@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// DB接続テスト用
+Route::get('/test/db/conect', 'TestController@testDbConect');
