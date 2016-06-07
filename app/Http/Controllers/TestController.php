@@ -5,14 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Test;
+use App\Item;
 
 class TestController extends Controller
 {
     public function testDbConect(){
 
-      $test = Test::find(1);
+      $item = Item::find(4);
 
-      return view('test', compact('test'));
+      return view('test', compact('item'));
     }
+
+    public function testJenkinsDeploy(){
+
+      $item = Item::find(5);
+
+      return view('test', compact('item'));
+    }
+
 }

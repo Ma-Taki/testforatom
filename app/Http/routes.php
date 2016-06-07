@@ -17,3 +17,5 @@ Route::get('/', function () {
 
 // DB接続テスト用
 Route::get('/test/db/conect', 'TestController@testDbConect');
+// Jenkinsデプロイテスト用
+Route::get('/test/jenkins/deploy', 'TestController@testJenkinsDeploy');
