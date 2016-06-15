@@ -27,8 +27,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
+//            \App\Http\Middleware\LoginCheckMiddleware::class, ログインチェック
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+
         ],
 
         'api' => [
@@ -49,5 +51,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'loginCheck' => \App\Http\Middleware\LoginCheckMiddleware::class,
+        'authCheck' => \App\Http\Middleware\AuthCheckMiddleware::class,
     ];
 }
