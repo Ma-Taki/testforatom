@@ -37,10 +37,14 @@ class UserUtility
     /* パスに対応して必要な権限を返す  */
     public function getAuthByPath($requestPath){
         switch ($requestPath) {
-            case 'admin/user/list':   return self::AUTH_TYPE_MASTER; break;
-            case 'admin/user/input':  return self::AUTH_TYPE_MASTER; break;
-            case 'admin/user/insert': return self::AUTH_TYPE_MASTER; break;
-            case 'admin/user/delete': return self::AUTH_TYPE_MASTER; break;
+            case 'admin/user/list':      return self::AUTH_TYPE_MASTER; break;
+            case 'admin/user/input':     return self::AUTH_TYPE_MASTER; break;
+            case 'admin/user/insert':    return self::AUTH_TYPE_MASTER; break;
+            case 'admin/user/delete':    return self::AUTH_TYPE_MASTER; break;
+            case 'admin/entry/list':     return self::AUTH_TYPE_ENTRY_READ; break;
+            case 'admin/entry/detail':   return self::AUTH_TYPE_ENTRY_READ; break;
+            case 'admin/entry/delete':   return self::AUTH_TYPE_ENTRY_DELETE; break;
+            case 'admin/entry/download': return self::AUTH_TYPE_ENTRY_DOWNLOAD; break;
             default:
                 break;
         }

@@ -9,11 +9,11 @@ class Tr_admin_user extends Model
     // モデルに関連付けるデータベースのテーブルを指定
     protected $table = 'admin_user';
 
-    // timestampのカラムがないため無効
+    // timestampの自動更新を明示的にOFF
     public $timestamps = false;
 
     /**
-     * The attributes that are mass assignable.
+     * 配列を使っての複数代入を許可する項目
      *
      * @var array
      */
@@ -25,10 +25,11 @@ class Tr_admin_user extends Model
         'last_update_date',
         'last_login_date',
         'delete_flag',
+        'delete_date',
     ];
 
     /**
-     * 許可された権限を取得する
+     * 許可された権限を取得する(多：多)
      */
     public function auths()
     {

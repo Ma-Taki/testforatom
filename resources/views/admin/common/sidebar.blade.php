@@ -13,8 +13,8 @@
                     <li><a href="#">案件登録</a></li>
                 </ul>
             </li>
-            <li><a href="#"><i class="glyphicon glyphicon-user"></i> 会員管理</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-file"></i> エントリー管理</a></li>
+            <li><a href="/admin/member/list"><i class="glyphicon glyphicon-user"></i> 会員管理</a></li>
+            <li><a href="/admin/entry/list"><i class="glyphicon glyphicon-file"></i> エントリー管理</a></li>
 
 @if(session('user_session_key_master_flg') === '1')
             <li class="submenu">
