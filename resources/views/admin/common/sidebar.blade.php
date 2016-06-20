@@ -1,8 +1,12 @@
-@if (!strstr(Request::url(), '/admin/login'))
+<?php
+use App\Libraries\SessionUtility;
+use App\Libraries\UserUtility;
+?>
 <div class="col-md-2">
     <div class="sidebar content-box" style="display: block;">
         <ul class="nav">
-            <li class="current"><a href="#"><i class="glyphicon glyphicon-home"></i> メイン</a></li>
+            <li class="current"><a href="/admin/top"><i class="glyphicon glyphicon-home"></i> メイン</a></li>
+@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ITEM_READ))
             <li class="submenu">
                 <a href="#">
                     <i class="glyphicon glyphicon-briefcase"></i> 案件管理
@@ -13,10 +17,14 @@
                     <li><a href="#">案件登録</a></li>
                 </ul>
             </li>
+@endif
+@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MEMBER_READ))
             <li><a href="/admin/member/list"><i class="glyphicon glyphicon-user"></i> 会員管理</a></li>
+@endif
+@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ENTRY_READ))
             <li><a href="/admin/entry/list"><i class="glyphicon glyphicon-file"></i> エントリー管理</a></li>
-
-@if(session('user_session_key_master_flg') === '1')
+@endif
+@if(session(SessionUtility::SESSION_KEY_MASTER_FLG))
             <li class="submenu">
                 <a href="#">
                     <i class="glyphicon glyphicon-wrench"></i> ユーザ管理
@@ -28,8 +36,6 @@
                 </ul>
             </li>
 @endif
-
         </ul>
     </div>
 </div>
-@endif

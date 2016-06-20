@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Admin_user;
+use App\Libraries\SessionUtility;
 
 class LoginCheckMiddleware
 {
@@ -16,18 +16,10 @@ class LoginCheckMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->session()->has('user_session_key_login_id')) {
+        // sessoinにログインIDが保存されているか
+        if (!$request->session()->has(SessionUtility::SESSION_KEY_LOGIN_ID)) {
             return redirect('/admin/login');
         }
-
-        /* DBに存在するか確認
-        $session_key = $request->session()->get('user_session_key_login_id', '');
-        $user = Admin_user::where('login_id', $session_key)->get();
-        if($user->isEmpty()) {
-            return view('admin.login');
-        }
-        */
-
         return $next($request);
     }
 }

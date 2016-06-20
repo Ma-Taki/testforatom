@@ -5,6 +5,9 @@
  */
 namespace App\Libraries;
 
+use App\Libraries\SessionUtility;
+use App\Models\Tr_admin_user;
+
 class UserUtility
 {
     // 権限：マスター管理者
@@ -28,26 +31,63 @@ class UserUtility
     // 権限：エントリー管理：スキルシートDL
     const AUTH_TYPE_ENTRY_DOWNLOAD = 'entry.download';
 
-    public function __construct(){
+    // パスに対応した権限リスト
+    const AUTH_LIST = [
+        // ユーザ管理
+        'admin/user/list' => self::AUTH_TYPE_MASTER,
+        'admin/user/input' => self::AUTH_TYPE_MASTER,
+        'admin/user/insert' => self::AUTH_TYPE_MASTER,
+        'admin/user/modify' => self::AUTH_TYPE_MASTER,
+        'admin/user/update' => self::AUTH_TYPE_MASTER,
+        'admin/user/delete' => self::AUTH_TYPE_MASTER,
+        //エントリー管理
+        'admin/entry/list' => self::AUTH_TYPE_ENTRY_READ,
+        'admin/entry/detail' => self::AUTH_TYPE_ENTRY_READ,
+        'admin/entry/search' => self::AUTH_TYPE_ENTRY_READ,
+        'admin/entry/delete' => self::AUTH_TYPE_ENTRY_DELETE,
+        'admin/entry/download' => self::AUTH_TYPE_ENTRY_DOWNLOAD,
+        // 会員管理
+        'admin/member/list' => self::AUTH_TYPE_MEMBER_READ,
+        'admin/member/detail' => self::AUTH_TYPE_MEMBER_READ,
+        'admin/member/search' => self::AUTH_TYPE_MEMBER_READ,
+        'admin/member/update' => self::AUTH_TYPE_MEMBER_READ,
+        'admin/member/delete' => self::AUTH_TYPE_MEMBER_DELETE,
+        // 案件管理
+    ];
+
+    // サイドバー表示制御用：案件
+    //const SIDE_BAR_DISPLAY_ITEM = 'item';
+    // サイドバー表示制御用：会員
+    //const SIDE_BAR_DISPLAY_ITEM = 'member';
+    // サイドバー表示制御用：エントリー
+    //const SIDE_BAR_DISPLAY_ITEM = 'entry';
+    // サイドバー表示制御用：ユーザ
+    //const SIDE_BAR_DISPLAY_ITEM = 'user';
+
+    /**
+     * 管理者idで指定されたユーザが指定された権限を持っているかをチェックする
+     *
+     * @param $id 管理者id
+     * @param $authName 権限名
+     * @return bool
+     **/
+    public static function isExistAuth($id, $authName){
+        $user = Tr_admin_user::find($id);
+        if ($user != null) {
+            foreach ($user->auths as $auth) {
+                if ($auth->auth_name.'.'.$auth->auth_type === $authName) return true;
+            }
+        }
+        return false;
     }
 
-
-
-
-    /* パスに対応して必要な権限を返す  */
-    public function getAuthByPath($requestPath){
-        switch ($requestPath) {
-            case 'admin/user/list':      return self::AUTH_TYPE_MASTER; break;
-            case 'admin/user/input':     return self::AUTH_TYPE_MASTER; break;
-            case 'admin/user/insert':    return self::AUTH_TYPE_MASTER; break;
-            case 'admin/user/delete':    return self::AUTH_TYPE_MASTER; break;
-            case 'admin/entry/list':     return self::AUTH_TYPE_ENTRY_READ; break;
-            case 'admin/entry/detail':   return self::AUTH_TYPE_ENTRY_READ; break;
-            case 'admin/entry/delete':   return self::AUTH_TYPE_ENTRY_DELETE; break;
-            case 'admin/entry/download': return self::AUTH_TYPE_ENTRY_DOWNLOAD; break;
-            default:
-                break;
-        }
-        return "";
+    /**
+     * サイドバーにサブメニューを表示するかを返す
+     * 検索・照会権限を持っている場合にtrueになる
+     * @param  string  $subMenu
+     * @return bool
+     */
+    public static function isDisplaySubMenu($subMenu){
+        return self::isExistAuth(session(SessionUtility::SESSION_KEY_ADMIN_ID), $subMenu);
     }
 }
