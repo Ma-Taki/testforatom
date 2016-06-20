@@ -2,6 +2,7 @@
 use App\Libraries\SessionUtility;
 use App\Libraries\UserUtility;
 ?>
+@if (!strstr(Request::url(), '/admin/login'))
 <div class="col-md-2">
     <div class="sidebar content-box" style="display: block;">
         <ul class="nav">
@@ -39,3 +40,4 @@ use App\Libraries\UserUtility;
         </ul>
     </div>
 </div>
+@endif
