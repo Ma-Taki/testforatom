@@ -1,7 +1,6 @@
 @extends('admin.common.layout')
 @section('title', 'エントリー一覧')
 @section('content')
-
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
@@ -9,21 +8,38 @@
                 <div class="panel-title" style="font-size:20px">エントリー一覧</div>
 			</div>
   			<div class="panel-body">
+@if(count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+@foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+@endforeach
+                    </ul>
+                </div>
+@endif
+{{-- error：不正な日付 --}}
+@if(isset($c_error_date))
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>不正な日付が設定されています。</li>
+                    </ul>
+                </div>
+@endif
                 <fieldset>
                     <legend><div class="panel-title">検索</div></legend>
 			  		    <form class="form-inline" role="form" method="POST" action="{{ url('/admin/entry/search') }}">
                             <table class="table table-bordered">
                                 <tr>
                                     <th>エントリーID</th>
-                            		<td>EN<input type="text" name="entry_id" value="" size="6" maxlength="6" /> (エントリーIDを指定した場合、他の検索条件は無視されます)</td>
+                                    <td>EN<input type="text" class="" name="entry_id" value="{{ old('entry_id') }}" maxlength="6" /> (エントリーIDを指定した場合、他の検索条件は無視されます)</td>
                             	</tr>
                         		<tr>
                         			<th><label class="control-label">エントリー日付</label></th>
-                        			<td><input type="text" class="datepicker" name="entry_date_from" value="" maxlength="10" readonly="readonly"/> ～ <input type="text" class="datepicker" name="entry_date_to" value=""  maxlength="10" readonly="readonly"/> (YYYY/MM/DD形式)</td>
+                                    <td><input type="text" class="datepicker" name="entry_date_from" value="{{ old('entry_date_from') }}" maxlength="10" readonly="readonly"/> ～ <input type="text" class="datepicker" name="entry_date_to" value="{{ old('entry_date_to') }}"  maxlength="10" readonly="readonly"/> (YYYY/MM/DD形式)</td>
                             	</tr>
                             	<tr>
                         			<th><label class="control-label">ステータス</label></th>
-                        			<td><input type="checkbox"  name="enabledOnly" value="true" />有効なエントリーのみ</td>
+                                    <td><input type="checkbox" name="enabledOnly" id="eo_label"　@if(old('enabledOnly')) checked @endif }} /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><button type="submit" class="btn btn-primary btn-md col-xs-2 col-xs-offset-5">検索</button></td>
@@ -84,6 +100,7 @@ $(function() {
       format: 'yyyy/mm/dd',
       language: 'ja',
       autoclose: true,
+      clearBtn: true,
   });
 });
 </script>

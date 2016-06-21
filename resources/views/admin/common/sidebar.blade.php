@@ -26,7 +26,7 @@ use App\Libraries\UserUtility;
 @endif
 @if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ENTRY_READ)
     || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
-            <li><a href="/admin/entry/list"><i class="glyphicon glyphicon-file"></i> エントリー管理</a></li>
+            <li><a href="/admin/entry/search"><i class="glyphicon glyphicon-file"></i> エントリー管理</a></li>
 @endif
 @if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
             <li class="submenu">

@@ -55,6 +55,8 @@ Route::get('/admin/entry/list', 'admin\EntryController@showEntryList')
 Route::get('/admin/entry/detail', 'admin\EntryController@showEntryDetail')
 ->middleware(['loginCheck', 'authCheck']);
 // 管理画面：エントリー管理：検索処理
+Route::get('/admin/entry/search', 'admin\EntryController@searchEntry')
+->middleware(['loginCheck', 'authCheck']);
 Route::post('/admin/entry/search', 'admin\EntryController@searchEntry')
 ->middleware(['loginCheck', 'authCheck']);
 // 管理画面：エントリー管理：論理削除処理

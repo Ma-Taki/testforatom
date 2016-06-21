@@ -38,6 +38,15 @@ function checkbox_copy()
                 <div class="panel-title" style="font-size:20px">ユーザ登録</div>
 			</div>
 		    <div class="panel-body">
+@if(count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+@foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+@endforeach
+                    </ul>
+                </div>
+@endif
                 <form class="form-horizontal" name="userForm" role="form" method="POST" action="{{ url('/admin/user/insert') }}">
                     <fieldset>
                         <legend style="font-size:16px">ログイン情報</legend>
