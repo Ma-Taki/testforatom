@@ -5,16 +5,18 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\admin\MemberSearchRequest;
 use App\Http\Controllers\AdminController;
 use App\Models\Tr_users;
 use Carbon\Carbon;
+use DB;
 
 class MemberController extends AdminController
 {
     /* 会員一覧画面表示 */
     public function showMemberList(){
         $memberList = Tr_users::all();
-        return view('admin.member_list', compact('memberList', $memberList));
+        return view('admin.member_list', compact('memberList'));
     }
 
     /* 会員詳細画面表示 */
@@ -23,35 +25,47 @@ class MemberController extends AdminController
         $member = Tr_users::find($member_id);
         if ($member == null) {
         }
-        return view('admin.member_detail', compact('member', $member));
+        return view('admin.member_detail', compact('member'));
     }
 
     /* 会員検索処理 */
-    public function searchMember(Request $request){
-        $member_id = $request->input('member_id');
+    public function searchMember(MemberSearchRequest $request){
+        $member_mail = $request->input('member_mail');
         $member_name = $request->input('member_name');
         $member_name_kana = $request->input('member_name_kana');
         $enabledOnly = $request->input('enabledOnly');
 
-        /*
-        if ($entry_id != '') {
-            $entryList = Tr_item_entries::where('id', $entry_id)->get();
-            if (!$entryList->isEmpty()) {
-                if (!$enabledOnly) {
-                    return view('admin.entry_list', compact('entryList', $entryList));
-                } else {
-                    if ($entryList->first()->delete_flag == 0
-                        && $entryList->first()->delete_date == null) {
-                            return view('admin.entry_list', compact('entryList', $entryList));
+        // 再利用するためパラメータを次のリクエストまで保存
+        $request->flash();
+
+        $memberListAll = array();
+        $memberList = array();
+
+        // パラメータの入力状態によって動的にクエリを発行
+        $query = Tr_users::query();
+        if ($member_mail != null) {
+            $query->where('mail', 'LIKE', "%".$member_mail."%");
+        } elseif ($member_name != null) {
+            $query->where(DB::raw("CONCAT(first_name, last_name)"),'LIKE',"%".$member_name."%");
+        } elseif ($member_name_kana != null) {
+            $query->where(DB::raw("CONCAT(first_name_kana, last_name_kana)"),'LIKE',"%".$member_name_kana."%");
+        }
+        $memberListAll = $query->get();
+
+        if (!empty($memberListAll)) {
+            foreach ($memberListAll as $member) {
+                if ($enabledOnly) {
+                    // 有効なユーザのみの場合、論理削除済みのものは含めない
+                    if ($member->delete_flag == 0 && $member->delete_date == null) {
+                        array_push($memberList, $member);
                     }
+                } else {
+                    array_push($memberList, $member);
                 }
             }
-        } else if ($date_from != null && $date_to != null) {
-
         }
-        */
-        $memberList = Tr_users::all();
-        return view('admin.member_list', compact('memberList', $memberList));
+
+        return view('admin.member_list', compact('memberList'));
     }
 
     /* 更新処理（メモ） */

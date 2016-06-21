@@ -31,7 +31,7 @@ class UserUtility
     // 権限：エントリー管理：スキルシートDL
     const AUTH_TYPE_ENTRY_DOWNLOAD = 'entry.download';
 
-    // パスに対応した権限リスト
+    // パスに対応した必要権限リスト
     const AUTH_LIST = [
         // ユーザ管理
         'admin/user/list' => self::AUTH_TYPE_MASTER,

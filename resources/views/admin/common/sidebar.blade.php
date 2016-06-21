@@ -22,7 +22,7 @@ use App\Libraries\UserUtility;
 @endif
 @if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MEMBER_READ)
     || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
-            <li><a href="/admin/member/list"><i class="glyphicon glyphicon-user"></i> 会員管理</a></li>
+            <li><a href="/admin/member/search"><i class="glyphicon glyphicon-user"></i> 会員管理</a></li>
 @endif
 @if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ENTRY_READ)
     || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))

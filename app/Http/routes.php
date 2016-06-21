@@ -73,6 +73,8 @@ Route::get('/admin/member/list', 'admin\MemberController@showMemberList')
 Route::get('/admin/member/detail', 'admin\MemberController@showMemberDetail')
 ->middleware(['loginCheck', 'authCheck']);
 // 管理画面：会員管理：検索処理
+Route::get('/admin/member/search', 'admin\MemberController@searchMember')
+->middleware(['loginCheck', 'authCheck']);
 Route::post('/admin/member/search', 'admin\MemberController@searchMember')
 ->middleware(['loginCheck', 'authCheck']);
 // 管理画面：会員管理：更新処理

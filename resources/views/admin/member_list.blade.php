@@ -14,19 +14,19 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th class="col-md-3"><label class="control-label">会員ID（メールアドレス）</label></th>
-                            		<td class="col-xs-9"><input class="col-xs-6" type="text" name="member_id" value="" /></td>
+                                    <td class="col-md-9"><input class="form-control input-sm" type="text" name="member_mail" value="{{ old('member_mail') }}" /></td>
                             	</tr>
-                        		<tr>
-                        			<th><label class="control-label">氏名</label></th>
-                            		<td><input type="text" name="member_name" value="" /></td>
+                                <tr>
+                                    <th><label class="control-label">氏名</label></th>
+                                    <td><input type="text" class="form-control input-sm" name="member_name" value="{{ old('member_name') }}" /></td>
                             	</tr>
                             	<tr>
-                        			<th><label class="control-label">氏名(かな)</label></th>
-                        			<td><input type="text" name="member_name_kana" value="" /></td>
+                                    <th><label class="control-label">氏名(かな)</label></th>
+                                    <td><input type="text" class="form-control input-sm" name="member_name_kana" value="{{ old('member_name_kana') }}" /></td>
                                 </tr>
                                 <tr>
                                     <th><label class="control-label">ステータス</label></th>
-                        			<td><input type="checkbox"  name="enabledOnly" value="true" />有効なエントリーのみ</td>
+                                    <td><input type="checkbox" name="enabledOnly" id="inputEnabledOnly" @if(old('enabledOnly')) checked @endif /><label for="inputEnabledOnly"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><button type="submit" class="btn btn-primary btn-md col-xs-2 col-xs-offset-5">検索</button></td>
@@ -58,7 +58,7 @@
 						<td>{{ $member->first_name }} {{ $member->last_name }} ({{ $member->first_name_kana }} {{ $member->last_name_kana }})</td>
 						<td>{{ $member->birth_date->age }}</td>
                         <td>{{ $member->sex === 'Male' ? '男性' : '女性' }}</td>
-						<td>{{ $member->prefecture->name }}</td>
+                        <td>{{ $member->prefecture->name }}</td>
                         <td>{{ $member->delete_flag > 0 ? '無効' : '有効' }}</td>
                         <td nowrap>
                             <a href="/admin/member/detail?id={{ $member->id }}"><button type="button" class="btn btn-info btn-xs">詳細</button></a>

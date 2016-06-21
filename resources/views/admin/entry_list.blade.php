@@ -39,7 +39,7 @@
                             	</tr>
                             	<tr>
                         			<th><label class="control-label">ステータス</label></th>
-                                    <td><input type="checkbox" name="enabledOnly" id="eo_label"　@if(old('enabledOnly')) checked @endif }} /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
+                                    <td><input type="checkbox" name="enabledOnly" id="eo_label"　@if(old('enabledOnly')) checked @endif /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><button type="submit" class="btn btn-primary btn-md col-xs-2 col-xs-offset-5">検索</button></td>
