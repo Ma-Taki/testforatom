@@ -84,6 +84,14 @@ Route::post('/admin/member/update', 'admin\MemberController@updatehMemberMemo')
 Route::get('/admin/member/delete', 'admin\MemberController@deleteMember')
 ->middleware(['loginCheck', 'authCheck']);
 
+// 管理画面：会員管理：検索処理
+Route::get('/admin/item/search', 'admin\ItemController@searchItem')
+->middleware(['loginCheck', 'authCheck']);
+Route::post('/admin/item/search', 'admin\ItemController@searchItem')
+->middleware(['loginCheck', 'authCheck']);
+
+
+
 // 管理画面：エラー画面
 Route::get('/admin/error', function () {
     return view('admin.errors.error');

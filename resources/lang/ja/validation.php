@@ -57,6 +57,7 @@ return [
     'regex'                => ':attributeの書式が正しくありません。',
     'required'             => ':attributeは必須です。',
     'required_if'          => ':otherが:valueの時、:attributeは必須です。',
+    'required_unless'      => '',
     'required_with'        => ':valuesが存在する時、:attributeは必須です。',
     'required_with_all'    => ':valuesが存在する時、:attributeは必須です。',
     'required_without'     => ':valuesが存在しない時、:attributeは必須です。',
@@ -83,8 +84,10 @@ return [
     |
     */
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'auths' => [
+            'required' => '権限は一つ以上のチェックが必須です。',
+            'required_unless' => '権限は一つ以上のチェックが必須です。',
+            'required_if' => '権限は一つ以上のチェックが必須です。',
         ],
     ],
     /*
@@ -100,8 +103,6 @@ return [
     'attributes' => [
         'login_id' => 'ログインID',
         'password' => 'パスワード',
-        'inputAdminName' => '管理者名',
-        'inputLoginId' => 'ログインID',
-        'inputPassword' => 'パスワード',
+        'admin_name' => '管理者名',
     ],
 ];

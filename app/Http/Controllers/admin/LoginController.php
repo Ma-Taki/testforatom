@@ -28,7 +28,7 @@ class LoginController extends AdminController
       $password = $request->input('password');
 
       // ハッシュパスワード確認用
-      //dd(md5($password));
+      //dd(md5(''));
 
       $user = Tr_admin_user::where('login_id', $login_id)->where('password', md5($password))->where('delete_flag', 0)->get();
 
@@ -47,9 +47,9 @@ class LoginController extends AdminController
           $adUser = Tr_link_admin_user_admin_auth::where(
             'admin_id', $user->first()->id)->where('auth_id', 1)->get();
           if($adUser->isEmpty()){
-              session([SessionUtility::SESSION_KEY_MASTER_FLG => false]);
+              session([SessionUtility::SESSION_KEY_MASTER_FLG => 0]);
           } else {
-              session([SessionUtility::SESSION_KEY_MASTER_FLG => true]);
+              session([SessionUtility::SESSION_KEY_MASTER_FLG => 1]);
           }
 
           // 現在時刻

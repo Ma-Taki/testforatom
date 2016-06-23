@@ -4,18 +4,17 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Requests\admin\AdminUserRequest;
-
+use App\Http\Requests\admin\AdminUserRegistRequest;
+use App\Http\Requests\admin\AdminUserEditRequest;
 use App\Http\Controllers\AdminController;
 use App\Models\Tr_admin_user;
 use App\Models\Ms_admin_auth;
 use App\Models\Tr_link_admin_user_admin_auth;
+use App\Libraries\SessionUtility;
+use App\Libraries\UserUtility;
 
 class UserController extends AdminController
 {
-    //const COMMON_DATE_FORMAT = 'Y-m-d H:i:s';
-    const AUTH_TYPE_MASTER = 'master_admin.all';
-
     /* ユーザ一覧画面の表示 */
     public function showUserList(){
         $userList = Tr_admin_user::all();
@@ -25,24 +24,27 @@ class UserController extends AdminController
 
     /* ユーザ新規登録画面の表示 */
     public function showUserInput(){
-        $authList = Ms_admin_auth::where('master_type', 1)->get()->toArray();
-        return view('admin.user_input', compact('authList', $authList));
+        return view('admin.user_input');
     }
 
     /* ユーザ新規登録処理 */
-    public function insertAdminUser(AdminUserRequest $request){
+    public function insertAdminUser(AdminUserRegistRequest $request){
 
         // 管理者名
-        $admin_name = $request->input('inputAdminName');
+        $admin_name = $request->input('admin_name');
         // ログインID
-        $login_id = $request->input('inputLoginId');
+        $login_id = $request->input('login_id');
         // パスワード
-        $password = $request->input('inputPassword');
+        $password = $request->input('password');
         if(!empty($password)){
             $password = md5($password);
         }
         // 現在時刻
         $timestamp = time() ;
+
+        // 権限
+        $authList = $request->input('auths');
+        dd($authList);
 
 	    // 管理者テーブルにインサート
         $user = Tr_admin_user::create([
@@ -78,21 +80,15 @@ class UserController extends AdminController
             return redirect('/admin/top');
         }
 
-        // 一般ユーザが自身のid以外で入ってきた場合
-        if (session('user_session_key_master_flg') === '0'
-            && session('user_session_key_admin_id') != $admin_id) {
-            return redirect('/admin/top');
-        }
-
         // 許可された権限情報
         $user = Tr_admin_user::find($admin_id);
         $authList = array();
         $master_flg = '0';
         foreach ($user->auths as $auth) {
-            if ($auth->auth_name.'.'.$auth->auth_type === self::AUTH_TYPE_MASTER) {
+            if ($auth->auth_name.'.'.$auth->auth_type === UserUtility::AUTH_TYPE_MASTER) {
                 $master_flg = '1';
             }
-            $authList[$auth->id] = $auth->auth_name . $auth->auth_type;
+            $authList[] = $auth->id;
         }
 
         return view('admin.user_modify', compact(
@@ -102,36 +98,47 @@ class UserController extends AdminController
     }
 
     /* ユーザ情報更新処理 */
-    public function updateAdminUser(AdminUserRequest $request){
+    public function updateAdminUser(AdminUserEditRequest $request){
 
         // 管理者ID
-        $admin_id = $request->input('id');
+        $admin_id = $request->input('admin_id');
         // 管理者名
-        $admin_name = $request->input('inputAdminName');
+        $admin_name = $request->input('admin_name');
         // ログインID
-        $login_id = $request->input('inputLoginId');
+        $login_id = $request->input('login_id');
         // パスワード
-        $password = $request->input('inputPassword');
+        $password = $request->input('password');
         if(!empty($password)){
             $password = md5($password);
         }
+
         // 現在時刻
         $timestamp = time();
 
         // 管理者テーブルをアップデート
-        Tr_admin_user::where('id', $admin_id)->update([
-            'admin_name' => $admin_name,
-            'login_id' => $login_id,
-            'password' => $password,
-            'last_update_date' => date('Y-m-d H:i:s', $timestamp),
-        ]);
+        if (!empty($password)) {
+            Tr_admin_user::where('id', $admin_id)->update([
+                'admin_name' => $admin_name,
+                'login_id' => $login_id,
+                'password' => $password,
+                'last_update_date' => date('Y-m-d H:i:s', $timestamp),
+            ]);
+        } else {
+            // passwordは変更がない場合渡ってこないので処理を分ける
+            Tr_admin_user::where('id', $admin_id)->update([
+                'admin_name' => $admin_name,
+                'login_id' => $login_id,
+                'last_update_date' => date('Y-m-d H:i:s', $timestamp),
+            ]);
+        }
 
         // 権限
         $postAuths = $request->input('postAuths');
         $authList = explode(',', $postAuths);
 
-        // マスター管理者かどうか
-        if ($request->input('master_flg') === '0') {
+        // 編集者：マスター管理者　かつ　編集対象：一般管理者の場合のみ権限の更新を行う
+        if ($request->input('master_flg') === '0'
+            && session(SessionUtility::SESSION_KEY_MASTER_FLG)) {
             // 管理者権限中間テーブルをデリートインサート
             $deletedRows = Tr_link_admin_user_admin_auth::where('admin_id', $admin_id)->delete();
             foreach ($authList as $auth) {
@@ -140,9 +147,18 @@ class UserController extends AdminController
                     'auth_id' => $auth,
                 ]);
             }
-            return redirect('/admin/top');
         }
-        return redirect('/admin/user/list');
+
+        // ログイン中の管理者名を更新した場合、sessionに上書き保存
+        if ($admin_id == session(SessionUtility::SESSION_KEY_ADMIN_ID)) {
+            session([SessionUtility::SESSION_KEY_ADMIN_NAME => $admin_name]);
+        }
+
+        $redirectPath = '/admin/user/list';
+        if (!session(SessionUtility::SESSION_KEY_MASTER_FLG)) {
+            $redirectPath = '/admin/top';
+        }
+        return redirect($redirectPath);
     }
 
     /* ユーザ論理削除処理 */
@@ -157,14 +173,12 @@ class UserController extends AdminController
         }
 
         // マスター管理者は削除不可
-        if (parent::isExistAuth($admin_id, self::AUTH_TYPE_MASTER)) {
+        if (parent::isExistAuth($admin_id, UserUtility::AUTH_TYPE_MASTER)) {
             return redirect('/admin/top');
         }
 
         // 現在時刻
         $timestamp = time();
-
-        dd($timestamp);
 
         // 管理者テーブルをアップデート
         Tr_admin_user::where('id', $admin_id)->update([

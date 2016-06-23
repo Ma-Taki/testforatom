@@ -30,7 +30,9 @@ function checkbox_copy()
     return true;
 }
 </script>
-
+<?php
+use App\Libraries\HtmlAttributeUtility;
+ ?>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
@@ -53,19 +55,19 @@ function checkbox_copy()
                         <div class="form-group">
                             <label for="inputAdminName" class="col-md-2 control-label">管理者名</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputAdminName" name="inputAdminName" value="{{ old('inputAdminName') }}" placeholder="管理者名">
+                                <input type="text" class="form-control" id="inputAdminName" name="admin_name" value="{{ old('admin_name') }}" placeholder="管理者名">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputLoginId" class="col-md-2 control-label">ログインID</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputLoginId" name="inputLoginId" value="{{ old('inputLoginId') }}" maxlength="20" placeholder="ログインID">
+                                <input type="text" class="form-control" id="inputLoginId" name="login_id" value="{{ old('login_id') }}" maxlength="20" placeholder="ログインID">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="col-md-2 control-label">パスワード</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" id="inputPassword" name="inputPassword" maxlength="20" placeholder="パスワード">
+                                <input type="password" class="form-control" id="inputPassword" name="password" maxlength="20" placeholder="パスワード">
                             </div>
                         </div>
                         </br>
@@ -81,36 +83,36 @@ function checkbox_copy()
                             <label class="col-md-2 control-label">案件権限</label>
                             <div class="col-md-10">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_1" value="3" checked='checked' onclick="checkbox_inspection(this)">検索・照会
+                                    <input type="checkbox" name="auths[]" id="item_1" value="3" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlAttributeUtility::isChecked(old('auths'), 3) }} @else checked @endif>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_2" value="2">新規登録</label>
+                                    <input type="checkbox" name="auths[]" id="item_2" value="2" {{ HtmlAttributeUtility::isChecked(old('auths'), 2) }}>新規登録</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_3" value="4">更新</label>
+                                    <input type="checkbox" name="auths[]" id="item_3" value="4" {{ HtmlAttributeUtility::isChecked(old('auths'), 4) }}>更新</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_4" value="5">削除</label>
+                                    <input type="checkbox" name="auths[]" id="item_4" value="5" {{ HtmlAttributeUtility::isChecked(old('auths'), 5) }}>削除</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">会員権限</label>
                             <div class="col-md-10">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_1" value="7" checked="checked" onclick="checkbox_inspection(this)">検索・照会
+                                    <input type="checkbox" name="auths[]" id="member_1" value="7" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlAttributeUtility::isChecked(old('auths'), 7) }} @else checked @endif>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_2" value="9">削除</label>
+                                    <input type="checkbox" name="auths[]" id="member_2" value="9" {{ HtmlAttributeUtility::isChecked(old('auths'), 9) }}>削除</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">エントリー権限</label>
                             <div class="col-md-10">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" checked="checked" onclick="checkbox_inspection(this)">検索・照会
+                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlAttributeUtility::isChecked(old('auths'), 11) }} @else checked @endif>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_2" value="13">削除</label>
+                                    <input type="checkbox" name="auths[]" id="entry_2" value="13" {{ HtmlAttributeUtility::isChecked(old('auths'), 13) }}>削除</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_3" value="14">スキルシートDL</label>
+                                    <input type="checkbox" name="auths[]" id="entry_3" value="14" {{ HtmlAttributeUtility::isChecked(old('auths'), 14) }}>スキルシートDL</label>
                             </div>
                         </div>
                         <div class="col-md-10 text-right">
@@ -124,4 +126,9 @@ function checkbox_copy()
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    checkbox_inspection(document.getElementById("item_1"));
+    checkbox_inspection(document.getElementById("member_1"));
+    checkbox_inspection(document.getElementById("entry_1"));
+</script>
 @endsection

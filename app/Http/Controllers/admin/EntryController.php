@@ -88,14 +88,9 @@ class EntryController extends AdminController
         $entry_id = $request->input('id');
         $entry = Tr_item_entries::find($entry_id);
 
-        // 既に論理削除済み、または未アップロード
-        if ($entry == null || $entry->delete_flag > 0 || !$entry->skillsheet_upload){
+        // 既に論理削除済み
+        if ($entry == null || $entry->delete_flag > 0){
             return redirect('admin/top');
-        }
-
-        // エントリーシートを削除
-        if ($entry != null && $entry->skillsheet_upload && $entry->skillsheet_filename != null) {
-            Storage::disk('local')->delete('test.xls');
         }
 
         // 現在時刻
@@ -109,18 +104,25 @@ class EntryController extends AdminController
 
         // エントリーシートを削除
         if ($entry != null && $entry->skillsheet_upload && $entry->skillsheet_filename != null) {
-            Storage::disk('local')->delete('test.xls');
+            Storage::disk('local')->delete($entry->skillsheet_filename);
         }
     }
 
     /* エントリーシートダウンロード処理 */
     public function downloadSkillSheet(Request $request){
+
         $entry_id = $request->input('id');
+        $localStoragePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $entry = Tr_item_entries::where('id', $entry_id)->where('skillsheet_upload', 1)->get();
         if ($entry->isEmpty()) {
-            redirect('admin.top');
+            return redirect('/admin/top');
         }
-        return response()->download('/Users/sd-pc019/Engineer-Route/storage/app/'.$entry->first()->skillsheet_filename);
-    }
 
+        // エントリーシートの存在チェック
+        if (!Storage::disk('local')->exists($entry->first()->skillsheet_filename)) {
+            return redirect('/admin/top');
+        }
+
+        return response()->download($localStoragePath.$entry->first()->skillsheet_filename);
+    }
 }

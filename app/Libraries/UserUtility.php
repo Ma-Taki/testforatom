@@ -90,4 +90,21 @@ class UserUtility
     public static function isDisplaySubMenu($subMenu){
         return self::isExistAuth(session(SessionUtility::SESSION_KEY_ADMIN_ID), $subMenu);
     }
+
+    /**
+     * ユーザ情報更新画面にて、編集者と編集対象の関係から
+     * 権限の必須チェックを行うか判定する
+     * @param
+     * @param
+     * @return
+     */
+     public static function isValidationAuths($eMasFlg, $sMasFlg){
+         if (!$eMasFlg && $sMasFlg) {
+             return 1;
+         }
+         return 0;
+     }
+
+
+
 }

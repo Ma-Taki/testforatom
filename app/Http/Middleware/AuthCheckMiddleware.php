@@ -32,6 +32,14 @@ class AuthCheckMiddleware
                 break;
             }
         }
+
+        // ログイン中のIDに紐づくユーザ情報照会、一部更新については、常に許可する
+        if (($requestUri === 'admin/user/modify' && $admin_id == $request->input('id'))
+            || ($requestUri === 'admin/user/update' && $admin_id == $request->input('admin_id'))) {
+                $permission = true;
+        }
+
+
         return $permission ? $next($request) : redirect('admin/error');
     }
 }

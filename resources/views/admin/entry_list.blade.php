@@ -54,7 +54,7 @@
   			<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="entryList">
                  <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>エントリーID</th>
                         <th>氏名/氏名(かな)</th>
                         <th>案件名</th>
                         <th>エントリー日付</th>
