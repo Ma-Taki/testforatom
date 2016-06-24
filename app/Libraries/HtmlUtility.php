@@ -1,13 +1,15 @@
 <?php
 /**
- * HTML属性ライブラリ
+ * 汎用HTMLイブラリ
  *
- * HTML上で使用するタグの属性関連の値を返却する
+ * HTML上で使用するタグの属性や、表示制御に関わる判定を返す
  *
  */
 namespace App\Libraries;
 
-class HtmlAttributeUtility
+use Carbon\Carbon;
+
+class HtmlUtility
 {
     const CHECKBOX_CHECKED = "checked";
     const NULL_CHARACTER = "";
@@ -54,4 +56,46 @@ class HtmlAttributeUtility
 
         return $exist ? self::CHECKBOX_CHECKED : self::NULL_CHARACTER;
     }
+
+    /**
+     * 今日日付が、指定された期間内かを判定する（日付単位)
+     * @param Carbon $fromDate
+     * @param Carbon $toDate
+     * @return bool
+     */
+     /*
+    public static function isTodayInPeriod($fromDate, $toDate){
+        // fromは当日 00:00:00から
+        // toは明日 00:00:00まで
+        if(Carbon::today()->between($fromDate, $toDate->addDays(1))){
+            return true;
+        }
+        return false;
+    }
+    */
+
+    /**
+     * 今日日付が指定された期間前、期間中、期間終了かを判定し
+     * 結果を文字で返す（日付単位)
+     *
+     * @param Carbon $fromDate
+     * @param Carbon $toDate
+     * @return String "前" or "中" or "後"
+     */
+    public static function isTodayInPeriod($fromDate, $toDate){
+        $result = '';
+        if(Carbon::today()->lt($fromDate)){
+            $result = '前';
+        } elseif(Carbon::today()->gt($toDate->addDays(1))){
+            $result = '終了';
+        } else {
+            $result = '中';
+        }
+        return $result;
+    }
+
+
+
+
+
 }

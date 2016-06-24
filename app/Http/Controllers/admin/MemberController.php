@@ -52,6 +52,9 @@ class MemberController extends AdminController
         }
         $memberListAll = $query->get();
 
+
+
+        // これも動的に含めてよくないか
         if (!empty($memberListAll)) {
             foreach ($memberListAll as $member) {
                 if ($enabledOnly) {

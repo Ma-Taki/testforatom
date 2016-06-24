@@ -15,7 +15,7 @@ use App\Libraries\UserUtility;
                     <span class="caret pull-right"></span>
                 </a>
                 <ul>
-                    <li><a href="#">案件一覧</a></li>
+                    <li><a href="/admin/item/search">案件一覧</a></li>
                     <li><a href="#">案件登録</a></li>
                 </ul>
             </li>

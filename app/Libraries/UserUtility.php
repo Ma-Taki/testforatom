@@ -53,6 +53,7 @@ class UserUtility
         'admin/member/update' => self::AUTH_TYPE_MEMBER_READ,
         'admin/member/delete' => self::AUTH_TYPE_MEMBER_DELETE,
         // 案件管理
+        'admin/item/search' => self::AUTH_TYPE_ITEM_READ,
     ];
 
     // サイドバー表示制御用：案件
