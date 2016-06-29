@@ -31,7 +31,7 @@ function checkbox_copy()
 }
 </script>
 <?php
-use App\Libraries\HtmlAttributeUtility;
+use App\Libraries\HtmlUtility;
  ?>
 <div class="col-md-10">
     <div class="row">
@@ -51,7 +51,7 @@ use App\Libraries\HtmlAttributeUtility;
 @endif
                 <form class="form-horizontal" name="userForm" role="form" method="POST" action="{{ url('/admin/user/insert') }}">
                     <fieldset>
-                        <legend style="font-size:16px">ログイン情報</legend>
+                        <legend style="font-size:16px">ユーザ情報</legend>
                         <div class="form-group">
                             <label for="inputAdminName" class="col-md-2 control-label">管理者名</label>
                             <div class="col-sm-8">
@@ -83,43 +83,43 @@ use App\Libraries\HtmlAttributeUtility;
                             <label class="col-md-2 control-label">案件権限</label>
                             <div class="col-md-10">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_1" value="3" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlAttributeUtility::isChecked(old('auths'), 3) }} @else checked @endif>検索・照会
+                                    <input type="checkbox" name="auths[]" id="item_1" value="3" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlUtility::isChecked(old('auths'), 3) }} @else checked @endif>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_2" value="2" {{ HtmlAttributeUtility::isChecked(old('auths'), 2) }}>新規登録</label>
+                                    <input type="checkbox" name="auths[]" id="item_2" value="2" {{ HtmlUtility::isChecked(old('auths'), 2) }}>新規登録</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_3" value="4" {{ HtmlAttributeUtility::isChecked(old('auths'), 4) }}>更新</label>
+                                    <input type="checkbox" name="auths[]" id="item_3" value="4" {{ HtmlUtility::isChecked(old('auths'), 4) }}>更新</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_4" value="5" {{ HtmlAttributeUtility::isChecked(old('auths'), 5) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="item_4" value="5" {{ HtmlUtility::isChecked(old('auths'), 5) }}>削除</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">会員権限</label>
                             <div class="col-md-10">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_1" value="7" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlAttributeUtility::isChecked(old('auths'), 7) }} @else checked @endif>検索・照会
+                                    <input type="checkbox" name="auths[]" id="member_1" value="7" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlUtility::isChecked(old('auths'), 7) }} @else checked @endif>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_2" value="9" {{ HtmlAttributeUtility::isChecked(old('auths'), 9) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="member_2" value="9" {{ HtmlUtility::isChecked(old('auths'), 9) }}>削除</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">エントリー権限</label>
                             <div class="col-md-10">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlAttributeUtility::isChecked(old('auths'), 11) }} @else checked @endif>検索・照会
+                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlUtility::isChecked(old('auths'), 11) }} @else checked @endif>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_2" value="13" {{ HtmlAttributeUtility::isChecked(old('auths'), 13) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="entry_2" value="13" {{ HtmlUtility::isChecked(old('auths'), 13) }}>削除</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_3" value="14" {{ HtmlAttributeUtility::isChecked(old('auths'), 14) }}>スキルシートDL</label>
+                                    <input type="checkbox" name="auths[]" id="entry_3" value="14" {{ HtmlUtility::isChecked(old('auths'), 14) }}>スキルシートDL</label>
                             </div>
                         </div>
                         <div class="col-md-10 text-right">
                             <button type="submit" class="btn btn-primary">登録</button>
                             <a href="/admin/user/list"><button type="button" class="btn btn-default">キャンセル</button></a>
                         </div>
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        {{ csrf_field() }}
                     </fieldset>
                 </form>
             </div>

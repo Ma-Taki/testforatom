@@ -6,7 +6,7 @@
         <div class="content-box-large">
             <div class="alert alert-danger">
                 <ul>
-                    <li>権限がありません。</li>
+                    <li>{{ $message }}</li>
                 </ul>
             </div>
         </div>

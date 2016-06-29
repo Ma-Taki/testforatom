@@ -5,8 +5,6 @@
  */
 namespace App\Libraries;
 
-use App\Libraries\SessionUtility;
-
 class OrderUtility
 {
     const ORDER_ITEM_SERVICE_DESC = [

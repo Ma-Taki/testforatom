@@ -40,6 +40,6 @@ class AuthCheckMiddleware
         }
 
 
-        return $permission ? $next($request) : redirect('admin/error');
+        return $permission ? $next($request) : abort(403,' アクセス権がありません。');
     }
 }

@@ -89,6 +89,9 @@ return [
             'required_unless' => '権限は一つ以上のチェックが必須です。',
             'required_if' => '権限は一つ以上のチェックが必須です。',
         ],
+        'item_max_rate' => [
+            'digits_between' => '報酬(検索用)は半角数字で1〜4桁にしてください。',
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -101,8 +104,29 @@ return [
     |
     */
     'attributes' => [
+        // ▽▽　管理ユーザ登録　▽▽
         'login_id' => 'ログインID',
         'password' => 'パスワード',
         'admin_name' => '管理者名',
+        // △△　管理ユーザ登録　△△
+        // ▽▽　案件登録　▽▽
+        'item_name' => '案件名',
+        'item_date_from' => 'エントリー受付期間(開始日)',
+        'item_date_to' => 'エントリー受付期間(終了日)',
+        'item_max_rate' => '報酬(検索用)',
+        'item_rate_detail' => '報酬(表示用)',
+        'areas' => 'エリア',
+        'item_area_detail' => 'エリア詳細',
+        'item_employment_period' => '就業期間',
+        'item_working_hours' => '就業時間',
+        'search_categories' => 'カテゴリ',
+        'item_biz_category' => '業種',
+        'job_types' => 'ポジション',
+        'sys_types' => 'システム種別',
+        'skills' => '要求スキル',
+        'item_tag' => 'タグ',
+        'item_detail' => '詳細',
+        'item_note' => 'メモ(社内用)',
+        // △△　案件登録　△△
     ],
 ];

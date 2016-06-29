@@ -31,7 +31,7 @@ function checkbox_copy()
 }
 </script>
 <?php
-use App\Libraries\HtmlAttributeUtility;
+use App\Libraries\HtmlUtility;
 use App\Libraries\SessionUtility;
 use App\Libraries\UserUtility;
  ?>
@@ -57,13 +57,13 @@ use App\Libraries\UserUtility;
                         <div class="form-group">
                             <label for="inputAdminName" class="col-md-2 control-label">管理者名</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputAdminName" name="admin_name" value="{{ HtmlAttributeUtility::setTextValueByRequest($user->admin_name, old('admin_name')) }}" {{ session('user_session_key_master_flg') == 0 ? "readonly='readonly'" : "placeholder=ログインID" }}>
+                                <input type="text" class="form-control" id="inputAdminName" name="admin_name" value="{{ HtmlUtility::setTextValueByRequest($user->admin_name, old('admin_name')) }}" {{ session('user_session_key_master_flg') == 0 ? "readonly='readonly'" : "placeholder=ログインID" }}>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputLoginId" class="col-md-2 control-label">ログインID</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputLoginId" name="login_id" value="{{ HtmlAttributeUtility::setTextValueByRequest($user->login_id, old('login_id')) }}" maxlength="20" {{ session('user_session_key_master_flg') == 0 ? "readonly='readonly'" : "placeholder=ログインID" }}>
+                                <input type="text" class="form-control" id="inputLoginId" name="login_id" value="{{ HtmlUtility::setTextValueByRequest($user->login_id, old('login_id')) }}" maxlength="20" {{ session('user_session_key_master_flg') == 0 ? "readonly='readonly'" : "placeholder=ログインID" }}>
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,25 +100,25 @@ use App\Libraries\UserUtility;
 @elseif(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：マスター管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_1" value="3" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 3) }} onclick="checkbox_inspection(this)">検索・照会
+                                    <input type="checkbox" name="auths[]" id="item_1" value="3" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 3) }} onclick="checkbox_inspection(this)">検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_2" value="2" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 2) }}>新規登録</label>
+                                    <input type="checkbox" name="auths[]" id="item_2" value="2" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 2) }}>新規登録</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_3" value="4" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 4) }}>更新</label>
+                                    <input type="checkbox" name="auths[]" id="item_3" value="4" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 4) }}>更新</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_4" value="5" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 5) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="item_4" value="5" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 5) }}>削除</label>
 @elseif(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：一般管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_1" value="3" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 3) }}>検索・照会
+                                    <input type="checkbox" name="auths[]" id="item_1" value="3" disabled="disabled" {{ HtmlUtility::isChecked($authList, 3) }}>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_2" value="2" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 2) }}>新規登録</label>
+                                    <input type="checkbox" name="auths[]" id="item_2" value="2" disabled="disabled" {{ HtmlUtility::isChecked($authList, 2) }}>新規登録</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_3" value="4" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 4) }}>更新</label>
+                                    <input type="checkbox" name="auths[]" id="item_3" value="4" disabled="disabled" {{ HtmlUtility::isChecked($authList, 4) }}>更新</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_4" value="5" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 5) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="item_4" value="5" disabled="disabled" {{ HtmlUtility::isChecked($authList, 5) }}>削除</label>
 @endif
 
                             </div>
@@ -136,17 +136,17 @@ use App\Libraries\UserUtility;
 @elseif(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：マスター管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_1" value="7" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 7) }} onclick="checkbox_inspection(this)">検索・照会
+                                    <input type="checkbox" name="auths[]" id="member_1" value="7" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 7) }} onclick="checkbox_inspection(this)">検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_2" value="9" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 9) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="member_2" value="9" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 9) }}>削除</label>
 @elseif(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：一般管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_1" value="7" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 7) }}>検索・照会
+                                    <input type="checkbox" name="auths[]" id="member_1" value="7" disabled="disabled" {{ HtmlUtility::isChecked($authList, 7) }}>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_2" value="9" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 9) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="member_2" value="9" disabled="disabled" {{ HtmlUtility::isChecked($authList, 9) }}>削除</label>
 @endif
 
                             </div>
@@ -166,21 +166,21 @@ use App\Libraries\UserUtility;
 @elseif(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：マスター管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 11) }} onclick="checkbox_inspection(this)">検索・照会
+                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 11) }} onclick="checkbox_inspection(this)">検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_2" value="13" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 13) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="entry_2" value="13" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 13) }}>削除</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_3" value="14" {{ HtmlAttributeUtility::isCheckedOldRequest($authList, old('auths'), 14) }}>スキルシートDL</label>
+                                    <input type="checkbox" name="auths[]" id="entry_3" value="14" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 14) }}>スキルシートDL</label>
 @elseif(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：一般管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 11) }}>検索・照会
+                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" disabled="disabled" {{ HtmlUtility::isChecked($authList, 11) }}>検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_2" value="13" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 13) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" id="entry_2" value="13" disabled="disabled" {{ HtmlUtility::isChecked($authList, 13) }}>削除</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_3" value="14" disabled="disabled" {{ HtmlAttributeUtility::isChecked($authList, 14) }}>スキルシートDL</label>
+                                    <input type="checkbox" name="auths[]" id="entry_3" value="14" disabled="disabled" {{ HtmlUtility::isChecked($authList, 14) }}>スキルシートDL</label>
 @endif
 
                             </div>

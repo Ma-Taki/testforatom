@@ -11,4 +11,13 @@ class Tr_tags extends Model
 
     // timestampの自動更新を明示的にOFF
     public $timestamps = false;
+
+    /**
+     * 配列を使っての複数代入を許可する項目
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'term',
+    ];
 }

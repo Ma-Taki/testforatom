@@ -120,7 +120,7 @@ class EntryController extends AdminController
 
         // エントリーシートの存在チェック
         if (!Storage::disk('local')->exists($entry->first()->skillsheet_filename)) {
-            return redirect('/admin/top');
+            abort(404, 'モデルが見つかりません。');
         }
 
         return response()->download($localStoragePath.$entry->first()->skillsheet_filename);

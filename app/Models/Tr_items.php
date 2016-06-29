@@ -16,6 +16,30 @@ class Tr_items extends Model
     protected $dates = ['service_start_date', 'service_end_date'];
 
     /**
+     * 配列を使っての複数代入を許可する項目
+     *
+     * @var array
+     */
+     protected $fillable = [
+         'name',
+         'biz_category_id',
+         'service_start_date',
+         'service_end_date',
+         'registration_date',
+         'last_update',
+         'employment_period',
+         'working_hours',
+         'max_rate',
+         'rate_detail',
+         'area_detail',
+         'detail',
+         'delete_flag',
+         'delete_date',
+         'note',
+         'version',
+     ];
+
+    /**
      * 業種を取得
      */
     public function bizCategorie() {
@@ -83,6 +107,13 @@ class Tr_items extends Model
                                     'tag_id');
     }
 
+    /**
+     * エントリーを取得
+     */
+     public function entries() {
+         return $this->hasMany('App\Models\Tr_item_entries',
+                               'item_id');
+     }
 
 
 

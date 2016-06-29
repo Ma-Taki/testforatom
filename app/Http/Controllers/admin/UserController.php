@@ -40,7 +40,7 @@ class UserController extends AdminController
             $password = md5($password);
         }
         // 現在時刻
-        $timestamp = time() ;
+        $timestamp = time();
 
         // 権限
         $authList = $request->input('auths');

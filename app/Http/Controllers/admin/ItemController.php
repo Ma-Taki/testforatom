@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\admin\ItemRegistRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Tr_items;
 use Carbon\Carbon;
@@ -12,6 +13,19 @@ use App\Models\Tr_tag_infos;
 use DB;
 use Log;
 use App\Libraries\OrderUtility as OdrUtil;
+use App\Models\Ms_areas;
+use App\Models\Tr_search_categories;
+use App\Models\Ms_biz_categories;
+use App\Models\Ms_job_types;
+use App\Models\Ms_sys_types;
+use App\Models\Ms_skills;
+use App\Models\Tr_link_items_areas;
+use App\Models\Tr_link_items_job_types;
+use App\Models\Tr_link_items_search_categories;
+use App\Models\Tr_link_items_skills;
+use App\Models\Tr_link_items_sys_types;
+use App\Models\Tr_link_items_tags;
+use App\Models\Tr_tags;
 
 class ItemController extends Controller
 {
@@ -86,5 +100,238 @@ class ItemController extends Controller
             'sort_id',
             'enabled_only'
         ));
+    }
+
+    // 案件詳細画面表示
+    public function showItemDetail(Request $request){
+        $item_id = $request->input('id');
+        $item = Tr_items::find($item_id);
+        // AdminControllerで404まで
+        $today = Carbon::today();
+        return view('admin.item_detail', compact('item', 'today'));
+    }
+
+    // 案件新規登録画面表示
+    public function showItemInput(){
+        // Master_Type:3(IndexOnly)以外を取得
+        $master_areas = Ms_areas::where('master_type', '!=', 3)->get();
+        $master_search_categories = Tr_search_categories::all();
+        $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)->get();
+        $master_job_types = Ms_job_types::where('master_type', '!=', 3)
+                                        ->orderBy('sort_order', 'asc')
+                                        ->get();
+        $master_sys_types = Ms_sys_types::where('master_type', '!=', 3)
+                                        ->orderBy('sort_order', 'asc')
+                                        ->get();
+        $master_skills = Ms_skills::where('master_type', '!=', 3)
+                                        ->orderBy('sort_order', 'asc')
+                                        ->get();
+        // 特集タグ取得
+        $featureTagInfos = Tr_tag_infos::where('tag_type', 3)
+                                        ->orderBy('sort_order', 'asc')
+                                        ->limit(30)
+                                        ->get();
+        // pickupタグ取得
+        $pickupTagInfos = Tr_tag_infos::where('tag_type', 2)
+                                        ->orderBy('sort_order', 'asc')
+                                        ->limit(30)
+                                        ->get();
+
+        return view('admin.item_input', compact(
+            'master_areas',
+            'master_search_categories',
+            'master_biz_categories',
+            'master_job_types',
+            'master_sys_types',
+            'master_skills',
+            'featureTagInfos',
+            'pickupTagInfos'
+        ));
+    }
+
+    // 新規登録処理
+    public function insertItem(ItemRegistRequest $request){
+
+        // 案件名
+        $item_name = $request->input('item_name');
+        // エントリー受付期間(開始日)
+        $item_date_from = $request->input('item_date_from');
+        // エントリー受付期間(終了日)
+        $item_date_to = $request->input('item_date_to');
+        // 報酬(検索用)
+        $item_max_rate = $request->input('item_max_rate');
+        //$item_max_rate = $item_max_rate * 10000;
+        // 報酬(表示用)
+        $item_rate_detail = $request->input('item_rate_detail');
+        // エリア
+        $areas = $request->input('areas');
+        // エリア詳細
+        $item_area_detail = $request->input('item_area_detail');
+        // 就業期間
+        $item_employment_period = $request->input('item_employment_period');
+        // 就業時間
+        $item_working_hours = $request->input('item_working_hours');
+        // カテゴリ
+        $search_categories = $request->input('search_categories');
+        // 業種
+        $item_biz_category = $request->input('item_biz_category');
+        // ポジション
+        $job_types = $request->input('job_types');
+        // システム種別
+        $sys_types = $request->input('sys_types');
+        // 要求スキル
+        $skills = $request->input('skills');
+        // タグ
+        $item_tags = $request->input('item_tag');
+        // 詳細
+        $item_detail = $request->input('item_detail');
+        // メモ(社内用)
+        $item_note = $request->input('item_note');
+
+        //dd($item_tags);
+
+        // ▽▽▽ 追加のvalidation ▽▽▽
+        $valiCheck = true;
+        $custom_error_messages = array();
+        // エントリー受付期間(終了日)がエントリー受付期間(開始日)より早い場合
+        $carbon_date_from = Carbon::parse($item_date_from.' 00:00:00');
+        $carbon_date_to = Carbon::parse($item_date_to.' 23:59:59');
+        if ($carbon_date_to->lt($carbon_date_from)) {
+            array_push($custom_error_messages, 'エントリー受付期間(終了日)がエントリー受付期間(開始日)より過去になっています。');
+            $valiCheck =false;
+        }
+
+        if (!($item_max_rate >= 0 && $item_max_rate <= 9999)) {
+            array_push($custom_error_messages, '報酬(検索用)は整数値1~9999の間を入力してください。');
+            $valiCheck =false;
+        }
+
+        if (!$valiCheck) {
+            // フラッシュセッションにエラーメッセージを保存
+            \Session::flash('custom_error_messages', $custom_error_messages);
+            return back()->withInput();
+        }
+
+
+        // 改行コードを"\n"で統一する
+        $item_tags = str_replace(array("\r\n", "\r"), '\n', $item_tags);
+        // 全角スペースを半角に変換する
+        $item_tags = str_replace('　', ' ', $item_tags);
+        // 文字列前後の空白（改行コード含む）を削除
+        $item_tags = trim($item_tags);
+        // 配列に変換する
+        $item_tagList = explode('\n',$item_tags);
+        //　すべての文字列要素の前後の空白を削除する
+        $item_tagList = array_map('trim', $item_tagList);
+        // 空要素を削除
+        $item_tagList = array_filter($item_tagList, 'strlen');
+        // indexを振り直す
+        $item_tagList = array_values($item_tagList);
+
+        // タグ名からタグIDを取得する
+        $tag_idList = array();
+        foreach ($item_tagList as $item_tag) {
+            $tag = Tr_tags::where('term', '=', $item_tag)->get();
+            if ($tag->isEmpty()) {
+                // DBに存在しない場合はタグテーブルにインサートを行う
+                $tag = Tr_tags::create([
+                    'term' => $item_tag,
+                ]);
+            }
+            array_push($tag_idList, $tag->first()->id);
+        }
+
+        // 選択されたカテゴリIDから、紐づく親カテゴリの一覧を取得する
+        $parent_categories = Tr_search_categories::whereIn('id', $search_categories)
+                                                 ->where('parent_id', '>=', 0)
+                                                 ->select('parent_id')
+                                                 ->distinct()
+                                                 ->get();
+
+        // 子カテゴリのみ選択されていた場合、対象の親カテゴリを追加する
+        foreach ($parent_categories as $parent_category) {
+            if (!in_array($parent_category->parent_id, $search_categories)) {
+                array_push($search_categories, $parent_category->parent_id);
+            }
+        }
+
+        // 現在時刻
+        $timestamp = time();
+
+        /*
+
+        // 案件テーブルにインサート
+        $item = Tr_items::create([
+            'name' => $item_name,
+            'biz_category_id' => $item_biz_category,
+            'service_start_date' => date('Y-m-d', strtotime($item_date_from)),
+            'service_end_date' => date('Y-m-d', strtotime($item_date_to)),
+            'registration_date' => date('Y-m-d H:i:s', $timestamp),
+            'last_update' => date('Y-m-d H:i:s', $timestamp),
+            'employment_period' => $item_employment_period,
+            'working_hours' => $item_working_hours,
+            'max_rate' => $item_max_rate,
+            'rate_detail' => $item_rate_detail,
+            'area_detail' => $item_area_detail,
+            'detail' => $item_detail,
+            'delete_flag' => false,
+            'delete_date' => null,
+            'note' => $item_note,
+            'version' => 0,
+        ]);
+
+        // 案件エリア中間テーブルにインサート
+        foreach ($areas as $area) {
+            Tr_link_items_areas::create([
+                'item_id' => $item->id,
+                'area_id' => $area,
+            ]);
+        }
+        // 案件職種中間テーブルにインサート
+        foreach ($job_types as $job_type) {
+            Tr_link_items_job_types::create([
+                'item_id' => $item->id,
+                'job_type_id' => $job_type,
+            ]);
+        }
+        // 案件業種検索中間テーブルにインサート
+        foreach ($search_categories as $search_category) {
+            Tr_link_items_search_categories::create([
+                'item_id' => $item->id,
+                'search_category_id' => $search_category,
+            ]);
+        }
+        // 案件スキル中間テーブルにインサート
+        foreach ($skills as $skill) {
+            Tr_link_items_skills::create([
+                'item_id' => $item->id,
+                'skill_id' => $skill,
+            ]);
+        }
+        // 案件システム種別中間テーブルにインサート
+        foreach ($sys_types as $sys_type) {
+            Tr_link_items_sys_types::create([
+                'item_id' => $item->id,
+                'sys_type_id' => $sys_type,
+            ]);
+        }
+        // 案件タグ中間テーブルにインサート
+        foreach ($tag_idList as $tag_id) {
+            Tr_link_items_tags::create([
+                'item_id' => $item->id,
+                'tag_id' => $tag_id,
+            ]);
+        }
+
+        */
+
+        return redirect('/admin/item/search');
+    }
+
+    // 論理削除処理
+    public function deleteItem(Request $request){
+        $item_id = $request->input('id');
+        $item = Tr_items::findOrFail($item_id);
+
     }
 }

@@ -17,19 +17,19 @@ class Tr_admin_user extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'admin_name',
-        'login_id',
-        'password',
-        'registration_date',
-        'last_update_date',
-        'last_login_date',
-        'delete_flag',
-        'delete_date',
-    ];
-
+     protected $fillable = [
+         'admin_name',
+         'login_id',
+         'password',
+         'registration_date',
+         'last_update_date',
+         'last_login_date',
+         'delete_flag',
+         'delete_date',
+     ];
+     
     /**
-     * 許可された権限を取得する(多：多)
+     * 許可された権限を取得する
      */
     public function auths()
     {
