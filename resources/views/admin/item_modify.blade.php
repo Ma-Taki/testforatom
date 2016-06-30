@@ -1,5 +1,5 @@
 @extends('admin.common.layout')
-@section('title', '案件登録')
+@section('title', '案件編集')
 @section('content')
 
 <?php
@@ -9,7 +9,7 @@ use App\Libraries\HtmlUtility;
     <div class="row">
         <div class="content-box-large">
             <div class="panel-heading">
-                <div class="panel-title" style="font-size:20px">案件登録</div>
+                <div class="panel-title" style="font-size:20px">案件編集</div>
     		</div>
             <div class="panel-body">
 
@@ -39,20 +39,20 @@ use App\Libraries\HtmlUtility;
                     <div class="col-md-4">案件情報入力（<font color="#FF0000">*</font>は入力必須項目）</div>
                 </div>
                 </br>
-                <form class="form-horizontal" name="itemForm" role="form" method="POST" onSubmit="mutualApplyBeforeSubmit()" action="{{ url('/admin/item/insert') }}">
+                <form class="form-horizontal" name="itemForm" role="form" method="POST" onSubmit="mutualApplyBeforeSubmit()" action="{{ url('/admin/item/update') }}">
                     <fieldset>
                         <div class="form-group">
                             <label for="inputItemName" class="col-md-2 control-label">案件名<font color="#FF0000">*</font></label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputItemName" name="item_name" value="{{ old('item_name') }}" placeholder="案件名">
+                                <input type="text" class="form-control" id="inputItemName" name="item_name" value="{{ HtmlUtility::setTextValueByRequest($item->name, old('item_name')) }}" placeholder="案件名">
                                 <span class="">(50文字まで)</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEntryDate" class="col-md-2 control-label">エントリー受付期間<font color="#FF0000">*</font></label>
-                            <div class="col-md-2"><input type="text" class="datepicker" name="item_date_from" value="{{ old('item_date_from') }}" maxlength="10" readonly="readonly"/></div>
+                            <div class="col-md-2"><input type="text" class="datepicker" name="item_date_from" value="{{ HtmlUtility::setTextValueByRequest($item->service_start_date->format('Y/m/d'), old('item_date_from')) }}" maxlength="10" readonly="readonly"/></div>
                             <div class="col-md-1 text-center">～</div>
-                            <div class="col-md-2"><input type="text" class="datepicker" name="item_date_to" value="{{ old('item_date_to') }}"  maxlength="10" readonly="readonly"/></div>
+                            <div class="col-md-2"><input type="text" class="datepicker" name="item_date_to" value="{{ HtmlUtility::setTextValueByRequest($item->service_end_date->format('Y/m/d'), old('item_date_to')) }}"  maxlength="10" readonly="readonly"/></div>
                             <div class="col-md-2">(YYYY/MM/DD形式)</div>
                         </div>
                         <div class="form-group">
@@ -61,7 +61,7 @@ use App\Libraries\HtmlUtility;
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="inputMaxRate" name="item_max_rate" value="{{ old('item_max_rate') }}" placeholder="検索用">
+                                            <input type="text" class="form-control" id="inputMaxRate" name="item_max_rate" value="{{ HtmlUtility::setTextValueByRequest($item->max_rate, old('item_max_rate')) }}" placeholder="検索用">
                                             <span class="input-group-addon">万円(半角数字)</span>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@ use App\Libraries\HtmlUtility;
                         <div class="form-group">
                             <label for="inputRateDetail" class="col-md-2 control-label">報酬(表示用)<font color="#FF0000">*</font></label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputRateDetail" name="item_rate_detail" value="{{ old('item_rate_detail') }}" placeholder="表示用">
+                                <input type="text" class="form-control" id="inputRateDetail" name="item_rate_detail" value="{{ HtmlUtility::setTextValueByRequest($item->rate_detail, old('item_rate_detail')) }}" placeholder="表示用">
                                 <span class="">(20文字まで)</span>
                             </div>
                         </div>
@@ -81,7 +81,7 @@ use App\Libraries\HtmlUtility;
                             <div class="col-md-8">
 @foreach($master_areas as $area)
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="areas[]" value="{{ $area->id }}" {{ HtmlUtility::isChecked(old('areas'), $area->id) }}>{{ $area->name }}
+                                    <input type="checkbox" name="areas[]" value="{{ $area->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->areas), old('areas'), $area->id) }}>{{ $area->name }}
                                 </label>
 @endforeach
                                 </br>
@@ -92,21 +92,21 @@ use App\Libraries\HtmlUtility;
                         <div class="form-group">
                             <label for="inputAreaDetail" class="col-md-2 control-label">エリア(詳細)<font color="#FF0000">*</font></label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputAreaDetail" name="item_area_detail" value="{{ old('item_area_detail') }}" placeholder="エリア詳細">
+                                <input type="text" class="form-control" id="inputAreaDetail" name="item_area_detail" value="{{ HtmlUtility::setTextValueByRequest($item->area_detail, old('item_area_detail')) }}" placeholder="エリア詳細">
                                 <span class="">(20文字まで)</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmploymentPeriod" class="col-md-2 control-label">就業期間</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputEmploymentPeriod" name="item_employment_period" value="{{ old('item_employment_period') }}" placeholder="就業期間">
+                                <input type="text" class="form-control" id="inputEmploymentPeriod" name="item_employment_period" value="{{ HtmlUtility::setTextValueByRequest($item->employment_period, old('item_employment_period')) }}" placeholder="就業期間">
                                 <span class="">(50文字まで)</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputWorkingHours" class="col-md-2 control-label">就業時間</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputWorkingHours" name="item_working_hours" value="{{ old('item_working_hours') }}" placeholder="就業時間">
+                                <input type="text" class="form-control" id="inputWorkingHours" name="item_working_hours" value="{{ HtmlUtility::setTextValueByRequest($item->working_hours, old('item_working_hours')) }}" placeholder="就業時間">
                                 <span class="">(50文字まで)</span>
                             </div>
                         </div>
@@ -118,13 +118,13 @@ use App\Libraries\HtmlUtility;
 
 @foreach($master_search_categories_parent as $search_category_parent)
                                 <label class="checkbox">
-                                    <input type="checkbox" name="search_categories[]" value="{{ $search_category_parent->id }}" {{ HtmlUtility::isChecked(old('search_categories'), $search_category_parent->id) }}>{{ $search_category_parent->name }}
+                                    <input type="checkbox" name="search_categories[]" value="{{ $search_category_parent->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->searchCategorys), old('search_categories'), $search_category_parent->id) }}>{{ $search_category_parent->name }}
                                 </label>
                                 <div class="col-md-offset-1">
 @foreach($master_search_categories_child as $search_category_child)
 @if($search_category_parent->id == $search_category_child->parent_id)
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="search_categories[]" value="{{ $search_category_child->id }}" {{ HtmlUtility::isChecked(old('search_categories'), $search_category_child->id) }}>{{ $search_category_child->name }}
+                                        <input type="checkbox" name="search_categories[]" value="{{ $search_category_child->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->searchCategorys), old('search_categories'), $search_category_child->id) }}>{{ $search_category_child->name }}
                                     </label>
 @endif
 @endforeach
@@ -140,7 +140,7 @@ use App\Libraries\HtmlUtility;
                                 <select class="form-control" id="input_biz_category" name="item_biz_category">
 
 @foreach($master_biz_categories as $biz_category)
-                                    <option value="{{ $biz_category->id }}" {{ old('item_biz_category') == $biz_category->id ? "selected" : "" }}>{{ $biz_category->name }}</option>
+                                    <option value="{{ $biz_category->id }}" {{ HtmlUtility::isSelectedOldRequest($item->bizCategorie->id, old('item_biz_category'), $biz_category->id) }}>{{ $biz_category->name }}</option>
 @endforeach
 
                                 </select>
@@ -155,7 +155,7 @@ use App\Libraries\HtmlUtility;
 @foreach($master_job_types as $job_type)
                                     <div class="col-md-6">
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="job_types[]" value="{{ $job_type->id }}" {{ HtmlUtility::isChecked(old('job_types'), $job_type->id) }}>{{ $job_type->name }}
+                                            <input type="checkbox" name="job_types[]" value="{{ $job_type->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->jobTypes), old('jobTypes'), $job_type->id) }}>{{ $job_type->name }}
                                         </label>
                                     </div>
 @endforeach
@@ -171,7 +171,7 @@ use App\Libraries\HtmlUtility;
 @foreach($master_sys_types as $sys_type)
                                     <div class="col-md-4">
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}" {{ HtmlUtility::isChecked(old('sys_types'), $sys_type->id) }}>{{ $sys_type->name }}
+                                            <input type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->sysTypes), old('sys_types'), $sys_type->id) }}>{{ $sys_type->name }}
                                         </label>
                                     </div>
 @endforeach
@@ -188,7 +188,7 @@ use App\Libraries\HtmlUtility;
 @foreach($master_skills as $skill)
                                     <div class="col-md-4">
                                         <div class="checkbox-inline">
-                                            <label><input type="checkbox" name="skills[]" value="{{ $skill->id }}" {{ HtmlUtility::isChecked(old('skills'), $skill->id) }}><font style="font-weight:normal;">{{ $skill->name }}</font></label>
+                                            <label><input type="checkbox" name="skills[]" value="{{ $skill->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->skills), old('skills'), $skill->id) }}><font style="font-weight:normal;">{{ $skill->name }}</font></label>
                                         </div>
                                     </div>
 @endforeach
@@ -202,7 +202,7 @@ use App\Libraries\HtmlUtility;
                                 (20文字以内、80個まで。キーワード毎に改行してください。)</br>
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px" id="tagTextArea">{{ old('item_tag') }}</textarea>
+                                        <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px" id="tagTextArea">{{ HtmlUtility::setTextValueByRequest(HtmlUtility::convertTagModelToString($item->tags), old('item_tag')) }}</textarea>
                                     </div>
                                     <div class="col-md-7">
                                         <button type="button" class="btn btn-sm btn-default" onclick="mutualApply()">相互反映</button>
@@ -234,7 +234,7 @@ use App\Libraries\HtmlUtility;
                             <div class="col-md-8">
                                 (1000文字まで)</br>
                                 <textarea name="item_detail" rows="15" cols"60" class="form-control" style="font-size:12px" id="tagTextArea">
-{{ HtmlUtility::setTextValueByRequest('【仕事内容】&#13;&#13;【要求スキル】&#13;（必須）&#13;・&#13;（尚可）&#13;・&#13;&#13;【募集人数】&#13;名&#13;&#13;【面接回数】&#13;回（弊社同席)', old('item_detail')) }}</textarea>
+{{ HtmlUtility::setTextValueByRequestDefault($item->detail, old('item_detail'),'【仕事内容】&#13;&#13;【要求スキル】&#13;（必須）&#13;・&#13;（尚可）&#13;・&#13;&#13;【募集人数】&#13;名&#13;&#13;【面接回数】&#13;回（弊社同席)') }}</textarea>
                             </div>
                         </div>
 
@@ -242,7 +242,8 @@ use App\Libraries\HtmlUtility;
                             <label for="input_note" class="col-md-2 control-label">メモ(社内用)</label>
                             <div class="col-md-8">
                                 (1000文字まで)</br>
-                                <textarea name="item_note" rows="7" cols"60" class="form-control" style="font-size:12px" id="tagTextArea">{{ old('item_note') }}</textarea>
+                                <textarea name="item_note" rows="7" cols"60" class="form-control" style="font-size:12px" id="tagTextArea">
+{{ HtmlUtility::setTextValueByRequest($item->note, old('item_note')) }}</textarea>
                             </div>
                         </div>
 
@@ -256,9 +257,10 @@ use App\Libraries\HtmlUtility;
                                 <font style="font-weight:normal;">登録時にタグの相互反映を実施する</font></br>
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-md btn-primary">&nbsp;&nbsp;&nbsp;登録&nbsp;&nbsp;&nbsp;</button>
+                        <button type="submit" class="btn btn-md btn-primary">&nbsp;&nbsp;&nbsp;更新&nbsp;&nbsp;&nbsp;</button>
                     </div>
                     </div>
+                    <input type="hidden" name="item_id" value="{{ $item->id }}">
                     </fieldset>
                 </form>
             </div>

@@ -102,6 +102,14 @@ Route::get('/admin/item/insert', 'admin\ItemController@insertItem')
 ->middleware(['loginCheck', 'authCheck']);
 Route::post('/admin/item/insert', 'admin\ItemController@insertItem')
 ->middleware(['loginCheck', 'authCheck']);
+// 管理画面：案件管理：案件情報編集画面
+Route::get('/admin/item/modify', 'admin\ItemController@showItemModify')
+->middleware(['loginCheck', 'authCheck']);
+// 管理画面：案件管理：案件情報更新処理
+Route::post('/admin/item/update', 'admin\ItemController@updateItem')
+->middleware(['loginCheck', 'authCheck']);
+Route::get('/admin/item/update', 'admin\ItemController@updateItem')
+->middleware(['loginCheck', 'authCheck']);
 // 管理画面：案件：論理削除処理
 Route::get('/admin/item/delete', 'admin\ItemController@deleteItem')
 ->middleware(['loginCheck', 'authCheck']);

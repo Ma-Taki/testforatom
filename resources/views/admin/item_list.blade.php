@@ -89,14 +89,17 @@ use App\Libraries\OrderUtility as OdrUtil;
                             <td>@if($item->delete_flag) 削除済み @else 受付{{ (HtmlUtility::isTodayInPeriod($item->service_start_date, $item->service_end_date)) }} @endif</td>
                             <td nowrap>
                                 <a href="/admin/item/detail?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">詳細</button></a>
+@if(!$item->delete_flag)
+                                <a href="/admin/item/modify?id={{ $item->id }}"><button type="button" class="btn btn-warning btn-xs">編集</button></a>
                                 <a href="/admin/item/delete?id={{ $item->id }}" onClick="javascript:return confirm('本当に削除しますか？')"><button type="button" class="btn btn-danger btn-xs">削除</button></a>
+@endif
                             </td>
 				        </tr>
 @endforeach
 
 				    </tbody>
 				</table>
-                <dev class="">{!! $itemList->appends(['sort_id' => $sort_id, 'enabled_only' => $enabled_only])->render() !!}</div>
+                <dev class="pull-right">{!! $itemList->appends(['sort_id' => $sort_id, 'enabled_only' => $enabled_only])->render() !!}</div>
             </div>
         </div>
     </div>

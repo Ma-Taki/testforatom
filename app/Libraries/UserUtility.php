@@ -57,17 +57,10 @@ class UserUtility
         'admin/item/detail' => self::AUTH_TYPE_ITEM_READ,
         'admin/item/input' => self::AUTH_TYPE_ITEM_CREATE,
         'admin/item/insert' => self::AUTH_TYPE_ITEM_CREATE,
+        'admin/item/modify' => self::AUTH_TYPE_ITEM_UPDATE,
+        'admin/item/update' => self::AUTH_TYPE_ITEM_UPDATE,
         'admin/item/delete' => self::AUTH_TYPE_ITEM_DELETE,
     ];
-
-    // サイドバー表示制御用：案件
-    //const SIDE_BAR_DISPLAY_ITEM = 'item';
-    // サイドバー表示制御用：会員
-    //const SIDE_BAR_DISPLAY_ITEM = 'member';
-    // サイドバー表示制御用：エントリー
-    //const SIDE_BAR_DISPLAY_ITEM = 'entry';
-    // サイドバー表示制御用：ユーザ
-    //const SIDE_BAR_DISPLAY_ITEM = 'user';
 
     /**
      * 管理者idで指定されたユーザが指定された権限を持っているかをチェックする

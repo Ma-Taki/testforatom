@@ -8,7 +8,7 @@
         <div class="content-box-large">
             <div class="alert alert-danger">
                 <ul>
-                    <li>{{ $message }}</li>
+                    <li>削除済みの案件です。</li>
                 </ul>
             </div>
         </div>
@@ -119,7 +119,7 @@
                         </tr>
                         <tr>
                             <th>メモ(社内用)</th>
-                            <td>{{ $item->note }}</td>
+                            <td>{!! nl2br($item->note) !!}</td>
                         </tr>
                     </table>
                 </div>

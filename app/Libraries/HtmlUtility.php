@@ -12,6 +12,7 @@ use Carbon\Carbon;
 class HtmlUtility
 {
     const CHECKBOX_CHECKED = "checked";
+    const DROPDOWNLIST_SELECTED = "selected";
     const NULL_CHARACTER = "";
 
     /**
@@ -23,6 +24,22 @@ class HtmlUtility
      */
     public static function setTextValueByRequest($value, $oldValue){
         return $oldValue == null || $oldValue === "" ? $value : $oldValue;
+    }
+
+    /**
+     * テキストフィールド初期値設定用
+     * 古いvalueが存在しなければ初期表示様Valueを返す
+     * @param  string $value
+     * @param  string $oldValue
+     * @return string
+     */
+    public static function setTextValueByRequestDefault($value, $oldValue, $defaultValue){
+        if ($oldValue != null || $oldValue != '') {
+            return $oldValue;
+        } elseif ($value != null || $value != '') {
+            return $value;
+        }
+        return $defaultValue;
     }
 
     /**
@@ -55,6 +72,52 @@ class HtmlUtility
         }
 
         return $exist ? self::CHECKBOX_CHECKED : self::NULL_CHARACTER;
+    }
+
+    /**
+     * 関連モデル配列を、idの配列に変換する
+     * @param  Collection modelList
+     * @return list
+     */
+    public static function convertModelListToIdList($modelList){
+        $id_list = array();
+        foreach ($modelList as $model) {
+            array_push($id_list, $model->id);
+        }
+        return $id_list;
+    }
+
+    /**
+     * タグモデル配列を、改行コードを含む文字列にして返却する
+     * @param  Collection modelList
+     * @return string
+     */
+    public static function convertTagModelToString($modelList){
+        $tag_str = '';
+        foreach ($modelList as $model) {
+            $tag_str = $tag_str.$model->term."\n";
+        }
+        return $tag_str;
+    }
+
+    /**
+     * ドロップダウンリストの初期表示項目を判定する
+     * フラッシュデータに直前の選択項目が保存されていた場合、優先して参照する
+     * フラッシュデータに選択項目が存在しない場合、初期表示用の配列を参照する
+     * @param  string  $element
+     * @param  string  $oldElement
+     * @param  string  $value
+     * @return string "selected" or ""
+     */
+    public static function isSelectedOldRequest($element, $oldElement, $value){
+        $exist = false;
+        if(!empty($oldElement)) {
+            if($value === $oldElement) $exist = true;
+        } elseif (empty($oldElement) && !empty($element)) {
+            if($value === $element) $exist = true;
+        }
+
+        return $exist ? self::DROPDOWNLIST_SELECTED : self::NULL_CHARACTER;
     }
 
     /**
