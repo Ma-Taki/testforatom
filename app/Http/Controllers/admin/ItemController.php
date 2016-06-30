@@ -109,6 +109,7 @@ class ItemController extends Controller
         if ($item->isEmpty()) {
             abort(404, '案件が見つかりません。');
         }
+        $item = $item->first();
         // AdminControllerで404まで
         $today = Carbon::today();
         return view('admin.item_detail', compact('item', 'today'));
