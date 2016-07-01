@@ -12,117 +12,157 @@ use App\Models\Tr_items;
 use App\Models\Tr_users;
 use Carbon\Carbon;
 use Storage;
+use DB;
 
 class EntryController extends AdminController
 {
-    /* エントリー一覧画面表示 */
-    public function showEntryList(){
-        $entryList = Tr_item_entries::all();
-        return view('admin.entry_list', compact('entryList'));
-    }
-
-    /* エントリー詳細画面表示 */
+    /**
+     * 詳細画面表示
+     * GET:/admin/entry/detail
+     */
     public function showEntryDetail(Request $request){
+
+        // エントリーID
         $entry_id = $request->input('id');
-        $entry = Tr_item_entries::find($entry_id);
+
+        // 今日日付
         $today = Carbon::today();
+
+        // エントリー情報を取得する
+        $entry = Tr_item_entries::where('id', $entry_id)->get()->first();
+        if (empty($entry)) {
+            abort(404, '指定されたエントリーは存在しません。');
+        }
+
         return view('admin.entry_detail', compact('entry', 'today'));
     }
 
-    /* エントリー検索処理 */
+    /**
+     * 検索処理
+     * GET,POST:/admin/entry/search
+     */
     public function searchEntry(EntrySearchRequest $request){
+
+        // エントリーID
         $entry_id = $request->input('entry_id');
-        $date_from = $request->input('entry_date_from');
-        $date_to = $request->input('entry_date_to');
+        // エントリー日付(開始日)
+        $entry_date_from = $request->input('entry_date_from');
+        // エントリー日付(終了日)
+        $entry_date_to = $request->input('entry_date_to');
+        // 有効なエントリーのみか
         $enabledOnly = $request->input('enabledOnly');
-
-        // 再利用するためパラメータを次のリクエストまで保存
-        $request->flash();
-
-        $entryListAll = array();
-        $entryList = array();
 
         // 追加のvalidation：from日付がto日付より大きい場合エラー
         // エントリーIDが入力されている場合はエラーにしない
-        if ($date_from > $date_to && $entry_id == null) {
-            $c_error_date = 1;
-            return view('admin.entry_list', compact('entryList', 'c_error_date'));
+        if (!empty($entry_date_from) && !empty($entry_date_to) && $entry_date_from > $entry_date_to && empty($entry_id)) {
+            // フラッシュセッションにエラーメッセージを保存
+            \Session::flash('custom_error_messages', 'エントリー日付(終了日)がエントリー日付(開始日)より過去になっています。');
+            return back()->withInput();
         }
+
+        // パラメータの入力状態によって動的にクエリを発行
+        $query = Tr_item_entries::query();
 
         // ID検索　優先順位１位
-        if ($entry_id != null) {
-            $entryListAll = Tr_item_entries::where('id', $entry_id)->get();
-        // エントリー日付検索
-        } else if ($date_from != null && $date_to != null) {
-            $entryListAll = Tr_item_entries::whereBetween('entry_date', array($date_from.' 00:00:00', $date_to.' 23:59:59'))->get();
-
-        } else if ($date_from != null && $date_to == null) {
-            $entryListAll = Tr_item_entries::where('entry_date', '>=',$date_from.' 00:00:00')->get();
-
-        } else if ($date_from == null && $date_to != null) {
-            $entryListAll = Tr_item_entries::where('entry_date', '<=',$date_to.' 23:59:59')->get();
-
+        if (!empty($entry_id)) {
+            $query = $query->where('id', $entry_id);
+        // エントリー日付検索 from~to
+        } else if (!empty($entry_date_from) && !empty($entry_date_to)) {
+            $query = $query->whereBetween('entry_date', array($entry_date_from.' 00:00:00', $entry_date_to.' 23:59:59'));
+        // エントリー日付検索 from~
+        } else if (!empty($entry_date_from) && empty($entry_date_to)) {
+            $query = $query->where('entry_date', '>=',$entry_date_from.' 00:00:00');
+        // エントリー日付検索 ~to
+        } else if (empty($entry_date_from) && !empty($entry_date_to)) {
+            $query = $query->where('entry_date', '<=',$entry_date_to.' 23:59:59');
         } else {
             // すべてブランク、もしくは"有効なエントリ"のみ入力の場合全件検索する
-            $entryListAll = Tr_item_entries::all();
         }
 
-        if (!empty($entryListAll)) {
-            foreach ($entryListAll as $entry) {
-                if ($enabledOnly) {
-                    // 有効なエントリーのみの場合、論理削除済みのものは含めない
-                    if ($entry->delete_flag == 0 && $entry->delete_date == null) {
-                        array_push($entryList, $entry);
-                    }
-                } else {
-                    array_push($entryList, $entry);
-                }
-            }
+        // 有効なエントリーのみの場合、論理削除済みのものは含めない
+        if ($enabledOnly) {
+            $query = $query->where('delete_flag', '>', 0)
+                           ->where('delete_date', '!=', null);
         }
 
-        return view('admin.entry_list', compact('entryList'));
+        // 検索結果を取得する
+        $entryList = $query->get();
+
+        return view('admin.entry_list', compact(
+            'entryList',
+            'entry_id',
+            'entry_date_from',
+            'entry_date_to',
+            'enabledOnly'
+        ));
     }
 
-    /* エントリー論理削除処理 */
+    /**
+     * 論理削除処理
+     * GET:/admin/entry/delete
+     */
     public function deleteEntry(Request $request){
+
+        // エントリーID
         $entry_id = $request->input('id');
-        $entry = Tr_item_entries::find($entry_id);
-
-        // 既に論理削除済み
-        if ($entry == null || $entry->delete_flag > 0){
-            return redirect('admin/top');
-        }
-
         // 現在時刻
         $timestamp = time();
+        // エントリー情報を取得する
+        $entry = Tr_item_entries::where('id', $entry_id)->get()->first();
+        if (empty($entry)) {
+            abort(404, '指定されたエントリーは存在しません。');
+        } elseif($entry->delete_flag > 0 || $entry->delete_date != null) {
+            abort(404, '指定されたエントリーは既に削除されています。');
+        }
 
-        // エントリーテーブルをアップデート
-        Tr_item_entries::where('id', $entry_id)->update([
-            'delete_flag' => 1,
-            'delete_date' => date('Y-m-d H:i:s', $timestamp),
-        ]);
+        // トランザクション
+        DB::transaction(function () use ($entry_id, $timestamp) {
+            try {
+                // エントリーテーブルをアップデート
+                Tr_item_entries::where('id', $entry_id)->update([
+                    'delete_flag' => 1,
+                    'delete_date' => date('Y-m-d H:i:s', $timestamp),
+                ]);
+            } catch (\Exception $e) {
+                // TODO エラーのログ出力
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
 
         // エントリーシートを削除
-        if ($entry != null && $entry->skillsheet_upload && $entry->skillsheet_filename != null) {
+        if (!empty($entry) && $entry->skillsheet_upload && !empty($entry->skillsheet_filename)) {
             Storage::disk('local')->delete($entry->skillsheet_filename);
         }
+
+        return redirect('/admin/entry/search')->with('custom_info_messages','エントリー削除は正常に終了しました。');
     }
 
-    /* エントリーシートダウンロード処理 */
+    /**
+     * エントリーシートダウンロード処理
+     * GET:/admin/entry/download
+     */
     public function downloadSkillSheet(Request $request){
 
+        // エントリーID
         $entry_id = $request->input('id');
+        // ストレージパス
         $localStoragePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
-        $entry = Tr_item_entries::where('id', $entry_id)->where('skillsheet_upload', 1)->get();
-        if ($entry->isEmpty()) {
-            return redirect('/admin/top');
+        // エントリー情報を取得する
+        $entry = Tr_item_entries::where('id', $entry_id)->get()->first();
+        if (empty($entry)) {
+            abort(404, 'エントリーが存在しません。');
+        } elseif($entry->delete_flag > 0 || $entry->delete_date != null) {
+            // エントリー削除時にエントリーシートも削除しているため
+            abort(404, 'エントリーは既に削除されています。');
+        } elseif (!$entry->skillsheet_upload) {
+            abort(404, 'エントリーシート未アップロードです。');
         }
 
-        // エントリーシートの存在チェック
-        if (!Storage::disk('local')->exists($entry->first()->skillsheet_filename)) {
-            abort(404, 'モデルが見つかりません。');
+        // ストレージへエントリーシートの存在チェック
+        if (!Storage::disk('local')->exists($entry->skillsheet_filename)) {
+            abort(404, 'エントリーシートが見つかりません。');
         }
 
-        return response()->download($localStoragePath.$entry->first()->skillsheet_filename);
+        return response()->download($localStoragePath.$entry->skillsheet_filename);
     }
 }

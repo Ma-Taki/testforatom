@@ -11,12 +11,11 @@
     </ul>
 </div>
 @endif
-
-{{-- error：auth --}}
-@if(!empty($auth_error))
+{{-- error：custom --}}
+@if(\Session::has('custom_error_messages'))
 <div class="alert alert-danger">
     <ul>
-        <li>ログインできません</li>
+        <li>{{ \Session::get('custom_error_messages') }}</li>
     </ul>
 </div>
 @endif
@@ -32,8 +31,8 @@
                             <input type="text" name="login_id" value="{{ old('login_id') }}" class="form-control" maxlength="20" placeholder="ログインID">
                             <div align="left"><span class="alert-danger text-left">{{$errors->first('password')}}</span></div>
                             <input type="password" name="password" class="form-control" maxlength="20" placeholder="パスワード">
-                            <button type="submit" class="btn btn-primary signup ">ログイン</button>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-primary signup">ログイン</button>
+                            {{ csrf_field() }}
                         </form>
 			        </div>
 			    </div>

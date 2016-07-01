@@ -12,6 +12,16 @@
 				</div>
 			</div>
 		  	<div class="panel-body">
+
+{{-- info：custom --}}
+@if(\Session::has('custom_info_messages'))
+<div class="alert alert-info">
+    <ul>
+        <li>{{ \Session::get('custom_info_messages') }}</li>
+    </ul>
+</div>
+@endif
+
 		        <table class="table">
                     <thead>
                         <tr>

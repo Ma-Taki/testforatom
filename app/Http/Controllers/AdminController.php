@@ -27,23 +27,6 @@ class AdminController extends BaseController
     }
 
     /**
-     * idで指定されたユーザがadmin_userテーブルに存在するかをチェックする
-     *
-     * @param $id id
-     * @param $includeDeleted 論理削除済みデータを含むか
-     * @return bool
-     **/
-    protected function isExistAdminUserById($id, $includeDeleted){
-        $user = Tr_admin_user::find($id);
-        if ($includeDeleted) {
-            return $user != null;
-        } else {
-            return $user != null && !$user->delete_flag;
-        }
-        return false;
-    }
-
-    /**
      * idで指定されたユーザが指定された権限を持っているかをチェックする
      *
      * @param $id id

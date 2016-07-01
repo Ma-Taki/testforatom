@@ -24,8 +24,8 @@ class LoginRequest extends Request
     public function rules()
     {
         return [
-            'login_id' => 'required',
-            'password' => 'required',
+            'login_id' => 'required|between:8,20',
+            'password' => 'required|between:8,20',
         ];
     }
 }

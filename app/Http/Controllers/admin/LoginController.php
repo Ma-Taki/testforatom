@@ -12,51 +12,45 @@ use App\Libraries\SessionUtility;
 class LoginController extends AdminController
 {
   /**
-   * 初期表示画面
-   * GET:admin/Login
-   */
-  public function index(){
-      return view('admin.login');
-  }
-  /**
    * ログイン処理
-   * POST:admin/Login
+   * POST:/admin/Login
    */
-  public function store(LoginRequest $request){
+  public function login(LoginRequest $request){
 
       $login_id = $request->input('login_id');
       $password = $request->input('password');
 
-      // ハッシュパスワード確認用
-      //dd(md5(''));
+      // 入力値から、有効な管理ユーザを取得する
+      $user = Tr_admin_user::where('login_id', $login_id)
+                            ->where('password', md5($password))
+                            ->where('delete_flag', 0)
+                            ->get();
 
-      $user = Tr_admin_user::where('login_id', $login_id)->where('password', md5($password))->where('delete_flag', 0)->get();
-
+      // DBに対象ユーザが存在しない、または削除済み
       if($user->isEmpty()){
-          //認証失敗
-          $data = array('auth_error'=>1);
-          return view('admin.login', $data);
+          // 認証失敗
+          return back()->with('custom_error_messages', 'ログインできません。')->withInput();
 
       }else{
-          //認証成功
+          // 認証成功
+          // sessionにユーザ情報を保存
           session([SessionUtility::SESSION_KEY_ADMIN_ID => $user->first()->id]);
           session([SessionUtility::SESSION_KEY_ADMIN_NAME => $user->first()->admin_name]);
           session([SessionUtility::SESSION_KEY_LOGIN_ID => $login_id]);
-
-          // ログイン時にmaster_adminかどうかをsessionに保存
-          $adUser = Tr_link_admin_user_admin_auth::where(
-            'admin_id', $user->first()->id)->where('auth_id', 1)->get();
+          // マスター管理者フラグ
+          $adUser = Tr_link_admin_user_admin_auth::where('admin_id', $user->first()->id)
+                                                 ->where('auth_id', 1)
+                                                 ->get();
           if($adUser->isEmpty()){
-              session([SessionUtility::SESSION_KEY_MASTER_FLG => 0]);
+              session([SessionUtility::SESSION_KEY_MASTER_FLG => false]);
           } else {
-              session([SessionUtility::SESSION_KEY_MASTER_FLG => 1]);
+              session([SessionUtility::SESSION_KEY_MASTER_FLG => true]);
           }
 
-          // 現在時刻
-          $timestamp = time();
           // 管理者テーブルをアップデート
-          Tr_admin_user::where('id', $user->first()->id)->update([
-              'last_login_date' => date('Y-m-d H:i:s', $timestamp),
+          Tr_admin_user::where('id', $user->first()->id)
+                       ->update([
+              'last_login_date' => date('Y-m-d H:i:s', time()),
               ]);
           return redirect('/admin/top');
       }

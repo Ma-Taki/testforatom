@@ -17,11 +17,11 @@
                     </ul>
                 </div>
 @endif
-{{-- error：不正な日付 --}}
-@if(isset($c_error_date))
+{{-- error：customValidation --}}
+@if(Session::has('custom_error_messages'))
                 <div class="alert alert-danger">
                     <ul>
-                        <li>不正な日付が設定されています。</li>
+                        <li>{{ Session::get('custom_error_messages') }}</li>
                     </ul>
                 </div>
 @endif
@@ -31,21 +31,25 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>エントリーID</th>
-                                    <td>EN<input type="text" class="" name="entry_id" value="{{ old('entry_id') }}" maxlength="6" /> (エントリーIDを指定した場合、他の検索条件は無視されます)</td>
+                                    <td>EN<input type="text" class="" name="entry_id" value="{{ isset($entry_id) ? $entry_id : old('entry_id')  }}" maxlength="6" /> (エントリーIDを指定した場合、他の検索条件は無視されます)</td>
                             	</tr>
                         		<tr>
                         			<th><label class="control-label">エントリー日付</label></th>
-                                    <td><input type="text" class="datepicker" name="entry_date_from" value="{{ old('entry_date_from') }}" maxlength="10" readonly="readonly"/> ～ <input type="text" class="datepicker" name="entry_date_to" value="{{ old('entry_date_to') }}"  maxlength="10" readonly="readonly"/> (YYYY/MM/DD形式)</td>
+                                    <td><input type="text" class="datepicker" name="entry_date_from" value="{{ isset($entry_date_from) ? $entry_date_from : old('entry_date_from')  }}" maxlength="10" readonly="readonly"/> ～ <input type="text" class="datepicker" name="entry_date_to" value="{{ isset($entry_date_to) ? $entry_date_to : old('entry_date_to') }}"  maxlength="10" readonly="readonly"/> (YYYY/MM/DD形式)</td>
                             	</tr>
                             	<tr>
                         			<th><label class="control-label">ステータス</label></th>
+@if(isset($enabledOnly))
+                                    <td><input type="checkbox" name="enabledOnly" id="eo_label"　@if($enabledOnly) checked @endif /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
+@else
                                     <td><input type="checkbox" name="enabledOnly" id="eo_label"　@if(old('enabledOnly')) checked @endif /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
+@endif
                                 </tr>
                                 <tr>
                                     <td colspan="2"><button type="submit" class="btn btn-primary btn-md col-xs-2 col-xs-offset-5">検索</button></td>
                                 </tr>
                             </table>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            {{ csrf_field() }}
 						</form>
                     <legend></legend>
                 </fieldset>
@@ -59,6 +63,7 @@
                         <th>案件名</th>
                         <th>エントリー日付</th>
                         <th>スキルシート</th>
+                        <th>ステータス</th>
                         <th><!-- レイアウト用Blank --></th>
                     </tr>
                 </thead>
@@ -71,9 +76,12 @@
 						<td>{{ $entry->item->name}}</td>
                         <td>{{ $entry->entry_date->format('Y年n月j日 G時i分') }}</td>
 						<td>{!! $entry->skillsheet_upload ? "<a href='/admin/entry/download?id=$entry->id'>アップロード済み</a>" : '未アップロード' !!}</td>
-                        <td align="center" nowrap>
+                        <td>{{ $entry->delete_flag > 0 ? '無効' : '有効' }}</td>
+                        <td nowrap>
                             <a href="/admin/entry/detail?id={{ $entry->id }}"><button type="button" class="btn btn-info btn-xs">詳細</button></a>
+@if(!$entry->delete_flag > 0)
                             <a href="/admin/entry/delete?id={{ $entry->id }}" onClick="javascript:return confirm('本当に削除しますか？')"><button type="button" class="btn btn-danger btn-xs">削除</button></a>
+@endif
                         </td>
 					</tr>
 @endforeach

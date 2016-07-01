@@ -11,111 +11,78 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// 管理画面：ログイン画面
+Route::get('/admin/login', function () {
+    return view('admin.login');
 });
-
-// 管理画面：ログイン
-Route::get('/admin/login', 'admin\LoginController@index');
-Route::post('/admin/login', 'admin\LoginController@store');
+// 管理画面：ログイン処理
+Route::post('/admin/login', 'admin\LoginController@login');
 
 // 管理画面；ログアウト
 Route::get('/admin/logout', 'AdminController@logout');
 
-// 管理画面：TOP
-Route::get('/admin/top', function () {
-    return view('admin.top');
-})->middleware(['loginCheck']);
+// 管理画面：ログインチェックを行うルート
+Route::group(['middleware' => 'loginCheck'], function () {
+    // トップ画面
+    Route::get('/admin/top', function () {
+        return view('admin.top');
+    });
+    // エラー画面
+    Route::get('/admin/error', function () {
+        return view('admin.errors.error');
+    });
+});
 
-// 管理画面：ユーザ管理：一覧画面
-Route::get('/admin/user/list', 'admin\UserController@showUserList')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：ユーザ管理：新規登録画面
-Route::get('/admin/user/input', 'admin\UserController@showUserInput')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：ユーザ管理：ユーザ情報編集画面
-Route::get('/admin/user/modify', 'admin\UserController@showUserModify')
-->middleware(['loginCheck', 'authCheck']);
+// 管理画面：ログインチェックと権限チェックを行うルート
+Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
 
+    // ユーザ管理
+    // 一覧画面
+    Route::get('/admin/user/list', 'admin\UserController@showUserList');
+    // 新規登録画面
+    Route::get('/admin/user/input', 'admin\UserController@showUserInput');
+    // 編集画面
+    Route::get('/admin/user/modify', 'admin\UserController@showUserModify');
+    // 新規登録処理
+    Route::post('/admin/user/insert', 'admin\UserController@insertAdminUser');
+    // 更新処理
+    Route::post('/admin/user/update', 'admin\UserController@updateAdminUser');
+    // 論理削除処理
+    Route::get('/admin/user/delete', 'admin\UserController@deleteAdminUser');
 
-// 管理画面：ユーザ管理：新規登録処理
-Route::post('/admin/user/insert', 'admin\UserController@insertAdminUser')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：ユーザ管理：更新処理
-Route::post('/admin/user/update', 'admin\UserController@updateAdminUser')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：ユーザ管理：論理削除処理
-Route::get('/admin/user/delete', 'admin\UserController@deleteAdminUser')
-->middleware(['loginCheck', 'authCheck']);
+    //エントリー管理
+    // 詳細画面
+    Route::get('/admin/entry/detail', 'admin\EntryController@showEntryDetail');
+    // 検索処理
+    Route::match(['get', 'post'], '/admin/entry/search', 'admin\EntryController@searchEntry');
+    // 論理削除処理
+    Route::get('/admin/entry/delete', 'admin\EntryController@deleteEntry');
+    // スキルシートダウンロード処理
+    Route::get('/admin/entry/download', 'admin\EntryController@downloadSkillSheet');
 
-// 管理画面：エントリー管理：一覧画面
-Route::get('/admin/entry/list', 'admin\EntryController@showEntryList')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：エントリー管理：詳細画面
-Route::get('/admin/entry/detail', 'admin\EntryController@showEntryDetail')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：エントリー管理：検索処理
-Route::get('/admin/entry/search', 'admin\EntryController@searchEntry')
-->middleware(['loginCheck', 'authCheck']);
-Route::post('/admin/entry/search', 'admin\EntryController@searchEntry')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：エントリー管理：論理削除処理
-Route::get('/admin/entry/delete', 'admin\EntryController@deleteEntry')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：エントリー管理：スキルシートダウンロード処理
-Route::get('/admin/entry/download', 'admin\EntryController@downloadSkillSheet')
-->middleware(['loginCheck', 'authCheck']);
+    // 会員管理
+    // 詳細画面
+    Route::get('/admin/member/detail', 'admin\MemberController@showMemberDetail');
+    // 検索処理
+    Route::match(['get', 'post'], '/admin/member/search', 'admin\MemberController@searchMember');
+    // 更新処理
+    Route::post('/admin/member/update', 'admin\MemberController@updatehMemberMemo');
+    // 論理削除処理
+    Route::get('/admin/member/delete', 'admin\MemberController@deleteMember');
 
-// 管理画面：会員管理：一覧画面
-Route::get('/admin/member/list', 'admin\MemberController@showMemberList')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：会員管理：詳細画面
-Route::get('/admin/member/detail', 'admin\MemberController@showMemberDetail')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：会員管理：検索処理
-Route::get('/admin/member/search', 'admin\MemberController@searchMember')
-->middleware(['loginCheck', 'authCheck']);
-Route::post('/admin/member/search', 'admin\MemberController@searchMember')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：会員管理：更新処理
-Route::post('/admin/member/update', 'admin\MemberController@updatehMemberMemo')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：会員管理：論理削除処理
-Route::get('/admin/member/delete', 'admin\MemberController@deleteMember')
-->middleware(['loginCheck', 'authCheck']);
-
-// 管理画面：案件管理：検索処理
-Route::get('/admin/item/search', 'admin\ItemController@searchItem')
-->middleware(['loginCheck', 'authCheck']);
-Route::post('/admin/item/search', 'admin\ItemController@searchItem')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：案件管理：詳細画面
-Route::get('/admin/item/detail', 'admin\ItemController@showItemDetail')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：案件管理：登録画面
-Route::get('/admin/item/input', 'admin\ItemController@showItemInput')
-->middleware(['loginCheck', 'authCheck']);
-Route::post('/admin/item/input', 'admin\ItemController@showItemInput')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：案件管理：新規登録処理
-Route::get('/admin/item/insert', 'admin\ItemController@insertItem')
-->middleware(['loginCheck', 'authCheck']);
-Route::post('/admin/item/insert', 'admin\ItemController@insertItem')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：案件管理：案件情報編集画面
-Route::get('/admin/item/modify', 'admin\ItemController@showItemModify')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：案件管理：案件情報更新処理
-Route::post('/admin/item/update', 'admin\ItemController@updateItem')
-->middleware(['loginCheck', 'authCheck']);
-Route::get('/admin/item/update', 'admin\ItemController@updateItem')
-->middleware(['loginCheck', 'authCheck']);
-// 管理画面：案件：論理削除処理
-Route::get('/admin/item/delete', 'admin\ItemController@deleteItem')
-->middleware(['loginCheck', 'authCheck']);
-
-
-// 管理画面：エラー画面
-Route::get('/admin/error', function () {
-    return view('admin.errors.error');
-})->middleware(['loginCheck']);
+    // 案件管理
+    // 新規登録画面
+    Route::get('/admin/item/input', 'admin\ItemController@showItemInput');
+    // 詳細画面
+    Route::get('/admin/item/detail', 'admin\ItemController@showItemDetail');
+    // 編集画面
+    Route::get('/admin/item/modify', 'admin\ItemController@showItemModify');
+    // 検索処理
+    Route::match(['get', 'post'], '/admin/item/search', 'admin\ItemController@searchItem');
+    // 新規登録処理
+    Route::post('/admin/item/insert', 'admin\ItemController@insertItem');
+    // 更新処理
+    Route::post('/admin/item/update', 'admin\ItemController@updateItem');
+    // 論理削除処理
+    Route::get('/admin/item/delete', 'admin\ItemController@deleteItem');
+});

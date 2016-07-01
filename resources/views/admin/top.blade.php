@@ -1,5 +1,5 @@
 @extends('admin.common.layout')
-@section('title', '管理画面：トップ')
+@section('title', 'トップ')
 @section('content')
 <div class="col-md-10">
     <div class="row">
@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="content-box-header">
-                        <div class="panel-title">適当に</div>
+                        <div class="panel-title">test</div>
                         <div class="panel-options">
                             <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
                             <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
