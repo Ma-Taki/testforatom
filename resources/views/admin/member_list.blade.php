@@ -8,6 +8,14 @@
                 <div class="panel-title" style="font-size:20px">会員一覧</div>
 			</div>
   			<div class="panel-body">
+{{-- info：custom --}}
+@if(\Session::has('custom_info_messages'))
+                <div class="alert alert-info">
+                    <ul>
+                        <li>{{ \Session::get('custom_info_messages') }}</li>
+                    </ul>
+                </div>
+@endif
                 <fieldset>
                     <legend><div class="panel-title">検索</div></legend>
 			  		    <form class="form-inline" role="form" method="POST" action="{{ url('/admin/member/search') }}">

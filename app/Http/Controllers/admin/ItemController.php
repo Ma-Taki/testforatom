@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\admin\ItemRegistRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminController;
 use App\Models\Tr_items;
 use Carbon\Carbon;
 use App\Models\Tr_tag_infos;
@@ -27,17 +28,25 @@ use App\Models\Tr_link_items_sys_types;
 use App\Models\Tr_link_items_tags;
 use App\Models\Tr_tags;
 
-class ItemController extends Controller
+class ItemController extends AdminController
 {
+    /**
+     * 検索処理
+     * GET,POST:/admin/item/search
+     */
     public function searchItem(Request $request){
 
+        // 案件ID
         $item_id = $request->input('item_id');
+        // 案件名
         $item_names = $request->input('item_name');
+        // スペシャルタグ
         $tag_id = $request->input('special_tag');
+        //　有効な案件のみか
         $enabled_only = $request->input('enabled_only');
-        $sort_id = $request->input('sort_id');
-        // 初期表示の場合は更新日が新しい順を設定
-        if($sort_id == null) $sort_id = OdrUtil::ORDER_ITEM_UPDATE_DESC['sortId'];
+        // ソートID 初期表示の場合は更新日が新しい順を設定
+        $sort_id = $request->input('sort_id', OdrUtil::ORDER_ITEM_UPDATE_DESC['sortId']);
+        // ソート順
         $item_order = OdrUtil::ItemOrder[$sort_id];
 
         // 再利用するためパラメータを次のリクエストまで保存
@@ -47,12 +56,15 @@ class ItemController extends Controller
 
         // パラメータの入力状態によって動的にクエリを発行
         $query = Tr_items::query();
+
         // 案件IDが入力された場合はその他の検索条件を無視する
-        if ($item_id != null) {
+        if (!empty($item_id)) {
             $query->where('id', $item_id);
 
+        // その他の検索条件
         } else {
-            if ($item_names != null) {
+            // 案件名
+            if (!empty($item_names)) {
                 // 全角スペースを半角スペースに置換
                 $item_names = mb_convert_kana($item_names, 's');
                 // 文字列を半角スペースで分割
@@ -61,6 +73,7 @@ class ItemController extends Controller
                     $query->where('name', 'like', '%'.$item_name.'%');
                 }
             }
+            // スペシャルタグ
             if ($tag_id != null) {
                 $query->join('link_items_tags', 'items.id', '=', 'link_items_tags.item_id')
                       ->join('tags', 'tags.id', '=', 'link_items_tags.tag_id')
@@ -102,34 +115,46 @@ class ItemController extends Controller
         ));
     }
 
-    // 案件詳細画面表示
+    /**
+     * 詳細画面表示
+     * GET:/admin/item/detail
+     */
     public function showItemDetail(Request $request){
+
+        // 案件ID
         $item_id = $request->input('id');
-        $item = Tr_items::where('id', $item_id)->get();
-        if ($item->isEmpty()) {
+        $item = Tr_items::where('id', $item_id)->get()->first();
+        if (empty($item)) {
             abort(404, '案件が見つかりません。');
         }
-        $item = $item->first();
-        // AdminControllerで404まで
         $today = Carbon::today();
         return view('admin.item_detail', compact('item', 'today'));
     }
 
-    // 案件新規登録画面表示
+    /**
+     * 新規登録画面表示
+     * GET:/admin/item/input
+     */
     public function showItemInput(){
-        // Master_Type:3(IndexOnly)以外を取得
+
+        // 各種マスタのMaster_Type:3(IndexOnly)以外を取得
+        // エリア
         $master_areas = Ms_areas::where('master_type', '!=', 3)->get();
         // 親カテゴリ
         $master_search_categories_parent = Tr_search_categories::where('parent_id', null)->get();
         // 子カテゴリ
         $master_search_categories_child = Tr_search_categories::where('parent_id', '!=', null)->get();
+        // 業種
         $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)->get();
+        // 職種
         $master_job_types = Ms_job_types::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
+        // システム種別
         $master_sys_types = Ms_sys_types::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
+        // スキル
         $master_skills = Ms_skills::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
@@ -157,7 +182,10 @@ class ItemController extends Controller
         ));
     }
 
-    // 新規登録処理
+    /**
+     * 新規登録処理
+     * POST:/admin/item/insert
+     */
     public function insertItem(ItemRegistRequest $request){
 
         // 案件名
@@ -168,7 +196,6 @@ class ItemController extends Controller
         $item_date_to = $request->input('item_date_to');
         // 報酬(検索用)
         $item_max_rate = $request->input('item_max_rate');
-        //$item_max_rate = $item_max_rate * 10000;
         // 報酬(表示用)
         $item_rate_detail = $request->input('item_rate_detail');
         // エリア
@@ -205,7 +232,7 @@ class ItemController extends Controller
         $item_tags = trim($item_tags);
         // 配列に変換する
         $item_tagList = explode('\n',$item_tags);
-        //　すべての文字列要素の前後の空白を削除する
+        // すべての文字列要素の前後の空白を削除する
         $item_tagList = array_map('trim', $item_tagList);
         // 空要素を削除
         $item_tagList = array_filter($item_tagList, 'strlen');
@@ -250,16 +277,14 @@ class ItemController extends Controller
 
         // タグ名からタグIDを取得する
         $tag_idList = array();
+        $tag_termList = array();
         foreach ($item_tagList as $item_tag) {
-            $tag = Tr_tags::where('term', '=', $item_tag)->get();
-            if ($tag->isEmpty()) {
-                // DBに存在しない場合はタグテーブルにインサートを行う
-                $tag = Tr_tags::create([
-                    'term' => $item_tag,
-                ]);
-                array_push($tag_idList, $tag->id);
+            $tag = Tr_tags::where('term', '=', $item_tag)->get()->first();
+            if (empty($tag)) {
+                // DBに存在しない場合はトランザクション内でタグテーブルにインサートを行う
+                array_push($tag_termList, $item_tag);
             } else {
-                array_push($tag_idList, $tag->first()->id);
+                array_push($tag_idList, $tag->id);
             }
         }
 
@@ -280,96 +305,140 @@ class ItemController extends Controller
         // 現在時刻
         $timestamp = time();
 
-        // 案件テーブルにインサート
-        $item = Tr_items::create([
-            'name' => $item_name,
-            'biz_category_id' => $item_biz_category,
-            'service_start_date' => date('Y-m-d', strtotime($item_date_from)),
-            'service_end_date' => date('Y-m-d', strtotime($item_date_to)),
-            'registration_date' => date('Y-m-d H:i:s', $timestamp),
-            'last_update' => date('Y-m-d H:i:s', $timestamp),
-            'employment_period' => $item_employment_period,
-            'working_hours' => $item_working_hours,
-            'max_rate' => $item_max_rate,
-            'rate_detail' => $item_rate_detail,
-            'area_detail' => $item_area_detail,
-            'detail' => $item_detail,
-            'delete_flag' => false,
-            'delete_date' => null,
-            'note' => $item_note,
-            'version' => 0,
-        ]);
+        // トランザクション
+        DB::transaction(function () use ($item_name,
+                                         $item_biz_category,
+                                         $item_date_from,
+                                         $item_date_to,
+                                         $timestamp,
+                                         $item_employment_period,
+                                         $item_working_hours,
+                                         $item_max_rate,
+                                         $item_rate_detail,
+                                         $item_area_detail,
+                                         $item_detail,
+                                         $item_note,
+                                         $areas,
+                                         $job_types,
+                                         $search_categories,
+                                         $skills,
+                                         $sys_types,
+                                         $tag_idList,
+                                         $tag_termList) {
+            try {
+                // 案件テーブルにインサート
+                $item = Tr_items::create([
+                    'name' => $item_name,
+                    'biz_category_id' => $item_biz_category,
+                    'service_start_date' => date('Y-m-d', strtotime($item_date_from)),
+                    'service_end_date' => date('Y-m-d', strtotime($item_date_to)),
+                    'registration_date' => date('Y-m-d H:i:s', $timestamp),
+                    'last_update' => date('Y-m-d H:i:s', $timestamp),
+                    'employment_period' => $item_employment_period,
+                    'working_hours' => $item_working_hours,
+                    'max_rate' => $item_max_rate * 10000,
+                    'rate_detail' => $item_rate_detail,
+                    'area_detail' => $item_area_detail,
+                    'detail' => $item_detail,
+                    'delete_flag' => false,
+                    'delete_date' => null,
+                    'note' => $item_note,
+                    'version' => 0,
+                ]);
+                // 案件エリア中間テーブルにインサート
+                foreach ($areas as $area) {
+                    Tr_link_items_areas::create([
+                        'item_id' => $item->id,
+                        'area_id' => $area,
+                    ]);
+                }
+                // 案件職種中間テーブルにインサート
+                foreach ($job_types as $job_type) {
+                    Tr_link_items_job_types::create([
+                        'item_id' => $item->id,
+                        'job_type_id' => $job_type,
+                    ]);
+                }
+                // 案件業種検索中間テーブルにインサート
+                foreach ($search_categories as $search_category) {
+                    Tr_link_items_search_categories::create([
+                        'item_id' => $item->id,
+                        'search_category_id' => $search_category,
+                    ]);
+                }
+                // 案件スキル中間テーブルにインサート
+                foreach ($skills as $skill) {
+                    Tr_link_items_skills::create([
+                        'item_id' => $item->id,
+                        'skill_id' => $skill,
+                    ]);
+                }
+                // 案件システム種別中間テーブルにインサート
+                foreach ($sys_types as $sys_type) {
+                    Tr_link_items_sys_types::create([
+                        'item_id' => $item->id,
+                        'sys_type_id' => $sys_type,
+                    ]);
+                }
 
-        // 案件エリア中間テーブルにインサート
-        foreach ($areas as $area) {
-            Tr_link_items_areas::create([
-                'item_id' => $item->id,
-                'area_id' => $area,
-            ]);
-        }
-        // 案件職種中間テーブルにインサート
-        foreach ($job_types as $job_type) {
-            Tr_link_items_job_types::create([
-                'item_id' => $item->id,
-                'job_type_id' => $job_type,
-            ]);
-        }
-        // 案件業種検索中間テーブルにインサート
-        foreach ($search_categories as $search_category) {
-            Tr_link_items_search_categories::create([
-                'item_id' => $item->id,
-                'search_category_id' => $search_category,
-            ]);
-        }
-        // 案件スキル中間テーブルにインサート
-        foreach ($skills as $skill) {
-            Tr_link_items_skills::create([
-                'item_id' => $item->id,
-                'skill_id' => $skill,
-            ]);
-        }
-        // 案件システム種別中間テーブルにインサート
-        foreach ($sys_types as $sys_type) {
-            Tr_link_items_sys_types::create([
-                'item_id' => $item->id,
-                'sys_type_id' => $sys_type,
-            ]);
-        }
-        // 案件タグ中間テーブルにインサート
-        foreach ($tag_idList as $tag_id) {
-            Tr_link_items_tags::create([
-                'item_id' => $item->id,
-                'tag_id' => $tag_id,
-            ]);
-        }
+                // タグテーブルにインサート
+                foreach ($tag_termList as $tag_term) {
+                    $tag = Tr_tags::create([
+                        'term' => $tag_term,
+                    ]);
+                    array_push($tag_idList, $tag->id);
+                }
 
-        return redirect('/admin/item/search');
+                // 案件タグ中間テーブルにインサート
+                foreach ($tag_idList as $tag_id) {
+                    Tr_link_items_tags::create([
+                        'item_id' => $item->id,
+                        'tag_id' => $tag_id,
+                    ]);
+                }
+            } catch (\Exception $e) {
+                // TODO エラーのログ出力
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+
+        return redirect('/admin/item/search')
+            ->with('custom_info_messages','案件登録は正常に終了しました。');
     }
 
-    // 案件情報編集画面表示
+    /**
+     * 編集画面表示
+     * GET:/admin/item/modify
+     */
     public function showItemModify(Request $request){
+
+        // 案件ID
         $item_id = $request->input('id');
-        $item = Tr_items::where('id', $item_id)->get();
-        if ($item->isEmpty()) {
+        $item = Tr_items::where('id', $item_id)->get()->first();
+        if (empty($item)) {
             abort(404, '案件が見つかりません。');
-        } elseif ($item->first()->delete_flag || $item->first()->delete_date != null) {
+        } elseif ($item->delete_flag || !empty($item->delete_date)) {
             abort(404, 'すでに削除済みです。');
         }
-        $item = $item->first();
 
-        // Master_Type:3(IndexOnly)以外を取得
+        // 各種マスタのMaster_Type:3(IndexOnly)以外を取得
+        // エリア
         $master_areas = Ms_areas::where('master_type', '!=', 3)->get();
         // 親カテゴリ
         $master_search_categories_parent = Tr_search_categories::where('parent_id', null)->get();
         // 子カテゴリ
         $master_search_categories_child = Tr_search_categories::where('parent_id', '!=', null)->get();
+        // 業種
         $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)->get();
+        // 職種
         $master_job_types = Ms_job_types::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
+        // システム種別
         $master_sys_types = Ms_sys_types::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
+        // スキル
         $master_skills = Ms_skills::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
@@ -398,18 +467,20 @@ class ItemController extends Controller
         ));
     }
 
-    // 案件情報更新処理
+    /**
+     * 更新処理
+     * POST:/admin/item/update
+     */
     public function updateItem(ItemRegistRequest $request){
 
         // 案件ID
         $item_id = $request->input('item_id');
-        $item = Tr_items::where('id', $item_id)->get();
-        if ($item->isEmpty()) {
+        $item = Tr_items::where('id', $item_id)->get()->first();
+        if (empty($item)) {
             abort(404, '案件が見つかりません。');
-        } elseif ($item->first()->delete_flag || $item->first()->delete_date != null) {
+        } elseif ($item->delete_flag || !empty($item->delete_date)) {
             abort(404, 'すでに削除済みです。');
         }
-        $item = $item->first();
 
         // 案件名
         $item_name = $request->input('item_name');
@@ -419,7 +490,6 @@ class ItemController extends Controller
         $item_date_to = $request->input('item_date_to');
         // 報酬(検索用)
         $item_max_rate = $request->input('item_max_rate');
-        //$item_max_rate = $item_max_rate * 10000;
         // 報酬(表示用)
         $item_rate_detail = $request->input('item_rate_detail');
         // エリア
@@ -501,17 +571,14 @@ class ItemController extends Controller
 
         // タグ名からタグIDを取得する
         $tag_idList = array();
+        $tag_termList = array();
         foreach ($item_tagList as $item_tag) {
-            $tag = Tr_tags::where('term', '=', $item_tag)->get();
-
-            if ($tag->isEmpty()) {
-                // DBに存在しない場合はタグテーブルにインサートを行う
-                $tag = Tr_tags::create([
-                    'term' => $item_tag,
-                ]);
-                array_push($tag_idList, $tag->id);
+            $tag = Tr_tags::where('term', '=', $item_tag)->get()->first();
+            if (empty($tag)) {
+                // DBに存在しない場合はトランザクション内でタグテーブルにインサートを行う
+                array_push($tag_termList, $item_tag);
             } else {
-                array_push($tag_idList, $tag->first()->id);
+                array_push($tag_idList, $tag->id);
             }
         }
 
@@ -533,93 +600,141 @@ class ItemController extends Controller
         // 現在時刻
         $timestamp = time();
 
-        // 案件テーブルをアップデート
-        Tr_items::where('id', $item_id)->update([
-            'name' => $item_name,
-            'biz_category_id' => $item_biz_category,
-            'service_start_date' => date('Y-m-d', strtotime($item_date_from)),
-            'service_end_date' => date('Y-m-d', strtotime($item_date_to)),
-            'registration_date' => $item->registration_date,
-            'last_update' => date('Y-m-d H:i:s', $timestamp),
-            'employment_period' => $item_employment_period,
-            'working_hours' => $item_working_hours,
-            'max_rate' => $item_max_rate,
-            'rate_detail' => $item_rate_detail,
-            'area_detail' => $item_area_detail,
-            'detail' => $item_detail,
-            'delete_flag' => $item->delete_flag,
-            'delete_date' => $item->delete_date,
-            'note' => $item_note,
-            'version' => $item->version,
-        ]);
+        // トランザクション
+        DB::transaction(function () use ($item_name,
+                                         $item_biz_category,
+                                         $item_date_from,
+                                         $item_date_to,
+                                         $timestamp,
+                                         $item_employment_period,
+                                         $item_working_hours,
+                                         $item_max_rate,
+                                         $item_rate_detail,
+                                         $item_area_detail,
+                                         $item_detail,
+                                         $item_note,
+                                         $item,
+                                         $item_id,
+                                         $areas,
+                                         $job_types,
+                                         $search_categories,
+                                         $skills,
+                                         $sys_types,
+                                         $tag_idList,
+                                         $tag_termList) {
+            try {
+                // 案件テーブルをアップデート
+                Tr_items::where('id', $item_id)->update([
+                    'name' => $item_name,
+                    'biz_category_id' => $item_biz_category,
+                    'service_start_date' => date('Y-m-d', strtotime($item_date_from)),
+                    'service_end_date' => date('Y-m-d', strtotime($item_date_to)),
+                    'registration_date' => $item->registration_date,
+                    'last_update' => date('Y-m-d H:i:s', $timestamp),
+                    'employment_period' => $item_employment_period,
+                    'working_hours' => $item_working_hours,
+                    'max_rate' => $item_max_rate,
+                    'rate_detail' => $item_rate_detail,
+                    'area_detail' => $item_area_detail,
+                    'detail' => $item_detail,
+                    'delete_flag' => $item->delete_flag,
+                    'delete_date' => $item->delete_date,
+                    'note' => $item_note,
+                    'version' => $item->version,
+                ]);
+                // 案件エリア中間テーブルをデリートインサート
+                Tr_link_items_areas::where('item_id', $item_id)->delete();
+                foreach ((array)$areas as $area) {
+                    Tr_link_items_areas::create([
+                        'item_id' => $item->id,
+                        'area_id' => $area,
+                    ]);
+                }
+                // 案件職種中間テーブルにデリートインサート
+                Tr_link_items_job_types::where('item_id', $item_id)->delete();
+                foreach ((array)$job_types as $job_type) {
+                    Tr_link_items_job_types::create([
+                        'item_id' => $item->id,
+                        'job_type_id' => $job_type,
+                    ]);
+                }
+                // 案件業種検索中間テーブルにデリートインサート
+                Tr_link_items_search_categories::where('item_id', $item_id)->delete();
+                foreach ((array)$search_categories as $search_category) {
+                    Tr_link_items_search_categories::create([
+                        'item_id' => $item->id,
+                        'search_category_id' => $search_category,
+                    ]);
+                }
+                // 案件スキル中間テーブルにデリートインサート
+                Tr_link_items_skills::where('item_id', $item_id)->delete();
+                foreach ((array)$skills as $skill) {
+                    Tr_link_items_skills::create([
+                        'item_id' => $item->id,
+                        'skill_id' => $skill,
+                    ]);
+                }
+                // 案件システム種別中間テーブルにデリートインサート
+                Tr_link_items_sys_types::where('item_id', $item_id)->delete();
+                foreach ((array)$sys_types as $sys_type) {
+                    Tr_link_items_sys_types::create([
+                        'item_id' => $item->id,
+                        'sys_type_id' => $sys_type,
+                    ]);
+                }
+                // タグテーブルにインサート
+                foreach ($tag_termList as $tag_term) {
+                    $tag = Tr_tags::create([
+                        'term' => $tag_term,
+                    ]);
+                    array_push($tag_idList, $tag->id);
+                }
+                // 案件タグ中間テーブルにデリートインサート
+                Tr_link_items_tags::where('item_id', $item_id)->delete();
+                foreach ($tag_idList as $tag_id) {
+                    Tr_link_items_tags::create([
+                        'item_id' => $item->id,
+                        'tag_id' => $tag_id,
+                    ]);
+                }
+            } catch (\Exception $e) {
+                // TODO エラーのログ出力
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
 
-//        dd($job_types);
-
-        // 案件エリア中間テーブルをデリートインサート
-        Tr_link_items_areas::where('item_id', $item_id)->delete();
-        foreach ((array)$areas as $area) {
-            Tr_link_items_areas::create([
-                'item_id' => $item->id,
-                'area_id' => $area,
-            ]);
-        }
-        // 案件職種中間テーブルにデリートインサート
-        Tr_link_items_job_types::where('item_id', $item_id)->delete();
-        foreach ((array)$job_types as $job_type) {
-            Tr_link_items_job_types::create([
-                'item_id' => $item->id,
-                'job_type_id' => $job_type,
-            ]);
-        }
-        // 案件業種検索中間テーブルにデリートインサート
-        Tr_link_items_search_categories::where('item_id', $item_id)->delete();
-        foreach ((array)$search_categories as $search_category) {
-            Tr_link_items_search_categories::create([
-                'item_id' => $item->id,
-                'search_category_id' => $search_category,
-            ]);
-        }
-        // 案件スキル中間テーブルにデリートインサート
-        Tr_link_items_skills::where('item_id', $item_id)->delete();
-        foreach ((array)$skills as $skill) {
-            Tr_link_items_skills::create([
-                'item_id' => $item->id,
-                'skill_id' => $skill,
-            ]);
-        }
-        // 案件システム種別中間テーブルにデリートインサート
-        Tr_link_items_sys_types::where('item_id', $item_id)->delete();
-        foreach ((array)$sys_types as $sys_type) {
-            Tr_link_items_sys_types::create([
-                'item_id' => $item->id,
-                'sys_type_id' => $sys_type,
-            ]);
-        }
-        // 案件タグ中間テーブルにデリートインサート
-        Tr_link_items_tags::where('item_id', $item_id)->delete();
-        foreach ($tag_idList as $tag_id) {
-            Tr_link_items_tags::create([
-                'item_id' => $item->id,
-                'tag_id' => $tag_id,
-            ]);
-        }
-        return redirect('/admin/item/search');
+        return redirect('/admin/item/search')
+            ->with('custom_info_messages','案件更新は正常に終了しました。');
     }
 
-    // 論理削除処理
+    /**
+     * 論理削除処理
+     * GET:/admin/item/delete
+     */
     public function deleteItem(Request $request){
+
+        // 案件ID
         $item_id = $request->input('id');
-        $item = Tr_items::where('id', $item_id)->get();
-        if ($item->isEmpty()) {
+        $item = Tr_items::where('id', $item_id)->get()->first();
+        if (empty($item)) {
             abort(404, '案件が見つかりません。');
-        } elseif ($item->first()->delete_flag || $item->first()->delete_date != null) {
+        } elseif ($item->delete_flag || !empty($item->delete_date)) {
             abort(404, 'すでに削除済みです。');
         }
 
-        Tr_items::where('id', $item_id)->update([
-            'delete_flag' => true,
-            'delete_date' => date('Y-m-d H:i:s', time()),
-        ]);
-        return redirect('/admin/item/search');
+        // トランザクション
+        DB::transaction(function () use ($item_id) {
+            try {
+                Tr_items::where('id', $item_id)->update([
+                    'delete_flag' => true,
+                    'delete_date' => date('Y-m-d H:i:s', time()),
+                ]);
+            } catch (\Exception $e) {
+                // TODO エラーのログ出力
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+        return redirect('/admin/item/search')
+            ->with('custom_info_messages','案件削除は正常に終了しました。');;
     }
 }

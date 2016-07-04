@@ -2,6 +2,14 @@
 @section('title', '会員詳細')
 @section('content')
 <div class="col-md-10">
+{{-- info：custom --}}
+@if(\Session::has('custom_info_messages'))
+    <div class="alert alert-info">
+        <ul>
+            <li>{{ \Session::get('custom_info_messages') }}</li>
+        </ul>
+    </div>
+@endif
     <div class="row">
         <div class="col-md-6">
                 <div class="content-box-header">

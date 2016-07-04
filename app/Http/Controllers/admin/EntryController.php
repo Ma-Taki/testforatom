@@ -76,13 +76,13 @@ class EntryController extends AdminController
         } else if (empty($entry_date_from) && !empty($entry_date_to)) {
             $query = $query->where('entry_date', '<=',$entry_date_to.' 23:59:59');
         } else {
-            // すべてブランク、もしくは"有効なエントリ"のみ入力の場合全件検索する
+            // すべてブランクの場合全件検索する
         }
 
         // 有効なエントリーのみの場合、論理削除済みのものは含めない
         if ($enabledOnly) {
-            $query = $query->where('delete_flag', '>', 0)
-                           ->where('delete_date', '!=', null);
+            $query = $query->where('delete_flag', '=', 0)
+                           ->where('delete_date', '=', null);
         }
 
         // 検索結果を取得する

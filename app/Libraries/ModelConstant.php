@@ -62,47 +62,6 @@ class UserUtility
         'admin/item/delete' => self::AUTH_TYPE_ITEM_DELETE,
     ];
 
-    /**
-     * 管理者idで指定されたユーザが指定された権限を持っているかをチェックする
-     *
-     * @param $id 管理者id
-     * @param $authName 権限名
-     * @return bool
-     **/
-    public static function isExistAuth($id, $authName){
-        $user = Tr_admin_user::find($id);
-        if ($user != null) {
-            foreach ($user->auths as $auth) {
-                if ($auth->auth_name.'.'.$auth->auth_type === $authName) return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * サイドバーにサブメニューを表示するかを返す
-     * 検索・照会権限を持っている場合にtrueになる
-     * @param  string  $subMenu
-     * @return bool
-     */
-    public static function isDisplaySubMenu($subMenu){
-        return self::isExistAuth(session(SessionUtility::SESSION_KEY_ADMIN_ID), $subMenu);
-    }
-
-    /**
-     * ユーザ情報更新画面にて、編集者と編集対象の関係から
-     * 権限の必須チェックを行うか判定する
-     * @param
-     * @param
-     * @return
-     */
-     public static function isValidationAuths($eMasFlg, $sMasFlg){
-         if (!$eMasFlg && $sMasFlg) {
-             return 1;
-         }
-         return 0;
-     }
-
 
 
 }

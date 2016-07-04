@@ -18,7 +18,7 @@ class AdminController extends BaseController
 
     /**
      * ログアウト処理
-     * /admin/logout
+     * GET:/admin/logout
      */
     protected function logout(Request $request){
         // session全データ削除

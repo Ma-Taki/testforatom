@@ -8,6 +8,14 @@
                 <div class="panel-title" style="font-size:20px">エントリー一覧</div>
 			</div>
   			<div class="panel-body">
+{{-- info：custom --}}
+@if(\Session::has('custom_info_messages'))
+                <div class="alert alert-info">
+                    <ul>
+                        <li>{{ \Session::get('custom_info_messages') }}</li>
+                    </ul>
+                </div>
+@endif
 @if(count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>

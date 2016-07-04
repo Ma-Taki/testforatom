@@ -71,7 +71,7 @@ class UserController extends AdminController
                         'auth_id' => $auth,
                     ]);
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // TODO エラーのログ出力
                 abort(400, 'トランザクションが異常終了しました。');
             }
@@ -128,7 +128,8 @@ class UserController extends AdminController
         // ログインID
         $login_id = $request->input('login_id');
         // パスワード
-        $password = md5($request->input('password', ""));
+        $password = $request->input('password');
+        if (!empty($password)) $password = md5($password);
         // 権限リスト
         $authList = explode(',', $request->input('postAuths'));
         // 現在時刻
