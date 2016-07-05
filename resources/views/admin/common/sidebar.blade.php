@@ -6,7 +6,7 @@ use App\Libraries\UserUtility;
 <div class="col-md-2">
     <div class="sidebar content-box" style="display: block;">
         <ul class="nav">
-            <li class="current"><a href="/admin/top"><i class="glyphicon glyphicon-home"></i> メイン</a></li>
+            <li class="current"><a href="/admin/top"><i class="glyphicon glyphicon-home"></i> トップ</a></li>
 @if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ITEM_READ)
     || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
             <li class="submenu">

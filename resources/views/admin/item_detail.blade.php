@@ -18,7 +18,6 @@
 
 <div class="col-md-10">
     <div class="row">
-        <div class="col-md-offset-1 col-md-10">
             <div class="content-box-header">
                 <div class="panel-title">案件詳細</div>
             </div>
@@ -124,50 +123,46 @@
                     </table>
                 </div>
             </div>
-        </div>
     </div>
 
 @if($item->entries->isEmpty())
-    <div class="col-md-12">
-        <div class="row">
-            <div class="content-box-large">
-                <div class="alert alert-info">
-                    <ul>
-                        <li>この案件にはエントリーがありません。</li>
-                    </ul>
-                </div>
+    <div class="row">
+        <div class="content-box-large">
+            <div class="alert alert-info">
+                <ul>
+                    <li>この案件にはエントリーがありません。</li>
+                </ul>
             </div>
         </div>
     </div>
 @else
-
-    <div class="col-md-12">
-        <div class="content-box-header">
-            <div class="panel-title">本案件への応募一覧</div>
-        </div>
-        <div class="content-box-large box-with-header">
-            <table class="table">
-                <thead>
-                    <tr>
-                         <th class="">エントリーID</th>
-                         <th class="">氏名/氏名(かな)</th>
-                         <th class="">エントリー日付</th>
-                         <th class="">ステータス</th>
-                     </tr>
-                 </thead>
-                 <tbody>
+    <div class="row">
+    <div class="content-box-header">
+        <div class="panel-title">本案件への応募一覧</div>
+    </div>
+    <div class="content-box-large box-with-header">
+        <table class="table">
+            <thead>
+                <tr>
+                     <th class="">エントリーID</th>
+                     <th class="">氏名/氏名(かな)</th>
+                     <th class="">エントリー日付</th>
+                     <th class="">ステータス</th>
+                </tr>
+            </thead>
+            <tbody>
 @foreach($item->entries as $entry)
-                    <tr>
-                        <th>AN{{ $entry->id }}</th>
-                        <th>{{ $entry->user->first_name }} {{ $entry->user->last_name }}({{ $entry->user->first_name_kana }} {{ $entry->user->last_name_kana }})</th>
-                        <th>{{ $entry->entry_date->format('Y年n月j日 G時i分') }}</th>
-                        <th>{{ $entry->delete_flag ? '無効' : '有効' }}</th>
-                    </tr>
+                <tr>
+                    <th><a href="/admin/entry/detail?id={{ $entry->id }}">EN{{ $entry->id }}</a></th>
+                    <th>{{ $entry->user->last_name }} {{ $entry->user->first_name }}({{ $entry->user->last_name_kana }} {{ $entry->user->first_name_kana }})</th>
+                    <th>{{ $entry->entry_date->format('Y年n月j日 G時i分') }}</th>
+                    <th>{{ $entry->delete_flag ? '無効' : '有効' }}</th>
+                </tr>
 @endforeach
 @endif
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
+    </div>
     </div>
 </div>
 @endsection

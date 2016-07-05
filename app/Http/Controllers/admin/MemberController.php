@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Models\Tr_users;
 use Carbon\Carbon;
 use DB;
+use App\Libraries\OrderUtility as OdrUtil;
 
 class MemberController extends AdminController
 {
@@ -44,6 +45,10 @@ class MemberController extends AdminController
         $member_name_kana = $request->input('member_name_kana');
         // 有効なエントリーのみか
         $enabledOnly = $request->input('enabledOnly');
+        // ソートID 初期表示の場合は更新日が新しい順を設定
+        $sort_id = $request->input('sort_id', OdrUtil::ORDER_MEMBER_REGISTRATION_DESC['sortId']);
+        // ソート順
+        $item_order = OdrUtil::MemberOrder[$sort_id];
 
         // 再利用するためパラメータを次のリクエストまで保存
         $request->flash();
@@ -68,9 +73,10 @@ class MemberController extends AdminController
         }
 
         // 検索結果を取得する
-        $memberList = $query->get();
+        $memberList = $query->orderBy($item_order['columnName'], $item_order['sort'])
+                            ->paginate(30);
 
-        return view('admin.member_list', compact('memberList'));
+        return view('admin.member_list', compact('memberList', 'sort_id'));
     }
 
     /**

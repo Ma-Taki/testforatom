@@ -25,12 +25,20 @@ use App\Libraries\OrderUtility as OdrUtil;
 			  		    <form class="form-inline" role="form" method="POST" action="{{ url('/admin/item/search') }}">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>案件ID</th>
-                                    <td>AN<input type="text" class="" name="item_id" value="{{ old('item_id') }}" maxlength="6" /> (案件IDを指定した場合、他の検索条件は無視されます)</td>
+                                    <th class="col-md-2">
+                                        <label class="control-label">案件ID</label>
+                                    </th>
+                                    <td class="col-md-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">AN</span>
+                                            <input class="form-control" name="item_id" value="{{ old('item_id') }}" maxlength="6" type="text">
+                                        </div>
+                                        (案件IDを指定した場合、他の検索条件は無視されます)
+                                    </td>
                             	</tr>
                                 <tr>
-                                    <th>案件名</th>
-                                    <td><input type="text" class="" name="item_name" value="{{ old('item_name') }}" /></td>
+                                    <th><label class="control-label">案件名</label></th>
+                                    <td><input type="text" class="form-control" name="item_name" value="{{ old('item_name') }}" /></td>
                             	</tr>
                                 <tr>
                                     <th><label class="control-label" for="select-1">スペシャルタグ</label></th>

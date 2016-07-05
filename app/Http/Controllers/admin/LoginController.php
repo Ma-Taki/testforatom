@@ -22,9 +22,9 @@ class LoginController extends AdminController
 
       // 入力値から、有効な管理ユーザを取得する
       $user = Tr_admin_user::where('login_id', $login_id)
-                            ->where('password', md5($password))
-                            ->where('delete_flag', 0)
-                            ->get();
+                           ->where('password', md5($password))
+                           ->where('delete_flag', 0)
+                           ->get();
 
       // DBに対象ユーザが存在しない、または削除済み
       if($user->isEmpty()){

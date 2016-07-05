@@ -13,6 +13,7 @@ use App\Models\Tr_users;
 use Carbon\Carbon;
 use Storage;
 use DB;
+use App\Libraries\OrderUtility as OdrUtil;
 
 class EntryController extends AdminController
 {
@@ -51,6 +52,10 @@ class EntryController extends AdminController
         $entry_date_to = $request->input('entry_date_to');
         // 有効なエントリーのみか
         $enabledOnly = $request->input('enabledOnly');
+        // ソートID 初期表示の場合はエントリー日付が新しい順を設定
+        $sort_id = $request->input('sort_id', OdrUtil::ORDER_ENTRY_DATE_DESC['sortId']);
+        // ソート順
+        $item_order = OdrUtil::EntryOrder[$sort_id];
 
         // 追加のvalidation：from日付がto日付より大きい場合エラー
         // エントリーIDが入力されている場合はエラーにしない
@@ -86,14 +91,16 @@ class EntryController extends AdminController
         }
 
         // 検索結果を取得する
-        $entryList = $query->get();
+        $entryList = $query->orderBy($item_order['columnName'], $item_order['sort'])
+                           ->paginate(30);
 
         return view('admin.entry_list', compact(
             'entryList',
             'entry_id',
             'entry_date_from',
             'entry_date_to',
-            'enabledOnly'
+            'enabledOnly',
+            'sort_id'
         ));
     }
 

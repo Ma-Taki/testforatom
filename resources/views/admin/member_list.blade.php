@@ -1,6 +1,9 @@
 @extends('admin.common.layout')
 @section('title', '会員一覧')
 @section('content')
+<?php
+use App\Libraries\OrderUtility as OdrUtil;
+ ?>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
@@ -37,6 +40,15 @@
                                     <td><input type="checkbox" name="enabledOnly" id="inputEnabledOnly" @if(old('enabledOnly')) checked @endif /><label for="inputEnabledOnly"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
                                 </tr>
                                 <tr>
+                                    <th><label class="control-label" for="select-2">表示順序</label></th>
+									<td><select class="form-control" id="select-2" name="sort_id">
+@foreach(OdrUtil::MemberOrder as $memberOrder)
+                                            <option value="{{ $memberOrder['sortId'] }}" {{ $sort_id ===  $memberOrder['sortId'] ? "selected" : "" }}>{{ $memberOrder['sortName'] }}</option>
+@endforeach
+										</select>
+                                    </td>
+                            	</tr>
+                                <tr>
                                     <td colspan="2"><button type="submit" class="btn btn-primary btn-md col-xs-2 col-xs-offset-5">検索</button></td>
                                 </tr>
                             </table>
@@ -63,7 +75,7 @@
 @foreach($memberList as $member)
                     <tr>
 						<td>{{ $member->mail }}</td>
-						<td>{{ $member->first_name }} {{ $member->last_name }} ({{ $member->first_name_kana }} {{ $member->last_name_kana }})</td>
+						<td>{{ $member->last_name }} {{ $member->first_name }} ({{ $member->last_name_kana }} {{ $member->first_name_kana }})</td>
 						<td>{{ $member->birth_date->age }}</td>
                         <td>{{ $member->sex === 'Male' ? '男性' : '女性' }}</td>
                         <td>{{ $member->prefecture->name }}</td>
@@ -79,13 +91,9 @@
 
                     </tbody>
                 </table>
+                <dev class="pull-right">{!! $memberList->render() !!}</div>
             </div>
         </div>
     </div>
 </div>
-<link href="{{ url('/admin/vendors/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" media="screen">
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script src="{{ url('/admin/vendors/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ url('/admin/vendors/datatables/dataTables.bootstrap.js') }}"></script>
-<script src="{{ url('/admin/js/tables.js') }}"></script>
 @endsection

@@ -20,11 +20,11 @@
                         <table>
                             <tr>
                                 <th>氏名</th>
-                                <td>{{ $member->first_name }} {{ $member->last_name }}</td>
+                                <td>{{ $member->last_name }} {{ $member->first_name }}</td>
                             </tr>
                             <tr>
                                 <th>氏名（かな）</th>
-                                <td>{{ $member->first_name_kana }} {{ $member->last_name_kana }}</td>
+                                <td>{{ $member->last_name_kana }} {{ $member->first_name_kana }}</td>
                             </tr>
                             <tr>
                                 <th>生年月日</th>

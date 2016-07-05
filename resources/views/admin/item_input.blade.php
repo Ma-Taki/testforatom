@@ -44,7 +44,7 @@ use App\Libraries\HtmlUtility;
                         <div class="form-group">
                             <label for="inputItemName" class="col-md-2 control-label">案件名<font color="#FF0000">*</font></label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputItemName" name="item_name" value="{{ old('item_name') }}" placeholder="案件名">
+                                <input type="text" class="form-control" id="inputItemName" name="item_name" value="{{ old('item_name') }}" maxlength="50" placeholder="案件名">
                                 <span class="">(50文字まで)</span>
                             </div>
                         </div>
@@ -61,7 +61,7 @@ use App\Libraries\HtmlUtility;
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="inputMaxRate" name="item_max_rate" value="{{ old('item_max_rate') }}" placeholder="検索用">
+                                            <input type="text" class="form-control" id="inputMaxRate" name="item_max_rate" value="{{ old('item_max_rate') }}" maxlength="4" placeholder="検索用">
                                             <span class="input-group-addon">万円(半角数字)</span>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@ use App\Libraries\HtmlUtility;
                         <div class="form-group">
                             <label for="inputRateDetail" class="col-md-2 control-label">報酬(表示用)<font color="#FF0000">*</font></label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputRateDetail" name="item_rate_detail" value="{{ old('item_rate_detail') }}" placeholder="表示用">
+                                <input type="text" class="form-control" id="inputRateDetail" name="item_rate_detail" value="{{ old('item_rate_detail') }}" maxlength="20" placeholder="表示用">
                                 <span class="">(20文字まで)</span>
                             </div>
                         </div>
@@ -92,21 +92,21 @@ use App\Libraries\HtmlUtility;
                         <div class="form-group">
                             <label for="inputAreaDetail" class="col-md-2 control-label">エリア(詳細)<font color="#FF0000">*</font></label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputAreaDetail" name="item_area_detail" value="{{ old('item_area_detail') }}" placeholder="エリア詳細">
+                                <input type="text" class="form-control" id="inputAreaDetail" name="item_area_detail" value="{{ old('item_area_detail') }}" maxlength="20" placeholder="エリア詳細">
                                 <span class="">(20文字まで)</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmploymentPeriod" class="col-md-2 control-label">就業期間</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputEmploymentPeriod" name="item_employment_period" value="{{ old('item_employment_period') }}" placeholder="就業期間">
+                                <input type="text" class="form-control" id="inputEmploymentPeriod" name="item_employment_period" value="{{ old('item_employment_period') }}" maxlength="50" placeholder="就業期間">
                                 <span class="">(50文字まで)</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputWorkingHours" class="col-md-2 control-label">就業時間</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputWorkingHours" name="item_working_hours" value="{{ old('item_working_hours') }}" placeholder="就業時間">
+                                <input type="text" class="form-control" id="inputWorkingHours" name="item_working_hours" value="{{ old('item_working_hours') }}" maxlength="50" placeholder="就業時間">
                                 <span class="">(50文字まで)</span>
                             </div>
                         </div>
@@ -233,7 +233,7 @@ use App\Libraries\HtmlUtility;
                             <label for="input_detail" class="col-md-2 control-label">詳細</label>
                             <div class="col-md-8">
                                 (1000文字まで)</br>
-                                <textarea name="item_detail" rows="15" cols"60" class="form-control" style="font-size:12px" id="tagTextArea">
+                                <textarea name="item_detail" rows="15" cols"60" class="form-control" style="font-size:12px" maxlength="1000" id="tagTextArea">
 {{ HtmlUtility::setTextValueByRequest('【仕事内容】&#13;&#13;【要求スキル】&#13;（必須）&#13;・&#13;（尚可）&#13;・&#13;&#13;【募集人数】&#13;名&#13;&#13;【面接回数】&#13;回（弊社同席)', old('item_detail')) }}</textarea>
                             </div>
                         </div>
@@ -242,7 +242,7 @@ use App\Libraries\HtmlUtility;
                             <label for="input_note" class="col-md-2 control-label">メモ(社内用)</label>
                             <div class="col-md-8">
                                 (1000文字まで)</br>
-                                <textarea name="item_note" rows="7" cols"60" class="form-control" style="font-size:12px" id="tagTextArea">{{ old('item_note') }}</textarea>
+                                <textarea name="item_note" rows="7" cols"60" class="form-control" style="font-size:12px" maxlength="1000" id="tagTextArea">{{ old('item_note') }}</textarea>
                             </div>
                         </div>
 

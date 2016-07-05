@@ -1,6 +1,9 @@
 @extends('admin.common.layout')
 @section('title', 'エントリー一覧')
 @section('content')
+<?php
+use App\Libraries\OrderUtility as OdrUtil;
+?>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
@@ -38,8 +41,16 @@
 			  		    <form class="form-inline" role="form" method="POST" action="{{ url('/admin/entry/search') }}">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>エントリーID</th>
-                                    <td>EN<input type="text" class="" name="entry_id" value="{{ isset($entry_id) ? $entry_id : old('entry_id')  }}" maxlength="6" /> (エントリーIDを指定した場合、他の検索条件は無視されます)</td>
+                                    <th class="col-md-2">
+                                        <label class="control-label">エントリーID</label>
+                                    </th>
+                                    <td class="col-md-10">
+                                        <div class="input-group">
+											<span class="input-group-addon">EN</span>
+											<input name="entry_id" value="{{ isset($entry_id) ? $entry_id : old('entry_id')  }}" maxlength="6"class="form-control" type="text">
+										</div>
+                                        (エントリーIDを指定した場合、他の検索条件は無視されます)
+                                    </td>
                             	</tr>
                         		<tr>
                         			<th><label class="control-label">エントリー日付</label></th>
@@ -53,6 +64,15 @@
                                     <td><input type="checkbox" name="enabledOnly" id="eo_label"　@if(old('enabledOnly')) checked @endif /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
 @endif
                                 </tr>
+                                <tr>
+                                    <th><label class="control-label" for="select-2">表示順序</label></th>
+									<td><select class="form-control" id="select-2" name="sort_id">
+@foreach(OdrUtil::EntryOrder as $entryOrder)
+                                            <option value="{{ $entryOrder['sortId'] }}" {{ $sort_id ===  $entryOrder['sortId'] ? "selected" : "" }}>{{ $entryOrder['sortName'] }}</option>
+@endforeach
+										</select>
+                                    </td>
+                            	</tr>
                                 <tr>
                                     <td colspan="2"><button type="submit" class="btn btn-primary btn-md col-xs-2 col-xs-offset-5">検索</button></td>
                                 </tr>
@@ -80,7 +100,7 @@
 @foreach($entryList as $entry)
                     <tr>
 						<td>{{ $entry->id }}</td>
-						<td>{{ $entry->user->first_name or '山田' }} {{ $entry->user->last_name or '太郎' }} ({{ $entry->user->first_name_kana or 'やまだ' }} {{ $entry->user->last_name_kana or 'たろう' }})</td>
+						<td>{{ $entry->user->last_name or '山田' }} {{ $entry->user->first_name or '太郎' }} ({{ $entry->user->last_name_kana or 'たろう' }} {{ $entry->user->first_name_kana or 'やまだ' }})</td>
 						<td>{{ $entry->item->name}}</td>
                         <td>{{ $entry->entry_date->format('Y年n月j日 G時i分') }}</td>
 						<td>{!! $entry->skillsheet_upload ? "<a href='/admin/entry/download?id=$entry->id'>アップロード済み</a>" : '未アップロード' !!}</td>
@@ -96,16 +116,11 @@
 
                     </tbody>
                 </table>
+                <dev class="pull-right">{!! $entryList->render() !!}</div>
             </div>
         </div>
     </div>
 </div>
-<link href="{{ url('/admin/vendors/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" media="screen">
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script src="{{ url('/admin/vendors/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ url('/admin/vendors/datatables/dataTables.bootstrap.js') }}"></script>
-<script src="{{ url('/admin/js/tables.js') }}"></script>
-
 
 <link rel="stylesheet" type="text/css" href="{{ url('/admin/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
 <script type="text/javascript" src="{{ url('/admin/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>

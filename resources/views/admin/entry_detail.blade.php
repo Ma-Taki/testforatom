@@ -40,11 +40,11 @@
                         <table>
                             <tr>
                                 <th>氏名</th>
-                                <td>{{ $entry->user->first_name.' '.$entry->user->last_name }}</td>
+                                <td>{{ $entry->user->last_name.' '.$entry->user->first_name }}</td>
                             </tr>
                             <tr>
                                 <th>氏名(かな)</th>
-                                <td>{{ $entry->user->first_name_kana.' '.$entry->user->last_name_kana }}</td>
+                                <td>{{ $entry->user->last_name_kana.' '.$entry->user->first_name_kana }}</td>
                             </tr>
                             <tr>
                                 <th>生年月日</th>
