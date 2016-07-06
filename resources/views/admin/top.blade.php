@@ -5,6 +5,14 @@
 use App\Libraries\UserUtility;
 ?>
 <div class="col-md-10">
+{{-- info：custom --}}
+@if(\Session::has('custom_info_messages'))
+    <div class="alert alert-info">
+        <ul>
+            <li>{{ \Session::get('custom_info_messages') }}</li>
+        </ul>
+    </div>
+@endif
 @if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ITEM_READ)
     || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
     <div class="row">

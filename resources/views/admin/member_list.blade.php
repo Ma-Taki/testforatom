@@ -37,7 +37,7 @@ use App\Libraries\OrderUtility as OdrUtil;
                                 </tr>
                                 <tr>
                                     <th><label class="control-label">ステータス</label></th>
-                                    <td><input type="checkbox" name="enabledOnly" id="inputEnabledOnly" @if(old('enabledOnly')) checked @endif /><label for="inputEnabledOnly"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
+                                    <td><input type="checkbox" name="enabledOnly" id="inputEnabledOnly" @if(old('enabledOnly')) checked @endif /><label for="inputEnabledOnly"><font style="font-weight:normal;">有効な会員のみ</font></label></td>
                                 </tr>
                                 <tr>
                                     <th><label class="control-label" for="select-2">表示順序</label></th>
@@ -54,10 +54,10 @@ use App\Libraries\OrderUtility as OdrUtil;
                             </table>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 						</form>
-                    <legend></legend>
                 </fieldset>
                 </br>
                 </br>
+            <legend><div class="panel-title">一覧</div></legend>
   			<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="memberList">
                  <thead>
                     <tr>

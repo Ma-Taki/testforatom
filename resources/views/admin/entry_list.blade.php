@@ -79,11 +79,11 @@ use App\Libraries\OrderUtility as OdrUtil;
                             </table>
                             {{ csrf_field() }}
 						</form>
-                    <legend></legend>
                 </fieldset>
                 </br>
                 </br>
-  			<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="entryList">
+            <legend><div class="panel-title">一覧</div></legend>
+  			<table class="table table-striped table-bordered">
                  <thead>
                     <tr>
                         <th>エントリーID</th>

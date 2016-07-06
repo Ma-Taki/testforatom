@@ -1,14 +1,13 @@
 <div class="header">
-    <div class="container">
+    <div class="col-md-12">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-offset-2 col-md-5">
                 <div class="logo">
                     <h1><a href="/admin/top">Engineer-Route 管理画面</a></h1>
                 </div>
-           </div>
-
+            </div>
 @if (!strstr(Request::url(), '/admin/login'))
-           <div class="col-md-offset-5 col-md-2">
+            <div class="col-md-offset-3 col-md-2">
                <div class="navbar navbar-inverse" role="banner">
                    <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
                        <ul class="nav navbar-nav">
@@ -24,7 +23,6 @@
                </div>
            </div>
 @endif
-
-       </div>
-   </div>
+        </div>
+    </div>
 </div>

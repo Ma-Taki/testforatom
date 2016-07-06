@@ -1,6 +1,9 @@
 @extends('admin.common.layout')
 @section('title', 'ユーザ一覧')
 @section('content')
+<?php
+use App\Libraries\SessionUtility as sesUtil;
+ ?>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
@@ -21,46 +24,37 @@
     </ul>
 </div>
 @endif
-
-		        <table class="table">
+                <legend><div class="panel-title">一覧</div></legend>
+		        <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                             <th class="col-md-1">ID</th>
-                             <th class="col-md-2">管理者名</th>
-                             <th class="col-md-2">ログインID</th>
-                             <th class="col-md-2">登録日</th>
-                             <th class="col-md-2">最終更新日</th>
-                             <th class="col-md-1"><!-- レイアウト用ブランク --></th>
-                             <th class="col-md-2"><!-- 編集/削除ボタン --></th>
+                             <th class="">ID</th>
+                             <th class="">管理者名</th>
+                             <th class="">ログインID</th>
+                             <th class="">登録日</th>
+                             <th class="">最終更新日</th>
+                             <th class="">ステータス</th>
+                             <th class=""><!-- 編集/削除ボタン --></th>
                          </tr>
                      </thead>
                      <tbody>
 
 @foreach($userList as $user)
-@if (session('user_session_key_admin_id') === $user->id)
-<!-- 現状ユーザ管理にはマスター管理者しか行えないためこの判定 -->
-                        <tr class="success">
-@elseif (!$user->delete_flag)
-                        <tr class="active">
-@else
-                        <tr class="danger">
-@endif
-                            <th>{{ $user->id }}</th>
-                            <th>{{ $user->admin_name }}</th>
-                            <th>{{ $user->login_id }}</th>
-                            <th>{{ $user->registration_date }}</th>
-                            <th>{{ $user->last_update_date }}</th>
-                            <th></th>
-@if (!$user->delete_flag)
-                            <th>
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->admin_name }}</td>
+                            <td>{{ $user->login_id }}</td>
+                            <td>{{ $user->registration_date }}</td>
+                            <td>{{ $user->last_update_date }}</td>
+                            <td>{{ $user->delete_flag ? '無効' : '有効' }}</td>
+                            <td>
+@if(!$user->delete_flag)
                                 <a href="/admin/user/modify?id={{ $user->id }}"><button type="button" class="btn btn-warning btn-xs">編集</button></a>
-@if (session('user_session_key_admin_id') !== $user->id)
+@if($user->id != session(sesUtil::SESSION_KEY_ADMIN_ID))
                                 <a href="/admin/user/delete?id={{ $user->id }}" onClick="javascript:return confirm('本当に削除しますか？')"><button type="button" class="btn btn-danger btn-xs">削除</button></a>
 @endif
-                            </th>
-@else
-                            <th></th>
 @endif
+                            </td>
                         </tr>
 @endforeach
 

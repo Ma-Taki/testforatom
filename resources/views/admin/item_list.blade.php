@@ -75,11 +75,11 @@ use App\Libraries\OrderUtility as OdrUtil;
                             </table>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 						</form>
-                    <legend></legend>
                 </fieldset>
                 </br>
                 </br>
-                <table class="table table-bordered">
+                <legend><div class="panel-title">一覧</div></legend>
+                <table class="table table-striped table-bordered">
 				    <thead>
 			            <tr>
                             <th>案件ID</th>
