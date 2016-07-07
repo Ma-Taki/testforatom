@@ -68,7 +68,11 @@ use App\Libraries\OrderUtility as OdrUtil;
                                     <th><label class="control-label" for="select-2">表示順序</label></th>
 									<td><select class="form-control" id="select-2" name="sort_id">
 @foreach(OdrUtil::EntryOrder as $entryOrder)
+@if(old('sort_id'))
+                                            <option value="{{ $entryOrder['sortId'] }}" {{ old('sort_id') ===  $entryOrder['sortId'] ? "selected" : "" }}>{{ $entryOrder['sortName'] }}</option>
+@else
                                             <option value="{{ $entryOrder['sortId'] }}" {{ $sort_id ===  $entryOrder['sortId'] ? "selected" : "" }}>{{ $entryOrder['sortName'] }}</option>
+@endif
 @endforeach
 										</select>
                                     </td>

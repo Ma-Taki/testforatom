@@ -133,7 +133,7 @@ class OrderUtility
         'LastNameKanaAsc' => self::ORDER_MEMBER_NAME_ASC,
         'LastNameKanaDesc' => self::ORDER_MEMBER_NAME_DESC,
         'MailAsc' => self::ORDER_MEMBER_MAIL_ASC,
-        'MailAsc' => self::ORDER_MEMBER_MAIL_DESC,
+        'MailDesc' => self::ORDER_MEMBER_MAIL_DESC,
     ];
     // △△△ 会員表示順 △△△
 }

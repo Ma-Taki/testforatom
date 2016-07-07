@@ -50,21 +50,33 @@ class MemberController extends AdminController
         // ソート順
         $item_order = OdrUtil::MemberOrder[$sort_id];
 
-        // 再利用するためパラメータを次のリクエストまで保存
-        $request->flash();
-
         // パラメータの入力状態によって動的にクエリを発行
         $query = Tr_users::query();
 
         // メールアドレス検索
         if (!empty($member_mail))
-            $query->where('mail', 'LIKE', "%".$member_mail."%");
+            //　asciiに変換できない文字を含む場合エラー
+            if (mb_check_encoding($member_mail, 'ASCII')) {
+                // 文字列を半角スペースで分割
+                $member_mail_array = explode(' ', $member_mail);
+                // 空要素を削除
+                $member_mail_array = array_filter($member_mail_array, 'strlen');
+                foreach ($member_mail_array as $mail_str) {
+                    $query->where('mail', 'like', '%'.$mail_str.'%');
+                }
+            } else {
+                // フラッシュセッションにエラーメッセージを保存
+                \Session::flash('custom_error_messages', ['メールアドレスに使用できない文字が含まれています。']);
+                return back()->withInput();
+            }
         // 会員名検索
         if (!empty($member_name))
-            $query->where(DB::raw("CONCAT(first_name, last_name)"),'LIKE',"%".$member_name."%");
+            // すべてのスペースを除去
+            $member_name = str_replace(array(' ', '　'), '', $member_name);
+            $query->where(DB::raw("CONCAT(last_name, first_name)"),'LIKE',"%".$member_name."%");
         // 会員名（かな）検索
         if (!empty($member_name_kana))
-            $query->where(DB::raw("CONCAT(first_name_kana, last_name_kana)"),'LIKE',"%".$member_name_kana."%");
+            $query->where(DB::raw("CONCAT(last_name_kana, first_name_kana)"),'LIKE',"%".$member_name_kana."%");
 
         // 有効なエントリーのみの場合、論理削除済みのものは含めない
         if ($enabledOnly) {
@@ -76,7 +88,13 @@ class MemberController extends AdminController
         $memberList = $query->orderBy($item_order['columnName'], $item_order['sort'])
                             ->paginate(30);
 
-        return view('admin.member_list', compact('memberList', 'sort_id'));
+        return view('admin.member_list', compact(
+            'memberList',
+            'sort_id',
+            'member_mail',
+            'member_name',
+            'member_name_kana',
+            'enabledOnly'));
     }
 
     /**

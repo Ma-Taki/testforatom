@@ -54,8 +54,8 @@ class Handler extends ExceptionHandler
             $status = $e->getStatusCode();
             $message = $e->getMessage();
 
-            if (!isset($message)) {
-                switch ($error->getStatusCode()) {
+            if (empty($message)) {
+                switch ($status) {
                     case 400: $message = 'Bad Request'; break;
                     case 401: $message = '認証に失敗しました'; break;
                     case 403: $message = 'アクセス権がありません'; break;

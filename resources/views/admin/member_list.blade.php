@@ -19,31 +19,49 @@ use App\Libraries\OrderUtility as OdrUtil;
                     </ul>
                 </div>
 @endif
+{{-- error：customValidation --}}
+@if(Session::has('custom_error_messages'))
+                <div class="alert alert-danger">
+                    <ul>
+@foreach(Session::get('custom_error_messages') as $message)
+                        <li>{{ $message }}</li>
+@endforeach
+                    </ul>
+                </div>
+@endif
                 <fieldset>
                     <legend><div class="panel-title">検索</div></legend>
 			  		    <form class="form-inline" role="form" method="POST" action="{{ url('/admin/member/search') }}">
                             <table class="table table-bordered">
                                 <tr>
                                     <th class="col-md-3"><label class="control-label">会員ID（メールアドレス）</label></th>
-                                    <td class="col-md-9"><input class="form-control input-sm" type="text" name="member_mail" value="{{ old('member_mail') }}" /></td>
+                                    <td class="col-md-9"><input class="form-control input-sm" type="text" name="member_mail" value="{{ isset($member_mail) ? $member_mail : old('member_mail') }}" /></td>
                             	</tr>
                                 <tr>
                                     <th><label class="control-label">氏名</label></th>
-                                    <td><input type="text" class="form-control input-sm" name="member_name" value="{{ old('member_name') }}" /></td>
+                                    <td><input type="text" class="form-control input-sm" name="member_name" value="{{ isset($member_name) ? $member_name : old('member_name') }}" /></td>
                             	</tr>
                             	<tr>
                                     <th><label class="control-label">氏名(かな)</label></th>
-                                    <td><input type="text" class="form-control input-sm" name="member_name_kana" value="{{ old('member_name_kana') }}" /></td>
+                                    <td><input type="text" class="form-control input-sm" name="member_name_kana" value="{{ isset($member_name_kana) ? $member_name_kana : old('member_name_kana') }}" /></td>
                                 </tr>
                                 <tr>
                                     <th><label class="control-label">ステータス</label></th>
+@if(isset($enabledOnly))
+                                    <td><input type="checkbox" name="enabledOnly" id="inputEnabledOnly" @if($enabledOnly) checked @endif /><label for="inputEnabledOnly"><font style="font-weight:normal;">有効な会員のみ</font></label></td>
+@else
                                     <td><input type="checkbox" name="enabledOnly" id="inputEnabledOnly" @if(old('enabledOnly')) checked @endif /><label for="inputEnabledOnly"><font style="font-weight:normal;">有効な会員のみ</font></label></td>
+@endif
                                 </tr>
                                 <tr>
                                     <th><label class="control-label" for="select-2">表示順序</label></th>
 									<td><select class="form-control" id="select-2" name="sort_id">
 @foreach(OdrUtil::MemberOrder as $memberOrder)
+@if(old('sort_id'))
+                                            <option value="{{ $memberOrder['sortId'] }}" {{ old('sort_id') ===  $memberOrder['sortId'] ? "selected" : "" }}>{{ $memberOrder['sortName'] }}</option>
+@else
                                             <option value="{{ $memberOrder['sortId'] }}" {{ $sort_id ===  $memberOrder['sortId'] ? "selected" : "" }}>{{ $memberOrder['sortName'] }}</option>
+@endif
 @endforeach
 										</select>
                                     </td>
