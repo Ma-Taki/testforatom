@@ -187,7 +187,11 @@ use App\Libraries\UserUtility;
                         </div>
                         <div class="col-md-10 text-right">
                             <button type="submit" class="btn btn-primary" onclick="checkbox_copy()">更新</button>
+@if(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+                            <a href="/admin/top"><button type="button" class="btn btn-default">キャンセル</button></a>
+@else
                             <a href="/admin/user/list"><button type="button" class="btn btn-default">キャンセル</button></a>
+@endif
                         </div>
                         <input type="hidden" name="postAuths" value="">
                         <input type="hidden" name="master_flg" value="{{ $master_flg }}">

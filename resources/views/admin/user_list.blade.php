@@ -9,10 +9,6 @@ use App\Libraries\SessionUtility as sesUtil;
         <div class="content-box-large">
             <div class="panel-heading">
                 <div class="panel-title" style="font-size:20px">ユーザ一覧</div>
-				<div class="panel-options">
-                    <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-                    <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
-				</div>
 			</div>
 		  	<div class="panel-body">
 

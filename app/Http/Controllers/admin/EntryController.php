@@ -84,6 +84,8 @@ class EntryController extends AdminController
             // すべてブランクの場合全件検索する
         }
 
+        
+
         // 有効なエントリーのみの場合、論理削除済みのものは含めない
         if ($enabledOnly) {
             $query = $query->where('delete_flag', '=', 0)

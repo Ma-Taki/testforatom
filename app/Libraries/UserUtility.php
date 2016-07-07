@@ -41,13 +41,11 @@ class UserUtility
         'admin/user/update' => self::AUTH_TYPE_MASTER,
         'admin/user/delete' => self::AUTH_TYPE_MASTER,
         //エントリー管理
-        'admin/entry/list' => self::AUTH_TYPE_ENTRY_READ,
         'admin/entry/detail' => self::AUTH_TYPE_ENTRY_READ,
         'admin/entry/search' => self::AUTH_TYPE_ENTRY_READ,
         'admin/entry/delete' => self::AUTH_TYPE_ENTRY_DELETE,
         'admin/entry/download' => self::AUTH_TYPE_ENTRY_DOWNLOAD,
         // 会員管理
-        'admin/member/list' => self::AUTH_TYPE_MEMBER_READ,
         'admin/member/detail' => self::AUTH_TYPE_MEMBER_READ,
         'admin/member/search' => self::AUTH_TYPE_MEMBER_READ,
         'admin/member/update' => self::AUTH_TYPE_MEMBER_READ,

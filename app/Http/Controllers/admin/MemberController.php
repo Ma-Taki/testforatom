@@ -54,7 +54,7 @@ class MemberController extends AdminController
         $query = Tr_users::query();
 
         // メールアドレス検索
-        if (!empty($member_mail))
+        if (!empty($member_mail)) {
             //　asciiに変換できない文字を含む場合エラー
             if (mb_check_encoding($member_mail, 'ASCII')) {
                 // 文字列を半角スペースで分割
@@ -69,16 +69,32 @@ class MemberController extends AdminController
                 \Session::flash('custom_error_messages', ['メールアドレスに使用できない文字が含まれています。']);
                 return back()->withInput();
             }
+        }
         // 会員名検索
-        if (!empty($member_name))
-            // すべてのスペースを除去
-            $member_name = str_replace(array(' ', '　'), '', $member_name);
-            $query->where(DB::raw("CONCAT(last_name, first_name)"),'LIKE',"%".$member_name."%");
+        if (!empty($member_name)) {
+            // 全角スペースを半角に変換する
+            $member_name_hankaku = str_replace('　', ' ', $member_name);
+            // 文字列を半角スペースで分割
+            $member_name_array = explode(' ', $member_name_hankaku);
+            // 空要素を削除
+            $member_name_array = array_filter($member_name_array, 'strlen');
+            foreach ($member_name_array as $name_str) {
+                $query->where(DB::raw("CONCAT(last_name, first_name)"),'LIKE',"%".$name_str."%");
+            }
+        }
         // 会員名（かな）検索
-        if (!empty($member_name_kana))
-            $query->where(DB::raw("CONCAT(last_name_kana, first_name_kana)"),'LIKE',"%".$member_name_kana."%");
-
-        // 有効なエントリーのみの場合、論理削除済みのものは含めない
+        if (!empty($member_name_kana)) {
+            // 全角スペースを半角に変換する
+            $member_name_kana_hankaku = str_replace('　', ' ', $member_name_kana);
+            // 文字列を半角スペースで分割
+            $member_name_kana_array = explode(' ', $member_name_kana_hankaku);
+            // 空要素を削除
+            $member_name_kana_array = array_filter($member_name_kana_array, 'strlen');
+            foreach ($member_name_kana_array as $name_kana_str) {
+                $query->where(DB::raw("CONCAT(last_name_kana, first_name_kana)"),'LIKE',"%".$name_kana_str."%");
+            }
+        }
+        // 有効な会員のみの場合、論理削除済みのものは含めない
         if ($enabledOnly) {
             $query = $query->where('delete_flag', '=', 0)
                            ->where('delete_date', '=', null);
