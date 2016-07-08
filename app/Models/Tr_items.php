@@ -37,6 +37,7 @@ class Tr_items extends Model
          'delete_date',
          'note',
          'version',
+         'admin_id',
      ];
 
     /**
@@ -113,6 +114,13 @@ class Tr_items extends Model
      public function entries() {
          return $this->hasMany('App\Models\Tr_item_entries',
                                'item_id');
+     }
+
+     /**
+      * 管理者を取得
+      */
+     public function adminUser() {
+         return $this->belongsTo('App\Models\Tr_admin_user', 'admin_id');
      }
 
 

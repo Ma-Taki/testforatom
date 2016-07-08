@@ -127,7 +127,7 @@ class MemberController extends AdminController
         // 更新対象会員を取得
         $member = Tr_users::where('id', $member_id)->get()->first();
         if (empty($member)) {
-            abort(404, '指定されたユーザは存在しません。');
+            abort(404, '指定された会員は存在しません。');
         }
         // トランザクション
         DB::transaction(function () use ($member_id, $memo) {
@@ -157,9 +157,9 @@ class MemberController extends AdminController
         // 削除対象会員を取得
         $member = Tr_users::where('id', $member_id)->get()->first();
         if (empty($member)) {
-            abort(404, '指定されたユーザは存在しません。');
+            abort(404, '指定された会員は存在しません。');
         } elseif ($member->delete_flag > 0 || $user->delete_date != null) {
-            abort(404, '指定されたユーザは既に削除されています。');
+            abort(404, '指定された会員は既に削除されています。');
         }
 
         // 現在時刻

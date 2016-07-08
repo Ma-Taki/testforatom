@@ -16,6 +16,19 @@
 </div>
 @endif
 
+@if(!empty($item->adminUser))
+<div class="col-md-10">
+    <div class="row">
+        <div class="content-box-header">
+            <div class="panel-title">登録者</div>
+        </div>
+        <div class="content-box-large">
+            {{ $item->adminUser->admin_name }}
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="col-md-10">
     <div class="row">
             <div class="content-box-header">

@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\Tr_tag_infos;
 use DB;
 use Log;
+use App\Libraries\SessionUtility as ssnUtil;
 use App\Libraries\OrderUtility as OdrUtil;
 use App\Models\Ms_areas;
 use App\Models\Tr_search_categories;
@@ -125,7 +126,7 @@ class ItemController extends AdminController
         $item_id = $request->input('id');
         $item = Tr_items::where('id', $item_id)->get()->first();
         if (empty($item)) {
-            abort(404, '案件が見つかりません。');
+            abort(404, '指定された案件は存在しません。');
         }
         $today = Carbon::today();
         return view('admin.item_detail', compact('item', 'today'));
@@ -222,6 +223,8 @@ class ItemController extends AdminController
         $item_detail = $request->input('item_detail');
         // メモ(社内用)
         $item_note = $request->input('item_note');
+        // 管理者ID(登録者保持のため)
+        $item_admin_id = session(ssnUtil::SESSION_KEY_ADMIN_ID);
 
         // タグの編集
         // 改行コードを"\n"で統一する
@@ -324,7 +327,8 @@ class ItemController extends AdminController
                                          $skills,
                                          $sys_types,
                                          $tag_idList,
-                                         $tag_termList) {
+                                         $tag_termList,
+                                         $item_admin_id) {
             try {
                 // 案件テーブルにインサート
                 $item = Tr_items::create([
@@ -344,6 +348,7 @@ class ItemController extends AdminController
                     'delete_date' => null,
                     'note' => $item_note,
                     'version' => 0,
+                    'admin_id' => $item_admin_id,
                 ]);
                 // 案件エリア中間テーブルにインサート
                 foreach ((array)$areas as $area) {
@@ -416,9 +421,9 @@ class ItemController extends AdminController
         $item_id = $request->input('id');
         $item = Tr_items::where('id', $item_id)->get()->first();
         if (empty($item)) {
-            abort(404, '案件が見つかりません。');
+            abort(404, '指定された案件は存在しません。');
         } elseif ($item->delete_flag || !empty($item->delete_date)) {
-            abort(404, 'すでに削除済みです。');
+            abort(404, '指定された案件は既に削除されています。');
         }
 
         // 各種マスタのMaster_Type:3(IndexOnly)以外を取得
@@ -477,9 +482,9 @@ class ItemController extends AdminController
         $item_id = $request->input('item_id');
         $item = Tr_items::where('id', $item_id)->get()->first();
         if (empty($item)) {
-            abort(404, '案件が見つかりません。');
+            abort(404, '指定された案件は存在しません。');
         } elseif ($item->delete_flag || !empty($item->delete_date)) {
-            abort(404, 'すでに削除済みです。');
+            abort(404, '指定された案件は既に削除されています。');
         }
 
         // 案件名
@@ -717,9 +722,9 @@ class ItemController extends AdminController
         $item_id = $request->input('id');
         $item = Tr_items::where('id', $item_id)->get()->first();
         if (empty($item)) {
-            abort(404, '案件が見つかりません。');
+            abort(404, '指定された案件は存在しません。');
         } elseif ($item->delete_flag || !empty($item->delete_date)) {
-            abort(404, 'すでに削除済みです。');
+            abort(404, '指定された案件は既に削除されています。');
         }
 
         // トランザクション
