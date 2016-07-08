@@ -10,8 +10,9 @@ use App\Http\Controllers\AdminController;
 use App\Models\Tr_admin_user;
 use App\Models\Ms_admin_auth;
 use App\Models\Tr_link_admin_user_admin_auth;
-use App\Libraries\SessionUtility;
-use App\Libraries\UserUtility;
+use App\Libraries\SessionUtility as ssnUtil;
+use App\Libraries\AdminUtility as admnUtil;
+use App\Libraries\ModelUtility as mdlUtil;
 use DB;
 
 class UserController extends AdminController
@@ -103,7 +104,7 @@ class UserController extends AdminController
 
         $authList = array();
         foreach ($user->auths as $auth) {
-            if ($auth->auth_name.'.'.$auth->auth_type === UserUtility::AUTH_TYPE_MASTER) {
+            if ($auth->auth_name.'.'.$auth->auth_type === mdlUtil::AUTH_TYPE_MASTER) {
                 $master_flg = true;
             }
             array_push($authList, $auth->id);
@@ -158,7 +159,7 @@ class UserController extends AdminController
                 }
 
                 // 編集者：マスター管理者　かつ　編集対象：一般管理者の場合のみ権限の更新を行う
-                if (session(SessionUtility::SESSION_KEY_MASTER_FLG) && !$master_flg) {
+                if (session(ssnUtil::SESSION_KEY_MASTER_FLG) && !$master_flg) {
                     // 管理者権限中間テーブルをデリートインサート
                     Tr_link_admin_user_admin_auth::where('admin_id', $admin_id)->delete();
                     foreach ((array)$authList as $auth) {
@@ -175,13 +176,13 @@ class UserController extends AdminController
         });
 
         // 自身の管理者名を更新した場合、sessionに上書き保存する
-        if ($admin_id == session(SessionUtility::SESSION_KEY_ADMIN_ID)) {
-            session([SessionUtility::SESSION_KEY_ADMIN_NAME => $admin_name]);
+        if ($admin_id == session(ssnUtil::SESSION_KEY_ADMIN_ID)) {
+            session([ssnUtil::SESSION_KEY_ADMIN_NAME => $admin_name]);
         }
 
         // トランザクション正常終了時のリダイレクト先
         $redirectPath = '/admin/top';
-        if (session(SessionUtility::SESSION_KEY_MASTER_FLG)) {
+        if (session(ssnUtil::SESSION_KEY_MASTER_FLG)) {
             // マスター管理者はユーザ一覧へ
             $redirectPath = '/admin/user/list';
         }
@@ -207,7 +208,7 @@ class UserController extends AdminController
             abort(404, '指定されたユーザは存在しません。');
         } elseif ($user->delete_flag || $user->delete_date != null) {
             abort(404, '指定されたユーザは既に削除されています。');
-        } elseif (parent::isExistAuth($admin_id, UserUtility::AUTH_TYPE_MASTER)) {
+        } elseif (parent::isExistAuth($admin_id, mdlUtil::AUTH_TYPE_MASTER)) {
             abort(400, 'マスター管理者は削除できません。');
         }
 

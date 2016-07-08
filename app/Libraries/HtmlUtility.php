@@ -1,6 +1,6 @@
 <?php
 /**
- * 汎用HTMLイブラリ
+ * View用HTMLユーティリティー
  *
  * HTML上で使用するタグの属性や、表示制御に関わる判定を返す
  *
@@ -119,23 +119,6 @@ class HtmlUtility
 
         return $exist ? self::DROPDOWNLIST_SELECTED : self::NULL_CHARACTER;
     }
-
-    /**
-     * 今日日付が、指定された期間内かを判定する（日付単位)
-     * @param Carbon $fromDate
-     * @param Carbon $toDate
-     * @return bool
-     */
-     /*
-    public static function isTodayInPeriod($fromDate, $toDate){
-        // fromは当日 00:00:00から
-        // toは明日 00:00:00まで
-        if(Carbon::today()->between($fromDate, $toDate->addDays(1))){
-            return true;
-        }
-        return false;
-    }
-    */
 
     /**
      * 今日日付が指定された期間前、期間中、期間終了かを判定し

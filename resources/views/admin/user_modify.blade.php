@@ -32,8 +32,8 @@ function checkbox_copy()
 </script>
 <?php
 use App\Libraries\HtmlUtility;
-use App\Libraries\SessionUtility;
-use App\Libraries\UserUtility;
+use App\Libraries\SessionUtility as ssnUtil;
+use App\Libraries\AdminUtility as admnUtil;
  ?>
 <div class="col-md-10">
     <div class="row">
@@ -57,7 +57,7 @@ use App\Libraries\UserUtility;
                         <div class="form-group">
                             <label for="inputAdminName" class="col-md-2 control-label">管理者名</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputAdminName" name="admin_name" value="{{ HtmlUtility::setTextValueByRequest($user->admin_name, old('admin_name')) }}" {{ session('user_session_key_master_flg') == 0 ? "readonly='readonly'" : "placeholder=ログインID" }}>
+                                <input type="text" class="form-control" id="inputAdminName" name="admin_name" maxlength="30" value="{{ HtmlUtility::setTextValueByRequest($user->admin_name, old('admin_name')) }}" {{ session('user_session_key_master_flg') == 0 ? "readonly='readonly'" : "placeholder=ログインID" }}>
                             </div>
                         </div>
                         <div class="form-group">
@@ -74,7 +74,7 @@ use App\Libraries\UserUtility;
                         </div>
                         </br>
                         <legend style="font-size:16px">権限情報</legend>
-@if(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+@if(session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                             <div class="alert alert-warning">
                                 <ul>
                                     <li>検索・照会はデフォルトチェックです。</br>
@@ -87,7 +87,7 @@ use App\Libraries\UserUtility;
                             <label class="col-md-2 control-label">案件権限</label>
                             <div class="col-md-10">
 
-@if(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 1)
+@if(session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 1)
                                 <!-- 編集者：マスター管理者　編集対象：マスター管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" disabled="disabled" checked='checked'>検索・照会</label>
@@ -97,7 +97,7 @@ use App\Libraries\UserUtility;
                                     <input type="checkbox" disabled="disabled" checked='checked'>更新</label>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" disabled="disabled" checked='checked'>削除</label>
-@elseif(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+@elseif(session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：マスター管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="item_1" value="3" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 3) }} onclick="checkbox_inspection(this)">検索・照会
@@ -108,7 +108,7 @@ use App\Libraries\UserUtility;
                                     <input type="checkbox" name="auths[]" id="item_3" value="4" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 4) }}>更新</label>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="item_4" value="5" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 5) }}>削除</label>
-@elseif(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+@elseif(!session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：一般管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="item_1" value="3" disabled="disabled" {{ HtmlUtility::isChecked($authList, 3) }}>検索・照会
@@ -127,20 +127,20 @@ use App\Libraries\UserUtility;
                             <label class="col-md-2 control-label">会員権限</label>
                             <div class="col-md-10">
 
-@if(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 1)
+@if(session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 1)
                                 <!-- 編集者：マスター管理者　編集対象：マスター管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" disabled="disabled" checked='checked'>検索・照会</label>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" disabled="disabled" checked='checked'>削除</label>
-@elseif(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+@elseif(session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：マスター管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="member_1" value="7" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 7) }} onclick="checkbox_inspection(this)">検索・照会
                                 </label>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="member_2" value="9" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 9) }}>削除</label>
-@elseif(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+@elseif(!session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：一般管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="member_1" value="7" disabled="disabled" {{ HtmlUtility::isChecked($authList, 7) }}>検索・照会
@@ -155,7 +155,7 @@ use App\Libraries\UserUtility;
                             <label class="col-md-2 control-label">エントリー権限</label>
                             <div class="col-md-10">
 
-@if(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 1)
+@if(session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 1)
                                 <!-- 編集者：マスター管理者　編集対象：マスター管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" disabled="disabled" checked='checked'>検索・照会</label>
@@ -163,7 +163,7 @@ use App\Libraries\UserUtility;
                                     <input type="checkbox" disabled="disabled" checked='checked'>削除</label>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" disabled="disabled" checked='checked'>スキルシートDL</label>
-@elseif(session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+@elseif(session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：マスター管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="entry_1" value="11" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 11) }} onclick="checkbox_inspection(this)">検索・照会
@@ -172,7 +172,7 @@ use App\Libraries\UserUtility;
                                     <input type="checkbox" name="auths[]" id="entry_2" value="13" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 13) }}>削除</label>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="entry_3" value="14" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 14) }}>スキルシートDL</label>
-@elseif(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+@elseif(!session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                                 <!-- 編集者：一般管理者　編集対象：一般管理者 -->
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" id="entry_1" value="11" disabled="disabled" {{ HtmlUtility::isChecked($authList, 11) }}>検索・照会
@@ -187,7 +187,7 @@ use App\Libraries\UserUtility;
                         </div>
                         <div class="col-md-10 text-right">
                             <button type="submit" class="btn btn-primary" onclick="checkbox_copy()">更新</button>
-@if(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
+@if(!session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
                             <a href="/admin/top"><button type="button" class="btn btn-default">キャンセル</button></a>
 @else
                             <a href="/admin/user/list"><button type="button" class="btn btn-default">キャンセル</button></a>
@@ -195,7 +195,7 @@ use App\Libraries\UserUtility;
                         </div>
                         <input type="hidden" name="postAuths" value="">
                         <input type="hidden" name="master_flg" value="{{ $master_flg }}">
-                        <input type="hidden" name="isAuthsCheck" value="{{ UserUtility::isValidationAuths($master_flg, session(SessionUtility::SESSION_KEY_MASTER_FLG)) }}">
+                        <input type="hidden" name="isAuthsCheck" value="{{ !$master_flg && session(ssnUtil::SESSION_KEY_MASTER_FLG) }}">
                         <input type="hidden" name="admin_id" value="{{ $user->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     </fieldset>
@@ -204,7 +204,7 @@ use App\Libraries\UserUtility;
         </div>
     </div>
 </div>
-@if(!(!session(SessionUtility::SESSION_KEY_MASTER_FLG) && $master_flg == 0))
+@if(!(!session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0))
 <script type="text/javascript">
     checkbox_inspection(document.getElementById("item_1"));
     checkbox_inspection(document.getElementById("member_1"));

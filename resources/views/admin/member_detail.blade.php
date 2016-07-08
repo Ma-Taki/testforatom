@@ -98,6 +98,18 @@
                 </form>
             </div>
         </div>
+
+@if($member->entries->isEmpty())
+        <div class="col-md-12">
+            <div class="content-box-large">
+                <div class="alert alert-info">
+                    <ul>
+                        <li>この会員は未エントリーです。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+@else
         <div class="col-md-12">
             <div class="content-box-header">
                 <div class="panel-title">本会員の応募一覧</div>
@@ -129,6 +141,7 @@
                 </table>
             </div>
         </div>
+@endif
     </div>
 </div>
 @endsection

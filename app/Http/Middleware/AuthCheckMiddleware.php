@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 
 use App\Models\Tr_admin_user;
-use App\Libraries\UserUtility;
-use App\Libraries\SessionUtility;
+use App\Libraries\AdminUtility as admnUtil;
+use App\Libraries\SessionUtility as ssnUtil;
+use App\Libraries\ModelUtility as mdlUtil;
 
 class AuthCheckMiddleware
 {
@@ -20,14 +21,14 @@ class AuthCheckMiddleware
     public function handle($request, Closure $next)
     {
         $requestUri = $request->path();
-        $admin_id = session(SessionUtility::SESSION_KEY_ADMIN_ID);
+        $admin_id = session(ssnUtil::SESSION_KEY_ADMIN_ID);
         $authList = Tr_admin_user::find($admin_id)->auths;
 
         $permission = false;
         foreach ($authList as $auth) {
             // 権限あり、またはマスター管理者の場合、遷移を行う
-            if ($auth->auth_name.'.'.$auth->auth_type === UserUtility::AUTH_LIST[$requestUri]
-                || $auth->auth_name.'.'.$auth->auth_type === UserUtility::AUTH_TYPE_MASTER){
+            if ($auth->auth_name.'.'.$auth->auth_type === admnUtil::AUTH_LIST[$requestUri]
+                || $auth->auth_name.'.'.$auth->auth_type === mdlUtil::AUTH_TYPE_MASTER){
                 $permission = true;
                 break;
             }

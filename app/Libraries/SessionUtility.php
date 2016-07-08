@@ -1,6 +1,6 @@
 <?php
 /**
- * セッションライブラリ
+ * セッションユーティリティ
  *
  */
 namespace App\Libraries;

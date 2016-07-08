@@ -1,6 +1,6 @@
 <?php
 /**
- * 並び替え処理ユーティリティ
+ * 表示順序ユーティリティ
  *
  */
 namespace App\Libraries;

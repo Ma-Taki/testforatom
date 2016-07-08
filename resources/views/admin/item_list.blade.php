@@ -12,7 +12,8 @@ use App\Libraries\OrderUtility as OdrUtil;
                 <div class="panel-title" style="font-size:20px">案件一覧</div>
 			</div>
   			<div class="panel-body">
-{{-- info：custom --}}
+
+{{-- info message --}}
 @if(\Session::has('custom_info_messages'))
                 <div class="alert alert-info">
                     <ul>

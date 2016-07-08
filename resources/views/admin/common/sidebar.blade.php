@@ -1,14 +1,15 @@
 <?php
-use App\Libraries\SessionUtility;
-use App\Libraries\UserUtility;
+use App\Libraries\AdminUtility as admnUtil;
+use App\Libraries\ModelUtility as mdlUtil;
 ?>
 @if (!strstr(Request::url(), '/admin/login'))
 <div class="col-md-2">
     <div class="sidebar content-box" style="display: block;">
         <ul class="nav">
             <li class="current"><a href="/admin/top"><i class="glyphicon glyphicon-home"></i> トップ</a></li>
-@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ITEM_READ)
-    || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
+
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_ITEM_READ)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
             <li class="submenu">
                 <a href="#">
                     <i class="glyphicon glyphicon-briefcase"></i> 案件管理
@@ -20,15 +21,18 @@ use App\Libraries\UserUtility;
                 </ul>
             </li>
 @endif
-@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MEMBER_READ)
-    || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
+
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MEMBER_READ)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
             <li><a href="/admin/member/search"><i class="glyphicon glyphicon-user"></i> 会員管理</a></li>
 @endif
-@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ENTRY_READ)
-    || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
+
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_ENTRY_READ)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
             <li><a href="/admin/entry/search"><i class="glyphicon glyphicon-file"></i> エントリー管理</a></li>
 @endif
-@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
+
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
             <li class="submenu">
                 <a href="#">
                     <i class="glyphicon glyphicon-wrench"></i> ユーザ管理
@@ -40,6 +44,7 @@ use App\Libraries\UserUtility;
                 </ul>
             </li>
 @endif
+
         </ul>
     </div>
 </div>

@@ -2,10 +2,11 @@
 @section('title', 'トップ')
 @section('content')
 <?php
-use App\Libraries\UserUtility;
+use App\Libraries\AdminUtility as admnUtil;
+use App\Libraries\ModelUtility as mdlUtil;
 ?>
 <div class="col-md-10">
-{{-- info：custom --}}
+{{-- info message --}}
 @if(\Session::has('custom_info_messages'))
     <div class="alert alert-info">
         <ul>
@@ -13,8 +14,9 @@ use App\Libraries\UserUtility;
         </ul>
     </div>
 @endif
-@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ITEM_READ)
-    || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
+
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_ITEM_READ)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
     <div class="row">
         <div class="col-md-12">
             <div class="content-box-header">
@@ -27,8 +29,8 @@ use App\Libraries\UserUtility;
         </div>
     </div>
 @endif
-@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MEMBER_READ)
-    || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MEMBER_READ)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
     <div class="row">
         <div class="col-md-12">
             <div class="content-box-header">
@@ -41,8 +43,8 @@ use App\Libraries\UserUtility;
         </div>
     </div>
 @endif
-@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_ENTRY_READ)
-    || UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_ENTRY_READ)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
     <div class="row">
         <div class="col-md-12">
             <div class="content-box-header">
@@ -55,7 +57,7 @@ use App\Libraries\UserUtility;
         </div>
     </div>
 @endif
-@if(UserUtility::isDisplaySubMenu(UserUtility::AUTH_TYPE_MASTER))
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
     <div class="row">
         <div class="col-md-12">
             <div class="content-box-header">
