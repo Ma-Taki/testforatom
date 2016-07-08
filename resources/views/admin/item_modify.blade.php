@@ -39,7 +39,7 @@ use App\Libraries\HtmlUtility;
                     <div class="col-md-4">案件情報入力（<font color="#FF0000">*</font>は入力必須項目）</div>
                 </div>
                 </br>
-                <form class="form-horizontal" name="itemForm" role="form" method="POST" onSubmit="mutualApplyBeforeSubmit()" action="{{ url('/admin/item/update') }}">
+                <form class="form-horizontal" name="itemForm" role="form" method="POST" onSubmit="mutualApplyBeforeSubmit()" action="{{ url('/admin/item/modify') }}">
                     <fieldset>
                         <div class="form-group">
                             <label for="inputItemName" class="col-md-2 control-label">案件名<font color="#FF0000">*</font></label>

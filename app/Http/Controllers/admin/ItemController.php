@@ -184,7 +184,7 @@ class ItemController extends AdminController
 
     /**
      * 新規登録処理
-     * POST:/admin/item/insert
+     * POST:/admin/item/input
      */
     public function insertItem(ItemRegistRequest $request){
 
@@ -346,35 +346,35 @@ class ItemController extends AdminController
                     'version' => 0,
                 ]);
                 // 案件エリア中間テーブルにインサート
-                foreach ($areas as $area) {
+                foreach ((array)$areas as $area) {
                     Tr_link_items_areas::create([
                         'item_id' => $item->id,
                         'area_id' => $area,
                     ]);
                 }
                 // 案件職種中間テーブルにインサート
-                foreach ($job_types as $job_type) {
+                foreach ((array)$job_types as $job_type) {
                     Tr_link_items_job_types::create([
                         'item_id' => $item->id,
                         'job_type_id' => $job_type,
                     ]);
                 }
                 // 案件業種検索中間テーブルにインサート
-                foreach ($search_categories as $search_category) {
+                foreach ((array)$search_categories as $search_category) {
                     Tr_link_items_search_categories::create([
                         'item_id' => $item->id,
                         'search_category_id' => $search_category,
                     ]);
                 }
                 // 案件スキル中間テーブルにインサート
-                foreach ($skills as $skill) {
+                foreach ((array)$skills as $skill) {
                     Tr_link_items_skills::create([
                         'item_id' => $item->id,
                         'skill_id' => $skill,
                     ]);
                 }
                 // 案件システム種別中間テーブルにインサート
-                foreach ($sys_types as $sys_type) {
+                foreach ((array)$sys_types as $sys_type) {
                     Tr_link_items_sys_types::create([
                         'item_id' => $item->id,
                         'sys_type_id' => $sys_type,
@@ -382,7 +382,7 @@ class ItemController extends AdminController
                 }
 
                 // タグテーブルにインサート
-                foreach ($tag_termList as $tag_term) {
+                foreach ((array)$tag_termList as $tag_term) {
                     $tag = Tr_tags::create([
                         'term' => $tag_term,
                     ]);
@@ -390,14 +390,14 @@ class ItemController extends AdminController
                 }
 
                 // 案件タグ中間テーブルにインサート
-                foreach ($tag_idList as $tag_id) {
+                foreach ((array)$tag_idList as $tag_id) {
                     Tr_link_items_tags::create([
                         'item_id' => $item->id,
                         'tag_id' => $tag_id,
                     ]);
                 }
             } catch (\Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
@@ -469,7 +469,7 @@ class ItemController extends AdminController
 
     /**
      * 更新処理
-     * POST:/admin/item/update
+     * POST:/admin/item/modify
      */
     public function updateItem(ItemRegistRequest $request){
 
@@ -683,7 +683,7 @@ class ItemController extends AdminController
                     ]);
                 }
                 // タグテーブルにインサート
-                foreach ($tag_termList as $tag_term) {
+                foreach ((array)$tag_termList as $tag_term) {
                     $tag = Tr_tags::create([
                         'term' => $tag_term,
                     ]);
@@ -691,14 +691,14 @@ class ItemController extends AdminController
                 }
                 // 案件タグ中間テーブルにデリートインサート
                 Tr_link_items_tags::where('item_id', $item_id)->delete();
-                foreach ($tag_idList as $tag_id) {
+                foreach ((array)$tag_idList as $tag_id) {
                     Tr_link_items_tags::create([
                         'item_id' => $item->id,
                         'tag_id' => $tag_id,
                     ]);
                 }
             } catch (\Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
@@ -730,7 +730,7 @@ class ItemController extends AdminController
                     'delete_date' => date('Y-m-d H:i:s', time()),
                 ]);
             } catch (\Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });

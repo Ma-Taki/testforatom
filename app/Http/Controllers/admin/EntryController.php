@@ -84,7 +84,7 @@ class EntryController extends AdminController
             // すべてブランクの場合全件検索する
         }
 
-        
+
 
         // 有効なエントリーのみの場合、論理削除済みのものは含めない
         if ($enabledOnly) {
@@ -133,7 +133,7 @@ class EntryController extends AdminController
                     'delete_date' => date('Y-m-d H:i:s', $timestamp),
                 ]);
             } catch (\Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });

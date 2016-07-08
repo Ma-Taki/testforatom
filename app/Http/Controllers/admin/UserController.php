@@ -36,7 +36,7 @@ class UserController extends AdminController
 
     /**
      * 新規登録処理
-     * POST:/admin/user/insert
+     * POST:/admin/user/input
      */
     public function insertAdminUser(AdminUserRegistRequest $request){
 
@@ -73,7 +73,7 @@ class UserController extends AdminController
                     ]);
                 }
             } catch (Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
@@ -118,7 +118,7 @@ class UserController extends AdminController
 
     /**
      * 更新処理
-     * POST:/admin/user/update
+     * POST:/admin/user/modify
      */
     public function updateAdminUser(AdminUserEditRequest $request){
 
@@ -170,7 +170,7 @@ class UserController extends AdminController
                     }
                 }
             } catch (\Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
@@ -222,7 +222,7 @@ class UserController extends AdminController
                     'delete_date' => date('Y-m-d H:i:s', $timestamp),
                 ]);
             } catch (\Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });

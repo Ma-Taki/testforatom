@@ -41,12 +41,12 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/user/list', 'admin\UserController@showUserList');
     // 新規登録画面
     Route::get('/admin/user/input', 'admin\UserController@showUserInput');
+    // 新規登録処理
+    Route::post('/admin/user/input', 'admin\UserController@insertAdminUser');
     // 編集画面
     Route::get('/admin/user/modify', 'admin\UserController@showUserModify');
-    // 新規登録処理
-    Route::post('/admin/user/insert', 'admin\UserController@insertAdminUser');
     // 更新処理
-    Route::post('/admin/user/update', 'admin\UserController@updateAdminUser');
+    Route::post('/admin/user/modify', 'admin\UserController@updateAdminUser');
     // 論理削除処理
     Route::get('/admin/user/delete', 'admin\UserController@deleteAdminUser');
 
@@ -73,16 +73,16 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     // 案件管理
     // 新規登録画面
     Route::get('/admin/item/input', 'admin\ItemController@showItemInput');
+    // 新規登録処理
+    Route::post('/admin/item/input', 'admin\ItemController@insertItem');
     // 詳細画面
     Route::get('/admin/item/detail', 'admin\ItemController@showItemDetail');
     // 編集画面
     Route::get('/admin/item/modify', 'admin\ItemController@showItemModify');
+    // 更新処理
+    Route::post('/admin/item/modify', 'admin\ItemController@updateItem');
     // 検索処理
     Route::match(['get', 'post'], '/admin/item/search', 'admin\ItemController@searchItem');
-    // 新規登録処理
-    Route::post('/admin/item/insert', 'admin\ItemController@insertItem');
-    // 更新処理
-    Route::post('/admin/item/update', 'admin\ItemController@updateItem');
     // 論理削除処理
     Route::get('/admin/item/delete', 'admin\ItemController@deleteItem');
 });

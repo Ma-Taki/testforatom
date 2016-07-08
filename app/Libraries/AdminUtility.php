@@ -16,9 +16,7 @@ class AdminUtility
         // ユーザ管理
         'admin/user/list' => mdlUtil::AUTH_TYPE_MASTER,
         'admin/user/input' => mdlUtil::AUTH_TYPE_MASTER,
-        'admin/user/insert' => mdlUtil::AUTH_TYPE_MASTER,
         'admin/user/modify' => mdlUtil::AUTH_TYPE_MASTER,
-        'admin/user/update' => mdlUtil::AUTH_TYPE_MASTER,
         'admin/user/delete' => mdlUtil::AUTH_TYPE_MASTER,
         //エントリー管理
         'admin/entry/detail' => mdlUtil::AUTH_TYPE_ENTRY_READ,
@@ -34,9 +32,7 @@ class AdminUtility
         'admin/item/search' => mdlUtil::AUTH_TYPE_ITEM_READ,
         'admin/item/detail' => mdlUtil::AUTH_TYPE_ITEM_READ,
         'admin/item/input' => mdlUtil::AUTH_TYPE_ITEM_CREATE,
-        'admin/item/insert' => mdlUtil::AUTH_TYPE_ITEM_CREATE,
         'admin/item/modify' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
-        'admin/item/update' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
         'admin/item/delete' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
     ];
 

@@ -42,7 +42,7 @@ use App\Libraries\AdminUtility as admnUtil;
                 <div class="panel-title" style="font-size:20px">ユーザ情報</div>
 			</div>
 		    <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" name="userForm" action="{{ url('/admin/user/update') }}">
+                <form class="form-horizontal" role="form" method="POST" name="userForm" action="{{ url('/admin/user/modify') }}">
 @if(count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>

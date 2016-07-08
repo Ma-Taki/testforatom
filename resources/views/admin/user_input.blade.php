@@ -49,7 +49,7 @@ use App\Libraries\HtmlUtility;
                     </ul>
                 </div>
 @endif
-                <form class="form-horizontal" name="userForm" role="form" method="POST" action="{{ url('/admin/user/insert') }}">
+                <form class="form-horizontal" name="userForm" role="form" method="POST" action="{{ url('/admin/user/input') }}">
                     <fieldset>
                         <legend style="font-size:16px">ユーザ情報</legend>
                         <div class="form-group">

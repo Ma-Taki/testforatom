@@ -124,6 +124,11 @@ class MemberController extends AdminController
         // メモ
         $memo = $request->input('memo');
 
+        // 更新対象会員を取得
+        $member = Tr_users::where('id', $member_id)->get()->first();
+        if (empty($member)) {
+            abort(404, '指定されたユーザは存在しません。');
+        }
         // トランザクション
         DB::transaction(function () use ($member_id, $memo) {
             try {
@@ -131,7 +136,7 @@ class MemberController extends AdminController
                  Tr_users::where('id', $member_id)
                          ->update(['note' => $memo,]);
             } catch (\Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
@@ -148,6 +153,15 @@ class MemberController extends AdminController
 
         // 会員ID
         $member_id = $request->input('id');
+
+        // 削除対象会員を取得
+        $member = Tr_users::where('id', $member_id)->get()->first();
+        if (empty($member)) {
+            abort(404, '指定されたユーザは存在しません。');
+        } elseif ($member->delete_flag > 0 || $user->delete_date != null) {
+            abort(404, '指定されたユーザは既に削除されています。');
+        }
+
         // 現在時刻
         $timestamp = time();
 
@@ -157,11 +171,11 @@ class MemberController extends AdminController
                 // ユーザーテーブルをアップデート
                 Tr_users::where('id', $member_id)->update([
                     'delete_flag' => 1,
-                    'delete_date' => date('Y-m-d H:i:s', $timestamp),
+                    'delete_date' => date('Y-m-d', $timestamp),
                 ]);
 
             } catch (\Exception $e) {
-                // TODO エラーのログ出力
+                Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
