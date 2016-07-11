@@ -146,7 +146,7 @@ class ItemController extends AdminController
         // 子カテゴリ
         $master_search_categories_child = Tr_search_categories::where('parent_id', '!=', null)->get();
         // 業種
-        $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)->get();
+        $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)->orderBy('sort_order', 'desc')->get();
         // 職種
         $master_job_types = Ms_job_types::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
@@ -161,7 +161,7 @@ class ItemController extends AdminController
                                         ->get();
         // 特集タグ取得
         $featureTagInfos = Tr_tag_infos::where('tag_type', 3)
-                                        ->orderBy('sort_order', 'asc')
+                                        ->orderBy('sort_order', 'desc')
                                         ->limit(30)
                                         ->get();
         // pickupタグ取得
@@ -434,7 +434,9 @@ class ItemController extends AdminController
         // 子カテゴリ
         $master_search_categories_child = Tr_search_categories::where('parent_id', '!=', null)->get();
         // 業種
-        $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)->get();
+        $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)
+                                                  ->orderBy('sort_order', 'desc')
+                                                  ->get();
         // 職種
         $master_job_types = Ms_job_types::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
@@ -449,7 +451,7 @@ class ItemController extends AdminController
                                         ->get();
         // 特集タグ取得
         $featureTagInfos = Tr_tag_infos::where('tag_type', 3)
-                                        ->orderBy('sort_order', 'asc')
+                                        ->orderBy('sort_order', 'desc')
                                         ->limit(30)
                                         ->get();
         // pickupタグ取得
