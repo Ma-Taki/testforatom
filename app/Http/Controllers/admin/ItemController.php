@@ -443,9 +443,9 @@ class ItemController extends AdminController
         $master_sys_types = Ms_sys_types::where('master_type', '!=', 3)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
-        // スキル
+        // スキル ABC順に表示
         $master_skills = Ms_skills::where('master_type', '!=', 3)
-                                        ->orderBy('sort_order', 'asc')
+                                        ->orderBy('name', 'asc')
                                         ->get();
         // 特集タグ取得
         $featureTagInfos = Tr_tag_infos::where('tag_type', 3)

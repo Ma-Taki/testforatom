@@ -36,7 +36,7 @@
             </div>
             <div class="content-box-large box-with-header">
                 <div word-wrap:break-word>
-                    <table border="1" align="center">
+                    <table border="1">
                         <tr>
                             <th>案件ID</th>
                             <td>AN{{ $item->id }}</td>

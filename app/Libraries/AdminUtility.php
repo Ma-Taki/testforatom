@@ -43,8 +43,18 @@ class AdminUtility
      * @return bool
      **/
     public static function isExistAuth($authName){
-        $admin_id = session(ssnUtil::SESSION_KEY_ADMIN_ID);
-        $user = Tr_admin_user::find($admin_id);
+        return self::isExistAuthById(session(ssnUtil::SESSION_KEY_ADMIN_ID), $authName);
+    }
+
+    /**
+     * idで指定されたユーザが指定された権限を持っているかをチェックする
+     *
+     * @param $id 管理者id
+     * @param $authName 権限名
+     * @return bool
+     **/
+    public static function isExistAuthById($id, $authName){
+        $user = Tr_admin_user::find($id);
         if ($user != null) {
             foreach ($user->auths as $auth) {
                 if ($auth->auth_name.'.'.$auth->auth_type === $authName) return true;
@@ -52,21 +62,4 @@ class AdminUtility
         }
         return false;
     }
-
-    /**
-     * ユーザ情報更新画面にて、編集者と編集対象の関係から
-     * 権限の必須チェックを行うか判定する
-     * @param
-     * @param
-     * @return
-     */
-     public static function isValidationAuths($eMasFlg, $sMasFlg){
-         if (!$eMasFlg && $sMasFlg) {
-             return 1;
-         }
-         return 0;
-     }
-
-
-
 }

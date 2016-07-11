@@ -208,7 +208,7 @@ class UserController extends AdminController
             abort(404, '指定されたユーザは存在しません。');
         } elseif ($user->delete_flag || $user->delete_date != null) {
             abort(404, '指定されたユーザは既に削除されています。');
-        } elseif (parent::isExistAuth($admin_id, mdlUtil::AUTH_TYPE_MASTER)) {
+        } elseif (admnUtil::isExistAuthById($admin_id, mdlUtil::AUTH_TYPE_MASTER)) {
             abort(400, 'マスター管理者は削除できません。');
         }
 

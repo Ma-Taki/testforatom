@@ -1,5 +1,5 @@
 @extends('admin.common.layout')
-@section('title', 'ユーザ情報')
+@section('title', 'ユーザ編集')
 @section('content')
 <script type="text/javascript">
 function checkbox_inspection(element) {
