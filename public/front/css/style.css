@@ -1,0 +1,1081 @@
+@charset "UTF-8";
+
+/*-------------------------------
+# reset
+-------------------------------*/
+html,body,div,span,object,iframe,
+h1,h2,h3,h4,h5,h6,p,blockquote,pre,
+abbr,address,cite,code,
+del,dfn,em,img,ins,kbd,q,samp,
+small,strong,sub,sup,var,
+b,i,
+dl,dt,dd,ol,ul,li,
+fieldset,form,label,legend,
+table,caption,tbody,tfoot,thead,tr,th,td,
+article,aside,canvas,details,figcaption,figure, 
+footer,header,hgroup,menu,nav,section,summary,
+time,mark,audio,video{
+    margin:0;
+    padding:0;
+    border:0;
+    background:transparent;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+}
+
+html{
+	font-size: 62.5%;
+}
+
+body{
+	line-height:1;
+	color: #333;
+    font-family:Avenir , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+    -webkit-text-size-adjust: 100%;
+	font-size: 13px;
+	font-size: 1.3rem;
+}
+
+input{padding:0;}
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section{display:block;}
+li{list-style:none;}
+blockquote, q{quotes:none;}
+blockquote:before, blockquote:after,
+q:before, q:after{content:''; content:none;}
+a{margin:0; padding:0; background:transparent; font-size:100%; vertical-align:baseline;}
+
+table{
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+input, select{
+    vertical-align:middle;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+a{
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover{
+	transition: 0.25s;
+}
+
+.fs0{
+	font-size: 0;
+}
+
+/*-------------------------------
+# common
+-------------------------------*/
+.bg{
+	background: url(../images/absurdidad.png)repeat;
+}
+
+.alignleft{
+	float: left;
+	display: inline-block;
+}
+
+.alignright{
+	float: right;
+	display: inline-block;
+}
+
+.clear{
+	clear: both;
+}
+
+/*-------------------------------
+# header
+-------------------------------*/
+header{
+	height: 100px;
+}
+
+.headerInr{
+	width: 1000px;
+	margin: 0 auto;
+	height: 100px;
+	position: relative;
+}
+
+.headerInr h1{
+	width: 276px;
+}
+
+.headerInr h1 a{
+	background: url(../images/logo.png)no-repeat;
+	background-size: 276px 68px;
+	display: block;
+	height: 68px;
+}
+
+.headerInr p{
+	line-height: 32px;
+	font-size: 12px;
+}
+
+/* user */
+.user{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.user li{
+	display: inline-block;
+	background: #333;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
+}
+
+.user li:hover{
+	background: #4c616a;
+	transition: 0.25s;
+}
+
+.user li a{
+	color: #fff;
+	line-height: 40px;
+	padding: 0 56px;
+	font-size: 14px;
+}
+
+/* search */
+.search{
+	position: absolute;
+	right: 0;
+	bottom: 12px;
+}
+
+.searchBox{
+	border: #5e8796 1px solid;
+	border-radius: 8px;
+	padding: 8px;
+	margin-right: 4px;
+}
+
+.searchBtn{
+	background: url(../images/search.png)no-repeat;
+	background-size: 26px 26px;
+	width: 26px;
+	height: 26px;
+	text-indent: -9999px;
+	cursor: pointer;
+	border: none;
+}
+
+/* nav */
+nav{
+	background: #5e8796;
+	height: 48px;
+	text-align: center;
+}
+
+nav ul{
+	width: 1000px;
+	margin: 0 auto;
+	font-size: 0px;
+}
+
+nav li{
+	display: inline;
+}
+
+nav li a{
+	color: #fff;
+	font-size: 14px;
+	line-height: 48px;
+	padding: 0 46px;
+}
+
+nav li a:hover{
+	color: #4c616a;
+}
+
+nav li .active{
+	background: #536C75;
+	display: inline-block;
+}
+
+/* Mobile Navigation */
+.nav-mobile {
+	display:none; /* Hide from browsers that don't support media queries */
+	cursor:pointer;
+	position:absolute;
+	top:12px;
+	right:8px;
+	background:url(../images/navOpen.png) no-repeat center center;
+	height:24px;
+	width:24px;
+	background-size: 24px 24px;
+}
+
+
+/*-------------------------------
+# page
+-------------------------------*/
+.wrapper {
+	margin:0 auto;
+}
+.main {
+	width:100%;
+}
+.content {
+}
+
+.contentInr{
+	width: 1000px;
+	margin: 0 auto;
+	padding: 24px 0 40px;
+}
+
+.contentInr h1{
+	font-size: 20px;
+	margin-bottom: 24px;
+	
+}
+
+.contentInr h1:before{
+	content: " ";
+	background: url(../images/h1search.png)no-repeat;
+	width: 20px;
+	height: 20px;
+	background-size: 16px 16px;
+	background-position: 0 4px;
+	display: inline-block;
+}
+
+
+/*-------------------------------
+## top
+-------------------------------*/
+/* -- slider -- */
+.sliderWrap{
+}
+
+/*左右の矢印の色を変える*/
+.slick-prev:before,
+.slick-next:before {
+    color: #000;
+}
+/*左右の矢印の位置を変える*/
+.slick-next {
+    right: 20px;
+    z-index: 99;
+}
+.slick-prev {
+  left: 15px;
+    z-index: 100;
+}
+/*スライド数のドットの色を変える*/
+.slick-dots li.slick-active button:before,
+.slick-dots li button:before {
+    color: #fff;
+}
+/*スライド画像の横幅可変*/
+img {
+    max-width: 100%;
+  height: auto;
+}
+
+
+/* -- 新着案件・急募案件 -- */
+/* common */
+.ankenListWrap{
+	overflow: auto;
+}
+
+.topJobWrap{
+	width: 500px;
+	padding: 32px 0 40px;
+}
+
+.topJobWrap h1{
+	font-size: 20px;
+	margin-bottom: 16px;
+}
+
+.topJobWrap li{
+	width: 50%;
+	display: inline-block;
+	font-size: 14px;
+	padding: 8px;
+	vertical-align: top;
+	position: relative;
+}
+
+.topJobWrap li:nth-child(2n+1){
+	padding-left: 0;
+}
+
+.topJobWrap li:nth-child(2n){
+	padding-right: 0;
+}
+
+.topJobWrap .topJobInr{
+	background: #fff;
+	border-radius: 8px;
+	overflow: auto;
+	padding: 16px;
+}
+
+.topJobInr img{
+	width: 40px;
+	height: 40px;
+	float: left;
+	margin-right: 8px;
+	margin-bottom: 16px;
+}
+
+.topJobInr h2{
+	font-size: 14px;
+	line-height: 1.2;
+	margin-bottom: 16px;
+	margin-top: 5px;
+}
+
+.topJobInr .location,
+.topJobInr .remuneration{
+	clear: both;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+
+.topJobInr .update{
+	color: #7F7F7F;
+	font-size: 13px;
+	position: absolute;
+	bottom:16px;
+	right: 16px;
+}
+
+.topJobWrap p a:hover{
+	text-decoration: underline;
+}
+
+.topJobWrap p a:before{
+	display: inline-block; 
+	width: 6px; 
+	height: 6px; 
+	-ms-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+	content: "";
+	margin-right: 6px;
+	margin-bottom: 1px;
+}
+
+.topJobWrap li:nth-child(2n) .update{
+	right: 8px;
+}
+
+
+/* 新着 */
+.newJob{
+	width: 50%;
+	background: #E7EFF3;
+	padding-right: 20px;
+}
+
+.newJob p a,
+.newJob .location{
+	color: #5e8796;
+}
+
+.newJob .topJobWrap p a:before{
+	border-top: 2px solid #5e8796; 
+	border-right: 2px solid #5e8796; 
+}
+
+
+/* 急募 */
+.attentionJob{
+	width: 50%;
+	background: #F8F3F0;
+	padding-left: 20px;
+}
+
+.attentionJob p a,
+.attentionJob .location{
+	color: #D46363;
+}
+
+.attentionJob .topJobWrap p a:before{
+	border-top: 2px solid #D46363; 
+	border-right: 2px solid #D46363; 
+}
+
+/* 特集 */
+.pickupCat li{
+	display: inline-block;
+	width: 33.3%;
+	text-align: center;
+	line-height: 32px;
+	padding: 8px;
+}
+
+.pickupCat li a{
+	display: block;
+	border-radius: 32px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 48px;
+	box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
+	background-size: 32px 64px;
+}
+
+.pickupCat li a:before{
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 5px;
+	margin-right: 8px;
+	content: "";
+}
+
+.pickupCat li img{
+	width: 32px;
+	height: 64px;
+	margin-right: 8px;
+}
+
+.pucat01 a{
+	border: 3px solid #89A1BE;
+	color: #89a1be;
+}
+
+.pucat01 a:before{
+	background: url(../images/ico-pickup01.png)no-repeat;
+	background-size: 32px 64px;
+}
+
+.pucat01 a:hover{
+	background: #89a1be;
+	color: #fff;
+}
+
+.pucat02 a{
+	border: 3px solid #9B9B9B;
+	color: #9b9b9b;
+}
+
+.pucat02 a:before{
+	background: url(../images/ico-pickup02.png)no-repeat;
+	background-size: 32px 64px;
+}
+
+.pucat02 a:hover{
+	background: #9B9B9B;
+	color: #fff;
+}
+
+.pucat03 a{
+	border: 3px solid #D9BF21;
+	color: #D9BF21;
+}
+
+.pucat03 a:before{
+	background: url(../images/ico-pickup03.png)no-repeat;
+	background-size: 32px 64px;
+}
+
+.pucat03 a:hover{
+	background: #D9BF21;
+	color: #fff;
+}
+
+.pucat04 a{
+	border: 3px solid #88BA4E;
+	color: #88BA4E;
+}
+
+.pucat04 a:before{
+	background: url(../images/ico-pickup04.png)no-repeat;
+	background-size: 32px 64px;
+}
+
+.pucat04 a:hover{
+	background: #88BA4E;
+	color: #fff;
+}
+
+.pucat05 a{
+	border: 3px solid #E38585;
+	color: #e38585;
+}
+
+.pucat05 a:before{
+	background: url(../images/ico-pickup05.png)no-repeat;
+	background-size: 32px 64px;
+}
+
+.pucat05 a:hover{
+	background: #E38585;
+	color: #fff;
+}
+
+.pucat01 a:hover:before,
+.pucat02 a:hover:before,
+.pucat03 a:hover:before,
+.pucat04 a:hover:before,
+.pucat05 a:hover:before{
+	background-position: 0 -32px;
+	transition: 0.25s;
+}
+
+/* 条件 */
+.conditions{
+	background: url(../images/absurdidad.png);
+	overflow: auto;
+}
+
+.tabWrap{
+	width: 728;
+	padding: 0;
+	margin: 50px auto 0;
+}	
+	
+.tabMenu {
+	margin:0;
+	width:136px;
+	padding:0;
+	float:left;
+	}
+
+.tabMenu ul li {
+	width: 136px;
+	padding: 16px 0;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	background: #5E8796;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	color: #fff;
+	margin-bottom: 2px;
+	border: 1px solid #EBEBEB;
+	border-right: 0;
+	}
+
+.tabMenu li:hover{
+	opacity: 0.6;
+	transition: 0.3s;
+}
+
+.tabMenu .navhit{
+	background:#fff;
+	color: #5e8796;
+	}
+
+.tabBox{
+	width:592px;
+	float:left; /* rightから変更 */
+	}
+
+.tabBox .tabBoxInr{
+	border: 1px solid #EBEBEB;
+	padding: 24px;
+	background: #fff;
+	border-left: 0;
+	min-height: 320px;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+.tabBox .tabBoxInr .attention{
+	color: #5e8796;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.tabBox .tabBoxInr .attention span{
+	text-align: right;
+	font-weight: normal;
+	color: #666;
+	display: inline-block;
+	float: right;
+	font-size: 12px;
+	vertical-align: top;
+}
+
+/* 自分で追加 */
+.tabContentElementOneThird{
+	display: inline-block;
+	width: 32%;
+	text-align: left;
+	padding: 3px;
+	margin: 0px;
+}
+.tabContentElementHalf{
+	display: inline-block;
+	width: 40%;
+	text-align: left;
+	padding: 3px;
+	margin: 0px;
+}
+
+/* 選択した項目 start */
+.tabSelected{
+	width:272px;
+	padding-left: 22px;
+	float:right;
+}
+
+.tabSelectedInr{
+	border: 1px solid #EBEBEB;
+	padding: 24px;
+	background: #fff;
+	min-height: 320px;
+	border-radius: 8px;
+}
+
+.tabSelected .tabSelectedInr p.attention{
+	color: #5e8796;
+	font-weight: 650; /* boldよりちょい細め */
+	font-size: 15px;
+	padding-bottom: 10px;
+}
+.tabSelected .tabSelectedInr li{
+	font-size: 14px;
+	font-weight: 300;
+	padding: 3px;
+	padding-bottom: 5px;
+}
+
+.tabSelected .tabSelectedInr li span{
+	text-align: center;
+	color: #fff;
+	background: #5e8796;
+	font-size: 15px;
+	width: 15px;
+	float: right;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+/* 選択した項目 end */
+
+
+/* 終わり　*/
+
+/*-------------------------------
+# footer
+-------------------------------*/
+footer{
+	text-align: center;
+}
+
+footer li{
+	display: inline-block;
+	padding: 40px 32px;
+}
+
+footer li a{
+	color: #536c75;
+}
+
+footer li a:hover{
+	color: #ccc;
+}
+
+footer p{
+	background: #5E8796;
+	color: #fff;
+	padding: 16px 0;
+	font-size: 12px;
+}
+
+/*===============================
+tablet.css 
+===============================*/
+@media screen and (max-width: 768px){
+	img{
+		width: 100%;
+	}
+	
+	/*-------------------------------
+	# header
+	-------------------------------*/
+	.headerInr{
+		width: 100%;
+		height: 100px;
+		padding: 0 16px;
+	}
+	
+	/* search */
+	.search{
+		right: 16px;
+	}
+	
+	/* user */
+	.user{
+		right: 16px;
+	}
+	
+	.user li a{
+		padding: 0 24px;
+		font-size: 13px;
+		line-height: 32px;
+	}
+	
+	/* nav */
+	nav ul{
+		width: 100%;
+	}
+	
+	nav li a{
+		padding: 0 24px;
+	}
+	
+	/*-------------------------------
+	# page
+	-------------------------------*/
+	.contentInr{
+		padding-left: 16px;
+		padding-right: 16px;
+		width: 100%;
+	}
+
+	/*-------------------------------
+	## top
+	-------------------------------*/
+	/* 新着・急募*/
+	.newJob,
+	.attentionJob{
+		padding: 0;
+	}
+	
+	.topJobWrap{
+		width: 100%;
+		padding: 16px;
+	}
+	
+	.topJobWrap h1{
+		margin-bottom: 8px;
+	}
+	
+	.topJobWrap .topJobInr{
+		padding: 16px 8px;
+		height: 160px;
+	}
+	
+	.topJobWrap .update{
+
+	}
+	
+	.topJobInr h2{
+		font-size: 15px;
+	}
+
+
+	
+	
+	
+
+
+	
+
+	
+	
+	
+	
+	
+}
+
+/*===============================
+sp.css
+===============================*/
+@media screen and (max-width:640px){
+	/*-------------------------------
+	# common
+	-------------------------------*/
+	
+	,
+	.alignright{
+		float: none;
+	}
+	
+	/*-------------------------------
+	# header
+	-------------------------------*/
+	header{
+		height: 48px;
+	}
+	
+	.headerInr p{
+		display: none;
+	}
+	
+	.headerInr{
+		padding: 0 16px;
+		height: 48px;
+	}
+	
+	.headerInr h1{
+		margin-top: 8px;
+		width: 100%;
+	}
+	
+	.headerInr h1 a {
+		background-size: 160px;
+		height: 46px;
+	}
+	
+	/* user */
+	.user{
+		top: 8px;
+		right: 48px;
+	}
+	
+	.user li{
+		background: #5e8796;
+		border-radius: 8px;
+		box-shadow: none;
+	}
+	
+	/* search */
+	.headerInr .signin,
+	.search{
+		display: none;
+	}
+	
+	/* nav */
+	.nav-item a{
+		display: block;
+	}
+	
+	nav{
+		height: auto;
+		width:100%;
+	}
+	
+	nav ul{
+		width: 100%;
+		margin: 0 auto;
+		font-size: 0px;
+	}
+	
+	nav li a{
+		padding: 0 24px;
+	}
+	
+	nav li .active{
+		background: #536C75;
+		display: block;
+	}
+	
+	.nav-mobile {
+		display:block;
+	}
+
+	.nav-list {
+		display:none;
+	}
+	
+	.nav-item {
+		width:100%;
+		float:none;
+	}
+	
+	.nav-item a {
+		background:#5e8796;
+		padding:0;
+		border-bottom: 1px solid #fff;
+	}
+	
+	.nav-item:last-child a{
+		border-bottom: 0;
+	}
+
+	.nav-active {
+		display:block;
+	}
+	
+	.nav-mobile-open {
+		background: url(../images/navClose.png)center no-repeat;
+		background-size: 20px;
+	}
+	
+	/*-------------------------------
+	# footer
+	-------------------------------*/
+	footer{
+		text-align: center;
+	}
+	
+	footer ul{
+		font-size: 0;
+	}
+	
+	footer li{
+		width: 50%;
+		padding: 16px 8px;
+		font-size: 13px;
+		border-right: #5E8796 1px solid;
+	}
+	
+	footer li:nth-child(2n) {
+		border-right: 0;
+	}
+	
+	footer li:nth-child(-n+2){
+		border-bottom: #5E8796 1px solid;
+		border-top: #5E8796 1px solid;
+	}
+
+	footer li a{
+		color: #5E8796;
+	}
+
+	footer li a:hover{
+		color: #ccc;
+	}
+
+	footer p{
+		background: #5E8796;
+		color: #fff;
+		padding: 16px 0;
+		font-size: 12px;
+	}
+	
+	/*-------------------------------
+	# page
+	-------------------------------*/
+	.slick-prev,
+	.slick-arrow{
+		display: none !important;
+	}
+	
+	.contentInr{
+		padding: 0 0 32px;
+	}
+	
+	.contentInr h1{
+		background: #5e8796;
+		color: #fff;
+		font-size: 16px;
+		line-height: 48px;
+		margin-bottom: 16px;
+		padding-left: 16px;
+	}
+	
+	.contentInr h1:before{
+		content: " ";
+		background: url(../images/h1search-sp.png)no-repeat;
+		width: 20px;
+		height: 20px;
+		background-size: 14px 14px;
+		background-position: 0 6px;
+		display: inline-block;
+	}
+	
+	/* 新着・急募*/
+	.newJob,
+	.attentionJob{
+		padding: 0;
+		width: 100%;
+	}
+	
+	.topJobWrap{
+		width: 100%;
+		padding: 16px;
+	}
+	
+	.topJobWrap h1{
+		margin-bottom: 8px;
+		font-size: 16px;
+	}
+	
+	.topJobWrap .topJobInr{
+		padding: 16px 8px;
+		height: auto;
+	}
+	
+	.topJobInr h2{
+		margin-top: 4px;
+	}
+	
+	.topJobWrap ul{
+		background: #fff;
+		border-radius: 8px;
+	}
+	
+	.topJobWrap li{
+		width: 100%;
+		padding: 0 0 8px;
+		background-color: transparent;
+		border-radius: 0;
+		border-bottom: 1px dotted #ccc;
+	}
+	
+	.topJobWrap li:last-child{
+		border-bottom: 0;
+	}
+	
+	.topJobInr img{
+		width: 32px;
+		height: 32px;
+	}
+	
+	.topJobInr .location{
+		float: left;
+		display: inline;
+	}
+	
+	.topJobInr .remuneration {
+		float: right;
+		display: inline;
+		clear: inherit;
+	}
+	
+	.topJobInr .update{
+		bottom: 8px;
+		right: 8px;
+	}
+	
+	.newJob p,
+	.attentionJob p{
+		float: right;
+	}
+	
+	.pickupCat li{
+		width: 100%;
+	}
+	
+	/* 自分で追加 */
+	.tabBox{
+		width:100%;
+	}
+	
+	
+	.tabContent ul li{
+		display: inline-block;
+		width: 100%;
+		text-align: left;
+		padding: 3px;
+		margin: 0px;
+	}		
+	/* 終わり */
+}
+

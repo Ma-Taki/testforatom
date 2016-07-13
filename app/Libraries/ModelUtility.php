@@ -28,4 +28,17 @@ class ModelUtility
     // 権限：エントリー管理：スキルシートDL
     const AUTH_TYPE_ENTRY_DOWNLOAD = 'entry.download';
 
+    // タグタイプ：通常
+    const TAG_TYPE_NORMAL = 1;
+    // タグタイプ：ピックアップ
+    const TAG_TYPE_PICK_UP = 2;
+    // タグタイプ：特集
+    const TAG_TYPE_FEATURE = 3;
+
+    // マスタータイプ：検索、保有、表示
+    const MASTER_TYPE_ACTUAL_DATA = 1;
+    // マスタータイプ：表示、保有
+    const MASTER_TYPE_DISPLAY_ONLY = 2;
+    // マスタータイプ：検索
+    const MASTER_TYPE_INDEX_ONLY = 3;
 }

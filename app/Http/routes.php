@@ -11,6 +11,13 @@
 |
 */
 
+// フロント：トップ画面
+Route::resource('/', 'FrontController');
+
+
+
+
+
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {
     return view('admin.login');

@@ -19,6 +19,8 @@ class Tr_tag_infos extends Model
      * タグを取得
      */
     public function tag(){
-     return $this->belongsTo('App\Models\Tr_tags');
+     return $this->hasOne('App\Models\Tr_tags',
+                          'id',
+                          'tag_id');
     }
 }
