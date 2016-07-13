@@ -550,7 +550,7 @@ img {
 }
 
 .tabWrap{
-	width: 728;
+	width: 1000px;
 	padding: 0;
 	margin: 50px auto 0;
 }	
@@ -657,7 +657,7 @@ img {
 	padding-bottom: 10px;
 }
 .tabSelected .tabSelectedInr li{
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 300;
 	padding: 3px;
 	padding-bottom: 5px;
@@ -667,13 +667,28 @@ img {
 	text-align: center;
 	color: #fff;
 	background: #5e8796;
-	font-size: 15px;
-	width: 15px;
+	font-size: 12px;
+	width: 12px;
 	float: right;
 	border-radius: 2px;
 	cursor: pointer;
 }
 
+.centerBtn{
+	text-align: center;
+}
+
+.centerBtn button{
+	margin-top: 20px;
+	width: 33.3%;
+	border-radius: 32px;
+	background: #5e8796;
+	color: #fff;
+	line-height: 30px;
+	border-style: none;
+	font-size: 13px
+
+}
 /* 選択した項目 end */
 
 
