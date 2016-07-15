@@ -1,11 +1,11 @@
-// 現在いるページ
+// current page
 $(function(){
 	$('.nav li a').each(function(){
 		var $href = $(this).attr('href');
 		if(location.href.match($href)) {
-		$(this).addClass('active');
+			$(this).parent('li').addClass('active');
 		} else {
-		$(this).removeClass('active');
+			$(this).parent('li').removeClass('active');
 		}
 	});
 });

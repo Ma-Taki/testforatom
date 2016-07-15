@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Libraries\ModelUtility as mdlUtil;
+use App\Libraries\FrontUtility as frntUtil;
 use App\Http\Requests;
 use App\Models\Tr_items;
 use App\Models\Tr_tag_infos;
@@ -74,14 +75,7 @@ class FrontController extends Controller
                                  ->get();
 
         // 報酬
-        $seach_rateList = [
-            '指定しない' => '',
-            '20万円以上' => 20,
-            '30万円以上' => 30,
-            '50万円以上' => 50,
-            '80万円以上' => 80,
-            '90万円以上' => 90,
-        ];
+        $seach_rateList = frntUtil::SEARCH_CONDITION_RATE;
 
         // 業種
         $biz_categories = Ms_biz_categories::where('master_type', '!=', mdlUtil::MASTER_TYPE_INDEX_ONLY)
@@ -98,6 +92,26 @@ class FrontController extends Controller
                                  ->orderBy('sort_order', 'asc')
                                  ->get();
 
+        // 親カテゴリー
+        $parentCategories = Tr_search_categories::where('parent_id', null)
+                                                ->get();
+        // 子カテゴリー
+        $childCategories = Tr_search_categories::where('parent_id', '!=', null)
+                                               ->get();
+
+        $parentList = array();
+        $childWorkList = array();
+        $childList = array();
+        foreach ($parentCategories as $parentCategory) {
+            $parentList += [$parentCategory->id => $parentCategory->name];
+            foreach ($childCategories as $childCategory) {
+                if ($parentCategory->id == $childCategory->parent_id) {
+                    array_push($childWorkList, $childCategory);
+                }
+            }
+            $childList += [$parentCategory->id => $childWorkList];
+            $childWorkList = array();
+        }
 
         return view('front.top', compact('newItemList',
                                          'pickUpItemList',
@@ -106,7 +120,9 @@ class FrontController extends Controller
                                          'seach_rateList',
                                          'biz_categories',
                                          'areas',
-                                         'job_types'));
+                                         'job_types',
+                                         'parentList',
+                                         'childList'));
     }
 
 }

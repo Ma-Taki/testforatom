@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /*-------------------------------
-# reset
+# common reset
 -------------------------------*/
 html,body,div,span,object,iframe,
 h1,h2,h3,h4,h5,h6,p,blockquote,pre,
@@ -12,7 +12,7 @@ b,i,
 dl,dt,dd,ol,ul,li,
 fieldset,form,label,legend,
 table,caption,tbody,tfoot,thead,tr,th,td,
-article,aside,canvas,details,figcaption,figure, 
+article,aside,canvas,details,figcaption,figure,
 footer,header,hgroup,menu,nav,section,summary,
 time,mark,audio,video{
     margin:0;
@@ -72,12 +72,16 @@ a:hover{
 	transition: 0.25s;
 }
 
+img {
+    max-width: 100%;
+}
+
 .fs0{
 	font-size: 0;
 }
 
 /*-------------------------------
-# common
+# pc-1024px~ common
 -------------------------------*/
 .bg{
 	background: url(../images/absurdidad.png)repeat;
@@ -98,33 +102,33 @@ a:hover{
 }
 
 /*-------------------------------
-# header
+# pc-1024px~ header
 -------------------------------*/
 header{
-	height: 100px;
+	height: auto;
 }
 
 .headerInr{
-	width: 1000px;
+	width: 95%;
+    max-width: 1000px;
 	margin: 0 auto;
 	height: 100px;
 	position: relative;
 }
 
-.headerInr h1{
-	width: 276px;
+.headerInr p{
+    width: 75%;
+	line-height: 32px;
+	font-size: 12px;
 }
+
+.headerInr h1{ width: 100%; }
 
 .headerInr h1 a{
 	background: url(../images/logo.png)no-repeat;
 	background-size: 276px 68px;
 	display: block;
 	height: 68px;
-}
-
-.headerInr p{
-	line-height: 32px;
-	font-size: 12px;
 }
 
 /* user */
@@ -144,15 +148,13 @@ header{
 	-moz-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
 }
 
-.user li:hover{
-	background: #4c616a;
-	transition: 0.25s;
+.user li:hover{ background: #4c616a; transition: 0.25s;
 }
 
 .user li a{
 	color: #fff;
-	line-height: 40px;
-	padding: 0 56px;
+	line-height: 32px;
+	padding: 0 20px;
 	font-size: 14px;
 }
 
@@ -181,37 +183,34 @@ header{
 }
 
 /* nav */
-nav{
-	background: #5e8796;
-	height: 48px;
-	text-align: center;
-}
+nav{ width: 100%; background: #5e8796; }
 
 nav ul{
-	width: 1000px;
+    width: 95%;
+    max-width: 1000px;
 	margin: 0 auto;
 	font-size: 0px;
+    text-align: center;
 }
 
 nav li{
-	display: inline;
+    text-align: center;
+    width:16.6%;
+	display: inline-block;
+    vertical-align: middle;
 }
 
 nav li a{
 	color: #fff;
 	font-size: 14px;
 	line-height: 48px;
-	padding: 0 46px;
+	padding: 10px;
 }
 
-nav li a:hover{
-	color: #4c616a;
-}
+nav li a:hover{ color: #4c616a; }
 
-nav li .active{
-	background: #536C75;
-	display: inline-block;
-}
+nav ul .active{ background: #536C75; }
+
 
 /* Mobile Navigation */
 .nav-mobile {
@@ -225,6 +224,11 @@ nav li .active{
 	width:24px;
 	background-size: 24px 24px;
 }
+
+/*-------------------------------
+# tablet- 641px~1024px header
+-------------------------------*/
+
 
 
 /*-------------------------------
@@ -248,7 +252,7 @@ nav li .active{
 .contentInr h1{
 	font-size: 20px;
 	margin-bottom: 24px;
-	
+
 }
 
 .contentInr h1:before{
@@ -288,11 +292,13 @@ nav li .active{
 .slick-dots li button:before {
     color: #fff;
 }
-/*スライド画像の横幅可変*/
-img {
-    max-width: 100%;
-  height: auto;
-}
+
+
+
+
+
+
+
 
 
 /* -- 新着案件・急募案件 -- */
@@ -370,9 +376,9 @@ img {
 }
 
 .topJobWrap p a:before{
-	display: inline-block; 
-	width: 6px; 
-	height: 6px; 
+	display: inline-block;
+	width: 6px;
+	height: 6px;
 	-ms-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg);
@@ -399,8 +405,8 @@ img {
 }
 
 .newJob .topJobWrap p a:before{
-	border-top: 2px solid #5e8796; 
-	border-right: 2px solid #5e8796; 
+	border-top: 2px solid #5e8796;
+	border-right: 2px solid #5e8796;
 }
 
 
@@ -417,8 +423,8 @@ img {
 }
 
 .attentionJob .topJobWrap p a:before{
-	border-top: 2px solid #D46363; 
-	border-right: 2px solid #D46363; 
+	border-top: 2px solid #D46363;
+	border-right: 2px solid #D46363;
 }
 
 /* 特集 */
@@ -553,8 +559,8 @@ img {
 	width: 1000px;
 	padding: 0;
 	margin: 50px auto 0;
-}	
-	
+}
+
 .tabMenu {
 	margin:0;
 	width:136px;
@@ -619,7 +625,8 @@ img {
 	vertical-align: top;
 }
 
-/* 自分で追加 */
+/* y.suzuki start */
+/* 条件から案件を探す start */
 .tabContentElementOneThird{
 	display: inline-block;
 	width: 32%;
@@ -635,11 +642,11 @@ img {
 	margin: 0px;
 }
 
-/* 選択した項目 start */
+
 .tabSelected{
 	width:272px;
 	padding-left: 22px;
-	float:right;
+	float:left;
 }
 
 .tabSelectedInr{
@@ -674,6 +681,7 @@ img {
 	cursor: pointer;
 }
 
+/* 検索ボタン start */
 .centerBtn{
 	text-align: center;
 }
@@ -689,10 +697,134 @@ img {
 	font-size: 13px
 
 }
-/* 選択した項目 end */
+/* 検索ボタン end */
+/* 条件から案件を探す end */
 
+/* カテゴリーから案件を探す */
 
-/* 終わり　*/
+.categorySearch{
+}
+
+.categorySearchInr{
+	width: 728px;
+	margin: 0 auto;
+	float: left;
+}
+
+.categorySearch .categorySearchInr h1{
+	font-size: 20px;
+	margin-bottom: 24px;
+}
+
+.categorySearch .categorySearchInr h1:before{
+	content: " ";
+	background: url(../images/h1search.png)no-repeat;
+	width: 20px;
+	height: 20px;
+	background-size: 16px 16px;
+	background-position: 0 4px;
+	display: inline-block;
+}
+
+.categorySearch .categorySearchInr .parentCategory{
+	font-size: 15px;
+	line-height: normal;
+	font-weight: bold;
+}
+
+.categorySearch .categorySearchInr .parentCategory:before{
+	content: "\a0"; /* 16進数の半角スペース */
+	background: #5e8796;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.categorySearch .categorySearchInr .childCategory{
+	margin-top: 5px;
+	opacity: 0.8;
+}
+
+.categorySearch .categorySearchInr .childCategory a{
+	font-size: 13px;
+}
+
+.categorySearch .categorySearchInr .childCategory span{
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.categorySearch .categorySearchInr .categoryPartitionLine{
+	border-top: 1px dashed #5e8796;
+	margin-top: 7px;
+	margin-bottom: 10px;
+}
+
+/* side info start */
+.sideInfo{
+}
+
+.sideInfoInr{
+	width: 272px;
+	padding-left: 22px;
+	float: right;
+}
+
+.sideInfo .sideInfoInr .sideInfoCstmBnr{
+	width: 100%;
+	border-radius: 7px;
+	background: #E38585;
+	line-height: 30px;
+	margin-bottom: 5px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.sideInfo .sideInfoInr .sideInfoCstmBnr a{
+	color: #fff;
+}
+
+.sideInfo .sideInfoInr .sideInfoCstmBnrMWrd{
+	text-align: center;
+	font-size: 21px;
+}
+
+.sideInfo .sideInfoInr .sideInfoCstmBnrSWrd{
+	text-align: center;
+	font-size: 11px;
+}
+
+.sideInfo .sideInfoInr .sideInfoImgBnr{
+	margin-top: 10px;
+}
+/* side info end */
+
+/* keyword search start */
+.keyWordSearchForm {
+	width: 728px;
+}
+
+.keyWordSearchInputForm {
+	width: 79%;
+	line-height: 30px;
+	font-size: 17px;
+	border: 2px solid #5e8796;
+	border-radius: 5px;
+	vertical-align: middle;
+}
+
+.keyWordSearchSearchBtn {
+	width: 20%;
+	line-height: 30px;
+	font-size: 17px;
+	border-radius: 5px;
+	background: #5e8796;
+	color: #fff;
+	border-style: none;
+	vertical-align: middle;
+}
+
+/* keyword search end */
+/* y.suzuki end */
 
 /*-------------------------------
 # footer
@@ -722,47 +854,68 @@ footer p{
 }
 
 /*===============================
-tablet.css 
+tablet.css
 ===============================*/
-@media screen and (max-width: 768px){
-	img{
-		width: 100%;
-	}
-	
+@media screen and (max-width: 1024px) {
+
+    /*-------------------------------
+	# common
+	-------------------------------*/
+    .onlyVisiPc{ display: none; }
+
 	/*-------------------------------
 	# header
 	-------------------------------*/
 	.headerInr{
-		width: 100%;
+		width: 95%;
 		height: 100px;
 		padding: 0 16px;
 	}
-	
+    .headerInr p{ font-size: 11px; }
+
 	/* search */
 	.search{
 		right: 16px;
 	}
-	
+
 	/* user */
 	.user{
 		right: 16px;
 	}
-	
+
 	.user li a{
 		padding: 0 24px;
 		font-size: 13px;
 		line-height: 32px;
 	}
-	
+
 	/* nav */
 	nav ul{
-		width: 100%;
+        /*
+        display:-webkit-box;
+        display:-moz-box;
+        display:-ms-box;
+        display:-webkit-flexbox;
+        display:-moz-flexbox;
+        display:-ms-flexbox;
+        display:-webkit-flex;
+        display:-moz-flex;
+        display:-ms-flex;
+        display:flex;
+        -webkit-box-lines:multiple;
+        -moz-box-lines:multiple;
+        -webkit-flex-wrap:wrap;
+        -moz-flex-wrap:wrap;
+        -ms-flex-wrap:wrap;
+        */
+        display: flex;
+        flex-wrap:wrap;
 	}
-	
+
 	nav li a{
-		padding: 0 24px;
+        line-height: 28px;
 	}
-	
+
 	/*-------------------------------
 	# page
 	-------------------------------*/
@@ -780,42 +933,86 @@ tablet.css
 	.attentionJob{
 		padding: 0;
 	}
-	
+
 	.topJobWrap{
 		width: 100%;
 		padding: 16px;
 	}
-	
+
 	.topJobWrap h1{
 		margin-bottom: 8px;
 	}
-	
+
 	.topJobWrap .topJobInr{
 		padding: 16px 8px;
 		height: 160px;
 	}
-	
+
 	.topJobWrap .update{
 
 	}
-	
+
 	.topJobInr h2{
 		font-size: 15px;
 	}
 
+	/* 条件から検索 */
+	.tabWrap{
+		width: 100%;
+	}
+	.tabSelected{
+		width: 592px;
+		padding: 0px;
+		padding-top: 10px;
+		margin-left: 136px;
+	}
+	.tabSelectedInr{
+		min-height: 0px;
+	}
 
-	
-	
-	
+	/* カテゴリーから案件を探す */
+	.categorySearchInr{
+		float:none;
+	}
 
+	/* サイドバー width: 728px; */
+	.sideInfo{
 
-	
+	}
+	.sideInfoInr{
+		width: 100%;
+		float: none;
+	}
+	.sideInfo .sideInfoInr .sideInfoCstmBnr{
+		width: 214.188px;
+		height: 71.391px;
+		border-radius: 7px;
+		background: #E38585;
+		line-height: 30px;
+		margin: 15px 2px 0px;
+		float: left;
+	}
 
-	
-	
-	
-	
-	
+	.sideInfo .sideInfoInr .sideInfoCstmBnr a{
+		color: #fff;
+	}
+
+	.sideInfo .sideInfoInr .sideInfoCstmBnrMWrd{
+		text-align: center;
+		font-size: 21px;
+	}
+
+	.sideInfo .sideInfoInr .sideInfoCstmBnrSWrd{
+		text-align: center;
+		font-size: 11px;
+	}
+
+	.sideInfo .sideInfoInr .sideInfoImgBnr{
+		width: 30%;
+		margin-top: 10px;
+		float: left;
+		margin: 15px 2px 0px;
+	}
 }
 
 /*===============================
@@ -825,81 +1022,81 @@ sp.css
 	/*-------------------------------
 	# common
 	-------------------------------*/
-	
+
 	,
 	.alignright{
 		float: none;
 	}
-	
+
 	/*-------------------------------
 	# header
 	-------------------------------*/
 	header{
 		height: 48px;
 	}
-	
+
 	.headerInr p{
 		display: none;
 	}
-	
+
 	.headerInr{
 		padding: 0 16px;
 		height: 48px;
 	}
-	
+
 	.headerInr h1{
 		margin-top: 8px;
 		width: 100%;
 	}
-	
+
 	.headerInr h1 a {
 		background-size: 160px;
 		height: 46px;
 	}
-	
+
 	/* user */
 	.user{
 		top: 8px;
 		right: 48px;
 	}
-	
+
 	.user li{
 		background: #5e8796;
 		border-radius: 8px;
 		box-shadow: none;
 	}
-	
+
 	/* search */
 	.headerInr .signin,
 	.search{
 		display: none;
 	}
-	
+
 	/* nav */
 	.nav-item a{
 		display: block;
 	}
-	
+
 	nav{
 		height: auto;
 		width:100%;
 	}
-	
+
 	nav ul{
 		width: 100%;
 		margin: 0 auto;
 		font-size: 0px;
 	}
-	
+
 	nav li a{
 		padding: 0 24px;
 	}
-	
+
 	nav li .active{
 		background: #536C75;
 		display: block;
 	}
-	
+
 	.nav-mobile {
 		display:block;
 	}
@@ -907,18 +1104,18 @@ sp.css
 	.nav-list {
 		display:none;
 	}
-	
+
 	.nav-item {
 		width:100%;
 		float:none;
 	}
-	
+
 	.nav-item a {
 		background:#5e8796;
 		padding:0;
 		border-bottom: 1px solid #fff;
 	}
-	
+
 	.nav-item:last-child a{
 		border-bottom: 0;
 	}
@@ -926,34 +1123,34 @@ sp.css
 	.nav-active {
 		display:block;
 	}
-	
+
 	.nav-mobile-open {
 		background: url(../images/navClose.png)center no-repeat;
 		background-size: 20px;
 	}
-	
+
 	/*-------------------------------
 	# footer
 	-------------------------------*/
 	footer{
 		text-align: center;
 	}
-	
+
 	footer ul{
 		font-size: 0;
 	}
-	
+
 	footer li{
 		width: 50%;
 		padding: 16px 8px;
 		font-size: 13px;
 		border-right: #5E8796 1px solid;
 	}
-	
+
 	footer li:nth-child(2n) {
 		border-right: 0;
 	}
-	
+
 	footer li:nth-child(-n+2){
 		border-bottom: #5E8796 1px solid;
 		border-top: #5E8796 1px solid;
@@ -973,7 +1170,7 @@ sp.css
 		padding: 16px 0;
 		font-size: 12px;
 	}
-	
+
 	/*-------------------------------
 	# page
 	-------------------------------*/
@@ -981,11 +1178,11 @@ sp.css
 	.slick-arrow{
 		display: none !important;
 	}
-	
+
 	.contentInr{
 		padding: 0 0 32px;
 	}
-	
+
 	.contentInr h1{
 		background: #5e8796;
 		color: #fff;
@@ -994,7 +1191,7 @@ sp.css
 		margin-bottom: 16px;
 		padding-left: 16px;
 	}
-	
+
 	.contentInr h1:before{
 		content: " ";
 		background: url(../images/h1search-sp.png)no-repeat;
@@ -1004,38 +1201,38 @@ sp.css
 		background-position: 0 6px;
 		display: inline-block;
 	}
-	
+
 	/* 新着・急募*/
 	.newJob,
 	.attentionJob{
 		padding: 0;
 		width: 100%;
 	}
-	
+
 	.topJobWrap{
 		width: 100%;
 		padding: 16px;
 	}
-	
+
 	.topJobWrap h1{
 		margin-bottom: 8px;
 		font-size: 16px;
 	}
-	
+
 	.topJobWrap .topJobInr{
 		padding: 16px 8px;
 		height: auto;
 	}
-	
+
 	.topJobInr h2{
 		margin-top: 4px;
 	}
-	
+
 	.topJobWrap ul{
 		background: #fff;
 		border-radius: 8px;
 	}
-	
+
 	.topJobWrap li{
 		width: 100%;
 		padding: 0 0 8px;
@@ -1043,54 +1240,53 @@ sp.css
 		border-radius: 0;
 		border-bottom: 1px dotted #ccc;
 	}
-	
+
 	.topJobWrap li:last-child{
 		border-bottom: 0;
 	}
-	
+
 	.topJobInr img{
 		width: 32px;
 		height: 32px;
 	}
-	
+
 	.topJobInr .location{
 		float: left;
 		display: inline;
 	}
-	
+
 	.topJobInr .remuneration {
 		float: right;
 		display: inline;
 		clear: inherit;
 	}
-	
+
 	.topJobInr .update{
 		bottom: 8px;
 		right: 8px;
 	}
-	
+
 	.newJob p,
 	.attentionJob p{
 		float: right;
 	}
-	
+
 	.pickupCat li{
 		width: 100%;
 	}
-	
+
 	/* 自分で追加 */
 	.tabBox{
 		width:100%;
 	}
-	
-	
+
+
 	.tabContent ul li{
 		display: inline-block;
 		width: 100%;
 		text-align: left;
 		padding: 3px;
 		margin: 0px;
-	}		
+	}
 	/* 終わり */
 }
-
