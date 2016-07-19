@@ -16,8 +16,9 @@ use App\Libraries\ModelUtility as mdlUtil;
         <link rel="stylesheet" type="text/css" href="{{ url('/front/css/slick-theme.css') }}">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/slick.min.js') }}"></script>
+        <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/jquery.tile.js') }}"></script>
         <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/all.js') }}"></script>
-        <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/jQueryAutoHeight.js') }}"></script>
+
     </head>
     <body>
         <header>
@@ -78,9 +79,9 @@ use App\Libraries\ModelUtility as mdlUtil;
                         });
                     </script><!-- /.slider -->
 
-                    <div class="ankenListWrap">
-                        <section class="alignleft newJob">
-                            <div class="topJobWrap alignright">
+                    <div class="topItemList">
+                        <section class="newJob">
+                            <div class="topJobWrap">
                                 <h1 class="alignleft">新着案件</h1>
                                 <p class="alignright"><a href="#">新着案件一覧へ</a></p>
                                 <ul class="fs0 clear">
@@ -101,8 +102,8 @@ use App\Libraries\ModelUtility as mdlUtil;
                             </div>
                         </section><!-- /.newJob -->
 
-                        <section class="alignleft attentionJob">
-                            <div class="topJobWrap alignleft">
+                        <section class="attentionJob">
+                            <div class="topJobWrap">
                                 <h1 class="alignleft">急募案件</h1>
                                 <p class="alignright"><a href="#">急募案件一覧へ</a></p>
                                 <ul class="fs0 clear">
@@ -122,13 +123,7 @@ use App\Libraries\ModelUtility as mdlUtil;
                                 </ul>
                             </div>
                         </section><!-- /.attentionJob -->
-
-                        <script>
-                            $(window).load(function() {
-                                $(".topJobInr").tile();
-                            });
-                        </script><!-- /.topJob -->
-                    </div><!-- /.ankenListWrap -->
+                    </div><!-- /.topItemList -->
 
                     <section class="pickupCat">
                         <div class="contentInr">
@@ -239,7 +234,7 @@ use App\Libraries\ModelUtility as mdlUtil;
                                                 <ul>
 @foreach($job_types as $job_type)
                                                     <li class="tabContentElementHalf">
-                                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="job_type[]" value="{{ $job_type->id }}">{{ $job_type->name }}</label>
+                                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="job_types[]" value="{{ $job_type->id }}">{{ $job_type->name }}</label>
                                                     </li>
 @endforeach
                                                 </ul>
@@ -250,11 +245,40 @@ use App\Libraries\ModelUtility as mdlUtil;
                                     <div class="tabSelected">
                                         <div class="tabSelectedInr">
                                             <p class="attention">選択した項目</p>
-                                            <ul></ul>
+                                            <div id="tagSelectedSkill">
+                                                <p class="tagSelectedName">スキル</p>
+                                                <ul></ul>
+                                                <hr class="partitionLine">
+                                            </div>
+                                            <div id="tagSelectedSysType">
+                                                <p class="tagSelectedName">システム種別</a>
+                                                <ul></ul>
+                                                <hr class="partitionLine">
+                                            </div>
+                                            <div id="tagSelectedRate">
+                                                <p class="tagSelectedName">報酬</a>
+                                                <ul></ul>
+                                                <hr class="partitionLine">
+                                            </div>
+                                            <div id="tagSelectedBizCategory">
+                                                <p class="tagSelectedName">業種</a>
+                                                <ul></ul>
+                                                <hr class="partitionLine">
+                                            </div>
+                                            <div id="tagSelectedArea">
+                                                <p class="tagSelectedName">勤務地</a>
+                                                <ul></ul>
+                                                <hr class="partitionLine">
+                                            </div>
+                                            <div id="tagSelectedPosition">
+                                                <p class="tagSelectedName">ポジション</a>
+                                                <ul></ul>
+                                                <hr class="partitionLine">
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="centerBtn">
+                                    <div class="centerBtn clear">
                                         <button type="submit">検　索</button>
                                     </div>
                                 </form>
@@ -348,17 +372,34 @@ use App\Libraries\ModelUtility as mdlUtil;
                                 $(this).click(function(){
                                     var click_chkBox = $(this);
                                     var chkBox_label = $(this).parent('label').text();
+                                    var selected_cndtns_type;
+                                    switch (click_chkBox.attr('name')) {
+                                        case 'skills[]': selected_cndtns_type = $('#tagSelectedSkill'); break;
+                                        case 'sys_types[]': selected_cndtns_type = $('#tagSelectedSysType'); break;
+                                        case 'biz_categories[]': selected_cndtns_type = $('#tagSelectedBizCategory'); break;
+                                        case 'areas[]': selected_cndtns_type = $('#tagSelectedArea'); break;
+                                        case 'job_types[]': selected_cndtns_type = $('#tagSelectedPosition'); break;
+                                    }
                                     if($(this).prop('checked')){
                                         var addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
                                         addValue.children('span').click(function(){
                                             $(this).parent('li').remove();
+                                            if (selected_cndtns_type.find('li').length <= 0) {
+                                                selected_cndtns_type.hide();
+                                            }
                                             click_chkBox.prop('checked', false);
+
                                         });
-                                        addValue.appendTo('.tabSelected .tabSelectedInr ul');
+                                        selected_cndtns_type.show();
+                                        addValue.appendTo(selected_cndtns_type.children('ul'));
+
                                     } else {
-                                        $('.tabSelected .tabSelectedInr ul li').each(function(){
+                                        selected_cndtns_type.find('li').each(function(){
                                             if($(this).children('span').attr('id') == chkBox_label){
                                                 $(this).remove();
+                                                if (selected_cndtns_type.find('li').length <= 0) {
+                                                    selected_cndtns_type.hide();
+                                                }
                                             }
                                         });
                                     }
@@ -378,13 +419,21 @@ use App\Libraries\ModelUtility as mdlUtil;
                                         $(this).parent('li').remove();
                                         $('.srchCndtns_radio').each(function(){
                                             if($(this).val() == 0){
+                                                $('#tagSelectedRate').hide();
                                                 $(this).prop('checked', true);
                                             }
                                         });
                                     });
-                                    addValue.appendTo('.tabSelected .tabSelectedInr ul');
+                                    $('#tagSelectedRate').show();
+                                    addValue.appendTo('#tagSelectedRate ul');
+                                } else {
+                                    $('#tagSelectedRate').hide();
                                 }
                             });
+                        });
+
+                        jQuery(function($){
+                            $('.topJobInr').tile();
                         });
                     </script>
                 </div>

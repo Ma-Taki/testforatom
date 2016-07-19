@@ -244,7 +244,8 @@ nav ul .active{ background: #536C75; }
 }
 
 .contentInr{
-	width: 1000px;
+	width: 95%;
+    max-width: 1000px;
 	margin: 0 auto;
 	padding: 24px 0 40px;
 }
@@ -293,23 +294,17 @@ nav ul .active{ background: #536C75; }
     color: #fff;
 }
 
-
-
-
-
-
-
-
-
 /* -- 新着案件・急募案件 -- */
 /* common */
-.ankenListWrap{
-	overflow: auto;
+
+.topItemList{
+    margin: 0 auto;
 }
 
 .topJobWrap{
-	width: 500px;
-	padding: 32px 0 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+	padding: 32px  12px;
 }
 
 .topJobWrap h1{
@@ -318,7 +313,7 @@ nav ul .active{ background: #536C75; }
 }
 
 .topJobWrap li{
-	width: 50%;
+	width: 25%;
 	display: inline-block;
 	font-size: 14px;
 	padding: 8px;
@@ -326,18 +321,10 @@ nav ul .active{ background: #536C75; }
 	position: relative;
 }
 
-.topJobWrap li:nth-child(2n+1){
-	padding-left: 0;
-}
-
-.topJobWrap li:nth-child(2n){
-	padding-right: 0;
-}
-
 .topJobWrap .topJobInr{
+    height: auto;
 	background: #fff;
 	border-radius: 8px;
-	overflow: auto;
 	padding: 16px;
 }
 
@@ -394,14 +381,14 @@ nav ul .active{ background: #536C75; }
 
 /* 新着 */
 .newJob{
-	width: 50%;
+	width: 100%;
 	background: #E7EFF3;
-	padding-right: 20px;
 }
 
 .newJob p a,
 .newJob .location{
 	color: #5e8796;
+    font-size: 13px;
 }
 
 .newJob .topJobWrap p a:before{
@@ -412,9 +399,7 @@ nav ul .active{ background: #536C75; }
 
 /* 急募 */
 .attentionJob{
-	width: 50%;
 	background: #F8F3F0;
-	padding-left: 20px;
 }
 
 .attentionJob p a,
@@ -555,21 +540,25 @@ nav ul .active{ background: #536C75; }
 	overflow: auto;
 }
 
+.conditions .contentInr{
+    width: 95%;
+    margin: 0 auto;
+    padding: 24px 0 40px;
+}
+
 .tabWrap{
-	width: 1000px;
-	padding: 0;
-	margin: 50px auto 0;
+    width: 100%;
 }
 
 .tabMenu {
-	margin:0;
-	width:136px;
-	padding:0;
-	float:left;
+    margin:0;
+    width:13.6%;
+    padding:0;
+    float:left;
 	}
 
 .tabMenu ul li {
-	width: 136px;
+	width: 100%;
 	padding: 16px 0;
 	display: block;
 	text-align: center;
@@ -594,8 +583,8 @@ nav ul .active{ background: #536C75; }
 	}
 
 .tabBox{
-	width:592px;
-	float:left; /* rightから変更 */
+    width:59.2%;
+    float:left;
 	}
 
 .tabBox .tabBoxInr{
@@ -644,7 +633,7 @@ nav ul .active{ background: #536C75; }
 
 
 .tabSelected{
-	width:272px;
+	width:27.2%;
 	padding-left: 22px;
 	float:left;
 }
@@ -663,6 +652,21 @@ nav ul .active{ background: #536C75; }
 	font-size: 15px;
 	padding-bottom: 10px;
 }
+
+.tabSelected .tabSelectedInr .tagSelectedName{
+	color: #5e8796;
+    font-size: 12px;
+	font-weight: 300;
+	padding: 3px;
+	padding-bottom: 5px;
+}
+
+.tabSelected .tabSelectedInr .partitionLine{
+	border-top: 1px dashed;
+	margin-top: 7px;
+	margin-bottom: 10px;
+}
+
 .tabSelected .tabSelectedInr li{
 	font-size: 12px;
 	font-weight: 300;
@@ -681,13 +685,20 @@ nav ul .active{ background: #536C75; }
 	cursor: pointer;
 }
 
+#tagSelectedSkill{display: none;}
+#tagSelectedSysType{display: none;}
+#tagSelectedRate{display: none;}
+#tagSelectedBizCategory{display: none;}
+#tagSelectedArea{display: none;}
+#tagSelectedPosition{display: none;}
+
 /* 検索ボタン start */
 .centerBtn{
 	text-align: center;
 }
 
 .centerBtn button{
-	margin-top: 20px;
+	margin: 20px auto 40px;
 	width: 33.3%;
 	border-radius: 32px;
 	background: #5e8796;
@@ -706,7 +717,7 @@ nav ul .active{ background: #536C75; }
 }
 
 .categorySearchInr{
-	width: 728px;
+	width: 72.8%;
 	margin: 0 auto;
 	float: left;
 }
@@ -764,7 +775,7 @@ nav ul .active{ background: #536C75; }
 }
 
 .sideInfoInr{
-	width: 272px;
+	width: 27.2%;
 	padding-left: 22px;
 	float: right;
 }
@@ -777,6 +788,7 @@ nav ul .active{ background: #536C75; }
 	margin-bottom: 5px;
 	padding-top: 15px;
 	padding-bottom: 15px;
+    box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
 }
 
 .sideInfo .sideInfoInr .sideInfoCstmBnr a{
@@ -800,13 +812,13 @@ nav ul .active{ background: #536C75; }
 
 /* keyword search start */
 .keyWordSearchForm {
-	width: 728px;
+	width: 72.8%;
 }
 
 .keyWordSearchInputForm {
 	width: 79%;
 	line-height: 30px;
-	font-size: 17px;
+	font-size: 14px;
 	border: 2px solid #5e8796;
 	border-radius: 5px;
 	vertical-align: middle;
@@ -920,9 +932,8 @@ tablet.css
 	# page
 	-------------------------------*/
 	.contentInr{
-		padding-left: 16px;
-		padding-right: 16px;
-		width: 100%;
+		width: 95%;
+        margin: 0 auto;
 	}
 
 	/*-------------------------------
@@ -941,11 +952,13 @@ tablet.css
 
 	.topJobWrap h1{
 		margin-bottom: 8px;
+        font-size: 16px
 	}
 
 	.topJobWrap .topJobInr{
 		padding: 16px 8px;
-		height: 160px;
+		/* height: 160px; */
+        width: auto;
 	}
 
 	.topJobWrap .update{
@@ -953,18 +966,28 @@ tablet.css
 	}
 
 	.topJobInr h2{
-		font-size: 15px;
+		font-size: 13px;
 	}
 
 	/* 条件から検索 */
 	.tabWrap{
 		width: 100%;
 	}
+
+    .tabMenu {
+        width:20%;
+    }
+
+    .tabBox{
+        width:80%;
+        float:left;
+    }
+
 	.tabSelected{
-		width: 592px;
+		width: 80%;
 		padding: 0px;
 		padding-top: 10px;
-		margin-left: 136px;
+		margin-left: 20%;
 	}
 	.tabSelectedInr{
 		min-height: 0px;
@@ -972,7 +995,6 @@ tablet.css
 
 	/* カテゴリーから案件を探す */
 	.categorySearchInr{
-		float:none;
 	}
 
 	/* サイドバー width: 728px; */
@@ -980,17 +1002,17 @@ tablet.css
 
 	}
 	.sideInfoInr{
-		width: 100%;
-		float: none;
+		width: 27.2%;
+		float: right;
+        padding-left: 0;
 	}
 	.sideInfo .sideInfoInr .sideInfoCstmBnr{
-		width: 214.188px;
-		height: 71.391px;
 		border-radius: 7px;
 		background: #E38585;
 		line-height: 30px;
 		margin: 15px 2px 0px;
 		float: left;
+        height: 70px;
 	}
 
 	.sideInfo .sideInfoInr .sideInfoCstmBnr a{
@@ -1008,7 +1030,7 @@ tablet.css
 	}
 
 	.sideInfo .sideInfoInr .sideInfoImgBnr{
-		width: 30%;
+		width: 100%;
 		margin-top: 10px;
 		float: left;
 		margin: 15px 2px 0px;

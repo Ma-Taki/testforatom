@@ -44,7 +44,7 @@ class FrontController extends Controller
                                ->where('service_end_date', '>=', $today)
                                ->orderBy('service_start_date', 'desc')
                                ->orderBy('registration_date', 'desc')
-                               ->limit(10)
+                               ->limit(4)
                                ->get();
 
         // ピックアップ案件を取得
@@ -60,7 +60,7 @@ class FrontController extends Controller
                                    ->where('tags.term', $pickUpTag->tag->term)
                                    ->orderBy('service_start_date', 'desc')
                                    ->select('items.*')
-                                   ->limit(10) // 現行は多分表示の関係で7件 新着に合わせて10件にした
+                                   ->limit(4)
                                    ->get();
         }
 
