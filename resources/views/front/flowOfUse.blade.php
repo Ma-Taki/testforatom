@@ -90,7 +90,8 @@ use App\Libraries\ModelUtility as mdlUtil;
                         </li>
                     </ul>
 
-                    <ul class="clear flowWords">
+                    <div class="clear"><!-- 回りこみ解除 --></div>
+                    <ul class="flowWords">
                         <li class="flowWordTitle"><h2>Step 1</h2><h2>会員登録</h2></li>
                         <li class="flowWordDetail"><p>まずはじめに、会員登録ページから申し込みをして下さい。</p></li>
                     </ul>
@@ -152,7 +153,12 @@ use App\Libraries\ModelUtility as mdlUtil;
                 <!-- END CONTENT-LEFT -->
 
                 <div class="content-right">
-                    @include('front.common.sideInfo')
+                    <div class="invisible-sp">
+                        @include('front.common.sideInfo')
+                    </div>
+                    <div class="invisible-pc invisible-tab">
+                        @include('front.common.sideInfo_sp')
+                    </div>
                 </div>
                 <div class="clear"></div>
                 <!-- END CONTENT-RIGHT -->

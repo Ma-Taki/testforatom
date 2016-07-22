@@ -74,6 +74,8 @@ img {
     max-width: 100%;
 }
 
+p{ font-size: 1.4rem; }
+
 
 /*-------------------------------
 ## ご利用の流れ
@@ -98,13 +100,13 @@ img {
     float: left;
 }
 
-.content-left h1{ font-size: 2rem; }
-.content-left h2{ font-size: 1.1rem; }
+.content-left h1{ font-size: 2.5rem; }
+.content-left h2{ font-size: 1.5rem; }
 .content-left h3{ font-size: 1rem; }
-.content-left h4{ font-size: 0.83rem; }
+.content-left h4{ font-size: 1.2rem; }
 
 .content-left p.detail{
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     color: #5e8796;
     padding-top: 20px;
 }
@@ -114,7 +116,7 @@ img {
     margin-top: 8px;
 }
 
-.flowImages{ padding-top: 40px;}
+.flowImages{ padding-top: 6%; }
 
 .flowImage{
     width: 12.5%;
@@ -126,12 +128,11 @@ img {
 .flowWords{
     width: 100%;
     display: table;
-    padding-top: 30px;
+    margin-top: 4%;
 }
 .flowWords li{
     display: table-cell;
-    border: 1px solid #EBEBEB;
-    padding: 20px 0px;
+    padding: 2.5%;
     vertical-align: middle;
 }
 
@@ -149,6 +150,7 @@ img {
 }
 
 .flowWordDetail{
+    border: 1px solid #5e8796;
     width: 80%;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -228,7 +230,7 @@ li.customBanner{
 @media screen and (min-width: 1025px) {
 
     html{
-        font-size: 100%; /* 16px */
+        font-size: 62.5%; /* 10px */
     }
 
     /*  invisible element */
@@ -1199,34 +1201,64 @@ sp.css
     /*-------------------------------
 	# common
 	-------------------------------*/
-
-    /* default font-size */
-    html{ font-size: 62.5%; /* 10px */ }
-    /*p{ font-size: 1.3rem; }*/
-
-    .invisible-sp{ display: none; }
-
-    .content_{
-        padding: 10% 5% 10% 5%;
+    html{
+        /* base font-size(10px) */
+        font-size: 62.5%;
     }
+    .invisible-sp{ display: none; }
+    .content_{ padding: 10% 5% 5% 5%; }
 
     /*-------------------------------
     ## ご利用の流れ
     -------------------------------*/
-    .content-left{
-        width: 100%;
-    }
+    .content-left{ width: 100%; }
 
     .content-right{
         width: 100%;
         float: left;
     }
 
+    .flowImage{ width: 25%; }
+    .flowImage ul{ margin-top: 10%; }
+    .flowImage li h4{ padding: 10% 0%; }
+
+    .flowWords ul{
+        display: block;
+    }
+
+    .flowWords li{
+        display: block;
+        line-height: normal;
+    }
+
+    .flowWordTitle{
+        width: 100%;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .flowWordTitle h2{
+        display: inline;
+    }
+
+    .flowWordTitle h2:nth-child(2):before {
+        content: "\a0\a0\a0"
+    }
+
+    .flowWordDetail{
+        width: 100%;
+        border-radius: 0px 0px 10px 10px;
+    }
 
     /*-------------------------------
     ## サイドバー
     -------------------------------*/
+    .sideInfo{ margin-top: 15%; }
     .sideInfo ul{ margin-left: 0; }
+    .sideInfo li{
+        width: 48%;
+        float: left;
+        margin: 1%;
+    }
 
 
 
@@ -1344,12 +1376,9 @@ sp.css
 
     .bg{ background: #5E8796; }
 
-    footer{
-        margin-top: 270px;
-    }
+    footer{ margin-top: 0; }
 
 	footer ul{
-        margin-top: 30px;
 		letter-spacing: -1em; /* inline-blockの隙間対策 */
 	}
 
