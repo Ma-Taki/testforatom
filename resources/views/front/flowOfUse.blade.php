@@ -30,7 +30,7 @@ use App\Libraries\ModelUtility as mdlUtil;
                 <div class="content-left">
                     <h1 class="title">ご利用の流れ</h1>
                     <hr>
-                    <h2 class="detail">エンジニアルートでは、案件のプロジェクト終了後までエンジニアの皆様を全力でサポート致します。</h1>
+                    <p class="detail">エンジニアルートでは、案件のプロジェクト終了後までエンジニアの皆様を全力でサポート致します。</p>
                     <ul class="flowImages">
                         <li class="flowImage">
                             <ul>
@@ -92,59 +92,59 @@ use App\Libraries\ModelUtility as mdlUtil;
 
                     <ul class="clear flowWords">
                         <li class="flowWordTitle"><h2>Step 1</h2><h2>会員登録</h2></li>
-                        <li class="flowWordDetail"><h3>まずはじめに、会員登録ページから申し込みをして下さい。</h3></li>
+                        <li class="flowWordDetail"><p>まずはじめに、会員登録ページから申し込みをして下さい。</p></li>
                     </ul>
 
                     <ul class="flowWords">
                         <li class="flowWordTitle"><h2>Step 2</h2><h2>案件を探す</h2></li>
                         <li class="flowWordDetail">
-                            <h3>エンジニアルートでは、キーワード検索だけでなく、案件の特徴やスキル／単価等の細かい条件検索で、より希望に近い案件を探し出すことができます。</h3>
-                            <h3>また個別に案件を紹介させていただくことも可能ですので、お気軽にお問い合わせ下さい！</h3>
+                            <p>エンジニアルートでは、キーワード検索だけでなく、案件の特徴やスキル／単価等の細かい条件検索で、より希望に近い案件を探し出すことができます。</p>
+                            <p>また個別に案件を紹介させていただくことも可能ですので、お気軽にお問い合わせ下さい！</p>
                         </li>
                     </ul>
 
                     <ul class="flowWords">
                         <li class="flowWordTitle"><h2>Step 3</h2><h2>案件にエントリー</h2></li>
                         <li class="flowWordDetail">
-                            <h3>気になる案件が見つかりましたら、早速エントリーしましょう！</h3>
-                            <h3>エンジニアルートでは、Webから簡単にエントリーできます。また、アップロードによるスキルシートの提出が可能です。</h3>
+                            <p>気になる案件が見つかりましたら、早速エントリーしましょう！</p>
+                            <p>エンジニアルートでは、Webから簡単にエントリーできます。また、アップロードによるスキルシートの提出が可能です。</p>
                         </li>
                     </ul>
 
                     <ul class="flowWords">
                         <li class="flowWordTitle"><h2>Step 4</h2><h2>担当とのカウンセリング</h2></li>
                         <li class="flowWordDetail">
-                            <h3>今までのご経験やご要望をお伺いし、キャリアプランのお手伝いをさせて頂きます。</h3>
-                            <h3>Web上では掲載していない未公開案件などもご紹介させていただきます。フリーランスとして初めて就業される方もお気軽にご相談ください。</h3>
+                            <p>今までのご経験やご要望をお伺いし、キャリアプランのお手伝いをさせて頂きます。</p>
+                            <p>Web上では掲載していない未公開案件などもご紹介させていただきます。フリーランスとして初めて就業される方もお気軽にご相談ください。</p>
                         </li>
                     </ul>
 
                     <ul class="flowWords">
                         <li class="flowWordTitle"><h2>Step 5</h2><h2>クライアントとの面談</h2></li>
                         <li class="flowWordDetail">
-                            <h3>ご希望の案件が見つかり次第、クライアント様にご提案させていただき、面談を調整致します。</h3>
+                            <p>ご希望の案件が見つかり次第、クライアント様にご提案させていただき、面談を調整致します。</p>
                         </li>
                     </ul>
 
                     <ul class="flowWords">
                         <li class="flowWordTitle"><h2>Step 6</h2><h2>条件の調整</h2></li>
                         <li class="flowWordDetail">
-                            <h3>事前に頂いている条件・業務内容・就業時期などで、問題がないか最終確認をいたします。</h3>
+                            <p>事前に頂いている条件・業務内容・就業時期などで、問題がないか最終確認をいたします。</p>
                         </li>
                     </ul>
 
                     <ul class="flowWords">
                         <li class="flowWordTitle"><h2>Step 7</h2><h2>就業開始</h2></li>
                         <li class="flowWordDetail">
-                            <h3>就業後も、担当コンサルタントが随時フォローいたします。</h3>
-                            <h3>何かありましたらお気軽にご相談ください。</h3>
+                            <p>就業後も、担当コンサルタントが随時フォローいたします。</p>
+                            <p>何かありましたらお気軽にご相談ください。</p>
                         </li>
                     </ul>
 
                     <ul class="flowWords">
                         <li class="flowWordTitle"><h2>Step 8</h2><h2>案件の終了</h2></li>
                         <li class="flowWordDetail">
-                            <h3>案件（プロジェクト）の終了の1ヶ月前（現プロジェクト期間）から次の案件のご相談を伺います。「期間を空けたくない」「少しお休みしたい」などのご希望に沿って再度お探しいたします。</h3>
+                            <p>案件（プロジェクト）の終了の1ヶ月前（現プロジェクト期間）から次の案件のご相談を伺います。「期間を空けたくない」「少しお休みしたい」などのご希望に沿って再度お探しいたします。</p>
                         </li>
                     </ul>
 

@@ -25,16 +25,14 @@ time,mark,audio,video{
 }
 
 html{
-	font-size: 62.5%;
+	font-size: 62.5%; /* 10px */
 }
 
 body{
 	line-height:1;
 	color: #333;
     font-family:Avenir , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
-    -webkit-text-size-adjust: 100%;
-	font-size: 13px;
-	font-size: 1.3rem;
+    -webkit-text-size-adjust: 100%; /* ブラウザの自動調整を行わない */
 }
 
 input{padding:0;}
@@ -100,16 +98,16 @@ img {
     float: left;
 }
 
-.content-left h1{ font-size: 30px; }
-.content-left h2{ font-size: 20px; }
-.content-left h3{ font-size: 16px; }
-.content-left h4{ font-size: 13px; }
+.content-left h1{ font-size: 2rem; }
+.content-left h2{ font-size: 1.1rem; }
+.content-left h3{ font-size: 1rem; }
+.content-left h4{ font-size: 0.83rem; }
 
-.content-left h2.detail{
+.content-left p.detail{
+    font-size: 1.2rem;
     color: #5e8796;
     padding-top: 20px;
 }
-
 
 .content-left hr{
     border: 2px solid #5e8796;
@@ -228,6 +226,10 @@ li.customBanner{
 # pc 1025px~
 -------------------------------*/
 @media screen and (min-width: 1025px) {
+
+    html{
+        font-size: 100%; /* 16px */
+    }
 
     /*  invisible element */
     .invisible-pc{ display: none; }
@@ -1193,20 +1195,47 @@ tablet.css
 sp.css
 ===============================*/
 @media screen and (max-width:640px){
-	/*-------------------------------
+
+    /*-------------------------------
 	# common
 	-------------------------------*/
 
-    .visible-sp{}
+    /* default font-size */
+    html{ font-size: 62.5%; /* 10px */ }
+    /*p{ font-size: 1.3rem; }*/
+
     .invisible-sp{ display: none; }
-/*
-	.alignright{
-		/float: none;
-	}
-*/
-    /* slider */
-    #slider{
+
+    .content_{
+        padding: 10% 5% 10% 5%;
     }
+
+    /*-------------------------------
+    ## ご利用の流れ
+    -------------------------------*/
+    .content-left{
+        width: 100%;
+    }
+
+    .content-right{
+        width: 100%;
+        float: left;
+    }
+
+
+    /*-------------------------------
+    ## サイドバー
+    -------------------------------*/
+    .sideInfo ul{ margin-left: 0; }
+
+
+
+
+
+
+
+
+
 
 	/*-------------------------------
 	# header
