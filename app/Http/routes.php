@@ -14,8 +14,10 @@
 // フロント：トップ画面
 Route::resource('/', 'FrontController');
 
-
-
+// フロント：ご利用の流れ画面
+Route::get('/front/flow', function () {
+    return view('front.flowOfUse');
+});
 
 
 // 管理画面：ログイン画面

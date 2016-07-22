@@ -44,7 +44,7 @@ class FrontController extends Controller
                                ->where('service_end_date', '>=', $today)
                                ->orderBy('service_start_date', 'desc')
                                ->orderBy('registration_date', 'desc')
-                               ->limit(4)
+                               ->limit(frntUtil::NEW_ITEM_MAX_RESULT)
                                ->get();
 
         // ピックアップ案件を取得
@@ -60,7 +60,7 @@ class FrontController extends Controller
                                    ->where('tags.term', $pickUpTag->tag->term)
                                    ->orderBy('service_start_date', 'desc')
                                    ->select('items.*')
-                                   ->limit(4)
+                                   ->limit(frntUtil::PICK_UP_ITEM_MAX_RESULT)
                                    ->get();
         }
 

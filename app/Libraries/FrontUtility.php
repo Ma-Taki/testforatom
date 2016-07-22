@@ -16,5 +16,11 @@ class FrontUtility
         '90万円以上' => 90,
     ];
 
+    // トップページに表示する新着案件数
+    const NEW_ITEM_MAX_RESULT = 4;
+
+    // トップページに表示する急募案件数
+    const PICK_UP_ITEM_MAX_RESULT = 4;
+
 
 }

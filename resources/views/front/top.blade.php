@@ -17,28 +17,11 @@ use App\Libraries\ModelUtility as mdlUtil;
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/slick.min.js') }}"></script>
         <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/jquery.tile.js') }}"></script>
-        <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/all.js') }}"></script>
-
     </head>
     <body>
-        <header>
-            <div class="headerInr">
-                <p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト<span class="onlyVisiPc">「エンジニアルート」</span></p>
-                <div class="user">
-                    <ul>
-                        <li><a href="#" class="signin">新規登録</a></li>
-                        <li><a href="#">ログイン</a></li>
-                    </ul>
-                </div>
-                <h1 class="alignleft"><a href="#" title="エンジニアルート"></a></h1>
-                <div class="search">
-                    <form action="#" method="post">
-                        <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
-                        <input type="submit" name="submit" value="検索" class="searchBtn">
-                    </form>
-                </div><!-- /.search -->
-            </div><!-- /.headerInr -->
-        </header>
+        <!-- header -->
+        @include('front.common.header')
+
         <div class="wrapper">
             <div class="main">
                 <nav class="nav">
@@ -53,37 +36,61 @@ use App\Libraries\ModelUtility as mdlUtil;
                 </nav><!-- /Nav -->
 
                 <div class="content">
-                    <ul class="slider center-item">
-                        <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
-                        <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
-                        <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
-                        <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
-                    </ul>
+                    <div id="slider">
+                        <ul class="slider slider-item">
+                            <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
+                            <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
+                            <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
+                            <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
+                        </ul>
+                    </div>
                     <script>
-                        $(function() {
-                            $('.center-item').slick({
-                                arrows: true,
-                                infinite: true,
-                                dots:false,
-                                slidesToShow: 1,
-                                centerMode: true, //要素を中央寄せ
-                                centerPadding:'150px', //両サイドの見えている部分のサイズ
-                                autoplay:true, //自動再生
-                                responsive: [{
-                                    breakpoint: 480,
-                                    settings: {
-                                        centerMode: false,
-                                    }
-                                }]
-                            });
+                        jQuery(function() {
+                            if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
+                                $('.slider-item').slick({
+                                    arrows: false,            // 前へ/次へナビ
+                                    infinite: true,           // 無限ループ
+                                    dots:false,               // カレントナビ(ドット)
+                                    slidesToShow: 1,          // 見えているスライド数
+                                    centerMode: true,         // 中央寄せ
+                                    centerPadding:'20px',     // 両サイドの見えている部分のサイズ
+                                    autoplay:true,            // 自動再生
+                                });
+                            } else {
+                                $('.slider-item').slick({
+                                    arrows: true,
+                                    infinite: true,
+                                    dots:true,
+                                    slidesToShow: 1,
+                                    centerMode: true,
+                                    centerPadding:'150px',
+                                    autoplay:true,
+                                });
+                            };
                         });
                     </script><!-- /.slider -->
 
-                    <div class="topItemList">
+                    <section class="keyWordSearch clear invisible-pc invisible-tab">
+                        <div class="alignCenter">
+                            <div class="keyWordSearchForm">
+                                <form action="#" method="post">
+                                    <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+                                    <input type="submit" name="submit" value="検索" class="searchBtn">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="sideInfoInr invisible-pc invisible-tab ">
+                            <div class="alignCenter">
+                                <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
+                            </div>
+                        </div>
+                    </section><!-- /.keyWordSearch for sp -->
+
+                    <div class="topItemList clear">
                         <section class="newJob">
                             <div class="topJobWrap">
                                 <h1 class="alignleft">新着案件</h1>
-                                <p class="alignright"><a href="#">新着案件一覧へ</a></p>
+                                <p class="alignright invisible-sp"><a href="#">新着案件一覧へ</a></p>
                                 <ul class="fs0 clear">
 @foreach($newItemList as $newItem)
                                     <li>
@@ -93,19 +100,22 @@ use App\Libraries\ModelUtility as mdlUtil;
                                                 <h2>{{ $newItem->name }}</h2>
                                                 <p class="location">{{ $newItem->area_detail }}</p>
                                                 <p class="remuneration">{{ $newItem->rate_detail }}</p>
-                                                <p class="update">{{ $newItem->service_start_date->format('m/d') }}</p>
+                                                <p class="update">{{ $newItem->service_start_date->format('Y/m/d') }}</p>
                                             </div>
                                         </a>
                                     </li>
 @endforeach
                                 </ul>
+                                <div class="newItemListLink clear invisible-pc invisible-tab">
+                                    <a href="#">新着案件一覧へ</a>
+                                </div>
                             </div>
                         </section><!-- /.newJob -->
 
                         <section class="attentionJob">
                             <div class="topJobWrap">
                                 <h1 class="alignleft">急募案件</h1>
-                                <p class="alignright"><a href="#">急募案件一覧へ</a></p>
+                                <p class="alignright invisible-sp"><a href="#">急募案件一覧へ</a></p>
                                 <ul class="fs0 clear">
 @foreach($pickUpItemList as $pickUpItem)
                                     <li>
@@ -115,12 +125,15 @@ use App\Libraries\ModelUtility as mdlUtil;
                                                 <h2>{{ $pickUpItem->name }}</h2>
                                                 <p class="location">{{ $pickUpItem->area_detail }}</p>
                                                 <p class="remuneration">{{ $pickUpItem->rate_detail }}</p>
-                                                <p class="update">{{ $pickUpItem->service_start_date->format('m/d') }}</p>
+                                                <p class="update">{{ $pickUpItem->service_start_date->format('Y/m/d') }}</p>
                                             </div>
                                         </a>
                                     </li>
 @endforeach
                                 </ul>
+                                <div class="wantedItemListLink clear invisible-pc invisible-tab">
+                                    <a href="#">急募案件一覧へ</a>
+                                </div>
                             </div>
                         </section><!-- /.attentionJob -->
                     </div><!-- /.topItemList -->
@@ -138,7 +151,7 @@ use App\Libraries\ModelUtility as mdlUtil;
                         </div>
                     </section><!-- /.pickupCat -->
 
-                    <section class="conditions">
+                    <section class="conditions invisible-sp">
                         <div class="contentInr">
                             <h1>条件から案件を探す</h1>
                             <div class="tabWrap alignleft">
@@ -287,7 +300,7 @@ use App\Libraries\ModelUtility as mdlUtil;
                     </section><!-- /.conditions -->
 
                     <div class="contentInr">
-                        <section class="categorySearch">
+                        <section class="categorySearch invisible-sp">
                             <div class="categorySearchInr">
                                 <h1>カテゴリーから案件を探す</h1>
                                 <div class="categorySearchContent">
@@ -305,19 +318,52 @@ use App\Libraries\ModelUtility as mdlUtil;
 @endforeach
                                 </div>
                             </div>
-                        </section><!-- /.categorySearch -->
+                        </section><!-- /.categorySearch for pc,tablet-->
+
+                        <section class="categorySearch invisible-pc invisible-tab">
+                            <div class="categorySearchInr">
+                                <h1>カテゴリーから案件を探す</h1>
+                                <div class="categorySearchContent">
+                                    <ul>
+@foreach($parentList as $parentKey => $parent)
+                                        <li>
+                                            <ul>
+                                                <a href="/item/search?category_id={{ $parentKey }}">
+                                                    <li class="parentCategory">{{ $parent }}<span class="alignright">+</span></li>
+                                                </a>
+@foreach($childList[$parentKey] as $child)
+                                                <a href="/item/search?category_id={{ $child->id }}">
+                                                    <li class="childCategory">{{ $child->name }}<span class="alignright">></span></li>
+                                                </a>
+@endforeach
+                                            </ul>
+                                        </li>
+@endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </section><!-- /.categorySearch for sp-->
+
+                        <section class="keyWordSearch clear invisible-pc invisible-tab">
+                            <div class="alignCenter">
+                                <div class="keyWordSearchForm">
+                                    <form action="#" method="post">
+                                        <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+                                        <input type="submit" name="submit" value="検索" class="searchBtn">
+                                    </form>
+                                </div>
+                            </div>
+                        </section><!-- /.keyWordSearch for sp -->
 
                         <section class="sideInfo">
                             <div class="sideInfoInr">
-                                <ul>
-                                    <li>
-                                        <div class="sideInfoCstmBnr">
-                                            <a href="#">
-                                                <div class="sideInfoCstmBnrMWrd">無料会員登録</div>
-                                                <div class="sideInfoCstmBnrSWrd">案件紹介をご希望の方はこちら</div>
-                                            </a>
-                                        </div>
-                                    </li>
+                                <div class="alignCenter">
+                                    <p>無料会員登録
+                                        <span class="cstmBnrSubWord invisible-sp"></br>案件紹介をご希望の方はこちら</span>
+                                        <span class="alignright invisible-pc invisible-tab">></span>
+                                    </p>
+                                </div>
+                                <ul class="sideInfoBnr">
                                     <li>
                                         <div class="sideInfoImgBnr">
                                             <a href="#"><img src="/front/images/sBnr01.png"></a>
@@ -343,7 +389,7 @@ use App\Libraries\ModelUtility as mdlUtil;
                         </section><!-- /.sideInfo -->
                     </div><!-- category & sideInfo -->
 
-                    <section class="keyWordSearch clear">
+                    <section class="keyWordSearch clear invisible-sp">
                         <div class="contentInr">
                             <h1>キーワードから案件を探す</h1>
                             <div class="">
@@ -353,101 +399,13 @@ use App\Libraries\ModelUtility as mdlUtil;
                                 </form>
                             </div>
                         </div>
-                    </section>
-                    <script>
-                        jQuery(function($){
-                            var tabmenu = $('.tabMenu ul li');
-                            $('.tabBox .tabBoxInr').hide().eq(0).show();
-                            tabmenu.eq(0).addClass('navhit');
-                            tabmenu.click(function () {
-                                var no = $(this).parent().children().index(this);
-                                tabmenu.removeClass('navhit');
-                                $(this).addClass('navhit');
-                                $('.tabBox .tabBoxInr').hide().eq(no).show();
-                            });
-                        });
+                    </section><!-- /.keyWordSearch for pc,tablet -->
 
-                        jQuery(function($){
-                            $('.srchCndtns_chkBx').each(function(){
-                                $(this).click(function(){
-                                    var click_chkBox = $(this);
-                                    var chkBox_label = $(this).parent('label').text();
-                                    var selected_cndtns_type;
-                                    switch (click_chkBox.attr('name')) {
-                                        case 'skills[]': selected_cndtns_type = $('#tagSelectedSkill'); break;
-                                        case 'sys_types[]': selected_cndtns_type = $('#tagSelectedSysType'); break;
-                                        case 'biz_categories[]': selected_cndtns_type = $('#tagSelectedBizCategory'); break;
-                                        case 'areas[]': selected_cndtns_type = $('#tagSelectedArea'); break;
-                                        case 'job_types[]': selected_cndtns_type = $('#tagSelectedPosition'); break;
-                                    }
-                                    if($(this).prop('checked')){
-                                        var addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
-                                        addValue.children('span').click(function(){
-                                            $(this).parent('li').remove();
-                                            if (selected_cndtns_type.find('li').length <= 0) {
-                                                selected_cndtns_type.hide();
-                                            }
-                                            click_chkBox.prop('checked', false);
-
-                                        });
-                                        selected_cndtns_type.show();
-                                        addValue.appendTo(selected_cndtns_type.children('ul'));
-
-                                    } else {
-                                        selected_cndtns_type.find('li').each(function(){
-                                            if($(this).children('span').attr('id') == chkBox_label){
-                                                $(this).remove();
-                                                if (selected_cndtns_type.find('li').length <= 0) {
-                                                    selected_cndtns_type.hide();
-                                                }
-                                            }
-                                        });
-                                    }
-                                });
-                            });
-                        });
-
-                        jQuery(function($){
-                            $('.srchCndtns_radio').change(function (){
-                                if ($('#cndtns_rate')[0]) {
-                                    $('#cndtns_rate').parent('li').remove();
-                                }
-                                if ($(this).val() != 0) {
-                                    var addText = $(this).parent('label').text();
-                                    var addValue = $('<li>' + addText + '<span id="cndtns_rate" >×</span></li>');
-                                    addValue.children('span').click(function(){
-                                        $(this).parent('li').remove();
-                                        $('.srchCndtns_radio').each(function(){
-                                            if($(this).val() == 0){
-                                                $('#tagSelectedRate').hide();
-                                                $(this).prop('checked', true);
-                                            }
-                                        });
-                                    });
-                                    $('#tagSelectedRate').show();
-                                    addValue.appendTo('#tagSelectedRate ul');
-                                } else {
-                                    $('#tagSelectedRate').hide();
-                                }
-                            });
-                        });
-
-                        jQuery(function($){
-                            $('.topJobInr').tile();
-                        });
-                    </script>
                 </div>
             </div>
         </div>
-
-        <footer class="bg clear">
-            <ul>
-                <li><a href="#">運営会社</a></li>
-                <li><a href="#">プライバシーポリシー</a></li>
-                <li><a href="#">利用規約</a></li>
-                <li><a href="#">お問い合わせ</a></li>
-            </ul>
-            <p>&copy; SolidSeed Co.,Ltd.</p>
-        </footer>
+        <!-- footer -->
+        @include('front.common.footer')
+        <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/all.js') }}"></script>
     </body>
 </html>
