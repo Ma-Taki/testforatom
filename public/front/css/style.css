@@ -86,9 +86,7 @@ p{ font-size: 1.4rem; }
     margin:0 auto;
 }
 
-.content_{
-    padding-top: 5%;
-}
+.content_{ margin-top: 5%; }
 
 .content-left{
     width: 75%;
@@ -1019,17 +1017,20 @@ tablet.css
 ===============================*/
 @media screen and (max-width: 1024px) {
 
+    /*-------------------------------
+	# common
+    -------------------------------*/
     @media screen and (min-width: 641px) {
         /*  invisible element */
         .invisible-tab{ display: none; }
     }
 
-    /*-------------------------------
-	# common
-	-------------------------------*/
+    .wrap{
+        width:95%;
+        margin:0 auto;
+    }
+
     .onlyVisiPc{ display: none; }
-
-
 
 	/*-------------------------------
 	# header
@@ -1206,7 +1207,7 @@ sp.css
         font-size: 62.5%;
     }
     .invisible-sp{ display: none; }
-    .content_{ padding: 10% 5% 5% 5%; }
+    .content_{ margin: 10% 5% 5% 5%; }
 
     /*-------------------------------
     ## ご利用の流れ
