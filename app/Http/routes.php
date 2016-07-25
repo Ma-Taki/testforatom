@@ -29,7 +29,10 @@ Route::get('/front/privacy', function () {
     return view('front.privacyPolicy');
 });
 
-
+// フロント：利用規約画面
+Route::get('/front/terms', function () {
+    return view('front.terms');
+});
 
 
 
