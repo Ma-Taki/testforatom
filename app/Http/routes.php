@@ -34,13 +34,10 @@ Route::get('/front/terms', function () {
     return view('front.terms');
 });
 
-
-
-
-
-
-
-
+// フロント：エンジニアルートとは画面
+Route::get('/front/about', function () {
+    return view('front.about');
+});
 
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {
