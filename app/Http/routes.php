@@ -19,6 +19,25 @@ Route::get('/front/flow', function () {
     return view('front.flowOfUse');
 });
 
+// フロント：Q&A画面
+Route::get('/front/question', function () {
+    return view('front.question');
+});
+
+// フロント：プライバシーポリシー画面
+Route::get('/front/privacy', function () {
+    return view('front.privacyPolicy');
+});
+
+
+
+
+
+
+
+
+
+
 
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {

@@ -1,3 +1,33 @@
+
+// .qaMark resize
+jQuery(function($){
+	$(".qaMark").each(function (){
+		$(this).height($(this).width());
+	});
+	$( window ).resize(function(){
+		$(".qaMark").each(function (){
+			$(this).height($(this).width());
+		});
+	});
+});
+
+// Q&A
+jQuery(function($){
+	$('.anserElement').hide();
+	$('span.clickText').each(function (){
+		$(this).click(function (){
+			var anser = $(this).parents('.question').find('.anserElement');
+			var openMark = $(this).parents('.questionElement').find('.questionOpen')
+			anser.toggle();
+			if (anser.is(':visible')) {
+				openMark.text('-');
+			} else {
+				openMark.text('+');
+			}
+		});
+	})
+});
+
 jQuery(function($){
 	$('.topJobInr').tile();
 });

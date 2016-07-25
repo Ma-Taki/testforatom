@@ -74,7 +74,20 @@ img {
     max-width: 100%;
 }
 
-p{ font-size: 1.4rem; }
+p{
+    font-size: 1.4rem;
+    line-height: normal;
+}
+
+.cycle{
+    display: table-cell;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: #5e8796;
+    text-align: center;
+    vertical-align: middle;
+}
 
 
 /*-------------------------------
@@ -98,10 +111,15 @@ p{ font-size: 1.4rem; }
     float: left;
 }
 
-.content-left h1{ font-size: 2.5rem; }
-.content-left h2{ font-size: 1.5rem; }
-.content-left h3{ font-size: 1rem; }
-.content-left h4{ font-size: 1.2rem; }
+.content_ h1{ font-size: 2.5rem; }
+.content_ h2{ font-size: 2rem; }
+.content_ h3{ font-size: 1.5rem; }
+.content_ h4{ font-size: 1.2rem; }
+.content_ hr{
+    border: 2px solid #5e8796;
+    margin-top: 8px;
+}
+
 
 .content-left p.detail{
     font-size: 1.6rem;
@@ -109,10 +127,6 @@ p{ font-size: 1.4rem; }
     padding-top: 20px;
 }
 
-.content-left hr{
-    border: 2px solid #5e8796;
-    margin-top: 8px;
-}
 
 .flowImages{ padding-top: 6%; }
 
@@ -155,6 +169,107 @@ p{ font-size: 1.4rem; }
 }
 
 .color-01{ color: #5e8796; }
+
+/*-------------------------------
+## Q&A
+-------------------------------*/
+#question{ margin: 0 4%; }
+
+.subTitle{
+    margin-top: 4%;
+    color: #5e8796;
+}
+
+.questionElement{
+    display: table;
+    width: 100%;
+    margin-top: 2%;
+}
+
+#question .qaMark{
+    display: table-cell;
+    width: 35px; /* 理論上の最大値 */
+    font-size: 1.5rem;
+    color: #fff;
+    font-family: Verdana;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.questionMark{ background: #5e8796; }
+.anserMark{ background: #E38585; }
+
+.questionText{
+    display: table-cell;
+    width: 90%;
+    font-size: 1.4rem;
+    vertical-align: middle;
+}
+
+.questionText::before{
+    content: "\a0\a0";
+}
+
+.questionOpen{
+    display: table-cell;
+    color: #5e8796;
+    width: 5%;
+    font-size: 2rem;
+    text-align: center;;
+    vertical-align: middle;
+}
+
+.anserElement{
+    display: table;
+    width: 100%;
+    margin-top: 2%;
+}
+
+
+
+.anserText{
+    display: table-cell;
+    width: 90%;
+    font-size: 1.4rem;
+    vertical-align: middle;
+    padding: 1%;
+}
+
+#question .url{
+    color: #E38585;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+#question .partitionLine{
+    border: 1px dashed #333;
+    opacity: 0.4;
+    margin-top: 2%;
+}
+
+.clickText:hover{
+    color: #5e8796;
+    opacity: 0.6;
+}
+
+/*-------------------------------
+## プライバシーポリシー
+-------------------------------*/
+.privacyPolicy{
+    width: 95%;
+    margin: 0 auto;
+}
+
+#privacyPolicy .pageTitle{}
+#privacyPolicy .contentTitle{
+    width: 95%;
+    margin: 0 auto;
+}
+#privacyPolicy .subTitle{
+    width: 95%;
+    margin: 0 auto;
+}
 
 /*-------------------------------
 ## サイドバー
@@ -1025,12 +1140,15 @@ tablet.css
         .invisible-tab{ display: none; }
     }
 
+    html{
+        /* base font-size(9px) */
+        font-size: 56.25%;
+    }
+
     .wrap{
         width:95%;
         margin:0 auto;
     }
-
-    .onlyVisiPc{ display: none; }
 
 	/*-------------------------------
 	# header
@@ -1203,8 +1321,8 @@ sp.css
 	# common
 	-------------------------------*/
     html{
-        /* base font-size(10px) */
-        font-size: 62.5%;
+        /* base font-size(8px) */
+        font-size: 50%;
     }
     .invisible-sp{ display: none; }
     .content_{ margin: 10% 5% 5% 5%; }
@@ -1223,10 +1341,7 @@ sp.css
     .flowImage ul{ margin-top: 10%; }
     .flowImage li h4{ padding: 10% 0%; }
 
-    .flowWords ul{
-        display: block;
-    }
-
+    .flowWords ul{ display: block; }
     .flowWords li{
         display: block;
         line-height: normal;
@@ -1237,9 +1352,7 @@ sp.css
         border-radius: 10px 10px 0px 0px;
     }
 
-    .flowWordTitle h2{
-        display: inline;
-    }
+    .flowWordTitle h2{ display: inline; }
 
     .flowWordTitle h2:nth-child(2):before {
         content: "\a0\a0\a0"
@@ -1249,6 +1362,14 @@ sp.css
         width: 100%;
         border-radius: 0px 0px 10px 10px;
     }
+
+    /*-------------------------------
+    ##　Q&A
+    -------------------------------*/
+
+    .subTitle{ margin-top: 7%; }
+    .questionElement{ margin-top: 3%; }
+    #question .partitionLine{ margin-top:3%; }
 
     /*-------------------------------
     ## サイドバー

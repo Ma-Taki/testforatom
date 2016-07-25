@@ -1,6 +1,6 @@
 <header>
     <div class="headerInr">
-        <p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト<span class="onlyVisiPc">「エンジニアルート」</span></p>
+        <p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト<span class="invisible-tab">「エンジニアルート」</span></p>
         <div class="user">
             <ul>
                 <li><a href="#" class="signin">新規登録</a></li>
