@@ -79,17 +79,6 @@ p{
     line-height: normal;
 }
 
-.cycle{
-    display: table-cell;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    background: #5e8796;
-    text-align: center;
-    vertical-align: middle;
-}
-
-
 /*-------------------------------
 ## ご利用の流れ
 -------------------------------*/
@@ -115,11 +104,6 @@ p{
 .content_ h2{ font-size: 2rem; }
 .content_ h3{ font-size: 1.5rem; }
 .content_ h4{ font-size: 1.2rem; }
-.content_ hr{
-    border: 2px solid #5e8796;
-    margin-top: 8px;
-}
-
 
 .content-left p.detail{
     font-size: 1.6rem;
@@ -261,15 +245,26 @@ p{
     margin: 0 auto;
 }
 
+.privacyPolicyInr{
+    width: 95%;
+    margin: 0 auto;
+}
+
 #privacyPolicy .pageTitle{}
 #privacyPolicy .contentTitle{
     width: 95%;
     margin: 0 auto;
+    padding-top: 4%;
 }
 #privacyPolicy .subTitle{
-    width: 95%;
+    display: table-cell;
+    color: #333;
     margin: 0 auto;
 }
+
+#privacyPolicy .block{ margin-top: 1.5%; }
+#privacyPolicy .text{ padding: 0.5% 0; }
+
 
 /*-------------------------------
 ## サイドバー
@@ -336,6 +331,24 @@ li.customBanner{
     text-align: -webkit-center;
     text-align: -moz-center;
 }
+
+.tAlignRight{
+    text-align: right;
+}
+
+.partitionLine_01{
+    border: 0;
+    border-top: 1px dashed #333;
+    margin-top: 1.5%;
+}
+.partitionLine_02 {
+    border: 2px solid #5e8796;
+    margin-top: 8px;
+}
+
+.table{ display: table; }
+.table-row{ display: table-row; }
+.table-cell{ display: table-cell; }
 
 /*-------------------------------
 # pc 1025px~
