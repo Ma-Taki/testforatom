@@ -1,7 +1,7 @@
 @extends('front.common.layout')
 @section('content')
 <div class="wrap">
-    <div id="terms" class="content_">
+    <div id="terms" class="content">
         <h1 class="pageTitle">利用規約</h1>
         <hr class="partitionLine_02">
         <div class="terms">

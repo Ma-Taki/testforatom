@@ -34,6 +34,10 @@ Route::get('/front/terms', function () {
     return view('front.terms');
 });
 
+// フロント：お問い合わせ
+Route::resource('/front/contact', 'front\ContactController');
+
+
 // フロント：エンジニアルートとは画面
 Route::get('/front/about', function () {
     return view('front.about');

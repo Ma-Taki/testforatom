@@ -79,8 +79,10 @@ p{
     line-height: normal;
 }
 
+label{ font-size: 1.4rem; }
+textarea{ font-size: 1.4rem; }
 /*-------------------------------
-## ご利用の流れ
+## common
 -------------------------------*/
 .wrap{
     width:100%;
@@ -88,7 +90,20 @@ p{
     margin:0 auto;
 }
 
-.content_{ margin-top: 5%; }
+.content{ margin-top: 5%; }
+.content h1{ font-size: 2.5rem; }
+.content h2{ font-size: 2rem; }
+.content h3{ font-size: 1.5rem; }
+.content h4{ font-size: 1.2rem; }
+.content h1.pageTitle{
+}
+.content p.pageDetail{
+    font-size: 1.6rem;
+    color: #5e8796;
+    padding-top: 20px;
+}
+
+
 
 .content-left{
     width: 75%;
@@ -100,17 +115,170 @@ p{
     float: left;
 }
 
-.content_ h1{ font-size: 2.5rem; }
-.content_ h2{ font-size: 2rem; }
-.content_ h3{ font-size: 1.5rem; }
-.content_ h4{ font-size: 1.2rem; }
 
-.content-left p.detail{
-    font-size: 1.6rem;
-    color: #5e8796;
-    padding-top: 20px;
+.color-01{ color: #5e8796; }
+.color-red{ color: #ff0000; }
+
+.fs0{ font-size: 0; }
+
+.bg{ background: url(../images/absurdidad.png)repeat; }
+
+.alignleft{
+	float: left;
+	display: inline-block;
 }
 
+.alignright{
+	float: right;
+	display: inline-block;
+}
+
+.alignCenter {
+    text-align: -webkit-center;
+    text-align: -moz-center;
+}
+
+.tAlignRight{
+    text-align: right;
+}
+
+.clear{ clear: both; }
+
+.table{ display: table; }
+.table-row{ display: table-row; }
+.table-cell{ display: table-cell; }
+
+.partitionLine_01{
+    border: 0;
+    border-top: 1px dashed #333;
+    margin-top: 1.5%;
+}
+.partitionLine_02 {
+    border: 2px solid #5e8796;
+    margin-top: 8px;
+}
+
+.partitionLine_03{
+    border: 0;
+    border-top: 1px dashed #333;
+}
+
+.textArea{
+    width: 95%;
+    text-align: left;
+    overflow: auto;
+    border: 1px solid #5e8796;
+    margin: 2rem auto;
+    height: 30rem;
+}
+
+.textAreaInr{
+    padding: 1.5rem;
+}
+
+.commonCenterBtn{
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 3%
+}
+
+.commonCenterBtn button {
+	width: 25%;
+	border-radius: 32px;
+	background: #5e8796;
+	color: #fff;
+	line-height: 30px;
+	border-style: none;
+    margin: 0 1%;
+}
+
+
+
+/*-------------------------------
+## お問い合わせ
+-------------------------------*/
+.contact{
+    width: 95%;
+    margin: 0 auto;
+}
+#contact p.pageInfo{
+    color: #5e8796;
+    padding: 2% 0 3%;
+}
+
+#contact .inputTable{
+    width: 100%;
+}
+
+#contact .inputName{
+    width: 30%;
+    vertical-align: middle;
+}
+
+#contact .inputField{
+    width: 70%;
+    padding: 1% 0;
+}
+
+#contact .inputFieldMail {
+    width: 70%;
+    padding: 1% 0;
+}
+
+#contact .inputField input{
+    width: 50%;
+    font-size: 1.4rem;
+    border: 1px solid #5e8796;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+#contact p.mailConfirmText{
+    padding-top: 2%;
+}
+
+.confirmBtn{
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 3%
+}
+
+.confirmBtn button {
+	width: 25%;
+	border-radius: 32px;
+	background: #5e8796;
+	color: #fff;
+	line-height: 30px;
+	border-style: none;
+    margin: 0 1%;
+}
+
+/* プライバシーポリシー */
+.textAreaInr .title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.6rem;
+    padding: 1% 0;
+}
+
+.textAreaInr .caption{
+    font-weight: bold;
+    font-size: 1.4rem;
+    padding-top: 1%;
+}
+
+.textAreaInr p{
+    padding: 1% 1rem 0;
+}
+
+.textAreaInr p.titleDetail{
+    padding: 0;
+}
+
+
+/*-------------------------------
+## ご利用の流れ
+-------------------------------*/
 
 .flowImages{ padding-top: 6%; }
 
@@ -151,8 +319,6 @@ p{
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-
-.color-01{ color: #5e8796; }
 
 /*-------------------------------
 ## Q&A
@@ -209,8 +375,6 @@ p{
     width: 100%;
     margin-top: 2%;
 }
-
-
 
 .anserText{
     display: table-cell;
@@ -309,49 +473,6 @@ li.customBanner{
     font-size: 1.1rem;
     color: #fff;
     padding-bottom: 1rem;
-}
-
-/*-------------------------------
-# common
--------------------------------*/
-
-.fs0{ font-size: 0; }
-
-.bg{ background: url(../images/absurdidad.png)repeat; }
-
-.alignleft{
-	float: left;
-	display: inline-block;
-}
-
-.alignright{
-	float: right;
-	display: inline-block;
-}
-
-.alignCenter {
-    text-align: -webkit-center;
-    text-align: -moz-center;
-}
-
-.tAlignRight{
-    text-align: right;
-}
-
-.clear{ clear: both; }
-
-.table{ display: table; }
-.table-row{ display: table-row; }
-.table-cell{ display: table-cell; }
-
-.partitionLine_01{
-    border: 0;
-    border-top: 1px dashed #333;
-    margin-top: 1.5%;
-}
-.partitionLine_02 {
-    border: 2px solid #5e8796;
-    margin-top: 8px;
 }
 
 /*-------------------------------
@@ -463,14 +584,6 @@ nav ul .active{ background: #536C75; }
 /*-------------------------------
 # page
 -------------------------------*/
-.wrapper {
-	margin:0 auto;
-}
-.main {
-	width:100%;
-}
-.content {
-}
 
 .contentInr{
 	width: 95%;
@@ -499,6 +612,11 @@ nav ul .active{ background: #536C75; }
 /*-------------------------------
 ## top
 -------------------------------*/
+
+#top{ margin: 0; }
+
+#top .tabMenu ul li{ font-size: 1.4rem; }
+
 /* -- slider -- */
 .sliderWrap{
 }
@@ -1166,6 +1284,11 @@ tablet.css 641px~1024px
 	/*-------------------------------
 	## top
 	-------------------------------*/
+    #top .wrap{
+        width:100%;
+        margin:0 auto;
+    }
+
 	/* 新着・急募*/
 	.newJob,
 	.attentionJob{
@@ -1277,7 +1400,7 @@ sp.css ~640px
         font-size: 50%;
     }
     .invisible-sp{ display: none; }
-    .content_{ margin: 10% 5% 5% 5%; }
+    .content{ margin: 10% 5% 5% 5%; }
 
     /* navi */
     .nav-mobile {
@@ -1379,7 +1502,7 @@ sp.css ~640px
 
 	.headerInr h1 a {
 		background-size: 160px;
-		height: 46px;
+		height: 40px;
 	}
 
 	/* user */
@@ -1400,58 +1523,30 @@ sp.css ~640px
 		display: none;
 	}
 
-	/* nav */
-	.nav-item a{
-		display: block;
-	}
+    /* navi-list */
+    nav ul{ width: 100%; }
+    nav ul li{
+        width: 100%;
+        min-height: 1.4rem;
+    }
+    nav ul li a{
+        width: 100%;
+        padding: 0.5rem 0;
+        line-height: 2rem;
+        border: 0;
+        border-bottom: 1px solid #fff;
+    }
 
-	nav{
-		height: auto;
-		width:100%;
-	}
+    .nav-list {
+        display: none;
+    }
+    .nav-active {
+        display: block;
+    }
 
-	nav ul{
-		width: 100%;
-		margin: 0 auto;
-		font-size: 0px;
-	}
-
-	nav li a{
-		padding: 0 24px;
-	}
-
-	nav li .active{
-		background: #536C75;
-		display: block;
-	}
-
-	.nav-mobile {
+    .nav-mobile {
 		display:block;
 	}
-
-	.nav-list {
-		display:none;
-	}
-
-	.nav-item {
-		width:100%;
-		float:none;
-	}
-
-	.nav-item a {
-		background:#5e8796;
-		padding:0;
-		border-bottom: 1px solid #fff;
-	}
-
-	.nav-item:last-child a{
-		border-bottom: 0;
-	}
-
-	.nav-active {
-		display:block;
-	}
-
 	.nav-mobile-open {
 		background: url(../images/navClose.png)center no-repeat;
 		background-size: 20px;
@@ -1493,6 +1588,16 @@ sp.css ~640px
 	/*-------------------------------
 	# page
 	-------------------------------*/
+
+    #top{
+        width:100%;
+        margin:0 auto;
+    }
+
+    #top .content{
+        width:100%;
+        margin:0 auto;
+    }
 
 	.contentInr{
         width: 100%;

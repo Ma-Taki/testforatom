@@ -1,7 +1,7 @@
 @extends('front.common.layout')
 @section('content')
 <div class="wrap">
-    <div class="content_">
+    <div class="content">
         <div id="aboutERoute" class="content-left">
             <h1 class="title">エンジニアルートとは</h1>
             <hr class="partitionLine_02">

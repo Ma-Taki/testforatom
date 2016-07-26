@@ -1,10 +1,10 @@
 @extends('front.common.layout')
 @section('content')
 <div class="wrap">
-    <div class="content_">
+    <div class="content">
         <div class="content-left">
             <h1 class="title">Q&amp;A&nbsp;&nbsp;ーよくある質問ー</h1>
-            <hr>
+            <hr class="partitionLine_02">
             <div id="question">
                 <h2 class="subTitle">エンジニアルートについて</h2>
 
@@ -487,7 +487,7 @@
                     </ul>
                 </div>
                 <hr class="partitionLine">
-                
+
             </div>
         </div><!-- END CONTENT-LEFT -->
 

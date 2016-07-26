@@ -15,4 +15,4 @@
             </form>
         </div><!-- /.search -->
     </div><!-- /.headerInr -->
-</header><!-- /.header -->
+</header>

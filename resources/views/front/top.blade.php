@@ -1,34 +1,31 @@
 @extends('front.common.layout')
 @section('content')
 <?php use App\Libraries\ModelUtility as mdlUtil; ?>
-<div class="wrapper">
-    <div class="main">
-        <div class="content">
+    <div class="content" id="top">
+        <div id="slider">
+            <ul class="slider slider-item">
+                <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
+                <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
+                <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
+                <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
+            </ul>
+        </div><!-- ./slider -->
 
-            <div id="slider">
-                <ul class="slider slider-item">
-                    <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
-                    <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
-                    <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
-                    <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
-                </ul>
+        <section class="keyWordSearch clear invisible-pc invisible-tab">
+            <div class="alignCenter">
+                <div class="keyWordSearchForm">
+                    <form action="#" method="post">
+                        <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+                        <input type="submit" name="submit" value="検索" class="searchBtn">
+                    </form>
+                </div>
             </div>
-
-            <section class="keyWordSearch clear invisible-pc invisible-tab">
+            <div class="sideInfoInr invisible-pc invisible-tab ">
                 <div class="alignCenter">
-                    <div class="keyWordSearchForm">
-                        <form action="#" method="post">
-                            <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
-                            <input type="submit" name="submit" value="検索" class="searchBtn">
-                        </form>
-                    </div>
+                    <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
                 </div>
-                <div class="sideInfoInr invisible-pc invisible-tab ">
-                    <div class="alignCenter">
-                        <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
-                    </div>
-                </div>
-            </section><!-- /.keyWordSearch for sp -->
+            </div>
+        </section><!-- /.keyWordSearch for sp -->
 
             <div class="topItemList clear">
                 <section class="newJob">
@@ -119,7 +116,7 @@
 @foreach($skill_categories as $skill_category)
 @if(!$skill_category->skills->isEmpty())
                                     <div class="tabContent">
-                                        <h2>{{ $skill_category->name }}</h2>
+                                        <h3>{{ $skill_category->name }}</h3>
                                         <ul>
 @foreach($skill_category->skills as $skill)
 @if($skill->master_type !== mdlUtil::MASTER_TYPE_INDEX_ONLY)
@@ -300,38 +297,16 @@
                     </div>
                 </section><!-- /.keyWordSearch for sp -->
 
-                <section class="sideInfo">
-                    <div class="sideInfoInr">
-                        <div class="alignCenter">
-                            <p>無料会員登録
-                                <span class="cstmBnrSubWord invisible-sp"></br>案件紹介をご希望の方はこちら</span>
-                                <span class="alignright invisible-pc invisible-tab">></span>
-                            </p>
-                        </div>
-                        <ul class="sideInfoBnr">
-                            <li>
-                                <div class="sideInfoImgBnr">
-                                    <a href="#"><img src="/front/images/sBnr01.png"></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sideInfoImgBnr">
-                                    <a href="#"><img src="/front/images/sBnr02.png"></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sideInfoImgBnr">
-                                    <a href="#"><img src="/front/images/sBnr03.png"></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sideInfoImgBnr">
-                                    <a href="#"><img src="/front/images/sBnr04.png"></a>
-                                </div>
-                            </li>
-                        </ul>
+                <div class="sideInfoInr invisible-pc invisible-tab ">
+                    <div class="alignCenter">
+                        <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
                     </div>
-                </section><!-- /.sideInfo -->
+                </div>
+
+                <div class="content-right">
+                    @include('front.common.sideInfo')
+                </div>
+
             </div><!-- category & sideInfo -->
 
             <section class="keyWordSearch clear invisible-sp">
@@ -345,6 +320,7 @@
                     </div>
                 </div>
             </section><!-- /.keyWordSearch for pc,tablet -->
+
         </div>
     </div>
 </div>

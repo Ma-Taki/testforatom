@@ -7,4 +7,4 @@
         <li class="nav-item"><a href="{{ url('/front/flow') }}">ご利用の流れ</a></li>
         <li class="nav-item"><a href="hoge5">企業の皆様へ</a></li>
     </ul>
-</nav><!-- /Nav -->
+</nav>
