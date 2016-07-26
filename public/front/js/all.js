@@ -1,4 +1,29 @@
 
+// slick-slider
+jQuery(function($) {
+	if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
+		$('.slider-item').slick({
+			arrows: false,            // 前へ/次へナビ
+			infinite: true,           // 無限ループ
+			dots:false,               // カレントナビ(ドット)
+			slidesToShow: 1,          // 見えているスライド数
+			centerMode: true,         // 中央寄せ
+			centerPadding:'20px',     // 両サイドの見えている部分のサイズ
+			autoplay:true,            // 自動再生
+		});
+	} else {
+		$('.slider-item').slick({
+			arrows: true,
+			infinite: true,
+			dots:true,
+			slidesToShow: 1,
+			centerMode: true,
+			centerPadding:'150px',
+			autoplay:true,
+		});
+	};
+});
+
 // .qaMark resize
 jQuery(function($){
 	$(".qaMark").each(function (){
@@ -128,8 +153,9 @@ jQuery(function($){
 // current page
 $(function(){
 	$('.nav li a').each(function(){
-		var $href = $(this).attr('href');
-		if(location.href.match($href)) {
+		var href = $(this).attr('href');
+		var locHref = location.href.replace(/\/$/g, '')
+		if (href === locHref) {
 			$(this).parent('li').addClass('active');
 		} else {
 			$(this).parent('li').removeClass('active');

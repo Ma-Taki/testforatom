@@ -238,9 +238,10 @@ p{
 }
 
 /*-------------------------------
-## プライバシーポリシー
+## プライバシーポリシー, 利用規約
 -------------------------------*/
-.privacyPolicy{
+.privacyPolicy,
+.terms{
     width: 95%;
     margin: 0 auto;
 }
@@ -250,20 +251,21 @@ p{
     margin: 0 auto;
 }
 
-#privacyPolicy .pageTitle{}
 #privacyPolicy .contentTitle{
     width: 95%;
     margin: 0 auto;
     padding-top: 4%;
 }
-#privacyPolicy .subTitle{
-    display: table-cell;
-    color: #333;
-    margin: 0 auto;
+
+#privacyPolicy .block,
+#terms .block{
+    margin-top: 1.5%;
 }
 
-#privacyPolicy .block{ margin-top: 1.5%; }
-#privacyPolicy .text{ padding: 0.5% 0; }
+#privacyPolicy .text,
+#terms .text{
+    padding: 0.5% 1rem 0;
+}
 
 /*-------------------------------
 ## エンジニアルートとは
@@ -299,36 +301,23 @@ li.customBanner{
 }
 
 .customBanner h2{
-    font-size: 16px;
     color: #fff;
-    padding: 15px 10px 0px 10px;
+    padding: 4% 0;
 }
 
 .customBanner p{
-    font-size: 14px;
+    font-size: 1.1rem;
     color: #fff;
-    font-weight: 300;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
 }
-
-
-
-
-
-
-
 
 /*-------------------------------
 # common
 -------------------------------*/
 
-.fs0{
-	font-size: 0;
-}
+.fs0{ font-size: 0; }
 
-.bg{
-	background: url(../images/absurdidad.png)repeat;
-}
+.bg{ background: url(../images/absurdidad.png)repeat; }
 
 .alignleft{
 	float: left;
@@ -340,10 +329,6 @@ li.customBanner{
 	display: inline-block;
 }
 
-.clear{
-	clear: both;
-}
-
 .alignCenter {
     text-align: -webkit-center;
     text-align: -moz-center;
@@ -352,6 +337,12 @@ li.customBanner{
 .tAlignRight{
     text-align: right;
 }
+
+.clear{ clear: both; }
+
+.table{ display: table; }
+.table-row{ display: table-row; }
+.table-cell{ display: table-cell; }
 
 .partitionLine_01{
     border: 0;
@@ -363,31 +354,9 @@ li.customBanner{
     margin-top: 8px;
 }
 
-.table{ display: table; }
-.table-row{ display: table-row; }
-.table-cell{ display: table-cell; }
-
 /*-------------------------------
-# pc 1025px~
+# ヘッダー
 -------------------------------*/
-@media screen and (min-width: 1025px) {
-
-    html{
-        font-size: 62.5%; /* 10px */
-    }
-
-    /*  invisible element */
-    .invisible-pc{ display: none; }
-}
-
-
-/*-------------------------------
-# pc-1024px~ header
--------------------------------*/
-header{
-	height: auto;
-}
-
 .headerInr{
 	width: 95%;
     max-width: 1000px;
@@ -397,9 +366,8 @@ header{
 }
 
 .headerInr p{
-    width: 75%;
-	line-height: 32px;
-	font-size: 12px;
+	line-height: 3.2rem;
+	font-size: 1.3rem;
 }
 
 .headerInr h1{ width: 100%; }
@@ -411,7 +379,7 @@ header{
 	height: 68px;
 }
 
-/* user */
+/* 新規登録、ログイン*/
 .user{
 	position: absolute;
 	top: 0;
@@ -428,17 +396,19 @@ header{
 	-moz-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
 }
 
-.user li:hover{ background: #4c616a; transition: 0.25s;
+.user li:hover{
+    background: #4c616a;
+    transition: 0.25s;
 }
 
 .user li a{
 	color: #fff;
-	line-height: 32px;
-	padding: 0 20px;
-	font-size: 14px;
+	line-height: 3.2rem;
+	padding: 0 2.5rem;
+	font-size: 1.4rem;
 }
 
-/* search */
+/* キーワード検索 */
 .search{
 	position: absolute;
 	right: 0;
@@ -457,7 +427,7 @@ header{
 	background-size: 26px 26px;
 	width: 26px;
 	height: 26px;
-	text-indent: -9999px;
+	text-indent: 100%;
 	cursor: pointer;
 	border: none;
 }
@@ -466,10 +436,9 @@ header{
 nav{ width: 100%; background: #5e8796; }
 
 nav ul{
-    width: 95%;
     max-width: 1000px;
 	margin: 0 auto;
-	font-size: 0px;
+	font-size: 0px; /* 隙間対策 */
     text-align: center;
 }
 
@@ -482,32 +451,14 @@ nav li{
 
 nav li a{
 	color: #fff;
-	font-size: 14px;
-	line-height: 48px;
-	padding: 10px;
+	font-size: 1.4rem;
+	line-height: 4.8rem;
+	padding: 1rem;
 }
 
 nav li a:hover{ color: #4c616a; }
 
 nav ul .active{ background: #536C75; }
-
-
-/* Mobile Navigation */
-.nav-mobile {
-	display:none; /* Hide from browsers that don't support media queries */
-	cursor:pointer;
-	position:absolute;
-	top:12px;
-	right:8px;
-	background:url(../images/navOpen.png) no-repeat center center;
-	height:24px;
-	width:24px;
-	background-size: 24px 24px;
-}
-
-
-
-
 
 /*-------------------------------
 # page
@@ -1045,8 +996,6 @@ nav ul .active{ background: #536C75; }
 }
 
 /* side info start */
-.sideInfo{
-}
 
 .sideInfoInr{
 	width: 27.2%;
@@ -1158,7 +1107,19 @@ footer p{
 }
 
 /*===============================
-tablet.css
+pc.css 1025px~
+===============================*/
+@media screen and (min-width: 1025px) {
+
+    html{
+        font-size: 62.5%; /* 10px */
+    }
+    /*  invisible element */
+    .invisible-pc{ display: none; }
+}
+
+/*===============================
+tablet.css 641px~1024px
 ===============================*/
 @media screen and (max-width: 1024px) {
 
@@ -1180,58 +1141,19 @@ tablet.css
         margin:0 auto;
     }
 
-	/*-------------------------------
-	# header
-	-------------------------------*/
-	.headerInr{
-		width: 95%;
-		height: 100px;
-		padding: 0 16px;
-	}
-    .headerInr p{ font-size: 11px; }
-
-	/* search */
-	.search{
-		right: 16px;
-	}
-
-	/* user */
-	.user{
-		right: 16px;
-	}
-
-	.user li a{
-		padding: 0 24px;
-		font-size: 13px;
-		line-height: 32px;
-	}
-
-	/* nav */
+	/* nav inline-blockからflexBoxに変更 */
 	nav ul{
-        /*
-        display:-webkit-box;
-        display:-moz-box;
-        display:-ms-box;
-        display:-webkit-flexbox;
-        display:-moz-flexbox;
-        display:-ms-flexbox;
-        display:-webkit-flex;
-        display:-moz-flex;
-        display:-ms-flex;
-        display:flex;
-        -webkit-box-lines:multiple;
-        -moz-box-lines:multiple;
-        -webkit-flex-wrap:wrap;
-        -moz-flex-wrap:wrap;
-        -ms-flex-wrap:wrap;
-        */
+        width: 95%;
         display: flex;
-        flex-wrap:wrap;
-	}
-
+    }
+    nav li{
+        min-height: 4.8rem;
+        display: flex;
+        justify-content: center;
+    }
 	nav li a{
-        line-height: 28px;
-	}
+        line-height: 2.4rem;
+    }
 
 	/*-------------------------------
 	# page
@@ -1343,7 +1265,7 @@ tablet.css
 }
 
 /*===============================
-sp.css
+sp.css ~640px
 ===============================*/
 @media screen and (max-width:640px){
 
@@ -1356,6 +1278,19 @@ sp.css
     }
     .invisible-sp{ display: none; }
     .content_{ margin: 10% 5% 5% 5%; }
+
+    /* navi */
+    .nav-mobile {
+    	display:none; /* Hide from browsers that don't support media queries */
+    	cursor:pointer;
+    	position:absolute;
+    	top:12px;
+    	right:8px;
+    	background:url(../images/navOpen.png) no-repeat center center;
+    	height:24px;
+    	width:24px;
+    	background-size: 24px 24px;
+    }
 
     /*-------------------------------
     ## ご利用の流れ

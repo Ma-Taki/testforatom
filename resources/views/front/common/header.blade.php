@@ -7,7 +7,7 @@
                 <li><a href="#">ログイン</a></li>
             </ul>
         </div>
-        <h1 class="alignleft"><a href="#" title="エンジニアルート"></a></h1>
+        <h1 class="alignleft"><a href="{{ url('/') }}" title="エンジニアルート"></a></h1>
         <div class="search">
             <form action="#" method="post">
                 <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
