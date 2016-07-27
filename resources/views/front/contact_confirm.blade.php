@@ -11,7 +11,7 @@
             </p>
             <hr class="partitionLine_03">
 
-            <form method="post" action="{{ url('/front/contact/complete') }}">
+            <form method="post">
 
                 <table class="inputTable">
                     <tr>
@@ -98,13 +98,32 @@
                 </div>
 
                 <div class="confirmBtn">
-                    <button type="submit" name="action" value="send">個人情報の取扱いに同意して送信する</button>
-                    <button type="submit" name="action" value="edit">入力内容を修正する</button></a>
+                    <button class="submit" value="send">個人情報の取扱いに同意して送信する</button>
+                    <button class="submit" value="edit">入力内容を修正する</button></a>
                 </div>
-
+                <input type="hidden" name="user_name" value="{{ $user_name }}">
+                <input type="hidden" name="company_name" value="{{ $company_name }}">
+                <input type="hidden" name="mail" value="{{ $mail }}">
+                <input type="hidden" name="mail_confirmation" value="{{ $mail }}">
+                <input type="hidden" name="contactMessage" value="{{ $contactMessage }}">
                 {{ csrf_field() }}
             </form>
         </div>
+        <script>
+            jQuery(function($){
+                $('.submit').click(function (){
+                    switch ($(this).attr('value')) {
+                        case 'edit':
+                            $(this).parents('form').attr('action', '/front/contact');
+                            break;
+                        case 'send':
+                            $(this).parents('form').attr('action', '/front/contact/complete');
+                            break;
+                    }
+                    $(this).parents('form').submit();
+                });
+            });
+        </script>
 
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->

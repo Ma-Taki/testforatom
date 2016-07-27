@@ -29,6 +29,7 @@ class ContactController extends Controller
             'user_name' => $request->user_name,
             'company_name' => $request->company_name,
             'mail' => $request->mail,
+            'mail_confirmation' => $request->mail_confirmation,
             'contactMessage' => $request->contactMessage
         ]);
     }
@@ -52,15 +53,6 @@ class ContactController extends Controller
      * POST:/front/contact/complete
      **/
     public function contact(Request $request){
-
-        /*
-        $data = [
-            'user_name' => $request->user_name,
-            'company_name' => $request->company_name,
-            'mail' => $request->mail,
-            'contactMessage' => $request->contactMessage
-        ];
-        */
 
         $subject = '【エンジニアルート】お問い合わせメール';
         $body = 'エンジニアルート-お問い合わせメール';
