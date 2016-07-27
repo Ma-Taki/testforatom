@@ -57,11 +57,17 @@ class ContactController extends Controller
         $subject = '【エンジニアルート】お問い合わせメール';
         $body = 'エンジニアルート-お問い合わせメール';
         $body .= "\n";
+        $body .= "\n";
         $body .= '【問い合わせ日時】';
+        $body .= "\n";
         $body .= '【氏名】' .$request->user_name;
+        $body .= "\n";
         $body .= '【会社名】' .$request->company_name;
+        $body .= "\n";
         $body .= '【メールアドレス】' .$request->mail;
+        $body .= "\n";
         $body .= '【お問い合わせ内容】';
+        $body .= "\n";
         $body .= $request->contactMessage;
         $header = 'From: contact@engineer-route.solidseed.jp';
 
