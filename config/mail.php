@@ -109,4 +109,9 @@ return [
 
     'sendmail' => '/usr/sbin/sendmail -bs',
 
+    'to' => [
+        'address' => 'y.suzuki@solidseed.co.jp',
+        'name' => 'dev'
+    ],
+
 ];

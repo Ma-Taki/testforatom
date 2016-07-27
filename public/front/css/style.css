@@ -192,7 +192,14 @@ textarea{ font-size: 1.4rem; }
     margin: 0 1%;
 }
 
+.errorMessage{
+    color: #ff0000;
+}
 
+.pre-wrap{
+    font-size: 1.4rem;
+    white-space: pre-wrap;
+}
 
 /*-------------------------------
 ## お問い合わせ

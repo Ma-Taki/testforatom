@@ -12,7 +12,7 @@
 */
 
 // フロント：トップ画面
-Route::resource('/', 'FrontController');
+Route::resource('/', 'FrontController', ['only' => ['index',]]);
 
 // フロント：ご利用の流れ画面
 Route::get('/front/flow', function () {
@@ -35,8 +35,9 @@ Route::get('/front/terms', function () {
 });
 
 // フロント：お問い合わせ
-Route::resource('/front/contact', 'front\ContactController');
-
+Route::resource('/front/contact', 'front\ContactController', ['only' => ['index', 'store']]);
+Route::post('/front/contact/confirm', 'front\ContactController@confirm');
+Route::post('/front/contact/complete', 'front\ContactController@contact');
 
 // フロント：エンジニアルートとは画面
 Route::get('/front/about', function () {

@@ -11,12 +11,12 @@
             </p>
             <hr class="partitionLine_03">
 
-            <form method="post" action="{{ url('/front/contact') }}">
+            <form method="post" action="{{ url('/front/contact/complete') }}">
 
                 <table class="inputTable">
                     <tr>
                         <td class="inputName"><p>　氏名<span class="color-red">※</span></p></td>
-                        <td class="inputField"><p>{{ $name }}</p></td>
+                        <td class="inputField"><p>{{ $user_name }}</p></td>
                     </tr>
                 </table>
                 <hr class="partitionLine_03">
@@ -43,7 +43,9 @@
                 <table class="inputTable">
                     <tr>
                         <td class="inputName"><p>　お問い合わせ内容<span class="color-red">※</span></p></td>
-                        <td class="inputField"><p>{{ $message }}</p></td>
+                        <td class="inputField">
+                            <div class="pre-wrap">{{ $contactMessage }}</div>
+                        </td>
                     </tr>
                 </table>
                 <hr class="partitionLine_03">
@@ -96,8 +98,8 @@
                 </div>
 
                 <div class="confirmBtn">
-                    <button type="submit">個人情報の取扱いに同意して送信する</button>
-                    <button type="button">入力内容を修正する</button>
+                    <button type="submit" name="action" value="send">個人情報の取扱いに同意して送信する</button>
+                    <button type="submit" name="action" value="edit">入力内容を修正する</button></a>
                 </div>
 
                 {{ csrf_field() }}

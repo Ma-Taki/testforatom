@@ -24,11 +24,11 @@ class ContactRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
+            'user_name' => 'required',
             'company_name' => '',
             'mail' => 'required|email|confirmed',
             'mail_confirmation' => '',
-            'message' => 'required',
+            'contactMessage' => 'required',
         ];
     }
 }
