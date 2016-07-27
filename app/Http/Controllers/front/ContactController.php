@@ -66,11 +66,11 @@ class ContactController extends Controller
         $body = 'エンジニアルート-お問い合わせメール';
         $body .= "\n";
         $body .= '【問い合わせ日時】';
-        $body .= '【氏名】' .$request->$user_name;
-        $body .= '【会社名】' .$request->$company_name;
-        $body .= '【メールアドレス】' .$request->$mail;
+        $body .= '【氏名】' .$request->user_name;
+        $body .= '【会社名】' .$request->company_name;
+        $body .= '【メールアドレス】' .$request->mail;
         $body .= '【お問い合わせ内容】';
-        $body .= $request->$contactMessage;
+        $body .= $request->contactMessage;
         $header = 'From: contact@engineer-route.solidseed.jp';
 
         mail('y.suzuki@solidseed.co.jp', $subject, $body, $header);
