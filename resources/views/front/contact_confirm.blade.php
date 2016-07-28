@@ -15,7 +15,7 @@
 
                 <table class="inputTable">
                     <tr>
-                        <td class="inputName"><p>　氏名<span class="color-red">※</span></p></td>
+                        <td class="inputName"><p>氏名<span class="color-red">※</span></p></td>
                         <td class="inputField"><p>{{ $user_name }}</p></td>
                     </tr>
                 </table>
@@ -23,7 +23,7 @@
 
                 <table class="inputTable">
                     <tr>
-                        <td class="inputName"><p>　会社名</p></td>
+                        <td class="inputName"><p>会社名</p></td>
                         <td class="inputField"><p>{{ $company_name }}</p></td>
                     </tr>
                 </table>
@@ -32,7 +32,7 @@
                 <table class="inputTable">
                     <tr>
                         <td class="inputName">
-                            <p>　メールアドレス<span class="color-red">※</span></p>
+                            <p>メールアドレス<span class="color-red">※</span></p>
                         </td>
                         <td class="inputField"><p>{{ $mail }}</p>
                         </td>
@@ -42,7 +42,7 @@
 
                 <table class="inputTable">
                     <tr>
-                        <td class="inputName"><p>　お問い合わせ内容<span class="color-red">※</span></p></td>
+                        <td class="inputName"><p>お問い合わせ内容<span class="color-red">※</span></p></td>
                         <td class="inputField">
                             <div class="pre-wrap">{{ $contactMessage }}</div>
                         </td>
@@ -98,8 +98,12 @@
                 </div>
 
                 <div class="confirmBtn">
-                    <button class="submit" value="send">個人情報の取扱いに同意して送信する</button>
-                    <button class="submit" value="edit">入力内容を修正する</button></a>
+                    <div class="button">
+                        <button class="submit" name="send">個人情報の取扱いに同意して送信する</button>
+                    </div>
+                    <div class="button">
+                        <button class="submit" name="edit">入力内容を修正する</button></a>
+                    </div>
                 </div>
                 <input type="hidden" name="user_name" value="{{ $user_name }}">
                 <input type="hidden" name="company_name" value="{{ $company_name }}">
@@ -112,7 +116,7 @@
         <script>
             jQuery(function($){
                 $('.submit').click(function (){
-                    switch ($(this).attr('value')) {
+                    switch ($(this).attr('name')) {
                         case 'edit':
                             $(this).parents('form').attr('action', '/front/contact');
                             break;

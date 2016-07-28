@@ -13,57 +13,49 @@
 
             <form method="post" action="{{ url('/front/contact/confirm') }}">
 
-                <table class="inputTable">
-                    <tr>
-                        <td class="inputName"><p>　氏名<span class="color-red">※</span></p></td>
-                        <td class="inputField">
+                <div class="inputTable">
+                    <div class="inputName"><p>氏名<span class="color-red">※</span></p></div>
+                    <div class="inputField">
                             <p class="errorMessage">{{ $errors->first('user_name') }}</p>
                             <input type="text" value="{{ isset($user_name) ? $user_name : old('user_name') }}" name="user_name" maxlength="30" placeholder="ソリッド　太郎">
-                        </td>
-                    </tr>
-                </table>
+                    </div>
+                </div>
                 <hr class="partitionLine_03">
 
-                <table class="inputTable">
-                    <tr>
-                        <td class="inputName"><p>　会社名</p></td>
-                        <td class="inputField">
-                            <p class="errorMessage">{{ $errors->first('company_name') }}</p>
-                            <input type="text" value="{{ isset($company_name) ? $company_name : old('company_name') }}" name="company_name" maxlength="30" placeholder="ソリッドシード株式会社">
-                        </td>
-                    </tr>
-                </table>
+                <div class="inputTable">
+                    <div class="inputName"><p>会社名</p></div>
+                    <div class="inputField">
+                        <p class="errorMessage">{{ $errors->first('company_name') }}</p>
+                        <input type="text" value="{{ isset($company_name) ? $company_name : old('company_name') }}" name="company_name" maxlength="30" placeholder="ソリッドシード株式会社">
+                    </div>
+                </div>
                 <hr class="partitionLine_03">
 
-                <table class="inputTable">
-                    <tr>
-                        <td class="inputName">
-                            <p>　メールアドレス<span class="color-red">※</span></p>
-                        </td>
-                        <td class="inputField">
-                            <p class="errorMessage">{{ $errors->first('mail') }}</p>
-                            <label><input type="text" value="{{ isset($mail) ? $mail : old('mail') }}" name="mail" maxlength="256" placeholder="info@solidseed.co.jp">（半角）</label>
-                            <p class="mailConfirmText">確認のため、もう一度入力してください</p>
-                            <label><input type="text" value="{{ isset($mail_confirmation) ? $mail_confirmation : old('mail_confirmation') }}" name="mail_confirmation" maxlength="256" placeholder="info@solidseed.co.jp">（半角）</label>
-                        </td>
-                    </tr>
-                </table>
+                <div class="inputTable">
+                    <div class="inputName"><p>メールアドレス<span class="color-red">※</span></p></div>
+                    <div class="inputField">
+                        <p class="errorMessage">{{ $errors->first('mail') }}</p>
+                        <label><input type="text" value="{{ isset($mail) ? $mail : old('mail') }}" name="mail" maxlength="256" placeholder="info@solidseed.co.jp">（半角）</label>
+                        <p class="mailConfirmText">確認のため、もう一度入力してください</p>
+                        <label><input type="text" value="{{ isset($mail_confirmation) ? $mail_confirmation : old('mail_confirmation') }}" name="mail_confirmation" maxlength="256" placeholder="info@solidseed.co.jp">（半角）</label>
+                    </div>
+                </div>
                 <hr class="partitionLine_03">
 
-                <table class="inputTable">
-                    <tr>
-                        <td class="inputName"><p>　お問い合わせ内容<span class="color-red">※</span></p></td>
-                        <td class="inputField">
-                            <p class="errorMessage">{{ $errors->first('contactMessage') }}</p>
-                            <p>500文字以内で入力してください。</p>
-                            <textarea name="contactMessage" cols="60" rows="10" maxlength="500">{{ isset($contactMessage) ? $contactMessage : old('contactMessage') }}</textarea>
-                        </td>
-                    </tr>
-                </table>
+                <div class="inputTable">
+                    <div class="inputName"><p>お問い合わせ内容<span class="color-red">※</span></p></div>
+                    <div class="inputField">
+                        <p class="errorMessage">{{ $errors->first('contactMessage') }}</p>
+                        <p>500文字以内で入力してください。</p>
+                        <textarea name="contactMessage" rows="10" maxlength="500">{{ isset($contactMessage) ? $contactMessage : old('contactMessage') }}</textarea>
+                    </div>
+                </div>
                 <hr class="partitionLine_03">
 
                 <div class="confirmBtn">
-                    <button type="submit">入力内容の確認</button>
+                    <div class="button">
+                        <button type="submit">入力内容の確認</button>
+                    </div>
                 </div>
 
                 {{ csrf_field() }}

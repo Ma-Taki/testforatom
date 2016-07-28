@@ -33,13 +33,13 @@ class FrontUtility
         switch (env('APP_ENV')) {
             case 'local':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->user_contact_mail_from_name = 'E-R開発';
+                $this->user_contact_mail_from_name = 'E-R開発(local)';
                 $this->user_contact_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_contact_mail_to_name = 'E-R開発者';
                 break;
             case 'develop':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->user_contact_mail_from_name = 'E-R開発';
+                $this->user_contact_mail_from_name = 'E-R開発(develop)';
                 $this->user_contact_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_contact_mail_to_name = 'E-R開発者';
                 break;

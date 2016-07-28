@@ -183,13 +183,13 @@ textarea{ font-size: 1.4rem; }
 }
 
 .commonCenterBtn button {
-	width: 25%;
+	width: 33%;
 	border-radius: 32px;
 	background: #5e8796;
 	color: #fff;
-	line-height: 30px;
 	border-style: none;
     margin: 0 1%;
+    padding: 1.1%;
 }
 
 .errorMessage{
@@ -214,20 +214,19 @@ textarea{ font-size: 1.4rem; }
 }
 
 #contact .inputTable{
-    width: 100%;
+    width: 96%;
+    display: table;
+    margin: 0 auto;
 }
 
 #contact .inputName{
+    display: table-cell;
     width: 30%;
     vertical-align: middle;
 }
 
 #contact .inputField{
-    width: 70%;
-    padding: 1% 0;
-}
-
-#contact .inputFieldMail {
+    display: table-cell;
     width: 70%;
     padding: 1% 0;
 }
@@ -240,6 +239,13 @@ textarea{ font-size: 1.4rem; }
     padding: 1%;
 }
 
+#contact .inputField textarea{
+    width: 50%;
+    font-size: 1.4rem;
+    border: 1px solid #5e8796;
+    border-radius: 5px;
+}
+
 #contact p.mailConfirmText{
     padding-top: 2%;
 }
@@ -247,17 +253,24 @@ textarea{ font-size: 1.4rem; }
 .confirmBtn{
     margin: 0 auto;
     text-align: center;
-    padding-top: 3%
+    padding-top: 3%;
+    display: table;
+}
+
+#contact .button{
+    width: 45%;
+    display: table-cell;
+    padding: 0 2%;
 }
 
 .confirmBtn button {
-	width: 25%;
+    font-size: 1.4rem;
+	width: 100%;
 	border-radius: 32px;
 	background: #5e8796;
 	color: #fff;
-	line-height: 30px;
 	border-style: none;
-    margin: 0 1%;
+    padding: 2.5% 0;
 }
 
 /* プライバシーポリシー */
@@ -1280,6 +1293,12 @@ tablet.css 641px~1024px
         line-height: 2.4rem;
     }
 
+    /*-------------------------------
+	# お問い合わせ
+	-------------------------------*/
+    #contact .inputField input{ width: 70%; }
+    #contact .inputField textarea{ width: 70%; }
+
 	/*-------------------------------
 	# page
 	-------------------------------*/
@@ -1421,6 +1440,46 @@ sp.css ~640px
     	width:24px;
     	background-size: 24px 24px;
     }
+
+    .commonCenterBtn button {
+    	width: 36%;
+    }
+
+    /*-------------------------------
+    # お問い合わせ
+    -------------------------------*/
+    #contact .inputName{
+        width: 100%;
+        display: table-row;;
+    }
+    #contact .inputField{
+        width: 100%;
+        display: table-row;;
+        margin: 1% 0;
+    }
+    #contact .inputName p{
+        padding: 1% 0;
+     }
+    #contact .inputField input{
+        width: 100%;
+        margin: 1% 0;
+    }
+    #contact .inputField textarea{ width: 100%; }
+    #contact .confirmBtn{
+        width: 80%;
+    }
+    #contact .button{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: table-row;
+    }
+    #contact .confirmBtn button{
+        width: 100%;
+        padding: 2.5% 0;
+        margin: 2% 0;
+    }
+
 
     /*-------------------------------
     ## ご利用の流れ
