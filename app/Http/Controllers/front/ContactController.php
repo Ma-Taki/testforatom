@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\front\ContactRequest;
+use App\Libraries\FrontUtility as FrontUtil;
 use Mail;
+use Carbon\Carbon;
 
 class ContactController extends Controller
 {
@@ -54,24 +56,19 @@ class ContactController extends Controller
      **/
     public function contact(Request $request){
 
-        $subject = '【エンジニアルート】お問い合わせメール';
-        $body = 'エンジニアルート-お問い合わせメール';
-        $body .= "\n";
-        $body .= "\n";
-        $body .= '【問い合わせ日時】';
-        $body .= "\n";
-        $body .= '【氏名】' .$request->user_name;
-        $body .= "\n";
-        $body .= '【会社名】' .$request->company_name;
-        $body .= "\n";
-        $body .= '【メールアドレス】' .$request->mail;
-        $body .= "\n";
-        $body .= '【お問い合わせ内容】';
-        $body .= "\n";
-        $body .= $request->contactMessage;
-        $header = 'From: contact@engineer-route.solidseed.jp';
-
-        mail('y.suzuki@solidseed.co.jp', $subject, $body, $header);
+        $data = [
+            'user_name' => $request->user_name,
+            'company_name' => $request->company_name,
+            'mail' => $request->mail,
+            'contactMessage' => $request->contactMessage,
+            'date' => Carbon::now()->toDateTimeString()
+        ];
+        $frontUtil = new FrontUtil();
+        Mail::send('front.emails.contact', $data, function ($message) use ($data, $frontUtil) {
+            $message->from($frontUtil->user_contact_mail_from, $frontUtil->user_contact_mail_from_name);
+            $message->to($frontUtil->user_contact_mail_to, $frontUtil->user_contact_mail_to_name);
+            $message->subject(FrontUtil::USER_CONTACT_MAIL_TITLE);
+        });
 
         return view('front.contact_complete');
     }
