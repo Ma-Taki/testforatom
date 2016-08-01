@@ -13,7 +13,10 @@ class Tr_items extends Model
     public $timestamps = false;
 
     // 日付型で取得する項目
-    protected $dates = ['service_start_date', 'service_end_date'];
+    protected $dates = [
+        'registration_date',
+        'service_start_date',
+        'service_end_date'];
 
     /**
      * 配列を使っての複数代入を許可する項目

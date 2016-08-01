@@ -140,8 +140,45 @@ class HtmlUtility
         return $result;
     }
 
+    /**
+     * 案件一覧ページング
+     *
+     * @param LengthAwarePaginator $itemList
+     * @return String paginate用html
+     */
+    public static function paginate($itemList){
+        $result = '';
+        $firstPageNum;
+        if ($itemList->currentPage() <= 4) {
+            $firstPageNum = 1;
+        } elseif ($itemList->currentPage() > $itemList->lastPage() - 7) {
+            $firstPageNum = $itemList->lastPage() - 7;
+        } else {
+            $firstPageNum = $itemList->currentPage() - 3;
+        }
 
+        // Prev
+        if ($itemList->currentPage() <= 1) {
+            $result .= '<li><a class="disabled" href="' .$itemList->previousPageUrl() .'">Prev</a></li>';
+        } else {
+            $result .= '<li><a href="' .$itemList->previousPageUrl() .'">Prev</a></li>';
+        }
 
+        // page
+        for ($i = $firstPageNum; $i <= $firstPageNum + 7; $i++) {
+            if ($i == $itemList->currentPage()) {
+                $result .= '<li><a class="active" href="/front/search?page=' .$i .'">' .$i .'</a></li>';
+            } else {
+                $result .= '<li><a href="/front/search?page=' .$i .'">' .$i .'</a></li>';
+            }
+        }
 
-
+        // Next
+        if ($itemList->currentPage() >= $itemList->lastPage()) {
+            $result .= '<li><a class="disabled" href="' .$itemList->nextPageUrl() .'">Next</a></li>';
+        } else {
+            $result .= '<li><a href="' .$itemList->nextPageUrl() .'">Next</a></li>';
+        }
+        return $result;
+    }
 }

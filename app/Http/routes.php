@@ -44,6 +44,12 @@ Route::get('/front/about', function () {
     return view('front.about');
 });
 
+// フロント：案件一覧
+Route::get('/front/search', 'front\ItemController@searchItem');
+
+// フロント：急募案件
+Route::get('/front/pickup', 'front\ItemController@searchItem');
+
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {
     return view('admin.login');

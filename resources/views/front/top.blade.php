@@ -31,7 +31,7 @@
                 <section class="newJob">
                     <div class="topJobWrap">
                         <h1 class="alignleft">新着案件</h1>
-                        <p class="alignright invisible-sp"><a href="#">新着案件一覧へ</a></p>
+                        <p class="alignright invisible-sp"><a href="/front/search?order=RegistrationDesc">新着案件一覧へ</a></p>
                         <ul class="fs0 clear">
 @foreach($newItemList as $newItem)
                             <li>
@@ -56,7 +56,7 @@
                 <section class="attentionJob">
                     <div class="topJobWrap">
                         <h1 class="alignleft">急募案件</h1>
-                        <p class="alignright invisible-sp"><a href="#">急募案件一覧へ</a></p>
+                        <p class="alignright invisible-sp"><a href="/front/search?tag=1order=RegistrationDesc">急募案件一覧へ</a></p>
                         <ul class="fs0 clear">
 @foreach($pickUpItemList as $pickUpItem)
                             <li>
@@ -89,6 +89,7 @@
                         <li class="pucat03"><a href="#">高単価</a></li>
                         <li class="pucat04"><a href="#">ロースキル</a></li>
                         <li class="pucat05"><a href="#">現場直</a></li>
+                        <li class="pucat06"><a href="#">女性が活躍</a></li>
                     </ul>
                 </div>
             </section><!-- /.pickupCat -->

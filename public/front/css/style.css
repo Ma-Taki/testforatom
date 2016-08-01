@@ -201,6 +201,230 @@ textarea{ font-size: 1.4rem; }
     white-space: pre-wrap;
 }
 
+.paginate {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.page{
+    display: table;
+    padding-top: 10%;
+    margin: 0 auto;
+}
+
+.page li{
+    display: table-cell;
+}
+
+.page li a{
+    color: #90adb7;
+    border: 1px solid #5e8796;
+    padding: 0.6rem;
+    margin: 0 0.1rem;
+    font-size: 1.5rem;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.page .active{
+    color: #fff;
+    background: #5e8796;
+    pointer-events: none;
+}
+
+.page .disabled{
+    pointer-events: none;
+}
+
+/*-------------------------------
+## 該当案件一覧
+-------------------------------*/
+#itemList .titleArea{
+    position: relative;
+}
+
+#itemList .title .itemCount{
+    text-align: right;
+    font-size: 1.4rem;
+    font-weight: normal;
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+}
+
+#itemList .title .itemCount .num{
+    font-size: 2rem;
+    color: #5e8796;
+}
+
+#itemList .conditions{
+    background: none;
+}
+
+#itemList .conditions span{
+    width: 20%;
+    float: right;
+    position: relative;
+    display: inline-block;
+    border: solid 1px #bfbfbf;
+}
+
+#itemList .conditions span:after{
+    content: "\25BC";
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    margin-right: 5px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+#itemList .conditions select,
+#itemList .conditions option {
+    width: 100%;
+    line-height: 30px;
+    padding: 0px;
+    margin: 0;
+    text-indent: 1em;
+    background-color: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+}
+
+.item {
+    padding-top: 6%;
+}
+
+#itemList .itemHeader {
+    display: table;
+    width: 100%;
+}
+
+#itemList .new {
+    display: table-cell;;
+    font-size: 1.4rem;
+    width: 10%;
+    color: #fff;
+    background: #415e69;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#itemList .name{
+    display: table-cell;
+    font-size: 1.6rem;
+    color: #fff;
+    background: #5e8796;
+    vertical-align: middle;
+    padding: 1% 1.5%;
+    position: relative;
+    border-radius: 0 8px 0 0;
+}
+
+#itemList .itemHeader p:first-child{
+    border-radius: 8px 0 0 0;
+}
+
+#itemList .name span{
+    font-size: 1.2rem;
+    position: absolute;
+    right: 2%;
+    bottom: 25%;
+}
+
+#itemList .itemInfo{
+    width: 100%;
+    margin: 0 auto;
+    padding: 2% 0;
+    border: 1px solid #5e8796;
+    border-radius: 0 0 8px 8px;
+}
+
+#itemList .itemInfoInr{
+    width: 95%;
+    margin: 0 auto;
+}
+
+#itemList .pickUp{
+    display: table;
+    width: 100%;
+    padding: 0 0 0 2%;
+}
+
+#itemList .rate{
+    display: table-cell;;
+    width: 10%;
+    color: #5e8796;
+    background: #becfd5;
+    font-weight: bold;
+    text-align: center;
+}
+
+#itemList .rate_detail{
+    display: table-cell;
+    width: 39%;
+    font-size: 1.6rem;
+    color: #ff0000;
+    background: #eef3f4;
+    font-weight: bold;
+    padding: 2% 2.5%;
+}
+
+#itemList .area{
+    display: table-cell;;
+    width: 10%;
+    color: #5e8796;
+    background: #becfd5;
+    font-weight: bold;
+    text-align: center;
+}
+
+#itemList .area_detail{
+    display: table-cell;
+    width: 39%;
+    background: #eef3f4;
+    font-weight: bold;
+    padding: 2% 2.5%;
+}
+
+#itemList .pckUpWhtSpce{
+    display: table-cell;
+    width: 2%;
+}
+
+#itemList .other{
+    display: table;
+    width: 100%;
+    border-bottom: 1px dotted #5e8796;
+}
+
+#itemList .otherName{
+    display: table-cell;;
+    width: 20%;
+    font-weight: bold;
+    padding: 1% 2%;
+}
+
+
+#itemList .otherValue{
+    display: table-cell;;
+    width: 80%;
+    padding: 1% 2%;
+}
+
+#itemList .detail{
+    padding-top: 2%;
+}
+
+#itemList .otherValue .wordPunctuation:last-child{
+    display: none;
+}
+
 /*-------------------------------
 ## お問い合わせ
 -------------------------------*/
@@ -888,11 +1112,27 @@ nav ul .active{ background: #536C75; }
 	color: #fff;
 }
 
+.pucat06 a{
+	border: 3px solid #A78260;
+	color: #A78260;
+}
+
+.pucat06 a:before{
+	background: url(../images/ico-pickup06.png)no-repeat;
+	background-size: 32px 64px;
+}
+
+.pucat06 a:hover{
+	background: #A78260;
+	color: #fff;
+}
+
 .pucat01 a:hover:before,
 .pucat02 a:hover:before,
 .pucat03 a:hover:before,
 .pucat04 a:hover:before,
-.pucat05 a:hover:before{
+.pucat05 a:hover:before,
+.pucat06 a:hover:before{
 	background-position: 0 -32px;
 	transition: 0.25s;
 }
