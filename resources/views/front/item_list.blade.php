@@ -6,23 +6,36 @@
     use App\Libraries\HtmlUtility as HtmlUtil;
     use Carbon\Carbon;
 ?>
-<link rel="stylesheet" href="{{ url('/front/css/simplePagination.css') }}">
-<script type="text/javascript" charset="utf-8" src="{{ url('/front/js/jquery.simplePagination.js') }}"></script>
 <div class="wrap">
-    <div id="itemList" class="content">
+    <div id="item" class="content">
         <div class="content-left">
-            <h1 class="title">該当案件一覧<span class="itemCount">該当件数：<span class="num">{{ $itemList->total() }}</span>件</span></h1>
+            <div class="titleArea">
+                <h1 class="title">該当案件一覧</h1>
+                <span class="itemCount">該当件数：<span class="num">{{ $itemList->total() }}</span>件</span>
+            </div>
             <hr class="partitionLine_02">
 
             <div class="conditions">
                 <div class="search"></div>
-                <span>
-                    <select>
-                        <option value="RegistrationDesc">新着順</option>
-                        <option value="ServiceAsc">受付終了日が近い順</option>
-                        <option value="RateDesc">報酬が高い順</option>
-                    </select>
-                </span>
+                <div class="sort">
+                    <label>
+                        <span class="selectBox">
+                            <select id="order" class="">
+                                <option value="RegistrationDesc" {{ $params['order'] === 'RegistrationDesc' ? "selected" : ""}}>新着順</option>
+                                <option value="ServiceAsc" {{ $params['order'] === 'ServiceAsc' ? "selected" : ""}}>受付終了日が近い順</option>
+                                <option value="RateDesc" {{ $params['order'] === 'RateDesc' ? "selected" : ""}}>報酬が高い順</option>
+                            </select>
+                        </span>
+                        <span class="selectBox">
+                            <select id="limit" class="">
+                                <option value="10" {{ $params['limit'] == 10 ? "selected" : ""}}>10</option>
+                                <option value="20" {{ $params['limit'] == 20 ? "selected" : ""}}>20</option>
+                                <option value="50" {{ $params['limit'] == 50 ? "selected" : ""}}>50</option>
+                            </select>
+                        </span>
+                        件表示
+                    </label>
+                </div>
             </div>
 
 @foreach($itemList as $item)
@@ -63,16 +76,16 @@
                         </div>
                         <p class="detail">{{ $item->detail }}</p>
                     <div class="commonCenterBtn">
-                        <a href="/front/search?id={{ $item->id }}"><button><p>詳細を見る<p></button></a>
+                        <a href="/front/detail?id={{ $item->id }}"><button><p>詳細を見る<p></button></a>
                         </div>
                     </div>
                 </div>
             </div>
 @endforeach
-
             <div class="paginate">
                 <ul class="page">
-                    {!! HtmlUtil::paginate($itemList) !!}
+
+                    {!! HtmlUtil::paginate($itemList, $params) !!}
                 </ul>
             </div>
 

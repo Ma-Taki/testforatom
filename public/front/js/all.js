@@ -1,3 +1,51 @@
+//　itemSearch
+jQuery(function($){
+	$('#order').change(function (){
+		var params = getParameter();
+        params['order'] = $(this).val();
+        window.location.href = setParameter(params);
+    })
+
+	$('#limit').change(function (){
+		var params = getParameter();
+        params['limit'] = $(this).val();
+        window.location.href = setParameter(params);
+	})
+
+	var params = getParameter();
+	if (params['page'] == '1') {
+		$('.paginate .page #prevBtn').addClass('disabled');
+	}
+
+    function setParameter( paramsArray ) {
+        var resurl = location.href.replace(/\?.*$/,"");
+        for ( key in paramsArray ) {
+            resurl += (resurl.indexOf('?') == -1) ? '?':'&';
+			if (key != 'page') {
+            	resurl += key + '=' + paramsArray[key];
+			}
+        }
+        return resurl;
+    }
+
+    function getParameter(){
+    	var paramsArray = [];
+    	var url = location.href;
+    	parameters = url.split("#");
+    	if( parameters.length > 1 ) {
+        	url = parameters[0];
+    	}
+    	parameters = url.split("?");
+    	if( parameters.length > 1 ) {
+        	var params   = parameters[1].split("&");
+        	for ( i = 0; i < params.length; i++ ) {
+           		var paramItem = params[i].split("=");
+           		paramsArray[paramItem[0]] = paramItem[1];
+        	}
+    	}
+    	return paramsArray;
+    }
+});
 
 // slick-slider
 jQuery(function($) {

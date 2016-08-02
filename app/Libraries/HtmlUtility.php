@@ -146,7 +146,9 @@ class HtmlUtility
      * @param LengthAwarePaginator $itemList
      * @return String paginate用html
      */
-    public static function paginate($itemList){
+    public static function paginate($itemList, $params){
+
+
         $result = '';
         $firstPageNum;
         if ($itemList->currentPage() <= 4) {
@@ -157,27 +159,29 @@ class HtmlUtility
             $firstPageNum = $itemList->currentPage() - 3;
         }
 
-        // Prev
-        if ($itemList->currentPage() <= 1) {
-            $result .= '<li><a class="disabled" href="' .$itemList->previousPageUrl() .'">Prev</a></li>';
-        } else {
-            $result .= '<li><a href="' .$itemList->previousPageUrl() .'">Prev</a></li>';
+        $paramStr = '';
+        foreach ($params as $key => $value) {
+            $paramStr .= empty($paramStr) ? '?' : '&';
+            $paramStr .= $key .'=' .$value;
         }
+
+        // Prev
+        $result .= '<li id="prevBtn"><a href="/front/search' .$paramStr .'">Prev</a></li>';
 
         // page
         for ($i = $firstPageNum; $i <= $firstPageNum + 7; $i++) {
             if ($i == $itemList->currentPage()) {
-                $result .= '<li><a class="active" href="/front/search?page=' .$i .'">' .$i .'</a></li>';
+                $result .= '<li><a class="active" href="/front/search' .$paramStr .'">' .$i .'</a></li>';
             } else {
-                $result .= '<li><a href="/front/search?page=' .$i .'">' .$i .'</a></li>';
+                $result .= '<li><a href="/front/search' .$paramStr .'">' .$i .'</a></li>';
             }
         }
 
         // Next
         if ($itemList->currentPage() >= $itemList->lastPage()) {
-            $result .= '<li><a class="disabled" href="' .$itemList->nextPageUrl() .'">Next</a></li>';
+            $result .= '<li><a class="disabled" href="/front/search' .$paramStr .'">Next</a></li>';
         } else {
-            $result .= '<li><a href="' .$itemList->nextPageUrl() .'">Next</a></li>';
+            $result .= '<li><a href="/front/search' .$paramStr .'">Next</a></li>';
         }
         return $result;
     }

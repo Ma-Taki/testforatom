@@ -238,39 +238,59 @@ textarea{ font-size: 1.4rem; }
 /*-------------------------------
 ## 該当案件一覧
 -------------------------------*/
-#itemList .titleArea{
-    position: relative;
+#item .titleArea{
+    width: 100%;
+    display: table;
 }
 
-#itemList .title .itemCount{
+#item .titleArea h1{
+    width: 80%;
+    display: table-cell;
+}
+
+#item .titleArea .itemCount{
+    width: 20%;
+    display: table-cell;
     text-align: right;
+    vertical-align: bottom;
     font-size: 1.4rem;
     font-weight: normal;
-    position: absolute;
-    right: 0%;
-    bottom: 0%;
 }
 
-#itemList .title .itemCount .num{
+#item .titleArea .itemCount .num{
     font-size: 2rem;
     color: #5e8796;
 }
 
-#itemList .conditions{
+#item .conditions{
     background: none;
 }
 
-#itemList .conditions span{
-    width: 20%;
-    float: right;
-    position: relative;
-    display: inline-block;
-    border: solid 1px #bfbfbf;
+#item .conditions .sort{
+    text-align: right;
 }
 
-#itemList .conditions span:after{
+#item .conditions label{
+    font-size: 1.1rem;
+}
+
+#item .conditions .selectBox{
+    position: relative;
+    display: inline-block;
+    border: solid 1px #5e8796;
+}
+
+#item .conditions #order{
+    width: 14rem;
+}
+#item .conditions #limit{
+    width: 4rem;
+}
+
+#item .conditions .selectBox:after{
     content: "\25BC";
     position: absolute;
+    color: #5e8796;
     top: 50%;
     right: 0px;
     margin-right: 5px;
@@ -281,13 +301,13 @@ textarea{ font-size: 1.4rem; }
     z-index: -1;
 }
 
-#itemList .conditions select,
-#itemList .conditions option {
+#item .conditions select,
+#item .conditions option {
     width: 100%;
-    line-height: 30px;
+    line-height: 2.2rem;
     padding: 0px;
     margin: 0;
-    text-indent: 1em;
+    text-indent: 0.6em;
     background-color: transparent;
     border: none;
     -webkit-appearance: none;
@@ -296,16 +316,16 @@ textarea{ font-size: 1.4rem; }
     appearance: none;
 }
 
-.item {
+#item .item {
     padding-top: 6%;
 }
 
-#itemList .itemHeader {
+#item .itemHeader {
     display: table;
     width: 100%;
 }
 
-#itemList .new {
+#item .new {
     display: table-cell;;
     font-size: 1.4rem;
     width: 10%;
@@ -315,7 +335,7 @@ textarea{ font-size: 1.4rem; }
     vertical-align: middle;
 }
 
-#itemList .name{
+#item .name{
     display: table-cell;
     font-size: 1.6rem;
     color: #fff;
@@ -323,21 +343,21 @@ textarea{ font-size: 1.4rem; }
     vertical-align: middle;
     padding: 1% 1.5%;
     position: relative;
-    border-radius: 0 8px 0 0;
+    border-top-right-radius: 8px;
 }
 
-#itemList .itemHeader p:first-child{
-    border-radius: 8px 0 0 0;
+#item .itemHeader p:first-child{
+    border-top-left-radius: 8px;
 }
 
-#itemList .name span{
+#item .name span{
     font-size: 1.2rem;
     position: absolute;
     right: 2%;
     bottom: 25%;
 }
 
-#itemList .itemInfo{
+#item .itemInfo{
     width: 100%;
     margin: 0 auto;
     padding: 2% 0;
@@ -345,18 +365,18 @@ textarea{ font-size: 1.4rem; }
     border-radius: 0 0 8px 8px;
 }
 
-#itemList .itemInfoInr{
+#item .itemInfoInr{
     width: 95%;
     margin: 0 auto;
 }
 
-#itemList .pickUp{
+#item .pickUp{
     display: table;
     width: 100%;
-    padding: 0 0 0 2%;
+    margin-bottom: 2%;
 }
 
-#itemList .rate{
+#item .rate{
     display: table-cell;;
     width: 10%;
     color: #5e8796;
@@ -365,17 +385,17 @@ textarea{ font-size: 1.4rem; }
     text-align: center;
 }
 
-#itemList .rate_detail{
+#item .rate_detail{
     display: table-cell;
     width: 39%;
     font-size: 1.6rem;
-    color: #ff0000;
+    color: #E38585;
     background: #eef3f4;
     font-weight: bold;
     padding: 2% 2.5%;
 }
 
-#itemList .area{
+#item .area{
     display: table-cell;;
     width: 10%;
     color: #5e8796;
@@ -384,7 +404,7 @@ textarea{ font-size: 1.4rem; }
     text-align: center;
 }
 
-#itemList .area_detail{
+#item .area_detail{
     display: table-cell;
     width: 39%;
     background: #eef3f4;
@@ -392,18 +412,18 @@ textarea{ font-size: 1.4rem; }
     padding: 2% 2.5%;
 }
 
-#itemList .pckUpWhtSpce{
+#item .pckUpWhtSpce{
     display: table-cell;
     width: 2%;
 }
 
-#itemList .other{
+#item .other{
     display: table;
     width: 100%;
     border-bottom: 1px dotted #5e8796;
 }
 
-#itemList .otherName{
+#item .otherName{
     display: table-cell;;
     width: 20%;
     font-weight: bold;
@@ -411,18 +431,74 @@ textarea{ font-size: 1.4rem; }
 }
 
 
-#itemList .otherValue{
+#item .otherValue{
     display: table-cell;;
     width: 80%;
     padding: 1% 2%;
 }
 
-#itemList .detail{
+#item .detail{
     padding-top: 2%;
 }
 
-#itemList .otherValue .wordPunctuation:last-child{
+#item .otherValue .wordPunctuation:last-child{
     display: none;
+}
+
+/*-------------------------------
+## 案件詳細
+-------------------------------*/
+#itemDetail .item{
+    padding-top: 3%;
+}
+
+#itemDetail .other:nth-child(2){
+    border-top: 1px dotted #5e8796;
+}
+
+#itemDetail .otherName{
+    text-align: center;
+    font-size: 1.3rem;
+    color: #5e8796;
+    background-color: #eef3f4;
+    padding: 1% 0;
+    vertical-align: middle;
+}
+
+#itemDetail .otherValue{
+    width: 80%;
+    padding: 1% 2%;
+}
+
+#itemDetail .itemTagList{
+    padding-top: 2%;
+}
+
+#itemDetail .tag{
+    font-size: 1.1rem;
+    color: #5e8796;
+    background-color: #eef3f4;
+    display: inline-block;
+    padding: 0 1%;
+    line-height: 3rem;
+    margin: 0.5%;
+}
+
+#itemDetail .commonCenterBtn a button{
+    font-size: 1.3rem;
+}
+
+#itemDetail .keyWordSearch{
+
+}
+
+#item .keyWordSearchForm{
+    width: 100%;
+}
+
+/* こちらもおすすめ */
+.recommended {
+    background:
 }
 
 /*-------------------------------

@@ -46,9 +46,16 @@ Route::get('/front/about', function () {
 
 // フロント：案件一覧
 Route::get('/front/search', 'front\ItemController@searchItem');
+// フロント：案件詳細
+Route::get('/front/detail', 'front\ItemController@detailItem');
+Route::get('/front/tag/{id}', 'front\ItemController@searchItemByTag');
 
 // フロント：急募案件
 Route::get('/front/pickup', 'front\ItemController@searchItem');
+
+
+
+
 
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {
