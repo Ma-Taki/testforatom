@@ -12,11 +12,6 @@ jQuery(function($){
         window.location.href = setParameter(params);
 	})
 
-	var params = getParameter();
-	if (params['page'] == '1') {
-		$('.paginate .page #prevBtn').addClass('disabled');
-	}
-
     function setParameter( paramsArray ) {
         var resurl = location.href.replace(/\?.*$/,"");
         for ( key in paramsArray ) {

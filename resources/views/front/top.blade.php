@@ -35,7 +35,7 @@
                         <ul class="fs0 clear">
 @foreach($newItemList as $newItem)
                             <li>
-                                <a href="#">
+                                <a href="/front/detail?id={{ $newItem->id }}">
                                     <div class="topJobInr">
                                         <img src="/front/images/ico-newjob.png">
                                         <h2>{{ $newItem->name }}</h2>
@@ -48,7 +48,7 @@
 @endforeach
                         </ul>
                         <div class="newItemListLink clear invisible-pc invisible-tab">
-                            <a href="#">新着案件一覧へ</a>
+                            <a href="/front/search?order=RegistrationDesc">新着案件一覧へ</a>
                         </div>
                     </div>
                 </section><!-- /.newJob -->
@@ -56,11 +56,11 @@
                 <section class="attentionJob">
                     <div class="topJobWrap">
                         <h1 class="alignleft">急募案件</h1>
-                        <p class="alignright invisible-sp"><a href="/front/search?tag=1order=RegistrationDesc">急募案件一覧へ</a></p>
+                        <p class="alignright invisible-sp"><a href="/front/tag/1?order=RegistrationDesc">急募案件一覧へ</a></p>
                         <ul class="fs0 clear">
 @foreach($pickUpItemList as $pickUpItem)
                             <li>
-                                <a href="#">
+                                <a href="/front/detail?id={{ $pickUpItem->id }}">
                                     <div class="topJobInr">
                                         <img src="/front/images/ico-attentionJob.png">
                                         <h2>{{ $pickUpItem->name }}</h2>
@@ -73,7 +73,7 @@
 @endforeach
                         </ul>
                         <div class="wantedItemListLink clear invisible-pc invisible-tab">
-                            <a href="#">急募案件一覧へ</a>
+                            <a href="/front/tag/1?order=RegistrationDesc">急募案件一覧へ</a>
                         </div>
                     </div>
 
@@ -84,12 +84,12 @@
                 <div class="contentInr">
                     <h1>特集から案件を探す</h1>
                     <ul class="fs0">
-                        <li class="pucat01"><a href="#">残業少なめ</a></li>
-                        <li class="pucat02"><a href="#">年齢不問</a></li>
-                        <li class="pucat03"><a href="#">高単価</a></li>
-                        <li class="pucat04"><a href="#">ロースキル</a></li>
-                        <li class="pucat05"><a href="#">現場直</a></li>
-                        <li class="pucat06"><a href="#">女性が活躍</a></li>
+                        <li class="pucat01"><a href="/front/tag/3?order=RegistrationDesc">残業少なめ</a></li>
+                        <li class="pucat02"><a href="/front/tag/4?order=RegistrationDesc">年齢不問</a></li>
+                        <li class="pucat03"><a href="/front/tag/5?order=RegistrationDesc">高単価</a></li>
+                        <li class="pucat04"><a href="/front/tag/6?order=RegistrationDesc">ロースキル</a></li>
+                        <li class="pucat05"><a href="/front/tag/7?order=RegistrationDesc">現場直</a></li>
+                        <li class="pucat06"><a href="/front/tag/2?order=RegistrationDesc">女性が活躍</a></li>
                     </ul>
                 </div>
             </section><!-- /.pickupCat -->
@@ -248,10 +248,10 @@
                         <h1>カテゴリーから案件を探す</h1>
                         <div class="categorySearchContent">
 @foreach($parentList as $parentKey => $parent)
-                            <div class="parentCategory">&nbsp;<a href="/item/search?category_id={{ $parentKey }}">{{ $parent }}</div>
+                            <div class="parentCategory">&nbsp;<a href="/front/category/{{ $parentKey }}">{{ $parent }}</div>
                                 <div class="childCategory">
 @foreach($childList[$parentKey] as $child)
-                                    <a href="/item/search?category_id={{ $child->id }}">{{ $child->name }}</a>
+                                    <a href="/front/category/{{ $child->id }}">{{ $child->name }}</a>
 @if(next($childList[$parentKey]) !== FALSE)
                                     <span>|</span>
 @endif
@@ -271,11 +271,11 @@
 @foreach($parentList as $parentKey => $parent)
                                 <li>
                                     <ul>
-                                        <a href="/item/search?category_id={{ $parentKey }}">
+                                        <a href="/front/category/{{ $parentKey }}">
                                             <li class="parentCategory">{{ $parent }}<span class="alignright">+</span></li>
                                         </a>
 @foreach($childList[$parentKey] as $child)
-                                        <a href="/item/search?category_id={{ $child->id }}">
+                                        <a href="/front/category/{{ $child->id }}">
                                             <li class="childCategory">{{ $child->name }}<span class="alignright">></span></li>
                                         </a>
 @endforeach

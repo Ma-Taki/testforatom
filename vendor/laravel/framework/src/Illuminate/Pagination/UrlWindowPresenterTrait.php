@@ -18,13 +18,13 @@ trait UrlWindowPresenterTrait
         }
 
         if (is_array($this->window['slider'])) {
-            $html .= $this->getDots();
-            $html .= $this->getUrlLinks($this->window['slider']);
+            //$html .= $this->getDots();
+            //$html .= $this->getUrlLinks($this->window['slider']);
         }
 
         if (is_array($this->window['last'])) {
-            $html .= $this->getDots();
-            $html .= $this->getUrlLinks($this->window['last']);
+            //$html .= $this->getDots();
+            //$html .= $this->getUrlLinks($this->window['last']);
         }
 
         return $html;

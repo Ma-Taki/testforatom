@@ -103,9 +103,7 @@
         <div class="clear "></div>
 
         <section class="recommended bg">
-            <p>
-                テスト
-            </p>
+            こちらもおすすめ
         </section>
 
         <section class="pickupCat">

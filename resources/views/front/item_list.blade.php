@@ -28,9 +28,9 @@
                         </span>
                         <span class="selectBox">
                             <select id="limit" class="">
-                                <option value="10" {{ $params['limit'] == 10 ? "selected" : ""}}>10</option>
-                                <option value="20" {{ $params['limit'] == 20 ? "selected" : ""}}>20</option>
-                                <option value="50" {{ $params['limit'] == 50 ? "selected" : ""}}>50</option>
+                                <option value="1" {{ $params['limit'] == 1 ? "selected" : ""}}>10</option>
+                                <option value="2" {{ $params['limit'] == 2 ? "selected" : ""}}>20</option>
+                                <option value="3" {{ $params['limit'] == 3 ? "selected" : ""}}>50</option>
                             </select>
                         </span>
                         件表示
@@ -82,11 +82,9 @@
                 </div>
             </div>
 @endforeach
-            <div class="paginate">
-                <ul class="page">
 
-                    {!! HtmlUtil::paginate($itemList, $params) !!}
-                </ul>
+            <div class="paginate">
+                {!! $itemList->links() !!}
             </div>
 
         </div><!-- END CONTENT-LEFT -->

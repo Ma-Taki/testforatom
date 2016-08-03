@@ -225,9 +225,18 @@ textarea{ font-size: 1.4rem; }
     vertical-align: -webkit-baseline-middle;
 }
 
-.page .active{
+.page li span{
+    color: #90adb7;
+    border: 1px solid #5e8796;
+    padding: 0.6rem;
+    margin: 0 0.1rem;
+    font-size: 1.5rem;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.page .active span{
     color: #fff;
-    background: #5e8796;
+    background-color: #5e8796;
     pointer-events: none;
 }
 

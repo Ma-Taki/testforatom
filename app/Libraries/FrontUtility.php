@@ -16,6 +16,12 @@ class FrontUtility
         '90万円以上' => 90,
     ];
 
+    const SEARCH_PAGINATE = [
+        '1' => 10,
+        '2' => 20,
+        '3' => 50,
+    ];
+
     // トップページに表示する新着案件数
     const NEW_ITEM_MAX_RESULT = 4;
 

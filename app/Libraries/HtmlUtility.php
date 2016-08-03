@@ -140,6 +140,15 @@ class HtmlUtility
         return $result;
     }
 
+    public static function getParamsString($params){
+        $result = '';
+        foreach ($params as $key => $value) {
+            $result .= empty($result) ? '?':'&';
+            $result .= $key ."=" .$value;
+        }
+        return $result;
+    }
+
     /**
      * 案件一覧ページング
      *
@@ -166,7 +175,7 @@ class HtmlUtility
         }
 
         // Prev
-        $result .= '<li id="prevBtn"><a href="/front/search' .$paramStr .'">Prev</a></li>';
+//        $result .= '
 
         // page
         for ($i = $firstPageNum; $i <= $firstPageNum + 7; $i++) {
@@ -179,7 +188,6 @@ class HtmlUtility
 
         // Next
         if ($itemList->currentPage() >= $itemList->lastPage()) {
-            $result .= '<li><a class="disabled" href="/front/search' .$paramStr .'">Next</a></li>';
         } else {
             $result .= '<li><a href="/front/search' .$paramStr .'">Next</a></li>';
         }

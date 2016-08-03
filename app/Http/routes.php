@@ -49,7 +49,7 @@ Route::get('/front/search', 'front\ItemController@searchItem');
 // フロント：案件詳細
 Route::get('/front/detail', 'front\ItemController@detailItem');
 Route::get('/front/tag/{id}', 'front\ItemController@searchItemByTag');
-
+Route::get('/front/category/{id}', 'front\ItemController@searchItemByCategory');
 // フロント：急募案件
 Route::get('/front/pickup', 'front\ItemController@searchItem');
 

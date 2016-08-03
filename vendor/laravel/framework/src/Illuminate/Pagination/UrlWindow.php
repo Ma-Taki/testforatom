@@ -44,7 +44,7 @@ class UrlWindow
      */
     public function get($onEachSide = 3)
     {
-        if ($this->paginator->lastPage() < ($onEachSide * 2) + 6) {
+        if ($this->paginator->lastPage() < 8) {
             return $this->getSmallSlider();
         }
 
@@ -73,7 +73,9 @@ class UrlWindow
      */
     protected function getUrlSlider($onEachSide)
     {
-        $window = $onEachSide * 2;
+        // $window = $onEachSide * 2;
+        $window = 8;
+
 
         if (! $this->hasPages()) {
             return [
@@ -86,7 +88,7 @@ class UrlWindow
         // If the current page is very close to the beginning of the page range, we will
         // just render the beginning of the page range, followed by the last 2 of the
         // links in this list, since we will not have room to create a full slider.
-        if ($this->currentPage() <= $window) {
+        if ($this->currentPage() < $window) {
             return $this->getSliderTooCloseToBeginning($window);
         }
 
@@ -112,9 +114,10 @@ class UrlWindow
     protected function getSliderTooCloseToBeginning($window)
     {
         return [
-            'first'  => $this->paginator->getUrlRange(1, $window + 2),
+//            'first'  => $this->paginator->getUrlRange(1, $window + 2),
+            'first'  => $this->paginator->getUrlRange(1, $window),
             'slider' => null,
-            'last'   => $this->getFinish(),
+            'last'   => null,
         ];
     }
 
@@ -126,15 +129,22 @@ class UrlWindow
      */
     protected function getSliderTooCloseToEnding($window)
     {
+        /*
         $last = $this->paginator->getUrlRange(
             $this->lastPage() - ($window + 2),
             $this->lastPage()
         );
+        */
+
+        $last = $this->paginator->getUrlRange(
+            $this->lastPage() - ($window),
+            $this->lastPage()
+        );
 
         return [
-            'first'  => $this->getStart(),
+            'first'  => $last,
             'slider' => null,
-            'last'   => $last,
+            'last'   => null,
         ];
     }
 
@@ -146,10 +156,17 @@ class UrlWindow
      */
     protected function getFullSlider($onEachSide)
     {
+        /*
         return [
             'first'  => $this->getStart(),
             'slider' => $this->getAdjacentUrlRange($onEachSide),
             'last'   => $this->getFinish(),
+        ];
+        */
+        return [
+            'first'  => $this->getAdjacentUrlRange($onEachSide),
+            'slider' => null,
+            'last'   => null,
         ];
     }
 
@@ -162,8 +179,8 @@ class UrlWindow
     public function getAdjacentUrlRange($onEachSide)
     {
         return $this->paginator->getUrlRange(
-            $this->currentPage() - $onEachSide,
-            $this->currentPage() + $onEachSide
+            $this->currentPage() - 3,
+            $this->currentPage() + 4
         );
     }
 
