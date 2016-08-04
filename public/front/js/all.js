@@ -15,8 +15,8 @@ jQuery(function($){
     function setParameter( paramsArray ) {
         var resurl = location.href.replace(/\?.*$/,"");
         for ( key in paramsArray ) {
-            resurl += (resurl.indexOf('?') == -1) ? '?':'&';
 			if (key != 'page') {
+            	resurl += (resurl.indexOf('?') == -1) ? '?':'&';
             	resurl += key + '=' + paramsArray[key];
 			}
         }

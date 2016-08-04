@@ -109,7 +109,7 @@
                             </ul>
                         </div><!-- /.tabMenu -->
 
-                        <form name="form" role="form" method="POST" action="{{ url('/item/search') }}">
+                        <form name="form" role="form" method="GET" action="{{ url('/front/search') }}">
 
                             <div class="tabBox">
                                 <div class="tabBoxInr">
@@ -151,7 +151,7 @@
                                         <ul>
 @foreach($seach_rateList as $key => $value)
                                             <li class="tabContentElementHalf">
-                                                <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $value }}">{{ $key }}</label>
+                                                <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
                                             </li>
 @endforeach
                                         </ul>

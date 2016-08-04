@@ -148,49 +148,4 @@ class HtmlUtility
         }
         return $result;
     }
-
-    /**
-     * 案件一覧ページング
-     *
-     * @param LengthAwarePaginator $itemList
-     * @return String paginate用html
-     */
-    public static function paginate($itemList, $params){
-
-
-        $result = '';
-        $firstPageNum;
-        if ($itemList->currentPage() <= 4) {
-            $firstPageNum = 1;
-        } elseif ($itemList->currentPage() > $itemList->lastPage() - 7) {
-            $firstPageNum = $itemList->lastPage() - 7;
-        } else {
-            $firstPageNum = $itemList->currentPage() - 3;
-        }
-
-        $paramStr = '';
-        foreach ($params as $key => $value) {
-            $paramStr .= empty($paramStr) ? '?' : '&';
-            $paramStr .= $key .'=' .$value;
-        }
-
-        // Prev
-//        $result .= '
-
-        // page
-        for ($i = $firstPageNum; $i <= $firstPageNum + 7; $i++) {
-            if ($i == $itemList->currentPage()) {
-                $result .= '<li><a class="active" href="/front/search' .$paramStr .'">' .$i .'</a></li>';
-            } else {
-                $result .= '<li><a href="/front/search' .$paramStr .'">' .$i .'</a></li>';
-            }
-        }
-
-        // Next
-        if ($itemList->currentPage() >= $itemList->lastPage()) {
-        } else {
-            $result .= '<li><a href="/front/search' .$paramStr .'">Next</a></li>';
-        }
-        return $result;
-    }
 }

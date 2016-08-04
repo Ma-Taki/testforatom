@@ -108,6 +108,7 @@ textarea{ font-size: 1.4rem; }
 .content-left{
     width: 75%;
     float: left;
+    margin-bottom: 5%;
 }
 
 .content-right{
@@ -243,6 +244,22 @@ textarea{ font-size: 1.4rem; }
 .page .disabled{
     pointer-events: none;
 }
+
+h1.SearchTitle{
+    font-size: 20px;
+	margin-bottom: 24px;
+}
+
+h1.SearchTitle:before{
+	content: " ";
+	background: url(../images/h1search.png)no-repeat;
+	width: 20px;
+	height: 20px;
+	background-size: 16px 16px;
+	background-position: 0 4px;
+	display: inline-block;
+}
+
 
 /*-------------------------------
 ## 該当案件一覧
@@ -541,7 +558,7 @@ textarea{ font-size: 1.4rem; }
 }
 
 #contact .inputField input{
-    width: 50%;
+    width: 83.7%;
     font-size: 1.4rem;
     border: 1px solid #5e8796;
     border-radius: 5px;
@@ -549,7 +566,7 @@ textarea{ font-size: 1.4rem; }
 }
 
 #contact .inputField textarea{
-    width: 50%;
+    width: 83.7%;
     font-size: 1.4rem;
     border: 1px solid #5e8796;
     border-radius: 5px;
@@ -557,6 +574,27 @@ textarea{ font-size: 1.4rem; }
 
 #contact p.mailConfirmText{
     padding-top: 2%;
+}
+
+#contact .userNameTable{
+    display: table;
+    width: 85%;
+}
+
+.userNameTable .table-row:nth-child(2) label{
+    padding-top: 2%;
+}
+
+#contact .userNameTable label{
+    font-size: 1.3rem;
+    width: 50%;
+    display: table-cell;
+}
+
+#contact .userNameTable input{
+    width: 85%;
+    padding: 2%;
+    margin-left: 2%;
 }
 
 .confirmBtn{
@@ -1545,16 +1583,20 @@ nav ul .active{ background: #536C75; }
 # footer
 -------------------------------*/
 footer{
-    margin-top: 100px;
 	text-align: center;
+}
+
+footer ul{
+    padding-top: 10%;
 }
 
 footer li{
 	display: inline-block;
-	padding: 40px 32px;
+	padding: 0 3% 1rem 3%;
 }
 
 footer li a{
+    font-size: 1.2rem;
 	color: #536c75;
 }
 
@@ -1565,8 +1607,8 @@ footer li a:hover{
 footer p{
 	background: #5E8796;
 	color: #fff;
-	padding: 16px 0;
-	font-size: 12px;
+	padding: 1.6rem 0;
+	font-size: 1.2rem;
 }
 
 /*===============================
@@ -1621,10 +1663,12 @@ tablet.css 641px~1024px
     /*-------------------------------
 	# お問い合わせ
 	-------------------------------*/
-    #contact .inputField input{ width: 70%; }
-    #contact .inputField textarea{ width: 70%; }
+    #contact .inputField input{ width: 100%; }
+    #contact .inputField textarea{ width: 100%; }
+    #contact .userNameTable{ width: 100%; }
+    #contact .userNameTable input{ width: 86%; }
 
-	/*-------------------------------
+    /*-------------------------------
 	# page
 	-------------------------------*/
 	.contentInr{

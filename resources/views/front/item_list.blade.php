@@ -84,7 +84,9 @@
 @endforeach
 
             <div class="paginate">
-                {!! $itemList->links() !!}
+                {!! $itemList->appends(['page' => $params['page'],
+                                        'order' => $params['order'],
+                                        'limit' => $params['limit']])->links() !!}
             </div>
 
         </div><!-- END CONTENT-LEFT -->
@@ -92,6 +94,18 @@
             @include('front.common.sideInfo')
         </div><!-- END CONTENT-RIGHT -->
         <div class="clear"></div>
+
+        <section class="pickupCat">
+            <h1 class="SearchTitle">特集から案件を探す</h1>
+            <ul class="fs0">
+                <li class="pucat01"><a href="#">残業少なめ</a></li>
+                <li class="pucat02"><a href="#">年齢不問</a></li>
+                <li class="pucat03"><a href="#">高単価</a></li>
+                <li class="pucat04"><a href="#">ロースキル</a></li>
+                <li class="pucat05"><a href="#">現場直</a></li>
+                <li class="pucat06"><a href="#">女性が活躍</a></li>
+            </ul>
+        </section><!-- /.pickupCat -->
 
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->

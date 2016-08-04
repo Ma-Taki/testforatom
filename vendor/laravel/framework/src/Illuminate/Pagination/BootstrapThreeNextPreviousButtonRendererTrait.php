@@ -10,7 +10,7 @@ trait BootstrapThreeNextPreviousButtonRendererTrait
      * @param  string  $text
      * @return string
      */
-    public function getPreviousButton($text = 'prev')
+    public function getPreviousButton($text = 'Prev')
     {
         // If the current page is less than or equal to one, it means we can't go any
         // further back in the pages, so we will render a disabled previous button
@@ -32,7 +32,7 @@ trait BootstrapThreeNextPreviousButtonRendererTrait
      * @param  string  $text
      * @return string
      */
-    public function getNextButton($text = 'next')
+    public function getNextButton($text = 'Next')
     {
         // If the current page is greater than or equal to the last page, it means we
         // can't go any further into the pages, as we're already on this last page

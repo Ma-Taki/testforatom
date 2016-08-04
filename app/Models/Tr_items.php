@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Tr_items extends Model
 {
@@ -126,6 +127,14 @@ class Tr_items extends Model
          return $this->belongsTo('App\Models\Tr_admin_user', 'admin_id');
      }
 
-
-
+     /**
+      * エントリー受付期間中
+      */
+      public function scopeEntryPossible($query)
+      {
+        $today = Carbon::today();
+        return $query->where('delete_flag', '=', false)
+                     ->where('service_start_date', '<=', $today)
+                     ->where('service_end_date', '>=', $today);
+      }
 }

@@ -8,10 +8,10 @@
                     <p class="alignright invisible-pc invisible-tab">></p>
                 </a>
             </li>
-            <li><a href="#"><img src="/front/images/sBnr01.png"></a></li>
+            <li><a href="{{ url('/') }}"><img src="/front/images/sBnr01.png"></a></li>
             <li><a href="{{ url('/front/question#aboutFreeEngineer') }}"><img src="/front/images/sBnr02.png"></a></li>
-            <li><a href="#"><img src="/front/images/sBnr03.png"></a></li>
-            <li><a href="#"><img src="/front/images/sBnr04.png"></a></li>
+            <li><a href="{{ url('/front/flow') }}"><img src="/front/images/sBnr03.png"></a></li>
+            <li><a href="{{ url('/front/question') }}"><img src="/front/images/sBnr04.png"></a></li>
         </ul>
     </div>
     <div class="invisible-pc invisible-tab">
