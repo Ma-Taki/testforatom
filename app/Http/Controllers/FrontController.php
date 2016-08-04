@@ -65,39 +65,28 @@ class FrontController extends Controller
         }
 
         // スキルカテゴリーを取得
-        $skill_categories = Ms_skill_categories::where('master_type', '!=', mdlUtil::MASTER_TYPE_INDEX_ONLY)
-                                     ->orderBy('sort_order', 'asc')
-                                     ->get();
+        $skill_categories = Ms_skill_categories::getNotIndexOnly();
 
         // システム種別を取得
-        $sys_types = Ms_sys_types::where('master_type', '!=', mdlUtil::MASTER_TYPE_INDEX_ONLY)
-                                 ->orderBy('sort_order', 'asc')
-                                 ->get();
+        $sys_types = Ms_sys_types::getNotIndexOnly();
 
         // 報酬
         $seach_rateList = frntUtil::SEARCH_CONDITION_RATE;
 
         // 業種
-        $biz_categories = Ms_biz_categories::where('master_type', '!=', mdlUtil::MASTER_TYPE_INDEX_ONLY)
-                                           ->orderBy('sort_order', 'asc')
-                                           ->get();
+        $biz_categories = Ms_biz_categories::getNotIndexOnly();
 
         // 勤務地
-        $areas = Ms_areas::where('master_type', '!=', mdlUtil::MASTER_TYPE_INDEX_ONLY)
-                         ->orderBy('sort_order', 'asc')
-                         ->get();
+        $areas = Ms_areas::getNotIndexOnly();
 
         // ポジション
-        $job_types = Ms_job_types::where('master_type', '!=', mdlUtil::MASTER_TYPE_INDEX_ONLY)
-                                 ->orderBy('sort_order', 'asc')
-                                 ->get();
+        $job_types = Ms_job_types::getNotIndexOnly();
 
         // 親カテゴリー
-        $parentCategories = Tr_search_categories::where('parent_id', null)
-                                                ->get();
+        $parentCategories = Tr_search_categories::getParentCategories();
+
         // 子カテゴリー
-        $childCategories = Tr_search_categories::where('parent_id', '!=', null)
-                                               ->get();
+        $childCategories = Tr_search_categories::getChildCategories();
 
         $parentList = array();
         $childWorkList = array();

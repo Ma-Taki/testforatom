@@ -98,12 +98,13 @@ class ItemController extends Controller
                             ->orderBy($sortOrder['columnName'], $sortOrder['sort'])
                             ->paginate(FrntUtil::SEARCH_PAGINATE[$limit]);
 
-        // 必須パラメータを作成
+        // パラメータを作成
         $params = [
             'order' => $order,
             'limit' => $limit,
             'page' => $page,
         ];
+        $params = array_merge($params, $request->all());
 
         return view('front.item_list', compact('itemList','params'));
     }

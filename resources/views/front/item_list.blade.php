@@ -4,7 +4,13 @@
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
+    use App\Libraries\FrontUtility as FrntUtil;
     use Carbon\Carbon;
+    use App\Models\Ms_skill_categories;
+    use App\Models\Ms_sys_types;
+    use App\Models\Ms_biz_categories;
+    use App\Models\Ms_areas;
+    use App\Models\Ms_job_types;
 ?>
 <div class="wrap">
     <div id="item" class="content">
@@ -16,7 +22,127 @@
             <hr class="partitionLine_02">
 
             <div class="conditions">
-                <div class="search"></div>
+                <div class="search">
+                    <div class="tabBox">
+                        <div class="tabBoxInr">
+                            <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+@foreach(Ms_skill_categories::getNotIndexOnly() as $skill_category)
+@if(!$skill_category->skills->isEmpty())
+                            <div class="tabContent">
+                                <h3>{{ $skill_category->name }}</h3>
+                                <ul>
+@foreach($skill_category->skills as $skill)
+                                    <li class="tabContentElementOneThird">
+                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
+                                    </li>
+@endforeach
+                                </ul>
+                            </div>
+@endif
+@endforeach
+                        </div>
+
+                        <div class="tabBoxInr">
+                            <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                            <div class="tabContent">
+                                <ul>
+@foreach(Ms_sys_types::getNotIndexOnly() as $sys_type)
+                                    <li class="tabContentElementHalf">
+                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}">{{ $sys_type->name }}</label>
+                                    </li>
+@endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tabBoxInr">
+                            <p class="attention">1個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                            <div class="tabContent">
+                                <ul>
+@foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
+                                    <li class="tabContentElementHalf">
+                                        <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
+                                    </li>
+@endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tabBoxInr">
+                            <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                            <div class="tabContent">
+                                <ul>
+@foreach(Ms_biz_categories::getNotIndexOnly() as $biz_category)
+                                    <li class="tabContentElementHalf">
+                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="biz_categories[]" value="{{ $biz_category->id }}">{{ $biz_category->name }}</label>
+                                    </li>
+@endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tabBoxInr">
+                            <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                            <div class="tabContent">
+                                <ul>
+@foreach(Ms_areas::getNotIndexOnly() as $area)
+                                    <li class="tabContentElementHalf">
+                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="areas[]" value="{{ $area->id }}">{{ $area->name }}</label>
+                                    </li>
+@endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tabBoxInr">
+                            <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                            <div class="tabContent">
+                                <ul>
+@foreach(Ms_job_types::getNotIndexOnly() as $job_type)
+                                    <li class="tabContentElementHalf">
+                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="job_types[]" value="{{ $job_type->id }}">{{ $job_type->name }}</label>
+                                    </li>
+@endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- /.tabBox -->
+                    <p>選択した項目</p>
+                    <div class="searchElement">
+                        <div id="tagSelectedSkill">
+                            <p class="tagSelectedName">スキル</p>
+                            <ul>
+                                <li></li>
+                            </ul>
+                            <hr class="partitionLine">
+                        </div>
+                        <div id="tagSelectedSysType">
+                            <p class="tagSelectedName">システム種別</a>
+                            <ul></ul>
+                            <hr class="partitionLine">
+                        </div>
+                        <div id="tagSelectedRate">
+                            <p class="tagSelectedName">報酬</a>
+                            <ul></ul>
+                            <hr class="partitionLine">
+                        </div>
+                        <div id="tagSelectedBizCategory">
+                            <p class="tagSelectedName">業種</a>
+                            <ul></ul>
+                            <hr class="partitionLine">
+                        </div>
+                        <div id="tagSelectedArea">
+                            <p class="tagSelectedName">勤務地</a>
+                            <ul></ul>
+                            <hr class="partitionLine">
+                        </div>
+                        <div id="tagSelectedPosition">
+                            <p class="tagSelectedName">ポジション</a>
+                            <ul></ul>
+                            <hr class="partitionLine">
+                        </div>
+                    </div>
+                </div>
                 <div class="sort">
                     <label>
                         <span class="selectBox">
@@ -84,9 +210,7 @@
 @endforeach
 
             <div class="paginate">
-                {!! $itemList->appends(['page' => $params['page'],
-                                        'order' => $params['order'],
-                                        'limit' => $params['limit']])->links() !!}
+                {!! $itemList->appends($params)->links() !!}
             </div>
 
         </div><!-- END CONTENT-LEFT -->

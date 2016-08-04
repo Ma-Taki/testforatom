@@ -11,4 +11,20 @@ class Tr_search_categories extends Model
 
     // timestampの自動更新を明示的にOFF
     public $timestamps = false;
+
+    /**
+     * 親カテゴリーを取得
+     */
+    public function scopeGetParentCategories($query){
+        return $query->where('parent_id', null)
+                     ->get();
+    }
+
+    /**
+     * 子カテゴリーを取得
+     */
+    public function scopeGetChildCategories($query){
+        return $query->where('parent_id', '!=', null)
+                     ->get();
+    }
 }

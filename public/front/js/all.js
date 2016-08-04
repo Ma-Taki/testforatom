@@ -1,5 +1,16 @@
 //　itemSearch
 jQuery(function($){
+
+/*
+	var params = getParameter();
+	for ( key in params ) {
+		switch (key) {
+			case 'skills%5B%5D':
+				break;
+		}
+	}
+*/
+
 	$('#order').change(function (){
 		var params = getParameter();
         params['order'] = $(this).val();

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Libraries\ModelUtility as mdlUtil;
 
 class Ms_skill_categories extends Model
 {
@@ -19,4 +20,13 @@ class Ms_skill_categories extends Model
                               'skill_category_id',
                               'id');
     }
+
+    /**
+     * indexOnly以外を取得
+     */
+     public function scopeGetNotIndexOnly($query){
+         return $query->where('master_type', '!=', mdlUtil::MASTER_TYPE_INDEX_ONLY)
+                      ->orderBy('sort_order', 'asc')
+                      ->get();
+     }
 }

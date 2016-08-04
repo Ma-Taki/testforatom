@@ -292,6 +292,11 @@ h1.SearchTitle:before{
     background: none;
 }
 
+#item .conditions .search{
+    background: #eef3f4;
+    padding: 2% 3%;
+}
+
 #item .conditions .sort{
     text-align: right;
 }
@@ -897,7 +902,7 @@ li.customBanner{
 }
 
 /* キーワード検索 */
-.search{
+header .search{
 	position: absolute;
 	right: 0;
 	bottom: 12px;
