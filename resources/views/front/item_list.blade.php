@@ -5,6 +5,7 @@
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
     use App\Libraries\FrontUtility as FrntUtil;
+    use App\Libraries\ModelUtility as mdlUtil;
     use Carbon\Carbon;
     use App\Models\Ms_skill_categories;
     use App\Models\Ms_sys_types;
@@ -32,9 +33,11 @@
                                 <h3>{{ $skill_category->name }}</h3>
                                 <ul>
 @foreach($skill_category->skills as $skill)
+@if($skill->master_type !== mdlUtil::MASTER_TYPE_INDEX_ONLY)
                                     <li class="tabContentElementOneThird">
                                         <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
                                     </li>
+@endif
 @endforeach
                                 </ul>
                             </div>

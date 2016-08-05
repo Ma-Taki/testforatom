@@ -31,7 +31,7 @@ html{
 body{
 	line-height:1;
 	color: #333;
-    font-family:Avenir , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+    font-family: "ＭＳ Ｐゴシック", Avenir , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "MS PGothic" , sans-serif;
     -webkit-text-size-adjust: 100%; /* ブラウザの自動調整を行わない */
 }
 
@@ -203,25 +203,25 @@ textarea{ font-size: 1.4rem; }
 }
 
 .paginate {
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
 }
 
 .page{
-    display: table;
+    width: 100%;
     padding-top: 10%;
-    margin: 0 auto;
+    text-align: center;
 }
 
 .page li{
-    display: table-cell;
+    display: inline-block;
+    margin: 0.3rem;
 }
 
 .page li a{
     color: #90adb7;
     border: 1px solid #5e8796;
-    padding: 0.6rem;
-    margin: 0 0.1rem;
+    padding: 0.6rem 1.3rem;
     font-size: 1.5rem;
     vertical-align: -webkit-baseline-middle;
 }
@@ -229,8 +229,7 @@ textarea{ font-size: 1.4rem; }
 .page li span{
     color: #90adb7;
     border: 1px solid #5e8796;
-    padding: 0.6rem;
-    margin: 0 0.1rem;
+    padding: 0.6rem 1.3rem;
     font-size: 1.5rem;
     vertical-align: -webkit-baseline-middle;
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Libraries\FrontUtility as FrntUtil;
 
 class Tr_items extends Model
 {
@@ -130,11 +131,117 @@ class Tr_items extends Model
      /**
       * エントリー受付期間中
       */
-      public function scopeEntryPossible($query)
-      {
+      public function scopeEntryPossible($query) {
         $today = Carbon::today();
         return $query->where('delete_flag', '=', false)
                      ->where('service_start_date', '<=', $today)
                      ->where('service_end_date', '>=', $today);
       }
+
+    /**
+     * スキルIDを配列で受け取り、一つ以上該当の要求スキルを持つ案件を返す。
+     *
+     * @param QueryBuilder $query
+     * @param array $skills
+     * @return QueryBuilder
+     */
+    public function scopeGetItemBySkills($query, $skills) {
+        return $query->when(!empty($skills), function($query) use ($skills) {
+            return $query->join('link_items_skills', 'items.id', '=', 'link_items_skills.item_id')
+                         ->join('skills', 'skills.id', '=', 'link_items_skills.skill_id')
+                         ->where(function($query) use ($skills) {
+                foreach ((array)$skills as $skill) {
+                    $query->orWhere('skills.id', $skill);
+                }
+            });
+        });
+    }
+
+    /**
+     * システム種別IDを配列で受け取り、一つ以上該当のシステム種別を持つ案件を返す。
+     *
+     * @param QueryBuilder $query
+     * @param array $sys_types
+     * @return QueryBuilder
+     */
+    public function scopeGetItemBySysTypes($query, $sys_types) {
+        return $query->when(empty(!$sys_types), function($query) use ($sys_types) {
+            return $query->join('link_items_sys_types', 'items.id', '=', 'link_items_sys_types.item_id')
+                         ->join('sys_types', 'sys_types.id', '=', 'link_items_sys_types.sys_type_id')
+                         ->where(function($query) use ($sys_types) {
+                foreach ((array)$sys_types as $sys_type) {
+                    $query->orWhere('sys_types.id', $sys_type);
+                }
+            });
+        });
+    }
+
+    /**
+     * 指定された報酬額以上の案件を返す。
+     *
+     * @param QueryBuilder $query
+     * @param int $search_rate
+     * @return QueryBuilder
+     */
+    public function scopeGetItemByRate($query, $search_rate) {
+        return $query->when(array_key_exists($search_rate, FrntUtil::SEARCH_CONDITION_RATE),
+            function($query) use ($search_rate) {
+                return $query->where('items.max_rate', '>=', $search_rate);
+        });
+    }
+
+    /**
+     * 業種IDを配列で受け取り、該当の業種を持つ案件を返す。
+     *
+     * @param QueryBuilder $query
+     * @param array $biz_categories
+     * @return QueryBuilder
+     */
+    public function scopeGetItemByBizCategories($query, $biz_categories) {
+        return $query->when(empty(!$biz_categories), function($query) use ($biz_categories) {
+            return $query->where(function($query) use ($biz_categories) {
+                foreach ((array)$biz_categories as $biz_category) {
+                    $query->orWhere('items.biz_category_id', $biz_category);
+                }
+            });
+        });
+    }
+
+    /**
+     * エリアIDを配列で受け取り、一つ以上該当のエリアを持つ案件を返す。
+     *
+     * @param QueryBuilder $query
+     * @param array $areas
+     * @return QueryBuilder
+     */
+    public function scopeGetItemByAreas($query, $areas) {
+        return $query->when(empty(!$areas), function($query) use ($areas) {
+            return $query->join('link_items_areas', 'items.id', '=', 'link_items_areas.item_id')
+                         ->join('areas', 'areas.id', '=', 'link_items_areas.areas_id')
+                         ->where(function($query) use ($areas) {
+                foreach ((array)$areas as $area) {
+                    $query->orWhere('area.id', $area);
+                }
+            });
+        });
+    }
+
+    /**
+     * ポジションIDを配列で受け取り、一つ以上該当のポジションを持つ案件を返す。
+     *
+     * @param QueryBuilder $query
+     * @param array $job_types
+     * @return QueryBuilder
+     */
+    public function scopeGetItemByJobTypes($query, $job_types) {
+        return $query->when(empty(!$job_types), function($query) use ($job_types) {
+            return $query->join('link_items_job_types', 'items.id', '=', 'link_items_job_types.item_id')
+                         ->join('job_types', 'job_types.id', '=', 'link_items_job_types.job_type_id')
+                         ->where(function($query) use ($job_types) {
+                foreach ((array)$job_types as $job_type) {
+                    $query->orWhere('job_types.id', $job_type);
+                }
+            });
+        });
+    }
 }
