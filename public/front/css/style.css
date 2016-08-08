@@ -145,7 +145,7 @@ textarea{ font-size: 1.4rem; }
 
 .clear{ clear: both; }
 
-.table{ display: table; }
+.table{ width: 100%; display: table; }
 .table-row{ display: table-row; }
 .table-cell{ display: table-cell; }
 
@@ -269,12 +269,10 @@ h1.SearchTitle:before{
 }
 
 #item .titleArea h1{
-    width: 80%;
     display: table-cell;
 }
 
 #item .titleArea .itemCount{
-    width: 20%;
     display: table-cell;
     text-align: right;
     vertical-align: bottom;
@@ -297,6 +295,7 @@ h1.SearchTitle:before{
 }
 
 #item .conditions .sort{
+    padding-top: 2rem;
     text-align: right;
 }
 
@@ -346,6 +345,88 @@ h1.SearchTitle:before{
     appearance: none;
 }
 
+/* 条件から検索 */
+
+#item .tab{
+    /*display: none;*/
+}
+
+#item .tabMenu{
+    width: 100%;
+    float: none;
+    text-align: left;
+}
+
+#item .tabMenu ul{
+    width: 100%;
+    display: flex;
+}
+
+#item .tabMenu ul li{
+    font-size: 1.3rem;
+    width: 15%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 0;
+    margin: 0;
+    border: none;
+}
+
+#item .tabBox {
+    width: 100%;
+    margin: 0 auto;
+    float: none;
+}
+
+#item .tabSelected{
+    width: 100%;
+    float: none;
+    padding: 0;
+}
+
+#item .tabSelected .title{
+    font-size: 1.7rem;
+    color: #5e8796;
+    font-weight: bold;
+    line-height: 4rem;
+    padding-bottom: 1%;
+}
+
+#item .tabSelected .title span{
+    font-size: 1.5rem;
+    color: #fff;
+    background: #5e8796;
+    line-height: 3rem;
+    float: right;
+    padding: 3px 2rem;
+    font-weight: normal;
+}
+
+#item .tabSelectedInr{
+    width: 100%;
+    min-height: 10rem;
+    margin-bottom: 2%;
+}
+
+#item .tabSelected .tabSelectedInr .tagSelectedName{
+    font-size: 1.4rem;
+    padding-bottom: 3px;
+}
+
+#item .tabSelected .tabSelectedInr li{
+    font-size: 1.3rem;
+}
+
+#item .tabSelected .tabSelectedInr li span{
+    margin-left: 1rem;
+    margin-right: 1.5rem;
+}
+
+#item .tabSelected ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #item .item {
     padding-top: 6%;
 }
@@ -374,6 +455,7 @@ h1.SearchTitle:before{
     padding: 1% 1.5%;
     position: relative;
     border-top-right-radius: 8px;
+    border: 1px solid #5e8796;
 }
 
 #item .itemHeader p:first-child{
@@ -528,7 +610,61 @@ h1.SearchTitle:before{
 
 /* こちらもおすすめ */
 .recommended {
-    background:
+    padding: 24px 0;
+}
+
+.recommendedInr{
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.recommendedInr h3{
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.recoItems {
+    margin-top: 2%;
+    display: flex;
+}
+
+.recoItem {
+    color: #5e8796;
+    width: 19%;
+    background: #fff;
+}
+
+.recoItem:not(:first-child){
+    margin-left: 1.25%;
+}
+
+.recoItem .header{
+    background: #becfd5;
+    text-align: center;
+    padding: 4%;
+    font-weight: bold;
+}
+
+.recoItem .detail{
+    font-weight: bold;
+    padding: 4%;
+}
+
+.recoItem .detail .name{
+    display: table-cell;
+    width: 35%;
+    font-weight: normal;
+}
+
+.recoItem .detail .rate,
+.recoItem .detail .area{
+    display: table-cell;
+    width: 65%;
+}
+.recoItem .detail .skill{
+    font-weight: normal;
+    padding-top: 5%;
 }
 
 /*-------------------------------
@@ -658,7 +794,15 @@ h1.SearchTitle:before{
     float: left;
 }
 .flowImage li{ text-align:center }
-.flowImage img{ width: 90%; }
+.flowImage img{ width: 85%; }
+
+.flowImage ul li:first-child{
+    padding-bottom: 1rem;
+}
+
+.flowImage ul li:last-child{
+    padding-top: 1rem;
+}
 
 .flowWords{
     width: 100%;
@@ -682,6 +826,7 @@ h1.SearchTitle:before{
     color: #fff;
     text-align: center;
     padding: 4px 0px;
+    font-size: 1.7rem;
 }
 
 .flowWordDetail{
@@ -706,6 +851,12 @@ h1.SearchTitle:before{
     width: 100%;
     margin-top: 2%;
 }
+
+.questionElement img{
+    width: 35px;
+    height: 35px;
+}
+
 
 #question .qaMark{
     display: table-cell;
@@ -770,6 +921,7 @@ h1.SearchTitle:before{
 .clickText:hover{
     color: #5e8796;
     opacity: 0.6;
+    cursor: pointer;
 }
 
 /*-------------------------------
@@ -824,7 +976,7 @@ h1.SearchTitle:before{
 ## サイドバー
 -------------------------------*/
 .sideInfo{ width: 100%; }
-.sideInfo ul{ margin-left: 5%; }
+.sideInfo ul{ margin-left: 15%; }
 .sideInfo li{ margin-bottom: 5%; }
 
 li.customBanner{
@@ -1127,6 +1279,28 @@ nav ul .active{ background: #536C75; }
 }
 
 /* 特集 */
+.pickupCat {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 24px 0;
+}
+
+.pickupCat h1{
+	font-size: 20px;
+    margin-bottom: 24px;
+}
+
+.pickupCat h1:before{
+    content: " ";
+	background: url(../images/h1search.png)no-repeat;
+    width: 20px;
+	height: 20px;
+    background-size: 16px 16px;
+	background-position: 0 4px;
+    display: inline-block;
+}
+
 .pickupCat li{
 	display: inline-block;
 	width: 33.3%;
@@ -1225,8 +1399,8 @@ nav ul .active{ background: #536C75; }
 }
 
 .pucat05 a{
-	border: 3px solid #E38585;
-	color: #e38585;
+	border: 3px solid #A78260;
+	color: #A78260;
 }
 
 .pucat05 a:before{
@@ -1235,13 +1409,13 @@ nav ul .active{ background: #536C75; }
 }
 
 .pucat05 a:hover{
-	background: #E38585;
+	background: #A78260;
 	color: #fff;
 }
 
 .pucat06 a{
-	border: 3px solid #A78260;
-	color: #A78260;
+	border: 3px solid #E38585;
+	color: #E38585;
 }
 
 .pucat06 a:before{
@@ -1250,7 +1424,7 @@ nav ul .active{ background: #536C75; }
 }
 
 .pucat06 a:hover{
-	background: #A78260;
+	background: #E38585;
 	color: #fff;
 }
 
@@ -1555,7 +1729,29 @@ nav ul .active{ background: #536C75; }
 }
 /* side info end */
 
-/* keyword search start */
+/* キーワードから案件を探す */
+.keyWordSearch{
+    width: 100%;
+    padding: 24px 0;
+}
+
+.keyWordSearch h1{
+	font-size: 20px;
+	margin-bottom: 24px;
+
+}
+
+.keyWordSearch h1:before{
+	content: " ";
+	background: url(../images/h1search.png)no-repeat;
+	width: 20px;
+	height: 20px;
+	background-size: 16px 16px;
+	background-position: 0 4px;
+	display: inline-block;
+}
+
+
 .keyWordSearchForm {
 	width: 72.8%;
 }
@@ -1587,6 +1783,7 @@ nav ul .active{ background: #536C75; }
 # footer
 -------------------------------*/
 footer{
+    margin-top: 5%;
 	text-align: center;
 }
 
@@ -1596,7 +1793,7 @@ footer ul{
 
 footer li{
 	display: inline-block;
-	padding: 0 3% 1rem 3%;
+	padding: 0 3% 2rem 3%;
 }
 
 footer li a{
@@ -1671,6 +1868,14 @@ tablet.css 641px~1024px
     #contact .inputField textarea{ width: 100%; }
     #contact .userNameTable{ width: 100%; }
     #contact .userNameTable input{ width: 86%; }
+
+    /*-------------------------------
+    # 案件詳細
+    -------------------------------*/
+    /* こちらもおすすめ */
+    .recommendedInr{
+        width: 95%;
+    }
 
     /*-------------------------------
 	# page
@@ -1796,10 +2001,12 @@ sp.css ~640px
 	-------------------------------*/
     html{
         /* base font-size(8px) */
-        font-size: 50%;
+        font-size: 56.25%;
+
+/*        font-size: 50%; */
     }
     .invisible-sp{ display: none; }
-    .content{ margin: 10% 5% 5% 5%; }
+    .content{ margin: 10% 2.5% 5% 2.5%; }
 
     /* navi */
     .nav-mobile {
@@ -1816,6 +2023,27 @@ sp.css ~640px
 
     .commonCenterBtn button {
     	width: 36%;
+    }
+
+    /*-------------------------------
+	# 該当案件一覧
+	-------------------------------*/
+    #item .pickUp{
+        display: inline-flex;
+    }
+
+    #item .rate,
+    #item .area{
+        width: 20%;
+    }
+
+    #item .rate_detail,
+    #item .area_detail{
+        width: 80%;
+    }
+
+    #item .pckUpWhtSpce{
+        display: ;
     }
 
     /*-------------------------------
@@ -2000,6 +2228,7 @@ sp.css ~640px
     footer{ margin-top: 0; }
 
 	footer ul{
+        padding: 0;
 		letter-spacing: -1em; /* inline-blockの隙間対策 */
 	}
 
@@ -2302,9 +2531,5 @@ sp.css ~640px
         margin-top: 20px;
         letter-spacing: normal;
     }
-
-
-
-
 
 }

@@ -59,4 +59,17 @@ class FrontUtility
                 break;
         }
     }
+
+    /**
+     * コレクション型のモデルリストを、idのみの配列に変換する
+     * @param  Collection modelList
+     * @return array
+     */
+    public static function convertCollectionToIdList($modelList) {
+        $id_list = array();
+        foreach ($modelList as $model) {
+            array_push($id_list, $model->id);
+        }
+        return $id_list;
+    }
 }

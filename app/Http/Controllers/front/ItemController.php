@@ -26,7 +26,7 @@ class ItemController extends Controller
 
         // 一覧取得
         $itemList = Tr_items::select('items.*')
-                            //->entryPossible() // 受付期間中の案件のみ
+                            ->entryPossible() // 受付期間中の案件のみ
                             ->getItemBySkills($request->skills) // スキル
                             ->getItemBySysTypes($request->sys_type) // システム種別
                             ->getItemByRate($request->search_rate) // 報酬
@@ -55,7 +55,23 @@ class ItemController extends Controller
     public function showItemDetail(Request $request){
 
         $item = Tr_items::find($request->id);
-        return view('front.item_detail', compact('item'));
+
+
+        //　おすすめ案件を取得する
+        $recoItemList = Tr_items::select('items.*')
+                                ->entryPossible()
+                                ->getItemByJobTypes(FrntUtil::convertCollectionToIdList($item->jobTypes))
+                                ->getItemBySkills(FrntUtil::convertCollectionToIdList($item->skills))
+                                ->getItemBySysTypes(FrntUtil::convertCollectionToIdList($item->sysTypes))
+                                ->groupBy('items.id')
+                                ->orderBy(OdrUtil::ORDER_ITEM_RATE_DESC['columnName'],
+                                          OdrUtil::ORDER_ITEM_RATE_DESC['sort'])
+                                ->limit(5)
+                                ->get();
+
+        // TODO: 自分は弾くように設定
+
+        return view('front.item_detail', compact('item', 'recoItemList'));
     }
 
     /**

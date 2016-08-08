@@ -87,12 +87,10 @@
 
         <section class="keyWordSearch clear invisible-sp">
             <h1>キーワードから案件を探す</h1>
-                <div class="">
-                    <form class="keyWordSearchForm" method="post" action="/item/search">
-                        <input class="keyWordSearchInputForm" type="text" name="search_keyWord">
-                        <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
-                    </form>
-                </div>
+            <form class="keyWordSearchForm" method="post" action="/item/search">
+                <input class="keyWordSearchInputForm" type="text" name="search_keyWord">
+                <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
+            </form>
         </section><!-- /.keyWordSearch for pc,tablet -->
 
         </div><!-- END CONTENT-LEFT -->
@@ -101,25 +99,40 @@
         </div><!-- END CONTENT-RIGHT -->
 
         <div class="clear "></div>
-
-        <section class="recommended bg">
-            こちらもおすすめ
-        </section>
-
-        <section class="pickupCat">
-            <div class="contentInr">
-                <h1>特集から案件を探す</h1>
-                <ul class="fs0">
-                    <li class="pucat01"><a href="#">残業少なめ</a></li>
-                    <li class="pucat02"><a href="#">年齢不問</a></li>
-                    <li class="pucat03"><a href="#">高単価</a></li>
-                    <li class="pucat04"><a href="#">ロースキル</a></li>
-                    <li class="pucat05"><a href="#">現場直</a></li>
-                    <li class="pucat06"><a href="#">女性が活躍</a></li>
-                </ul>
+    </div><!-- END CONTENT -->
+</div><!-- END WRAP -->
+<section class="recommended bg">
+    <div class="recommendedInr">
+        <h3>こちらもおすすめ</h3>
+        <div class="recoItems">
+@foreach($recoItemList as $item)
+            <div class="recoItem">
+                <p class="header">{{ $item->name }}</p>
+                <div class="detail">
+                    <div class="table">
+                        <p class="name">報酬</p>
+                        <p class="rate">{{ $item->rate_detail }}</p>
+                    </div>
+                    <div class="table">
+                        <p class="name">エリア</p>
+                        <p class="area">{{ $item->area_detail }}</p>
+                    </div>
+                    <p class="skill">要求スキル</p>
+                    <p>{{ HtmlUtil::convertSkillsMdlToNameStr($item->skills) }}</p>
+                </div>
             </div>
-        </section><!-- /.pickupCat -->
-
+@endforeach
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            $(".recoItem .header").tile();
+        });
+    </script>
+</section>
+<div class="wrap">
+    <div class="content">
+        @include('front.common.feature')
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->
 @endsection

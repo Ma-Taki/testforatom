@@ -80,19 +80,7 @@
                 </section><!-- /.attentionJob -->
             </div><!-- /.topItemList -->
 
-            <section class="pickupCat">
-                <div class="contentInr">
-                    <h1>特集から案件を探す</h1>
-                    <ul class="fs0">
-                        <li class="pucat01"><a href="/front/tag/3?order=RegistrationDesc">残業少なめ</a></li>
-                        <li class="pucat02"><a href="/front/tag/4?order=RegistrationDesc">年齢不問</a></li>
-                        <li class="pucat03"><a href="/front/tag/5?order=RegistrationDesc">高単価</a></li>
-                        <li class="pucat04"><a href="/front/tag/6?order=RegistrationDesc">ロースキル</a></li>
-                        <li class="pucat05"><a href="/front/tag/7?order=RegistrationDesc">現場直</a></li>
-                        <li class="pucat06"><a href="/front/tag/2?order=RegistrationDesc">女性が活躍</a></li>
-                    </ul>
-                </div>
-            </section><!-- /.pickupCat -->
+            @include('front.common.feature')
 
             <section class="conditions invisible-sp">
                 <div class="contentInr">

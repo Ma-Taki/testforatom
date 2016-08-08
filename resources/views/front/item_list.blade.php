@@ -24,126 +24,146 @@
 
             <div class="conditions">
                 <div class="search">
-                    <div class="tabBox">
-                        <div class="tabBoxInr">
-                            <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                    <div class="tabSelected">
+                        <p class="title">選択した項目<span class="openTab">＋　検索条件を変更する</span></p>
+                        <div class="tabSelectedInr">
+                            <div class="searchElement">
+                                <div id="tagSelectedSkill">
+                                    <p class="tagSelectedName">スキル</p>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedSysType">
+                                    <p class="tagSelectedName">システム種別</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedRate">
+                                    <p class="tagSelectedName">報酬</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedBizCategory">
+                                    <p class="tagSelectedName">業種</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedArea">
+                                    <p class="tagSelectedName">勤務地</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedPosition">
+                                    <p class="tagSelectedName">ポジション</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab">
+                        <div class="tabMenu">
+                            <ul>
+                                <li>スキル</li>
+                                <li>システム種別</li>
+                                <li>報　酬</li>
+                                <li>業　種</li>
+                                <li>勤務地</li>
+                                <li>ポジション</li>
+                            </ul>
+                        </div><!-- /.tabMenu -->
+
+                        <div class="tabBox">
+                            <div class="tabBoxInr">
+                                <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
 @foreach(Ms_skill_categories::getNotIndexOnly() as $skill_category)
 @if(!$skill_category->skills->isEmpty())
-                            <div class="tabContent">
-                                <h3>{{ $skill_category->name }}</h3>
-                                <ul>
+                                <div class="tabContent">
+                                    <h3>{{ $skill_category->name }}</h3>
+                                    <ul>
 @foreach($skill_category->skills as $skill)
 @if($skill->master_type !== mdlUtil::MASTER_TYPE_INDEX_ONLY)
-                                    <li class="tabContentElementOneThird">
-                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
-                                    </li>
+                                        <li class="tabContentElementOneThird">
+                                            <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
+                                        </li>
 @endif
 @endforeach
-                                </ul>
+                                    </ul>
+                                </div>
+@endif
+@endforeach
                             </div>
-@endif
-@endforeach
                         </div>
-
-                        <div class="tabBoxInr">
-                            <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
-                            <div class="tabContent">
-                                <ul>
+                        <div class="tabBox">
+                            <div class="tabBoxInr">
+                                <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                                <div class="tabContent">
+                                    <ul>
 @foreach(Ms_sys_types::getNotIndexOnly() as $sys_type)
-                                    <li class="tabContentElementHalf">
-                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}">{{ $sys_type->name }}</label>
-                                    </li>
+                                        <li class="tabContentElementHalf">
+                                            <label><input class="srchCndtns_chkBx" type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}">{{ $sys_type->name }}</label>
+                                        </li>
 @endforeach
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="tabBoxInr">
-                            <p class="attention">1個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
-                            <div class="tabContent">
-                                <ul>
+                        <div class="tabBox">
+                            <div class="tabBoxInr">
+                                <p class="attention">1個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                                <div class="tabContent">
+                                    <ul>
 @foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
-                                    <li class="tabContentElementHalf">
-                                        <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
-                                    </li>
+                                        <li class="tabContentElementHalf">
+                                            <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
+                                        </li>
 @endforeach
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="tabBoxInr">
-                            <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
-                            <div class="tabContent">
-                                <ul>
+                        <div class="tabBox">
+                            <div class="tabBoxInr">
+                                <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                                <div class="tabContent">
+                                    <ul>
 @foreach(Ms_biz_categories::getNotIndexOnly() as $biz_category)
-                                    <li class="tabContentElementHalf">
-                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="biz_categories[]" value="{{ $biz_category->id }}">{{ $biz_category->name }}</label>
-                                    </li>
+                                        <li class="tabContentElementHalf">
+                                            <label><input class="srchCndtns_chkBx" type="checkbox" name="biz_categories[]" value="{{ $biz_category->id }}">{{ $biz_category->name }}</label>
+                                        </li>
 @endforeach
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="tabBoxInr">
-                            <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
-                            <div class="tabContent">
-                                <ul>
+                        <div class="tabBox">
+                            <div class="tabBoxInr">
+                                <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                                <div class="tabContent">
+                                    <ul>
 @foreach(Ms_areas::getNotIndexOnly() as $area)
-                                    <li class="tabContentElementHalf">
-                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="areas[]" value="{{ $area->id }}">{{ $area->name }}</label>
-                                    </li>
+                                        <li class="tabContentElementHalf">
+                                            <label><input class="srchCndtns_chkBx" type="checkbox" name="areas[]" value="{{ $area->id }}">{{ $area->name }}</label>
+                                        </li>
 @endforeach
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="tabBoxInr">
-                            <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
-                            <div class="tabContent">
-                                <ul>
+                        <div class="tabBox">
+                            <div class="tabBoxInr">
+                                <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+                                <div class="tabContent">
+                                    <ul>
 @foreach(Ms_job_types::getNotIndexOnly() as $job_type)
-                                    <li class="tabContentElementHalf">
-                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="job_types[]" value="{{ $job_type->id }}">{{ $job_type->name }}</label>
-                                    </li>
+                                        <li class="tabContentElementHalf">
+                                            <label><input class="srchCndtns_chkBx" type="checkbox" name="job_types[]" value="{{ $job_type->id }}">{{ $job_type->name }}</label>
+                                        </li>
 @endforeach
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    </div><!-- /.tabBox -->
-                    <p>選択した項目</p>
-                    <div class="searchElement">
-                        <div id="tagSelectedSkill">
-                            <p class="tagSelectedName">スキル</p>
-                            <ul>
-                                <li></li>
-                            </ul>
-                            <hr class="partitionLine">
-                        </div>
-                        <div id="tagSelectedSysType">
-                            <p class="tagSelectedName">システム種別</a>
-                            <ul></ul>
-                            <hr class="partitionLine">
-                        </div>
-                        <div id="tagSelectedRate">
-                            <p class="tagSelectedName">報酬</a>
-                            <ul></ul>
-                            <hr class="partitionLine">
-                        </div>
-                        <div id="tagSelectedBizCategory">
-                            <p class="tagSelectedName">業種</a>
-                            <ul></ul>
-                            <hr class="partitionLine">
-                        </div>
-                        <div id="tagSelectedArea">
-                            <p class="tagSelectedName">勤務地</a>
-                            <ul></ul>
-                            <hr class="partitionLine">
-                        </div>
-                        <div id="tagSelectedPosition">
-                            <p class="tagSelectedName">ポジション</a>
-                            <ul></ul>
-                            <hr class="partitionLine">
-                        </div>
+                        </div><!-- /.tabBox -->
                     </div>
                 </div>
                 <div class="sort">
@@ -222,17 +242,7 @@
         </div><!-- END CONTENT-RIGHT -->
         <div class="clear"></div>
 
-        <section class="pickupCat">
-            <h1 class="SearchTitle">特集から案件を探す</h1>
-            <ul class="fs0">
-                <li class="pucat01"><a href="#">残業少なめ</a></li>
-                <li class="pucat02"><a href="#">年齢不問</a></li>
-                <li class="pucat03"><a href="#">高単価</a></li>
-                <li class="pucat04"><a href="#">ロースキル</a></li>
-                <li class="pucat05"><a href="#">現場直</a></li>
-                <li class="pucat06"><a href="#">女性が活躍</a></li>
-            </ul>
-        </section><!-- /.pickupCat -->
+        @include('front.common.feature')
 
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->

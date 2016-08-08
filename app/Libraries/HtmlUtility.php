@@ -101,6 +101,19 @@ class HtmlUtility
     }
 
     /**
+     * スキルモデル配列を、スキル名を句読点で区切った文字列にして返却する
+     * @param  Collection modelList
+     * @return string
+     */
+    public static function convertSkillsMdlToNameStr($modelList){
+        $skill_name_str = '';
+        foreach ($modelList as $model) {
+            $skill_name_str = $skill_name_str.$model->name.'、';
+        }
+        return rtrim($skill_name_str, '、');
+    }
+
+    /**
      * ドロップダウンリストの初期表示項目を判定する
      * フラッシュデータに直前の選択項目が保存されていた場合、優先して参照する
      * フラッシュデータに選択項目が存在しない場合、初期表示用の配列を参照する

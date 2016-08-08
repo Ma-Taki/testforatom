@@ -1,15 +1,30 @@
+
+// itemDetail tab toggle
+jQuery(function($){
+	$(".openTab").parents('.search').find('.tab').hide();
+	$(".openTab").click(function(){
+    	var tabBox = $(this).parents('.search').find('.tab');
+		tabBox.slideToggle(700, function(){
+			if (tabBox.is(':visible')) {
+				$(".openTab").text('−　タブを閉じる');
+			} else {
+				$(".openTab").text('＋　検索条件を変更する');
+			}
+		});
+	});
+});
+
+
+jQuery(function($){
+	$(".clickText").parents('.question').find('.anserElement').hide();
+	$(".clickText").click(function(){
+		$(this).parents('.question').find('.anserElement').slideToggle();
+		$(this).parents('.questionElement').find('.questionOpen').text('+')
+	});
+});
+
 //　itemSearch
 jQuery(function($){
-
-/*
-	var params = getParameter();
-	for ( key in params ) {
-		switch (key) {
-			case 'skills%5B%5D':
-				break;
-		}
-	}
-*/
 
 	$('#order').change(function (){
 		var params = getParameter();
@@ -91,6 +106,7 @@ jQuery(function($){
 });
 
 // Q&A
+/*
 jQuery(function($){
 	$('.anserElement').hide();
 	$('span.clickText').each(function (){
@@ -106,6 +122,7 @@ jQuery(function($){
 		});
 	})
 });
+*/
 
 jQuery(function($){
 	$('.topJobInr').tile();

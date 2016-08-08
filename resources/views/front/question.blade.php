@@ -10,12 +10,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">パスワードを忘れてしまった</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>下記URLからパスワードの再設定を行います。</p>
                             <a href="{{ url('/user/reminder') }}">
@@ -32,12 +32,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">利用料について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>会員登録、案件参照など当サイトは一切費用は掛かりません。すべて無料でお使い頂けます。</p>
                         </li>
@@ -48,12 +48,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">取り扱う案件の種類について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 システム開発案件が中心ですが、インフラ系・デザイン系・事務系など幅広くご紹介することが可能です。</br>
@@ -67,12 +67,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">契約形態について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>業務請負契約(個人)、契約社員、派遣契約、法人契約のいずれかになります。</p>
                         </li>
@@ -83,12 +83,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">支払いサイトについて</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 案件によって異なりますが、月末締めの翌月末（30日）お支払いから月末締めの翌々月末（60日）お支払いになります。</br>
@@ -102,12 +102,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">掲載単価と受取金額について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 スキルや経験によって異なりますが、弊社からお渡しする想定金額です。</br>
@@ -121,12 +121,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">就業後のフォローについて</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 就業後も、弊社担当者が随時フォローいたします。</br>
@@ -140,12 +140,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">プロジェクト終了後について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 案件終了の1か月前(現プロジェクト期間中)から次の案件などのご相談を伺います。</br>
@@ -161,12 +161,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">応募までの手順</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>「ご利用の流れ」（リンク）をご参照ください。</p>
                         </li>
@@ -177,12 +177,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">応募してから結果が出るまでの期間について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 カウンセリング済みの場合、案件によっても異なりますが、早いもので1日で就業が決まることもございます。</br>
@@ -196,12 +196,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">応募取り消し方法について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>弊社担当者までご連絡をお願い致します。</p>
                         </li>
@@ -212,12 +212,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">在職中でも応募について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>在職中の応募も可能です。応募の際、就業開始可能日をお教え下さい。</p>
                         </li>
@@ -228,12 +228,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">掲載案件の応募期間について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 いつでも応募可能です。</br>
@@ -249,12 +249,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">応募資格をすべて満たしていない場合について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 案件によっては多少のスキル不足があっても、周りの方のサポートを受けながら参画できる案件もあります。</br>
@@ -268,12 +268,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">未経験の言語や業界・業種への就業について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>就業は可能ですが、条件面がご希望に満たない可能性もございますので、その際はご相談させて頂きます。</p>
                         </li>
@@ -284,12 +284,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">年齢制限について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>案件により年齢制限がある場合もございますが、様々な案件がございますので、まずは一度カウンセリングをさせて頂ければと思います。</p>
                         </li>
@@ -302,12 +302,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">カウンセリング（事前面談）の時間調整・出張面談について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 平日でしたらできる限りご希望の時間に合わせて調整をさせて頂きます。</br>
@@ -321,12 +321,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">面接時の服装について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 カウンセリングについては私服でも問題ありません。</br>
@@ -345,7 +345,7 @@
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 カウンセリング時に今までのご経歴・業務概要・得意分野・希望事項などを伺います。</br>
@@ -361,12 +361,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">来社について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 よりマッチした案件をご紹介するため、可能なかぎりご来社いただき、お話させて頂いております。</br>
@@ -385,7 +385,7 @@
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>フォーマットはご用意しておりますが、お手持ちの職務経歴書がある場合はそちらでも構いません。</p>
                         </li>
@@ -396,12 +396,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">職務経歴書の書き方について</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>ご不明点がございましたら「お問い合わせ」フォーム、又は弊社までお気軽にご相談下さい。</p>
                         </li>
@@ -412,12 +412,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">職務経歴書の内容を更新したい場合</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>再度アップロード頂くか、弊社担当者へご連絡をお願い致します。</p>
                         </li>
@@ -430,12 +430,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">フリーエンジニアになるためには</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 フリーエンジニアになるために必要な経験は特にございません。</br>
@@ -450,12 +450,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">フリーの年金・保険・確定申告</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>
                                 まず申告書の入手から行いましょう。</br>
@@ -474,12 +474,12 @@
 
                 <div class="question">
                     <ul class="questionElement">
-                        <li><p class="qaMark questionMark">Q</p></li>
+                        <li><img alt="クエスチョン" src="/front/images/ico-question.png"></li>
                         <li class="questionText"><span class="clickText">Q&amp;Aで解決できない場合</span></li>
                         <li class="questionOpen">+</li>
                     </ul>
                     <ul class="anserElement">
-                        <li><p class="qaMark anserMark">A</p></li>
+                        <li><img alt="アンサー" src="/front/images/ico-answer.png"></li>
                         <li class="anserText">
                             <p>「お問い合わせ」フォーム、又は弊社までお気軽にご相談下さい。</p>
                         </li>
