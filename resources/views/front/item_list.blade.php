@@ -73,6 +73,7 @@
                             </ul>
                         </div><!-- /.tabMenu -->
 
+                        <form method="GET" action="{{ url('/front/search') }}">
                         <div class="tabBox">
                             <div class="tabBoxInr">
                                 <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
@@ -165,6 +166,10 @@
                             </div>
                         </div><!-- /.tabBox -->
                     </div>
+                    <div class="centerBtn clear">
+                        <button type="submit">検　索</button>
+                    </div>
+
                 </div>
                 <div class="sort">
                     <label>

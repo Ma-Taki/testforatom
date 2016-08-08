@@ -14,7 +14,6 @@ jQuery(function($){
 	});
 });
 
-
 jQuery(function($){
 	$(".clickText").parents('.question').find('.anserElement').hide();
 	$(".clickText").click(function(){
@@ -242,7 +241,6 @@ $(document).ready(function() {
 	});
 });
 
-
 // mobile-navi
 $(function () {
 	// Create mobile element
@@ -275,4 +273,85 @@ $(function () {
 		toggleClass(this, 'nav-mobile-open');
 		toggleClass(toggle, 'nav-active');
 	};
+});
+
+// itemDetail init selectedTagBox
+jQuery(function($){
+	var params = getParameter();
+	$('.srchCndtns_chkBx').each(function(){
+		if ('skills[]' in params) {
+			for (var i = 0; i < params['skills[]'].length; i++) {
+				if ('skills[]' === $(this).prop('name')
+					&& params['skills[]'][i] == $(this).val()){
+					$(this).trigger("click");
+				}
+			}
+		}
+		if ('sys_types[]' in params) {
+			for (var i = 0; i < params['sys_types[]'].length; i++) {
+				if ('sys_types[]' === $(this).prop('name')
+					&& params['sys_types[]'][i] == $(this).val()){
+						$(this).trigger("click");
+				}
+			}
+		}
+		if ('biz_categories[]' in params) {
+			for (var i = 0; i < params['biz_categories[]'].length; i++) {
+				if ('biz_categories[]' === $(this).prop('name')
+					&& params['biz_categories[]'][i] == $(this).val()){
+						$(this).trigger("click");
+				}
+			}
+		}
+		if ('areas[]' in params) {
+			for (var i = 0; i < params['areas[]'].length; i++) {
+				if ('areas[]' === $(this).prop('name')
+					&& params['areas[]'][i] == $(this).val()){
+						$(this).trigger("click");
+				}
+			}
+		}
+		if ('job_types[]' in params) {
+			for (var i = 0; i < params['job_types[]'].length; i++) {
+				if ('job_types[]' === $(this).prop('name')
+					&& params['job_types[]'][i] == $(this).val()){
+						$(this).trigger("click");
+				}
+			}
+		}
+	})
+
+	$('.srchCndtns_radio').each(function(){
+		if ('search_rate' in params) {
+			for (var i = 0; i < params['search_rate'].length; i++) {
+				if ('search_rate' === $(this).prop('name')
+					&& params['search_rate'][i] == $(this).val()){
+						$(this).trigger("change");
+				}
+			}
+		}
+	})
+
+	function getParameter(){
+    	var paramsArray = [];
+    	var url = decodeURI(location.href);
+    	parameters = url.split("#");
+    	if( parameters.length > 1 ) {
+        	url = parameters[0];
+    	}
+    	parameters = url.split("?");
+    	if( parameters.length > 1 ) {
+        	var params   = parameters[1].split("&");
+        	for ( i = 0; i < params.length; i++ ) {
+           		var paramItem = params[i].split("=");
+				if (paramItem[0] in paramsArray) {
+					paramsArray[paramItem[0]].push(paramItem[1]);
+				} else {
+					paramsArray[paramItem[0]] = [ paramItem[1] ];
+				}
+        	}
+    	}
+
+    	return paramsArray;
+    }
 });
