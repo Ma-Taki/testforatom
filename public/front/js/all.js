@@ -1,4 +1,20 @@
 
+// sp_condition_search
+jQuery(function($){
+	$('.condition_name').each(function(){
+		$(this).click(function(){
+			var $slideArea = $(this).parents('.condition_content').find('.condition_slideArea');
+			var $state = $(this).children('span');
+			$slideArea.slideToggle(700, function(){
+				if ($(this).is(':visible')) {
+					$state.text('-');
+				} else {
+					$state.text('+');
+				}
+			})
+		})
+	})
+});
 // itemDetail tab toggle
 jQuery(function($){
 	$(".openTab").parents('.search').find('.tab').hide();
@@ -354,4 +370,110 @@ jQuery(function($){
 
     	return paramsArray;
     }
+});
+
+// read more
+jQuery(function($){
+
+	var morePage = {
+		load: false,
+		hide: function() {
+			$('#sp_morePage').hide();
+		},
+		moreText: function() {
+			$('#sp_morePage').text('もっと見る');
+		}
+	}
+	var nextPage = 2;
+	/*
+	var searchParams = [];
+    if ($('#tabForm').find(":input").size()) {
+		searchParams = $('#tabForm').find(":input").serializeArray();
+	}
+	*/
+
+	$('#sp_morePage').click(function(){
+		if (morePage.loading) return;
+		$(this).text("読込中です");
+
+		var url = location.href;
+		params = url.split("?");
+		spparams = '';
+		if( params.length > 1 ) {
+			spparams = params[1].split("&");
+		}
+
+		var paramArray = [];
+		for ( i = 0; i < spparams.length; i++ ) {
+			vol = spparams[i].split("=");
+			paramArray.push(vol[0]);
+			paramArray[vol[0]] = vol[1];
+		}
+		morePage.loading = true;
+		$.ajax({
+			type: 'get',
+			url: '/front/ajax/readmore',
+			dataType : 'json',
+			data: {'order': paramArray['order'],
+				   'limit': paramArray['limit'],
+				   'page': nextPage,
+				   // 'page': paramArray['page'],
+				   'path': location.pathname},
+			success: function(data) {
+				// DOMツリー作成
+				for(var i in data['items']){
+					var $item_dom =
+					$('<div class="item">' +
+					  '<div class="itemHeader">' +
+					  '<div class="table-row">' +
+					  '<p class="name">' + data['items'][i].name +
+					  '<span class="sys_type">' + data['items'][i].biz_category_name +
+					  '</span></p></div></div>' +
+					  '<div class="itemInfo clear">' +
+					  '<div class="itemInfoInr">' +
+					  '<div class="pickUp">' +
+					  '<div class="pickUpRate">' +
+					  '<div class="rate"><p>報　酬</p></div>' +
+					  '<div class="rate_detail">' +
+					  '<p>' + data['items'][i].rate_detail +
+					  '</p></div></div>' +
+					  '<div class="pickUpArea">' +
+					  '<div class="area"><p>エリア</p></div>' +
+					  '<div class="area_detail">' +
+					  '<p>' + data['items'][i].area_detail +
+					  '</p></div></div></div>' +
+					  '<div class="other">' +
+					  '<p class="otherName">システム種別</p>' +
+					  '<p class="otherValue">' + data['items'][i].sys_type +
+					  '</p></div>' +
+					  '<p class="otherName">ポジション</p>' +
+					  '<p class="otherValue">' + data['items'][i].job_type +
+					  '</p></div>' +
+					  '<p class="detail">'+ data['items'][i].detail + '</p>' +
+					  '<div class="commonCenterBtn">' +
+					  '<a href="/front/detail?id=' + data['items'][i].id +'">' +
+					  '<button><p>詳細を見る<p></button></a>' +
+					  '</div></div></div></div>');
+					  //  登録が時間単位で一週間以内は新着
+					  var now = Date.parse(data['items'][i].registration_date);
+					  alert(now.getDate());
+					  if (true) {
+						  var $p_new = $('<p class="new">新着</p>');
+						  $item_dom.find('.table-row').prepend($p_new);
+					  }
+					  $('#itemList').append($item_dom);
+				  }
+				nextPage++;
+				if (!data['hasMorePages']) {
+					morePage.hide();
+				}
+
+
+			}
+	   }).done(function() {
+		   morePage.loading = false;
+		   morePage.moreText();
+	   });
+	   return false;
+   })
 });

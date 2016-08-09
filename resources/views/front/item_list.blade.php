@@ -73,7 +73,7 @@
                             </ul>
                         </div><!-- /.tabMenu -->
 
-                        <form method="GET" action="{{ url('/front/search') }}">
+                        <form id="tabForm" method="GET" action="{{ url('/front/search') }}">
                         <div class="tabBox">
                             <div class="tabBoxInr">
                                 <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
@@ -169,7 +169,7 @@
                     <div class="centerBtn clear">
                         <button type="submit">検　索</button>
                     </div>
-
+                </form>
                 </div>
                 <div class="sort">
                     <label>
@@ -192,6 +192,7 @@
                 </div>
             </div>
 
+            <div id="itemList">
 @foreach($itemList as $item)
             <div class="item">
                 <div class="itemHeader">
@@ -206,11 +207,14 @@
                 <div class="itemInfo clear">
                     <div class="itemInfoInr">
                         <div class="pickUp">
-                            <p class="rate">報　酬</p>
-                            <p class="rate_detail">{{ $item->rate_detail }}</p>
-                            <p class="pckUpWhtSpce"></p>
-                            <p class="area">エリア</p>
-                            <p class="area_detail">{{ $item->area_detail }}</p>
+                            <div class="pickUpRate">
+                                <div class="rate"><p>報　酬</p></div>
+                                <div class="rate_detail"><p>{{ $item->rate_detail }}</p></div>
+                            </div>
+                            <div class="pickUpArea">
+                                <div class="area"><p>エリア</p></div>
+                                <div class="area_detail"><p>{{ $item->area_detail }}</p></div>
+                            </div>
                         </div>
                         <div class="other">
                             <p class="otherName">システム種別</p>
@@ -236,18 +240,39 @@
                 </div>
             </div>
 @endforeach
+            </div>
 
-            <div class="paginate">
+            <div class="paginate invisible-sp">
                 {!! $itemList->appends($params)->links() !!}
             </div>
 
+@if($itemList->hasMorePages())
+            <div class="commonCenterBtn invisible-tab invisible-pc">
+                <button id="sp_morePage"><p>もっと見る<p></button>
+            </div>
+@endif
+
+            <section class="keyWordSearch clear invisible-sp">
+                <h1>キーワードから案件を探す</h1>
+                <form class="keyWordSearchForm" method="post" action="/item/search">
+                    <input class="keyWordSearchInputForm" type="text" name="search_keyWord">
+                    <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
+                </form>
+            </section><!-- /.keyWordSearch for pc,tablet -->
+
         </div><!-- END CONTENT-LEFT -->
-        <div class="content-right">
+
+        <div class="content-right invisible-sp">
             @include('front.common.sideInfo')
         </div><!-- END CONTENT-RIGHT -->
         <div class="clear"></div>
 
         @include('front.common.feature')
+
+        <div class="content-right invisible-pc invisible-tab">
+            @include('front.common.sideInfo')
+        </div><!-- END CONTENT-RIGHT -->
+        <div class="clear"></div>
 
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->

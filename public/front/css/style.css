@@ -483,50 +483,66 @@ h1.SearchTitle:before{
 }
 
 #item .pickUp{
-    display: table;
+    display: flex;
     width: 100%;
     margin-bottom: 2%;
 }
 
+#item .pickUpRate{
+    display: flex;
+    width: 49%;
+    margin-bottom: 2%;
+}
+
+#item .pickUpArea{
+    display: flex;
+    width: 49%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+}
+
 #item .rate{
-    display: table-cell;;
-    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
     color: #5e8796;
     background: #becfd5;
     font-weight: bold;
     text-align: center;
+    padding: 2% 2.5%;
 }
 
 #item .rate_detail{
-    display: table-cell;
-    width: 39%;
+    display: flex;
+    align-items: center;
+    width: 80%;
     font-size: 1.6rem;
     color: #E38585;
     background: #eef3f4;
     font-weight: bold;
-    padding: 2% 2.5%;
+    padding-left: 2.5%;
 }
 
 #item .area{
-    display: table-cell;;
-    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
     color: #5e8796;
     background: #becfd5;
     font-weight: bold;
     text-align: center;
-}
-
-#item .area_detail{
-    display: table-cell;
-    width: 39%;
-    background: #eef3f4;
-    font-weight: bold;
     padding: 2% 2.5%;
 }
 
-#item .pckUpWhtSpce{
-    display: table-cell;
-    width: 2%;
+#item .area_detail{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    background: #eef3f4;
+    font-weight: bold;
+    padding-left: 2.5%;
 }
 
 #item .other{
@@ -1872,6 +1888,17 @@ tablet.css 641px~1024px
     /*-------------------------------
     # 案件詳細
     -------------------------------*/
+    #item .tabSelected{
+        margin: 0;
+    }
+
+    #item .tabSelected .title span{
+        padding: 2px 1rem
+    }
+
+    /*-------------------------------
+    # 案件詳細
+    -------------------------------*/
     /* こちらもおすすめ */
     .recommendedInr{
         width: 95%;
@@ -2006,6 +2033,7 @@ sp.css ~640px
 /*        font-size: 50%; */
     }
     .invisible-sp{ display: none; }
+    .wrap{ width: 100%; }
     .content{ margin: 10% 2.5% 5% 2.5%; }
 
     /* navi */
@@ -2025,26 +2053,109 @@ sp.css ~640px
     	width: 36%;
     }
 
+    /* 検索コンテンツ用ヘッダー */
+    .searchHeader h1{
+        background: #5e8796;
+        color: #fff;
+        font-size: 16px;
+        line-height: 48px;
+        padding-left: 16px;
+    }
+
+    .searchHeader h1:before{
+        content: " ";
+        background: url(../images/h1search-sp.png)no-repeat;
+        width: 20px;
+        height: 20px;
+        background-size: 14px 14px;
+        background-position: 0 6px;
+        display: inline-block;
+    }
+
+    /*-------------------------------
+    # 条件を指定して検索
+    -------------------------------*/
+    .searchContent li{
+        width: 100%;
+        line-height: 4rem;
+        font-size: 2rem;
+        padding: 0 5%;
+    }
+
+    .searchContent li span{
+        float: right;
+    }
+
+    .searchContent li.condition_name{
+        color: #5e8796;
+        background: #becfd5;
+        border-bottom: 1px solid #fff;
+    }
+
+    .searchContent li.condition_name:hover{
+        color: #becfd5;
+        background: #5e8796;
+    }
+
+    .condition_slideArea{
+        display: none;
+    }
+
+    li.condition_elmnt_name{
+        font-size: 1.7rem;
+        color: #5e8796;
+        border-bottom: 1px solid #becfd5;
+    }
+
+    li.condition_elmnt{
+        display: inline-block;
+        width: 50%;
+    }
+
+    li.condition_elmnt:nth-child(even){
+        padding-left: 0;
+    }
+
+    li.condition_elmnt label{
+        font-size: 1.4rem;
+    }
+
     /*-------------------------------
 	# 該当案件一覧
 	-------------------------------*/
     #item .pickUp{
-        display: inline-flex;
+        display: flex;
+        flex-wrap: wrap;
     }
 
-    #item .rate,
-    #item .area{
-        width: 20%;
+    #item .pickUpRate,
+    #item .pickUpArea{
+        width: 100%;
     }
 
-    #item .rate_detail,
-    #item .area_detail{
-        width: 80%;
+    #item .pickUp .pickUpArea{
+        margin-left: 0;
     }
 
-    #item .pckUpWhtSpce{
-        display: ;
+    .pickupCat h1{
+        background: #5e8796;
+        color: #fff;
+        font-size: 16px;
+        line-height: 48px;
+        margin-bottom: 16px;
+        padding-left: 16px;
     }
+
+    .pickupCat h1:before{
+        content: " ";
+        background: url(../images/h1search-sp.png)no-repeat;
+        width: 20px;
+        height: 20px;
+        background-size: 14px 14px;
+        background-position: 0 6px;
+        display: inline-block;
+    }
+
 
     /*-------------------------------
     # お問い合わせ
@@ -2388,6 +2499,10 @@ sp.css ~640px
         line-height: 50px;
         color: #fff;
         font-size: 14px;
+    }
+
+    .pickupCat{
+        padding: 0;
     }
 
 	.pickupCat li{

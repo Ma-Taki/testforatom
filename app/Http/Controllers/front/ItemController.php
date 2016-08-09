@@ -138,6 +138,59 @@ class ItemController extends Controller
     }
 
     /**
+     * スマートフォンでのもっと見るボタン押下時の案件取得
+     * GET:/front/ajax/readmore
+     */
+    public function ajaxReadMore(Request $request){
+
+        // 基本のパラメータはデフォルトを設定する
+        $sortOrder = $this->getSortOrder($request->order);
+        $limit = $this->getLimit($request->limit);
+        $page = $this->getPage($request->page);
+        $path = $request->path;
+
+        if (!empty($path) && '/front/search') {
+            // 一覧取得
+            $itemList = Tr_items::select('items.*')
+                                ->entryPossible() // 受付期間中の案件のみ
+                                ->getItemBySkills($request->skills) // スキル
+                                ->getItemBySysTypes($request->sys_type) // システム種別
+                                ->getItemByRate($request->search_rate) // 報酬
+                                ->getItemByBizCategories($request->biz_categories) // 業種
+                                ->getItemByAreas($request->areas) // 勤務地
+                                ->getItemByJobTypes($request->job_types) // ポジション
+                                ->groupBy('items.id')
+                                ->orderBy($sortOrder['columnName'], $sortOrder['sort'])
+                                ->paginate(FrntUtil::SEARCH_PAGINATE[$limit]);
+        }
+
+        // Model=>json変換前に、表示に必要なデータを取得しておく
+        foreach ($itemList->items() as $item) {
+            $biz_category_name = $item->bizCategorie->name;
+            $sys_type = '';
+            foreach ($item->sysTypes as $value) {
+                $sys_type .= $value->name .'、' ;
+            }
+            $sys_type = rtrim($sys_type, '、');
+            $job_type = '';
+            foreach ($item->jobTypes as $value) {
+                $job_type .= $value->name .'、' ;
+            }
+            $job_type = rtrim($job_type, '、');
+            $item['biz_category_name'] = $biz_category_name;
+            $item['sys_type'] = $sys_type;
+            $item['job_type'] = $job_type;
+        }
+        $data = [
+            'items' => $itemList->items(),
+            'hasMorePages' => $itemList->hasMorePages(),
+        ];
+
+        // エンコードして返却
+        echo json_encode($data);
+    }
+
+    /**
      * 案件のソート順を取得する。
      * デフォルトは登録日降順。
      */

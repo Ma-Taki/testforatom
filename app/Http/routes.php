@@ -46,6 +46,13 @@ Route::get('/front/about', function () {
 
 // フロント：案件一覧
 Route::match(['get', 'post'], '/front/search', 'front\ItemController@searchItem');
+// フロント(sp)：もっと見るボタン
+Route::get('/front/ajax/readmore', 'front\ItemController@ajaxReadMore');
+// フロント(sp)：条件から検索
+Route::get('/front/sp/condition', function(){
+    return view('front.sp.condition_search');
+});
+
 // フロント：案件詳細
 Route::get('/front/detail', 'front\ItemController@showItemDetail');
 Route::get('/front/tag/{id}', 'front\ItemController@searchItemByTag');
