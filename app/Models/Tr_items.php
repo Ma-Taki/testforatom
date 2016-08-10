@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Libraries\FrontUtility as FrntUtil;
+use DB;
 
 class Tr_items extends Model
 {
@@ -217,10 +218,10 @@ class Tr_items extends Model
     public function scopeGetItemByAreas($query, $areas) {
         return $query->when(empty(!$areas), function($query) use ($areas) {
             return $query->join('link_items_areas', 'items.id', '=', 'link_items_areas.item_id')
-                         ->join('areas', 'areas.id', '=', 'link_items_areas.areas_id')
+                         ->join('areas', 'areas.id', '=', 'link_items_areas.area_id')
                          ->where(function($query) use ($areas) {
                 foreach ((array)$areas as $area) {
-                    $query->orWhere('area.id', $area);
+                    $query->orWhere('areas.id', $area);
                 }
             });
         });
@@ -242,6 +243,50 @@ class Tr_items extends Model
                     $query->orWhere('job_types.id', $job_type);
                 }
             });
+        });
+    }
+
+    /**
+     * 検索キーワードを受け取り、該当の文字列を対象カラムに含む案件を返す。
+     * 対象カラムは案件名、案件詳細、システム種別名、ポジション名、業種名、要求スキル名
+     * タグ名、エリア詳細、都道府県名、報酬詳細。
+     * @param QueryBuilder $query
+     * @param string $keyword
+     * @return QueryBuilder
+     */
+    public function scopeGetItemByKeyword($query, $keyword) {
+
+        if (empty($keyword)) return;
+
+        // 全角スペースを半角に変換する
+        $keyword = str_replace('　', ' ', $keyword);
+        // 文字列を半角スペースで分割
+        $keyword_array = explode(' ', $keyword);
+        // 空要素を削除
+        $keyword_array = array_filter($keyword_array, 'strlen');
+
+        return $query->when(!empty($keyword_array), function($query) use ($keyword_array) {
+            return $query->join('link_items_sys_types', 'items.id', '=', 'link_items_sys_types.item_id')
+                         ->join('sys_types', 'sys_types.id', '=', 'link_items_sys_types.sys_type_id')
+                         ->join('link_items_job_types', 'items.id', '=', 'link_items_job_types.item_id')
+                         ->join('job_types', 'job_types.id', '=', 'link_items_job_types.job_type_id')
+                         ->join('biz_categories', 'biz_categories.id', '=', 'items.biz_category_id')
+                         ->join('link_items_skills', 'items.id', '=', 'link_items_skills.item_id')
+                         ->join('skills', 'skills.id', '=', 'link_items_skills.skill_id')
+                         ->join('link_items_tags', 'items.id', '=', 'link_items_tags.item_id')
+                         ->join('tags', 'tags.id', '=', 'link_items_tags.tag_id')
+                         ->join('link_items_areas', 'items.id', '=', 'link_items_areas.item_id')
+                         ->join('areas', 'areas.id', '=', 'link_items_areas.area_id')
+                         ->join('prefectures', 'prefectures.id', '=', 'areas.prefecture_id')
+                         ->where(function($query) use($keyword_array) {
+                             foreach ((array)$keyword_array as $keyword) {
+                                 // タグ名だけutf8_unicode_ciなので、generalを明示
+                                 $query->orWhere(DB::raw("
+                                 CONCAT(items.name, items.detail, sys_types.name, job_types.name,
+                                 biz_categories.name, tags.term, skills.name, area_detail,
+                                 prefectures.name, items.rate_detail) collate utf8_general_ci"),'LIKE',"%".$keyword."%");
+                             }
+                         });
         });
     }
 }

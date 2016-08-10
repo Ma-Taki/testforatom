@@ -53,6 +53,8 @@ Route::get('/front/ajax/readmore', 'front\ItemController@ajaxReadMore');
 Route::get('/front/sp/condition', function(){
     return view('front.sp.condition_search');
 });
+// フロント：キーワード検索
+Route::get('/front/keyword/', 'front\ItemController@searchItemByKeyword');
 
 // フロント：案件詳細
 Route::get('/front/detail', 'front\ItemController@showItemDetail');

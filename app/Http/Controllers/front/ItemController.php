@@ -33,11 +33,41 @@ class ItemController extends Controller
                             ->getItemByBizCategories($request->biz_categories) // 業種
                             ->getItemByAreas($request->areas) // 勤務地
                             ->getItemByJobTypes($request->job_types) // ポジション
+                            //->getItemByKeyword($request->search_keyword) // キーワード
                             ->groupBy('items.id')
                             ->orderBy($sortOrder['columnName'], $sortOrder['sort'])
                             ->paginate(FrntUtil::SEARCH_PAGINATE[$limit]);
 
         // パラメータを作成
+        $params = [
+            'order' => $sortOrder['sortId'],
+            'limit' => $limit,
+            'page' => $page,
+        ];
+        $params = array_merge($params, $request->all());
+
+        return view('front.item_list', compact('itemList','params'));
+    }
+
+    /**
+     * キーワード検索
+     * GET:/front/keyword/{keyword}
+     */
+    public function searchItemByKeyword(Request $request){
+
+        // 基本のパラメータはデフォルトを設定する
+        $sortOrder = $this->getSortOrder($request->order);
+        $limit = $this->getLimit($request->limit);
+        $page = $this->getPage($request->page);
+
+        //処理
+        $itemList = Tr_items::select('items.*')
+                            ->entryPossible()
+                            ->getItemByKeyword($request->keyword)
+                            ->groupBy('items.id')
+                            ->orderBy($sortOrder['columnName'], $sortOrder['sort'])
+                            ->paginate(FrntUtil::SEARCH_PAGINATE[$limit]);
+
         $params = [
             'order' => $sortOrder['sortId'],
             'limit' => $limit,
@@ -188,6 +218,14 @@ class ItemController extends Controller
 
         // エンコードして返却
         echo json_encode($data);
+    }
+
+    /**
+     * キーワード検索用のテキストを案件ごとに生成する。
+     *
+     */
+    private function get($item){
+
     }
 
     /**
