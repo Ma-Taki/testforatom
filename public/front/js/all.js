@@ -14,6 +14,47 @@ jQuery(function($){
 			})
 		})
 	})
+
+	$('.sp_condition_search_btn button').click(function(){
+		window.location.href = setParameter(getParameter());
+	})
+
+	function setParameter( paramsArray ) {
+		var resurl = 'http://ts.engineer-route.com/front/sp/condition'
+        //var resurl = location.href.replace(/\?.*$/,"");
+        for ( key in paramsArray ) {
+			if (key != 'page') {
+				for (i in paramsArray[key]) {
+            		resurl += (resurl.indexOf('?') == -1) ? '?':'&';
+            		resurl += key + '=' + paramsArray[key][i]
+				}
+			}
+        }
+        return resurl;
+    }
+
+    function getParameter(){
+    	var paramsArray = [];
+    	var url = location.href;
+    	parameters = url.split("#");
+    	if( parameters.length > 1 ) {
+        	url = parameters[0];
+    	}
+    	parameters = url.split("?");
+    	if( parameters.length > 1 ) {
+        	var params   = parameters[1].split("&");
+        	for ( i = 0; i < params.length; i++ ) {
+           		var paramItem = params[i].split("=");
+				if (paramItem[0] in paramsArray) {
+					paramsArray[paramItem[0]].push(paramItem[1]);
+				} else {
+					paramsArray[paramItem[0]] = [paramItem[1]];
+				}
+
+        	}
+    	}
+    	return paramsArray;
+    }
 });
 // itemDetail tab toggle
 jQuery(function($){
@@ -211,10 +252,8 @@ jQuery(function($){
                 case 'job_types[]': selected_cndtns_type = $('#tagSelectedPosition'); break;
             }
             if($(this).prop('checked')){
-
-
 				var addValue;
-				if ($(this).parents('#sp_condition')) {
+				if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
 					// sp用html
 					addValue = $('<li><p>' + chkBox_label + '</p><span id="' + chkBox_label + '">×</span></li>');
 				} else {

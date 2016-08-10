@@ -139,7 +139,7 @@
                                         <ul>
 @foreach($seach_rateList as $key => $value)
                                             <li class="tabContentElementHalf">
-                                                <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $value }}">{{ $value }}</label>
+                                                <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
                                             </li>
 @endforeach
                                         </ul>

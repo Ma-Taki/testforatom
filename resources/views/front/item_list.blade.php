@@ -22,6 +22,13 @@
             </div>
             <hr class="partitionLine_02">
 
+@if(strstr(Request::url(), '/front/search'))
+            <div class="sp_condition_search_btn invisible-pc invisible-tab">
+                <div class="commonCenterBtn">
+                    <button><p>条件を指定して検索する<p></button>
+                </div>
+            </div>
+@endif
             <div class="conditions">
                 <div class="search">
                     <div class="tabSelected">
