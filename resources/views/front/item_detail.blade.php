@@ -24,11 +24,14 @@
                 <div class="itemInfo clear">
                     <div class="itemInfoInr">
                         <div class="pickUp">
-                            <p class="rate">報　酬</p>
-                            <p class="rate_detail">{{ $item->rate_detail }}</p>
-                            <p class="pckUpWhtSpce"></p>
-                            <p class="area">エリア</p>
-                            <p class="area_detail">{{ $item->area_detail }}</p>
+                            <div class="pickUpRate">
+                                <div class="rate"><p>報　酬</p></div>
+                                <div class="rate_detail"><p>{{ $item->rate_detail }}</p></div>
+                            </div>
+                            <div class="pickUpArea">
+                                <div class="area"><p>エリア</p></div>
+                                <div class="area_detail"><p>{{ $item->area_detail }}</p></div>
+                            </div>
                         </div>
                         <div class="other">
                             <p class="otherName">業種</p>
@@ -74,7 +77,7 @@
                                 {{ $item->service_start_date->format('Y年n月j日').' 〜 '.$item->service_end_date->format('Y年n月j日') }}
                             </p>
                         </div>
-                        <div class="itemTagList">
+                        <div class="itemTagList invisible-sp">
 @foreach($item->tags as $tag)<a href="/front/tag/{{ $tag->id }}"><p class="tag">{{ $tag->term }}</p></a>@endforeach
                         </div>
                         <div class="commonCenterBtn">
@@ -82,6 +85,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="itemTagList invisible-pc invisible-tab">
+@foreach($item->tags as $tag)<a href="/front/tag/{{ $tag->id }}"><p class="tag">{{ $tag->term }}</p></a>@endforeach
             </div>
         </div>
 
@@ -94,14 +100,15 @@
         </section><!-- /.keyWordSearch for pc,tablet -->
 
         </div><!-- END CONTENT-LEFT -->
-        <div class="content-right">
+
+        <div class="content-right invisible-sp">
             @include('front.common.sideInfo')
         </div><!-- END CONTENT-RIGHT -->
 
         <div class="clear "></div>
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->
-<section class="recommended bg">
+<section class="recommended">
     <div class="recommendedInr">
         <h3>こちらもおすすめ</h3>
         <div class="recoItems">
@@ -118,7 +125,7 @@
                         <p class="area">{{ $item->area_detail }}</p>
                     </div>
                     <p class="skill">要求スキル</p>
-                    <p>{{ HtmlUtil::convertSkillsMdlToNameStr($item->skills) }}</p>
+                    <p class="skills">{{ HtmlUtil::convertSkillsMdlToNameStr($item->skills) }}</p>
                 </div>
             </div>
 @endforeach
@@ -130,9 +137,10 @@
         });
     </script>
 </section>
-<div class="wrap">
-    <div class="content">
-        @include('front.common.feature')
-    </div><!-- END CONTENT -->
-</div><!-- END WRAP -->
+<section class="feature">
+    @include('front.common.feature')
+</section>
+<div class="content-right invisible-pc invisible-tab">
+    @include('front.common.sideInfo')
+</div><!-- END CONTENT-RIGHT -->
 @endsection

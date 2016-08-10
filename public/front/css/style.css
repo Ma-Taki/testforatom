@@ -626,6 +626,7 @@ h1.SearchTitle:before{
 
 /* こちらもおすすめ */
 .recommended {
+    background: url(../images/absurdidad.png);
     padding: 24px 0;
 }
 
@@ -1664,7 +1665,7 @@ nav ul .active{ background: #536C75; }
 }
 
 .categorySearch .categorySearchInr .parentCategory:before{
-	content: "\a0"; /* 16進数の半角スペース */
+	content: "\a0";
 	background: #5e8796;
 	font-weight: bold;
 	display: inline-block;
@@ -1904,6 +1905,10 @@ tablet.css 641px~1024px
         width: 95%;
     }
 
+    .feature{
+        padding: 0 2.5%;
+    }
+
     /*-------------------------------
 	# page
 	-------------------------------*/
@@ -2050,7 +2055,8 @@ sp.css ~640px
     }
 
     .commonCenterBtn button {
-    	width: 36%;
+    	width: 70%;
+        font-size: 2rem;
     }
 
     /* 検索コンテンツ用ヘッダー */
@@ -2075,6 +2081,11 @@ sp.css ~640px
     /*-------------------------------
     # 条件を指定して検索
     -------------------------------*/
+    .condition_search{
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+
     .searchContent li{
         width: 100%;
         line-height: 4rem;
@@ -2120,6 +2131,31 @@ sp.css ~640px
         font-size: 1.4rem;
     }
 
+    .tabSelected {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tabSelected .title{
+        font-size: 1.77rem;
+        line-height: 4.8rem;
+        padding-left: 16px;
+    }
+
+    .tabSelected .tabSelectedInr li{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .tabSelected .tabSelectedInr li span{
+        width: auto;
+        font-size: 3rem;
+        float: none;
+        padding: 0 0.33rem;
+    }
+
     /*-------------------------------
 	# 該当案件一覧
 	-------------------------------*/
@@ -2156,6 +2192,93 @@ sp.css ~640px
         display: inline-block;
     }
 
+    /*-------------------------------
+	# 案件詳細
+	-------------------------------*/
+    #itemDetail .other{
+        display: block;
+    }
+
+    #itemDetail .otherName{
+        display: block;
+        width: 100%;
+        text-align: left;
+        background-color: white;
+        color: black;
+    }
+
+    #itemDetail .otherName:before {
+        content: "\a0";
+    	background: #becfd5;
+    	font-weight: bold;
+        margin-right: 1%;
+    }
+
+    #itemDetail .otherValue{
+        display: block;
+        width: 100%;
+        padding: 1% 0;
+    }
+
+    /* こちらもおすすめ　 */
+    .recommended{
+        padding: 0;
+        background: url(../images/absurdidad.png);
+    }
+
+    .recommendedInr {
+        width: 100%;
+    }
+
+    .recommendedInr h3{
+        background: #5e8796;
+        color: white;
+        font-size: 16px;
+        line-height: 48px;
+        margin-bottom: 16px;
+        padding-left: 16px;
+    }
+
+    .recoItems{
+        margin-top: 0;
+        flex-wrap: wrap;
+    }
+
+    .recoItem{
+        width: 100%;
+        margin: 3% 16px 0 16px;
+    }
+
+    .recoItem:not(:first-child){
+        margin-left: 16px;
+    }
+
+    .recoItem:last-child{
+        margin-bottom: 16px;
+    }
+
+    .recoItem .header{
+        padding: 2%;
+        text-align: left;
+    }
+
+    .recoItem .detail{
+        padding: 3%;
+    }
+
+    .recoItem .detail .skill{
+/*        display: inline-block;
+        width: 35%; */
+        padding-top: 0;
+    }
+
+    .recoItem .detail .skills{
+        /*display: inline-block;*/
+    }
+
+    .feature{
+        padding: 0;
+    }
 
     /*-------------------------------
     # お問い合わせ

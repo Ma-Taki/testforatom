@@ -11,7 +11,8 @@ use App\Models\Ms_areas;
 use App\Models\Ms_job_types;
 ?>
 <div class="wrap">
-    <section id="sp_condition" class="categorySearch">
+    <section id="sp_condition" class="condition_search">
+        <form method="get" action="{{ url('/front/search') }}">
         <div class="searchHeader">
             <h1>条件を指定して案件を探す</h1>
         </div>
@@ -95,6 +96,47 @@ use App\Models\Ms_job_types;
                 </div>
             </ul>
         </div>
+        <div class="tabSelected">
+            <p class="title">選択した項目</p>
+                        <div class="tabSelectedInr">
+                            <div class="searchElement">
+                                <div id="tagSelectedSkill">
+                                    <p class="tagSelectedName">スキル</p>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedSysType">
+                                    <p class="tagSelectedName">システム種別</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedRate">
+                                    <p class="tagSelectedName">報酬</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedBizCategory">
+                                    <p class="tagSelectedName">業種</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedArea">
+                                    <p class="tagSelectedName">勤務地</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                                <div id="tagSelectedPosition">
+                                    <p class="tagSelectedName">ポジション</a>
+                                    <ul></ul>
+                                    <hr class="partitionLine">
+                                </div>
+                            </div>
+                        </div>
+        </div>
+        <div class="clear commonCenterBtn">
+            <button type="submit">検　索</button>
+        </div>
+    </form>
     </section>
 </div><!-- END WRAP -->
 @endsection

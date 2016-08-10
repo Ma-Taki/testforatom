@@ -211,7 +211,18 @@ jQuery(function($){
                 case 'job_types[]': selected_cndtns_type = $('#tagSelectedPosition'); break;
             }
             if($(this).prop('checked')){
-                var addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
+
+
+				var addValue;
+				if ($(this).parents('#sp_condition')) {
+					// sp用html
+					addValue = $('<li><p>' + chkBox_label + '</p><span id="' + chkBox_label + '">×</span></li>');
+				} else {
+					// pc tab用html
+					addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
+				}
+
+				//var addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
                 addValue.children('span').click(function(){
                     $(this).parent('li').remove();
                     if (selected_cndtns_type.find('li').length <= 0) {
