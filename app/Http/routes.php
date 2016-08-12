@@ -67,6 +67,9 @@ Route::get('/front/category/{id}', 'front\ItemController@searchItemByCategory');
 // フロント：急募案件
 Route::get('/front/pickup', 'front\ItemController@searchItem');
 
+// フロント：ログイン
+Route::resource('/front/login', 'front\LoginController', ['only' => ['index', 'store']]);
+
 
 
 

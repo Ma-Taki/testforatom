@@ -3,8 +3,8 @@
         <p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト<span class="invisible-tab">「エンジニアルート」</span></p>
         <div class="user">
             <ul>
-                <li><a href="#" class="signin">新規登録</a></li>
-                <li><a href="#">ログイン</a></li>
+                <li><a href="/front/member/regist" class="signin">新規登録</a></li>
+                <li><a href="/front/login">ログイン</a></li>
             </ul>
         </div>
         <h1 class="alignleft"><a href="{{ url('/') }}" title="エンジニアルート"></a></h1>

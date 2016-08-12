@@ -103,8 +103,6 @@ textarea{ font-size: 1.4rem; }
     padding-top: 20px;
 }
 
-
-
 .content-left{
     width: 75%;
     float: left;
@@ -116,6 +114,23 @@ textarea{ font-size: 1.4rem; }
     float: left;
 }
 
+/* alert関連 */
+.alert{
+    width: 100%;
+    margin: 2% 0;
+    padding: 2% 3%;
+}
+
+.alert li{
+    list-style: inside;
+}
+
+.alert-danger{
+    border: 1px solid #e9b2bd;
+    color: #bf1939;
+    background: #f7e5e9;
+    border-radius: 1rem;;
+}
 
 .color-01{ color: #5e8796; }
 .color-red{ color: #ff0000; }
@@ -257,6 +272,53 @@ h1.SearchTitle:before{
 	background-size: 16px 16px;
 	background-position: 0 4px;
 	display: inline-block;
+}
+
+/*-------------------------------
+## ログイン
+-------------------------------*/
+#login .loginInr{
+    width: 60%;
+    margin: 0 auto;
+    padding: 3% 0;
+}
+
+#login .login_input{
+    margin: 0 auto;
+    width: 100%;
+}
+
+#login .login_input p{
+    display: inline-block;
+    width: 25%;
+    vertical-align: middle;
+}
+#login .login_input input{
+    display: inline-block;
+    width: 75%;
+    font-size: 1.4rem;
+    border: 1.5px solid #5e8796;
+    border-radius: 5px;
+    padding: 1%;
+    margin: 0.8rem 0;
+    line-height: 2rem;
+}
+
+#login .infoText{
+    text-align: right;
+}
+
+#login ul li{
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+#login a{
+    color: #5e8796;
+}
+
+#login .contentInr p{
+    padding-bottom: 2.4rem;
 }
 
 /*-------------------------------
@@ -1114,6 +1176,7 @@ header .search{
 	text-indent: 100%;
 	cursor: pointer;
 	border: none;
+    vertical-align: middle;
 }
 
 /* nav */
@@ -2099,6 +2162,41 @@ sp.css ~640px
         background-size: 14px 14px;
         background-position: 0 6px;
         display: inline-block;
+    }
+
+    /*-------------------------------
+    # ログイン
+    -------------------------------*/
+    #login .loginInr{
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    #login .login_input p{
+        display: block;
+        width: 100%;
+    }
+
+    #login .login_input input{
+        display: block;
+        width: 100%;
+    }
+
+    #login .infoText{
+        padding: 1rem 0;
+    }
+
+    #login .infoText p{
+        line-height: 2rem;
+    }
+
+    #login .contentInr{
+        width: 95%;
+        padding: 2rem 0;
+    }
+
+    #login .contentInr p{
+        padding-bottom: 1.4rem;
     }
 
     /*-------------------------------
