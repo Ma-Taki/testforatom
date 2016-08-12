@@ -93,8 +93,8 @@
 
         <section class="keyWordSearch clear invisible-sp">
             <h1>キーワードから案件を探す</h1>
-            <form class="keyWordSearchForm" method="post" action="/item/search">
-                <input class="keyWordSearchInputForm" type="text" name="search_keyWord">
+            <form class="keyWordSearchForm" method="get" action="/front/keyword">
+                <input class="keyWordSearchInputForm" type="text" name="keyword">
                 <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
             </form>
         </section><!-- /.keyWordSearch for pc,tablet -->

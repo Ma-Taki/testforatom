@@ -504,15 +504,11 @@ jQuery(function($){
 					  '<a href="/front/detail?id=' + data['items'][i].id +'">' +
 					  '<button><p>詳細を見る<p></button></a>' +
 					  '</div></div></div></div>');
-					  /*  登録が時間単位で一週間以内は新着 後でやる
-					  var now = Date.parse(data['items'][i].registration_date);
-					  alert(now.getDate());
-					  if (true) {
+					  /*  登録が時間単位で一週間以内は新着 */
+					  if (data['items'][i].new_item_flg) {
 						  var $p_new = $('<p class="new">新着</p>');
 						  $item_dom.find('.table-row').prepend($p_new);
-
 					  }
-					  */
 					  $('#itemList').append($item_dom);
 				  }
 				nextPage++;

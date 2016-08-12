@@ -8,10 +8,11 @@
             </ul>
         </div>
         <h1 class="alignleft"><a href="{{ url('/') }}" title="エンジニアルート"></a></h1>
+
         <div class="search">
-            <form action="#" method="post">
-                <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
-                <input type="submit" name="submit" value="検索" class="searchBtn">
+            <form action="/front/keyword" method="get">
+                <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+                <button class="searchBtn" type="submit" />
             </form>
         </div><!-- /.search -->
     </div><!-- /.headerInr -->

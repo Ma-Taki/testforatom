@@ -266,25 +266,27 @@ class Tr_items extends Model
         $keyword_array = array_filter($keyword_array, 'strlen');
 
         return $query->when(!empty($keyword_array), function($query) use ($keyword_array) {
-            return $query->join('link_items_sys_types', 'items.id', '=', 'link_items_sys_types.item_id')
-                         ->join('sys_types', 'sys_types.id', '=', 'link_items_sys_types.sys_type_id')
-                         ->join('link_items_job_types', 'items.id', '=', 'link_items_job_types.item_id')
-                         ->join('job_types', 'job_types.id', '=', 'link_items_job_types.job_type_id')
-                         ->join('biz_categories', 'biz_categories.id', '=', 'items.biz_category_id')
-                         ->join('link_items_skills', 'items.id', '=', 'link_items_skills.item_id')
-                         ->join('skills', 'skills.id', '=', 'link_items_skills.skill_id')
-                         ->join('link_items_tags', 'items.id', '=', 'link_items_tags.item_id')
-                         ->join('tags', 'tags.id', '=', 'link_items_tags.tag_id')
-                         ->join('link_items_areas', 'items.id', '=', 'link_items_areas.item_id')
-                         ->join('areas', 'areas.id', '=', 'link_items_areas.area_id')
-                         ->join('prefectures', 'prefectures.id', '=', 'areas.prefecture_id')
+            return $query->leftJoin('link_items_sys_types', 'items.id', '=', 'link_items_sys_types.item_id')
+                         ->leftJoin('sys_types', 'sys_types.id', '=', 'link_items_sys_types.sys_type_id')
+                         ->leftJoin('link_items_job_types', 'items.id', '=', 'link_items_job_types.item_id')
+                         ->leftJoin('job_types', 'job_types.id', '=', 'link_items_job_types.job_type_id')
+                         ->leftJoin('biz_categories', 'biz_categories.id', '=', 'items.biz_category_id')
+                         ->leftJoin('link_items_skills', 'items.id', '=', 'link_items_skills.item_id')
+                         ->leftJoin('skills', 'skills.id', '=', 'link_items_skills.skill_id')
+                         ->leftJoin('link_items_tags', 'items.id', '=', 'link_items_tags.item_id')
+                         ->leftJoin('tags', 'tags.id', '=', 'link_items_tags.tag_id')
+                         ->leftJoin('link_items_areas', 'items.id', '=', 'link_items_areas.item_id')
+                         ->leftJoin('areas', 'areas.id', '=', 'link_items_areas.area_id')
+                         ->leftJoin('prefectures', 'prefectures.id', '=', 'areas.prefecture_id')
                          ->where(function($query) use($keyword_array) {
                              foreach ((array)$keyword_array as $keyword) {
-                                 // タグ名だけutf8_unicode_ciなので、generalを明示
-                                 $query->orWhere(DB::raw("
-                                 CONCAT(items.name, items.detail, sys_types.name, job_types.name,
-                                 biz_categories.name, tags.term, skills.name, area_detail,
-                                 prefectures.name, items.rate_detail) collate utf8_general_ci"),'LIKE',"%".$keyword."%");
+                                 $query->where(function($query) use ($keyword) {
+                                     // タグ名だけutf8_unicode_ciなので、generalを明示
+                                     $query->orWhere(DB::raw("
+                                        CONCAT(items.name, IFNULL(items.detail,''), IFNULL(sys_types.name,''), IFNULL(job_types.name,''),
+                                        biz_categories.name, IFNULL(tags.term,''), IFNULL(skills.name,''), area_detail,
+                                        prefectures.name, items.rate_detail) collate utf8_general_ci"),'LIKE','%'.$keyword.'%');
+                                 });
                              }
                          });
         });

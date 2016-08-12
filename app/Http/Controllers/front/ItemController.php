@@ -60,14 +60,12 @@ class ItemController extends Controller
         $limit = $this->getLimit($request->limit);
         $page = $this->getPage($request->page);
 
-        //処理
         $itemList = Tr_items::select('items.*')
                             ->entryPossible()
                             ->getItemByKeyword($request->keyword)
                             ->groupBy('items.id')
                             ->orderBy($sortOrder['columnName'], $sortOrder['sort'])
                             ->paginate(FrntUtil::SEARCH_PAGINATE[$limit]);
-
         $params = [
             'order' => $sortOrder['sortId'],
             'limit' => $limit,
@@ -210,6 +208,12 @@ class ItemController extends Controller
             $item['biz_category_name'] = $biz_category_name;
             $item['sys_type'] = $sys_type;
             $item['job_type'] = $job_type;
+            // 新着のフラグもここで生成
+            if($item->registration_date->between(Carbon::now(), Carbon::now()->subDays(7))){
+                $item['new_item_flg'] = true;
+            } else {
+                $item['new_item_flg'] = false;
+            }
         }
         $data = [
             'items' => $itemList->items(),
@@ -218,14 +222,6 @@ class ItemController extends Controller
 
         // エンコードして返却
         echo json_encode($data);
-    }
-
-    /**
-     * キーワード検索用のテキストを案件ごとに生成する。
-     *
-     */
-    private function get($item){
-
     }
 
     /**

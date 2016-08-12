@@ -14,9 +14,9 @@
         <section class="keyWordSearch clear invisible-pc invisible-tab">
             <div class="alignCenter">
                 <div class="keyWordSearchForm">
-                    <form action="#" method="post">
-                        <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
-                        <input type="submit" name="submit" value="検索" class="searchBtn">
+                    <form action="/front/keyword" method="get">
+                        <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+                        <input type="submit" class="searchBtn">
                     </form>
                 </div>
             </div>
@@ -278,9 +278,9 @@
                 <section class="keyWordSearch clear invisible-pc invisible-tab">
                     <div class="alignCenter">
                         <div class="keyWordSearchForm">
-                            <form action="#" method="post">
-                                <input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
-                                <input type="submit" name="submit" value="検索" class="searchBtn">
+                            <form action="front" method="get">
+                                <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+                                <input type="submit" class="searchBtn">
                             </form>
                         </div>
                     </div>

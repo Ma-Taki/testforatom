@@ -44,6 +44,10 @@ Route::get('/front/about', function () {
     return view('front.about');
 });
 
+// フロント：企業の皆様へ画面
+Route::get('/front/company', 'front\CompanyController@index');
+Route::post('/front/company', 'front\CompanyController@store');
+
 // フロント：案件一覧
 Route::match(['get', 'post'], '/front/search', 'front\ItemController@searchItem');
 

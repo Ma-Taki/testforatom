@@ -259,6 +259,29 @@ h1.SearchTitle:before{
 	display: inline-block;
 }
 
+/*-------------------------------
+## 企業の皆様へ
+-------------------------------*/
+.company{
+    width: 95%;
+    margin: 0 auto;
+}
+
+#company .pageDetail{
+    text-align: center;
+    padding: 2% 0 3%;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+#company .pageDetail p{
+    line-height: 2.4rem;
+}
+
+#company p.pageInfo{
+    color: #5e8796;
+    padding: 2% 0 3%;
+}
 
 /*-------------------------------
 ## 該当案件一覧
