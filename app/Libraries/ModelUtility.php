@@ -28,6 +28,9 @@ class ModelUtility
     // 権限：エントリー管理：スキルシートDL
     const AUTH_TYPE_ENTRY_DOWNLOAD = 'entry.download';
 
+    // 都道府県：東京
+    const PREFECTURES_ID_TOKYO = 13;
+
     // タグタイプ：通常
     const TAG_TYPE_NORMAL = 1;
     // タグタイプ：ピックアップ

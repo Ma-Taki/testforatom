@@ -114,6 +114,42 @@ textarea{ font-size: 1.4rem; }
     float: left;
 }
 
+.wsnw { white-space:nowrap; }
+
+/* 基本のセレクトボックス */
+.selectBox{
+    position: relative;
+    display: inline-block;
+    border: solid 1px #5e8796;
+}
+
+.selectBox:after{
+    content: "\25BC";
+    position: absolute;
+    color: #5e8796;
+    top: 50%;
+    right: 0px;
+    margin-right: 5px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+select, option {
+    line-height: 2.2rem;
+    padding: 0px;
+    margin: 0;
+    text-indent: 0.6em;
+    background-color: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+}
+
 /* alert関連 */
 .alert{
     width: 100%;
@@ -121,8 +157,10 @@ textarea{ font-size: 1.4rem; }
     padding: 2% 3%;
 }
 
-.alert li{
+.alert ul li{
     list-style: inside;
+    font-size: 1.4rem;
+    line-height: 2rem;
 }
 
 .alert-danger{
@@ -130,6 +168,11 @@ textarea{ font-size: 1.4rem; }
     color: #bf1939;
     background: #f7e5e9;
     border-radius: 1rem;;
+}
+
+p.pageInfo{
+    color: #5e8796;
+    padding: 2% 0 3%;
 }
 
 .color-01{ color: #5e8796; }
@@ -167,7 +210,6 @@ textarea{ font-size: 1.4rem; }
 .partitionLine_01{
     border: 0;
     border-top: 1px dashed #333;
-    margin-top: 1.5%;
 }
 .partitionLine_02 {
     border: 2px solid #5e8796;
@@ -179,6 +221,7 @@ textarea{ font-size: 1.4rem; }
     border-top: 1px dashed #333;
 }
 
+/* 利用規約、個人情報の取扱い */
 .textArea{
     width: 95%;
     text-align: left;
@@ -190,6 +233,16 @@ textarea{ font-size: 1.4rem; }
 
 .textAreaInr{
     padding: 1.5rem;
+}
+
+.textAreaInr .title:not(:first-child){
+    padding-top: 1.5rem;
+}
+
+.textAreaInfo{
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 3rem;
 }
 
 .commonCenterBtn{
@@ -275,6 +328,111 @@ h1.SearchTitle:before{
 }
 
 /*-------------------------------
+## 新規会員登録
+-------------------------------*/
+.user_input_Inr{
+}
+
+.input_field{
+    width: 95%;
+    margin: 0 auto;
+    padding: 1.4rem 0 1.4rem 1.4rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.input_f_name{
+    display: inline-flex;
+    width: 25%;
+}
+
+.input_f_value{
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 75%;
+}
+
+.input_f_value label{
+    display: inline-flex;
+    align-items: center;
+    width: 50%;
+}
+
+.input_f_value label:nth-child(n+3) {
+    margin-top: 1.4rem;
+}
+
+.input_f_value label input{
+    display: inline-flex;
+    width: 70%;
+    font-size: 1.4rem;
+    border: 1px solid #5e8796;
+    border-radius: 5px;
+    padding: 0.6rem;
+    margin-left: 12px;
+}
+
+.input_gender label{
+    width: 25%;
+}
+
+.input_gender label input{
+    width: auto;
+    margin-left: 0;
+    margin-right: 6px;
+}
+
+.input_birth label{
+    width: auto;
+    margin-right: 12px;
+}
+
+.input_birth label:nth-child(n+3){
+    margin: 0;
+}
+
+.input_f_value input{
+    display: inline-flex;
+    width: 70%;
+    font-size: 1.4rem;
+    border: 1px solid #5e8796;
+    border-radius: 5px;
+    padding: 0.6rem;;
+}
+
+.input_contract label{
+    width: 15%;
+}
+
+.input_contract label input{
+    width: auto;
+    margin-left: 0;
+    margin-right: 6px;
+}
+
+.input_contract label:nth-child(n+3){
+    margin: 0;
+}
+
+.input_email label{
+    width: 100%;
+}
+
+.input_email label input{
+    width: 70%;
+    margin-left: 0;
+}
+
+.input_email label:nth-child(2){
+    margin-top: 1.4rem;
+}
+
+#slctBx_prefecture{width: 12rem;}
+#slctBx_birth_y{width: 6rem;}
+#slctBx_birth_m,
+#slctBx_birth_d{width: 4rem;}
+
+/*-------------------------------
 ## ログイン
 -------------------------------*/
 #login .loginInr{
@@ -306,11 +464,6 @@ h1.SearchTitle:before{
 
 #login .infoText{
     text-align: right;
-}
-
-#login ul li{
-    font-size: 1.4rem;
-    line-height: 2rem;
 }
 
 #login a{
@@ -417,7 +570,6 @@ h1.SearchTitle:before{
 
 #item .conditions select,
 #item .conditions option {
-    width: 100%;
     line-height: 2.2rem;
     padding: 0px;
     margin: 0;
@@ -2163,6 +2315,73 @@ sp.css ~640px
         background-position: 0 6px;
         display: inline-block;
     }
+
+    /*-------------------------------
+    # 新規会員登録
+    -------------------------------*/
+    .input_field{
+        width: 100%;
+        padding: 1rem 0.5rem;
+        display: block;
+    }
+
+    .input_f_name{
+        display: block;
+        width: 100%;
+    }
+
+    .input_f_name p{
+        line-height: ;
+    }
+
+
+    .input_f_value{
+        display: block;
+        width: 100%;
+        padding-top: 1.6rem;
+    }
+
+    .input_f_value label{
+        display: block;
+        width: 100%;
+    }
+
+    .input_name label:nth-child(3) {
+        margin-top: 0.7rem;
+    }
+
+    .input_name label:nth-child(4) {
+        margin-top: 0;
+    }
+
+    .input_f_value label input{
+        display: inline-block;
+        width: 85%;
+        font-size: 1.4rem;
+        border: 1px solid #5e8796;
+        border-radius: 5px;
+        padding: 0.6rem;
+        margin-left: 12px;
+        margin-bottom: 0.7rem;
+    }
+
+    .input_gender {display: inline-flex;}
+    .input_gender label{width: 50%; display: inline-flex; align-items: center;}
+    .input_gender label input{width: auto; margin: 0;}
+
+    .input_birth{}
+    .input_birth label{display: inline-flex; width: auto;}
+    .input_birth label:not(:first-child){margin: 0 0 0 12px;}
+    .input_birth label:first-child{margin: 0;}
+
+    .input_f_value input{width: 100%;}
+
+    .input_contract{display: inline-flex;}
+    .input_contract label{width: 50%;}
+    .input_contract label input{width: auto;}
+
+    .input_email{}
+    .input_email label input{width: 100%; margin: 0 0 0.5rem 0;}
 
     /*-------------------------------
     # ログイン

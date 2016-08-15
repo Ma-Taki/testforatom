@@ -27,7 +27,7 @@
     @endif
 @endif
         <div class="loginInr">
-            <form action="/front/login" method="post">
+            <form action="/login" method="post">
                 <div class="login_input fs0">
                     <div class="input_field">
                         <p>メールアドレス</p>

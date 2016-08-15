@@ -68,10 +68,12 @@ Route::get('/front/category/{id}', 'front\ItemController@searchItemByCategory');
 Route::get('/front/pickup', 'front\ItemController@searchItem');
 
 // フロント：ログイン
-Route::resource('/front/login', 'front\LoginController', ['only' => ['index', 'store']]);
+Route::resource('/login', 'front\LoginController', ['only' => ['index', 'store']]);
 
-
-
+// フロント：新規登録
+Route::resource('/user/regist/input', 'front\UserController', ['only' => ['index', 'store']]);
+//Route::post('/user/regist/confirm', 'front\UserController@confirm');
+Route::post('/user/regist/complete', 'front\UserController@insertUser');
 
 
 // 管理画面：ログイン画面
