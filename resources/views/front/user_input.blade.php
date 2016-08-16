@@ -36,7 +36,7 @@
             <p class="pageInfo">以下のフォームに必要な情報を入力してください。<span class="color-red">※</span>印の項目は入力必須です。</p>
             <hr class="partitionLine_01">
 
-            <form method="post" name="userForm" action="{{ url('/user/regist/complete') }}">
+            <form method="post" name="userForm" action="{{ url('/user/regist') }}">
                 <div class="input_field fs0">
                     <div class="input_f_name">
                         <p>お名前<span class="color-red">※</span></p>
@@ -138,7 +138,7 @@
                     <div class="input_f_value">
                         <label>
                             <span class="selectBox">
-                                <select id="slctBx_prefecture" name="prefecture">
+                                <select id="slctBx_prefecture" name="prefecture_id">
 @foreach(Ms_prefectures::getNotIndexOnly() as $value)
                                     <option @if($value->id == MdlUtil::PREFECTURES_ID_TOKYO) selected @endif value="{{ $value->id }}">{{ $value->name }}</option>
 @endforeach

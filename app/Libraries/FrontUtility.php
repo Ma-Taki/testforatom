@@ -7,6 +7,10 @@ namespace App\Libraries;
 use App;
 class FrontUtility
 {
+    // パスワード暗号化用salt
+    const FIXED_SALT = "O#%1@'HfwJ2";
+
+    // 報酬のラジオボタン用
     const SEARCH_CONDITION_RATE = [
         0 => '指定しない',
         200000 => '20万円以上',

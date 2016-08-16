@@ -78,7 +78,9 @@ p{
     font-size: 1.4rem;
     line-height: normal;
 }
-
+ul li{
+    font-size: 1.4rem;
+}
 label{ font-size: 1.4rem; }
 textarea{ font-size: 1.4rem; }
 /*-------------------------------
@@ -252,13 +254,14 @@ p.pageInfo{
 }
 
 .commonCenterBtn button {
-	width: 33%;
+	width: 30%;
 	border-radius: 32px;
 	background: #5e8796;
 	color: #fff;
 	border-style: none;
     margin: 0 1%;
-    padding: 1.1%;
+    padding: 1%;
+    font-size: 1.5rem;
 }
 
 .errorMessage{
@@ -431,6 +434,35 @@ h1.SearchTitle:before{
 #slctBx_birth_y{width: 6rem;}
 #slctBx_birth_m,
 #slctBx_birth_d{width: 4rem;}
+
+/* 登録完了 */
+#user_complete .regist_thanks {
+    margin-top: 5%;
+}
+
+#user_complete .regist_thanks p{
+    line-height: 4rem;
+}
+
+#user_complete .regist_thanks p.user_id{
+    display: inline-block;
+    font-size: 1.8rem;
+    color: #E38585;
+    background: #eef3f4;
+    font-weight: bold;
+    padding: 1rem 3rem;
+    line-height: normal;
+}
+
+#user_complete .support{
+    margin-top: 10%;
+}
+
+#user_complete .support .about_support{
+    font-weight: bold;
+    font-size: 1.7rem;
+    line-height: 4rem;
+}
 
 /*-------------------------------
 ## ログイン
@@ -2294,7 +2326,7 @@ sp.css ~640px
 
     .commonCenterBtn button {
     	width: 70%;
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
 
     /* 検索コンテンツ用ヘッダー */
@@ -2382,6 +2414,9 @@ sp.css ~640px
 
     .input_email{}
     .input_email label input{width: 100%; margin: 0 0 0.5rem 0;}
+    #user_complete .contentInr p:first-child{
+        padding-top: 2rem;
+    }
 
     /*-------------------------------
     # ログイン

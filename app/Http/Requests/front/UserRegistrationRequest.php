@@ -46,7 +46,7 @@ class UserRegistrationRequest extends Request
             'contract_types' => '',
             'prefecture' => '',
             'station' => '',
-            'email' => 'required|email|max:256|confirmed',
+            'email' => 'required|email|max:256|confirmed|',
             'email_confirmation' => '',
             'phone' => [
                 'required',
