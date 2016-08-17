@@ -7,10 +7,21 @@ namespace App\Libraries;
 use App;
 class FrontUtility
 {
+    // 企業の皆様へ：お問い合わせ項目
+    const COMPANY_CONTACT_TYPE = [
+        '0' => '技術支援について',
+        '1' => '受託開発について',
+        '2' => 'Web制作について',
+        '3' => '商品・サービスについて',
+        '4' => '協業・ビジネスパートナーについて',
+        '5' => '採用関連について',
+        '6' => 'その他',
+    ];
+
     // パスワード暗号化用salt
     const FIXED_SALT = "O#%1@'HfwJ2";
 
-    // 報酬のラジオボタン用
+    // 条件から案件検索：報酬のラジオボタン
     const SEARCH_CONDITION_RATE = [
         0 => '指定しない',
         200000 => '20万円以上',
@@ -20,6 +31,7 @@ class FrontUtility
         900000 => '90万円以上',
     ];
 
+    // 案件一覧：ページ毎の表示数
     const SEARCH_PAGINATE = [
         '1' => 10,
         '2' => 20,
@@ -39,6 +51,13 @@ class FrontUtility
     public $user_contact_mail_to = '';
     public $user_contact_mail_to_name = '';
 
+    // メール：企業向けお問い合わせ
+    const COMPANY_CONTACT_MAIL_TITLE = '【エンジニアルート】企業向けお問い合わせメール';
+    public $company_contact_mail_from = '';
+    public $company_contact_mail_from_name = '';
+    public $company_contact_mail_to = '';
+    public $company_contact_mail_to_name = '';
+
     // メール：会員登録完了
     const USER_REGIST_MAIL_TITLE = 'エンジニアルートにご登録頂きありがとうございます。';
     public $user_regist_mail_from = '';
@@ -48,29 +67,44 @@ class FrontUtility
 
     public function __construct(){
         switch (env('APP_ENV')) {
+            // ローカル環境
             case 'local':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_contact_mail_from_name = 'E-R開発(local)';
                 $this->user_contact_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_contact_mail_to_name = 'E-R開発者';
 
+                $this->company_contact_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->company_contact_mail_from_name = 'E-R開発(local)';
+                $this->company_contact_mail_to = 'y.suzuki@solidseed.co.jp';
+                $this->company_contact_mail_to_name = 'E-R開発者';
+
                 $this->user_regist_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
                 $this->user_regist_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_to_name = 'E-R開発者';
 
                 break;
+
+            // 開発環境
             case 'develop':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_contact_mail_from_name = 'E-R開発(develop)';
                 $this->user_contact_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_contact_mail_to_name = 'E-R開発者';
 
+                $this->company_contact_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->company_contact_mail_from_name = 'E-R開発(local)';
+                $this->company_contact_mail_to = 'y.suzuki@solidseed.co.jp';
+                $this->company_contact_mail_to_name = 'E-R開発者';
+
                 $this->user_regist_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
                 $this->user_regist_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_to_name = 'E-R開発者';
                 break;
+
+            //　本番環境
             case 'master':
                 $this->user_contact_mail_from = 'sender@engineer-route.com';
                 $this->user_contact_mail_from_name = 'sender@engineer-route.com';

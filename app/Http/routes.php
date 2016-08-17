@@ -37,16 +37,17 @@ Route::get('/front/terms', function () {
 // フロント：お問い合わせ
 Route::resource('/front/contact', 'front\ContactController', ['only' => ['index', 'store']]);
 Route::post('/front/contact/confirm', 'front\ContactController@confirm');
-Route::post('/front/contact/complete', 'front\ContactController@contact');
+Route::post('/front/contact/complete', 'front\ContactController@complete');
 
-// フロント：エンジニアルートとは画面
+// フロント：エンジニアルートとは
 Route::get('/front/about', function () {
     return view('front.about');
 });
 
-// フロント：企業の皆様へ画面
-Route::get('/front/company', 'front\CompanyController@index');
-Route::post('/front/company', 'front\CompanyController@store');
+// フロント：企業の皆様へ
+Route::resource('/company', 'front\CompanyController', ['only' => ['index', 'store']]);
+Route::post('/company/confirm', 'front\CompanyController@confirm');
+Route::post('/company/complete', 'front\CompanyController@complete');
 
 // フロント：案件一覧
 Route::match(['get', 'post'], '/front/search', 'front\ItemController@searchItem');

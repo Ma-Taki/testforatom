@@ -41,7 +41,7 @@ class ContactController extends Controller
      * お問い合わせ処理・完了画面表示
      * POST:/front/contact/complete
      **/
-    public function contact(Request $request){
+    public function complete(Request $request){
 
         $data = [
             'user_name' => $request->last_name.' '.$request->first_name.'（'.$request->last_name_kana.' '.$request->first_name_kana.'）',

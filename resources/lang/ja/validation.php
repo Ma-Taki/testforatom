@@ -124,11 +124,18 @@ return [
         'email' => [
             'required' => 'メールアドレスが入力されておりません'
         ],
+        //後で統一
         'phone' => [
+            'required' => '電話番号が入力されておりません。'
+        ],
+        'phone_num' => [
             'required' => '電話番号が入力されておりません。'
         ],
         'password' => [
             'required' => 'パスワードが入力されておりません。'
+        ],
+        'contact_type' => [
+            'required' => 'お問い合わせ項目が選択されておりません。'
         ],
     ],
     /*
