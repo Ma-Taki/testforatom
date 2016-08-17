@@ -152,6 +152,20 @@ class HtmlUtility
         }
         return $result;
     }
+    /**
+     * 配列を受け取り、先頭から値が存在するかチェックする。
+     * 値が存在した時点で返却する。
+     *
+     * @param
+     * @return String
+     */
+    public static function getEnableFromBegin($param_array){
+        foreach ((array)$param_array as $key => $value) {
+            if(!empty($value))
+            return $value;
+        }
+        return self::NULL_CHARACTER;
+    }
 
     public static function getParamsString($params){
         $result = '';

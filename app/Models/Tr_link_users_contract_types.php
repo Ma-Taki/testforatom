@@ -13,7 +13,7 @@ class Tr_link_users_contract_types extends Model
     public $timestamps = false;
 
     // プライマリキー設定
-    protected $primaryKey = ['item_id', 'contract_type_id'];
+    protected $primaryKey = ['user_id', 'contract_type_id'];
 
     // incrementを無効化
     public $incrementing = false;
@@ -23,5 +23,5 @@ class Tr_link_users_contract_types extends Model
      *
      * @var array
      */
-    protected $fillable = ['item_id', 'contract_type_id'];
+    protected $fillable = ['user_id', 'contract_type_id'];
 }

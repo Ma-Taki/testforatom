@@ -158,7 +158,7 @@ class MemberController extends AdminController
         $member = Tr_users::where('id', $member_id)->get()->first();
         if (empty($member)) {
             abort(404, '指定された会員は存在しません。');
-        } elseif ($member->delete_flag > 0 || $user->delete_date != null) {
+        } elseif ($member->delete_flag > 0 || $member->delete_date != null) {
             abort(404, '指定された会員は既に削除されています。');
         }
 

@@ -64,8 +64,8 @@
                         <p>メールアドレス<span class="color-red">※</span></p>
                     </div>
                     <div class="input_f_value input_email">
-                        <label><input type="text" value="{{ isset($mail) ? $mail : old('mail') }}" name="mail" maxlength="256" placeholder="例）info@solidseed.co.jp">（半角）</label>
-                        <label><input type="text" value="{{ isset($mail_confirmation) ? $mail_confirmation : old('mail_confirmation') }}" name="mail_confirmation" maxlength="256" placeholder="確認のため、もう一度入力してください。">（半角）</label>
+                        <label><input type="text" value="{{ isset($email) ? $email : old('email') }}" name="email" maxlength="256" placeholder="例）info@solidseed.co.jp">（半角）</label>
+                        <label><input type="text" value="{{ isset($email_confirmation) ? $email_confirmation : old('email_confirmation') }}" name="email_confirmation" maxlength="256" placeholder="確認のため、もう一度入力してください。">（半角）</label>
                     </div>
                 </div>
                 <hr class="partitionLine_03">

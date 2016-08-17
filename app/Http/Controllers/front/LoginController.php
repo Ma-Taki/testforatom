@@ -8,6 +8,7 @@ use App\Http\Requests\front\LoginRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Tr_users;
+use App\Libraries\FrontUtility as FrontUtil;
 class LoginController extends Controller
 {
     /**
@@ -24,11 +25,16 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request){
 
-        // 入力値から、有効な管理ユーザを取得する
-        $user = Tr_users::where('mail', $request->mail)
-                        ->where('password', md5($request->password))
-                        ->where('delete_flag', 0)
+        // ユーザを取得する
+        $user = Tr_users::where('mail', $request->email)
+                        ->enable()
                         ->get();
+
+        //TODO 一応、２件以上取得したらWarning
+
+
+        // パスワード照合
+        $password = $user->first()->salt .$request->password .FrontUtil::FIXED_SALT;
 
         // DBに対象ユーザが存在しない、または削除済み
         if($user->isEmpty()){

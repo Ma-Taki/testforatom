@@ -46,11 +46,11 @@ class UserRegistrationRequest extends Request
             'contract_types' => '',
             'prefecture' => '',
             'station' => '',
-            'email' => 'required|email|max:256|confirmed|',
+            'email' => 'required|email|max:256|confirmed|unique:users,mail,'.$this->id.',id,delete_date,NULL'
             'email_confirmation' => '',
-            'phone' => [
+            'phone_num' => [
                 'required',
-                'max:20',
+                'max:14',
                 'confirmed',
                 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/',
             ],
@@ -59,6 +59,7 @@ class UserRegistrationRequest extends Request
                 'required',
                 'between:6,20',
                 'confirmed',
+                'regex:/^[\x21-\x7E]+$/',
             ],
             'password_confirmation' => '',
         ];

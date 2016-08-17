@@ -1,9 +1,12 @@
 @extends('front.common.layout')
+@section('title', '新規会員登録 - エンジニアルート')
+@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 @section('content')
 <?php
     use App\Models\Ms_contract_types;
     use App\Models\Ms_prefectures;
     use App\Libraries\ModelUtility as MdlUtil;
+    use App\Libraries\HtmlUtility as HtmlUtil;
     use Carbon\Carbon;
  ?>
 <div class="wrap">
@@ -79,7 +82,7 @@
                             <span class="selectBox">
                                 <select id="slctBx_birth_m" name="birth_month">
 @for($month = 1; $month <= 12; $month++)
-                                    <option value="{{ $month }}">{{ $month }}</option>
+                                    <option @if(old('birth_month') == $month) selected @endif value="{{ $month }}">{{ $month }}</option>
 @endfor
                                 </select>
                             </span>
@@ -88,7 +91,7 @@
                             <span class="selectBox">
                                 <select id="slctBx_birth_d" name="birth_day">
 @for($day = 1; $day <= 31; $day++)
-                                    <option value="{{ $day }}">{{ $day }}</option>
+                                    <option @if(old('birth_day') == $day) selected @endif value="{{ $day }}">{{ $day }}</option>
 @endfor
                                 </select>
                             </span>
@@ -102,7 +105,7 @@
                         <p>最終学歴</p>
                     </div>
                     <div class="input_f_value">
-                        <input type="text" name="education" maxlength="50"　placeholder="例）〇〇大学〇〇学部〇〇学科 卒">
+                        <input type="text" name="education" maxlength="50" value="{{ old('education') }}" placeholder="例）〇〇大学〇〇学部〇〇学科 卒">
                     </div>
                 </div>
                 <hr class="partitionLine_01">
@@ -112,7 +115,7 @@
                         <p>国籍</p>
                     </div>
                     <div class="input_f_value">
-                        <input type="text" name="country" maxlength="20" value="日本" placeholder="例）日本">
+                        <input type="text" name="country" maxlength="20" value="{{ is_null(old('country')) ? '日本' : old('country') }}" placeholder="例）日本">
                     </div>
                 </div>
                 <hr class="partitionLine_01">
@@ -124,7 +127,7 @@
                     <div class="input_f_value input_contract">
 @foreach(Ms_contract_types::getActual() as $value)
                         <label>
-                            <input type="checkbox" name="contract_types[]" value="{{ $value->id }}">{{ $value->name }}
+                            <input type="checkbox" @if(!is_null(old('contract_types')) && in_array($value->id, old('contract_types'))) checked @endif name="contract_types[]" value="{{ $value->id }}">{{ $value->name }}
                         </label>
 @endforeach
                     </div>
@@ -140,7 +143,11 @@
                             <span class="selectBox">
                                 <select id="slctBx_prefecture" name="prefecture_id">
 @foreach(Ms_prefectures::getNotIndexOnly() as $value)
+    @if(!is_null(old('prefecture_id')))
+                                    <option @if($value->id == old('prefecture_id')) selected @endif value="{{ $value->id }}">{{ $value->name }}</option>
+    @else
                                     <option @if($value->id == MdlUtil::PREFECTURES_ID_TOKYO) selected @endif value="{{ $value->id }}">{{ $value->name }}</option>
+    @endif
 @endforeach
                                 </select>
                             </span>
@@ -154,7 +161,7 @@
                         <p>最寄り駅</p>
                     </div>
                     <div class="input_f_value">
-                        <input type="text" maxlength="30" name="station" placeholder="例）〇〇線〇〇駅">
+                        <input type="text" maxlength="30" name="station" value="{{ old('station') }}" placeholder="例）〇〇線〇〇駅">
                     </div>
                 </div>
                 <hr class="partitionLine_01">
@@ -164,8 +171,8 @@
                         <p>メールアドレス<span class="color-red">※</span></p>
                     </div>
                     <div class="input_f_value input_email">
-                        <label><input type="text" maxlength="256" name="email" placeholder="例）info@solidseed.co.jp">（半角）</label>
-                        <label><input type="text" maxlength="256" name="email_confirmation" placeholder="確認のため、もう一度入力してください。">（半角）</label>
+                        <label><input type="text" maxlength="256" name="email" value="{{ old('email') }}" placeholder="例）info@solidseed.co.jp">（半角）</label>
+                        <label><input type="text" maxlength="256" name="email_confirmation" value="{{ old('email_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角）</label>
                     </div>
                 </div>
                 <hr class="partitionLine_01">
@@ -175,8 +182,8 @@
                         <p>電話番号<span class="color-red">※</span></p>
                     </div>
                     <div class="input_f_value input_email">
-                        <label><input type="text" maxlength="20" name="phone" placeholder="例）03-5774-5557">（半角 *ハイフン付き）</label>
-                        <label><input type="text" maxlength="20" name="phone_confirmation" placeholder="確認のため、もう一度入力してください。">（半角*ハイフン付き）</label>
+                        <label><input type="text" maxlength="14" name="phone_num" value="{{ old('phone_num') }}" placeholder="例）03-5774-5557">（半角 *ハイフン付き）</label>
+                        <label><input type="text" maxlength="14" name="phone_num_confirmation" value="{{ old('phone_num_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角*ハイフン付き）</label>
                     </div>
                 </div>
                 <hr class="partitionLine_01">

@@ -26,10 +26,10 @@ class UserController extends Controller
 
     /**
      * 会員登録処理&会員登録完了画面表示
-     * POST:/user/regist
-     * UserRegistrationRequest
+     * POST:/user/regist]
+*
      */
-    public function store(Request $request){
+    public function store(UserRegistrationRequest $request){
 
         // prefix_saltを作成
         $prefix_salt = $this->getPrefixSalt(20);
@@ -46,7 +46,7 @@ class UserController extends Controller
             'prefecture_id' => $request->prefecture_id,
             'station' => $request->station,
             'email' => $request->email,
-            'phone' => $request->phone,
+            'phone_num' => $request->phone_num,
             'salt' => $prefix_salt,
             'password' => $prefix_salt .$request->password .FrontUtil::FIXED_SALT,
             'now' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -75,7 +75,7 @@ class UserController extends Controller
                 $user->prefecture_id = $db_data['prefecture_id'];
                 $user->station = !empty($db_data['station']) ? $db_data['station'] : null;
                 $user->mail = $db_data['email'];
-                $user->tel = $db_data['phone'];
+                $user->tel = $db_data['phone_num'];
                 $user->delete_flag = 0;
                 $user->delete_date = null;
                 $user->version = 0;
@@ -83,6 +83,8 @@ class UserController extends Controller
 
                 // ユーザ契約形態中間テーブルにインサート
                 foreach ((array)$db_data['contract_types'] as $contract_type) {
+                    // 本番でデリートする意味はない
+                    Tr_link_users_contract_types::where('user_id', $user->id)->delete();
                     Tr_link_users_contract_types::create([
                         'user_id' => $user->id,
                         'contract_type_id' => $contract_type,

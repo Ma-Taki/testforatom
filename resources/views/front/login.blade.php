@@ -31,7 +31,7 @@
                 <div class="login_input fs0">
                     <div class="input_field">
                         <p>メールアドレス</p>
-                        <input type="text" name="mail" value="{{ old('mail')}}">
+                        <input type="text" name="email" value="{{ old('email')}}">
                     </div>
                     <div class="input_field">
                         <p>パスワード</p>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="infoText">
                     <p>パスワードを忘れた方は<a href="#">コチラ</a></p>
-                    <p>新規会員登録は<a href="#">コチラ</a></p>
+                    <p>新規会員登録は<a href="/user/regist">コチラ</a></p>
                 </div>
                 <div class="commonCenterBtn">
                     <button type="submit">ログイン</button>

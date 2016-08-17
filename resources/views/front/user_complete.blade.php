@@ -1,4 +1,6 @@
 @extends('front.common.layout')
+@section('title', '新規会員登録完了 - エンジニアルート')
+@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 @section('content')
 <div class="wrap">
     <div id="user_complete" class="content">
@@ -8,7 +10,7 @@
             <p>この度はエンジニアルートに会員登録をしていただき、誠にありがとうございます。</p>
             <div class="regist_thanks">
                 <p>会員IDはご登録いただいたメールアドレスになります。</p>
-                <p class="user_id">会員ID：{{  $email or 'hogehoge@solidseed.co.jp' }}</p>
+                <p class="user_id">会員ID：{{  $email or '*****************' }}</p>
                 <p>パスワードと共にお忘れずに管理ください。</p>
                 <div class="commonCenterBtn">
                     <a href="/"><button>トップページへ</button></a>

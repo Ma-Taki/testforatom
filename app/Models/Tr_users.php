@@ -40,4 +40,12 @@ class Tr_users extends Model
         return $this->hasMany('App\Models\Tr_item_entries',
                               'user_id');
     }
+
+    /**
+     * 有効なユーザー
+     */
+     public function scopeEnable($query) {
+       return $query->where('delete_flag', 0)
+                    ->where('delete_date', null);
+     }
 }
