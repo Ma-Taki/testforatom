@@ -24,7 +24,10 @@ class ContactRequest extends Request
     public function rules()
     {
         return [
-            'user_name' => 'required',
+            'last_name' => 'required',
+            'first_name' => 'required',
+            'last_name_kana' => 'required',
+            'first_name_kana' => 'required',
             'company_name' => '',
             'mail' => 'required|email|confirmed',
             'mail_confirmation' => '',

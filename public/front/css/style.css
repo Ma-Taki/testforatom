@@ -965,35 +965,8 @@ h1.SearchTitle:before{
     padding: 2% 0 3%;
 }
 
-#contact .inputTable{
-    width: 96%;
-    display: table;
-    margin: 0 auto;
-}
-
-#contact .inputName{
-    display: table-cell;
-    width: 30%;
-    vertical-align: middle;
-}
-
-#contact .inputField{
-    display: table-cell;
-    width: 70%;
-    padding: 1% 0;
-}
-
-#contact .inputField input{
-    width: 83.7%;
-    font-size: 1.4rem;
-    border: 1px solid #5e8796;
-    border-radius: 5px;
-    padding: 1%;
-}
-
-#contact .inputField textarea{
-    width: 83.7%;
-    font-size: 1.4rem;
+#contact textarea{
+    width: 100%;
     border: 1px solid #5e8796;
     border-radius: 5px;
 }

@@ -22,7 +22,9 @@
                 </div>
             </div>
         </div>
-        @include('front.common.sideInfo')
+        <div class="invisible-pc invisible-tab">
+            @include('front.common.sideInfo')
+        </div>
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->
 @endsection

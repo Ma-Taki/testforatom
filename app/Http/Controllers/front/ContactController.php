@@ -26,14 +26,7 @@ class ContactController extends Controller
      * POST:/front/contact
      **/
     public function store(Request $request){
-
-        return view('front.contact', [
-            'user_name' => $request->user_name,
-            'company_name' => $request->company_name,
-            'mail' => $request->mail,
-            'mail_confirmation' => $request->mail_confirmation,
-            'contactMessage' => $request->contactMessage
-        ]);
+        return view('front.contact', $request->all());
     }
 
     /**
@@ -41,13 +34,7 @@ class ContactController extends Controller
      * POST:/front/contact/confirm
      **/
     public function confirm(ContactRequest $request){
-
-        return view('front.contact_confirm', [
-            'user_name' => $request->user_name,
-            'company_name' => $request->company_name,
-            'mail' => $request->mail,
-            'contactMessage' => $request->contactMessage
-        ]);
+        return view('front.contact_confirm', $request->all());
     }
 
     /**
@@ -57,7 +44,7 @@ class ContactController extends Controller
     public function contact(Request $request){
 
         $data = [
-            'user_name' => $request->user_name,
+            'user_name' => $request->last_name.' '.$request->first_name.'（'.$request->last_name_kana.' '.$request->first_name_kana.'）',
             'company_name' => $request->company_name,
             'mail' => $request->mail,
             'contactMessage' => $request->contactMessage,

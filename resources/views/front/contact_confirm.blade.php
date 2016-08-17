@@ -13,41 +13,54 @@
 
             <form method="post">
 
-                <table class="inputTable">
-                    <tr>
-                        <td class="inputName"><p>氏名<span class="color-red">※</span></p></td>
-                        <td class="inputField"><p>{{ $user_name }}</p></td>
-                    </tr>
-                </table>
+                <div class="input_field fs0">
+                    <div class="input_f_name">
+                        <p>氏名<span class="color-red">※</span></p>
+                    </div>
+                    <div class="input_f_value">
+                        <p>{{ $last_name .' ' .$first_name .'（' .$last_name_kana .' '.$first_name_kana .'）' }}</p>
+                    </div>
+                </div>
                 <hr class="partitionLine_03">
 
-                <table class="inputTable">
-                    <tr>
-                        <td class="inputName"><p>会社名</p></td>
-                        <td class="inputField"><p>{{ $company_name }}</p></td>
-                    </tr>
-                </table>
+                <div class="input_field fs0">
+                    <div class="input_f_name">
+                        <p>会社名</p>
+                    </div>
+                    <div class="input_f_value">
+                        <p>{{ $company_name }}</p>
+                    </div>
+                </div>
                 <hr class="partitionLine_03">
 
-                <table class="inputTable">
-                    <tr>
-                        <td class="inputName">
-                            <p>メールアドレス<span class="color-red">※</span></p>
-                        </td>
-                        <td class="inputField"><p>{{ $mail }}</p>
-                        </td>
-                    </tr>
-                </table>
+                <div class="input_field fs0">
+                    <div class="input_f_name">
+                        <p>メールアドレス<span class="color-red">※</span></p>
+                    </div>
+                    <div class="input_f_value">
+                        <p>{{ $mail }}</p>
+                    </div>
+                </div>
                 <hr class="partitionLine_03">
 
-                <table class="inputTable">
-                    <tr>
-                        <td class="inputName"><p>お問い合わせ内容<span class="color-red">※</span></p></td>
-                        <td class="inputField">
-                            <div class="pre-wrap">{{ $contactMessage }}</div>
-                        </td>
-                    </tr>
-                </table>
+                <div class="input_field fs0">
+                    <div class="input_f_name">
+                        <p>電話番号</p>
+                    </div>
+                    <div class="input_f_value">
+                        <p>{{ $phoneNumber }}</p>
+                    </div>
+                </div>
+                <hr class="partitionLine_03">
+
+                <div class="input_field fs0">
+                    <div class="input_f_name">
+                        <p>お問い合わせ内容<span class="color-red">※</span></p>
+                    </div>
+                    <div class="input_f_value">
+                        <div class="pre-wrap">{{ $contactMessage }}</div>
+                    </div>
+                </div>
                 <hr class="partitionLine_03">
 
                 <div class="textArea">
@@ -97,15 +110,14 @@
                     </div>
                 </div>
 
-                <div class="confirmBtn">
-                    <div class="button">
+                <div class="commonCenterBtn">
                         <button class="submit" name="send">個人情報の取扱いに同意して送信する</button>
-                    </div>
-                    <div class="button">
                         <button class="submit" name="edit">入力内容を修正する</button></a>
-                    </div>
                 </div>
-                <input type="hidden" name="user_name" value="{{ $user_name }}">
+                <input type="hidden" name="last_name" value="{{ $last_name }}">
+                <input type="hidden" name="first_name" value="{{ $first_name }}">
+                <input type="hidden" name="last_name_kana" value="{{ $last_name_kana }}">
+                <input type="hidden" name="first_name_kana" value="{{ $first_name_kana }}">
                 <input type="hidden" name="company_name" value="{{ $company_name }}">
                 <input type="hidden" name="mail" value="{{ $mail }}">
                 <input type="hidden" name="mail_confirmation" value="{{ $mail }}">

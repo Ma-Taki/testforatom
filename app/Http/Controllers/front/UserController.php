@@ -21,7 +21,7 @@ class UserController extends Controller
      * GET:/user/regist
      */
     public function index(){
-        return view('front.user_complete');
+        return view('front.user_input');
     }
 
     /**
