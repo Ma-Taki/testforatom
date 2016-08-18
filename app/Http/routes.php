@@ -70,6 +70,7 @@ Route::get('/front/pickup', 'front\ItemController@searchItem');
 
 // フロント：ログイン
 Route::resource('/login', 'front\LoginController', ['only' => ['index', 'store']]);
+Route::get('/logout', 'front\LoginController@logout');
 
 // フロント：新規登録
 Route::resource('/user/regist', 'front\UserController', ['only' => ['index', 'store']]);

@@ -5,6 +5,8 @@
  */
 namespace App\Libraries;
 use App;
+use App\Libraries\CookieUtility as CkieUtil;
+
 class FrontUtility
 {
     // 企業の皆様へ：お問い合わせ項目
@@ -130,5 +132,13 @@ class FrontUtility
             array_push($id_list, $model->id);
         }
         return $id_list;
+    }
+
+    /**
+     * ログイン中か判定する
+     * @return bool
+     */
+    public static function isLogin(){
+        return !is_null(\Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID));
     }
 }

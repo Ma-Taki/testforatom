@@ -9,11 +9,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Tr_users;
 use App\Libraries\FrontUtility as FrontUtil;
+use App\Libraries\CookieUtility as CkieUtil;
+use Log;
+use Cookie;
+use Carbon\Carbon;
+use DB;
+
 class LoginController extends Controller
 {
     /**
      * ログイン画面表示
-     * GET:/front/login
+     * GET:/login
      */
     public function index(){
         return view('front.login');
@@ -21,7 +27,7 @@ class LoginController extends Controller
 
     /**
      * ログイン処理
-     * POST:/front/login
+     * POST:/login
      */
     public function store(LoginRequest $request){
 
@@ -30,11 +36,11 @@ class LoginController extends Controller
                         ->enable()
                         ->get();
 
-        //TODO 一応、２件以上取得したらWarning
-
-
-        // パスワード照合
-        $password = $user->first()->salt .$request->password .FrontUtil::FIXED_SALT;
+        // 一応、２件以上取得したらcritical
+        if ($user->count() >= 2) {
+            Log::critical('Duplicate email-address:' .$user->first()->mail);
+            abort(503, '');
+        }
 
         // DBに対象ユーザが存在しない、または削除済み
         if($user->isEmpty()){
@@ -42,32 +48,45 @@ class LoginController extends Controller
             return back()->with('custom_error_messages',['メールアドレス又はパスワードに誤りがあります。'])->withInput();
 
         }else{
-            // TODO: ログイン成功時
-            /*
-            // 認証成功
-            // sessionにユーザ情報を保存
-            session([SessionUtility::SESSION_KEY_ADMIN_ID => $user->first()->id]);
-            session([SessionUtility::SESSION_KEY_ADMIN_NAME => $user->first()->admin_name]);
-            session([SessionUtility::SESSION_KEY_LOGIN_ID => $login_id]);
-            // マスター管理者フラグ
-            $adUser = Tr_link_admin_user_admin_auth::where('admin_id', $user->first()->id)
-                                                   ->where('auth_id', 1)
-                                                   ->get();
-            if($adUser->isEmpty()){
-                session([SessionUtility::SESSION_KEY_MASTER_FLG => false]);
-            } else {
-                session([SessionUtility::SESSION_KEY_MASTER_FLG => true]);
+            // パスワード照合
+            $user = $user->first();
+            $password = md5($user->salt .$request->password .FrontUtil::FIXED_SALT);
+            if ($user->password != $password) {
+                // 認証失敗
+                Log::debug('input:'.$password.' db:'.$user->password);
+                return back()->with('custom_error_messages',['メールアドレス又はパスワードに誤りがあります。'])->withInput();
             }
 
-            // 管理者テーブルをアップデート
-            Tr_admin_user::where('id', $user->first()->id)
-                         ->update([
-                'last_login_date' => date('Y-m-d H:i:s', time()),
-                ]);
-            return redirect('/admin/top');
-            */
-        }
+            // 認証成功
+            $db_data = [
+                'user_id' => $user->id,
+                'now' => Carbon::now()->format('Y-m-d H:i:s'),
+            ];
 
-        return view('front.top');
+            // トランザクション
+            DB::transaction(function () use ($db_data) {
+                try {
+                    // 最終ログイン日付をアップデート
+                    Tr_users::where('id', $db_data['user_id'])
+                            ->update(['last_login_date' => $db_data['now']]);
+
+                } catch (Exception $e) {
+                    Log::error($e);
+                    abort(400, 'トランザクションが異常終了しました。');
+                }
+            });
+
+            // cookieを付加する
+            CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $user->id);
+        }
+        // トップ画面に遷移
+        return redirect('/');
+    }
+
+    public function logout(){
+        // cookieを削除
+        CkieUtil::delete(CkieUtil::COOKIE_NAME_USER_ID);
+        // トップ画面に遷移
+        return redirect('/');
     }
 }
