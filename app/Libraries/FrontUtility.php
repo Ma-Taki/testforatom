@@ -6,6 +6,7 @@
 namespace App\Libraries;
 use App;
 use App\Libraries\CookieUtility as CkieUtil;
+use App\Models\Tr_users;
 
 class FrontUtility
 {
@@ -140,5 +141,15 @@ class FrontUtility
      */
     public static function isLogin(){
         return !is_null(\Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID));
+    }
+
+    /**
+     * ログインユーザーの名前を取得する
+     * @return string
+     */
+    public static function getLoginUserName(){
+        $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
+        $user = Tr_users::find($cookie);
+        return $user->last_name .' ' .$user->first_name;
     }
 }

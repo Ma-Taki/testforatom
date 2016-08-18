@@ -1,10 +1,10 @@
-<?php use App\Libraries\FrontUtility as FrontUtil; ?>
+<?php use App\Libraries\FrontUtility as FrntUtil; ?>
 <header>
     <div class="headerInr">
         <p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト<span class="invisible-tab">「エンジニアルート」</span></p>
         <div class="user">
             <ul>
-@if(FrontUtil::isLogin())
+@if(FrntUtil::isLogin())
                 <li><a href="/user" class="signin">マイページ</a></li>
                 <li><a href="/logout">ログアウト</a></li>
 @else

@@ -1,6 +1,9 @@
 @extends('front.common.layout')
 @section('content')
-<?php use App\Libraries\ModelUtility as mdlUtil; ?>
+<?php
+use App\Libraries\ModelUtility as mdlUtil;
+use App\Libraries\FrontUtility as FrntUtil;
+?>
     <div class="content" id="top">
         <div id="slider">
             <ul class="slider slider-item">
@@ -20,12 +23,24 @@
                     </form>
                 </div>
             </div>
+@if(!FrntUtil::isLogin())
             <div class="sideInfoInr invisible-pc invisible-tab ">
                 <div class="alignCenter">
                     <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
                 </div>
             </div>
         </section><!-- /.keyWordSearch for sp -->
+@endif
+
+@if(FrntUtil::isLogin())
+
+        <section class="hello_user clear">
+            <div class="contentInr">
+                <p>こんにちわ、<a href="{{ url('/user') }}">{{ FrntUtil::getLoginUserName() }}さん</a></p>
+            </div>
+        </section>
+
+@endif
 
             <div class="topItemList clear">
                 <section class="newJob">
@@ -286,11 +301,13 @@
                     </div>
                 </section><!-- /.keyWordSearch for sp -->
 
+@if(!FrntUtil::isLogin())
                 <div class="sideInfoInr invisible-pc invisible-tab ">
                     <div class="alignCenter">
                         <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
                     </div>
                 </div>
+@endif
 
                 <div class="content-right">
                     @include('front.common.sideInfo')

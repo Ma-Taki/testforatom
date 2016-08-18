@@ -1,11 +1,22 @@
+<?php use App\Libraries\FrontUtility as FrntUtil; ?>
 <section class="sideInfo">
     <div class="invisible-sp">
         <ul>
+@if(FrntUtil::isLogin() && Request::path() != '/')
+            <li>
+                <div class="hello_user">
+                    <p class="wsnw">こんにちわ、<wbr><a href="{{ url('/user') }}">{{ FrntUtil::getLoginUserName() }}さん</a></p>
+                </div>
+            </li>
+@elseif(FrntUtil::isLogin() && Request::path() == '/')
+@else
             <li>
                 <a href="{{ url('/') }}">
                     <img src="/front/images/sbnrSignup.png" alt="会員登録はこちら">
                 </a>
             </li>
+@endif
+
             <li>
                 <a href="{{ url('/') }}">
                     <img src="/front/images/sBnr01.png" alt="Engineer-Route News">

@@ -223,6 +223,14 @@ p.pageInfo{
     border-top: 1px dashed #333;
 }
 
+.hello_user{
+    background: #EEFDED;
+}
+.hello_user p{
+}
+.hello_user p a{color: red;text-decoration: underline;
+}
+
 /* 利用規約、個人情報の取扱い */
 .textArea{
     width: 95%;
@@ -1243,6 +1251,7 @@ textarea{
 .sideInfo{ width: 100%; }
 .sideInfo ul{ margin-left: 15%; }
 .sideInfo li{ margin-bottom: 5%; }
+.sideInfo .hello_user{border: 1px dashed #B8B8B8;padding: 1rem;text-align: center;}
 
 li.customBanner{
     background: #E38585;
