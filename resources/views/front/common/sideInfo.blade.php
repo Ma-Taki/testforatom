@@ -11,7 +11,7 @@
 @elseif(FrntUtil::isLogin() && Request::path() == '/')
 @else
             <li>
-                <a href="{{ url('/') }}">
+                <a href="{{ url('/user/regist') }}">
                     <img src="/front/images/sbnrSignup.png" alt="会員登録はこちら">
                 </a>
             </li>
@@ -41,10 +41,10 @@
     </div>
     <div class="invisible-pc invisible-tab">
         <ul>
-            <li><a href="#"><img src="/front/images/sBnr01.png"></a></li>
-            <li><a href="#"><img src="/front/images/sBnr02.png"></a></li>
-            <li><a href="#"><img src="/front/images/sBnr03.png"></a></li>
-            <li><a href="#"><img src="/front/images/sBnr04.png"></a></li>
+            <li><a href="/user/regist"><img src="/front/images/sBnr01.png"></a></li>
+            <li><a href="/front/question#aboutFreeEngineer"><img src="/front/images/sBnr02.png"></a></li>
+            <li><a href="/front/flow"><img src="/front/images/sBnr03.png"></a></li>
+            <li><a href="/front/question"><img src="/front/images/sBnr04.png"></a></li>
         </ul>
     </div>
 </section><!-- END SIDE-INFO -->

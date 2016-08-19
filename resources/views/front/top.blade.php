@@ -29,8 +29,8 @@ use App\Libraries\FrontUtility as FrntUtil;
                     <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
                 </div>
             </div>
-        </section><!-- /.keyWordSearch for sp -->
 @endif
+        </section><!-- /.keyWordSearch for sp -->
 
 @if(FrntUtil::isLogin())
 

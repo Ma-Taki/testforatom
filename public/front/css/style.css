@@ -205,6 +205,10 @@ p.pageInfo{
 
 .clear{ clear: both; }
 
+.wrap_block{
+    display: block;
+}
+
 .table{ width: 100%; display: table; }
 .table-row{ display: table-row; }
 .table-cell{ display: table-cell; }
@@ -1113,85 +1117,58 @@ textarea{
 ## Q&A
 -------------------------------*/
 #question{ margin: 0 4%; }
-
-.subTitle{
-    margin-top: 4%;
-    color: #5e8796;
-}
+#question h2{margin: 4rem 0 2rem 0;color: #5e8796;}
+.question{margin: 1rem 0;}
 
 .questionElement{
-    display: table;
+    display: inline-flex;
     width: 100%;
-    margin-top: 2%;
+    align-items:center;
+}
+.anserElement{display: block;width: 100%;}
+
+.anserElementInr{
+    display: inline-flex;
+    align-items: center;;
+    margin-top: 1rem;
 }
 
-.questionElement img{
+.questionElement img,
+.anserElementInr img{
+    align-self: flex-start;
     width: 35px;
     height: 35px;
 }
 
-
-#question .qaMark{
-    display: table-cell;
-    width: 35px; /* 理論上の最大値 */
-    font-size: 1.5rem;
-    color: #fff;
-    font-family: Verdana;
-    border-radius: 50%;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.questionMark{ background: #5e8796; }
-.anserMark{ background: #E38585; }
-
-.questionText{
-    display: table-cell;
-    width: 90%;
+.questionText,
+.anserText{
+    width: 100%;
     font-size: 1.4rem;
-    vertical-align: middle;
-}
-
-.questionText::before{
-    content: "\a0\a0";
+    padding-left: 1rem;
 }
 
 .questionOpen{
-    display: table-cell;
     color: #5e8796;
     width: 5%;
     font-size: 2rem;
-    text-align: center;;
-    vertical-align: middle;
+    text-align: center;
 }
 
-.anserElement{
-    display: table;
-    width: 100%;
-    margin-top: 2%;
-}
-
-.anserText{
-    display: table-cell;
-    width: 90%;
-    font-size: 1.4rem;
-    vertical-align: middle;
-    padding: 1%;
+.anserElementInr a{
+    color: #E38585;
 }
 
 #question .url{
-    color: #E38585;
     text-decoration: underline;
-    text-decoration-style: dotted;
+    padding-bottom: 1.4rem;
 }
 
 #question .partitionLine{
     border: 1px dashed #333;
     opacity: 0.4;
-    margin-top: 2%;
 }
 
-.clickText:hover{
+.questionText:hover{
     color: #5e8796;
     opacity: 0.6;
     cursor: pointer;
@@ -1252,25 +1229,6 @@ textarea{
 .sideInfo ul{ margin-left: 15%; }
 .sideInfo li{ margin-bottom: 5%; }
 .sideInfo .hello_user{border: 1px dashed #B8B8B8;padding: 1rem;text-align: center;}
-
-li.customBanner{
-    background: #E38585;
-    border-radius: 7px;
-    box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
-    text-align: center;
-    margin-bottom: 10%;
-}
-
-.customBanner h2{
-    color: #fff;
-    padding: 4% 0;
-}
-
-.customBanner p{
-    font-size: 1.1rem;
-    color: #fff;
-    padding-bottom: 1rem;
-}
 
 /*-------------------------------
 # ヘッダー
