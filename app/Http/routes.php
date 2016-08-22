@@ -11,36 +11,36 @@
 |
 */
 
-// フロント：トップ画面
+// フロント：トップ
 Route::resource('/', 'FrontController', ['only' => ['index',]]);
 
-// フロント：ご利用の流れ画面
-Route::get('/front/flow', function () {
+// フロント：ご利用の流れ
+Route::get('/flow', function () {
     return view('front.flowOfUse');
 });
 
-// フロント：Q&A画面
-Route::get('/front/question', function () {
+// フロント：Q&A
+Route::get('/question', function () {
     return view('front.question');
 });
 
 // フロント：プライバシーポリシー画面
-Route::get('/front/privacy', function () {
+Route::get('/privacy', function () {
     return view('front.privacyPolicy');
 });
 
 // フロント：利用規約画面
-Route::get('/front/terms', function () {
+Route::get('/terms', function () {
     return view('front.terms');
 });
 
 // フロント：お問い合わせ
-Route::resource('/front/contact', 'front\ContactController', ['only' => ['index', 'store']]);
-Route::post('/front/contact/confirm', 'front\ContactController@confirm');
-Route::post('/front/contact/complete', 'front\ContactController@complete');
+Route::resource('/contact', 'front\ContactController', ['only' => ['index', 'store']]);
+Route::post('/contact/confirm', 'front\ContactController@confirm');
+Route::post('/contact/complete', 'front\ContactController@complete');
 
 // フロント：エンジニアルートとは
-Route::get('/front/about', function () {
+Route::get('/about', function () {
     return view('front.about');
 });
 
@@ -75,6 +75,8 @@ Route::get('/logout', 'front\LoginController@logout');
 // フロント：新規登録
 Route::resource('/user/regist', 'front\UserController', ['only' => ['index', 'store']]);
 
+// フロント：エントリー
+Route::resource('/entry', 'front\EntryController', ['only' => ['index', 'store']]);
 
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {

@@ -44,4 +44,19 @@ class ModelUtility
     const MASTER_TYPE_DISPLAY_ONLY = 2;
     // マスタータイプ：検索
     const MASTER_TYPE_INDEX_ONLY = 3;
+
+
+    /**
+     * 引数のモデル配列のname属性を'、'で連結して返す。
+     * @param array $array
+     * @return string
+     */
+    public static function getNameAll($array){
+        if ($array == null || $array->isEmpty()) return '';
+        $str = '';
+        foreach ($array as $value) {
+            $str .= $value->name .'、';
+        }
+        return rtrim($str, '、');
+    }
 }

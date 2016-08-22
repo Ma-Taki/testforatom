@@ -29,4 +29,11 @@ class Tr_item_entries extends Model
                                 'item_id');
     }
 
+    /**
+     * 有効なエントリー
+     */
+     public function scopeEnable($query) {
+       return $query->where('delete_flag', 0)
+                    ->where('delete_date', null);
+     }
 }

@@ -238,7 +238,6 @@ jQuery(function($){
 					addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
 				}
 
-				//var addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
                 addValue.children('span').click(function(){
                     $(this).parent('li').remove();
                     if (selected_cndtns_type.find('li').length <= 0) {
@@ -412,12 +411,6 @@ jQuery(function($){
 		}
 	}
 	var nextPage = 2;
-	/*
-	var searchParams = [];
-    if ($('#tabForm').find(":input").size()) {
-		searchParams = $('#tabForm').find(":input").serializeArray();
-	}
-	*/
 
 	$('#sp_morePage').click(function(){
 		if (morePage.loading) return;
@@ -444,7 +437,6 @@ jQuery(function($){
 			data: {'order': paramArray['order'],
 				   'limit': paramArray['limit'],
 				   'page': nextPage,
-				   // 'page': paramArray['page'],
 				   'path': location.pathname},
 			success: function(data) {
 				// DOMツリー作成

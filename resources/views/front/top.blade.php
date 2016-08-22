@@ -36,7 +36,7 @@ use App\Libraries\FrontUtility as FrntUtil;
 
         <section class="hello_user clear">
             <div class="contentInr">
-                <p>こんにちわ、<a href="{{ url('/user') }}">{{ FrntUtil::getLoginUserName() }}さん</a></p>
+                <p>こんにちは、<a href="{{ url('/user') }}">{{ FrntUtil::getLoginUserName() }}さん</a></p>
             </div>
         </section>
 

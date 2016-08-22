@@ -81,7 +81,7 @@
 @foreach($item->tags as $tag)<a href="/front/tag/{{ $tag->id }}"><p class="tag">{{ $tag->term }}</p></a>@endforeach
                         </div>
                         <div class="commonCenterBtn">
-                            <a href="#"><button>この案件にエントリーする</button></a>
+                            <a href="/entry?id={{ $item->id }}"><button>この案件にエントリーする</button></a>
                         </div>
                     </div>
                 </div>

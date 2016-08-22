@@ -205,9 +205,8 @@ p.pageInfo{
 
 .clear{ clear: both; }
 
-.wrap_block{
-    display: block;
-}
+.wrap_block{display: block;}
+.no_indent{text-indent: 0;}
 
 .table{ width: 100%; display: table; }
 .table-row{ display: table-row; }
@@ -281,7 +280,6 @@ p.pageInfo{
 }
 
 .pre-wrap{
-    font-size: 1.4rem;
     white-space: pre-wrap;
 }
 
@@ -341,6 +339,42 @@ h1.SearchTitle:before{
 	background-position: 0 4px;
 	display: inline-block;
 }
+
+/*-------------------------------
+## エントリー
+-------------------------------*/
+#entry p.pageInfo{color: black;}
+#entry h2{margin:3rem 0 1rem 0;}
+.dataTable .data{
+    width: 100%;
+    display: inline-flex;
+    font-size: 1.4rem;
+    border-top: 1px dotted black;
+}
+.dataTable .data:last-child{border-bottom: 1px dotted black;}
+.dataTable .name{
+    width: 30%;
+    display: inline-flex;
+    background-color: #eef3f4;
+    color: #5e8796;
+    font-weight: bold;
+    padding: 1.5rem 0;
+    justify-content: center;
+    align-items: center;
+}
+.dataTable .value{
+    display: inline-flex;
+    align-items: center;
+    padding: 1.5rem;
+}
+.dataTable .detail{line-height: 2.2rem;}
+.dataTable .upload_info{
+    padding: 1.5rem;
+    background-color: #eef3f4;
+}
+.dataTable .upload{display: inline-block;}
+
+
 
 /*-------------------------------
 ## 新規会員登録
@@ -856,7 +890,7 @@ h1.SearchTitle:before{
     padding-top: 2%;
 }
 
-#item .otherValue .wordPunctuation:last-child{
+.wordPunctuation:last-child{
     display: none;
 }
 
@@ -3091,4 +3125,32 @@ sp.css ~640px
         letter-spacing: normal;
     }
 
-}
+    /*-------------------------------
+    ## エントリー
+    -------------------------------*/
+    .dataTable .data{
+        display: block;
+        border-top: 1px dashed #333;
+        padding: 1rem 0;
+    }
+    .dataTable .data:last-child{border-bottom: 1px dashed #333;}
+    .dataTable .name{
+        width: 100%;
+        display: block;
+        background-color: #fff;
+        padding: 0;
+        line-height: 2rem;
+    }
+    .dataTable .name::before{
+        content: "\a0";
+        background: #5e8796;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 4px;
+    }
+    .dataTable .value{
+        display: block;
+        padding: 0;
+        padding-left: 1rem;
+        line-height: 2rem;
+    }

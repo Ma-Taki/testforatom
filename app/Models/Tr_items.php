@@ -130,7 +130,7 @@ class Tr_items extends Model
      }
 
      /**
-      * エントリー受付期間中
+      * エントリー可能な案件
       */
       public function scopeEntryPossible($query) {
         $today = Carbon::today();

@@ -41,11 +41,9 @@ class CookieUtility
      * @param string $name
      * @return \Symfony\Component\HttpFoundation\Cookie
      */
-     /*
     public static function get($name){
-        return Cookie::queued($name);
+        return Cookie::get(self::COOKIE_NAME_PREFIX .$name);
     }
-    */
 
     /*
      * delete cookie
