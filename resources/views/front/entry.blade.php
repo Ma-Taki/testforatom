@@ -12,6 +12,18 @@
         <hr class="partitionLine_02">
         <div class="contact">
             <p class="pageInfo">下記の内容を確認後、スキルシートの提出方法をお選び頂き、「この内容でエントリーする」ボタンをクリックしてください。</p>
+{{-- error：custom --}}
+@if(count($errors) == 0)
+    @if(Session::has('custom_error_messages'))
+            <div class="alert alert-danger">
+                <ul>
+        @foreach(Session::get('custom_error_messages') as $message)
+                    <li>{{ $message }}</li>
+        @endforeach
+                </ul>
+            </div>
+    @endif
+@endif
             <hr class="partitionLine_03">
 
             <form method="post" action="{{ url('/entry') }}" enctype="multipart/form-data">

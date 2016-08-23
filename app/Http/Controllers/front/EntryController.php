@@ -72,32 +72,41 @@ class EntryController extends Controller
 
         $file = !empty($request->skillSheet) ? $request->skillSheet : null;
         if(!empty($file)) {
-
+            $custom_error_messages = [];
             // サイズチェック
             if ($file->getClientSize() > FrntUtil::FILE_UPLOAD_RULE['maximumSize']) {
-                abort(400);
+                array_push($custom_error_messages, 'スキルシートが1MBを超えています。');
             }
 
             // 拡張子チェック
             $original_name = collect(explode('.', $file->getClientOriginalName()));
             if ($original_name->count() != 2
                 || !in_array($original_name->last(), FrntUtil::FILE_UPLOAD_RULE['allowedExtensions'])) {
-                    abort(400);
+                    array_push($custom_error_messages, 'スキルシートの拡張子が正しくありません。');
             }
 
             // mimeTypeチェック
             $mime_type = shell_exec('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name']));
             $mime_type = trim($mime_type);
             $mime_type = collect(explode(';', $mime_type));
+            if ($original_name->isEmpty()
+                || (!$original_name->isEmpty()
+                    && !in_array($original_name->first(), FrntUtil::FILE_UPLOAD_RULE['allowedTypes']))) {
+                    array_push($custom_error_messages, 'スキルシートのファイル形式が正しくありません。');
+            }
 
-            dd($mime_type->first());
+            if (!empty($custom_error_messages)) {
+                // フラッシュセッションにエラーメッセージを保存
+                \Session::flash('custom_error_messages', $custom_error_messages);
+                return back()->withInput();
+            }
         }
 
         $data = [
             'user_id' => $user->first()->id,
             'item_id' => $item->first()->id,
             'entry_date' => Carbon::now()->format('Y-m-d H:i:s'),
-            'skillsheet_upload' => $request->skillSheet != null,
+            'skillsheet_upload' => !empty($file),
             'skillsheet_filename' => null,
             'delete_flag' => 0,
             'delete_date' => null,
@@ -125,7 +134,6 @@ class EntryController extends Controller
                         $data['file_name'].$insert_entry->id.'.'.$data['file_extension'];
                     $insert_entry->save();
                 }
-
                 return $insert_entry->skillsheet_filename;
 
             } catch (\Exception $e) {
