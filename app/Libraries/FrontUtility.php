@@ -10,6 +10,30 @@ use App\Models\Tr_users;
 
 class FrontUtility
 {
+    // スキルシートアップロードルール
+    const FILE_UPLOAD_RULE = [
+        'maximumSize' => 1024000,
+		'allowedExtensions' => [
+            'docx',
+			'xlsx',
+			'pptx',
+			'doc',
+			'xls',
+            'ppt',
+			'pdf',
+        ],
+		'allowedTypes' => [
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+			'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+			'application/msword',
+			'application/vnd.ms-excel',
+			'application/vnd.ms-powerpoint',
+			'application/pdf',
+        ],
+    ];
+
+
     // 企業の皆様へ：お問い合わせ項目
     const COMPANY_CONTACT_TYPE = [
         '0' => '技術支援について',

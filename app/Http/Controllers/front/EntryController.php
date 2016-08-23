@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Libraries\CookieUtility as CkieUtil;
+use App\Libraries\FrontUtility as FrntUtil;
 use App\Models\Tr_users;
 use App\Models\Tr_items;
 use App\Models\Tr_item_entries;
@@ -43,13 +44,6 @@ class EntryController extends Controller
      * POST:/entry
      **/
     public function store(Request $request){
-/*
-        dd($_FILES);
-
-        dd($request->skillSheet);
-        dd($request->skillSheet->realPath);
-*/
-        dd(shell_exec('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name'])));
 
         // 案件の存在、エントリー期間中かチェック
         $item = Tr_items::where('id', $request->item_id)
@@ -77,10 +71,27 @@ class EntryController extends Controller
         }
 
         $file = !empty($request->skillSheet) ? $request->skillSheet : null;
-        $file_name = 'skillsheetEN';
-        $original_name = collect(explode('.', $file->getClientOriginalName()));
-        $file_extension = $original_name->isEmpty() ? '' : $original_name->last();
-        //$file_extension = !empty($file->guessExtension()) ? $file->guessExtension() : 'bin';
+        if(!empty($file)) {
+
+            // サイズチェック
+            if ($file->getClientSize() > FrntUtil::FILE_UPLOAD_RULE['maximumSize']) {
+                abort(400);
+            }
+
+            // 拡張子チェック
+            $original_name = collect(explode('.', $file->getClientOriginalName()));
+            if ($original_name->count() != 2
+                || !in_array($original_name->last(), FrntUtil::FILE_UPLOAD_RULE['allowedExtensions'])) {
+                    abort(400);
+            }
+
+            // mimeTypeチェック
+            $mime_type = shell_exec('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name']));
+            $mime_type = trim($mime_type);
+            $mime_type = collect(explode(';', $mime_type));
+
+            dd($mime_type->first());
+        }
 
         $data = [
             'user_id' => $user->first()->id,
@@ -90,7 +101,7 @@ class EntryController extends Controller
             'skillsheet_filename' => null,
             'delete_flag' => 0,
             'delete_date' => null,
-            'file_name' => $file_name,
+            'file_name' => 'skillsheetEN',
             'file_extension' => $file_extension,
         ];
 
@@ -126,6 +137,6 @@ class EntryController extends Controller
         // ファイルをローカルに保存
         $file->move(storage_path('app'), $file_name);
 
-        return redirect('/');
+        return view('front.entry_complete');
     }
 }

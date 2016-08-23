@@ -77,7 +77,7 @@
                     <div class="data">
                         <div class="upload_info">
                             <ul>
-                                <li>・キルシートは当フォーム上からのアップロード、又はメールでの提出が可能です。</li>
+                                <li>・スキルシートは当フォーム上からのアップロード、又はメールでの提出が可能です。</li>
                                 <li>・スキルシートのフォーマットはこちらからダウンロードできます。</li>
                                 <li>・アップロード可能なファイル形式はMicrosoft Excel(.xls,xlsx)、Word(.doc,.docx)、PowerPoint(.ppt,pptx)、PDF(.pdf)、ファイルサイズは1MB以内です。</li>
                                 <li>・上記以外のファイルはメールで提出してください。</li>
