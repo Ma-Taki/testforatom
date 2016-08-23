@@ -89,9 +89,9 @@ class EntryController extends Controller
             $mime_type = shell_exec('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name']));
             $mime_type = trim($mime_type);
             $mime_type = collect(explode(';', $mime_type));
-            if ($original_name->isEmpty()
-                || (!$original_name->isEmpty()
-                    && !in_array($original_name->first(), FrntUtil::FILE_UPLOAD_RULE['allowedTypes']))) {
+            if ($mime_type->isEmpty()
+                || (!$mime_type->isEmpty()
+                    && !in_array($mime_type->first(), FrntUtil::FILE_UPLOAD_RULE['allowedTypes']))) {
                     array_push($custom_error_messages, 'スキルシートのファイル形式が正しくありません。');
             }
 
