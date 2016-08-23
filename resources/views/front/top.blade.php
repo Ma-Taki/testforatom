@@ -7,10 +7,12 @@ use App\Libraries\FrontUtility as FrntUtil;
     <div class="content" id="top">
         <div id="slider">
             <ul class="slider slider-item">
-                <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
-                <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
-                <li><a href="#"><img src="/front/images/bnr001.jpg"></a></li>
-                <li><a href="#"><img src="/front/images/bnr002.jpg"></a></li>
+                <li><a href="/about"><img src="/front/images/topBnr001.jpg"></a></li>
+                <li><a href="/item/category/1"><img src="/front/images/topBnr002.jpg"></a></li>
+                <li><a href="/item/search?job_types%5B%5D=12"><img src="/front/images/topBnr003.jpg"></a></li>
+                <li><a href="/item/tag/32"><img src="/front/images/topBnr004.jpg"></a></li>
+                <li><a href="/item/tag/2"><img src="/front/images/topBnr005.jpg"></a></li>
+                <li><a href="/item/search?job_types%5B%5D=1"><img src="/front/images/topBnr006.jpg"></a></li>
             </ul>
         </div><!-- ./slider -->
 
@@ -34,12 +36,11 @@ use App\Libraries\FrontUtility as FrntUtil;
 
 @if(FrntUtil::isLogin())
 
-        <section class="hello_user clear">
+        <section class="hello_user clear bg">
             <div class="contentInr">
-                <p>こんにちは、<a href="{{ url('/user') }}">{{ FrntUtil::getLoginUserName() }}さん</a></p>
+                <p>こんにちは、<a href="/user">{{ FrntUtil::getLoginUserName() }}さん</a></p>
             </div>
         </section>
-
 @endif
 
             <div class="topItemList clear">

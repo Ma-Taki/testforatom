@@ -226,13 +226,10 @@ p.pageInfo{
     border-top: 1px dashed #333;
 }
 
-.hello_user{
-    background: #EEFDED;
-}
-.hello_user p{
-}
-.hello_user p a{color: red;text-decoration: underline;
-}
+.hello_user{}
+.hello_user .contentInr{padding-bottom: 2.4rem;}
+.hello_user p{}
+.hello_user p a{color: #D46363;text-decoration: underline;}
 
 /* 利用規約、個人情報の取扱い */
 .textArea{
@@ -933,6 +930,16 @@ h1.SearchTitle:before{
     margin: 0.5%;
 }
 
+#itemDetail .tag::before{
+    content: "";
+    background: url(../images/ico_tag.png)no-repeat;
+    display: inline-block;
+    background-size: 22px 23px;
+    width: 24px;
+    height: 25px;
+    vertical-align: middle;
+}
+
 #itemDetail .commonCenterBtn a button{
     font-size: 1.3rem;
 }
@@ -1246,11 +1253,27 @@ textarea{
     margin: 0 auto;
 }
 
+.about_image{
+    text-align: center;
+    position: relative;
+}
+
+.about_image .over_text{
+    font-size: 2.2rem;
+    color: #fff;
+    line-height: 4.4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 #aboutERoute img{
     padding-top: 2%;
 }
 
-#aboutERoute p{
+.aboutERouteInr p{
     padding-top: 2.5%;
     line-height: 3rem;
 }
@@ -1262,7 +1285,7 @@ textarea{
 .sideInfo{ width: 100%; }
 .sideInfo ul{ margin-left: 15%; }
 .sideInfo li{ margin-bottom: 5%; }
-.sideInfo .hello_user{border: 1px dashed #B8B8B8;padding: 1rem;text-align: center;}
+.sideInfo .hello_user{border: 1px dashed #5e8796;padding: 1.6rem 0.8rem;text-align: center;border-radius:8px;}
 
 /*-------------------------------
 # ヘッダー
@@ -1271,13 +1294,13 @@ textarea{
 	width: 95%;
     max-width: 1000px;
 	margin: 0 auto;
-	height: 100px;
 	position: relative;
 }
 
 .headerInr p{
-	line-height: 3.2rem;
+    width: 60%;
 	font-size: 1.3rem;
+    padding-top: 0.4rem;
 }
 
 .headerInr h1{ width: 100%; }
@@ -2326,6 +2349,14 @@ sp.css ~640px
         background-size: 14px 14px;
         background-position: 0 6px;
         display: inline-block;
+    }
+
+    /*-------------------------------
+    # エンジニアルートとは
+    -------------------------------*/
+    .about_image .over_text{
+        font-size: 1.5rem;
+        line-height: 2.4rem;
     }
 
     /*-------------------------------

@@ -4,7 +4,7 @@
         <ul>
 @if(FrntUtil::isLogin() && Request::path() != '/')
             <li>
-                <div class="hello_user">
+                <div class="hello_user bg">
                     <p class="wsnw">こんにちは、<wbr><a href="{{ url('/user') }}">{{ FrntUtil::getLoginUserName() }}さん</a></p>
                 </div>
             </li>

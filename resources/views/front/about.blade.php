@@ -6,7 +6,10 @@
             <h1 class="title">エンジニアルートとは</h1>
             <hr class="partitionLine_02">
             <div class="aboutERouteInr" >
-                <img src="/front/images/bnr_about.jpg" alt="エンジニアルートとは" />
+                <div class="about_image">
+                    <img src="/front/images/sky.jpg" alt="エンジニアルートとは">
+                    <p class="over_text wsnw">エンジニアルートは、プロジェクト終了後まで<wbr>エンジニアの皆様を全力でサポート致します。</p>
+                </div>
                 <p>
                     Engineer-Route（エンジニアルート）では、皆様の夢や目標、可能性をサポートするため、
                     それぞれの方に合った案件検索から、カウンセリング、プロジェクトの終了まで

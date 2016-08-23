@@ -1,7 +1,7 @@
 <?php use App\Libraries\FrontUtility as FrntUtil; ?>
 <header>
     <div class="headerInr">
-        <p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト<span class="invisible-tab">「エンジニアルート」</span></p>
+        <p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」</p>
         <div class="user">
             <ul>
 @if(FrntUtil::isLogin())
@@ -13,7 +13,7 @@
 @endif
             </ul>
         </div>
-        <h1 class="alignleft"><a href="{{ url('/') }}" title="エンジニアルート"></a></h1>
+        <h1><a href="{{ url('/') }}" title="エンジニアルート"></a></h1>
 
         <div class="search">
             <form action="/front/keyword" method="get">
