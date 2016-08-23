@@ -274,14 +274,17 @@ use App\Libraries\FrontUtility as FrntUtil;
 @foreach($parentList as $parentKey => $parent)
                                 <li>
                                     <ul>
-                                        <a href="/front/category/{{ $parentKey }}">
-                                            <li class="parentCategory">{{ $parent }}<span class="alignright">+</span></li>
-                                        </a>
+                                        <li class="parentCategory">{{ $parent }}<span class="alignright">+</span></li>
+                                        <div class="childCategories">
+                                            <a href="/front/category/{{ $parentKey }}">
+                                                <li class="childCategory">{{ $parent }}一覧<span class="alignright">></span></li>
+                                            </a>
 @foreach($childList[$parentKey] as $child)
-                                        <a href="/front/category/{{ $child->id }}">
-                                            <li class="childCategory">{{ $child->name }}<span class="alignright">></span></li>
-                                        </a>
+                                            <a href="/front/category/{{ $child->id }}">
+                                                <li class="childCategory">{{ $child->name }}<span class="alignright">></span></li>
+                                            </a>
 @endforeach
+                                        </div>
                                     </ul>
                                 </li>
 @endforeach

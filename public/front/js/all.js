@@ -164,13 +164,24 @@ jQuery(function($){
 // smart-phone categoty
 jQuery(function($){
 	if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
-		$('.childCategory').hide();
+		$('.childCategories').hide();
 		$('.parentCategory').click(function (){
-			var childCategories = $(this).parent('a').parent('ul').find('.childCategory');
-			childCategories.each(function (){
-				$(this).toggle();
+			var $parent = $(this);
+			$('.childCategories:visible').each(function(){
+				if($(this).get(0) != $parent.parent().find('.childCategories').get(0)){
+					$(this).slideUp('fast', function(){
+						$(this).parent().find('.parentCategory span').text('+');
+					});
+				}
 			});
-			return false;
+			var $childs = $(this).parent().find('.childCategories');
+			$childs.slideToggle('fast', function(){
+				if ($(this).is(':visible')) {
+					$(this).parent().find('.parentCategory span').text('-');
+				} else {
+					$(this).parent().find('.parentCategory span').text('+');
+				}
+			});
 		});
 	}
 });
