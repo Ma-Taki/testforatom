@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     /**
-     * 会員登録処理&会員登録完了画面表示
+     * 会員登録処理 & 会員登録完了画面表示
      * POST:/user/regist
 *
      */

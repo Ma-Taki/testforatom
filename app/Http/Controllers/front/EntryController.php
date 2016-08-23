@@ -43,8 +43,13 @@ class EntryController extends Controller
      * POST:/entry
      **/
     public function store(Request $request){
+/*
+        dd($_FILES);
 
-        //dd($request);
+        dd($request->skillSheet);
+        dd($request->skillSheet->realPath);
+*/
+        dd(shell_exec('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name'])));
 
         // 案件の存在、エントリー期間中かチェック
         $item = Tr_items::where('id', $request->item_id)
@@ -71,30 +76,55 @@ class EntryController extends Controller
             abort(400);
         }
 
+        $file = !empty($request->skillSheet) ? $request->skillSheet : null;
+        $file_name = 'skillsheetEN';
+        $original_name = collect(explode('.', $file->getClientOriginalName()));
+        $file_extension = $original_name->isEmpty() ? '' : $original_name->last();
+        //$file_extension = !empty($file->guessExtension()) ? $file->guessExtension() : 'bin';
+
         $data = [
-            'user_id' => $user->id,
-            'item_id' => $item->id,
+            'user_id' => $user->first()->id,
+            'item_id' => $item->first()->id,
             'entry_date' => Carbon::now()->format('Y-m-d H:i:s'),
             'skillsheet_upload' => $request->skillSheet != null,
-            'skillsheet_filename' => $file_name,
+            'skillsheet_filename' => null,
             'delete_flag' => 0,
             'delete_date' => null,
+            'file_name' => $file_name,
+            'file_extension' => $file_extension,
         ];
 
         // トランザクション
-        DB::transaction(function () use ($data) {
+        $file_name = DB::transaction(function () use ($data) {
             try {
                 // エントリーテーブルにインサート
-                Tr_item_entries::where('id', $entry_id)->update([
-                ]);
+                $insert_entry = new Tr_item_entries;
+                $insert_entry->user_id = $data['user_id'];
+                $insert_entry->item_id = $data['item_id'];
+                $insert_entry->entry_date = $data['entry_date'];
+                $insert_entry->skillsheet_upload = $data['skillsheet_upload'];
+                $insert_entry->skillsheet_filename = $data['skillsheet_filename'];
+                $insert_entry->delete_flag = $data['delete_flag'];
+                $insert_entry->delete_date = $data['delete_date'];
+                $insert_entry->save();
+
+                // 採番されたIDでファイル名を生成、アップデート
+                if ($insert_entry->skillsheet_upload) {
+                    $insert_entry->skillsheet_filename =
+                        $data['file_name'].$insert_entry->id.'.'.$data['file_extension'];
+                    $insert_entry->save();
+                }
+
+                return $insert_entry->skillsheet_filename;
+
             } catch (\Exception $e) {
                 Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
 
-
-        Storage::disk('local')->put('skillsheetEN124.xls', $file);
+        // ファイルをローカルに保存
+        $file->move(storage_path('app'), $file_name);
 
         return redirect('/');
     }
