@@ -71,6 +71,7 @@ class EntryController extends Controller
         }
 
         $file = !empty($request->skillSheet) ? $request->skillSheet : null;
+        $original_name = '';
         if(!empty($file)) {
             $custom_error_messages = [];
             // サイズチェック
@@ -111,7 +112,7 @@ class EntryController extends Controller
             'delete_flag' => 0,
             'delete_date' => null,
             'file_name' => 'skillsheetEN',
-            'file_extension' => $file_extension,
+            'file_extension' => $original_name->last() ,
         ];
 
         // トランザクション
