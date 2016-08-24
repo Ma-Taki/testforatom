@@ -371,7 +371,79 @@ h1.SearchTitle:before{
 }
 .dataTable .upload{display: inline-block;}
 
+#entry_complete .skillsheet{
+}
 
+
+#entry_complete .entry_content{width: 70%; margin: 2rem 0;}
+#entry_complete .skillsheet{width: 70%; margin: 2rem 0; border-bottom: 1px solid #E38585;}
+.entry_content .entry_content_title,
+.skillsheet .skillsheet_title{
+	overflow: hidden;
+	text-align: left;
+}
+.entry_content .entry_content_title span,
+.skillsheet .skillsheet_title span{
+	position: relative;
+	display: inline-block;
+	padding: 0 1rem;
+    margin-left: 2rem;
+}
+.entry_content .entry_content_title span::before,
+.entry_content .entry_content_title span::after,
+.skillsheet .skillsheet_title span::before,
+.skillsheet .skillsheet_title span::after{
+	position: absolute;
+	top: 50%;
+	content: '';
+	width: 500%;
+	height: 1px;
+}
+
+.entry_content .entry_content_title span::before,
+.entry_content .entry_content_title span::after{
+    background-color: #ccc;
+}
+.skillsheet .skillsheet_title span::before,
+.skillsheet .skillsheet_title span::after{
+    background-color: #E38585;
+}
+.entry_content .entry_content_title span::before,
+.skillsheet .skillsheet_title span::before{
+    right: 100%;
+}
+.entry_content .entry_content_title span::after,
+.skillsheet .skillsheet_title span::after{
+    left: 100%;
+}
+.entry_content .entry_content_body{border-bottom: 1px solid #ccc;}
+.entry_content .entry_content_body ul{
+    margin-bottom: 0.7rem;
+    border-radius: 1px;
+    background-color: #eef3f4
+}
+.entry_content .entry_content_body ul li{
+    width: 70%;
+    text-align: left;
+    line-height: 2rem;
+    color: #5E8796;
+    display: inline-flex;
+    justify-content: space-between;
+}
+.entry_content .entry_content_body ul li:first-child{color:#E38585;}
+.entry_content .entry_content_body ul li p:first-child{
+    width: 98px;
+    min-width: 98px;
+}
+.entry_content .entry_content_body ul li p:not(:first-child){
+    width: 100%;
+    text-align: center;
+    color: black;
+}
+.skillsheet .skillsheet_body{
+    width: 80%;
+    margin-bottom: 0.7rem;
+}
 
 /*-------------------------------
 ## 新規会員登録
@@ -2350,6 +2422,27 @@ sp.css ~640px
         background-position: 0 6px;
         display: inline-block;
     }
+
+    /*-------------------------------
+    # エントリー
+    -------------------------------*/
+    #entry_complete .contentInr{
+        padding: 16px 0 32px 0;
+    }
+    #entry_complete .entry_content{
+        width: 100%;
+    }
+    #entry_complete .skillsheet{
+        width: 100%;
+    }
+    .entry_content .entry_content_body ul li{
+        display: block;
+    }
+    .entry_content .entry_content_body ul li p:not(:first-child){
+        text-align: left;
+        padding-left: 1rem;
+    }
+
 
     /*-------------------------------
     # エンジニアルートとは

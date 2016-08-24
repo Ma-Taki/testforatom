@@ -92,6 +92,13 @@ class FrontUtility
     public $user_regist_mail_to = '';
     public $user_regist_mail_to_name = '';
 
+    // メール：エントリー完了
+    const USER_ENTRY_MAIL_TITLE = '案件にエントリー頂きありがとうございます。';
+    public $user_entry_mail_from = '';
+    public $user_entry_mail_from_name = '';
+    public $user_entry_mail_to = '';
+    public $user_entry_mail_to_name = '';
+
     public function __construct(){
         switch (env('APP_ENV')) {
             // ローカル環境
@@ -111,6 +118,10 @@ class FrontUtility
                 $this->user_regist_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_to_name = 'E-R開発者';
 
+                $this->user_entry_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->user_entry_mail_from_name = 'エンジニアルート';
+                $this->user_entry_mail_to = 'y.suzuki@solidseed.co.jp';
+                $this->user_entry_mail_to_name = 'E-R開発者';
                 break;
 
             // 開発環境
@@ -129,6 +140,11 @@ class FrontUtility
                 $this->user_regist_mail_from_name = 'エンジニアルート';
                 $this->user_regist_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_to_name = 'E-R開発者';
+
+                $this->user_entry_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->user_entry_mail_from_name = 'エンジニアルート';
+                $this->user_entry_mail_to = 'y.suzuki@solidseed.co.jp';
+                $this->user_entry_mail_to_name = 'E-R開発者';
                 break;
 
             //　本番環境

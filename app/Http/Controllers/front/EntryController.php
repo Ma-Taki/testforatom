@@ -14,6 +14,7 @@ use App\Models\Tr_item_entries;
 use Storage;
 use Carbon\Carbon;
 use DB;
+use Mail;
 
 class EntryController extends Controller
 {
@@ -72,6 +73,8 @@ class EntryController extends Controller
 
         $file = !empty($request->skillSheet) ? $request->skillSheet : null;
         $original_name = null;
+
+        // ▽▽▽ スキルシートアップロード時のバリデーション ▽▽▽
         if(!empty($file)) {
             $custom_error_messages = [];
             // サイズチェック
@@ -102,6 +105,7 @@ class EntryController extends Controller
                 return back()->withInput();
             }
         }
+        // △△△ スキルシートアップロード時のバリデーション △△△
 
         $data = [
             'user_id' => $user->first()->id,
@@ -116,7 +120,7 @@ class EntryController extends Controller
         ];
 
         // トランザクション
-        $file_name = DB::transaction(function () use ($data) {
+        $db_return_data = DB::transaction(function () use ($data) {
             try {
                 // エントリーテーブルにインサート
                 $insert_entry = new Tr_item_entries;
@@ -135,7 +139,11 @@ class EntryController extends Controller
                         $data['file_name'].$insert_entry->id.'.'.$data['file_extension'];
                     $insert_entry->save();
                 }
-                return $insert_entry->skillsheet_filename;
+                return [
+                    'file_name' => $insert_entry->skillsheet_filename,
+                    'entry' => $insert_entry,
+                ];
+
 
             } catch (\Exception $e) {
                 Log::error($e);
@@ -144,8 +152,31 @@ class EntryController extends Controller
         });
 
         // ファイルをローカルに保存
-        $file->move(storage_path('app'), $file_name);
+        if(!empty($file)) {
+            $file->move(storage_path('app'), $db_return_data['file_name']);
+        }
 
-        return view('front.entry_complete');
+        // メール送信
+        $data_mail = [
+            'admin_mail_addresses' => 'entry@engineer-route.com',
+            'entry_id' => $db_return_data['entry']->id,
+            'item_id' => $item->first()->id,
+            'item_name' => $item->first()->name,
+            'item_biz_category' => $item->bizCategorie->name,
+            'user_mail_address' => $user->first()->mail,
+        ];
+        $frntUtil = new FrntUtil();
+        Mail::send('front.emails.item_entry', $data_mail, function ($message) use ($data_mail, $frntUtil) {
+            $message->from($frntUtil->user_entry_mail_from, $frntUtil->user_entry_mail_from_name);
+            //$message->to($data_mail['user_mail_address'], $data_mail['user_mail_address']);
+            // 開発も含めて、全部自分に送られてくるようにしとく
+            $message->to($frontUtil->user_entry_mail_to, $frontUtil->user_entry_mail_to_name);
+            $message->subject(FrntUtil::USER_ENTRY_MAIL_TITLE);
+        });
+
+        return view('front.entry_complete', [
+            'entry' => $db_return_data['entry'],
+            'item' => $item->first(),
+        ]);
     }
 }

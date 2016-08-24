@@ -13,6 +13,7 @@
 
 // フロント：トップ
 Route::resource('/', 'FrontController', ['only' => ['index',]]);
+Route::get('/lp1', 'FrontController@index');
 
 // フロント：ご利用の流れ
 Route::get('/flow', function () {
