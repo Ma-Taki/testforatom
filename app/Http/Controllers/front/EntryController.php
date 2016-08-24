@@ -171,7 +171,7 @@ class EntryController extends Controller
             $message->from($frntUtil->user_entry_mail_from, $frntUtil->user_entry_mail_from_name);
             //$message->to($data_mail['user_mail_address'], $data_mail['user_mail_address']);
             // 開発も含めて、全部自分に送られてくるようにしとく
-            $message->to($frontUtil->user_entry_mail_to, $frontUtil->user_entry_mail_to_name);
+            $message->to($frntUtil->user_entry_mail_to, $frntUtil->user_entry_mail_to_name);
             $message->subject(FrntUtil::USER_ENTRY_MAIL_TITLE);
         });
 
