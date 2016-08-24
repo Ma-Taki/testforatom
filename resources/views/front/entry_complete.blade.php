@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-@if(!$entry.skillsheet_upload)
+@if(!$entry->skillsheet_upload)
             <div class="skillsheet">
                 <p class="skillsheet_title"><span>スキルシートについて</span></p>
                 <div class="skillsheet_body">
