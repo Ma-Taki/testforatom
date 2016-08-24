@@ -162,7 +162,7 @@ class EntryController extends Controller
             'entry_id' => $db_return_data['entry']->id,
             'item_id' => $item->first()->id,
             'item_name' => $item->first()->name,
-            'item_biz_category' => $item->bizCategorie->name,
+            'item_biz_category' => $item->first()->bizCategorie->name,
             'user_mail_address' => $user->first()->mail,
         ];
         $frntUtil = new FrntUtil();
