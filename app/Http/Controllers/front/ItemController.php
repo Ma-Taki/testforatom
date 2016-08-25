@@ -15,7 +15,7 @@ class ItemController extends Controller
 {
     /**
      * 案件検索
-     * GET:/front/search
+     * GET:/item/search
      */
     public function searchItem(Request $request){
 
@@ -51,7 +51,7 @@ class ItemController extends Controller
 
     /**
      * キーワード検索
-     * GET:/front/keyword/{keyword}
+     * GET:/item/keyword/{keyword}
      */
     public function searchItemByKeyword(Request $request){
 
@@ -78,7 +78,7 @@ class ItemController extends Controller
 
     /**
      * 案件詳細画面を表示する
-     * GET:/front/detail
+     * GET:/item/detail
      */
     public function showItemDetail(Request $request){
 
@@ -104,7 +104,7 @@ class ItemController extends Controller
 
     /**
      * 案件検索
-     * GET:/front/tag/{id}
+     * GET:/item/tag/{id}
      */
     public function searchItemByTag(Request $request, $tag_id){
 
@@ -134,7 +134,7 @@ class ItemController extends Controller
 
     /**
      * 案件検索
-     * GET:/front/category/{id}
+     * GET:/item/category/{id}
      */
     public function searchItemByCategory(Request $request, $category_id){
 
@@ -167,7 +167,7 @@ class ItemController extends Controller
 
     /**
      * スマートフォンでのもっと見るボタン押下時の案件取得
-     * GET:/front/ajax/readmore
+     * GET:/item/search/readmore
      */
     public function ajaxReadMore(Request $request){
 
@@ -177,7 +177,7 @@ class ItemController extends Controller
         $page = $this->getPage($request->page);
         $path = $request->path;
 
-        if (!empty($path) && '/front/search') {
+        if (!empty($path) && $path == '/item/search') {
             // 一覧取得
             $itemList = Tr_items::select('items.*')
                                 ->entryPossible() // 受付期間中の案件のみ

@@ -78,7 +78,7 @@
                             </p>
                         </div>
                         <div class="itemTagList invisible-sp">
-@foreach($item->tags as $tag)<a href="/front/tag/{{ $tag->id }}"><p class="tag">{{ $tag->term }}</p></a>@endforeach
+@foreach($item->tags as $tag)<a href="/item/tag/{{ $tag->id }}"><p class="tag">{{ $tag->term }}</p></a>@endforeach
                         </div>
                         <div class="commonCenterBtn">
                             <a href="/entry?id={{ $item->id }}"><button>この案件にエントリーする</button></a>
@@ -87,13 +87,13 @@
                 </div>
             </div>
             <div class="itemTagList invisible-pc invisible-tab">
-@foreach($item->tags as $tag)<a href="/front/tag/{{ $tag->id }}"><p class="tag">{{ $tag->term }}</p></a>@endforeach
+@foreach($item->tags as $tag)<a href="/item/tag/{{ $tag->id }}"><p class="tag">{{ $tag->term }}</p></a>@endforeach
             </div>
         </div>
 
         <section class="keyWordSearch clear invisible-sp">
             <h1>キーワードから案件を探す</h1>
-            <form class="keyWordSearchForm" method="get" action="/front/keyword">
+            <form class="keyWordSearchForm" method="get" action="/item/keyword">
                 <input class="keyWordSearchInputForm" type="text" name="keyword">
                 <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
             </form>

@@ -22,13 +22,14 @@
             </div>
             <hr class="partitionLine_02">
 
-@if(strstr(Request::url(), '/front/search'))
+@if(strstr(Request::url(), '/item/search'))
             <div class="sp_condition_search_btn invisible-pc invisible-tab">
                 <div class="commonCenterBtn">
                     <button><p>条件を指定して検索する<p></button>
                 </div>
             </div>
 @endif
+
             <div class="conditions">
                 <div class="search">
                     <div class="tabSelected">
@@ -80,7 +81,7 @@
                             </ul>
                         </div><!-- /.tabMenu -->
 
-                        <form id="tabForm" method="GET" action="{{ url('/front/search') }}">
+                        <form id="tabForm" method="GET" action="{{ url('/item/search') }}">
                         <div class="tabBox">
                             <div class="tabBoxInr">
                                 <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
@@ -261,7 +262,7 @@
 
             <section class="keyWordSearch clear invisible-sp">
                 <h1>キーワードから案件を探す</h1>
-                <form class="keyWordSearchForm" method="get" action="/front/keyword">
+                <form class="keyWordSearchForm" method="get" action="/item/keyword">
                     <input class="keyWordSearchInputForm" type="text" name="keyword">
                     <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
                 </form>

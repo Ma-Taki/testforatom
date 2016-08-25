@@ -15,7 +15,7 @@ class ContactController extends Controller
 {
     /**
      * お問い合わせ画面表示
-     * GET:/front/contact
+     * GET:/contact
      */
     public function index(Request $request){
         return view('front.contact');
@@ -23,7 +23,7 @@ class ContactController extends Controller
 
     /**
      * お問い合わせ画面修正表示
-     * POST:/front/contact
+     * POST:/contact
      **/
     public function store(Request $request){
         return view('front.contact', $request->all());
@@ -31,7 +31,7 @@ class ContactController extends Controller
 
     /**
      * お問い合わせ内容確認画面表示
-     * POST:/front/contact/confirm
+     * POST:/contact/confirm
      **/
     public function confirm(ContactRequest $request){
         return view('front.contact_confirm', $request->all());
@@ -39,7 +39,7 @@ class ContactController extends Controller
 
     /**
      * お問い合わせ処理・完了画面表示
-     * POST:/front/contact/complete
+     * POST:/contact/complete
      **/
     public function complete(Request $request){
 

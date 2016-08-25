@@ -12,7 +12,7 @@ use App\Models\Ms_job_types;
 ?>
 <div class="wrap">
     <section id="sp_condition" class="condition_search">
-        <form method="get" action="{{ url('/front/search') }}">
+        <form method="get" action="{{ url('/item/search') }}">
         <div class="searchHeader">
             <h1>条件を指定して案件を探す</h1>
         </div>

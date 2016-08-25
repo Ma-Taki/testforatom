@@ -19,7 +19,7 @@ use App\Libraries\FrontUtility as FrntUtil;
         <section class="keyWordSearch clear invisible-pc invisible-tab">
             <div class="alignCenter">
                 <div class="keyWordSearchForm">
-                    <form action="/front/keyword" method="get">
+                    <form action="/item/keyword" method="get">
                         <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
                         <input type="submit" class="searchBtn">
                     </form>
@@ -51,7 +51,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                         <ul class="fs0 clear">
 @foreach($newItemList as $newItem)
                             <li>
-                                <a href="/front/detail?id={{ $newItem->id }}">
+                                <a href="/item/detail?id={{ $newItem->id }}">
                                     <div class="topJobInr">
                                         <img src="/front/images/ico-newjob.png">
                                         <h2>{{ $newItem->name }}</h2>
@@ -64,7 +64,7 @@ use App\Libraries\FrontUtility as FrntUtil;
 @endforeach
                         </ul>
                         <div class="newItemListLink clear invisible-pc invisible-tab">
-                            <a href="/front/search?order=RegistrationDesc">新着案件一覧へ</a>
+                            <a href="/item/search">新着案件一覧へ</a>
                         </div>
                     </div>
                 </section><!-- /.newJob -->
@@ -72,11 +72,11 @@ use App\Libraries\FrontUtility as FrntUtil;
                 <section class="attentionJob">
                     <div class="topJobWrap">
                         <h1 class="alignleft">急募案件</h1>
-                        <p class="alignright invisible-sp"><a href="/front/tag/1?order=RegistrationDesc">急募案件一覧へ</a></p>
+                        <p class="alignright invisible-sp"><a href="/item/tag/1">急募案件一覧へ</a></p>
                         <ul class="fs0 clear">
 @foreach($pickUpItemList as $pickUpItem)
                             <li>
-                                <a href="/front/detail?id={{ $pickUpItem->id }}">
+                                <a href="/item/detail?id={{ $pickUpItem->id }}">
                                     <div class="topJobInr">
                                         <img src="/front/images/ico-attentionJob.png">
                                         <h2>{{ $pickUpItem->name }}</h2>
@@ -89,7 +89,7 @@ use App\Libraries\FrontUtility as FrntUtil;
 @endforeach
                         </ul>
                         <div class="wantedItemListLink clear invisible-pc invisible-tab">
-                            <a href="/front/tag/1?order=RegistrationDesc">急募案件一覧へ</a>
+                            <a href="/item/tag/1">急募案件一覧へ</a>
                         </div>
                     </div>
 
@@ -113,7 +113,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                             </ul>
                         </div><!-- /.tabMenu -->
 
-                        <form name="form" role="form" method="GET" action="{{ url('/front/search') }}">
+                        <form name="form" role="form" method="GET" action="{{ url('/item/search') }}">
 
                             <div class="tabBox">
                                 <div class="tabBoxInr">
@@ -252,10 +252,10 @@ use App\Libraries\FrontUtility as FrntUtil;
                         <h1>カテゴリーから案件を探す</h1>
                         <div class="categorySearchContent">
 @foreach($parentList as $parentKey => $parent)
-                            <div class="parentCategory">&nbsp;<a href="/front/category/{{ $parentKey }}">{{ $parent }}</div>
+                            <div class="parentCategory">&nbsp;<a href="/item/category/{{ $parentKey }}">{{ $parent }}</div>
                                 <div class="childCategory">
 @foreach($childList[$parentKey] as $child)
-                                    <a href="/front/category/{{ $child->id }}">{{ $child->name }}</a>
+                                    <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
 @if(next($childList[$parentKey]) !== FALSE)
                                     <span>|</span>
 @endif
@@ -277,11 +277,11 @@ use App\Libraries\FrontUtility as FrntUtil;
                                     <ul>
                                         <li class="parentCategory">{{ $parent }}<span class="alignright">+</span></li>
                                         <div class="childCategories">
-                                            <a href="/front/category/{{ $parentKey }}">
+                                            <a href="/item/category/{{ $parentKey }}">
                                                 <li class="childCategory">{{ $parent }}一覧<span class="alignright">></span></li>
                                             </a>
 @foreach($childList[$parentKey] as $child)
-                                            <a href="/front/category/{{ $child->id }}">
+                                            <a href="/item/category/{{ $child->id }}">
                                                 <li class="childCategory">{{ $child->name }}<span class="alignright">></span></li>
                                             </a>
 @endforeach
@@ -297,7 +297,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                 <section class="keyWordSearch clear invisible-pc invisible-tab">
                     <div class="alignCenter">
                         <div class="keyWordSearchForm">
-                            <form action="front" method="get">
+                            <form action="/item/keyword" method="get">
                                 <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
                                 <input type="submit" class="searchBtn">
                             </form>
@@ -323,7 +323,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                 <div class="contentInr">
                     <h1>キーワードから案件を探す</h1>
                     <div class="">
-                        <form class="keyWordSearchForm" method="get" action="/front/keyword">
+                        <form class="keyWordSearchForm" method="get" action="/item/keyword">
                             <input class="keyWordSearchInputForm" type="text" name="keyword">
                             <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
                         </form>

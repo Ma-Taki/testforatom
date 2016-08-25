@@ -167,7 +167,7 @@
                         <div class="anserElementInr">
                             <img alt="アンサー" src="/front/images/ico-answer.png">
                             <div class="anserText">
-                                <p><a href="/front/frow">「ご利用の流れ」</a>をご参照ください。</p>
+                                <p><a href="/frow">「ご利用の流れ」</a>をご参照ください。</p>
                             </div>
                         </div>
                     </div>

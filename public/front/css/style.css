@@ -338,6 +338,15 @@ h1.SearchTitle:before{
 }
 
 /*-------------------------------
+## パスワード変更
+-------------------------------*/
+.edit_password{width: 95%;margin: 0 auto;}
+#edit_password .input_password label{width: 100%;}
+#edit_password .input_password label input{width: 70%;margin-left: 0;}
+#edit_password .input_password label:nth-child(2){margin-top: 1.4rem;}
+
+
+/*-------------------------------
 ## エントリー
 -------------------------------*/
 #entry p.pageInfo{color: black;}
@@ -532,18 +541,9 @@ h1.SearchTitle:before{
     margin: 0;
 }
 
-.input_email label{
-    width: 100%;
-}
-
-.input_email label input{
-    width: 70%;
-    margin-left: 0;
-}
-
-.input_email label:nth-child(2){
-    margin-top: 1.4rem;
-}
+.input_email label{width: 100%;}
+.input_email label input{width: 70%;margin-left: 0;}
+.input_email label:nth-child(2){margin-top: 1.4rem;}
 
 #slctBx_prefecture{width: 12rem;}
 #slctBx_birth_y{width: 6rem;}
@@ -2391,7 +2391,7 @@ sp.css ~640px
     	display:none; /* Hide from browsers that don't support media queries */
     	cursor:pointer;
     	position:absolute;
-    	top:12px;
+        top:16px;
     	right:8px;
     	background:url(../images/navOpen.png) no-repeat center center;
     	height:24px;
@@ -2421,6 +2421,10 @@ sp.css ~640px
         background-size: 14px 14px;
         background-position: 0 6px;
         display: inline-block;
+    }
+
+    .hello_user .contentInr{
+        padding: 2.4rem 1rem;
     }
 
     /*-------------------------------
@@ -2863,7 +2867,6 @@ sp.css ~640px
 	# header
 	-------------------------------*/
 	header{
-		height: 48px;
 	}
 
 	.headerInr p{
@@ -2887,8 +2890,8 @@ sp.css ~640px
 
 	/* user */
 	.user{
-		top: 8px;
-		right: 48px;
+		top: 4px;
+		right: 31px;
 	}
 
 	.user li{
@@ -2936,9 +2939,7 @@ sp.css ~640px
 	# footer
 	-------------------------------*/
 
-    .bg{ background: #5E8796; }
-
-    footer{ margin-top: 0; }
+    footer{margin-top: 0;background: #5E8796;}
 
 	footer ul{
         padding: 0;

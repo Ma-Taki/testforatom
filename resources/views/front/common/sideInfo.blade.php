@@ -23,17 +23,17 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('/front/question#aboutFreeEngineer') }}">
+                <a href="{{ url('/question#aboutFreeEngineer') }}">
                     <img src="/front/images/sBnr02.png" alt="フリーエンジニアになるためには？">
                 </a>
             </li>
             <li>
-                <a href="{{ url('/front/flow') }}">
+                <a href="{{ url('/flow') }}">
                     <img src="/front/images/sBnr03.png" alt="ご利用案内">
                 </a>
             </li>
             <li>
-                <a href="{{ url('/front/question') }}">
+                <a href="{{ url('/question') }}">
                     <img src="/front/images/sBnr04.png" alt="よくある質問">
                 </a>
             </li>
@@ -41,10 +41,10 @@
     </div>
     <div class="invisible-pc invisible-tab">
         <ul>
-            <li><a href="/user/regist"><img src="/front/images/sBnr01.png"></a></li>
-            <li><a href="/front/question#aboutFreeEngineer"><img src="/front/images/sBnr02.png"></a></li>
-            <li><a href="/front/flow"><img src="/front/images/sBnr03.png"></a></li>
-            <li><a href="/front/question"><img src="/front/images/sBnr04.png"></a></li>
+            <li><a href="/user/regist"><img src="/front/images/sBnr01.png" alt="Engineer-Route News"></a></li>
+            <li><a href="/question#aboutFreeEngineer"><img src="/front/images/sBnr02.png" alt="フリーエンジニアになるためには？"></a></li>
+            <li><a href="/flow"><img src="/front/images/sBnr03.png" alt="ご利用案内"></a></li>
+            <li><a href="/question"><img src="/front/images/sBnr04.png" alt="よくある質問"></a></li>
         </ul>
     </div>
 </section><!-- END SIDE-INFO -->

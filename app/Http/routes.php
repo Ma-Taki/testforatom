@@ -15,6 +15,11 @@
 Route::resource('/', 'FrontController', ['only' => ['index',]]);
 Route::get('/lp1', 'FrontController@index');
 
+// フロント：エンジニアルートとは
+Route::get('/about', function () {
+    return view('front.about');
+});
+
 // フロント：ご利用の流れ
 Route::get('/flow', function () {
     return view('front.flowOfUse');
@@ -40,44 +45,55 @@ Route::resource('/contact', 'front\ContactController', ['only' => ['index', 'sto
 Route::post('/contact/confirm', 'front\ContactController@confirm');
 Route::post('/contact/complete', 'front\ContactController@complete');
 
-// フロント：エンジニアルートとは
-Route::get('/about', function () {
-    return view('front.about');
-});
-
 // フロント：企業の皆様へ
 Route::resource('/company', 'front\CompanyController', ['only' => ['index', 'store']]);
 Route::post('/company/confirm', 'front\CompanyController@confirm');
 Route::post('/company/complete', 'front\CompanyController@complete');
 
 // フロント：案件一覧
-Route::match(['get', 'post'], '/front/search', 'front\ItemController@searchItem');
+Route::match(['get', 'post'], '/item/search', 'front\ItemController@searchItem');
 
 // フロント(sp)：もっと見るボタン
-Route::get('/front/ajax/readmore', 'front\ItemController@ajaxReadMore');
+Route::get('/item/search/readmore', 'front\ItemController@ajaxReadMore');
 // フロント(sp)：条件から検索
-Route::get('/front/sp/condition', function(){
+Route::get('/item/search/condition', function(){
     return view('front.sp.condition_search');
 });
+
 // フロント：キーワード検索
-Route::get('/front/keyword/', 'front\ItemController@searchItemByKeyword');
+Route::get('/item/keyword/', 'front\ItemController@searchItemByKeyword');
+
+// フロント：特集タグ検索
+Route::get('/item/tag/{id}', 'front\ItemController@searchItemByTag');
+
+// フロント：カテゴリ検索
+Route::get('/item/category/{id}', 'front\ItemController@searchItemByCategory');
 
 // フロント：案件詳細
-Route::get('/front/detail', 'front\ItemController@showItemDetail');
-Route::get('/front/tag/{id}', 'front\ItemController@searchItemByTag');
-Route::get('/front/category/{id}', 'front\ItemController@searchItemByCategory');
-// フロント：急募案件
-Route::get('/front/pickup', 'front\ItemController@searchItem');
+Route::get('/item/detail', 'front\ItemController@showItemDetail');
 
 // フロント：ログイン
 Route::resource('/login', 'front\LoginController', ['only' => ['index', 'store']]);
 Route::get('/logout', 'front\LoginController@logout');
 
-// フロント：新規登録
+// フロント：マイページ
+Route::get('/user', 'front\UserController@showMyPage');
+// フロント：パスワード変更
+Route::get('/user/edit/password', function(){
+    return view('front.edit_password');
+});
+Route::post('/user/edit/password', 'front\UserController@updatePassword');
+// フロント：新規会員登録
 Route::resource('/user/regist', 'front\UserController', ['only' => ['index', 'store']]);
 
 // フロント：エントリー
 Route::resource('/entry', 'front\EntryController', ['only' => ['index', 'store']]);
+
+// フロント：退会
+Route::get('/user/delete', function(){
+    return view('front.user_delete');
+});
+Route::post('/user/delete', 'front\UserController@deleteUser');
 
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {

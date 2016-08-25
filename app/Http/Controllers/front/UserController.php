@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\front\UserRegistrationRequest;
-use App\Libraries\FrontUtility as FrontUtil;
+use App\Http\Requests\front\EditPasswordRequest;
+use App\Libraries\FrontUtility as FrntUtil;
+use App\Libraries\CookieUtility as CkieUtil;
 use App\Models\Tr_users;
 use App\Models\Tr_link_users_contract_types;
 use Mail;
 use Carbon\Carbon;
 use DB;
+use Log;
 
 class UserController extends Controller
 {
@@ -21,8 +24,8 @@ class UserController extends Controller
      * GET:/user/regist
      */
     public function index(){
-        return view('front.user_complete');
-//        return view('front.user_input');
+//        return view('front.user_complete');
+        return view('front.user_input');
     }
 
     /**
@@ -33,7 +36,7 @@ class UserController extends Controller
     public function store(UserRegistrationRequest $request){
 
         // prefix_saltを作成
-        $prefix_salt = $this->getPrefixSalt(20);
+        $prefix_salt = FrntUtil::getPrefixSalt(20);
         $db_data = [
             'last_name' => $request->last_name,
             'first_name' => $request->first_name,
@@ -49,7 +52,7 @@ class UserController extends Controller
             'email' => $request->email,
             'phone_num' => $request->phone_num,
             'salt' => $prefix_salt,
-            'password' => $prefix_salt .$request->password .FrontUtil::FIXED_SALT,
+            'password' => $prefix_salt .$request->password .FrntUtil::FIXED_SALT,
             'now' => Carbon::now()->format('Y-m-d H:i:s'),
             'contract_types' => $request->contract_types,
         ];
@@ -103,28 +106,111 @@ class UserController extends Controller
             'user_name' => $request->last_name .$request->first_name,
             'email' => $request->email,
         ];
-        $frontUtil = new FrontUtil();
-        Mail::send('front.emails.user_regist', $data, function ($message) use ($data, $frontUtil) {
-            $message->from($frontUtil->user_regist_mail_from, $frontUtil->user_regist_mail_from_name);
-            $message->to($frontUtil->user_regist_mail_to, $frontUtil->user_regist_mail_to_name);
-            $message->subject(FrontUtil::USER_REGIST_MAIL_TITLE);
+        $frntUtil = new FrntUtil();
+        Mail::send('front.emails.user_regist', $data, function ($message) use ($data, $frntUtil) {
+            $message->from($frntUtil->user_regist_mail_from, $frntUtil->user_regist_mail_from_name);
+            $message->to($frntUtil->user_regist_mail_to, $frntUtil->user_regist_mail_to_name);
+            $message->subject(FrntUtil::USER_REGIST_MAIL_TITLE);
         });
 
         return view('front.user_complete')->with('email',  $request->email);
     }
 
-    /**
-     * ASCIIコードが32~126の範囲でランダムな文字列を作成する。
-     * 引数は文字数。
-     * @param int $len
-     * @return String
+    /*
+     * マイページ表示
+     * GET:/user
      */
-    private function getPrefixSalt($len){
-        $str = '';
-        for ($i = 0; $i < $len; $i++) {
-            $rand_int = mt_rand(32,126);
-            $str .= chr($rand_int);
+    public function showMyPage(){
+
+        // ログインユーザ情報を取得
+        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
+                        ->enable()
+                        ->get()
+                        ->first();
+
+        if (empty($user)) {
+            return redirect('logout');
         }
-        return $str;
+        return view('front.user_mypage' , compact('user'));
+    }
+
+    /*
+     * パスワード変更処理
+     * POST:/user/edit/password
+     */
+    public function updatePassword(EditPasswordRequest $request){
+
+        // ログインユーザを取得
+        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
+                        ->enable()
+                        ->get()
+                        ->first();
+
+        // パスワード認証
+        $password = md5($user->salt .$request->old_password .FrntUtil::FIXED_SALT);
+        if ($user->password != $password) {
+            // 認証失敗
+            Log::debug('input:'.$password.' db:'.$user->password);
+            return back()->with('custom_error_messages',['現在のパスワードに誤りがあります。'])->withInput();
+        }
+        // 認証成功
+        // prefix_saltを作成
+        $prefix_salt = FrntUtil::getPrefixSalt(20);
+        $new_password = md5($prefix_salt .$request->new_password .FrntUtil::FIXED_SALT);
+
+        $db_data = [
+            'salt' => $prefix_salt,
+            'new_password' => $new_password,
+        ];
+
+        // トランザクション
+        DB::transaction(function () use ($user, $db_data) {
+            try {
+                // ユーザーをアップデート
+                $user->salt = $db_data['salt'];
+                $user->password = $db_data['new_password'];
+                $user->save();
+
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+
+        return redirect('/user');
+    }
+
+    /*
+     * 退会処理
+     * POST:/user/delete
+     */
+    public function deleteUser(){
+
+        // ログインユーザを取得
+        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
+                        ->enable()
+                        ->get()
+                        ->first();
+
+        $db_data = [
+            'user' => $user,
+            'delete_date' => Carbon::today()->format('Y-m-d'),
+        ];
+
+        // トランザクション
+        DB::transaction(function () use ($db_data) {
+            try {
+                // ユーザーをアップデート
+                $db_data['user']->delete_flag = $db_data['user']->id;
+                $db_data['user']->delete_date = $db_data['delete_date'];
+                $db_data['user']->save();
+
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+
+        return redirect('/logout');
     }
 }

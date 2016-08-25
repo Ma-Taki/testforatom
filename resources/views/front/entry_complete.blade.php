@@ -36,7 +36,7 @@
 @endif
 
             <div class="commonCenterBtn">
-                <button type="submit">トップへ戻る</button>
+                <a href="{{ url('/') }}"><button>トップへ戻る</button></a>
             </div>
         </div>
     </div><!-- END CONTENT -->

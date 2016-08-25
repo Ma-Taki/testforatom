@@ -35,7 +35,7 @@
             <p class="pageInfo">必要な項目をご記入いただき、「内容確認」ボタンをクリックしてください。<span class="color-red">※</span>印の項目は入力必須です。</p>
             <hr class="partitionLine_03">
 
-            <form method="post" action="{{ url('/front/contact/confirm') }}">
+            <form method="post" action="{{ url('/contact/confirm') }}">
                 <div class="input_field fs0">
                     <div class="input_f_name">
                         <p>お名前<span class="color-red">※</span></p>

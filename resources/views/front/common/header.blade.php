@@ -16,7 +16,7 @@
         <h1><a href="{{ url('/') }}" title="エンジニアルート"></a></h1>
 
         <div class="search">
-            <form action="/front/keyword" method="get">
+            <form action="/item/keyword" method="get">
                 <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
                 <button class="searchBtn" type="submit" />
             </form>

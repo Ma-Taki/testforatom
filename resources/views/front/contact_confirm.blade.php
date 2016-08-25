@@ -130,10 +130,10 @@
                 $('.submit').click(function (){
                     switch ($(this).attr('name')) {
                         case 'edit':
-                            $(this).parents('form').attr('action', '/front/contact');
+                            $(this).parents('form').attr('action', '/contact');
                             break;
                         case 'send':
-                            $(this).parents('form').attr('action', '/front/contact/complete');
+                            $(this).parents('form').attr('action', '/contact/complete');
                             break;
                     }
                     $(this).parents('form').submit();

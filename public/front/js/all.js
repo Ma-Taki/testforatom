@@ -20,7 +20,7 @@ jQuery(function($){
 	})
 
 	function setParameter( paramsArray ) {
-		var resurl = 'http://ts.engineer-route.com/front/sp/condition'
+		var resurl = 'http://ts.engineer-route.com/item/search/condition'
         //var resurl = location.href.replace(/\?.*$/,"");
         for ( key in paramsArray ) {
 			if (key != 'page') {
@@ -443,7 +443,7 @@ jQuery(function($){
 		morePage.loading = true;
 		$.ajax({
 			type: 'get',
-			url: '/front/ajax/readmore',
+			url: '/item/search/readmore',
 			dataType : 'json',
 			data: {'order': paramArray['order'],
 				   'limit': paramArray['limit'],

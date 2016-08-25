@@ -163,6 +163,21 @@ class FrontUtility
     }
 
     /**
+     * ASCIIコードが32~126の範囲でランダムな文字列を作成する。
+     * 引数は文字数。
+     * @param int $len
+     * @return String
+     */
+    public static function getPrefixSalt($len){
+        $str = '';
+        for ($i = 0; $i < $len; $i++) {
+            $rand_int = mt_rand(32,126);
+            $str .= chr($rand_int);
+        }
+        return $str;
+    }
+
+    /**
      * コレクション型のモデルリストを、idのみの配列に変換する
      * @param  Collection modelList
      * @return array
