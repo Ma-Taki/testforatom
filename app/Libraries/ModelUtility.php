@@ -45,6 +45,8 @@ class ModelUtility
     // マスタータイプ：検索
     const MASTER_TYPE_INDEX_ONLY = 3;
 
+    // 認証キー発行時の目的
+    const AUTH_TASK_RECOVER_PASSWORD = 'RecoverPassword';
 
     /**
      * 引数のモデル配列のname属性を'、'で連結して返す。

@@ -338,6 +338,13 @@ h1.SearchTitle:before{
 }
 
 /*-------------------------------
+## パスワード再設定
+-------------------------------*/
+.user_reminder{width: 95%;margin: 0 auto;}
+.user_reminder_complete{width: 95%;margin: 0 auto;}
+.user_reminder_complete .pageInfo{color: black;}
+
+/*-------------------------------
 ## パスワード変更
 -------------------------------*/
 .edit_password{width: 95%;margin: 0 auto;}

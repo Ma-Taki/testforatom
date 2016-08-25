@@ -8,10 +8,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\front\UserRegistrationRequest;
 use App\Http\Requests\front\EditPasswordRequest;
+use App\Http\Requests\front\ReminderRequest;
 use App\Libraries\FrontUtility as FrntUtil;
+use App\Libraries\ModelUtility as MdlUtil;
 use App\Libraries\CookieUtility as CkieUtil;
 use App\Models\Tr_users;
 use App\Models\Tr_link_users_contract_types;
+use App\Models\Tr_auth_keys;
 use Mail;
 use Carbon\Carbon;
 use DB;
@@ -212,5 +215,62 @@ class UserController extends Controller
         });
 
         return redirect('/logout');
+    }
+
+    /*
+     * パスワード再設定URL送信処理
+     * POST:/user/reminder
+     */
+    public function sendReminder(ReminderRequest $request){
+
+        // メールアドレスからユーザを取得
+        $user = Tr_users::where('mail', $request->mail)
+                        ->enable()
+                        ->get()
+                        ->first();
+
+        if (empty($user)) {
+            return back()->with('custom_error_messages',['登録されていないメールアドレスです。'])->withInput();
+        }
+
+        $auth_key = Tr_auth_keys::where('user_id', $user->id)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_RECOVER_PASSWORD)
+                                ->get()
+                                ->first();
+
+        // UUIDの衝突をチェック（UUIDは16^40通り）
+        $ticket = '';
+        do {
+            $ticket = sha1(uniqid(rand(), true));
+            $w_obj = Tr_auth_keys::where('auth_task', $ticket)->get()->first();
+        } while (!empty($w_obj));
+
+        if (empty($auth_key)) {
+            $auth_key = new Tr_auth_keys;
+            $auth_key->user_id = $user->id;
+            $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
+            $auth_key->auth_task = MdlUtil::AUTH_TASK_RECOVER_PASSWORD;
+            $auth_key->ticket = $ticket;
+            $auth_key->save();
+
+        } else {
+            $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
+            $auth_key->ticket = $ticket;
+            $auth_key->save();
+        }
+
+        // メール送信
+        $mail_data = [
+            'auth_key' => $auth_key,
+            'limit' => FrntUtil::AUTH_KEY_LIMIT_MINUTE,
+        ];
+        $frntUtil = new FrntUtil();
+        Mail::send('front.emails.user_reminder', $mail_data, function ($message) use ($frntUtil) {
+            $message->from($frntUtil->user_reminder_mail_from, $frntUtil->user_reminder_mail_from_name);
+            $message->to($frntUtil->user_reminder_mail_to, $frntUtil->user_reminder_mail_to_name);
+            $message->subject(FrntUtil::USER_REMINDER_MAIL_TITLE);
+        });
+
+        return view('front.user_reminder_complete');
     }
 }

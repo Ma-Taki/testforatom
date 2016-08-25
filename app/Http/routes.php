@@ -95,6 +95,12 @@ Route::get('/user/delete', function(){
 });
 Route::post('/user/delete', 'front\UserController@deleteUser');
 
+// フロント：退会
+Route::get('/user/reminder', function(){
+    return view('front.user_reminder');
+});
+Route::post('/user/reminder', 'front\UserController@sendReminder');
+
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {
     return view('admin.login');

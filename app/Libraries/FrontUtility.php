@@ -48,6 +48,9 @@ class FrontUtility
     // パスワード暗号化用salt
     const FIXED_SALT = "O#%1@'HfwJ2";
 
+    // 認証キー発行時の有効時間(分)
+    const AUTH_KEY_LIMIT_MINUTE = 60;
+
     // 条件から案件検索：報酬のラジオボタン
     const SEARCH_CONDITION_RATE = [
         0 => '指定しない',
@@ -99,6 +102,13 @@ class FrontUtility
     public $user_entry_mail_to = '';
     public $user_entry_mail_to_name = '';
 
+    // メール：パスワード再設定
+    const USER_REMINDER_MAIL_TITLE = 'パスワード再設定URL通知メール';
+    public $user_reminder_mail_from = '';
+    public $user_reminder_mail_from_name = '';
+    public $user_reminder_mail_to = '';
+    public $user_reminder_mail_to_name = '';
+
     public function __construct(){
         switch (env('APP_ENV')) {
             // ローカル環境
@@ -122,6 +132,11 @@ class FrontUtility
                 $this->user_entry_mail_from_name = 'エンジニアルート';
                 $this->user_entry_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_entry_mail_to_name = 'E-R開発者';
+
+                $this->user_reminder_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->user_reminder_mail_from_name = 'エンジニアルート';
+                $this->user_reminder_mail_to = 'y.suzuki@solidseed.co.jp';
+                $this->user_reminder_mail_to_name = 'E-R開発者';
                 break;
 
             // 開発環境
@@ -145,6 +160,11 @@ class FrontUtility
                 $this->user_entry_mail_from_name = 'エンジニアルート';
                 $this->user_entry_mail_to = 'y.suzuki@solidseed.co.jp';
                 $this->user_entry_mail_to_name = 'E-R開発者';
+
+                $this->user_reminder_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->user_reminder_mail_from_name = 'エンジニアルート';
+                $this->user_reminder_mail_to = 'y.suzuki@solidseed.co.jp';
+                $this->user_reminder_mail_to_name = 'E-R開発者';
                 break;
 
             //　本番環境
