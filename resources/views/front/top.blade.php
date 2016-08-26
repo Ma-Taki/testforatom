@@ -25,14 +25,14 @@ use App\Libraries\FrontUtility as FrntUtil;
                     </form>
                 </div>
             </div>
-@if(!FrntUtil::isLogin())
-            <div class="sideInfoInr invisible-pc invisible-tab ">
-                <div class="alignCenter">
-                    <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
-                </div>
-            </div>
-@endif
         </section><!-- /.keyWordSearch for sp -->
+
+@if(!FrntUtil::isLogin())
+        <div class="sideInfoInr invisible-pc invisible-tab ">
+            <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
+        </div>
+@endif
+
 
 @if(FrntUtil::isLogin())
 

@@ -469,6 +469,40 @@ h1.SearchTitle:before{
 }
 
 /*-------------------------------
+## マイページ
+-------------------------------*/
+.mypage{width: 95%;margin: 0 auto;}
+.mypage_element{
+    margin-top: 4rem;
+}
+.mypage_element h2{
+    color: #fff;
+    border: 1px solid #5E8796;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    background: #5E8796;
+    padding: 0.6rem 2rem;
+}
+.mypage_elementInr{
+    border: 1px solid #5E8796;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 3rem;
+}
+.edit_btn {margin-top: 2rem; text-align: center;}
+
+.commonButton button{
+    background: #5E8796;
+    border-radius: 16px;
+    color: #fff;
+    font-size:1.2rem;
+    border-style: none;
+    padding: 0.6rem 3rem;
+}
+
+.user_edit{width: 95%;margin: 0 auto;}
+
+/*-------------------------------
 ## 新規会員登録
 -------------------------------*/
 .user_input_Inr{

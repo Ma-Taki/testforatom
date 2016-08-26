@@ -242,7 +242,7 @@
                         </div>
                         <p class="detail">{{ $item->detail }}</p>
                     <div class="commonCenterBtn">
-                        <a href="/front/detail?id={{ $item->id }}"><button><p>詳細を見る<p></button></a>
+                        <a href="/item/detail?id={{ $item->id }}"><button><p>詳細を見る<p></button></a>
                         </div>
                     </div>
                 </div>

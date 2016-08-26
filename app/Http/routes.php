@@ -105,6 +105,10 @@ Route::post('/user/reminder', 'front\UserController@sendReminder');
 Route::get('/user/recovery', 'front\UserController@showRecovery');
 Route::post('/user/recovery', 'front\UserController@recoverPassword');
 
+// フロント：プロフィール変更
+Route::get('/user/edit', 'front\UserController@showUserEdit');
+Route::post('/user/edit', 'front\UserController@updateUser');
+
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {
     return view('admin.login');

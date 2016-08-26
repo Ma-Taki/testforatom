@@ -4,7 +4,7 @@ namespace App\Http\Requests\front;
 
 use App\Http\Requests\Request;
 
-class UserRegistrationRequest extends Request
+class UserEditRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -55,13 +55,6 @@ class UserRegistrationRequest extends Request
                 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/',
             ],
             'phone_confirmation' => '',
-            'password' => [
-                'required',
-                'between:6,20',
-                'confirmed',
-                'regex:/^[\x21-\x7E]+$/',
-            ],
-            'password_confirmation' => '',
         ];
     }
 }

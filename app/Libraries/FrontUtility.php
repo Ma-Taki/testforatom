@@ -203,7 +203,7 @@ class FrontUtility
      * @return array
      */
     public static function convertCollectionToIdList($modelList) {
-        $id_list = array();
+        $id_list = [];
         foreach ($modelList as $model) {
             array_push($id_list, $model->id);
         }

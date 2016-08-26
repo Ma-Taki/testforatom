@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\front\UserRegistrationRequest;
+use App\Http\Requests\front\UserEditRequest;
 use App\Http\Requests\front\EditPasswordRequest;
 use App\Http\Requests\front\ReminderRequest;
 use App\Http\Requests\front\RecoverPasswordRequest;
@@ -290,15 +291,15 @@ class UserController extends Controller
                                 ->get()
                                 ->first();
 
-/*
+
         if (empty($auth_key)) {
-            Log::warning('[not found auth key]',[
+            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
                 'auth_id' => $request->id,
                 'ticket' =>  $request->ticket,
             ]);
             return redirect('/'); // TODO: あとで汎用エラー画面つくる
         }
-*/
+
         return view('front.recover_password', [
             'id' => $request->id,
             'ticket' => $request->ticket,
@@ -319,7 +320,7 @@ class UserController extends Controller
                                 ->first();
 
         if (empty($auth_key)) {
-            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found',[
+            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
                 'auth_id' => $request->id,
                 'ticket' =>  $request->ticket,
             ]);
@@ -332,7 +333,7 @@ class UserController extends Controller
                          ->first();
 
         if (empty($user)) {
-            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found',[
+            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_users)',[
                 'auth_id' => $request->id,
                 'user_id' =>  $auth_key->user_id,
             ]);
@@ -349,12 +350,15 @@ class UserController extends Controller
         ];
 
         // トランザクション
-        DB::transaction(function () use ($user, $db_data) {
+        DB::transaction(function () use ($auth_key, $user, $db_data) {
             try {
                 // ユーザーをアップデート
                 $user->salt = $db_data['salt'];
                 $user->password = $db_data['new_password'];
                 $user->save();
+
+                // 認証キーは物理削除
+                $auth_key->delete();
 
             } catch (Exception $e) {
                 Log::error($e);
@@ -365,5 +369,94 @@ class UserController extends Controller
         Log::info('password recovery success',['user_id' => $user->id]);
 
         return view('front.recover_password_complete');
+    }
+
+    /*
+     * プロフィール変更画面表示
+     * GET:/user/edit
+     */
+    public function showUserEdit(){
+
+        // ログインユーザを取得
+        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
+                        ->enable()
+                        ->get()
+                        ->first();
+
+        return view('front.user_edit', compact('user'));
+    }
+
+    /*
+     * プロフィール変更処理
+     * POST:/user/edit
+     */
+    public function updateUser(UserEditRequest $request){
+
+        // ログインユーザを取得
+        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
+                        ->enable()
+                        ->get()
+                        ->first();
+
+        if (empty($user)) {
+            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_users)',[
+                'user_id' => CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID),
+            ]);
+            return redirect('/'); // TODO: あとで汎用エラー画面つくる
+        }
+
+        $db_data = [
+            'user' => $user,
+            'last_name' => $request->last_name,
+            'first_name' => $request->first_name,
+            'last_name_kana' => $request->last_name_kana,
+            'first_name_kana' => $request->first_name_kana,
+            'gender' => $request->gender,
+            'birth' => date('Y-m-d', strtotime($request->birth)),
+            'education' => $request->education,
+            'country' => $request->country,
+            'prefecture_id' => $request->prefecture_id,
+            'station' => $request->station,
+            'email' => $request->email,
+            'phone_num' => $request->phone_num,
+            'contract_types' => $request->contract_types,
+        ];
+
+        // トランザクション
+        DB::transaction(function () use ($db_data) {
+            try {
+                // ユーザーテーブルにインサート
+                // 必須項目以外は、入力されていない場合nullを指定
+                // empty()で判別しているため、'0'は空文字扱い
+                $db_data['user']->first_name = $db_data['first_name'];
+                $db_data['user']->last_name = $db_data['last_name'];
+                $db_data['user']->first_name_kana = $db_data['first_name_kana'];
+                $db_data['user']->last_name_kana = $db_data['last_name_kana'];
+                $db_data['user']->sex = $db_data['gender'];
+                $db_data['user']->birth_date = $db_data['birth'];
+                $db_data['user']->education_level = !empty($db_data['education']) ? $db_data['education'] : null;
+                $db_data['user']->nationality = !empty($db_data['country']) ? $db_data['country'] : null;
+                $db_data['user']->prefecture_id = $db_data['prefecture_id'];
+                $db_data['user']->station = !empty($db_data['station']) ? $db_data['station'] : null;
+                $db_data['user']->mail = $db_data['email'];
+                $db_data['user']->tel = $db_data['phone_num'];
+                $db_data['user']->save();
+
+                // ユーザ契約形態中間テーブルをデリートインサート
+                Tr_link_users_contract_types::where('user_id', $db_data['user']->id)->delete();
+                foreach ((array)$db_data['contract_types'] as $contract_type) {
+                    Tr_link_users_contract_types::create([
+                        'user_id' => $db_data['user']->id,
+                        'contract_type_id' => $contract_type,
+                    ]);
+                }
+
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+
+        return redirect('/user');
     }
 }
