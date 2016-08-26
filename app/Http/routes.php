@@ -95,11 +95,15 @@ Route::get('/user/delete', function(){
 });
 Route::post('/user/delete', 'front\UserController@deleteUser');
 
-// フロント：退会
+// フロント：パスワード再設定URL送信
 Route::get('/user/reminder', function(){
     return view('front.user_reminder');
 });
 Route::post('/user/reminder', 'front\UserController@sendReminder');
+
+// フロント：パスワード再設定
+Route::get('/user/recovery', 'front\UserController@showRecovery');
+Route::post('/user/recovery', 'front\UserController@recoverPassword');
 
 // 管理画面：ログイン画面
 Route::get('/admin/login', function () {

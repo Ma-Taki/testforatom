@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\front\UserRegistrationRequest;
 use App\Http\Requests\front\EditPasswordRequest;
 use App\Http\Requests\front\ReminderRequest;
+use App\Http\Requests\front\RecoverPasswordRequest;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\ModelUtility as MdlUtil;
 use App\Libraries\CookieUtility as CkieUtil;
@@ -238,9 +239,10 @@ class UserController extends Controller
                                 ->get()
                                 ->first();
 
-        // UUIDの衝突をチェック（UUIDは16^40通り）
+        // UUIDの生成、衝突をチェック（16^40通りなので、まず衝突しない）
         $ticket = '';
         do {
+            if (!empty($ticket)) Log::info('[duplicate UUID] ticket:'.$ticket);
             $ticket = sha1(uniqid(rand(), true));
             $w_obj = Tr_auth_keys::where('auth_task', $ticket)->get()->first();
         } while (!empty($w_obj));
@@ -264,6 +266,7 @@ class UserController extends Controller
             'auth_key' => $auth_key,
             'limit' => FrntUtil::AUTH_KEY_LIMIT_MINUTE,
         ];
+
         $frntUtil = new FrntUtil();
         Mail::send('front.emails.user_reminder', $mail_data, function ($message) use ($frntUtil) {
             $message->from($frntUtil->user_reminder_mail_from, $frntUtil->user_reminder_mail_from_name);
@@ -272,5 +275,95 @@ class UserController extends Controller
         });
 
         return view('front.user_reminder_complete');
+    }
+
+    /*
+     * パスワード再設定画面
+     * GET:/user/recovery
+     */
+    public function showRecovery(Request $request){
+
+        $auth_key = Tr_auth_keys::where('id', $request->id)
+                                ->where('ticket', $request->ticket)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_RECOVER_PASSWORD)
+                                ->where('application_datetime', '<=' ,Carbon::now()->subHour()->format('Y-m-d H:i:s'))
+                                ->get()
+                                ->first();
+
+/*
+        if (empty($auth_key)) {
+            Log::warning('[not found auth key]',[
+                'auth_id' => $request->id,
+                'ticket' =>  $request->ticket,
+            ]);
+            return redirect('/'); // TODO: あとで汎用エラー画面つくる
+        }
+*/
+        return view('front.recover_password', [
+            'id' => $request->id,
+            'ticket' => $request->ticket,
+        ]);
+    }
+
+    /*
+     * パスワード再設定処理 & 完了画面表示
+     * POST:/user/recovery
+     */
+    public function recoverPassword(RecoverPasswordRequest $request){
+
+        $auth_key = Tr_auth_keys::where('id', $request->id)
+                                ->where('ticket', $request->ticket)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_RECOVER_PASSWORD)
+                                ->where('application_datetime', '>=' ,Carbon::now()->subHour()->format('Y-m-d H:i:s'))
+                                ->get()
+                                ->first();
+
+        if (empty($auth_key)) {
+            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found',[
+                'auth_id' => $request->id,
+                'ticket' =>  $request->ticket,
+            ]);
+            return redirect('/'); // TODO: あとで汎用エラー画面つくる
+        }
+
+        $user = Tr_users::where('id', $auth_key->user_id)
+                         ->enable()
+                         ->get()
+                         ->first();
+
+        if (empty($user)) {
+            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found',[
+                'auth_id' => $request->id,
+                'user_id' =>  $auth_key->user_id,
+            ]);
+            return redirect('/'); // TODO: あとで汎用エラー画面つくる
+        }
+
+        // パスワード作成
+        $prefix_salt = FrntUtil::getPrefixSalt(20);
+        $new_password = md5($prefix_salt .$request->new_password .FrntUtil::FIXED_SALT);
+
+        $db_data = [
+            'salt' => $prefix_salt,
+            'new_password' => $new_password,
+        ];
+
+        // トランザクション
+        DB::transaction(function () use ($user, $db_data) {
+            try {
+                // ユーザーをアップデート
+                $user->salt = $db_data['salt'];
+                $user->password = $db_data['new_password'];
+                $user->save();
+
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+
+        Log::info('password recovery success',['user_id' => $user->id]);
+
+        return view('front.recover_password_complete');
     }
 }

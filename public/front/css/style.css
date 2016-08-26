@@ -344,6 +344,13 @@ h1.SearchTitle:before{
 .user_reminder_complete{width: 95%;margin: 0 auto;}
 .user_reminder_complete .pageInfo{color: black;}
 
+.recover_password{width: 95%;margin: 0 auto;}
+#recover_password .input_password label{width: 100%;}
+#recover_password .input_password label input{width: 70%;margin-left: 0;}
+#recover_password .input_password label:nth-child(2){margin-top: 1.4rem;}
+
+.recover_password_complete{width: 95%;margin: 0 auto;}
+
 /*-------------------------------
 ## パスワード変更
 -------------------------------*/
