@@ -29,14 +29,12 @@ class UserController extends Controller
      * GET:/user/regist
      */
     public function index(){
-//        return view('front.user_complete');
         return view('front.user_input');
     }
 
     /**
      * 会員登録処理 & 会員登録完了画面表示
      * POST:/user/regist
-*
      */
     public function store(UserRegistrationRequest $request){
 

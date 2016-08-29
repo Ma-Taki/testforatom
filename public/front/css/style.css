@@ -226,7 +226,7 @@ p.pageInfo{
     border-top: 1px dashed #333;
 }
 
-.hello_user{}
+.hello_user{background: url(../images/absurdidad.png)repeat;}
 .hello_user .contentInr{padding-bottom: 2.4rem;}
 .hello_user p{}
 .hello_user p a{color: #D46363;text-decoration: underline;}
@@ -2433,6 +2433,8 @@ sp.css ~640px
     .invisible-sp{ display: none; }
     .wrap{ width: 100%; }
     .content{ margin: 10% 2.5% 5% 2.5%; }
+
+    .bg{background: #5e8796;}
 
     /* navi */
     .nav-mobile {

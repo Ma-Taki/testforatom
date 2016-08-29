@@ -3,6 +3,12 @@
 <?php
 use App\Libraries\ModelUtility as mdlUtil;
 use App\Libraries\FrontUtility as FrntUtil;
+use App\Models\Ms_skill_categories;
+use App\Models\Ms_sys_types;
+use App\Models\Ms_biz_categories;
+use App\Models\Ms_areas;
+use App\Models\Ms_job_types;
+use App\Models\Tr_search_categories;
 ?>
     <div class="content" id="top">
         <div id="slider">
@@ -31,12 +37,8 @@ use App\Libraries\FrontUtility as FrntUtil;
         <div class="sideInfoInr invisible-pc invisible-tab ">
             <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
         </div>
-@endif
-
-
-@if(FrntUtil::isLogin())
-
-        <section class="hello_user clear bg">
+@else
+        <section class="hello_user clear">
             <div class="contentInr">
                 <p>こんにちは、<a href="/user">{{ FrntUtil::getLoginUserName() }}さん</a></p>
             </div>
@@ -118,7 +120,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                             <div class="tabBox">
                                 <div class="tabBoxInr">
                                     <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
-@foreach($skill_categories as $skill_category)
+@foreach(Ms_skill_categories::getNotIndexOnly() as $skill_category)
 @if(!$skill_category->skills->isEmpty())
                                     <div class="tabContent">
                                         <h3>{{ $skill_category->name }}</h3>
@@ -140,7 +142,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                                     <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                                     <div class="tabContent">
                                         <ul>
-@foreach($sys_types as $sys_type)
+@foreach(Ms_sys_types::getNotIndexOnly() as $sys_type)
                                             <li class="tabContentElementHalf">
                                                 <label><input class="srchCndtns_chkBx" type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}">{{ $sys_type->name }}</label>
                                             </li>
@@ -153,7 +155,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                                     <p class="attention">1個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                                     <div class="tabContent">
                                         <ul>
-@foreach($seach_rateList as $key => $value)
+@foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
                                             <li class="tabContentElementHalf">
                                                 <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
                                             </li>
@@ -166,7 +168,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                                     <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                                     <div class="tabContent">
                                         <ul>
-@foreach($biz_categories as $biz_category)
+@foreach(Ms_biz_categories::getNotIndexOnly() as $biz_category)
                                             <li class="tabContentElementHalf">
                                                 <label><input class="srchCndtns_chkBx" type="checkbox" name="biz_categories[]" value="{{ $biz_category->id }}">{{ $biz_category->name }}</label>
                                             </li>
@@ -179,7 +181,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                                     <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                                     <div class="tabContent">
                                         <ul>
-@foreach($areas as $area)
+@foreach(Ms_areas::getNotIndexOnly() as $area)
                                             <li class="tabContentElementHalf">
                                                 <label><input class="srchCndtns_chkBx" type="checkbox" name="areas[]" value="{{ $area->id }}">{{ $area->name }}</label>
                                             </li>
@@ -192,7 +194,7 @@ use App\Libraries\FrontUtility as FrntUtil;
                                     <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                                     <div class="tabContent">
                                         <ul>
-@foreach($job_types as $job_type)
+@foreach(Ms_job_types::getNotIndexOnly() as $job_type)
                                             <li class="tabContentElementHalf">
                                                 <label><input class="srchCndtns_chkBx" type="checkbox" name="job_types[]" value="{{ $job_type->id }}">{{ $job_type->name }}</label>
                                             </li>
@@ -251,14 +253,12 @@ use App\Libraries\FrontUtility as FrntUtil;
                     <div class="categorySearchInr">
                         <h1>カテゴリーから案件を探す</h1>
                         <div class="categorySearchContent">
-@foreach($parentList as $parentKey => $parent)
-                            <div class="parentCategory">&nbsp;<a href="/item/category/{{ $parentKey }}">{{ $parent }}</div>
+@foreach(Tr_search_categories::getParentCategories() as $parent)
+                            <div class="parentCategory">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</div>
                                 <div class="childCategory">
-@foreach($childList[$parentKey] as $child)
+@foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
                                     <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
-@if(next($childList[$parentKey]) !== FALSE)
                                     <span>|</span>
-@endif
 @endforeach
                                 </div>
                                 <hr class="categoryPartitionLine">
@@ -272,15 +272,15 @@ use App\Libraries\FrontUtility as FrntUtil;
                         <h1>カテゴリーから案件を探す</h1>
                         <div class="categorySearchContent">
                             <ul>
-@foreach($parentList as $parentKey => $parent)
+@foreach(Tr_search_categories::getParentCategories() as $parent)
                                 <li>
                                     <ul>
-                                        <li class="parentCategory">{{ $parent }}<span class="alignright">+</span></li>
+                                        <li class="parentCategory">{{ $parent->name }}<span class="alignright">+</span></li>
                                         <div class="childCategories">
-                                            <a href="/item/category/{{ $parentKey }}">
-                                                <li class="childCategory">{{ $parent }}一覧<span class="alignright">></span></li>
+                                            <a href="/item/category/{{ $parent->id }}">
+                                                <li class="childCategory">{{ $parent->name }}一覧<span class="alignright">></span></li>
                                             </a>
-@foreach($childList[$parentKey] as $child)
+@foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
                                             <a href="/item/category/{{ $child->id }}">
                                                 <li class="childCategory">{{ $child->name }}<span class="alignright">></span></li>
                                             </a>

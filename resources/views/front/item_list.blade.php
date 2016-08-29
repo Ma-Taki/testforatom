@@ -31,6 +31,7 @@
 @endif
 
             <div class="conditions">
+@if(strstr(Request::url(), '/item/search'))
                 <div class="search">
                     <div class="tabSelected">
                         <p class="title">選択した項目<span class="openTab">＋　検索条件を変更する</span></p>
@@ -179,6 +180,8 @@
                     </div>
                 </form>
                 </div>
+@endif
+
                 <div class="sort">
                     <label>
                         <span class="selectBox">
@@ -274,14 +277,13 @@
             @include('front.common.sideInfo')
         </div><!-- END CONTENT-RIGHT -->
         <div class="clear"></div>
-
-        @include('front.common.feature')
-
+    </div><!-- END CONTENT -->
+    @include('front.common.feature')
+    <div  id="item" class="content">
         <div class="content-right invisible-pc invisible-tab">
             @include('front.common.sideInfo')
         </div><!-- END CONTENT-RIGHT -->
         <div class="clear"></div>
-
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->
 @endsection

@@ -450,7 +450,7 @@ jQuery(function($){
 				   'page': nextPage,
 				   'path': location.pathname},
 			success: function(data) {
-				// DOMツリー作成
+				// DOM作成
 				for(var i in data['items']){
 					var $item_dom =
 					$('<div class="item">' +

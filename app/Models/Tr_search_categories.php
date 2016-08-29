@@ -27,4 +27,13 @@ class Tr_search_categories extends Model
         return $query->where('parent_id', '!=', null)
                      ->get();
     }
+
+    /**
+     * 親カテゴリIDに紐づく子カテゴリーを取得
+     */
+    public function scopeGetChildByParent($query, $id){
+        return $query->where('parent_id', $id)
+                     ->orderBy('sort_order', 'desc')
+                     ->get();
+    }
 }

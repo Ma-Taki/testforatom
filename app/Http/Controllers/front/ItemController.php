@@ -113,7 +113,6 @@ class ItemController extends Controller
         $limit = $this->getLimit($request->limit);
         $page = $this->getPage($request->page);
 
-        $today = Carbon::today();
         $itemList = Tr_items::select('items.*')
                             ->join('link_items_tags', 'items.id', '=', 'link_items_tags.item_id')
                             ->join('tags', 'tags.id', '=', 'link_items_tags.tag_id')
@@ -143,7 +142,6 @@ class ItemController extends Controller
         $limit = $this->getLimit($request->limit);
         $page = $this->getPage($request->page);
 
-        $today = Carbon::today();
         $itemList = Tr_items::select('items.*')
                             ->join('link_items_search_categories', 'items.id', '=', 'link_items_search_categories.item_id')
                             ->join('search_categories', 'search_categories.id', '=', 'link_items_search_categories.search_category_id')
@@ -187,6 +185,35 @@ class ItemController extends Controller
                                 ->getItemByBizCategories($request->biz_categories) // 業種
                                 ->getItemByAreas($request->areas) // 勤務地
                                 ->getItemByJobTypes($request->job_types) // ポジション
+                                ->groupBy('items.id')
+                                ->orderBy($sortOrder['columnName'], $sortOrder['sort'])
+                                ->paginate(FrntUtil::SEARCH_PAGINATE[$limit]);
+
+        // タグ検索
+        } elseif (!empty($path) && strstr($path, '/item/tag/')) {
+            // "/"で分割した最後の要素をtag_idとする
+            $url = collect(explode('/', $path));
+            $itemList = Tr_items::select('items.*')
+                                ->join('link_items_tags', 'items.id', '=', 'link_items_tags.item_id')
+                                ->join('tags', 'tags.id', '=', 'link_items_tags.tag_id')
+                                ->entryPossible()
+                                ->where('tags.id', '=', $url->last())
+                                ->groupBy('items.id')
+                                ->orderBy($sortOrder['columnName'], $sortOrder['sort'])
+                                ->paginate(FrntUtil::SEARCH_PAGINATE[$limit]);
+
+        // カテゴリー検索
+        } elseif (!empty($path) && strstr($path, '/item/category/')) {
+            // "/"で分割した最後の要素をcategory_idとする
+            $url = collect(explode('/', $path));
+            $itemList = Tr_items::select('items.*')
+                                ->join('link_items_search_categories', 'items.id', '=', 'link_items_search_categories.item_id')
+                                ->join('search_categories', 'search_categories.id', '=', 'link_items_search_categories.search_category_id')
+                                ->entryPossible()
+                                ->where(function($query) use ($category_id) {
+                                    $query->orWhere('search_categories.id', '=', $category_id)
+                                          ->orWhere('search_categories.parent_id', '=', $category_id);
+                                })
                                 ->groupBy('items.id')
                                 ->orderBy($sortOrder['columnName'], $sortOrder['sort'])
                                 ->paginate(FrntUtil::SEARCH_PAGINATE[$limit]);
