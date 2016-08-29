@@ -61,7 +61,7 @@ use App\Libraries\HtmlUtility;
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="inputMaxRate" name="item_max_rate" value="{{ HtmlUtility::setTextValueByRequest($item->max_rate, old('item_max_rate')) }}" placeholder="検索用">
+                                            <input type="text" class="form-control" id="inputMaxRate" name="item_max_rate" value="{{ old('item_max_rate', $item->max_rate) }}" placeholder="検索用">
                                             <span class="input-group-addon">万円(半角数字)</span>
                                         </div>
                                     </div>

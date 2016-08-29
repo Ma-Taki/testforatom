@@ -425,6 +425,8 @@ class ItemController extends AdminController
         } elseif ($item->delete_flag || !empty($item->delete_date)) {
             abort(404, '指定された案件は既に削除されています。');
         }
+        // max_rateを表示用に整形
+        $item->max_rate = $item->max_rate / 10000;
 
         // 各種マスタのMaster_Type:3(IndexOnly)以外を取得
         // エリア
@@ -640,7 +642,7 @@ class ItemController extends AdminController
                     'last_update' => date('Y-m-d H:i:s', $timestamp),
                     'employment_period' => $item_employment_period,
                     'working_hours' => $item_working_hours,
-                    'max_rate' => $item_max_rate,
+                    'max_rate' => $item_max_rate * 10000,
                     'rate_detail' => $item_rate_detail,
                     'area_detail' => $item_area_detail,
                     'detail' => $item_detail,

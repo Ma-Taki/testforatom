@@ -481,7 +481,7 @@ jQuery(function($){
 					  '</p></div>' +
 					  '<p class="detail">'+ data['items'][i].detail + '</p>' +
 					  '<div class="commonCenterBtn">' +
-					  '<a href="/front/detail?id=' + data['items'][i].id +'">' +
+					  '<a href="/item/detail?id=' + data['items'][i].id +'">' +
 					  '<button><p>詳細を見る<p></button></a>' +
 					  '</div></div></div></div>');
 					  /*  登録が時間単位で一週間以内は新着 */
