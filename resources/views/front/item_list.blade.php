@@ -251,7 +251,7 @@
             </div>
 
             <div class="paginate invisible-sp">
-                {!! $itemList->appends($params)->links() !!}
+                {!! (new App\Libraries\Pagination\CustomBootstrapPresenter($itemList->appends($params)))->render() !!}
             </div>
 
 @if($itemList->hasMorePages())

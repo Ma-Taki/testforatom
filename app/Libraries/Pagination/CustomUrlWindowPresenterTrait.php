@@ -1,8 +1,8 @@
 <?php
 
-namespace Illuminate\Pagination;
+namespace App\Libraries\Pagination;
 
-trait UrlWindowPresenterTrait
+trait CustomUrlWindowPresenterTrait
 {
     /**
      * Render the actual link slider.
@@ -18,13 +18,13 @@ trait UrlWindowPresenterTrait
         }
 
         if (is_array($this->window['slider'])) {
-            $html .= $this->getDots();
-            $html .= $this->getUrlLinks($this->window['slider']);
+            //$html .= $this->getDots();
+            //$html .= $this->getUrlLinks($this->window['slider']);
         }
 
         if (is_array($this->window['last'])) {
-            $html .= $this->getDots();
-            $html .= $this->getUrlLinks($this->window['last']);
+            //$html .= $this->getDots();
+            //$html .= $this->getUrlLinks($this->window['last']);
         }
 
         return $html;

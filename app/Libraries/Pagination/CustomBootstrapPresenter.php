@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Libraries;
+namespace App\Libraries\Pagination;
 
 use Illuminate\Support\HtmlString;
 use Illuminate\Pagination\BootstrapThreePresenter;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Pagination\Presenter as PresenterContract;
 
 class CustomBootstrapPresenter extends BootstrapThreePresenter
 {
-    use BootstrapThreeNextPreviousButtonRendererTrait, UrlWindowPresenterTrait;
+    use CustomBootstrapThreeNextPreviousButtonRendererTrait, CustomUrlWindowPresenterTrait;
 
     /**
      * Create a new Bootstrap presenter instance.
@@ -18,10 +18,10 @@ class CustomBootstrapPresenter extends BootstrapThreePresenter
      * @param  \Illuminate\Pagination\UrlWindow|null  $window
      * @return void
      */
-    public function __construct(PaginatorContract $paginator, UrlWindow $window = null)
+    public function __construct(PaginatorContract $paginator, CustomUrlWindow $window = null)
     {
         $this->paginator = $paginator;
-        $this->window = is_null($window) ? UrlWindow::make($paginator) : $window->get();
+        $this->window = is_null($window) ? CustomUrlWindow::make($paginator) : $window->get();
     }
 
     /**
@@ -33,7 +33,7 @@ class CustomBootstrapPresenter extends BootstrapThreePresenter
     {
         if ($this->hasPages()) {
             return new HtmlString(sprintf(
-                '<ul class="pagination">%s %s %s</ul>',
+                '<ul class="page">%s %s %s</ul>',
                 $this->getPreviousButton(),
                 $this->getLinks(),
                 $this->getNextButton()
