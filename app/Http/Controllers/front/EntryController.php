@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\FrontController;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Libraries\{CookieUtility as CkieUtil, FrontUtility as FrntUtil};
 use App\Models\{Tr_users, Tr_items, Tr_item_entries};
 use Storage;

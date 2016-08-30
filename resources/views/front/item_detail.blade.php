@@ -114,19 +114,21 @@
         <div class="recoItems">
 @foreach($recoItemList as $item)
             <div class="recoItem">
-                <p class="header">{{ $item->name }}</p>
-                <div class="detail">
-                    <div class="table">
-                        <p class="name">報酬</p>
-                        <p class="rate">{{ $item->rate_detail }}</p>
+                <a href="/item/detail?id={{ $item->id }}">
+                    <p class="header">{{ $item->name }}</p>
+                    <div class="detail">
+                        <div class="table">
+                            <p class="name">報酬</p>
+                            <p class="rate">{{ $item->rate_detail }}</p>
+                        </div>
+                        <div class="table">
+                            <p class="name">エリア</p>
+                            <p class="area">{{ $item->area_detail }}</p>
+                        </div>
+                        <p class="skill">要求スキル</p>
+                        <p class="skills">{{ HtmlUtil::convertSkillsMdlToNameStr($item->skills) }}</p>
                     </div>
-                    <div class="table">
-                        <p class="name">エリア</p>
-                        <p class="area">{{ $item->area_detail }}</p>
-                    </div>
-                    <p class="skill">要求スキル</p>
-                    <p class="skills">{{ HtmlUtil::convertSkillsMdlToNameStr($item->skills) }}</p>
-                </div>
+                </a>
             </div>
 @endforeach
         </div>

@@ -1060,10 +1060,11 @@ h1.SearchTitle:before{
     content: "";
     background: url(../images/ico_tag.png)no-repeat;
     display: inline-block;
-    background-size: 22px 23px;
-    width: 24px;
-    height: 25px;
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
     vertical-align: middle;
+    padding-right: 0.8rem;
 }
 
 #itemDetail .commonCenterBtn a button{
@@ -1101,9 +1102,8 @@ h1.SearchTitle:before{
 }
 
 .recoItem {
-    color: #5e8796;
     width: 19%;
-    background: #fff;
+    background-color: #fff;
 }
 
 .recoItem:not(:first-child){
@@ -1111,6 +1111,7 @@ h1.SearchTitle:before{
 }
 
 .recoItem .header{
+    color: #5e8796;
     background: #becfd5;
     text-align: center;
     padding: 4%;
@@ -1118,6 +1119,7 @@ h1.SearchTitle:before{
 }
 
 .recoItem .detail{
+    color: #5e8796;
     font-weight: bold;
     padding: 4%;
 }
@@ -2082,6 +2084,10 @@ nav ul .active{ background: #536C75; }
 .categorySearch .categorySearchInr .childCategory span{
 	margin-right: 10px;
 	margin-left: 10px;
+}
+
+.categorySearch .categorySearchInr .childCategory span:last-child{
+    display: none;
 }
 
 .categorySearch .categorySearchInr .categoryPartitionLine{

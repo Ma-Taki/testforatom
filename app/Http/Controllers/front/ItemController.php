@@ -5,13 +5,14 @@ namespace App\Http\Controllers\front;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\FrontController;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Libraries\OrderUtility as OdrUtil;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Models\Tr_items;
 use Carbon\Carbon;
 
-class ItemController extends Controller
+class ItemController extends FrontController
 {
     /**
      * 案件検索
@@ -82,11 +83,16 @@ class ItemController extends Controller
      */
     public function showItemDetail(Request $request){
 
-        $item = Tr_items::find($request->id);
+        try {
+            $item = parent::getItemById($request->id);
 
+        } catch (ModelNotFoundException $e) {
+            abort(404, '指定された案件情報は掲載期限が過ぎているか、存在しません。');
+        }
 
-        //　おすすめ案件を取得する
+        // おすすめ案件を取得する
         $recoItemList = Tr_items::select('items.*')
+                                ->where('items.id', '!=', $request->id)
                                 ->entryPossible()
                                 ->getItemByJobTypes(FrntUtil::convertCollectionToIdList($item->jobTypes))
                                 ->getItemBySkills(FrntUtil::convertCollectionToIdList($item->skills))

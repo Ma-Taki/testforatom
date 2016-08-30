@@ -286,4 +286,20 @@
         <div class="clear"></div>
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->
+
+<script type="text/javascript">
+    jQuery(function($){
+        $(".openTab").parents('.search').find('.tab').hide();
+        $(".openTab").click(function(){
+            var tabBox = $(this).parents('.search').find('.tab');
+		    tabBox.slideToggle(700, function(){
+                if (tabBox.is(':visible')) {
+                    $(".openTab").text('−　タブを閉じる');
+                } else {
+                    $(".openTab").text('＋　検索条件を変更する');
+                };
+			});
+		});
+	});
+</script>
 @endsection

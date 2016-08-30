@@ -334,4 +334,34 @@ use App\Models\Tr_search_categories;
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    jQuery(function($){
+        // topJob
+        $('.topJobInr').tile();
+
+        // slick-slider
+        if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
+            $('.slider-item').slick({
+                arrows: false,            // 前へ/次へナビ
+                infinite: true,           // 無限ループ
+                dots:false,               // カレントナビ(ドット)
+                slidesToShow: 1,          // 見えているスライド数
+                centerMode: true,         // 中央寄せ
+                centerPadding:'20px',     // 両サイドの見えている部分のサイズ
+                autoplay:true,            // 自動再生
+            });
+        } else {
+            $('.slider-item').slick({
+                arrows: true,
+                infinite: true,
+                dots:true,
+                slidesToShow: 1,
+                centerMode: true,
+                centerPadding:'150px',
+			    autoplay:true,
+            });
+        };
+    });
+</script>
+
 @endsection

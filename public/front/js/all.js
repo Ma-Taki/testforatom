@@ -5,7 +5,7 @@ jQuery(function($){
 		$(this).click(function(){
 			var $slideArea = $(this).parents('.condition_content').find('.condition_slideArea');
 			var $state = $(this).children('span');
-			$slideArea.slideToggle(700, function(){
+			$slideArea.slideToggle('fast', function(){
 				if ($(this).is(':visible')) {
 					$state.text('-');
 				} else {
@@ -56,38 +56,8 @@ jQuery(function($){
     	return paramsArray;
     }
 });
-// itemDetail tab toggle
-jQuery(function($){
-	$(".openTab").parents('.search').find('.tab').hide();
-	$(".openTab").click(function(){
-    	var tabBox = $(this).parents('.search').find('.tab');
-		tabBox.slideToggle(700, function(){
-			if (tabBox.is(':visible')) {
-				$(".openTab").text('−　タブを閉じる');
-			} else {
-				$(".openTab").text('＋　検索条件を変更する');
-			}
-		});
-	});
-});
 
-// Q&A
-jQuery(function($){
-	$('.anserElement').hide();
-	$(".questionText").click(function(){
-		var $ansr = $(this).parents('.question').find('.anserElement');
-		var $mark = $(this).parents('.questionElement').find('.questionOpen');
-		$ansr.slideToggle('normal', function(){
-			if($ansr.is(':hidden')) {
-				$mark.text('+');
-			} else {
-				$mark.text('-');
-			}
-		})
-	});
-});
-
-//　itemSearch
+//　itemSearch sort
 jQuery(function($){
 
 	$('#order').change(function (){
@@ -105,6 +75,7 @@ jQuery(function($){
     function setParameter( paramsArray ) {
         var resurl = location.href.replace(/\?.*$/,"");
         for ( key in paramsArray ) {
+			// 必ず1ページ目から表示するためpageは除く
 			if (key != 'page') {
             	resurl += (resurl.indexOf('?') == -1) ? '?':'&';
             	resurl += key + '=' + paramsArray[key];
@@ -121,7 +92,8 @@ jQuery(function($){
         	url = parameters[0];
     	}
     	parameters = url.split("?");
-    	if( parameters.length > 1 ) {
+		// http......item/search? の状態でもlengthが2のため空要素でないかもチェック
+		if( parameters.length > 1 && parameters[1] != '') {
         	var params   = parameters[1].split("&");
         	for ( i = 0; i < params.length; i++ ) {
            		var paramItem = params[i].split("=");
@@ -130,35 +102,6 @@ jQuery(function($){
     	}
     	return paramsArray;
     }
-});
-
-// slick-slider
-jQuery(function($) {
-	if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
-		$('.slider-item').slick({
-			arrows: false,            // 前へ/次へナビ
-			infinite: true,           // 無限ループ
-			dots:false,               // カレントナビ(ドット)
-			slidesToShow: 1,          // 見えているスライド数
-			centerMode: true,         // 中央寄せ
-			centerPadding:'20px',     // 両サイドの見えている部分のサイズ
-			autoplay:true,            // 自動再生
-		});
-	} else {
-		$('.slider-item').slick({
-			arrows: true,
-			infinite: true,
-			dots:true,
-			slidesToShow: 1,
-			centerMode: true,
-			centerPadding:'150px',
-			autoplay:true,
-		});
-	};
-});
-
-jQuery(function($){
-	$('.topJobInr').tile();
 });
 
 // smart-phone categoty
@@ -242,10 +185,10 @@ jQuery(function($){
             if($(this).prop('checked')){
 				var addValue;
 				if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
-					// sp用html
+					// sp用DOM
 					addValue = $('<li><p>' + chkBox_label + '</p><span id="' + chkBox_label + '">×</span></li>');
 				} else {
-					// pc tab用html
+					// pc tab用DOM
 					addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
 				}
 

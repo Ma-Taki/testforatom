@@ -487,18 +487,6 @@
 
             </div>
         </div><!-- END CONTENT-LEFT -->
-        <script type="text/javascript">
-            $(function() {
-                $('.anserText').each(function(){
-                    var q_img = $(this).parents('.question').find('.questionElement img').height();
-                    var q_text = $(this).parents('.question').find('.questionText').height();
-                    $(this).css('padding-top',(q_img - q_text) / 2);
-                    $(this).css('padding-bottom',(q_img - q_text) / 2);
-                });
-
-            });
-
-        </script>
 
         <div class="content-right">
             @include('front.common.sideInfo')
@@ -506,4 +494,26 @@
         <div class="clear"></div>
     </div>
 </div><!-- END WRAP -->
+<script type="text/javascript">
+    $(function() {
+        $('.anserText').each(function(){
+            var q_img = $(this).parents('.question').find('.questionElement img').height();
+            var q_text = $(this).parents('.question').find('.questionText').height();
+            $(this).css('padding-top',(q_img - q_text) / 2);
+            $(this).css('padding-bottom',(q_img - q_text) / 2);
+        });
+
+        $('.anserElement').hide();
+        $(".questionText").click(function(){
+		var $ansr = $(this).parents('.question').find('.anserElement');
+		var $mark = $(this).parents('.questionElement').find('.questionOpen');
+		$ansr.slideToggle('normal', function(){
+			if($ansr.is(':hidden')) {
+				$mark.text('+');
+			} else {
+				$mark.text('-');
+			}
+		});
+    });
+</script>
 @endsection
