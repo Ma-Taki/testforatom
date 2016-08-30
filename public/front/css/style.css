@@ -365,6 +365,7 @@ h1.SearchTitle:before{
 -------------------------------*/
 #entry p.pageInfo{color: black;}
 #entry h2{margin:3rem 0 1rem 0;}
+#entry_mail_address { color: #5e8796;;}
 .dataTable .data{
     width: 100%;
     display: inline-flex;
@@ -389,8 +390,13 @@ h1.SearchTitle:before{
 }
 .dataTable .detail{line-height: 2.2rem;}
 .dataTable .upload_info{
+    width: 100%;
     padding: 1.5rem;
     background-color: #eef3f4;
+}
+.dataTable .upload_info a{
+    color: #E38585;
+    text-decoration: underline;
 }
 .dataTable .upload{display: inline-block;}
 

@@ -68,6 +68,7 @@ Route::group(['middleware' => 'front_loginCheck'], function () {
     Route::post('/user/edit/password', 'front\UserController@updatePassword');
     // エントリー
     Route::resource('/entry', 'front\EntryController', ['only' => ['index', 'store']]);
+    Route::get('/entry/download', 'front\EntryController@download');
     // 退会
     Route::get('/user/delete', function(){ return view('front.user_delete'); });
     Route::post('/user/delete', 'front\UserController@deleteUser');
