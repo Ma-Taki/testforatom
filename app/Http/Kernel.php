@@ -27,7 +27,6 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-//            \App\Http\Middleware\LoginCheckMiddleware::class, ログインチェック
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
 
@@ -53,5 +52,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'loginCheck' => \App\Http\Middleware\LoginCheckMiddleware::class,
         'authCheck' => \App\Http\Middleware\AuthCheckMiddleware::class,
+        'front_loginCheck' => \App\Http\Middleware\front\LoginCheckMiddleware::class,
     ];
 }

@@ -5,18 +5,15 @@ namespace App\Http\Controllers\front;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Libraries\CookieUtility as CkieUtil;
-use App\Libraries\FrontUtility as FrntUtil;
-use App\Models\Tr_users;
-use App\Models\Tr_items;
-use App\Models\Tr_item_entries;
+use App\Http\Controllers\FrontController;
+use App\Libraries\{CookieUtility as CkieUtil, FrontUtility as FrntUtil};
+use App\Models\{Tr_users, Tr_items, Tr_item_entries};
 use Storage;
 use Carbon\Carbon;
 use DB;
 use Mail;
 
-class EntryController extends Controller
+class EntryController extends FrontController
 {
     /**
      * エントリー画面を表示する
@@ -24,18 +21,14 @@ class EntryController extends Controller
      **/
     public function index(Request $request){
 
-        $user_id = CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID);
+        try {
+            $item = parent::getItemById($request->id);
+        } catch (ModelNotFoundException $e) {
+            abort(404, '指定された案件情報は掲載期限が過ぎているか、存在しません。');
+        }
 
-        // 未ログインはログイン画面へリダイレクト
-        if (empty($user_id)) return redirect('/login');
-
-        $user = Tr_users::where('id', $user_id)
-                        ->enable()
-                        ->get()
-                        ->first();
-
-        $item_id = $request->id;
-        $item = Tr_items::where('id', $item_id)->get()->first();
+        // ミドルウェアで存在をチェック済み
+        $user = parent::getUserById(CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID));
 
         return view('front.entry', compact('user', 'item'));
     }
@@ -46,21 +39,14 @@ class EntryController extends Controller
      **/
     public function store(Request $request){
 
-        // 案件の存在、エントリー期間中かチェック
-        $item = Tr_items::where('id', $request->item_id)
-                        ->entryPossible()
-                        ->get();
-        if ($item->isEmpty()) {
-            abort(404);
+        try {
+            $item = parent::getItemById($request->item_id);
+        } catch (ModelNotFoundException $e) {
+            abort(404, '指定された案件情報は掲載期限が過ぎているか、存在しません。');
         }
 
-        // ユーザの存在チェック
-        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
-                        ->enable()
-                        ->get();
-        if ($user->isEmpty()) {
-            abort(404);
-        }
+        // ミドルウェアで存在をチェック済み
+        $user = parent::getUserById(CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID));
 
         //エントリー重複チェック
         $entry = Tr_item_entries::where('user_id', $user->first()->id)
@@ -68,7 +54,7 @@ class EntryController extends Controller
                                 ->enable()
                                 ->get();
         if ($entry->count() > 0) {
-            abort(400);
+            abort(400, 'すでにエントリー済みです。');
         }
 
         $file = !empty($request->skillSheet) ? $request->skillSheet : null;

@@ -15,18 +15,7 @@ class CookieUtility
 
     // expires属性 1ヶ月
     const COOKIE_TIME_MONTH = 44640;
-
-    /*
-    // path属性
-    const COOKIE_PATH;
-    // domain属性
-    const COOKIE_DOMAIN;
-    // secure属性
-    const COOKIE_SECURE;
-    // httpOnly属性
-    const COOKIE_HTTP_ONLY;
-    */
-
+    
     /**
      * set new cookie
      */
@@ -45,7 +34,7 @@ class CookieUtility
         return Cookie::get(self::COOKIE_NAME_PREFIX .$name);
     }
 
-    /*
+    /**
      * delete cookie
      * @param string $name
      */

@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\front;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\FrontController;
 use App\Http\Requests\front\ContactRequest;
 use App\Libraries\FrontUtility as FrontUtil;
 use Mail;
 use Carbon\Carbon;
 
-class ContactController extends Controller
+class ContactController extends FrontController
 {
     /**
      * お問い合わせ画面表示
@@ -50,6 +49,8 @@ class ContactController extends Controller
             'contactMessage' => $request->contactMessage,
             'date' => Carbon::now()->toDateTimeString()
         ];
+
+        // メール送信
         $frontUtil = new FrontUtil();
         Mail::send('front.emails.contact', $data, function ($message) use ($data, $frontUtil) {
             $message->from($frontUtil->user_contact_mail_from, $frontUtil->user_contact_mail_from_name);

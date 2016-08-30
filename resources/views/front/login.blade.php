@@ -45,6 +45,7 @@
                 <div class="commonCenterBtn">
                     <button type="submit">ログイン</button>
                 </div>
+                <input type="hidden" name="next" value="{{ $next }}">
                 {{ csrf_field() }}
             </form>
         </div>

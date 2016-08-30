@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\front;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\FrontController;
 use App\Http\Requests\front\CompanyRequest;
 use App\Libraries\FrontUtility as FrontUtil;
 use Mail;
 use Carbon\Carbon;
 
-class CompanyController extends Controller
+class CompanyController extends FrontController
 {
     /**
      * 企業の皆様へ画面表示
@@ -55,6 +54,8 @@ class CompanyController extends Controller
             'url' => $request->url,
             'contactMessage' => $request->contactMessage,
         ];
+
+        // メール送信
         $frontUtil = new FrontUtil();
         Mail::send('front.emails.company_contact', $data, function ($message) use ($data, $frontUtil) {
             $message->from($frontUtil->company_contact_mail_from, $frontUtil->company_contact_mail_from_name);
