@@ -505,14 +505,15 @@
 
         $('.anserElement').hide();
         $(".questionText").click(function(){
-		var $ansr = $(this).parents('.question').find('.anserElement');
-		var $mark = $(this).parents('.questionElement').find('.questionOpen');
-		$ansr.slideToggle('normal', function(){
-			if($ansr.is(':hidden')) {
-				$mark.text('+');
-			} else {
-				$mark.text('-');
-			}
+            var $ansr = $(this).parents('.question').find('.anserElement');
+            var $mark = $(this).parents('.questionElement').find('.questionOpen');
+            $ansr.slideToggle('normal', function(){
+                if($ansr.is(':hidden')) {
+                    $mark.text('+');
+                } else {
+                    $mark.text('-');
+			    };
+            });
 		});
     });
 </script>

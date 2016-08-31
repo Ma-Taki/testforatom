@@ -78,7 +78,10 @@ jQuery(function($){
 			// 必ず1ページ目から表示するためpageは除く
 			if (key != 'page') {
             	resurl += (resurl.indexOf('?') == -1) ? '?':'&';
-            	resurl += key + '=' + paramsArray[key];
+				for (var i = 0; i < paramsArray[key].length; i++) {
+					resurl += (i > 0) ? '&' : '';
+					resurl += key + '=' + paramsArray[key][i];
+				}
 			}
         }
         return resurl;
@@ -97,7 +100,11 @@ jQuery(function($){
         	var params   = parameters[1].split("&");
         	for ( i = 0; i < params.length; i++ ) {
            		var paramItem = params[i].split("=");
-           		paramsArray[paramItem[0]] = paramItem[1];
+				if (paramItem[0] in paramsArray) {
+					paramsArray[paramItem[0]].push(paramItem[1]);
+				} else {
+					paramsArray[paramItem[0]] = [ paramItem[1] ];
+				}
         	}
     	}
     	return paramsArray;
@@ -322,7 +329,7 @@ jQuery(function($){
 			for (var i = 0; i < params['search_rate'].length; i++) {
 				if ('search_rate' === $(this).prop('name')
 					&& params['search_rate'][i] == $(this).val()){
-						$(this).trigger("change");
+						$(this).trigger("click");
 				}
 			}
 		}
@@ -347,7 +354,6 @@ jQuery(function($){
 				}
         	}
     	}
-
     	return paramsArray;
     }
 });
