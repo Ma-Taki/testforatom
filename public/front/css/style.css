@@ -394,7 +394,7 @@ h1.SearchTitle:before{
     padding: 1.5rem;
     background-color: #eef3f4;
 }
-.dataTable .upload_info a{
+.dataTable a{
     color: #E38585;
     text-decoration: underline;
 }
@@ -2489,6 +2489,20 @@ sp.css ~640px
         padding: 2.4rem 1rem;
     }
 
+    /* 新規会員登録ボタン */
+    .user_regist_btn{text-align:center; padding:2rem;}
+    .user_regist_btn img{}
+
+    /*-------------------------------
+    # マイページ
+    -------------------------------*/
+    .mypage_elementInr{padding: 2rem;}
+
+    /*-------------------------------
+    ## パスワード変更
+    -------------------------------*/
+    #edit_password .input_password label input{width: 100%;}
+
     /*-------------------------------
     # エントリー
     -------------------------------*/
@@ -2915,15 +2929,6 @@ sp.css ~640px
         float: left;
         margin: 1%;
     }
-
-
-
-
-
-
-
-
-
 
 	/*-------------------------------
 	# header

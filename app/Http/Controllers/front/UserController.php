@@ -90,7 +90,7 @@ class UserController extends Controller
 
                 // ユーザ契約形態中間テーブルにインサート
                 foreach ((array)$db_data['contract_types'] as $contract_type) {
-                    // 本番でデリートする意味はない
+                    // 本番でデリートする意味はないが、一応
                     Tr_link_users_contract_types::where('user_id', $user->id)->delete();
                     Tr_link_users_contract_types::create([
                         'user_id' => $user->id,
@@ -285,10 +285,9 @@ class UserController extends Controller
         $auth_key = Tr_auth_keys::where('id', $request->id)
                                 ->where('ticket', $request->ticket)
                                 ->where('auth_task', MdlUtil::AUTH_TASK_RECOVER_PASSWORD)
-                                ->where('application_datetime', '<=' ,Carbon::now()->subHour()->format('Y-m-d H:i:s'))
+                                ->where('application_datetime', '<=' ,Carbon::now()->addHour()->format('Y-m-d H:i:s'))
                                 ->get()
                                 ->first();
-
 
         if (empty($auth_key)) {
             Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[

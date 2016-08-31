@@ -46,7 +46,7 @@
                         <p>メールアドレス</p>
                     </div>
                     <div class="input_f_value">
-                        <input type="text" name="mail" maxlength="256" placeholder="">
+                        <input type="text" name="mail" maxlength="256" value="{{ old('mail') }}" placeholder="">
                     </div>
                 </div>
                 <hr class="partitionLine_03">

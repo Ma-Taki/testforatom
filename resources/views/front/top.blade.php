@@ -26,7 +26,7 @@ use App\Models\Tr_search_categories;
             <div class="alignCenter">
                 <div class="keyWordSearchForm">
                     <form action="/item/keyword" method="get">
-                        <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+                        <input type="text" name="keyword" placeholder="キーワード検索" size="40" maxlength="255" class="searchBox">
                         <input type="submit" class="searchBtn">
                     </form>
                 </div>
@@ -34,8 +34,8 @@ use App\Models\Tr_search_categories;
         </section><!-- /.keyWordSearch for sp -->
 
 @if(!FrntUtil::isLogin())
-        <div class="sideInfoInr invisible-pc invisible-tab ">
-            <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
+        <div class="user_regist_btn invisible-pc invisible-tab ">
+            <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
         </div>
 @else
         <section class="hello_user clear">
@@ -298,7 +298,7 @@ use App\Models\Tr_search_categories;
                     <div class="alignCenter">
                         <div class="keyWordSearchForm">
                             <form action="/item/keyword" method="get">
-                                <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+                                <input type="text" name="keyword" placeholder="キーワード検索" size="40" maxlength="255" class="searchBox">
                                 <input type="submit" class="searchBtn">
                             </form>
                         </div>
@@ -306,10 +306,8 @@ use App\Models\Tr_search_categories;
                 </section><!-- /.keyWordSearch for sp -->
 
 @if(!FrntUtil::isLogin())
-                <div class="sideInfoInr invisible-pc invisible-tab ">
-                    <div class="alignCenter">
-                        <p>新規会員登録<span class="alignright invisible-pc invisible-tab">></span></p>
-                    </div>
+                <div class="user_regist_btn invisible-pc invisible-tab ">
+                    <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
                 </div>
 @endif
 

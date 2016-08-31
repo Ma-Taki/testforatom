@@ -5,8 +5,8 @@
         <div class="user">
             <ul>
 @if(FrntUtil::isLogin())
-                <li><a href="/user" class="signin">マイページ</a></li>
-                <li><a href="/logout">ログアウト</a></li>
+                <li><a href="/user">マイページ</a></li>
+                <li><a href="/logout" class="invisible-sp">ログアウト</a></li>
 @else
                 <li><a href="/user/regist" class="signin">新規登録</a></li>
                 <li><a href="/login">ログイン</a></li>

@@ -62,13 +62,13 @@ jQuery(function($){
 
 	$('#order').change(function (){
 		var params = getParameter();
-        params['order'] = $(this).val();
+        params['order'] = [$(this).val()];
         window.location.href = setParameter(params);
     })
 
 	$('#limit').change(function (){
 		var params = getParameter();
-        params['limit'] = $(this).val();
+        params['limit'] = [$(this).val()];
         window.location.href = setParameter(params);
 	})
 
