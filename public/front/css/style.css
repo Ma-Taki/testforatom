@@ -270,6 +270,7 @@ p.pageInfo{
     margin: 0 1%;
     padding: 1%;
     font-size: 1.4rem;
+    vertical-align: middle;
 }
 
 .errorMessage{

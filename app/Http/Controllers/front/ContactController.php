@@ -45,7 +45,7 @@ class ContactController extends FrontController
         $data = [
             'user_name' => $request->last_name.' '.$request->first_name.'（'.$request->last_name_kana.' '.$request->first_name_kana.'）',
             'company_name' => $request->company_name,
-            'mail' => $request->email,
+            'mail' => $request->mail,
             'contactMessage' => $request->contactMessage,
             'date' => Carbon::now()->toDateTimeString()
         ];

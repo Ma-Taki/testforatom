@@ -103,7 +103,7 @@
                         <p>お問い合わせ内容<span class="color-red">※</span></p>
                     </div>
                     <div class="input_f_value">
-                        <div class="pre-wrap">{{ $contactMessage }}</div>
+                        <p class="pre-wrap">{{ $contactMessage }}</p>
                     </div>
                 </div>
                 <hr class="partitionLine_03">
@@ -176,7 +176,7 @@
                 {{ csrf_field() }}
             </form>
         </div>
-        <script>
+        <script type="text/javascript">
             jQuery(function($){
                 $('.submit').click(function (){
                     switch ($(this).attr('name')) {
@@ -189,6 +189,8 @@
                     }
                     $(this).parents('form').submit();
                 });
+
+                $(".commonCenterBtn button").tile();
             });
         </script>
 

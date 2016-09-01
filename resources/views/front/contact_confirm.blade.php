@@ -38,7 +38,7 @@
                         <p>メールアドレス<span class="color-red">※</span></p>
                     </div>
                     <div class="input_f_value">
-                        <p>{{ $email }}</p>
+                        <p>{{ $mail }}</p>
                     </div>
                 </div>
                 <hr class="partitionLine_03">
@@ -58,7 +58,7 @@
                         <p>お問い合わせ内容<span class="color-red">※</span></p>
                     </div>
                     <div class="input_f_value">
-                        <div class="pre-wrap">{{ $contactMessage }}</div>
+                        <p class="pre-wrap">{{ $contactMessage }}</p>
                     </div>
                 </div>
                 <hr class="partitionLine_03">
@@ -119,8 +119,8 @@
                 <input type="hidden" name="last_name_kana" value="{{ $last_name_kana }}">
                 <input type="hidden" name="first_name_kana" value="{{ $first_name_kana }}">
                 <input type="hidden" name="company_name" value="{{ $company_name }}">
-                <input type="hidden" name="email" value="{{ $email }}">
-                <input type="hidden" name="email_confirmation" value="{{ $email }}">
+                <input type="hidden" name="mail" value="{{ $mail }}">
+                <input type="hidden" name="mail_confirmation" value="{{ $mail }}">
                 <input type="hidden" name="contactMessage" value="{{ $contactMessage }}">
                 {{ csrf_field() }}
             </form>
