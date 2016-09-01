@@ -331,7 +331,10 @@
                 </div>
 
             <div class="commonCenterBtn">
-                <button type="submit" id="confirmBtn" class="wsnw">利用規約・個人情報の取扱いに<wbr>同意して会員登録する</button>
+                <button type="submit" id="confirmBtn">
+                    利用規約・個人情報の取扱いに<br>
+                    同意して会員登録する
+                </button>
             </div>
             {{ csrf_field() }}
             </form>

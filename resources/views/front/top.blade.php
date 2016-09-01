@@ -35,7 +35,9 @@ use App\Models\Tr_search_categories;
 
 @if(!FrntUtil::isLogin())
         <div class="user_regist_btn invisible-pc invisible-tab ">
-            <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
+            <a href="{{ url('/user/regist') }}">
+                <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
+            </a>
         </div>
 @else
         <section class="hello_user clear">
@@ -308,7 +310,9 @@ use App\Models\Tr_search_categories;
 
 @if(!FrntUtil::isLogin())
                 <div class="user_regist_btn invisible-pc invisible-tab ">
-                    <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
+                    <a href="{{ url('/user/regist') }}">
+                        <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
+                    </a>
                 </div>
 @endif
 

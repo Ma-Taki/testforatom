@@ -260,7 +260,7 @@
             </div>
 
 @if($itemList->hasMorePages())
-            <div class="commonCenterBtn invisible-tab invisible-pc">
+            <div class="commonCenterBtn read_more_btn invisible-tab invisible-pc">
                 <button id="sp_morePage"><p>もっと見る<p></button>
             </div>
 @endif
