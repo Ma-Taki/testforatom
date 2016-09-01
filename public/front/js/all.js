@@ -20,8 +20,7 @@ jQuery(function($){
 	})
 
 	function setParameter( paramsArray ) {
-		var resurl = 'http://ts.engineer-route.com/item/search/condition'
-        //var resurl = location.href.replace(/\?.*$/,"");
+		var resurl = '/item/search/condition';
         for ( key in paramsArray ) {
 			if (key != 'page') {
 				for (i in paramsArray[key]) {

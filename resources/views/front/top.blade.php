@@ -71,6 +71,7 @@ use App\Models\Tr_search_categories;
                     </div>
                 </section><!-- /.newJob -->
 
+@if(!$pickUpItemList->isEmpty())
                 <section class="attentionJob">
                     <div class="topJobWrap">
                         <h1 class="alignleft">急募案件</h1>
@@ -94,8 +95,8 @@ use App\Models\Tr_search_categories;
                             <a href="/item/tag/1">急募案件一覧へ</a>
                         </div>
                     </div>
-
                 </section><!-- /.attentionJob -->
+@endif
             </div><!-- /.topItemList -->
 
             @include('front.common.feature')

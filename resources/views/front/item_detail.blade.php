@@ -108,6 +108,8 @@
         <div class="clear "></div>
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->
+
+@if(!$recoItemList->isEmpty())
 <section class="recommended">
     <div class="recommendedInr">
         <h3>こちらもおすすめ</h3>
@@ -139,9 +141,11 @@
         });
     </script>
 </section>
-<section class="feature">
+@endif
+
+<div id="pucat">
     @include('front.common.feature')
-</section>
+</div>
 <div class="content-right invisible-pc invisible-tab">
     @include('front.common.sideInfo')
 </div><!-- END CONTENT-RIGHT -->

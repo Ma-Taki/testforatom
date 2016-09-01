@@ -401,10 +401,6 @@ h1.SearchTitle:before{
 }
 .dataTable .upload{display: inline-block;}
 
-#entry_complete .skillsheet{
-}
-
-
 #entry_complete .entry_content{width: 70%; margin: 2rem 0;}
 #entry_complete .skillsheet{width: 70%; margin: 2rem 0; border-bottom: 1px solid #E38585;}
 .entry_content .entry_content_title,
@@ -506,15 +502,11 @@ h1.SearchTitle:before{
     border-style: none;
     padding: 0.6rem 3rem;
 }
-
 .user_edit{width: 95%;margin: 0 auto;}
 
 /*-------------------------------
 ## 新規会員登録
 -------------------------------*/
-.user_input_Inr{
-}
-
 .input_field{
     width: 95%;
     margin: 0 auto;
@@ -791,11 +783,6 @@ h1.SearchTitle:before{
 }
 
 /* 条件から検索 */
-
-#item .tab{
-    /*display: none;*/
-}
-
 #item .tabMenu{
     width: 100%;
     float: none;
@@ -1068,17 +1055,11 @@ h1.SearchTitle:before{
     padding-right: 0.8rem;
 }
 
-#itemDetail .commonCenterBtn a button{
-    font-size: 1.3rem;
-}
+#itemDetail .commonCenterBtn a button{font-size: 1.3rem;}
+#item .keyWordSearchForm{width: 100%;}
 
-#itemDetail .keyWordSearch{
+#pucat .pickupCat .contentInr {width: 100%;margin: 0;}
 
-}
-
-#item .keyWordSearchForm{
-    width: 100%;
-}
 
 /* こちらもおすすめ */
 .recommended {
@@ -1556,7 +1537,6 @@ nav ul .active{ background: #536C75; }
 -------------------------------*/
 
 #top{ margin: 0; }
-
 #top .tabMenu ul li{ font-size: 1.4rem; }
 
 /* -- slider -- */
@@ -1701,8 +1681,7 @@ nav ul .active{ background: #536C75; }
 .pickupCat {
     width: 100%;
     max-width: 1000px;
-    margin: auto;
-    padding: 24px 0;
+    margin: 0 auto;
 }
 
 .pickupCat h1{
@@ -1937,8 +1916,7 @@ nav ul .active{ background: #536C75; }
 	vertical-align: top;
 }
 
-/* y.suzuki start */
-/* 条件から案件を探す start */
+/* 条件から案件を探す */
 .tabContentElementOneThird{
 	display: inline-block;
 	width: 32%;
@@ -2015,10 +1993,7 @@ nav ul .active{ background: #536C75; }
 #tagSelectedArea{display: none;}
 #tagSelectedPosition{display: none;}
 
-/* 検索ボタン start */
-.centerBtn{
-	text-align: center;
-}
+.centerBtn{ text-align: center; }
 
 .centerBtn button{
 	margin: 20px auto 40px;
@@ -2031,14 +2006,8 @@ nav ul .active{ background: #536C75; }
 	font-size: 13px
 
 }
-/* 検索ボタン end */
-/* 条件から案件を探す end */
 
 /* カテゴリーから案件を探す */
-
-.categorySearch{
-}
-
 .categorySearchInr{
 	width: 72.8%;
 	margin: 0 auto;
@@ -2096,61 +2065,6 @@ nav ul .active{ background: #536C75; }
 	margin-top: 7px;
 	margin-bottom: 10px;
 }
-
-/* side info start */
-
-.sideInfoInr{
-	width: 27.2%;
-	padding-left: 22px;
-	float: right;
-}
-
-.sideInfoInr p{
-    font-weight: bold;
-    font-size: 14px;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    background: #E38585;
-    line-height: 30px;
-    border-radius: 7px;
-    box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
-}
-
-.sideInfoInr p span.cstmBnrSubWord{
-    font-size: 11px;
-    font-weight: lighter;
-}
-
-.sideInfo .sideInfoInr .sideInfoCstmBnr{
-	width: 100%;
-	border-radius: 7px;
-	background: #E38585;
-	line-height: 30px;
-	margin-bottom: 5px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-    box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
-}
-
-.sideInfo .sideInfoInr .sideInfoCstmBnr a{
-	color: #fff;
-}
-
-.sideInfo .sideInfoInr .sideInfoCstmBnrMWrd{
-	text-align: center;
-	font-size: 21px;
-}
-
-.sideInfo .sideInfoInr .sideInfoCstmBnrSWrd{
-	text-align: center;
-	font-size: 11px;
-}
-
-.sideInfo .sideInfoInr .sideInfoImgBnr{
-	margin-top: 10px;
-}
-/* side info end */
 
 /* キーワードから案件を探す */
 .keyWordSearch{
@@ -2270,7 +2184,7 @@ tablet.css 641px~1024px
         margin:0 auto;
     }
 
-	/* nav inline-blockからflexBoxに変更 */
+	/* nav */
 	nav ul{
         width: 95%;
         display: flex;
@@ -2295,25 +2209,16 @@ tablet.css 641px~1024px
     /*-------------------------------
     # 案件詳細
     -------------------------------*/
-    #item .tabSelected{
-        margin: 0;
-    }
+    #item .tabSelected{margin: 0;}
 
-    #item .tabSelected .title span{
-        padding: 2px 1rem
-    }
+    #item .tabSelected .title span{padding: 2px 1rem;}
 
     /*-------------------------------
     # 案件詳細
     -------------------------------*/
     /* こちらもおすすめ */
-    .recommendedInr{
-        width: 95%;
-    }
-
-    .feature{
-        padding: 0 2.5%;
-    }
+    .recommendedInr{width: 95%;}
+    .feature{padding: 0 2.5%;}
 
     /*-------------------------------
 	# page
@@ -2351,24 +2256,13 @@ tablet.css 641px~1024px
 		padding: 16px 8px;
         width: auto;
 	}
+	.topJobWrap .update{}
 
-	.topJobWrap .update{
-
-	}
-
-	.topJobInr h2{
-		font-size: 13px;
-	}
+	.topJobInr h2{font-size: 13px;}
 
 	/* 条件から検索 */
-	.tabWrap{
-		width: 100%;
-	}
-
-    .tabMenu {
-        width:20%;
-    }
-
+	.tabWrap{width: 100%;}
+    .tabMenu {width:20%;}
     .tabBox{
         width:80%;
         float:left;
@@ -2380,53 +2274,7 @@ tablet.css 641px~1024px
 		padding-top: 10px;
 		margin-left: 20%;
 	}
-	.tabSelectedInr{
-		min-height: 0px;
-	}
-
-	/* カテゴリーから案件を探す */
-	.categorySearchInr{
-	}
-
-	/* サイドバー width: 728px; */
-	.sideInfo{
-
-	}
-	.sideInfoInr{
-		width: 27.2%;
-		float: right;
-        padding-left: 5px;
-	}
-	.sideInfo .sideInfoInr .sideInfoCstmBnr{
-		border-radius: 7px;
-		background: #E38585;
-		line-height: 30px;
-		margin: 15px 2px 0px;
-		float: left;
-        height: 70px;
-        padding-top: 10px;
-	}
-
-	.sideInfo .sideInfoInr .sideInfoCstmBnr a{
-		color: #fff;
-	}
-
-	.sideInfo .sideInfoInr .sideInfoCstmBnrMWrd{
-		text-align: center;
-		font-size: 21px;
-	}
-
-	.sideInfo .sideInfoInr .sideInfoCstmBnrSWrd{
-		text-align: center;
-		font-size: 11px;
-	}
-
-	.sideInfo .sideInfoInr .sideInfoImgBnr{
-		width: 100%;
-		margin-top: 10px;
-		float: left;
-		margin: 15px 2px 0px;
-	}
+	.tabSelectedInr{min-height: 0px;}
 }
 
 /*===============================
@@ -2465,6 +2313,7 @@ sp.css ~640px
     .commonCenterBtn button {
     	width: 70%;
         font-size: 1.4rem;
+        padding: 0.7rem;
     }
 
     /* 検索コンテンツ用ヘッダー */
@@ -2491,8 +2340,8 @@ sp.css ~640px
     }
 
     /* 新規会員登録ボタン */
-    .user_regist_btn{text-align:center; padding:2rem;}
-    .user_regist_btn img{}
+    .user_regist_btn{text-align:center; margin-bottom:2rem; }
+    .user_regist_btn img{width: 70%;}
 
     /*-------------------------------
     # マイページ
@@ -2507,23 +2356,14 @@ sp.css ~640px
     /*-------------------------------
     # エントリー
     -------------------------------*/
-    #entry_complete .contentInr{
-        padding: 16px 0 32px 0;
-    }
-    #entry_complete .entry_content{
-        width: 100%;
-    }
-    #entry_complete .skillsheet{
-        width: 100%;
-    }
-    .entry_content .entry_content_body ul li{
-        display: block;
-    }
+    #entry_complete .contentInr{padding: 16px 0 32px 0;}
+    #entry_complete .entry_content{width: 100%;}
+    #entry_complete .skillsheet{width: 100%;}
+    .entry_content .entry_content_body ul li{display: block;}
     .entry_content .entry_content_body ul li p:not(:first-child){
         text-align: left;
         padding-left: 1rem;
     }
-
 
     /*-------------------------------
     # エンジニアルートとは
@@ -2546,11 +2386,6 @@ sp.css ~640px
         display: block;
         width: 100%;
     }
-
-    .input_f_name p{
-        line-height: ;
-    }
-
 
     .input_f_value{
         display: block;
@@ -2621,13 +2456,8 @@ sp.css ~640px
         width: 100%;
     }
 
-    #login .infoText{
-        padding: 1rem 0;
-    }
-
-    #login .infoText p{
-        line-height: 2rem;
-    }
+    #login .infoText{padding: 1rem 0;}
+    #login .infoText p{line-height: 2rem;}
 
     #login .contentInr{
         width: 95%;
@@ -2653,9 +2483,7 @@ sp.css ~640px
         padding: 0 5%;
     }
 
-    .searchContent li span{
-        float: right;
-    }
+    .searchContent li span{float: right;}
 
     .searchContent li.condition_name{
         color: #5e8796;
@@ -2668,9 +2496,7 @@ sp.css ~640px
         background: #5e8796;
     }
 
-    .condition_slideArea{
-        display: none;
-    }
+    .condition_slideArea{display: none;}
 
     li.condition_elmnt_name{
         font-size: 1.7rem;
@@ -2683,13 +2509,8 @@ sp.css ~640px
         width: 50%;
     }
 
-    li.condition_elmnt:nth-child(even){
-        padding-left: 0;
-    }
-
-    li.condition_elmnt label{
-        font-size: 1.4rem;
-    }
+    li.condition_elmnt:nth-child(even){padding-left: 0;}
+    li.condition_elmnt label{font-size: 1.4rem;}
 
     .tabSelected {
         width: 100%;
@@ -2725,13 +2546,8 @@ sp.css ~640px
     }
 
     #item .pickUpRate,
-    #item .pickUpArea{
-        width: 100%;
-    }
-
-    #item .pickUp .pickUpArea{
-        margin-left: 0;
-    }
+    #item .pickUpArea{width: 100%;}
+    #item .pickUp .pickUpArea{margin-left: 0;}
 
     .pickupCat h1{
         background: #5e8796;
@@ -2755,9 +2571,7 @@ sp.css ~640px
     /*-------------------------------
 	# 案件詳細
 	-------------------------------*/
-    #itemDetail .other{
-        display: block;
-    }
+    #itemDetail .other{display: block;}
 
     #itemDetail .otherName{
         display: block;
@@ -2786,9 +2600,7 @@ sp.css ~640px
         background: url(../images/absurdidad.png);
     }
 
-    .recommendedInr {
-        width: 100%;
-    }
+    .recommendedInr{width: 100%;}
 
     .recommendedInr h3{
         background: #5e8796;
@@ -2809,36 +2621,18 @@ sp.css ~640px
         margin: 3% 16px 0 16px;
     }
 
-    .recoItem:not(:first-child){
-        margin-left: 16px;
-    }
-
-    .recoItem:last-child{
-        margin-bottom: 16px;
-    }
+    .recoItem:not(:first-child){margin-left: 16px;}
+    .recoItem:last-child{margin-bottom: 16px;}
 
     .recoItem .header{
         padding: 2%;
         text-align: left;
     }
 
-    .recoItem .detail{
-        padding: 3%;
-    }
+    .recoItem .detail{padding: 3%;}
+    .recoItem .detail .skill{padding-top: 0;}
 
-    .recoItem .detail .skill{
-/*        display: inline-block;
-        width: 35%; */
-        padding-top: 0;
-    }
-
-    .recoItem .detail .skills{
-        /*display: inline-block;*/
-    }
-
-    .feature{
-        padding: 0;
-    }
+    .feature{padding: 0;}
 
     /*-------------------------------
     # お問い合わせ
@@ -2874,7 +2668,6 @@ sp.css ~640px
         padding: 2.5% 0;
         margin: 2% 0;
     }
-
 
     /*-------------------------------
     ## ご利用の流れ
@@ -2923,7 +2716,6 @@ sp.css ~640px
     /*-------------------------------
     ## サイドバー
     -------------------------------*/
-    .sideInfo{ margin-top: 15%; }
     .sideInfo ul{ margin-left: 0; }
     .sideInfo li{
         width: 48%;
@@ -2934,23 +2726,17 @@ sp.css ~640px
 	/*-------------------------------
 	# header
 	-------------------------------*/
-	header{
-	}
+	header{}
 
-	.headerInr p{
-		display: none;
-	}
-
-	.headerInr{
-		padding: 0 16px;
-		height: 48px;
-	}
-
+    .headerInr{
+        padding: 0 16px;
+        height: 48px;
+    }
+    .headerInr p{display: none;}
 	.headerInr h1{
 		margin-top: 8px;
 		width: 100%;
 	}
-
 	.headerInr h1 a {
 		background-size: 160px;
 		height: 40px;
@@ -2988,16 +2774,9 @@ sp.css ~640px
         border-bottom: 1px solid #fff;
     }
 
-    .nav-list {
-        display: none;
-    }
-    .nav-active {
-        display: block;
-    }
-
-    .nav-mobile {
-		display:block;
-	}
+    .nav-list {display: none;}
+    .nav-active {display: block;}
+    .nav-mobile {display:block;}
 	.nav-mobile-open {
 		background: url(../images/navClose.png)center no-repeat;
 		background-size: 20px;
@@ -3022,13 +2801,9 @@ sp.css ~640px
         border-bottom: #9eb7c0 1px solid;
         letter-spacing: normal;
 	}
-
 	footer li:nth-child(even){ border-right: 0; }
-
 	footer li a{ color: #fff; }
-
 	footer li a:hover{ color: #ccc; }
-
 	footer p{
 		color: #fff;
 		padding: 16px 0;
@@ -3237,63 +3012,12 @@ sp.css ~640px
         margin: 0;
     }
 
-    .sideInfo{
-        clear: both;
-    }
+    /* サイドバー */
+    .sideInfo{clear: both;}
 
-    .sideInfoInr{
-        width: 100%;
-        float: left;
-        padding: 0 5%;
-        margin-top: 20px;
-    }
-
-    .sideInfo .sideInfoInr .sideInfoImgBnr{
-        width: 45%;
-        margin: 10px 2.5% 0px 2.5%;
-    }
-
-    .sideInfo .sideInfoInr .sideInfoCstmBnr{
-        box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
-    }
-
-    .sideInfo .sideInfoInr .sideInfoCstmBnrMWrd{
-        font-size: 15px;
-    }
-
-    .sideInfoCstmBnrMWrd span{
-        font-weight: bold;
-        padding-right: 10px;
-    }
-
-    .sideInfoInr .hoge{
-        margin: 0 auto;
-    }
-
-    .sideInfoInr p{
-        display: inline-block;
-        font-size: 14px;
-        width: 80%;
-        text-align: center;
-        color: #fff;
-        background: #E38585;
-        border-radius: 32px;
-        line-height: 40px;
-        margin-bottom: 20px;
-    }
-
-    .sideInfoInr span{
-        font-weight: bold;
-        padding-right: 10px;
-    }
-
-
-
-     .keyWordSearchForm{
+    .keyWordSearchForm{
         width: 80%;
 		letter-spacing: -1em; /* inline-blockの隙間対策 */
-    }
-    .keyWordSearchForm{
     }
 
     .keyWordSearchSearchBtn{
@@ -3347,3 +3071,4 @@ sp.css ~640px
         padding-left: 1rem;
         line-height: 2rem;
     }
+}

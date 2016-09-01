@@ -278,8 +278,12 @@
         </div><!-- END CONTENT-RIGHT -->
         <div class="clear"></div>
     </div><!-- END CONTENT -->
-    @include('front.common.feature')
-    <div  id="item" class="content">
+
+    <div id="pucat">
+        @include('front.common.feature')
+    </div>
+
+    <div class="content">
         <div class="content-right invisible-pc invisible-tab">
             @include('front.common.sideInfo')
         </div><!-- END CONTENT-RIGHT -->
