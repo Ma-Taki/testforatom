@@ -169,7 +169,7 @@ textarea{ font-size: 1.4rem; }
     border: 1px solid #e9b2bd;
     color: #bf1939;
     background: #f7e5e9;
-    border-radius: 1rem;;
+    border-radius: 1rem;
 }
 
 p.pageInfo{
@@ -366,7 +366,7 @@ h1.SearchTitle:before{
 -------------------------------*/
 #entry p.pageInfo{color: black;}
 #entry h2{margin:3rem 0 1rem 0;}
-#entry_mail_address { color: #5e8796;;}
+#entry_mail_address { color: #5e8796;}
 .dataTable .data{
     width: 100%;
     display: inline-flex;
@@ -502,6 +502,15 @@ h1.SearchTitle:before{
     border-style: none;
     padding: 0.6rem 3rem;
 }
+.user_delete_btn{
+    text-align: right;
+    margin-top: 4rem;
+}
+.user_delete_btn button{
+    width: 20%;
+    text-align: center;
+}
+
 .user_edit{width: 95%;margin: 0 auto;}
 
 /*-------------------------------
@@ -571,7 +580,7 @@ h1.SearchTitle:before{
     font-size: 1.4rem;
     border: 1px solid #5e8796;
     border-radius: 5px;
-    padding: 0.6rem;;
+    padding: 0.6rem;
 }
 
 .input_contract label{
@@ -725,6 +734,7 @@ h1.SearchTitle:before{
 
 #item .conditions{
     background: none;
+    overflow: hidden;
 }
 
 #item .conditions .search{
@@ -824,8 +834,9 @@ h1.SearchTitle:before{
     padding-bottom: 1%;
 }
 
-#item .tabSelected .title span{
-    font-size: 1.5rem;
+#item .tabSelected .title .openTab{
+    width: 18rem;
+    font-size: 1.3rem;
     color: #fff;
     background: #5e8796;
     line-height: 3rem;
@@ -833,6 +844,11 @@ h1.SearchTitle:before{
     padding: 3px 2rem;
     font-weight: normal;
 }
+
+#item .tabSelected .title .openTabText{
+    float: right;
+}
+
 
 #item .tabSelectedInr{
     width: 100%;
@@ -869,7 +885,7 @@ h1.SearchTitle:before{
 }
 
 #item .new {
-    display: table-cell;;
+    display: table-cell;
     font-size: 1.4rem;
     width: 10%;
     color: #fff;
@@ -884,7 +900,7 @@ h1.SearchTitle:before{
     color: #fff;
     background: #5e8796;
     vertical-align: middle;
-    padding: 1% 1.5%;
+    padding: 0.6rem 1rem;
     position: relative;
     border-top-right-radius: 8px;
     border: 1px solid #5e8796;
@@ -984,7 +1000,7 @@ h1.SearchTitle:before{
 }
 
 #item .otherName{
-    display: table-cell;;
+    display: table-cell;
     width: 20%;
     font-weight: bold;
     padding: 1% 2%;
@@ -992,7 +1008,7 @@ h1.SearchTitle:before{
 
 
 #item .otherValue{
-    display: table-cell;;
+    display: table-cell;
     width: 80%;
     padding: 1% 2%;
 }
@@ -1280,7 +1296,7 @@ textarea{
 
 .anserElementInr{
     display: inline-flex;
-    align-items: center;;
+    align-items: center;
     margin-top: 1rem;
 }
 
@@ -2095,17 +2111,17 @@ nav ul .active{ background: #536C75; }
 
 .keyWordSearchInputForm {
 	width: 79%;
-	line-height: 30px;
 	font-size: 14px;
 	border: 2px solid #5e8796;
 	border-radius: 5px;
 	vertical-align: middle;
+    padding: 0.8rem 1rem;
 }
 
 .keyWordSearchSearchBtn {
 	width: 20%;
 	line-height: 30px;
-	font-size: 17px;
+	font-size: 14px;
 	border-radius: 5px;
 	background: #5e8796;
 	color: #fff;
@@ -2211,7 +2227,7 @@ tablet.css 641px~1024px
     -------------------------------*/
     #item .tabSelected{margin: 0;}
 
-    #item .tabSelected .title span{padding: 2px 1rem;}
+    #item .tabSelected .title span{padding: 0;}
 
     /*-------------------------------
     # 案件詳細
@@ -2316,6 +2332,10 @@ sp.css ~640px
         padding: 0.7rem;
     }
 
+    .commonCenterBtn button:not(:first-child) {
+        margin-top: 1rem;
+    }
+
     /* 検索コンテンツ用ヘッダー */
     .searchHeader h1{
         background: #5e8796;
@@ -2352,6 +2372,11 @@ sp.css ~640px
     ## パスワード変更
     -------------------------------*/
     #edit_password .input_password label input{width: 100%;}
+
+    /*-------------------------------
+    ## パスワード変更
+    -------------------------------*/
+    .user_delete{width: 95%; margin: 0 auto;}
 
     /*-------------------------------
     # エントリー
@@ -2639,11 +2664,11 @@ sp.css ~640px
     -------------------------------*/
     #contact .inputName{
         width: 100%;
-        display: table-row;;
+        display: table-row;
     }
     #contact .inputField{
         width: 100%;
-        display: table-row;;
+        display: table-row;
         margin: 1% 0;
     }
     #contact .inputName p{

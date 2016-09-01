@@ -19,8 +19,8 @@
 
             <form method="post" action="{{ url('/user/delete') }}">
                 <div class="commonCenterBtn">
-                    <button type="submit">退会する</button>
                     <a href="/user"><button type="button">キャンセル</button></a>
+                    <button type="submit">退会する</button>
                 </div>
                 {{ csrf_field() }}
             </form>

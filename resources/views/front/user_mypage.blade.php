@@ -81,13 +81,13 @@
                             <div class="value">{{ $user->tel }}</div>
                         </div>
                     </div>
-                    <div class="edit_btn commonButton">
+                    <div class="commonCenterBtn">
                         <a href="/user/edit"><button>登録内容変更</button></a>
                     </div>
                 </div>
             </div>
 
-            <div class="commonCenterBtn">
+            <div class="commonCenterBtn user_delete_btn">
                 <a href="/user/delete"><button>退会する</button></a>
             </div>
         </div>

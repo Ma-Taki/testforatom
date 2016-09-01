@@ -34,7 +34,9 @@
 @if(strstr(Request::url(), '/item/search'))
                 <div class="search">
                     <div class="tabSelected">
-                        <p class="title">選択した項目<span class="openTab">＋　検索条件を変更する</span></p>
+                        <p class="title">選択した項目
+                            <span class="openTab">＋<span class="openTabText">検索条件を変更する</span></span>
+                        </p>
                         <div class="tabSelectedInr">
                             <div class="searchElement">
                                 <div id="tagSelectedSkill">
@@ -298,9 +300,9 @@
             var tabBox = $(this).parents('.search').find('.tab');
 		    tabBox.slideToggle(700, function(){
                 if (tabBox.is(':visible')) {
-                    $(".openTab").text('−　タブを閉じる');
+                    $(".openTab").text('-').append($('<span class="openTabText">タブを閉じる</span>'));
                 } else {
-                    $(".openTab").text('＋　検索条件を変更する');
+                    $(".openTab").text('+').append($('<span class="openTabText">検索条件を変更する</span>'));
                 };
 			});
 		});

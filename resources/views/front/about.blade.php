@@ -8,7 +8,10 @@
             <div class="aboutERouteInr" >
                 <div class="about_image">
                     <img src="/front/images/sky.jpg" alt="エンジニアルートとは">
-                    <p class="over_text wsnw">エンジニアルートは、プロジェクト終了後まで<wbr>エンジニアの皆様を全力でサポート致します。</p>
+                    <p class="over_text wsnw">
+                        エンジニアルートは、プロジェクト終了後まで<br />
+                        エンジニアの皆様を全力でサポート致します。
+                    </p>
                 </div>
                 <p>
                     Engineer-Route（エンジニアルート）では、皆様の夢や目標、可能性をサポートするため、
