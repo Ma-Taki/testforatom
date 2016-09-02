@@ -27,8 +27,8 @@
 
     display: block;
 
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     padding: 0;
     -webkit-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
@@ -97,12 +97,12 @@
 
 .slick-next
 {
-    right: 145px;
+    right: 135px;
 }
 [dir='rtl'] .slick-next
 {
     right: auto;
-    left: 145px;
+    left: 135px;
 }
 .slick-next:before
 {

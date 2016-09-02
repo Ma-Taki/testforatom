@@ -175,11 +175,11 @@ class EntryController extends FrontController
      **/
     public function download(){
         // エントリーシートの存在チェック
-        if (!Storage::disk('public')->exists('skillsheet.xls')) {
+        if (!Storage::disk('public')->exists('skillsheet.zip')) {
             Log::critical('skillsheet not found');
             abort(404, 'システムエラーが発生致しました。恐れ入りますが、しばらく時間をおいてから再度アクセスしてください。');
         }
 
-        return response()->download(storage_path('app/public').'/skillsheet.xls');
+        return response()->download(storage_path('app/public').'/skillsheet.zip');
     }
 }

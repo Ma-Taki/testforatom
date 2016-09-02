@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
 
     protected function renderHttpException(HttpException $e)
     {
-        if ((config('app.env') === 'local')) {
+        if (!(config('app.env') === 'local')) {
             $status = $e->getStatusCode();
             $message = $e->getMessage();
 
