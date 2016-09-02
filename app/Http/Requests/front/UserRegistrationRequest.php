@@ -46,15 +46,13 @@ class UserRegistrationRequest extends Request
             'contract_types' => '',
             'prefecture' => '',
             'station' => '',
-            'email' => 'required|email|max:256|confirmed|unique:users,mail,NULL,id,delete_date,NULL',
-            'email_confirmation' => '',
             'phone_num' => [
                 'required',
                 'max:14',
-                'confirmed',
                 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/',
             ],
-            'phone_confirmation' => '',
+            'email' => 'required|email|max:256|confirmed|unique:users,mail,NULL,id,delete_date,NULL',
+            'email_confirmation' => '',
             'password' => [
                 'required',
                 'between:6,20',

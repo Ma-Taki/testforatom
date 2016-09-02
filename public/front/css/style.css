@@ -1287,6 +1287,8 @@ textarea{
     border-bottom-right-radius: 10px;
 }
 
+.flowWordDetail a{color: #E38585;}
+.flowWordDetail a:hover{opacity: 0.6;}
 /*-------------------------------
 ## Q&A
 -------------------------------*/
@@ -1446,6 +1448,7 @@ textarea{
 	background: url(../images/logo.png)no-repeat;
 	background-size: 276px 68px;
 	display: block;
+    width: 276px;
 	height: 68px;
 }
 
@@ -1944,6 +1947,9 @@ nav ul .active{ background: #536C75; }
 }
 
 /* 条件から案件を探す */
+.tabContent{margin-top: 1.6rem;}
+.tabContent h3{margin-bottom: 0.4rem;}
+
 .tabContentElementOneThird{
 	display: inline-block;
 	width: 32%;
@@ -2057,7 +2063,7 @@ nav ul .active{ background: #536C75; }
 }
 
 .categorySearch .categorySearchInr .parentCategory{
-	font-size: 15px;
+	font-size: 1.5rem;
 	line-height: normal;
 	font-weight: bold;
 }
@@ -2070,8 +2076,8 @@ nav ul .active{ background: #536C75; }
 }
 
 .categorySearch .categorySearchInr .childCategory{
-	margin-top: 5px;
-	opacity: 0.8;
+    opacity: 0.8;
+    margin: 0.8rem 0 1.6rem 1rem;
 }
 
 .categorySearch .categorySearchInr .childCategory a{
@@ -2809,7 +2815,8 @@ sp.css ~640px
     }
     nav ul li a{
         width: 100%;
-        padding: 0.5rem 0;
+        font-size: 1.6rem;
+        padding: 1rem 0;
         line-height: 2rem;
         border: 0;
         border-bottom: 1px solid #fff;

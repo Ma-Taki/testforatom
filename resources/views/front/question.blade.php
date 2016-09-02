@@ -21,7 +21,7 @@
                             <div class="anserText">
                                 <p>下記URLからパスワードの再設定を行います。</p>
                                 <a href="/user/reminder">
-                                        <p class="url">https://www.engineer-route.com/user/reminder</p>
+                                        <p class="url">{{ url('/user/reminder') }}</p>
                                 </a>
                                 <p>ご自身のメールアドレスを入力して頂き、送信して下さい。</p>
                                 <p>その後、パスワード再設定ページのURLが記載されたメールが届きますので、そちらからパスワードを再設定して頂けます。</p>

@@ -52,10 +52,8 @@ class UserEditRequest extends Request
             'phone_num' => [
                 'required',
                 'max:14',
-                'confirmed',
                 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/',
             ],
-            'phone_confirmation' => '',
         ];
     }
 }

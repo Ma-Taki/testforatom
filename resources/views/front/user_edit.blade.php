@@ -167,22 +167,21 @@
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
-                        <p>メールアドレス<span class="color-red">※</span></p>
+                        <p>電話番号<span class="color-red">※</span></p>
                     </div>
                     <div class="input_f_value input_email">
-                        <label><input type="text" maxlength="256" name="email" value="{{ old('email', $user->mail) }}" placeholder="例）info@solidseed.co.jp">（半角）</label>
-                        <label><input type="text" maxlength="256" name="email_confirmation" value="{{ old('email_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角）</label>
+                        <label><input type="text" maxlength="14" name="phone_num" value="{{ old('phone_num', $user->tel) }}" placeholder="例）03-5774-5557">（半角 ※ハイフン付き）</label>
                     </div>
                 </div>
                 <hr class="partitionLine_01">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
-                        <p>電話番号<span class="color-red">※</span></p>
+                        <p>メールアドレス<span class="color-red">※</span></p>
                     </div>
                     <div class="input_f_value input_email">
-                        <label><input type="text" maxlength="14" name="phone_num" value="{{ old('phone_num', $user->tel) }}" placeholder="例）03-5774-5557">（半角 ※ハイフン付き）</label>
-                        <label><input type="text" maxlength="14" name="phone_num_confirmation" value="{{ old('phone_num_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角 ※ハイフン付き）</label>
+                        <label><input type="text" maxlength="256" name="email" value="{{ old('email', $user->mail) }}" placeholder="例）info@solidseed.co.jp">（半角）</label>
+                        <label><input type="text" maxlength="256" name="email_confirmation" value="{{ old('email_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角）</label>
                     </div>
                 </div>
                 <hr class="partitionLine_01">
