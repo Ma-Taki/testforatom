@@ -51,10 +51,12 @@ class EntryController extends FrontController
         $user = parent::getUserById(CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID));
 
         //エントリー重複チェック
-        $entry = Tr_item_entries::where('user_id', $user->first()->id)
-                                ->where('item_id', $item->first()->id)
+        $entry = Tr_item_entries::where('user_id', $user->id)
+                                ->where('item_id', $item->id)
                                 ->enable()
                                 ->get();
+
+
         if ($entry->count() > 0) {
             abort(400, 'すでにエントリー済みです。');
         }
@@ -96,8 +98,8 @@ class EntryController extends FrontController
         // △△△ スキルシートアップロード時のバリデーション △△△
 
         $data = [
-            'user_id' => $user->first()->id,
-            'item_id' => $item->first()->id,
+            'user_id' => $user->id,
+            'item_id' => $item->id,
             'entry_date' => Carbon::now()->format('Y-m-d H:i:s'),
             'skillsheet_upload' => !empty($file),
             'skillsheet_filename' => null,
@@ -148,11 +150,11 @@ class EntryController extends FrontController
         $data_mail = [
             'admin_mail_addresses' => 'entry@engineer-route.com',
             'entry_id' => $db_return_data['entry']->id,
-            'item_id' => $item->first()->id,
-            'item_name' => $item->first()->name,
-            'item_biz_category' => $item->first()->bizCategorie->name,
-            'user_name' => $user->first()->last_name.' ' .$user->first()->first_name,
-            'user_mail_address' => $user->first()->mail,
+            'item_id' => $item->id,
+            'item_name' => $item->name,
+            'item_biz_category' => $item->bizCategorie->name,
+            'user_name' => $user->last_name.' ' .$user->first_name,
+            'user_mail_address' => $user->mail,
         ];
         $frntUtil = new FrntUtil();
         Mail::send('front.emails.item_entry', $data_mail, function ($message) use ($data_mail, $frntUtil) {
@@ -165,7 +167,7 @@ class EntryController extends FrontController
 
         return view('front.entry_complete', [
             'entry' => $db_return_data['entry'],
-            'item' => $item->first(),
+            'item' => $item,
         ]);
     }
 

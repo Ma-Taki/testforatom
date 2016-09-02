@@ -15,7 +15,7 @@
 
 // トップ
 Route::get('/', 'FrontController@showTop');
-Route::get('/lp1', 'FrontController@index');
+Route::get('/lp1', 'FrontController@showTop');
 
 // エンジニアルートとは
 Route::get('/about', function () { return view('front.about'); });

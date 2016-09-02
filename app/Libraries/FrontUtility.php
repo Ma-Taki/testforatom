@@ -169,6 +169,7 @@ class FrontUtility
 
             //　本番環境
             case 'master':
+            /*
                 $this->user_contact_mail_from = 'sender@engineer-route.com';
                 $this->user_contact_mail_from_name = 'sender@engineer-route.com';
                 $this->user_contact_mail_to = 'info@engineer-route.com';
@@ -177,6 +178,7 @@ class FrontUtility
                 $this->user_regist_mail_from = 'sender@engineer-route.com';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
                 break;
+            */
             default:
                 break;
         }
