@@ -159,9 +159,7 @@ class EntryController extends FrontController
         $frntUtil = new FrntUtil();
         Mail::send('front.emails.item_entry', $data_mail, function ($message) use ($data_mail, $frntUtil) {
             $message->from($frntUtil->user_entry_mail_from, $frntUtil->user_entry_mail_from_name);
-            //$message->to($data_mail['user_mail_address'], $data_mail['user_mail_address']);
-            // 開発も含めて、全部自分に送られてくるようにしとく
-            $message->to($frntUtil->user_entry_mail_to, $frntUtil->user_entry_mail_to_name);
+            $message->to($data_mail['user_mail_address']);
             $message->subject(FrntUtil::USER_ENTRY_MAIL_TITLE);
         });
 

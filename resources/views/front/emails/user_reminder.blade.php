@@ -13,7 +13,7 @@
     <p>
         /*<br>
         &nbsp;*　エンジニアルート<br>
-        &nbsp;*　http://www.engineer-route.com/<br>
+        &nbsp;*　{{ url('/') }}<br>
         &nbsp;*/
     </p>
     <p>

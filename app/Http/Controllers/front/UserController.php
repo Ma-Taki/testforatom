@@ -112,7 +112,7 @@ class UserController extends Controller
         $frntUtil = new FrntUtil();
         Mail::send('front.emails.user_regist', $data, function ($message) use ($data, $frntUtil) {
             $message->from($frntUtil->user_regist_mail_from, $frntUtil->user_regist_mail_from_name);
-            $message->to($frntUtil->user_regist_mail_to, $frntUtil->user_regist_mail_to_name);
+            $message->to($data['email']);
             $message->subject(FrntUtil::USER_REGIST_MAIL_TITLE);
         });
 
@@ -264,12 +264,13 @@ class UserController extends Controller
         $mail_data = [
             'auth_key' => $auth_key,
             'limit' => FrntUtil::AUTH_KEY_LIMIT_MINUTE,
+            'mail' => $request->mail,
         ];
 
         $frntUtil = new FrntUtil();
-        Mail::send('front.emails.user_reminder', $mail_data, function ($message) use ($frntUtil) {
+        Mail::send('front.emails.user_reminder', $mail_data, function ($message) use ($mail_data, $frntUtil) {
             $message->from($frntUtil->user_reminder_mail_from, $frntUtil->user_reminder_mail_from_name);
-            $message->to($frntUtil->user_reminder_mail_to, $frntUtil->user_reminder_mail_to_name);
+            $message->to($mail_data['mail']);
             $message->subject(FrntUtil::USER_REMINDER_MAIL_TITLE);
         });
 

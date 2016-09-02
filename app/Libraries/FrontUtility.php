@@ -142,30 +142,37 @@ class FrontUtility
             // 開発環境
             case 'develop':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->user_contact_mail_from_name = 'E-R開発(develop)';
-                $this->user_contact_mail_to = ['y.suzuki@solidseed.co.jp',
-                                                'y.saito@solidssed.co.jp'];
-                $this->user_contact_mail_to_name = 'E-R開発者';
+                $this->user_contact_mail_from_name = 'エンジニアルート(develop)';
+                $this->user_contact_mail_to = [
+                    'y.suzuki@solidseed.co.jp',
+                    'y.saito@solidssed.co.jp',
+                    'senoo@solidssed.co.jp',
+                ];
+                $this->user_contact_mail_to_name = 'エンジニアルート(develop)';
 
                 $this->company_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->company_contact_mail_from_name = 'E-R開発(local)';
-                $this->company_contact_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->company_contact_mail_to_name = 'E-R開発者';
+                $this->company_contact_mail_from_name = 'エンジニアルート(develop)';
+                $this->company_contact_mail_to = [
+                    'y.suzuki@solidseed.co.jp',
+                    'y.saito@solidssed.co.jp',
+                    'senoo@solidssed.co.jp',
+                ];
+                $this->company_contact_mail_to_name = 'エンジニアルート(develop)';
 
                 $this->user_regist_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
-                $this->user_regist_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->user_regist_mail_to_name = 'E-R開発者';
+                $this->user_regist_mail_to = '';
+                $this->user_regist_mail_to_name = '';
 
                 $this->user_entry_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_entry_mail_from_name = 'エンジニアルート';
-                $this->user_entry_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->user_entry_mail_to_name = 'E-R開発者';
+                $this->user_entry_mail_to = '';
+                $this->user_entry_mail_to_name = '';
 
                 $this->user_reminder_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_reminder_mail_from_name = 'エンジニアルート';
-                $this->user_reminder_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->user_reminder_mail_to_name = 'E-R開発者';
+                $this->user_reminder_mail_to = '';
+                $this->user_reminder_mail_to_name = '';
                 break;
 
             //　本番環境

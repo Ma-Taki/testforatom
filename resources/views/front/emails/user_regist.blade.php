@@ -9,12 +9,12 @@
     </p>
     <p>
         パスワードをお忘れの際は、以下のURLより再設定をお願い致します。<br>
-        ◆http://www.engineer-route.com/user/reminder
+        ◆{{ url('/user/reminder') }}
     </p>
     <p>
         /*<br>
         &nbsp;*　エンジニアルート<br>
-        &nbsp;*　http://www.engineer-route.com/<br>
+        &nbsp;*　{{ url('/') }}<br>
         &nbsp;*/
     </p>
     <p>

@@ -59,7 +59,9 @@ class CompanyController extends FrontController
         $frontUtil = new FrontUtil();
         Mail::send('front.emails.company_contact', $data, function ($message) use ($data, $frontUtil) {
             $message->from($frontUtil->company_contact_mail_from, $frontUtil->company_contact_mail_from_name);
-            $message->to($frontUtil->company_contact_mail_to, $frontUtil->company_contact_mail_to_name);
+            foreach ((array)$frontUtil->company_contact_mail_to as $value) {
+                $message->to($value, $frontUtil->company_contact_mail_to_name);
+            }
             $message->subject(FrontUtil::COMPANY_CONTACT_MAIL_TITLE);
         });
 
