@@ -1,6 +1,5 @@
 @extends('front.common.layout')
-@section('title', '案件一覧 - エンジニアルート')
-@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
+@section('title', '【案件詳細】'.$item->name.' - エンジニアルート')
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
@@ -116,7 +115,7 @@
         <div class="recoItems">
 @foreach($recoItemList as $item)
             <div class="recoItem">
-                <a href="/item/detail?id={{ $item->id }}">
+                <a href="/item/detail?id={{ $item->id }}"  target="_blank">
                     <p class="header">{{ $item->name }}</p>
                     <div class="detail">
                         <div class="table">

@@ -1,6 +1,5 @@
 @extends('front.common.layout')
 @section('title', 'パスワード再設定URLの通知 - エンジニアルート')
-@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

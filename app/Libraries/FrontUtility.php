@@ -143,7 +143,8 @@ class FrontUtility
             case 'develop':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_contact_mail_from_name = 'E-R開発(develop)';
-                $this->user_contact_mail_to = 'y.suzuki@solidseed.co.jp';
+                $this->user_contact_mail_to = ['y.suzuki@solidseed.co.jp',
+                                                'y.saito@solidssed.co.jp'];
                 $this->user_contact_mail_to_name = 'E-R開発者';
 
                 $this->company_contact_mail_from = 'y.suzuki@solidseed.co.jp';

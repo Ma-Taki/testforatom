@@ -1,5 +1,7 @@
 @extends('front.common.layout')
 @section('content')
+@section('title', 'フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」')
+@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 <?php
 use App\Libraries\ModelUtility as mdlUtil;
 use App\Libraries\FrontUtility as FrntUtil;
@@ -55,7 +57,7 @@ use App\Models\Tr_search_categories;
                         <ul class="fs0 clear">
 @foreach($newItemList as $newItem)
                             <li>
-                                <a href="/item/detail?id={{ $newItem->id }}">
+                                <a href="/item/detail?id={{ $newItem->id }}" target="_blank">
                                     <div class="topJobInr">
                                         <img src="/front/images/ico-newjob.png">
                                         <h2>{{ $newItem->name }}</h2>
@@ -81,7 +83,7 @@ use App\Models\Tr_search_categories;
                         <ul class="fs0 clear">
 @foreach($pickUpItemList as $pickUpItem)
                             <li>
-                                <a href="/item/detail?id={{ $pickUpItem->id }}">
+                                <a href="/item/detail?id={{ $pickUpItem->id }}"  target="_blank">
                                     <div class="topJobInr">
                                         <img src="/front/images/ico-attentionJob.png">
                                         <h2>{{ $pickUpItem->name }}</h2>

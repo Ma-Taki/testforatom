@@ -364,6 +364,7 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## エントリー
 -------------------------------*/
+#entry .entry{width: 95%;margin: 0 auto;}
 #entry p.pageInfo{color: black;}
 #entry h2{margin:3rem 0 1rem 0;}
 #entry_mail_address { color: #5e8796;}
@@ -1354,6 +1355,10 @@ textarea{
 .terms{
     width: 95%;
     margin: 0 auto;
+}
+
+.terms{
+    padding-top: 4%;
 }
 
 .privacyPolicyInr{

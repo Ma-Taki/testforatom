@@ -1,5 +1,6 @@
 @extends('front.common.layout')
 @section('content')
+@section('title', 'プライバシーポリシー - エンジニアルート')
 <div class="wrap">
     <div id="privacyPolicy" class="content">
         <h1 class="pageTitle">プライバシーポリシー</h1>

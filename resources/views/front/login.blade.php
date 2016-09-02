@@ -1,5 +1,6 @@
 @extends('front.common.layout')
 @section('content')
+@section('title', 'ログイン - エンジニアルート')
 <div class="wrap">
     <div id="login" class="content">
         <h1 class="pageTitle">ログイン</h1>

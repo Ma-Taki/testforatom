@@ -1,6 +1,5 @@
 @extends('front.common.layout')
 @section('title', '登録内容確認 - エンジニアルート')
-@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

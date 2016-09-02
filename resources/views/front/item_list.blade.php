@@ -1,6 +1,5 @@
 @extends('front.common.layout')
 @section('title', '案件一覧 - エンジニアルート')
-@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
@@ -247,7 +246,7 @@
                         </div>
                         <p class="detail">{{ $item->detail }}</p>
                     <div class="commonCenterBtn">
-                        <a href="/item/detail?id={{ $item->id }}"><button><p>詳細を見る<p></button></a>
+                        <a href="/item/detail?id={{ $item->id }}"  target="_blank"><button><p>詳細を見る<p></button></a>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,5 @@
 @extends('front.common.layout')
 @section('title', '新規会員登録 - エンジニアルート')
-@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 @section('content')
 <?php
     use App\Models\Ms_contract_types;

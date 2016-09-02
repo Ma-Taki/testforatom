@@ -1,4 +1,5 @@
 @extends('front.common.layout')
+@section('title', 'パスワード再設定URLの通知完了 - エンジニアルート')
 @section('content')
 <div class="wrap">
     <div id="user_reminder_complete" class="content">
