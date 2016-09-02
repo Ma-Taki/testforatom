@@ -46,7 +46,8 @@ class UserEditRequest extends Request
             'contract_types' => '',
             'prefecture' => '',
             'station' => '',
-            'email' => 'required|email|max:256|confirmed|unique:users,mail,'.$this->id.',id,delete_date,null',
+            // user_id はViewから送ってる
+            'email' => 'required|email|max:256|confirmed|unique:users,mail,'.$this->user_id.',id,delete_date,NULL',
             'email_confirmation' => '',
             'phone_num' => [
                 'required',

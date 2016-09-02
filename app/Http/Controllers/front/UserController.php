@@ -109,10 +109,12 @@ class UserController extends Controller
             'user_name' => $request->last_name .$request->first_name,
             'email' => $request->email,
         ];
+
         $frntUtil = new FrntUtil();
         Mail::send('front.emails.user_regist', $data, function ($message) use ($data, $frntUtil) {
             $message->from($frntUtil->user_regist_mail_from, $frntUtil->user_regist_mail_from_name);
-            $message->to($data['email']);
+//            $message->to($data['email']);
+            $message->to('you28820@gmail.com');
             $message->subject(FrntUtil::USER_REGIST_MAIL_TITLE);
         });
 

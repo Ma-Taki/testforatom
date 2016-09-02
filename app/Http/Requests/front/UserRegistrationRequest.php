@@ -46,7 +46,7 @@ class UserRegistrationRequest extends Request
             'contract_types' => '',
             'prefecture' => '',
             'station' => '',
-            'email' => 'required|email|max:256|confirmed|unique:users,mail,'.$this->id.',id,delete_date,null',
+            'email' => 'required|email|max:256|confirmed|unique:users,mail,NULL,id,delete_date,NULL',
             'email_confirmation' => '',
             'phone_num' => [
                 'required',
