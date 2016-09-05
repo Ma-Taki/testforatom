@@ -29,7 +29,7 @@ use App\Models\Ms_job_types;
                     <li class="condition_elmnt_name">{{$skill_category->name}}</li>
                     <div class="condition_elmnt_value">
 @foreach($skill_category->skills as $skill)
-@if($skill->master_type !== mdlUtil::MASTER_TYPE_INDEX_ONLY)
+@if($skill->master_type != mdlUtil::MASTER_TYPE_INDEX_ONLY)
                         <li class="condition_elmnt">
                             <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
                         </li>
