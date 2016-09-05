@@ -93,7 +93,7 @@
                                     <h3>{{ $skill_category->name }}</h3>
                                     <ul>
 @foreach($skill_category->skills as $skill)
-@if($skill->master_type !== mdlUtil::MASTER_TYPE_INDEX_ONLY)
+@if($skill->master_type != mdlUtil::MASTER_TYPE_INDEX_ONLY)
                                         <li class="tabContentElementOneThird">
                                             <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
                                         </li>
@@ -187,9 +187,9 @@
                     <label>
                         <span class="selectBox">
                             <select id="order" class="">
-                                <option value="RegistrationDesc" {{ $params['order'] === 'RegistrationDesc' ? "selected" : ""}}>新着順</option>
-                                <option value="ServiceAsc" {{ $params['order'] === 'ServiceAsc' ? "selected" : ""}}>受付終了日が近い順</option>
-                                <option value="RateDesc" {{ $params['order'] === 'RateDesc' ? "selected" : ""}}>報酬が高い順</option>
+                                <option value="RegistrationDesc" {{ $params['order'] == 'RegistrationDesc' ? "selected" : ""}}>新着順</option>
+                                <option value="ServiceAsc" {{ $params['order'] == 'ServiceAsc' ? "selected" : ""}}>受付終了日が近い順</option>
+                                <option value="RateDesc" {{ $params['order'] == 'RateDesc' ? "selected" : ""}}>報酬が高い順</option>
                             </select>
                         </span>
                         <span class="selectBox">

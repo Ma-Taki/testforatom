@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /*-------------------------------
-# common reset
+# reset
 -------------------------------*/
 html,body,div,span,object,iframe,
 h1,h2,h3,h4,h5,h6,p,blockquote,pre,
@@ -78,11 +78,10 @@ p{
     font-size: 1.4rem;
     line-height: normal;
 }
-ul li{
+ul li,label,textarea{
     font-size: 1.4rem;
 }
-label{ font-size: 1.4rem; }
-textarea{ font-size: 1.4rem; }
+/* reset end */
 
 /*-------------------------------
 ## common
@@ -94,6 +93,8 @@ textarea{ font-size: 1.4rem; }
 }
 
 .content{ margin-top: 5%; }
+
+
 .content h1{ font-size: 2.5rem; }
 .content h2{ font-size: 2rem; }
 .content h3{ font-size: 1.5rem; }
@@ -115,6 +116,13 @@ textarea{ font-size: 1.4rem; }
 .content-right{
     width: 25%;
     float: left;
+}
+
+/* 基本のテキストエリア */
+textarea{
+    width: 100%;
+    border: 1px solid #5e8796;
+    border-radius: 5px;
 }
 
 /* 基本のセレクトボックス */
@@ -154,7 +162,7 @@ textarea{ font-size: 1.4rem; }
 /* alert関連 */
 .alert{
     width: 100%;
-    margin: 2% 0;
+    margin: 2rem 0;
     padding: 2% 3%;
 }
 
@@ -192,13 +200,13 @@ p.pageInfo{
 	display: inline-block;
 }
 
+.cmmn__text-align-right {
+    text-align: right;
+}
+
 .alignCenter {
     text-align: -webkit-center;
     text-align: -moz-center;
-}
-
-.tAlignRight{
-    text-align: right;
 }
 
 .clear{
@@ -206,9 +214,6 @@ p.pageInfo{
 }
 .wrap_block{
     display: block;
-}
-.no_indent{
-    text-indent: 0;
 }
 
 .table{ width: 100%; display: table; }
@@ -228,6 +233,61 @@ p.pageInfo{
 .wsnw {
     white-space:nowrap;
 }
+
+.cmmn-btn{
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.cmmn-btn button{
+    width: 30%;
+	border-radius: 32px;
+	background: #5e8796;
+	color: #fff;
+	border-style: none;
+    margin: 0 1rem;
+    padding: 1rem;
+    font-size: 1.4rem;
+    vertical-align: middle;
+}
+
+.main-content {
+    width: 100%;
+    margin: 0 auto;
+    margin: 5rem 0;
+}
+
+.main-content__title {
+    font-size: 2.5rem;
+}
+
+.main-content__body {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.content__element {
+    margin-top: 4rem;
+}
+
+.content__info {
+    color: #5e8796;
+    margin-bottom: 2rem;
+}
+
+.content__title {
+    font-size: 2rem;
+}
+
+.element__title {
+    font-size: 1.6rem;
+}
+
+.element__body{
+    width: 95%;
+    margin: 0 auto;
+}
+/* common end */
 
 .hello_user{background: url(../images/absurdidad.png)repeat;}
 .hello_user .contentInr{padding-bottom: 2.4rem;}
@@ -1151,68 +1211,6 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## お問い合わせ
 -------------------------------*/
-.contact{
-    width: 95%;
-    margin: 0 auto;
-}
-#contact p.pageInfo{
-    color: #5e8796;
-    padding: 2% 0 3%;
-}
-
-textarea{
-    width: 100%;
-    border: 1px solid #5e8796;
-    border-radius: 5px;
-}
-
-#contact p.mailConfirmText{
-    padding-top: 2%;
-}
-
-#contact .userNameTable{
-    display: table;
-    width: 85%;
-}
-
-.userNameTable .table-row:nth-child(2) label{
-    padding-top: 2%;
-}
-
-#contact .userNameTable label{
-    font-size: 1.3rem;
-    width: 50%;
-    display: table-cell;
-}
-
-#contact .userNameTable input{
-    width: 85%;
-    padding: 2%;
-    margin-left: 2%;
-}
-
-.confirmBtn{
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 3%;
-    display: table;
-}
-
-#contact .button{
-    width: 45%;
-    display: table-cell;
-    padding: 0 2%;
-}
-
-.confirmBtn button {
-    font-size: 1.4rem;
-	width: 100%;
-	border-radius: 32px;
-	background: #5e8796;
-	color: #fff;
-	border-style: none;
-    padding: 2.5% 0;
-}
 
 /* プライバシーポリシー */
 .textAreaInr .title{
@@ -1235,7 +1233,7 @@ textarea{
 .textAreaInr p.titleDetail{
     padding: 0;
 }
-
+/* お問い合わせ end */
 
 /*-------------------------------
 ## ご利用の流れ
@@ -1353,38 +1351,14 @@ textarea{
     cursor: pointer;
 }
 
+
+
 /*-------------------------------
 ## プライバシーポリシー, 利用規約
 -------------------------------*/
-.privacyPolicy,
-.terms{
-    width: 95%;
-    margin: 0 auto;
-}
-
-.terms{
-    padding-top: 4%;
-}
-
-.privacyPolicyInr{
-    width: 95%;
-    margin: 0 auto;
-}
-
-#privacyPolicy .contentTitle{
-    width: 95%;
-    margin: 0 auto;
-    padding-top: 4%;
-}
-
-#privacyPolicy .block,
-#terms .block{
-    margin-top: 1.5%;
-}
-
-#privacyPolicy .text,
-#terms .text{
-    padding: 0.5% 1rem 0;
+.privacy-policy__element,
+.terms__element{
+    margin-top: 2rem;
 }
 
 /*-------------------------------
@@ -2215,10 +2189,12 @@ tablet.css 641px~1024px
         font-size: 56.25%;
     }
 
+/*
     .wrap{
         width:95%;
         margin:0 auto;
     }
+*/
 
 	/* nav */
 	nav ul{
@@ -2237,10 +2213,7 @@ tablet.css 641px~1024px
     /*-------------------------------
 	# お問い合わせ
 	-------------------------------*/
-    #contact .inputField input{ width: 100%; }
-    #contact .inputField textarea{ width: 100%; }
-    #contact .userNameTable{ width: 100%; }
-    #contact .userNameTable input{ width: 86%; }
+    /* お問い合わせ end */
 
     /*-------------------------------
     # 案件詳細
@@ -2324,11 +2297,11 @@ sp.css ~640px
     html{
         /* base font-size(8px) */
         font-size: 56.25%;
-
-/*        font-size: 50%; */
     }
-    .invisible-sp{ display: none; }
-    .wrap{ width: 100%; }
+
+    .invisible-sp{
+        display: none;
+    }
     .content{ margin: 10% 2.5% 5% 2.5%; }
 
     .bg{background: #5e8796;}
@@ -2346,6 +2319,25 @@ sp.css ~640px
     	background-size: 24px 24px;
     }
 
+    .cmmn-btn {
+        text-align: center;
+        margin-top: 4rem;
+    }
+
+    .cmmn-btn button{
+        width: 70%;
+        border-radius: 32px;
+	    background: #5e8796;
+	    color: #fff;
+        border-style: none;
+        margin: 0 1rem;
+        padding: 1rem;
+        font-size: 1.4rem;
+    }
+
+    .cmmn-btn button:not(:first-child) {
+        margin-top: 1rem;
+    }
     .commonCenterBtn button {
     	width: 70%;
         font-size: 1.4rem;
@@ -2392,11 +2384,6 @@ sp.css ~640px
     ## パスワード変更
     -------------------------------*/
     #edit_password .input_password label input{width: 100%;}
-
-    /*-------------------------------
-    ## パスワード変更
-    -------------------------------*/
-
 
     /*-------------------------------
     # エントリー
@@ -2687,37 +2674,7 @@ sp.css ~640px
     /*-------------------------------
     # お問い合わせ
     -------------------------------*/
-    #contact .inputName{
-        width: 100%;
-        display: table-row;
-    }
-    #contact .inputField{
-        width: 100%;
-        display: table-row;
-        margin: 1% 0;
-    }
-    #contact .inputName p{
-        padding: 1% 0;
-     }
-    #contact .inputField input{
-        width: 100%;
-        margin: 1% 0;
-    }
-    #contact .inputField textarea{ width: 100%; }
-    #contact .confirmBtn{
-        width: 80%;
-    }
-    #contact .button{
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        display: table-row;
-    }
-    #contact .confirmBtn button{
-        width: 100%;
-        padding: 2.5% 0;
-        margin: 2% 0;
-    }
+    /* お問い合わせ end */
 
     /*-------------------------------
     ## ご利用の流れ
