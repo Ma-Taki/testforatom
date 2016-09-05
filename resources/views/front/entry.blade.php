@@ -8,7 +8,7 @@
 <div class="wrap">
     <div id="entry" class="content">
         <h1 class="pageTitle">エントリー内容確認・スキルシート提出</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="entry">
             <p class="pageInfo">下記の内容を確認後、スキルシートの提出方法をお選び頂き、「この内容でエントリーする」ボタンをクリックしてください。</p>
 {{-- error：custom --}}
@@ -23,7 +23,7 @@
             </div>
     @endif
 @endif
-            <hr class="partitionLine_03">
+            <hr class="hr-1px-dashed-333">
 
             <form method="post" action="{{ url('/entry') }}" enctype="multipart/form-data">
 

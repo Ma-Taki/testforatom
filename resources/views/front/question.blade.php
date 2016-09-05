@@ -5,7 +5,7 @@
     <div class="content">
         <div class="content-left">
             <h1 class="pageTitle">Q&amp;A&nbsp;&nbsp;ーよくある質問ー</h1>
-            <hr class="partitionLine_02">
+            <hr class="hr-2px-solid-5e8796">
             <div id="question">
                 <h2 class="subTitle">エンジニアルートについて</h2>
 

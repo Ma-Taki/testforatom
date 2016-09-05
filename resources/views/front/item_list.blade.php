@@ -19,7 +19,7 @@
                 <h1 class="title">該当案件一覧</h1>
                 <span class="itemCount">該当件数：<span class="num">{{ $itemList->total() }}</span>件</span>
             </div>
-            <hr class="partitionLine_02">
+            <hr class="hr-2px-solid-5e8796">
 
 @if(strstr(Request::url(), '/item/search'))
             <div class="sp_condition_search_btn invisible-pc invisible-tab">

@@ -4,13 +4,13 @@
 <div class="wrap">
     <div id="contact" class="content">
         <h1 class="pageTitle">お問い合わせ内容確認</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="contact">
             <p class="pageInfo">
                 お問い合わせ内容をご確認頂き、「個人情報の取扱いについて」に同意の上、「
                 個人情報の取扱いに同意して送信する」ボタンをクリックしてください。
             </p>
-            <hr class="partitionLine_03">
+            <hr class="hr-1px-dashed-333">
 
             <form method="post">
 
@@ -22,7 +22,7 @@
                         <p>{{ $last_name .' ' .$first_name .'（' .$last_name_kana .' '.$first_name_kana .'）' }}</p>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -32,7 +32,7 @@
                         <p>{{ $company_name }}</p>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -42,7 +42,7 @@
                         <p>{{ $mail }}</p>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -52,7 +52,7 @@
                         <p>{{ $phoneNumber }}</p>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -62,7 +62,7 @@
                         <p class="pre-wrap">{{ $contactMessage }}</p>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="textArea">
                     <div class="textAreaInr">

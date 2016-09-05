@@ -8,7 +8,7 @@
 <div class="wrap">
     <div id="reminder" class="content">
         <h1 class="pageTitle">パスワード再設定URLの通知</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="user_reminder">
 {{-- error：validation --}}
 @if(count($errors) > 0)
@@ -36,7 +36,7 @@
                 登録メールアドレスを入力し、「送信」ボタンをクリックしてください。<br>
                 登録メールアドレス宛に、パスワード再設定URLを記載したメールを送信します。
             </p>
-            <hr class="partitionLine_03">
+            <hr class="hr-1px-dashed-333">
 
             <form method="post" action="{{ url('/user/reminder') }}">
 
@@ -48,7 +48,7 @@
                         <input type="text" name="mail" maxlength="256" value="{{ old('mail') }}" placeholder="">
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="commonCenterBtn">
                     <button type="submit">送信</button>

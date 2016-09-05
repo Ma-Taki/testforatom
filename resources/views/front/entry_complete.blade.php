@@ -8,7 +8,7 @@
 <div class="wrap">
     <div id="entry_complete" class="content">
         <h1 class="pageTitle">エントリー完了</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="contentInr alignCenter">
             <p>お申し込み頂きありがとうございます。</p>
             <p>下記の内容でエントリーを受け付けました。</p>

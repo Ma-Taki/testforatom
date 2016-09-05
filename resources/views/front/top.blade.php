@@ -132,6 +132,7 @@ use App\Models\Tr_search_categories;
                                         <ul>
 @foreach($skill_category->skills as $skill)
 @if($skill->master_type !== mdlUtil::MASTER_TYPE_INDEX_ONLY)
+{{ var_dump($skill->master_type) }}
                                             <li class="tabContentElementOneThird">
                                                 <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
                                             </li>

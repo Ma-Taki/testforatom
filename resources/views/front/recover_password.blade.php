@@ -8,7 +8,7 @@
 <div class="wrap">
     <div id="recover_password" class="content">
         <h1 class="pageTitle">パスワード再設定</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="recover_password">
 {{-- error：validation --}}
 @if(count($errors) > 0)
@@ -33,7 +33,7 @@
     @endif
 @endif
             <p class="pageInfo">◆&nbsp;下記より新しいパスワードを設定してください。</p>
-            <hr class="partitionLine_03">
+            <hr class="hr-1px-dashed-333">
 
             <form method="post" action="{{ url('/user/recovery') }}">
 
@@ -46,7 +46,7 @@
                         <label><input type="password" name="new_password_confirmation" maxlength="20" placeholder="確認のため、もう一度入力してください。"></label>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="commonCenterBtn">
                     <button type="submit">パスワードを変更する</button>

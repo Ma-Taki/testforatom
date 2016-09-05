@@ -4,7 +4,7 @@
 <div class="wrap">
     <div id="user_reminder_complete" class="content">
         <h1 class="pageTitle">パスワード再設定案内メール&nbsp;送信完了</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="user_reminder_complete">
             <p class="pageInfo">
                 パスワード再設定ページのURLが記載されたメールを、登録メールアドレス宛に送信しました。<br />

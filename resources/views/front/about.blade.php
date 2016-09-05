@@ -5,7 +5,7 @@
     <div class="content">
         <div id="aboutERoute" class="content-left">
             <h1 class="title">エンジニアルートとは</h1>
-            <hr class="partitionLine_02">
+            <hr class="hr-2px-solid-5e8796">
             <div class="aboutERouteInr" >
                 <div class="about_image">
                     <img src="/front/images/sky.jpg" alt="エンジニアルートとは">

@@ -8,7 +8,7 @@
 <div class="wrap">
     <div id="company" class="content">
         <h1 class="pageTitle">企業の皆様へ</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="company">
             <div class="pageDetail">
                 <p>弊社では業種・言語問わず、様々な企業様のご支援をさせて頂いております。</p>
@@ -39,7 +39,7 @@
     @endif
 @endif
             <p class="pageInfo">必要な項目をご記入いただき、「記入内容を確認する」ボタンをクリックしてください。<span class="color-red">※</span>印の項目は入力必須です。</p>
-            <hr class="partitionLine_03">
+            <hr class="hr-1px-dashed-333">
 
             <form method="post" action="{{ url('/company/confirm') }}">
 
@@ -65,7 +65,7 @@
                         </span>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -78,7 +78,7 @@
                         <label>めい<input type="text" value="{{ isset($first_name_kana) ? $first_name_kana : old('first_name_kana') }}" name="first_name_kana" placeholder="たろう"></label>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -88,7 +88,7 @@
                         <input type="text" value="{{ isset($company_name) ? $company_name : old('company_name') }}" name="company_name" maxlength="30" placeholder="例）ソリッドシード株式会社">
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -98,7 +98,7 @@
                         <input type="text" value="{{ isset($department_name) ? $department_name : old('department_name') }}" name="department_name" maxlength="30" placeholder="例）営業部">
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -109,7 +109,7 @@
                         <input type="text" value="{{ isset($address) ? $address : old('address') }}" name="address" placeholder="例）東京都港区南青山5-4-27 Barbizon104 3F">
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -119,7 +119,7 @@
                         <input type="text" value="{{ isset($phone_num) ? $phone_num : old('phone_num') }}" name="phone_num" maxlength="20" placeholder="例）03-5774-5557">
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -130,7 +130,7 @@
                         <label><input type="text" value="{{ isset($mail_confirmation) ? $mail_confirmation : old('mail_confirmation') }}" name="mail_confirmation" maxlength="256" placeholder="確認のため、もう一度入力してください。">（半角）</label>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -140,7 +140,7 @@
                         <input type="text" value="{{ isset($url) ? $url : old('url') }}" name="url" placeholder="例）http://solidseed.co.jp/">
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -150,7 +150,7 @@
                         <textarea name="contactMessage" rows="10" maxlength="500" placeholder="お問い合わせ内容をご記入ください。">{{ isset($contactMessage) ? $contactMessage : old('contactMessage') }}</textarea>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="commonCenterBtn">
                     <button type="submit">記入内容を確認する</button>

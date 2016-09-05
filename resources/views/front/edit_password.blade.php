@@ -8,7 +8,7 @@
 <div class="wrap">
     <div id="edit_password" class="content">
         <h1 class="pageTitle">パスワード変更</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="edit_password">
 {{-- error：validation --}}
 @if(count($errors) > 0)
@@ -33,7 +33,7 @@
     @endif
 @endif
             <p class="pageInfo">◆&nbsp;編集後に「パスワードを変更する」ボタンをクリックしてください。</p>
-            <hr class="partitionLine_03">
+            <hr class="hr-1px-dashed-333">
 
             <form method="post" action="{{ url('/user/edit/password') }}">
 
@@ -45,7 +45,7 @@
                         <input type="password" name="old_password" maxlength="20" placeholder="現在使用しているパスワードを入力して下さい。">
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -56,7 +56,7 @@
                         <label><input type="password" name="new_password_confirmation" maxlength="20" placeholder="確認のため、もう一度入力してください。"></label>
                     </div>
                 </div>
-                <hr class="partitionLine_03">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="commonCenterBtn">
                     <button type="submit">パスワードを変更する</button>

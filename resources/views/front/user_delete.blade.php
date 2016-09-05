@@ -8,13 +8,13 @@
 <div class="wrap">
     <div id="user_delete" class="content">
         <h1 class="pageTitle">退会</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="user_delete">
             <p class="pageInfo">
                 「退会する」ボタンをクリックで、エンジニアルートから退会を行います。<br>
                 退会を行うことで、案件へのエントリーができなくなります。
             </p>
-            <hr class="partitionLine_03">
+            <hr class="hr-1px-dashed-333">
 
             <form method="post" action="{{ url('/user/delete') }}">
                 <div class="commonCenterBtn">

@@ -4,10 +4,10 @@
 <div class="wrap">
     <div id="privacyPolicy" class="content">
         <h1 class="pageTitle">プライバシーポリシー</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="privacyPolicy">
             <h2 class="contentTitle">個人情報保護方針</h2>
-            <hr class="partitionLine_01">
+            <hr class="hr-1px-dashed-333">
             <div class="privacyPolicyInr">
 
                 <div class="block">
@@ -80,7 +80,7 @@
             </div><!-- ./privacyPolicyInr -->
 
             <h2 class="contentTitle">個人情報の取扱いについて</h2>
-            <hr class="partitionLine_01">
+            <hr class="hr-1px-dashed-333">
             <div class="privacyPolicyInr">
 
                 <div class="block">

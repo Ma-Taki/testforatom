@@ -32,7 +32,7 @@ body{
 	line-height:1;
 	color: #333;
     font-family: "ＭＳ Ｐゴシック", Avenir , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "MS PGothic" , sans-serif;
-    -webkit-text-size-adjust: 100%; /* ブラウザの自動調整を行わない */
+    -webkit-text-size-adjust: 100%;
 }
 
 input{padding:0;}
@@ -83,6 +83,7 @@ ul li{
 }
 label{ font-size: 1.4rem; }
 textarea{ font-size: 1.4rem; }
+
 /*-------------------------------
 ## common
 -------------------------------*/
@@ -115,8 +116,6 @@ textarea{ font-size: 1.4rem; }
     width: 25%;
     float: left;
 }
-
-.wsnw { white-space:nowrap; }
 
 /* 基本のセレクトボックス */
 .selectBox{
@@ -177,7 +176,6 @@ p.pageInfo{
     padding: 2% 0 3%;
 }
 
-.color-01{ color: #5e8796; }
 .color-red{ color: #ff0000; }
 
 .fs0{ font-size: 0; }
@@ -203,27 +201,32 @@ p.pageInfo{
     text-align: right;
 }
 
-.clear{ clear: both; }
-
-.wrap_block{display: block;}
-.no_indent{text-indent: 0;}
+.clear{
+    clear: both;
+}
+.wrap_block{
+    display: block;
+}
+.no_indent{
+    text-indent: 0;
+}
 
 .table{ width: 100%; display: table; }
 .table-row{ display: table-row; }
 .table-cell{ display: table-cell; }
 
-.partitionLine_01{
+/* hr用 */
+.hr-1px-dashed-333{
     border: 0;
     border-top: 1px dashed #333;
 }
-.partitionLine_02 {
+.hr-2px-solid-5e8796{
     border: 2px solid #5e8796;
     margin-top: 8px;
 }
 
-.partitionLine_03{
-    border: 0;
-    border-top: 1px dashed #333;
+.wsnw {
+    white-space:nowrap;
 }
 
 .hello_user{background: url(../images/absurdidad.png)repeat;}

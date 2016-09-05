@@ -5,7 +5,7 @@
     <div class="content">
         <div class="content-left">
             <h1 class="title">ご利用の流れ</h1>
-            <hr class="partitionLine_02">
+            <hr class="hr-2px-solid-5e8796">
             <p class="pageDetail">エンジニアルートでは、案件のプロジェクト終了後までエンジニアの皆様を全力でサポート致します。</p>
 
             <ul class="flowImages">

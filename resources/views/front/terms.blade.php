@@ -4,7 +4,7 @@
 <div class="wrap">
     <div id="terms" class="content">
         <h1 class="pageTitle">利用規約</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="terms">
             <div class="block">
                 <h3>1.「Engineer Route」のサービス</h3>

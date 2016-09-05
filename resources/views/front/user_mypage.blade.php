@@ -8,7 +8,7 @@
 <div class="wrap">
     <div id="mypage" class="content">
         <h1 class="pageTitle">登録内容確認</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="mypage">
 
             <div class="mypage_element">

@@ -4,7 +4,7 @@
 <div class="wrap">
     <div id="user_complete" class="content">
         <h1 class="pageTitle">会員登録完了</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="contentInr alignCenter">
             <p>この度はエンジニアルートに会員登録をしていただき、誠にありがとうございます。</p>
             <div class="regist_thanks">

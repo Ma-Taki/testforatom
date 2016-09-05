@@ -11,7 +11,7 @@
 <div class="wrap">
     <div id="user_edit" class="content">
         <h1 class="pageTitle">プロフィール変更</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
         <div class="user_edit">
 {{-- error：validation --}}
 @if(count($errors) > 0)
@@ -36,7 +36,7 @@
     @endif
 @endif
             <p class="pageInfo">◆&nbsp;編集後に「変更内容を登録する」ボタンをクリックしてください。<span class="color-red">※</span>印の項目は入力必須項目です。</p>
-            <hr class="partitionLine_01">
+            <hr class="hr-1px-dashed-333">
 
             <form method="post" name="userForm" action="{{ url('/user/edit') }}">
                 <div class="input_field fs0">
@@ -50,7 +50,7 @@
                         <label>めい<input type="text" maxlength="15" name="first_name_kana" value="{{ old('first_name_kana', $user->first_name_kana) }}" placeholder="たろう"></label>
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -61,7 +61,7 @@
                         <label><input type="radio" name="gender" @if(old('gender', $user->sex) == "Female") checked @endif value="Female">女性</label>
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -97,7 +97,7 @@
                         日</label>
                     </div>
                 </div>
-                <hr class="clear partitionLine_01">
+                <hr class="clear hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -107,7 +107,7 @@
                         <input type="text" name="education" maxlength="50" value="{{ old('education', $user->education_level) }}" placeholder="例）〇〇大学〇〇学部〇〇学科 卒">
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -117,7 +117,7 @@
                         <input type="text" name="country" maxlength="20" value="{{ old('country', $user->nationality) }}" placeholder="例）日本">
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -131,7 +131,7 @@
 @endforeach
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -153,7 +153,7 @@
                         </label>
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -163,7 +163,7 @@
                         <input type="text" maxlength="30" name="station" value="{{ old('station', $user->station) }}" placeholder="例）〇〇線〇〇駅">
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -173,7 +173,7 @@
                         <label><input type="text" maxlength="14" name="phone_num" value="{{ old('phone_num', $user->tel) }}" placeholder="例）03-5774-5557">（半角 ※ハイフン付き）</label>
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
                 <div class="input_field fs0">
                     <div class="input_f_name">
@@ -184,7 +184,7 @@
                         <label><input type="text" maxlength="256" name="email_confirmation" value="{{ old('email_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角）</label>
                     </div>
                 </div>
-                <hr class="partitionLine_01">
+                <hr class="hr-1px-dashed-333">
 
             <div class="commonCenterBtn">
                 <button type="submit" id="confirmBtn">変更内容を登録する</button>

@@ -4,7 +4,7 @@
 <div class="wrap">
     <div id="login" class="content">
         <h1 class="pageTitle">ログイン</h1>
-        <hr class="partitionLine_02">
+        <hr class="hr-2px-solid-5e8796">
 {{-- error：validation --}}
 @if(count($errors) > 0)
         <div class="alert alert-danger">
@@ -50,7 +50,7 @@
                 {{ csrf_field() }}
             </form>
         </div>
-        <hr class="partitionLine_03 invisible-sp">
+        <hr class="hr-1px-dashed-333 invisible-sp">
         <div class="contentInr">
             <p>ログインすると以下の機能を使用できるようになります。</p>
             <ul>
