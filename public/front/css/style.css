@@ -98,8 +98,12 @@ ul li,label,textarea{
 .content h2{ font-size: 2rem; }
 .content h3{ font-size: 1.5rem; }
 .content h4{ font-size: 1.2rem; }
-.content h1.pageTitle{
-}
+
+.main-content h1{ font-size: 2.5rem; }
+.main-content h2{ font-size: 2rem; }
+.main-content h3{ font-size: 1.5rem; }
+.main-content h4{ font-size: 1.2rem; }
+
 .content p.pageDetail{
     font-size: 1.6rem;
     color: #5e8796;
@@ -2328,6 +2332,18 @@ sp.css ~640px
         margin: 5rem 0 0 0;
     }
 
+    /* サイドバーがない画面 */
+    .company,
+    .company-confirm,
+    .company-complete,
+    .privacy-policy,
+    .contact,
+    .contact-confirm,
+    .contact-complete,
+    .terms {
+        margin-bottom: 5rem;
+    }
+
     .main-content-left{
         width: 100%;
         margin-bottom: 5rem;
@@ -2411,6 +2427,9 @@ sp.css ~640px
     # マイページ
     -------------------------------*/
     .mypage_elementInr{padding: 2rem;}
+    .user_delete_btn {
+        text-align: center;
+    }
 
     /*-------------------------------
     ## パスワード変更

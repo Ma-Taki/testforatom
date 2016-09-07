@@ -172,7 +172,7 @@
                                 <div class="question-anser__inr">
                                     <img alt="アンサー" src="/front/images/ico-answer.png">
                                     <div class="question-anser__text">
-                                        <p><a class="hover-thin" href="/frow">「ご利用の流れ」</a>をご参照ください。</p>
+                                        <p><a class="hover-thin" href="/flow">「ご利用の流れ」</a>をご参照ください。</p>
                                     </div>
                                 </div>
                             </div>
