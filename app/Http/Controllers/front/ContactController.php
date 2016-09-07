@@ -53,9 +53,9 @@ class ContactController extends FrontController
         // メール送信
         $frontUtil = new FrontUtil();
         Mail::send('front.emails.contact', $data, function ($message) use ($data, $frontUtil) {
-            $message->from($frontUtil->user_contact_mail_from, $frontUtil->user_contact_mail_from_name);
+            $message->from($frontUtil->user_contact_mail_from);
             foreach ((array)$frontUtil->user_contact_mail_to as $value){
-                $message->to($value, $frontUtil->user_contact_mail_to_name);
+                $message->to($value);
             }
             $message->subject(FrontUtil::USER_CONTACT_MAIL_TITLE);
         });

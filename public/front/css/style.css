@@ -94,7 +94,6 @@ ul li,label,textarea{
 
 .content{ margin-top: 5%; }
 
-
 .content h1{ font-size: 2.5rem; }
 .content h2{ font-size: 2rem; }
 .content h3{ font-size: 1.5rem; }
@@ -204,6 +203,10 @@ p.pageInfo{
     text-align: right;
 }
 
+.hover-thin:hover{
+    opacity: 0.6;
+}
+
 .alignCenter {
     text-align: -webkit-center;
     text-align: -moz-center;
@@ -253,9 +256,19 @@ p.pageInfo{
 
 .main-content {
     width: 100%;
-    margin: 0 auto;
     margin: 5rem 0;
 }
+
+.main-content-left {
+    width: 75%;
+    float: left;
+}
+
+.main-content-right {
+    width: 25%;
+    float: right;
+}
+
 
 .main-content__title {
     font-size: 2.5rem;
@@ -750,32 +763,36 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## 企業の皆様へ
 -------------------------------*/
-.company{
-    width: 95%;
-    margin: 0 auto;
-}
-
-#company .pageDetail{
+.content__detail{
     text-align: center;
-    padding: 2% 0 3%;
+    margin-bottom: 2rem;
     font-size: 1.6rem;
     font-weight: bold;
 }
 
-#company .pageDetail p{
-    line-height: 2.4rem;
+.company .selectBox{
+    font-size: 1.4rem;
+    border-radius: 5px;
 }
 
-#company p.pageInfo{
-    color: #5e8796;
-    padding: 2% 0 3%;
+.company .selectBox select{
+    width: 26rem;
+    font-size: 1.4rem;
+    line-height: 3rem;
+    color:#5e8796;
 }
 
-#company .selectBox{font-size: 1.4rem;border-radius: 5px;}
-#company .selectBox select{width: 26rem;font-size: 1.4rem;line-height: 3rem;color:#5e8796;}
-.input_address input:first-child{width: 35%;}
-.input_address input:nth-child(2){margin-top: 1.4rem;}
-#company_confirm .input_address{display: block;}
+.company-confirm .input_address{
+    display: block;
+}
+
+.input_address input:first-child{
+    width: 35%;
+}
+.input_address input:nth-child(2){
+    margin-top: 1.4rem;
+}
+
 
 /*-------------------------------
 ## 該当案件一覧
@@ -1293,65 +1310,71 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## Q&A
 -------------------------------*/
-#question{ margin: 0 4%; }
-#question h2{margin: 4rem 0 2rem 0;color: #5e8796;}
-.question{margin: 1rem 0;}
+.questions .content__title {
+    color: #5e8796;
+    padding-bottom: 2rem;
+}
 
-.questionElement{
+.question__element {
+    margin: 1rem 0;
+}
+
+.question {
     display: inline-flex;
     width: 100%;
     align-items:center;
 }
-.anserElement{display: block;width: 100%;}
+.question-anser {
+    display: block;
+    width: 100%;
+}
 
-.anserElementInr{
+.question-anser__inr {
     display: inline-flex;
     align-items: center;
     margin-top: 1rem;
 }
 
-.questionElement img,
-.anserElementInr img{
+.question img,
+.question-anser img{
     align-self: flex-start;
     width: 35px;
     height: 35px;
 }
 
-.questionText,
-.anserText{
+.question__text,
+.question-anser__text{
     width: 100%;
     font-size: 1.4rem;
     padding-left: 1rem;
 }
 
-.questionOpen{
+.question__mark{
     color: #5e8796;
     width: 5%;
     font-size: 2rem;
     text-align: center;
 }
 
-.anserElementInr a{
+.question-anser a{
     color: #E38585;
 }
 
-#question .url{
+.question-anser .question-anser__text-url{
     text-decoration: underline;
     padding-bottom: 1.4rem;
 }
 
-#question .partitionLine{
+.question__line{
     border: 1px dashed #333;
     opacity: 0.4;
 }
 
-.questionText:hover{
+.question__text:hover{
     color: #5e8796;
     opacity: 0.6;
     cursor: pointer;
 }
-
-
 
 /*-------------------------------
 ## プライバシーポリシー, 利用規約
@@ -1364,17 +1387,12 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## エンジニアルートとは
 -------------------------------*/
-.aboutERouteInr{
-    width: 95%;
-    margin: 0 auto;
-}
-
-.about_image{
+.about__image {
     text-align: center;
     position: relative;
 }
 
-.about_image .over_text{
+.about__image-text {
     font-size: 2.2rem;
     color: #fff;
     line-height: 4.4rem;
@@ -1385,15 +1403,10 @@ h1.SearchTitle:before{
     transform: translate(-50%, -50%);
 }
 
-#aboutERoute img{
-    padding-top: 2%;
-}
-
-.aboutERouteInr p{
+.about__text p{
     padding-top: 2.5%;
     line-height: 3rem;
 }
-
 
 /*-------------------------------
 ## サイドバー
@@ -2302,9 +2315,28 @@ sp.css ~640px
     .invisible-sp{
         display: none;
     }
-    .content{ margin: 10% 2.5% 5% 2.5%; }
 
-    .bg{background: #5e8796;}
+    .content{
+        margin: 10% 2.5% 5% 2.5%;
+    }
+
+    .bg{
+        background: #5e8796;
+    }
+
+    .main-content {
+        margin: 5rem 0 0 0;
+    }
+
+    .main-content-left{
+        width: 100%;
+        margin-bottom: 5rem;
+    }
+
+    .main-content-right{
+        width: 100%;
+        float: left;
+    }
 
     /* navi */
     .nav-mobile {
@@ -2400,7 +2432,7 @@ sp.css ~640px
     /*-------------------------------
     # エンジニアルートとは
     -------------------------------*/
-    .about_image .over_text{
+    .about__image-text{
         font-size: 1.5rem;
         line-height: 2.4rem;
     }
@@ -2716,10 +2748,6 @@ sp.css ~640px
     ##　Q&A
     -------------------------------*/
 
-    .subTitle{ margin-top: 7%; }
-    .questionElement{ margin-top: 3%; }
-    #question .partitionLine{ margin-top:3%; }
-
     /*-------------------------------
     ## サイドバー
     -------------------------------*/
@@ -3004,7 +3032,7 @@ sp.css ~640px
         line-height: 45px;
         border-bottom: 1px dotted #5e8796;
         opacity: 1.0;
-        margin-top: 0px;
+        margin: 0;
         padding-left: 16px;
         padding-right: 16px;
     }

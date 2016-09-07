@@ -89,9 +89,9 @@ class UserController extends Controller
                 $user->save();
 
                 // ユーザ契約形態中間テーブルにインサート
+                // ローカル環境用のデリート。本番で意味はないが影響もない
+                Tr_link_users_contract_types::where('user_id', $user->id)->delete();
                 foreach ((array)$db_data['contract_types'] as $contract_type) {
-                    // 本番でデリートする意味はないが、一応
-                    Tr_link_users_contract_types::where('user_id', $user->id)->delete();
                     Tr_link_users_contract_types::create([
                         'user_id' => $user->id,
                         'contract_type_id' => $contract_type,
@@ -114,6 +114,9 @@ class UserController extends Controller
         Mail::send('front.emails.user_regist', $data, function ($message) use ($data, $frntUtil) {
             $message->from($frntUtil->user_regist_mail_from, $frntUtil->user_regist_mail_from_name);
             $message->to($data['email']);
+            if (!empty($frntUtil->user_regist_mail_to_bcc)) {
+                $message->bcc($frntUtil->user_regist_mail_to_bcc);
+            }
             $message->subject(FrntUtil::USER_REGIST_MAIL_TITLE);
         });
 

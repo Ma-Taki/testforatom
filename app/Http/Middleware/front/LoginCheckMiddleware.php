@@ -20,7 +20,10 @@ class LoginCheckMiddleware
         // リクエストURL
         $requestUrl = $request->path();
         // cookieに有効なユーザIDが保存されているか
-        if (!Tr_users::find(CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))) {
+        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
+                        ->enable()
+                        ->get();
+        if ($user->isEmpty()) {
             if ($requestUrl == 'entry') {
                 $next = '/' .$requestUrl .'?' .$request->getQueryString();
                 // ログイン画面

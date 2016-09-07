@@ -2,18 +2,23 @@
 @section('title', 'お問い合わせ完了 - エンジニアルート')
 @section('content')
 <div class="wrap">
-    <div id="contact" class="content">
-        <h1 class="pageTitle">お問い合わせ完了</h1>
+    <div class="main-content company-complete">
+        <h1 class="main-content__title">お問い合わせ完了</h1>
         <hr class="hr-2px-solid-5e8796">
-        <div class="contact">
-            <p class="pageInfo">お問い合わせ頂きありがとうございます。</p>
-            <p>弊社にてお問い合わせ内容を確認後、エンジニアルートスタッフより、折り返しご連絡差し上げます。</p>
-            <p>今後ともエンジニアルートを宜しくお願い致します。</p>
-            <div class="commonCenterBtn">
-                <a href="{{ url('/') }}"><button>トップページへ</button></a>
+        <div class="main-content__body">
+            <div class="content__element">
+                <div class="content__info">
+                    <p>お問い合わせ頂きありがとうございます。</p>
+                </div>
+                <div class="content__body">
+                    <p>弊社にてお問い合わせ内容を確認後、エンジニアルートスタッフより、折り返しご連絡差し上げます。</p>
+                    <p>今後ともエンジニアルートを宜しくお願い致します。</p>
+                    <div class="cmmn-btn">
+                        <a href="{{ url('/') }}"><button>トップページへ</button></a>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div><!-- END CONTENT -->
 </div><!-- END WRAP -->
 @endsection

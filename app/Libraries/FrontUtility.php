@@ -77,23 +77,18 @@ class FrontUtility
     // メール：お問い合わせ
     const USER_CONTACT_MAIL_TITLE = '【エンジニアルート】お問い合わせメール';
     public $user_contact_mail_from = '';
-    public $user_contact_mail_from_name = '';
     public $user_contact_mail_to = '';
-    public $user_contact_mail_to_name = '';
 
     // メール：企業向けお問い合わせ
     const COMPANY_CONTACT_MAIL_TITLE = '【エンジニアルート】企業向けお問い合わせメール';
     public $company_contact_mail_from = '';
-    public $company_contact_mail_from_name = '';
     public $company_contact_mail_to = '';
-    public $company_contact_mail_to_name = '';
 
     // メール：会員登録完了
     const USER_REGIST_MAIL_TITLE = 'エンジニアルートにご登録頂きありがとうございます。';
     public $user_regist_mail_from = '';
     public $user_regist_mail_from_name = '';
-    public $user_regist_mail_to = '';
-    public $user_regist_mail_to_name = '';
+    public $user_regist_mail_to_bcc = '';
 
     // メール：エントリー完了
     const USER_ENTRY_MAIL_TITLE = '案件にエントリー頂きありがとうございます。';
@@ -101,6 +96,7 @@ class FrontUtility
     public $user_entry_mail_from_name = '';
     public $user_entry_mail_to = '';
     public $user_entry_mail_to_name = '';
+    public $user_entry_mail_to_bcc = '';
 
     // メール：パスワード再設定
     const USER_REMINDER_MAIL_TITLE = 'パスワード再設定URL通知メール';
@@ -114,19 +110,14 @@ class FrontUtility
             // ローカル環境
             case 'local':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->user_contact_mail_from_name = 'E-R開発(local)';
                 $this->user_contact_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->user_contact_mail_to_name = 'E-R開発者';
 
                 $this->company_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->company_contact_mail_from_name = 'E-R開発(local)';
                 $this->company_contact_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->company_contact_mail_to_name = 'E-R開発者';
 
                 $this->user_regist_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
-                $this->user_regist_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->user_regist_mail_to_name = 'E-R開発者';
+                $this->user_regist_mail_to_bcc  = '';
 
                 $this->user_entry_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_entry_mail_from_name = 'エンジニアルート';
@@ -142,27 +133,14 @@ class FrontUtility
             // 開発環境
             case 'develop':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->user_contact_mail_from_name = 'エンジニアルート(develop)';
-                $this->user_contact_mail_to = [
-                    'y.suzuki@solidseed.co.jp',
-                    'y.saito@solidssed.co.jp',
-                    'senoo@solidssed.co.jp',
-                ];
-                $this->user_contact_mail_to_name = 'エンジニアルート(develop)';
+                $this->user_contact_mail_to = ['y.suzuki@solidseed.co.jp'];
 
                 $this->company_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->company_contact_mail_from_name = 'エンジニアルート(develop)';
-                $this->company_contact_mail_to = [
-                    'y.suzuki@solidseed.co.jp',
-                    'y.saito@solidssed.co.jp',
-                    'senoo@solidssed.co.jp',
-                ];
-                $this->company_contact_mail_to_name = 'エンジニアルート(develop)';
+                $this->company_contact_mail_to = ['y.suzuki@solidseed.co.jp'];
 
                 $this->user_regist_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
-                $this->user_regist_mail_to = '';
-                $this->user_regist_mail_to_name = '';
+                $this->user_regist_mail_to_bcc = '';
 
                 $this->user_entry_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_entry_mail_from_name = 'エンジニアルート';
@@ -176,17 +154,23 @@ class FrontUtility
                 break;
 
             //　本番環境
-            case 'master':
-            /*
+            case 'production':
                 $this->user_contact_mail_from = 'sender@engineer-route.com';
-                $this->user_contact_mail_from_name = 'sender@engineer-route.com';
                 $this->user_contact_mail_to = 'info@engineer-route.com';
-                $this->user_contact_mail_to_name = 'info@engineer-route.com';
+
+                $this->company_contact_mail_from = 'sender@engineer-route.com';
+                $this->company_contact_mail_to = 'info@engineer-route.com';
 
                 $this->user_regist_mail_from = 'sender@engineer-route.com';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
-                break;
-            */
+                $this->user_regist_mail_to_bcc = 'info@engineer-route.com';
+
+                $this->user_entry_mail_from = 'sender@engineer-route.com';
+                $this->user_entry_mail_from_name = 'エンジニアルート';
+                $this->user_entry_mail_to_bcc = 'entry@engineer-route.com';
+
+                $this->user_reminder_mail_from = 'sender@engineer-route.com';
+                $this->user_reminder_mail_from_name = 'エンジニアルート';
             default:
                 break;
         }
@@ -225,7 +209,10 @@ class FrontUtility
      * @return bool
      */
     public static function isLogin(){
-        return !is_null(\Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID));
+        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
+                        ->enable()
+                        ->get();
+        return !$user->isEmpty();
     }
 
     /**
