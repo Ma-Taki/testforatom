@@ -419,6 +419,17 @@ h1.SearchTitle:before{
 }
 
 /*-------------------------------
+## トップページ：お知らせ
+-------------------------------*/
+.password-reminder__inr{
+    border:1px solid red;
+    padding:10px;
+}
+.password-reminder__inr a{
+    color:#D46363;
+}
+
+/*-------------------------------
 ## パスワード再設定
 -------------------------------*/
 .user_reminder{width: 95%;margin: 0 auto;}
@@ -2422,6 +2433,13 @@ sp.css ~640px
     /* 新規会員登録ボタン */
     .user_regist_btn{text-align:center; margin-bottom:2rem; }
     .user_regist_btn img{width: 70%;}
+
+    /*-------------------------------
+    ## トップページ：お知らせ
+    -------------------------------*/
+    .password-reminder .contentInr{
+        padding: 4rem 0 0 0;
+    }
 
     /*-------------------------------
     # マイページ
