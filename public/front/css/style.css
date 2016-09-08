@@ -362,13 +362,13 @@ p.pageInfo{
 }
 
 .paginate {
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
 }
 
 .page{
     width: 100%;
-    padding-top: 10%;
+    padding-top: 4rem;
     text-align: center;
 }
 
@@ -1117,6 +1117,10 @@ h1.SearchTitle:before{
 
 #item .detail{
     padding-top: 2%;
+}
+
+#item .keyWordSearch {
+    padding: 4rem 0 0 0;
 }
 
 .wordPunctuation:last-child{
