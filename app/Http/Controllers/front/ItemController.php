@@ -42,10 +42,11 @@ class ItemController extends FrontController
         // パラメータを作成
         $params = [
             'order' => $sortOrder['sortId'],
-            'limit' => $limit,
             'page' => $page,
         ];
         $params = array_merge($params, $request->all());
+        // mergeで上書きされるので後に入れる
+        $params['limit'] = $limit;
 
         return view('front.item_list', compact('itemList','params'));
     }
