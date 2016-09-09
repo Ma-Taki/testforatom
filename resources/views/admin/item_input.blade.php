@@ -12,6 +12,7 @@ $(function() {
       language: 'ja',
       autoclose: true,
       clearBtn: true,
+      todayHighlight: true,
   });
 });
 </script>
