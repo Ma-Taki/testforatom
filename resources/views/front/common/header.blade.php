@@ -8,7 +8,7 @@
                 <li><a href="/user">マイページ</a></li>
                 <li><a href="/logout" class="invisible-sp">ログアウト</a></li>
 @else
-                <li><a href="/user/regist" class="signin">新規登録</a></li>
+                <li><a href="/user/regist/auth" class="signin">新規登録</a></li>
                 <li><a href="/login">ログイン</a></li>
 @endif
             </ul>

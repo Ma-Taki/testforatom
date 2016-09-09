@@ -41,7 +41,7 @@
                 </div>
                 <div class="infoText">
                     <p>パスワードを忘れた方は<a href="/user/reminder">コチラ</a></p>
-                    <p>新規会員登録は<a href="/user/regist">コチラ</a></p>
+                    <p>新規会員登録は<a href="/user/regist/auth">コチラ</a></p>
                 </div>
                 <div class="commonCenterBtn">
                     <button type="submit">ログイン</button>

@@ -11,7 +11,7 @@
 @elseif(FrntUtil::isLogin() && Request::path() == '/')
 @else
             <li>
-                <a href="{{ url('/user/regist') }}">
+                <a href="{{ url('/user/regist/auth') }}">
                     <img src="/front/images/sbnrSignup.png" alt="会員登録はこちら">
                 </a>
             </li>
