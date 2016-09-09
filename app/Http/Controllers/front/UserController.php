@@ -11,6 +11,7 @@ use App\Http\Requests\front\UserEditRequest;
 use App\Http\Requests\front\EditPasswordRequest;
 use App\Http\Requests\front\ReminderRequest;
 use App\Http\Requests\front\RecoverPasswordRequest;
+use App\Http\Requests\front\MailAuthRequest;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\ModelUtility as MdlUtil;
 use App\Libraries\CookieUtility as CkieUtil;
@@ -25,11 +26,103 @@ use Log;
 class UserController extends Controller
 {
     /**
+     * メールアドレス認証画面表示
+     * GET:/user/regist/auth
+     */
+    public function showMailAuth() {
+        return view ('front.mail_auth');
+    }
+
+    /**
+     * メールアドレス認証 & 完了画面表示
+     * POST:/user/regist/auth
+     */
+    public function mailAuth(MailAuthRequest $request) {
+
+        // UUIDを生成
+        $ticket = FrntUtil::createUUID();
+
+        $auth_key = Tr_auth_keys::where('mail', $request->mail)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_MAIL_AUHT)
+                                ->get()
+                                ->first();
+
+        $data_db = [
+            'auth_key' => $auth_key,
+            'auth_task' => MdlUtil::AUTH_TASK_MAIL_AUHT,
+            'ticket' => $ticket,
+            'mail' => $request->mail,
+            'now' => Carbon::now()->format('Y-m-d H:i:s'),
+
+        ];
+
+        // トランザクション
+        DB::transaction(function () use ($data_db) {
+            try {
+                if (empty($data_db['auth_key'])) {
+                    // インサート
+                    $data_db['auth_key'] = new Tr_auth_keys;
+                    $data_db['auth_key']->mail = $data_db['mail'];
+                    $data_db['auth_key']->application_datetime = $data_db['now'];
+                    $data_db['auth_key']->auth_task = $data_db['auth_task'];
+                } else {
+                    // アップデート
+                    $data_db['auth_key']->application_datetime = $data_db['now'];
+                }
+                $data_db['auth_key']->ticket = $data_db['ticket'];
+                $data_db['auth_key']->save();
+
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+
+        // メール送信
+        $data_mail = [
+            'mail' => $request->mail,
+            'limit' => FrntUtil::AUTH_KEY_LIMIT_HOUR,
+            'url' => url('/user/regist?ticket='.$ticket),
+        ];
+
+        $frntUtil = new FrntUtil();
+        Mail::send('front.emails.mail_auth', $data_mail, function ($message) use ($data_mail, $frntUtil) {
+            $message->from($frntUtil->mail_auth_mail_from, $frntUtil->mail_auth_mail_from_name);
+            $message->to($data_mail['mail']);
+            $message->subject(FrntUtil::MAIL_TITLE_MAIL_AUTH);
+        });
+
+        return view('front.mail_auth_complete');
+    }
+
+    /**
      * 新規会員登録画面表示
      * GET:/user/regist
      */
-    public function index(){
-        return view('front.user_input');
+    public function index(Request $request){
+
+        // パラメータのticketから認証したメールアドレスを取得
+        $ticket = $request->ticket;
+        $now = Carbon::now()->addDay()->format('Y-m-d H:i:s');
+        $auth_key = Tr_auth_keys::where('ticket', $ticket)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_MAIL_AUHT)
+                                ->where('application_datetime', '<=', $now)
+                                ->get()
+                                ->first();
+
+        if (empty($auth_key)) {
+            Log::error('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
+                'ticket' => $ticket,
+                'auth_task' => MdlUtil::AUTH_TASK_MAIL_AUHT,
+                'now' => $now,
+            ]);
+            return redirect('/user/regist/auth')->with('custom_error_messages',['認証済みメールアドレスがありません。']);
+        }
+
+        return view('front.user_input',[
+            'mail' => $auth_key->mail,
+            'ticket' => $ticket,
+        ]);
     }
 
     /**
@@ -37,6 +130,26 @@ class UserController extends Controller
      * POST:/user/regist
      */
     public function store(UserRegistrationRequest $request){
+
+        // ticketとmailが正しいかチェックする
+        $ticket = $request->ticket;
+        $now = Carbon::now()->addDay()->format('Y-m-d H:i:s');
+        $auth_key = Tr_auth_keys::where('mail', $request->mail)
+                                ->where('ticket', $ticket)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_MAIL_AUHT)
+                                ->where('application_datetime', '<=', $now)
+                                ->get()
+                                ->first();
+
+        if (empty($auth_key)) {
+            Log::error('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
+                'mail' => $request->mail,
+                'ticket' => $ticket,
+                'auth_task' => MdlUtil::AUTH_TASK_MAIL_AUHT,
+                'now' => $now,
+            ]);
+            return redirect('/user/regist/auth')->with('custom_error_messages',['恐れ入りますが、再度メールアドレス認証を行ってください。']);
+        }
 
         // prefix_saltを作成
         $prefix_salt = FrntUtil::getPrefixSalt(20);
@@ -52,12 +165,13 @@ class UserController extends Controller
             'contract_types' => $request->contract_types,
             'prefecture_id' => $request->prefecture_id,
             'station' => $request->station,
-            'email' => $request->email,
+            'mail' => $request->mail,
             'phone_num' => $request->phone_num,
             'salt' => $prefix_salt,
             'password' => $prefix_salt .$request->password .FrntUtil::FIXED_SALT,
             'now' => Carbon::now()->format('Y-m-d H:i:s'),
             'contract_types' => $request->contract_types,
+            'auth_key' => $auth_key,
         ];
 
         // トランザクション
@@ -81,7 +195,7 @@ class UserController extends Controller
                 $user->nationality = !empty($db_data['country']) ? $db_data['country'] : null;
                 $user->prefecture_id = $db_data['prefecture_id'];
                 $user->station = !empty($db_data['station']) ? $db_data['station'] : null;
-                $user->mail = $db_data['email'];
+                $user->mail = $db_data['mail'];
                 $user->tel = $db_data['phone_num'];
                 $user->delete_flag = 0;
                 $user->delete_date = null;
@@ -98,6 +212,9 @@ class UserController extends Controller
                     ]);
                 }
 
+                // メールアドレスの認証鍵を物理削除
+                $db_data['auth_key']->delete();
+
             } catch (Exception $e) {
                 Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
@@ -107,20 +224,20 @@ class UserController extends Controller
         // メール送信
         $data = [
             'user_name' => $request->last_name .$request->first_name,
-            'email' => $request->email,
+            'mail' => $request->mail,
         ];
 
         $frntUtil = new FrntUtil();
         Mail::send('front.emails.user_regist', $data, function ($message) use ($data, $frntUtil) {
             $message->from($frntUtil->user_regist_mail_from, $frntUtil->user_regist_mail_from_name);
-            $message->to($data['email']);
+            $message->to($data['mail']);
             if (!empty($frntUtil->user_regist_mail_to_bcc)) {
                 $message->bcc($frntUtil->user_regist_mail_to_bcc);
             }
             $message->subject(FrntUtil::USER_REGIST_MAIL_TITLE);
         });
 
-        return view('front.user_complete')->with('email',  $request->email);
+        return view('front.user_complete')->with('mail',  $request->mail);
     }
 
     /*
@@ -242,13 +359,8 @@ class UserController extends Controller
                                 ->get()
                                 ->first();
 
-        // UUIDの生成、衝突をチェック（16^40通りなので、まず衝突しない）
-        $ticket = '';
-        do {
-            if (!empty($ticket)) Log::info('[duplicate UUID] ticket:'.$ticket);
-            $ticket = sha1(uniqid(rand(), true));
-            $w_obj = Tr_auth_keys::where('auth_task', $ticket)->get()->first();
-        } while (!empty($w_obj));
+        // UUIDを生成
+        $ticket = FrntUtil::createUUID();
 
         if (empty($auth_key)) {
             $auth_key = new Tr_auth_keys;

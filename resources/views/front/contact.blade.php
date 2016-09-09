@@ -11,7 +11,7 @@
         <div class="main-content__body">
             <div class="content__element">
 
-                @include('front.common.validation_error')
+@include('front.common.validation_error')
                 <div class="content__info">
                     <p>必要な項目をご記入いただき、「内容確認」ボタンをクリックしてください。<span class="color-red">※</span>印の項目は入力必須です。</p>
                 </div>

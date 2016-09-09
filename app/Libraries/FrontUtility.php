@@ -7,6 +7,7 @@ namespace App\Libraries;
 use App;
 use App\Libraries\CookieUtility as CkieUtil;
 use App\Models\Tr_users;
+use App\Models\Tr_auth_keys;
 
 class FrontUtility
 {
@@ -48,8 +49,11 @@ class FrontUtility
     // パスワード暗号化用salt
     const FIXED_SALT = "O#%1@'HfwJ2";
 
-    // 認証キー発行時の有効時間(分)
+    // 認証キー発行時の有効時間(分):パスワード再設定
     const AUTH_KEY_LIMIT_MINUTE = 60;
+
+    // 認証キー発行時の有効時間(時):メールアドレス認証
+    const AUTH_KEY_LIMIT_HOUR = 24;
 
     // 条件から案件検索：報酬のラジオボタン
     const SEARCH_CONDITION_RATE = [
@@ -94,16 +98,17 @@ class FrontUtility
     const USER_ENTRY_MAIL_TITLE = '案件にエントリー頂きありがとうございます。';
     public $user_entry_mail_from = '';
     public $user_entry_mail_from_name = '';
-    public $user_entry_mail_to = '';
-    public $user_entry_mail_to_name = '';
     public $user_entry_mail_to_bcc = '';
 
     // メール：パスワード再設定
     const USER_REMINDER_MAIL_TITLE = 'パスワード再設定URL通知メール';
     public $user_reminder_mail_from = '';
     public $user_reminder_mail_from_name = '';
-    public $user_reminder_mail_to = '';
-    public $user_reminder_mail_to_name = '';
+
+    // メール：メールアドレス認証
+    const MAIL_TITLE_MAIL_AUTH = '会員登録(無料)にお進みください。';
+    public $mail_auth_mail_from = '';
+    public $mail_auth_mail_from_name = '';
 
     public function __construct(){
         switch (env('APP_ENV')) {
@@ -117,26 +122,26 @@ class FrontUtility
 
                 $this->user_regist_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
-                $this->user_regist_mail_to_bcc  = '';
+                $this->user_regist_mail_to_bcc = '';
 
                 $this->user_entry_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_entry_mail_from_name = 'エンジニアルート';
-                $this->user_entry_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->user_entry_mail_to_name = 'E-R開発者';
+                $this->user_entry_mail_to_bcc = '';
 
                 $this->user_reminder_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_reminder_mail_from_name = 'エンジニアルート';
-                $this->user_reminder_mail_to = 'y.suzuki@solidseed.co.jp';
-                $this->user_reminder_mail_to_name = 'E-R開発者';
+
+                $this->mail_auth_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->mail_auth_mail_from_name = 'エンジニアルート';
                 break;
 
             // 開発環境
             case 'develop':
                 $this->user_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->user_contact_mail_to = ['y.suzuki@solidseed.co.jp'];
+                $this->user_contact_mail_to = 'y.suzuki@solidseed.co.jp';
 
                 $this->company_contact_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->company_contact_mail_to = ['y.suzuki@solidseed.co.jp'];
+                $this->company_contact_mail_to = 'y.suzuki@solidseed.co.jp';
 
                 $this->user_regist_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
@@ -144,13 +149,10 @@ class FrontUtility
 
                 $this->user_entry_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_entry_mail_from_name = 'エンジニアルート';
-                $this->user_entry_mail_to = '';
-                $this->user_entry_mail_to_name = '';
+                $this->user_entry_mail_to_bcc = '';
 
                 $this->user_reminder_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_reminder_mail_from_name = 'エンジニアルート';
-                $this->user_reminder_mail_to = '';
-                $this->user_reminder_mail_to_name = '';
                 break;
 
             //　本番環境
@@ -171,6 +173,8 @@ class FrontUtility
 
                 $this->user_reminder_mail_from = 'sender@engineer-route.com';
                 $this->user_reminder_mail_from_name = 'エンジニアルート';
+                break;
+
             default:
                 break;
         }
@@ -223,5 +227,19 @@ class FrontUtility
         $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
         $user = Tr_users::find($cookie);
         return $user->last_name .' ' .$user->first_name;
+    }
+
+    /**
+     * UUIDを生成する(16進数40桁)
+     * @return string $ticket
+     */
+    public static function createUUID(){
+        $ticket = '';
+        do {
+            if (!empty($ticket)) Log::info('[duplicate UUID] ticket:'.$ticket);
+            $ticket = sha1(uniqid(rand(), true));
+            $w_obj = Tr_auth_keys::where('auth_task', $ticket)->get()->first();
+        } while (!empty($w_obj));
+        return $ticket;
     }
 }

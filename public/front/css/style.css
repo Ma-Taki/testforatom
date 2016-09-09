@@ -699,21 +699,34 @@ h1.SearchTitle:before{
 .input_email label input{width: 70%;margin-left: 0;}
 .input_email label:nth-child(2){margin-top: 1.4rem;}
 
-#slctBx_prefecture{width: 12rem;}
-#slctBx_birth_y{width: 6rem;}
-#slctBx_birth_m,
-#slctBx_birth_d{width: 4rem;}
+.slctBx_prefecture{
+    width: 12rem;
+}
+.slctBx_birth-y{
+    width: 6rem;
+}
+.slctBx_birth-m,
+.slctBx_birth-d{
+    width: 4rem;
+}
 
 /* 登録完了 */
-#user_complete .regist_thanks {
+.user-complete {
+    text-align: center;
+}
+.user-complete .main-content__title {
+    text-align: left;
+}
+
+.user-complete .regist-thanks {
     margin-top: 5%;
 }
 
-#user_complete .regist_thanks p{
+.user-complete .regist-thanks p{
     line-height: 4rem;
 }
 
-#user_complete .regist_thanks p.user_id{
+.user-complete .regist-thanks p.user-id{
     display: inline-block;
     font-size: 1.8rem;
     color: #E38585;
@@ -723,11 +736,11 @@ h1.SearchTitle:before{
     line-height: normal;
 }
 
-#user_complete .support{
+.user-complete .support{
     margin-top: 10%;
 }
 
-#user_complete .support .about_support{
+.user-complete .support .about-support{
     font-weight: bold;
     font-size: 1.7rem;
     line-height: 4rem;
@@ -2347,7 +2360,7 @@ sp.css ~640px
         margin: 5rem 0 0 0;
     }
 
-    /* サイドバーがない画面 */
+    /* main-content-left 使わないページ */
     .company,
     .company-confirm,
     .company-complete,
@@ -2355,9 +2368,17 @@ sp.css ~640px
     .contact,
     .contact-confirm,
     .contact-complete,
-    .terms {
+    .terms,
+    .mail-auth,
+    .mail-auth-complete,
+    .user-input
+    {
         margin-bottom: 5rem;
     }
+    .user-complete .sideInfo {
+        margin-top: 5rem;
+    }
+    /* main-content-left 使わないページ ここまで */
 
     .main-content-left{
         width: 100%;

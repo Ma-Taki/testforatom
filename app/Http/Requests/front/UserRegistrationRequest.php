@@ -51,8 +51,7 @@ class UserRegistrationRequest extends Request
                 'max:14',
                 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/',
             ],
-            'email' => 'required|email|max:256|confirmed|unique:users,mail,NULL,id,delete_date,NULL',
-            'email_confirmation' => '',
+            'mail' => 'required|email|max:256|unique:users,mail,NULL,id,delete_date,NULL',
             'password' => [
                 'required',
                 'between:6,20',

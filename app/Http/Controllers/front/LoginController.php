@@ -51,7 +51,6 @@ class LoginController extends FrontController
         $password = md5($user->salt .$request->password .FrontUtil::FIXED_SALT);
         if ($user->password != $password) {
             // 認証失敗
-            Log::debug('input:'.$password.' db:'.$user->password);
             return back()->with('custom_error_messages',['メールアドレス又はパスワードに誤りがあります。'])->withInput();
         }
         // 認証成功
