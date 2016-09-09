@@ -153,6 +153,9 @@ class FrontUtility
 
                 $this->user_reminder_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_reminder_mail_from_name = 'エンジニアルート';
+
+                $this->mail_auth_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->mail_auth_mail_from_name = 'エンジニアルート';
                 break;
 
             //　本番環境
