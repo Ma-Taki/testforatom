@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,7 +14,11 @@
 
 // トップ
 Route::get('/', 'FrontController@showTop');
-Route::get('/lp1', 'FrontController@showTop');
+
+// 宣伝用
+Route::get('/lp1', function() {
+    return view('public.lp1');
+});
 
 // エンジニアルートとは
 Route::get('/about', function () { return view('front.about'); });

@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+body {
+	background-color: #000000;
+	color: #FFFFFF;
+}
+
+/* コンテナ */
+#container {
+	background-color: #362E23;
+	width: 900px;
+	margin: 0 auto;
+	position: relative;
+}
+
+#content {
+	width: 95%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+/* アンカー */
+a:link    { text-decoration: none; color: #d65038; }
+a:visited { text-decoration: none; color: #d65038; }
+a:hover   { text-decoration: none; color: #d65038; }
+a:active  { text-decoration: none; color: #d65038; }
+
+#header {
+	font-size: 125%;
+	font-weight: bold;
+	padding: 15px 20px;
+}
+
+#menu {
+	background-color: #362E23;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	overflow: auto;
+	list-style: none;
+}
+
+#menu li {
+	text-align: center;
+	padding: 6px 0;
+	border-right: 1px solid #000000;
+	width: 120px;
+	display: block;
+	float: left;
+}
+
+#menu li.actived {
+	background-color: #463f35;
+	font-weight: bold;
+}
+
+#footer {
+	text-align: center;
+	margin-top: 10px;
+	padding: 5px 0;
+}
+

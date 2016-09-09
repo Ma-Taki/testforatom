@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+/* ################################## */
+/* ## エラーCSS                    ## */
+/* ################################## */
+
+@import url("../common/reset.css");
+@import url("../layout/box.css");
+
+.content-layout {
+	padding: 30px 30px;
+}
+
+.content-layout h3 {
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #FFFFFF;
+	border: 3px double #FFFFFF;
+	background-color: #85A9A9;
+	padding: 5px;
+}
+
+.content-layout #guide {
+	margin-top: 20px;
+	padding: 5px;
+}
