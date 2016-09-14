@@ -29,8 +29,8 @@
                                 <p>メールアドレス</p>
                             </div>
                             <div class="input_f_value input_email">
-                                <label><input type="text" name="mail" maxlength="256" placeholder="例）info@solidseed.co.jp">（半角）</label>
-                                <label><input type="text" name="mail_confirmation" maxlength="256" placeholder="確認のため、もう一度入力してください。">（半角）</label>
+                                <label><input type="text" name="mail" maxlength="256" value="{{ old('mail') }}" placeholder="例）info@solidseed.co.jp">（半角）</label>
+                                <label><input type="text" name="mail_confirmation" maxlength="256" value="{{ old('mail_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角）</label>
                             </div>
                         </div>
                         <hr class="hr-1px-dashed-333">

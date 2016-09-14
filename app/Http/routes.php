@@ -16,9 +16,7 @@
 Route::get('/', 'FrontController@showTop');
 
 // 宣伝用
-Route::get('/lp1', function() {
-    return view('public.lp1');
-});
+Route::get('/lp1', function() { return view('public.lp1'); });
 
 // エンジニアルートとは
 Route::get('/about', function () { return view('front.about'); });
@@ -64,6 +62,10 @@ Route::resource('/user/regist', 'front\UserController', ['only' => ['index', 'st
 Route::resource('/login', 'front\LoginController', ['only' => ['index', 'store']]);
 Route::get('/logout', 'front\LoginController@logout');
 
+// Twitter
+Route::get('login/sns/twitter', 'Auth\SocialController@getTwitterAuth');
+Route::get('login/sns/twitter/callback', 'Auth\SocialController@getTwitterAuthCallback');
+
 // ログインチェックを行うルート
 Route::group(['middleware' => 'front_loginCheck'], function () {
     // マイページ
@@ -91,19 +93,19 @@ Route::get('/user/recovery', 'front\UserController@showRecovery');
 Route::post('/user/recovery', 'front\UserController@recoverPassword');
 
 // △△△ 公開画面ルート　△△△
+
 // ▽▽▽ 管理画面ルート　▽▽▽
 
-// 管理画面：ログイン画面
+// ログイン
 Route::get('/admin/login', function () {
     return view('admin.login');
 });
-// 管理画面：ログイン処理
 Route::post('/admin/login', 'admin\LoginController@login');
 
-// 管理画面；ログアウト
+// ログアウト
 Route::get('/admin/logout', 'AdminController@logout');
 
-// 管理画面：ログインチェックを行うルート
+// ログインチェックを行うルート
 Route::group(['middleware' => 'loginCheck'], function () {
     // トップ画面
     Route::get('/admin/top', function () {
@@ -115,7 +117,7 @@ Route::group(['middleware' => 'loginCheck'], function () {
     });
 });
 
-// 管理画面：ログインチェックと権限チェックを行うルート
+// ログインチェックと権限チェックを行うルート
 Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
 
     // ユーザ管理

@@ -432,9 +432,9 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## パスワード再設定
 -------------------------------*/
-.user_reminder{width: 95%;margin: 0 auto;}
-.user_reminder_complete{width: 95%;margin: 0 auto;}
-.user_reminder_complete .pageInfo{color: black;}
+.user-reminder-complete .content__info{
+    color: black;
+}
 
 .recover_password{width: 95%;margin: 0 auto;}
 #recover_password .input_password label{width: 100%;}
@@ -2371,7 +2371,9 @@ sp.css ~640px
     .terms,
     .mail-auth,
     .mail-auth-complete,
-    .user-input
+    .user-input,
+    .user-reminder,
+    .user-reminder-complete
     {
         margin-bottom: 5rem;
     }
@@ -2380,12 +2382,12 @@ sp.css ~640px
     }
     /* main-content-left 使わないページ ここまで */
 
-    .main-content-left{
+    .main-content-left {
         width: 100%;
         margin-bottom: 5rem;
     }
 
-    .main-content-right{
+    .main-content-right {
         width: 100%;
         float: left;
     }
