@@ -182,6 +182,17 @@ textarea{
     border-radius: 1rem;
 }
 
+.alert-info{
+    border: 1px solid #a9d0d8;
+    color: #31708f;
+    background: #e4f2f9;
+    border-radius: 1rem;
+}
+
+.alert-info ul li{
+    list-style: none;
+}
+
 p.pageInfo{
     color: #5e8796;
     padding: 2% 0 3%;

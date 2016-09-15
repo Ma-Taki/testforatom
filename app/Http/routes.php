@@ -63,8 +63,8 @@ Route::resource('/login', 'front\LoginController', ['only' => ['index', 'store']
 Route::get('/logout', 'front\LoginController@logout');
 
 // Twitter
-Route::get('login/sns/twitter', 'Auth\SocialController@getTwitterAuth');
-Route::get('login/sns/twitter/callback', 'Auth\SocialController@getTwitterAuthCallback');
+Route::get('/login/sns/twitter', 'SNSController@getTwitterAuth');
+Route::get('/login/sns/twitter/callback', 'SNSController@getTwitterAuthCallback');
 
 // ログインチェックを行うルート
 Route::group(['middleware' => 'front_loginCheck'], function () {

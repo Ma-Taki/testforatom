@@ -281,7 +281,6 @@ class Tr_items extends Model
                          ->where(function($query) use($keyword_array) {
                              foreach ((array)$keyword_array as $keyword) {
                                  $query->where(function($query) use ($keyword) {
-                                     // タグ名だけutf8_unicode_ciなので、generalを明示
                                      $query->orWhere(DB::raw("
                                         CONCAT(items.name, IFNULL(items.detail,''), IFNULL(sys_types.name,''), IFNULL(job_types.name,''),
                                         biz_categories.name, IFNULL(tags.term,''), IFNULL(skills.name,''), area_detail,

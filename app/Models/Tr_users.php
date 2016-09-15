@@ -42,10 +42,18 @@ class Tr_users extends Model
     }
 
     /**
+     * ソーシャルアカウントを取得
+     */
+    public function socialAccount() {
+        return $this->hasMany('App\Models\Tr_user_social_accounts',
+                              'user_id');
+    }
+
+    /**
      * 有効なユーザー
      */
-     public function scopeEnable($query) {
-       return $query->where('delete_flag', 0)
-                    ->where('delete_date', null);
-     }
+    public function scopeEnable($query) {
+        return $query->where('delete_flag', 0)
+                     ->where('delete_date', null);
+    }
 }

@@ -12,7 +12,16 @@
         <div class="main-content__body">
             <div class="content__element">
 @include('front.common.validation_error')
-
+{{-- SNS認証用メッセージ --}}
+@if(Session::has('custom_info_messages'))
+        <div class="alert alert-info">
+            <ul>
+    @foreach(Session::get('custom_info_messages') as $message)
+                <li>{!! $message !!}</li>
+    @endforeach
+            </ul>
+        </div>
+@endif
                 <div class="content__info">
                     <p>
                         入力されたメールアドレスに、認証用のメールを送信させていただきます。<br>

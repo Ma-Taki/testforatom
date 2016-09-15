@@ -30,7 +30,7 @@ class UserController extends Controller
      * GET:/user/regist/auth
      */
     public function showMailAuth() {
-        return view ('front.mail_auth');
+        return view('front.mail_auth');
     }
 
     /**

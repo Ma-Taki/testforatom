@@ -50,6 +50,11 @@ class ModelUtility
     // 認証キー発行時の目的：メールアドレス認証
     const AUTH_TASK_MAIL_AUHT = 'MailAuth';
 
+    // ソーシャルタイプ：Twitter
+    const SOCIAL_TYPE_TWITTER = 1;
+    // ソーシャルタイプ：FaceBook
+    const SOCIAL_TYPE_FACEBOOK = 2;
+
     /**
      * 引数のモデル配列のname属性を'、'で連結して返す。
      * @param array $array
