@@ -22,5 +22,7 @@
             </form>
         </div><!-- /.search -->
         <a href="/login/sns/twitter">Twitterログイン</a>
+        <a href="/login/sns/facebook">Facebookログイン</a>
+        <a href="/login/sns/github">Githubログイン</a>
     </div><!-- /.headerInr -->
 </header>

@@ -66,6 +66,14 @@ Route::get('/logout', 'front\LoginController@logout');
 Route::get('/login/sns/twitter', 'SNSController@getTwitterAuth');
 Route::get('/login/sns/twitter/callback', 'SNSController@getTwitterAuthCallback');
 
+// Facebook
+Route::get('/login/sns/facebook', 'SNSController@getFacebookAuth');
+Route::get('/login/sns/facebook/callback', 'SNSController@getFacebookAuthCallback');
+
+// Github
+Route::get('/login/sns/github', 'SNSController@getGithubAuth');
+Route::get('/login/sns/github/callback', 'SNSController@getGithubAuthCallback');
+
 // ログインチェックを行うルート
 Route::group(['middleware' => 'front_loginCheck'], function () {
     // マイページ
