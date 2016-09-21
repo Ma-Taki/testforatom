@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Libraries\CookieUtility as CkieUtil;
 
 class Tr_users extends Model
 {
@@ -54,6 +55,24 @@ class Tr_users extends Model
      */
     public function scopeEnable($query) {
         return $query->where('delete_flag', 0)
+                     ->where('delete_date', null);
+    }
+
+    /**
+     * ログイン中ユーザを取得
+     */
+    public function scopeGetLoginUser($query) {
+        return $query->where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
+                     ->where('delete_flag', 0)
+                     ->where('delete_date', null);
+    }
+
+    /**
+     * メールアドレスから有効なユーザを1件取得
+     */
+    public function scopeGetUserByMail($query, $email) {
+        return $query->where('mail', $email)
+                     ->where('delete_flag', 0)
                      ->where('delete_date', null);
     }
 }

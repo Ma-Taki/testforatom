@@ -706,19 +706,39 @@ h1.SearchTitle:before{
     margin: 0;
 }
 
-.input_email label{width: 100%;}
-.input_email label input{width: 70%;margin-left: 0;}
-.input_email label:nth-child(2){margin-top: 1.4rem;}
+.input_email label{
+    width: 100%;
+}
+
+.input_email label input{
+    width: 70%;margin-left: 0;
+}
+
+.input_email label:nth-child(2){
+    margin-top: 1.4rem;
+}
+
+.input_magazine label {
+    width: 100%;
+}
+
+.input_magazine label input {
+    margin-left: 0;
+    width: auto;
+}
 
 .slctBx_prefecture{
     width: 12rem;
+    height: 2rem;
 }
 .slctBx_birth-y{
     width: 6rem;
+    height: 2rem;
 }
 .slctBx_birth-m,
 .slctBx_birth-d{
     width: 4rem;
+    height: 2rem;
 }
 
 /* 登録完了 */
@@ -2573,6 +2593,11 @@ sp.css ~640px
     .input_contract{display: inline-flex;}
     .input_contract label{width: 50%;}
     .input_contract label input{width: auto;}
+
+    .input_magazine label input {
+        margin-left: 0;
+        width: auto;
+    }
 
     .input_email{}
     .input_email label input{width: 100%; margin: 0 0 0.5rem 0;}

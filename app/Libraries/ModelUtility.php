@@ -52,8 +52,10 @@ class ModelUtility
 
     // ソーシャルタイプ：Twitter
     const SOCIAL_TYPE_TWITTER = 1;
-    // ソーシャルタイプ：FaceBook
+    // ソーシャルタイプ：Facebook
     const SOCIAL_TYPE_FACEBOOK = 2;
+    // ソーシャルタイプ：Github
+    const SOCIAL_TYPE_GITHUB = 3;
 
     /**
      * 引数のモデル配列のname属性を'、'で連結して返す。

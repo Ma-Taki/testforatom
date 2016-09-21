@@ -184,6 +184,18 @@
                         </div>
                         <hr class="hr-1px-dashed-333">
 
+                        <div class="input_field fs0">
+                            <div class="input_f_name">
+                                <p>メールマガジン</p>
+                            </div>
+                            <div class="input_f_value input_magazine">
+                                <label><input type="checkbox" checked name="main_magazine[]" value="1">配信を希望する</label>
+                            </div>
+                        </div>
+                        <hr class="hr-1px-dashed-333">
+
+
+
                         <p class="textAreaInfo">下記の「利用規約」、「個人情報の取扱いについて」に同意の上、「利用規約・個人情報の取扱いに同意して会員登録する」ボタンをクリックしてください。</p>
                         <div class="textArea">
                             <div class="textAreaInr">
