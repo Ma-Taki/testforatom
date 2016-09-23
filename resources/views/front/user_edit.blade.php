@@ -9,7 +9,7 @@
     use Carbon\Carbon;
  ?>
 <div class="wrap">
-    <div id="user_edit" class="content">
+    <div class="main-content user-edit">
         <h1 class="pageTitle">プロフィール変更</h1>
         <hr class="hr-2px-solid-5e8796">
         <div class="user_edit">
@@ -70,7 +70,7 @@
                     <div class="input_f_value input_birth">
                         <label>
                             <span class="selectBox">
-                                <select id="slctBx_birth_y" name="birth_year">
+                                <select id="js-slctBx-birth_y" class="slctBx_birth-y" name="birth_year">
 @for($year = Carbon::today()->year - 18; $year >= 1940; $year--)
                                     <option @if(old('birth_year', $user->birth_date->year ) == $year) selected @endif value="{{ $year }}">{{ $year }}</option>
 @endfor
@@ -79,7 +79,7 @@
                         年</label>
                         <label>
                             <span class="selectBox">
-                                <select id="slctBx_birth_m" name="birth_month">
+                                <select id="js-slctBx-birth_m" class="slctBx_birth-m" name="birth_month">
 @for($month = 1; $month <= 12; $month++)
                                     <option @if(old('birth_month', $user->birth_date->month) == $month) selected @endif value="{{ $month }}">{{ $month }}</option>
 @endfor
@@ -88,7 +88,7 @@
                         月</label>
                         <label>
                             <span class="selectBox">
-                                <select id="slctBx_birth_d" name="birth_day">
+                                <select id="js-slctBx-birth_d" class="slctBx_birth-d" name="birth_day">
 @for($day = 1; $day <= 31; $day++)
                                     <option @if(old('birth_day', $user->birth_date->day) == $day) selected @endif value="{{ $day }}">{{ $day }}</option>
 @endfor
@@ -140,7 +140,7 @@
                     <div class="input_f_value">
                         <label>
                             <span class="selectBox">
-                                <select id="slctBx_prefecture" name="prefecture_id">
+                                <select class="slctBx_prefecture" name="prefecture_id">
 @foreach(Ms_prefectures::getNotIndexOnly() as $value)
     @if(!empty(old('prefecture_id', $user->prefecture_id)))
                                     <option @if($value->id == old('prefecture_id', $user->prefecture_id)) selected @endif value="{{ $value->id }}">{{ $value->name }}</option>
@@ -186,7 +186,17 @@
                 </div>
                 <hr class="hr-1px-dashed-333">
 
-            <div class="commonCenterBtn">
+                <div class="input_field fs0">
+                    <div class="input_f_name">
+                        <p>メールマガジン</p>
+                    </div>
+                    <div class="input_f_value input_magazine">
+                        <label><input type="checkbox" @if(old('magazine_flag', $user->magazine_flag)) checked @endif name="magazine_flag_temp">配信を希望する</label>
+                    </div>
+                </div>
+                <hr class="hr-1px-dashed-333">
+
+            <div class="cmmn-btn">
                 <button type="submit" id="confirmBtn">変更内容を登録する</button>
             </div>
             <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -195,9 +205,15 @@
         </div>
         <script type="text/javascript">
             $('form[name="userForm"]').submit(function(){
-                var year = $('#slctBx_birth_y').val();
-                var month = $('#slctBx_birth_m').val();
-                var day = $('#slctBx_birth_d').val();
+                var year = $('#js-slctBx-birth_y').val();
+                var month = $('#js-slctBx-birth_m').val();
+                var day = $('#js-slctBx-birth_d').val();
+                var $magazine_flag = $('<input />').attr('type', 'hidden').attr('name', 'magazine_flag');
+                if ($('input[name="magazine_flag_temp"]').prop('checked')) {
+                    $magazine_flag.attr('value', 1).appendTo($(this));
+                } else {
+                    $magazine_flag.attr('value', 0).appendTo($(this));
+                }
                 $('<input />')
                     .attr('type', 'hidden')
                     .attr('name', 'birth')

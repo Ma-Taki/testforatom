@@ -301,9 +301,7 @@ class SNSController extends Controller
             }
 
             // ログインユーザを取得
-            $login_user = Tr_users::getLoginUser()
-                                  ->get()
-                                  ->first();
+            $login_user = Tr_users::getLoginUser()->get()->first();
 
             // ログイン中の場合
             if(!empty($login_user)) {

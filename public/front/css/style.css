@@ -577,7 +577,6 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## マイページ
 -------------------------------*/
-.mypage{width: 95%;margin: 0 auto;}
 .mypage_element{
     margin-top: 4rem;
 }
@@ -595,7 +594,6 @@ h1.SearchTitle:before{
     border-bottom-left-radius: 15px;
     padding: 3rem;
 }
-.edit_btn {margin-top: 2rem; text-align: center;}
 
 .commonButton button{
     background: #5E8796;
@@ -606,21 +604,14 @@ h1.SearchTitle:before{
     padding: 0.6rem 3rem;
 }
 
+.cmmn-btn .edit-btn {
+    width: 32.945%;
+}
+
 .user_delete{
     width: 95%;
     margin: 0 auto;
 }
-
-.user_delete_btn{
-    text-align: right;
-    margin-top: 4rem;
-}
-.user_delete_btn button{
-    width: 20%;
-    text-align: center;
-}
-
-.user_edit{width: 95%;margin: 0 auto;}
 
 /*-------------------------------
 ## 新規会員登録
@@ -780,43 +771,127 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## ログイン
 -------------------------------*/
-#login .loginInr{
-    width: 60%;
-    margin: 0 auto;
-    padding: 3% 0;
+.login .content__element {
+    margin-bottom: 4rem;
 }
 
-#login .login_input{
+.login .content__body {
+    display: flex;
+}
+
+.login__element {
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem 1rem;
+    border: 1px solid #5e8796;
+}
+
+.login__element h2 {
+    text-align: center;
+    color: #5e8796;
+    margin-bottom: 4rem;
+}
+
+.login_input{
     margin: 0 auto;
     width: 100%;
 }
 
-#login .login_input p{
+.login_input .input_field {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.login_input p{
     display: inline-block;
     width: 25%;
     vertical-align: middle;
 }
-#login .login_input input{
+.login_input input{
     display: inline-block;
-    width: 75%;
-    font-size: 1.4rem;
+    width: 90%;
+    font-size: 1.6rem;
     border: 1.5px solid #5e8796;
     border-radius: 5px;
-    padding: 1%;
-    margin: 0.8rem 0;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.infoText{
+    text-align: right;
+    padding: 0 5%;
+}
+
+.infoText p {
     line-height: 2rem;
 }
 
-#login .infoText{
-    text-align: right;
-}
-
-#login a{
+.login a{
     color: #5e8796;
 }
 
-#login .contentInr p{
-    padding-bottom: 2.4rem;
+a.login__sns-btn {
+	width: 80%;
+	border-radius: 8px;
+	color: #fff;
+    border-style: none;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 39px;
+    margin-bottom: 1rem;
+}
+
+.twitter {
+    background: #1DA1F2;
+}
+
+.facebook {
+    background: #3B5998;
+}
+
+.github {
+    background: black;
+}
+
+.twitter_logo {
+    content: "";
+    display: inline-block;
+    background-image: url(/front/images/twitter_logo.png);
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.facebook_logo {
+    content: "";
+    display: inline-block;
+    background-image: url(/front/images/facebook_logo.png);
+    background-size: 28px;
+    width: 28px;
+    height: 28px;
+}
+
+.github_logo {
+    content: "";
+    display: inline-block;
+    background-image: url(/front/images/github_logo.png);
+    background-size: 26px;
+    width: 26px;
+    height: 26px;
+}
+
+.cmmn-btn button.login-btn {
+    width: 70%;
+}
+
+.login__sub-text {
+    width: 95%;
+    padding: 24px 0 40px;
 }
 
 /*-------------------------------
@@ -2407,14 +2482,16 @@ sp.css ~640px
     .mail-auth-complete,
     .user-input,
     .user-reminder,
-    .user-reminder-complete
+    .user-reminder-complete,
+    .user-mypage
     {
         margin-bottom: 5rem;
     }
+    /* main-content-left 使わないページ ここまで */
+
     .user-complete .sideInfo {
         margin-top: 5rem;
     }
-    /* main-content-left 使わないページ ここまで */
 
     .main-content-left {
         width: 100%;
@@ -2505,9 +2582,8 @@ sp.css ~640px
     /*-------------------------------
     # マイページ
     -------------------------------*/
-    .mypage_elementInr{padding: 2rem;}
-    .user_delete_btn {
-        text-align: center;
+    .mypage_elementInr{
+        padding: 2rem;
     }
 
     /*-------------------------------
@@ -2608,31 +2684,14 @@ sp.css ~640px
     /*-------------------------------
     # ログイン
     -------------------------------*/
-    #login .loginInr{
-        width: 95%;
-        margin: 0 auto;
-    }
-
-    #login .login_input p{
+    .login .content__body {
         display: block;
-        width: 100%;
     }
 
-    #login .login_input input{
+    .login__element {
+        width: 90%;
         display: block;
-        width: 100%;
-    }
-
-    #login .infoText{padding: 1rem 0;}
-    #login .infoText p{line-height: 2rem;}
-
-    #login .contentInr{
-        width: 95%;
-        padding: 2rem 0;
-    }
-
-    #login .contentInr p{
-        padding-bottom: 1.4rem;
+        border: none;
     }
 
     /*-------------------------------

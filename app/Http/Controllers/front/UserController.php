@@ -245,16 +245,8 @@ class UserController extends Controller
      * GET:/user
      */
     public function showMyPage(){
-
         // ログインユーザ情報を取得
-        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
-                        ->enable()
-                        ->get()
-                        ->first();
-
-        if (empty($user)) {
-            return redirect('logout');
-        }
+        $user = Tr_users::getLoginUser()->first();
         return view('front.user_mypage' , compact('user'));
     }
 
@@ -490,13 +482,8 @@ class UserController extends Controller
      * GET:/user/edit
      */
     public function showUserEdit(){
-
         // ログインユーザを取得
-        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
-                        ->enable()
-                        ->get()
-                        ->first();
-
+        $user = Tr_users::getLoginUser()->first();
         return view('front.user_edit', compact('user'));
     }
 
@@ -507,17 +494,7 @@ class UserController extends Controller
     public function updateUser(UserEditRequest $request){
 
         // ログインユーザを取得
-        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
-                        ->enable()
-                        ->get()
-                        ->first();
-
-        if (empty($user)) {
-            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_users)',[
-                'user_id' => CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID),
-            ]);
-            return redirect('/'); // TODO: あとで汎用エラー画面つくる
-        }
+        $user = Tr_users::getLoginUser()->first();
 
         $db_data = [
             'user' => $user,
@@ -534,6 +511,7 @@ class UserController extends Controller
             'email' => $request->email,
             'phone_num' => $request->phone_num,
             'contract_types' => $request->contract_types,
+            'magazine_flag' => $request->magazine_flag,
         ];
 
         // トランザクション
@@ -554,6 +532,7 @@ class UserController extends Controller
                 $db_data['user']->station = !empty($db_data['station']) ? $db_data['station'] : null;
                 $db_data['user']->mail = $db_data['email'];
                 $db_data['user']->tel = $db_data['phone_num'];
+                $db_data['user']->magazine_flag = $db_data['magazine_flag'];
                 $db_data['user']->save();
 
                 // ユーザ契約形態中間テーブルをデリートインサート
