@@ -54,7 +54,7 @@
                             {{ csrf_field() }}
                         </form>
                     </div>
-                    <hr class="hr-1px-dashed-333">
+                    <hr class="hr-1px-dashed-333 invisible-pc invisible-tab">
 
                     <div class="login__element">
                         <h2 class="login__title">外部アカウントでログイン</h2>
@@ -68,18 +68,18 @@
                             <span class="github_logo"></span>GitHubでログイン
                         </a>
                         <p>ユーザーの許可なく投稿することはありません</p>
-
-
                     </div>
                 </div>
-            </div>
-            <hr class="hr-1px-dashed-333">
-            <div class="login__sub-text">
-                <p>ログインすると以下の機能を使用できるようになります。</p>
-                <ul>
-                    <li>・案件へのエントリー</li>
-                    <li>・会員情報の変更</li>
-                </ul>
+                <hr class="hr-1px-dashed-333">
+
+                <div class="login__sub-text">
+                    <p>ログインすると以下の機能を使用できるようになります。</p>
+                    <ul>
+                        <li>・案件へのエントリー</li>
+                        <li>・会員情報の変更</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div><!-- END CONTENT -->

@@ -99,7 +99,6 @@ ul li,label,textarea{
 .content h3{ font-size: 1.5rem; }
 .content h4{ font-size: 1.2rem; }
 
-.main-content h1{ font-size: 2.5rem; }
 .main-content h2{ font-size: 2rem; }
 .main-content h3{ font-size: 1.5rem; }
 .main-content h4{ font-size: 1.2rem; }
@@ -287,6 +286,8 @@ p.pageInfo{
 
 .main-content__title {
     font-size: 2.5rem;
+    width: 95%;
+    margin: 0 auto;
 }
 
 .main-content__body {
@@ -777,6 +778,7 @@ h1.SearchTitle:before{
 
 .login .content__body {
     display: flex;
+    margin-bottom: 4rem;
 }
 
 .login__element {
@@ -883,6 +885,7 @@ a.login__sns-btn {
     background-size: 26px;
     width: 26px;
     height: 26px;
+    margin-right: 6px;
 }
 
 .cmmn-btn button.login-btn {
@@ -892,6 +895,10 @@ a.login__sns-btn {
 .login__sub-text {
     width: 95%;
     padding: 24px 0 40px;
+}
+
+.login__sub-text ul li {
+    line-height: 1.8rem;
 }
 
 /*-------------------------------
@@ -2686,12 +2693,20 @@ sp.css ~640px
     -------------------------------*/
     .login .content__body {
         display: block;
+        margin-bottom: 0;
     }
 
     .login__element {
         width: 90%;
         display: block;
         border: none;
+    }
+
+    a.login__sns-btn {
+        width: 90%;
+        border-radius: 32px;
+        height: 50px;
+        margin-bottom: 1.5rem;
     }
 
     /*-------------------------------

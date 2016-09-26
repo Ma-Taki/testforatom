@@ -11,4 +11,15 @@ class Tr_user_facebook_accounts extends Model
 
     // timestampの自動更新を明示的にOFF
     public $timestamps = false;
+
+    /**
+     * facebook_idからレコードを一件取得する。
+     *
+     * @param QueryBuilder $query
+     * @param string $facebook_id
+     * @return QueryBuilder
+     */
+    public function scopeGetAccountByFacebookId($query, $facebook_id) {
+        return $query->where('facebook_id', $facebook_id);
+    }
 }
