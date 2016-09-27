@@ -699,10 +699,19 @@ h1.SearchTitle:before{
 .input_email label input{width: 70%;margin-left: 0;}
 .input_email label:nth-child(2){margin-top: 1.4rem;}
 
-#slctBx_prefecture{width: 12rem;}
-#slctBx_birth_y{width: 6rem;}
+#slctBx_prefecture{
+    width: 12rem;
+    height: 2rem;
+}
+#slctBx_birth_y{
+    width: 6rem;
+    height: 2rem;
+}
 #slctBx_birth_m,
-#slctBx_birth_d{width: 4rem;}
+#slctBx_birth_d{
+    width: 4rem;
+    height: 2rem;
+}
 
 /* 登録完了 */
 #user_complete .regist_thanks {
