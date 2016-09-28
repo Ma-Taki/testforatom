@@ -51,6 +51,7 @@
                             {{ csrf_field() }}
                         </form>
                     </div>
+                    <hr class="hr-1px-dashed-333 invisible-pc invisible-tab">
 
                     <div class="login__element">
                         <h2 class="login__title">外部アカウントで認証</h2>

@@ -2694,9 +2694,10 @@ sp.css ~640px
     }
 
     /*-------------------------------
-    # ログイン
+    # ログイン & メールアドレス認証
     -------------------------------*/
-    .login .content__body {
+    .login .content__body,
+    .mail-auth .content__body {
         display: block;
         margin-bottom: 0;
     }
