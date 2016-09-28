@@ -770,15 +770,20 @@ h1.SearchTitle:before{
 }
 
 /*-------------------------------
-## ログイン
+## ログイン & メールアドレス認証
 -------------------------------*/
 .login .content__element {
     margin-bottom: 4rem;
 }
 
-.login .content__body {
+.login .content__body,
+.mail-auth .content__body {
     display: flex;
     margin-bottom: 4rem;
+}
+
+.mail-auth .content__body {
+    margin-top: 4rem;
 }
 
 .login__element {

@@ -75,4 +75,17 @@ class Tr_users extends Model
                      ->where('delete_flag', 0)
                      ->where('delete_date', null);
     }
+
+    /**
+     * SNSアカウントに紐付いたユーザを取得
+     */
+    public function scopeGetUserBySnsAccount($query, $account) {
+        return $query->join('user_social_accounts', 'users.id', '=', 'user_social_accounts.user_id')
+                     ->join('user_'.$account['name'].'_accounts', 'user_social_accounts.social_account_id', '=', 'user_'.$account['name'].'_accounts.id')
+                     ->where('user_'.$account['name'].'_accounts.'.$account['name'].'_id', $account['id'])
+                     ->where('user_social_accounts.social_account_type', $account['type'])
+                     ->where('delete_flag', 0)
+                     ->where('delete_date', null)
+                     ->select('users.*');
+    }
 }

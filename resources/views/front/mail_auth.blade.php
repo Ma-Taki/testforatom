@@ -22,33 +22,49 @@
             </ul>
         </div>
 @endif
+
                 <div class="content__info">
                     <p>
-                        入力されたメールアドレスに、認証用のメールを送信させていただきます。<br>
-                        メール本文に記載されたURLより、会員登録(無料)を行ってください。
+                        メールアドレスを入力して「送信」ボタンをクリックするか、外部アカウントを使用してメールアドレスの認証を行ってください。<br>
+                        「メールを送信して認証」では、メール本文に記載されたURLより、会員登録(無料)を行ってください。
                     </p>
                 </div>
                 <hr class="hr-1px-dashed-333">
 
                 <div class="content__body">
-                    <form method="post" action="{{ url('/user/regist/auth') }}">
 
-                        <div class="input_field fs0">
-                            <div class="input_f_name">
-                                <p>メールアドレス</p>
+                    <div class="login__element">
+                        <h2 class="login__title">メールを送信して認証</h2>
+                        <form method="post" action="{{ url('/user/regist/auth') }}">
+                            <div class="login_input fs0">
+                                <div class="input_field">
+                                    <input type="text" name="mail" maxlength="256" value="{{ old('email')}}" placeholder="例）info@solidseed.co.jp">
+                                </div>
+                                <div class="input_field">
+                                    <input type="text" name="mail_confirmation" maxlength="256" value="{{ old('mail_confirmation')}}" placeholder="もう一度入力してください">
+                                </div>
                             </div>
-                            <div class="input_f_value input_email">
-                                <label><input type="text" name="mail" maxlength="256" value="{{ old('mail') }}" placeholder="例）info@solidseed.co.jp">（半角）</label>
-                                <label><input type="text" name="mail_confirmation" maxlength="256" value="{{ old('mail_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角）</label>
-                            </div>
-                        </div>
-                        <hr class="hr-1px-dashed-333">
 
-                        <div class="cmmn-btn">
-                            <button type="submit">送信</button>
-                        </div>
-                        {{ csrf_field() }}
-                    </form>
+                            <div class="cmmn-btn">
+                                <button class="login-btn" type="submit">送信</button>
+                            </div>
+                            {{ csrf_field() }}
+                        </form>
+                    </div>
+
+                    <div class="login__element">
+                        <h2 class="login__title">外部アカウントで認証</h2>
+                        <a href="/login/sns/facebook?func=regist" class="login__sns-btn facebook">
+                            <span class="facebook_logo"></span>Facebook
+                        </a>
+                        <a href="/login/sns/twitter?func=regist" class="login__sns-btn twitter">
+                            <span class="twitter_logo"></span>Twitter
+                        </a>
+                        <a href="/login/sns/github?func=rgist" class="login__sns-btn github">
+                            <span class="github_logo"></span>GitHub
+                        </a>
+                        <p>ユーザーの許可なく投稿することはありません</p>
+                    </div>
                 </div>
             </div>
         </div>

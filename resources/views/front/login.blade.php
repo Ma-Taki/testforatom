@@ -58,14 +58,14 @@
 
                     <div class="login__element">
                         <h2 class="login__title">外部アカウントでログイン</h2>
-                        <a href="/login/sns/facebook" class="login__sns-btn facebook">
-                            <span class="facebook_logo"></span>Facebookでログイン
+                        <a href="/login/sns/facebook?func=login" class="login__sns-btn facebook">
+                            <span class="facebook_logo"></span>Facebook
                         </a>
-                        <a href="/login/sns/twitter" class="login__sns-btn twitter">
-                            <span class="twitter_logo"></span>Twitterでログイン
+                        <a href="/login/sns/twitter?func=login" class="login__sns-btn twitter">
+                            <span class="twitter_logo"></span>Twitter
                         </a>
-                        <a href="/login/sns/github" class="login__sns-btn github">
-                            <span class="github_logo"></span>GitHubでログイン
+                        <a href="/login/sns/github?func=login" class="login__sns-btn github">
+                            <span class="github_logo"></span>GitHub
                         </a>
                         <p>ユーザーの許可なく投稿することはありません</p>
                     </div>

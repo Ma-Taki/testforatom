@@ -25,7 +25,8 @@ class SNSController extends Controller
      * GET:/login/sns/twitter
      *
      */
-    public function getTwitterAuth() {
+    public function getTwitterAuth(Request $request) {
+        \Session::flash('OAuth_func', $request->func ?: '');
         return Socialite::driver('twitter')->redirect();
     }
 
@@ -44,89 +45,59 @@ class SNSController extends Controller
             return redirect("/");
         }
 
+        $oauth_func = \Session::get('OAuth_func');
+
         // 認証成功
         $this->log('info', 'success to twitter auth', [
+            'oauth_func' => $oauth_func,
             'twitter_id' => $t_user->id,
             'accessToken' => $t_user->token,
         ]);
 
-        // twitterアカウントに紐付いたユーザを取得
-        $user = Tr_users::join('user_social_accounts', 'users.id', '=', 'user_social_accounts.user_id')
-                        ->join('user_twitter_accounts', 'user_social_accounts.social_account_id', '=', 'user_twitter_accounts.id')
-                        ->where('user_twitter_accounts.twitter_id', $t_user->id)
-                        ->where('user_social_accounts.social_account_type', MdlUtil::SOCIAL_TYPE_TWITTER)
-                        ->select('users.*')
-                        ->enable()
-                        ->get()
-                        ->first();
+        // ログイン機能
+        if(!empty($oauth_func) && $oauth_func == 'login') {
 
-        // 紐付いたユーザが存在する場合
-        if (!empty($user)) {
-            //　ログイン成功
-            $user->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
-            $user->save();
-            CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $user->id);
+            // twitterアカウントに紐付いたユーザを取得
+            $user = Tr_users::getUserBySnsAccount([
+                'name' => 'twitter',
+                'id' => $t_user->id,
+                'type' => MdlUtil::SOCIAL_TYPE_TWITTER,
+                ])->get()->first();
 
-        // 紐付いたユーザが存在しない場合
-        } else {
+            // 紐付いたユーザが存在する場合
+            if (!empty($user)) {
 
-            // twitterアカウント情報を取得
-            $twitter_account = Tr_user_twitter_accounts::getAccountByTwitterId($t_user->id)
-                                                       ->get()
-                                                       ->first();
+                //　ログイン成功
+                $user->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
+                $user->save();
+                CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $user->id);
 
-            // アカウント情報がテーブルに存在しない場合、インサートする
-            if (empty($twitter_account)) {
-                $now = Carbon::now()->format('Y-m-d H:i:s');
-                $twitter_account = new Tr_user_twitter_accounts;
-                $twitter_account->twitter_id = $t_user->id;
-                $twitter_account->access_token_key = $t_user->token;
-                $twitter_account->access_token_secret = $t_user->tokenSecret;
-                $twitter_account->registration_date = $now;
-                $twitter_account->last_update_date = $now;
-                $twitter_account->save();
-            }
+            // 紐付いたユーザが存在しない場合
+            } else {
 
-            // ログインユーザを取得
-            $login_user = Tr_users::getLoginUser()->get()->first();
+                // twitterアカウント情報を取得
+                $twitter_account = Tr_user_twitter_accounts::getAccountByTwitterId($t_user->id)->get()->first();
 
-            // ログイン中の場合
-            if(!empty($login_user)) {
-                // ユーザとソーシャルアカウントの紐付けテーブルを取得
-                $social_account = Tr_user_social_accounts::where('user_id', $login_user->id)
-                                                         ->where('social_account_type', MdlUtil::SOCIAL_TYPE_TWITTER)
-                                                         ->get()
-                                                         ->first();
-
-                // 既に別のアカウントが紐付いている場合
-                if (!empty($social_account)) {
-                    // 今回のアカウントでアップデート
-                    $social_account->social_account_id = $twitter_account->id;
-                    $social_account->last_update_date = Carbon::now()->format('Y-m-d H:i:s');
-                    $social_account->save();
-
-                } else {
-                    // 今回のアカウントをインサート
+                // アカウント情報がテーブルに存在しない場合、インサートする
+                if (empty($twitter_account)) {
                     $now = Carbon::now()->format('Y-m-d H:i:s');
-                    $social_account = new Tr_user_social_accounts;
-                    $social_account->user_id = $login_user->id;
-                    $social_account->social_account_id = $twitter_account->id;
-                    $social_account->social_account_type = MdlUtil::SOCIAL_TYPE_TWITTER;
-                    $social_account->registration_date = $now;
-                    $social_account->last_update_date = $now;
-                    $social_account->save();
+                    $twitter_account = new Tr_user_twitter_accounts;
+                    $twitter_account->twitter_id = $t_user->id;
+                    $twitter_account->access_token_key = $t_user->token;
+                    $twitter_account->access_token_secret = $t_user->tokenSecret;
+                    $twitter_account->registration_date = $now;
+                    $twitter_account->last_update_date = $now;
+                    $twitter_account->save();
                 }
 
-            // 未ログイン
-            } else {
-                // メールアドレスからユーザを取得
-                $t_mail_user = Tr_users::getUserByMail($t_user->email)
-                                       ->get()
-                                       ->first();
-                // 会員登録済み
-                if (!empty($t_mail_user)) {
+                // ログインユーザを取得
+                $login_user = Tr_users::getLoginUser()->get()->first();
+
+                // ログイン中の場合
+                if(!empty($login_user)) {
+
                     // ユーザとソーシャルアカウントの紐付けテーブルを取得
-                    $social_account = Tr_user_social_accounts::where('user_id', $t_mail_user->id)
+                    $social_account = Tr_user_social_accounts::where('user_id', $login_user->id)
                                                              ->where('social_account_type', MdlUtil::SOCIAL_TYPE_TWITTER)
                                                              ->get()
                                                              ->first();
@@ -142,44 +113,144 @@ class SNSController extends Controller
                         // 今回のアカウントをインサート
                         $now = Carbon::now()->format('Y-m-d H:i:s');
                         $social_account = new Tr_user_social_accounts;
-                        $social_account->user_id = $t_mail_user->id;
+                        $social_account->user_id = $login_user->id;
                         $social_account->social_account_id = $twitter_account->id;
                         $social_account->social_account_type = MdlUtil::SOCIAL_TYPE_TWITTER;
                         $social_account->registration_date = $now;
                         $social_account->last_update_date = $now;
                         $social_account->save();
                     }
-
-                    //　ログイン成功
-                    $t_mail_user->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
-                    $t_mail_user->save();
-                    CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $t_mail_user->id);
-
-                // 会員未登録
+                // 未ログイン
                 } else {
-                    if (!empty($t_user->email)) {
-                        // メールアドレス認証フローを実行
-                        $auth_key = new Tr_auth_keys;
-                        $auth_key->mail = $t_user->email;
-                        $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
-                        $auth_key->auth_task = MdlUtil::AUTH_TASK_MAIL_AUHT;
-                        $auth_key->ticket = FrntUtil::createUUID();
-                        $auth_key->save();
+                    // メールアドレスからユーザを取得
+                    $t_mail_user = Tr_users::getUserByMail($t_user->email)
+                                           ->get()
+                                           ->first();
+                    // 会員登録済み
+                    if (!empty($t_mail_user)) {
+                        // ユーザとソーシャルアカウントの紐付けテーブルを取得
+                        $social_account = Tr_user_social_accounts::where('user_id', $t_mail_user->id)
+                                                                 ->where('social_account_type', MdlUtil::SOCIAL_TYPE_TWITTER)
+                                                                 ->get()
+                                                                 ->first();
 
-                        // 会員登録のユーザ情報入力画面に遷移
-                        return redirect('/user/regist?ticket='.$auth_key->ticket);
+                        // 既に別のアカウントが紐付いている場合
+                        if (!empty($social_account)) {
+                            // 今回のアカウントでアップデート
+                            $social_account->social_account_id = $twitter_account->id;
+                            $social_account->last_update_date = Carbon::now()->format('Y-m-d H:i:s');
+                            $social_account->save();
+
+                        } else {
+                            // 今回のアカウントをインサート
+                            $now = Carbon::now()->format('Y-m-d H:i:s');
+                            $social_account = new Tr_user_social_accounts;
+                            $social_account->user_id = $t_mail_user->id;
+                            $social_account->social_account_id = $twitter_account->id;
+                            $social_account->social_account_type = MdlUtil::SOCIAL_TYPE_TWITTER;
+                            $social_account->registration_date = $now;
+                            $social_account->last_update_date = $now;
+                            $social_account->save();
+                        }
+
+                        //　ログイン成功
+                        $t_mail_user->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
+                        $t_mail_user->save();
+                        CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $t_mail_user->id);
 
                     } else {
-                        // 会員登録のメールアドレス認証画面に遷移
-                        return redirect('/user/regist/auth')->with('custom_info_messages', ['Twitterアカウントでログインするためには、まずエンジニアルートで新規会員登録を行ってください。']);
+                        \Session::flash('custom_error_messages', ['会員登録が済んでおりません。']);
+                        return redirect('/user/regist/auth');
                     }
                 }
             }
+            // ログイン成功時はマイページに遷移
+            return redirect('/user');
+
+        // 会員登録機能
+        } else if(!empty($oauth_func) && $oauth_func == 'regist') {
+
+            // twitterアカウント情報を取得
+            $twitter_account = Tr_user_twitter_accounts::getAccountByTwitterId($t_user->id)->get()->first();
+
+            // twitterアカウント情報がテーブルに存在しない場合、インサートする
+            if (empty($twitter_account)) {
+                $now = Carbon::now()->format('Y-m-d H:i:s');
+                $twitter_account = new Tr_user_twitter_accounts;
+                $twitter_account->twitter_id = $t_user->id;
+                $twitter_account->access_token_key = $t_user->token;
+                $twitter_account->access_token_secret = $t_user->tokenSecret;
+                $twitter_account->registration_date = $now;
+                $twitter_account->last_update_date = $now;
+                $twitter_account->save();
+            }
+
+            // アカウント連携テーブルを取得
+            $local_t_user_account = Tr_user_social_accounts::join('user_twitter_accounts', 'user_social_accounts.social_account_id', '=', 'user_twitter_accounts.id')
+                                                           ->where('user_twitter_accounts.twitter_id', '=', $t_user->id)
+                                                           ->where('user_social_accounts.social_account_type', '=', MdlUtil::SOCIAL_TYPE_TWITTER)
+                                                           ->get();
+
+            // アカウント連携テーブルに、既に該当のTwitterアカウントが存在した場合
+            if (!$local_t_user_account->isEmpty()) {
+                $this->log('error', 'twitter account already exist', [
+                    'oauth_func' => $oauth_func,
+                    'twitter_id' => $t_user->id,
+                ]);
+                \Session::flash('custom_error_messages', ['Twitterアカウントは既に使用されています。']);
+                return redirect('/user/regist/auth');
+            }
+
+            //　Twitter API からメールアドレスを取得できた場合
+            if (!empty($t_user->email)) {
+
+                // メールアドレスからユーザを取得
+                $t_mail_user = Tr_users::getUserByMail($t_user->email)->get();
+
+                if (!$t_mail_user->isEmpty()) {
+                    $this->log('error', 'twitter email already exist', [
+                        'oauth_func' => $oauth_func,
+                        'twitter_id' => $t_user->id,
+                        'email' => $t_user->email,
+                    ]);
+                    \Session::flash('custom_error_messages', ['使用しているメールアドレスは既に登録されています。']);
+                    return redirect('/user/regist/auth');
+                }
+
+                // メールアドレス認証フローを実行
+                $auth_key = new Tr_auth_keys;
+                $auth_key->mail = $t_user->email;
+                $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
+                $auth_key->auth_task = MdlUtil::AUTH_TASK_MAIL_AUHT;
+                $auth_key->ticket = FrntUtil::createUUID();
+                $auth_key->save();
+
+                $this->log('info', 'success to email auth', [
+                    'oauth_func' => $oauth_func,
+                    'twitter_id' => $t_user->id,
+                    'email' => $t_user->email,
+                ]);
+
+                // 会員登録のユーザ情報入力画面に遷移
+                return redirect('/user/regist?ticket='.$auth_key->ticket);
+
+            // Twitter API からメールアドレスを取得できなかった場合
+            } else {
+                $this->log('info', 'twitter email not found', [
+                    'oauth_func' => $oauth_func,
+                    'twitter_id' => $t_user->id,
+                    'email' => $t_user->email,
+                ]);
+                \Session::flash('custom_error_messages', ['有効なTwitterアカウントが見つかりませんでした。']);
+                return redirect('/user/regist/auth');
+            }
         }
 
-        // ログイン成功時はマイページに遷移
-        return redirect('/user');
+        return redirect('/');
     }
+
+
+
 
     /**
      * Facebook認証
