@@ -159,8 +159,12 @@ class SNSController extends Controller
                         CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $t_mail_user->id);
 
                     } else {
-                        \Session::flash('custom_error_messages', ['会員登録が済んでおりません。']);
-                        return redirect('/user/regist/auth');
+                        \Session::flash('custom_error_messages', [
+                            'Twitterアカウントと同じメールアドレスを持つユーザが見つかりませんでした。
+                            <a class="hover-thin" href="/login/sns/twitter?func=regist">こちら</a>から会員登録を行ってください。<br>
+                            既に会員の方は、マイページよりTwitterアカウントの認証を行ってください。'
+                        ]);
+                        return redirect('/login');
                     }
                 }
             }
@@ -244,12 +248,77 @@ class SNSController extends Controller
                 \Session::flash('custom_error_messages', ['有効なTwitterアカウントが見つかりませんでした。']);
                 return redirect('/user/regist/auth');
             }
+
+        // マイぺージからの認証
+        } else if(!empty($oauth_func) && $oauth_func == 'auth') {
+
+            // ログインユーザ取得
+            $login_user = FrntUtil::getFirstLoginUser();
+
+            // ミドルウェアで検証してないので、ここでチェック
+            if (empty($login_user)) {
+                return redirect('/')
+            }
+
+            // ユーザとソーシャルアカウントの紐付けテーブルを取得
+            $social_account = Tr_user_social_accounts::getTwitterAccount($login_user->id)->first();
+
+            // 既に別のアカウントが紐付いている場合
+            if (!empty($social_account)) {
+                // 今回のアカウントでアップデート
+                $social_account->social_account_id = $twitter_account->id;
+                $social_account->last_update_date = Carbon::now()->format('Y-m-d H:i:s');
+                $social_account->save();
+
+            } else {
+                // 今回のアカウントをインサート
+                $now = Carbon::now()->format('Y-m-d H:i:s');
+                $social_account = new Tr_user_social_accounts;
+                $social_account->user_id = $login_user->id;
+                $social_account->social_account_id = $twitter_account->id;
+                $social_account->social_account_type = MdlUtil::SOCIAL_TYPE_TWITTER;
+                $social_account->registration_date = $now;
+                $social_account->last_update_date = $now;
+                $social_account->save();
+            }
+
         }
 
         return redirect('/');
     }
 
+    /**
+     * 各種SNS認証解除
+     * GET:/auth/sns/cancel
+     *
+     */
+    public function deleteSNSAuth(Request $request){
 
+        // ログインユーザを取得
+        $login_user = FrntUtil::getFirstLoginUser();
+
+        // social_typeパラメータを検証
+        if (!(FrntUtil::validateSocialType($request->social_type ?: null))) {
+            $this->log('error', 'fraudulent manipulation');
+            abort(400);
+        }
+
+        try {
+            // SNS連携テーブルをデリート
+            Tr_user_social_accounts::where('user_id', $login_user->id)
+                                   ->where('social_account_type', $request->social_type)
+                                   ->delete();
+
+        } catch (Exception $e) {
+            $this->log('error', 'failure to Twitter Auth cancel ', [
+                'error' => $e->getMessage(),
+            ]);
+            abort(400, 'システムエラーが発生致しました。恐れ入りますが、しばらく時間をおいてから再度アクセスしてください。');
+        }
+
+        // マイぺージに戻る
+        return redirect('/user');
+    }
 
 
     /**

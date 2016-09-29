@@ -18,6 +18,7 @@ use App\Libraries\CookieUtility as CkieUtil;
 use App\Models\Tr_users;
 use App\Models\Tr_link_users_contract_types;
 use App\Models\Tr_auth_keys;
+use App\Models\Tr_user_social_accounts;
 use Mail;
 use Carbon\Carbon;
 use DB;
@@ -303,13 +304,14 @@ class UserController extends Controller
     public function deleteUser(){
 
         // ログインユーザを取得
-        $user = Tr_users::where('id', CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID))
-                        ->enable()
-                        ->get()
-                        ->first();
+        $login_user = FrntUtil::getFirstLoginUser();
+
+        if (empty($login_user)) {
+            return redirect('/');
+        }
 
         $db_data = [
-            'user' => $user,
+            'user' => $login_user,
             'delete_date' => Carbon::today()->format('Y-m-d'),
         ];
 
@@ -321,12 +323,16 @@ class UserController extends Controller
                 $db_data['user']->delete_date = $db_data['delete_date'];
                 $db_data['user']->save();
 
+                // SNS連携テーブルを削除
+                Tr_user_social_accounts::where('user_id', $db_data['user']->id)->delete();
+
             } catch (Exception $e) {
                 Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
 
+        // ログアウト処理へリダイレクト
         return redirect('/logout');
     }
 
@@ -434,9 +440,9 @@ class UserController extends Controller
         }
 
         $user = Tr_users::where('id', $auth_key->user_id)
-                         ->enable()
-                         ->get()
-                         ->first();
+                        ->enable()
+                        ->get()
+                        ->first();
 
         if (empty($user)) {
             Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_users)',[

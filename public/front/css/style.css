@@ -578,17 +578,19 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## マイページ
 -------------------------------*/
-.mypage_element{
+.mypage_element {
     margin-top: 4rem;
 }
-.mypage_element h2{
+.mypage_element h2 {
     color: #fff;
     border: 1px solid #5E8796;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     background: #5E8796;
-    padding: 0.6rem 2rem;
+    padding: 0.3rem 1.6rem;
+    line-height: normal;
 }
+
 .mypage_elementInr{
     border: 1px solid #5E8796;
     border-bottom-right-radius: 15px;
@@ -2598,6 +2600,10 @@ sp.css ~640px
         padding: 2rem;
     }
 
+    .cmmn-btn .edit-btn {
+        width: 81.43%;
+    }
+
     /*-------------------------------
     ## パスワード変更
     -------------------------------*/
@@ -2962,7 +2968,7 @@ sp.css ~640px
 
 	/* user */
 	.user{
-		top: 4px;
+		top: 1px;
 		right: 31px;
 	}
 
@@ -2971,6 +2977,11 @@ sp.css ~640px
 		border-radius: 8px;
 		box-shadow: none;
 	}
+
+    .user li a{
+    	line-height: 3rem;
+    	padding: 0 1rem;
+    }
 
 	/* search */
 	.headerInr .signin,

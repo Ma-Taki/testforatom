@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\admin\MemberSearchRequest;
 use App\Http\Controllers\AdminController;
 use App\Models\Tr_users;
+use App\Models\Tr_user_social_accounts;
 use Carbon\Carbon;
 use DB;
 use App\Libraries\OrderUtility as OdrUtil;
@@ -168,11 +169,14 @@ class MemberController extends AdminController
         // トランザクション
         DB::transaction(function () use ($member_id, $timestamp) {
             try {
-                // ユーザーテーブルをアップデート
+                // ユーザテーブルをアップデート
                 Tr_users::where('id', $member_id)->update([
                     'delete_flag' => 1,
                     'delete_date' => date('Y-m-d', $timestamp),
                 ]);
+
+                // SNS連携テーブルをデリート
+                Tr_user_social_accounts::where('user_id', $member_id)->delete();
 
             } catch (\Exception $e) {
                 Log::error($e);

@@ -63,7 +63,7 @@ Route::resource('/login', 'front\LoginController', ['only' => ['index', 'store']
 Route::get('/logout', 'front\LoginController@logout');
 
 // Twitter
-Route::get('/login/sns/twitter', 'SNSController@getTwitterAuth');
+Route::get('/login/sns/twitter',          'SNSController@getTwitterAuth');
 Route::get('/login/sns/twitter/callback', 'SNSController@getTwitterAuthCallback');
 
 // Facebook
@@ -90,6 +90,8 @@ Route::group(['middleware' => 'front_loginCheck'], function () {
     // プロフィール変更
     Route::get('/user/edit', 'front\UserController@showUserEdit');
     Route::post('/user/edit', 'front\UserController@updateUser');
+    // SNS認証解除
+    Route::get('/auth/sns/cancel', 'SNSController@deleteSNSAuth');
 });
 
 // パスワード再設定URL送信

@@ -24,7 +24,7 @@
         <div class="alert alert-danger">
             <ul>
 @foreach(Session::get('custom_error_messages') as $message)
-                <li>{{ $message }}</li>
+                <li>{!! $message !!}</li>
 @endforeach
             </ul>
         </div>

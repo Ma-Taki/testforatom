@@ -6,6 +6,7 @@
 namespace App\Libraries;
 use App;
 use App\Libraries\CookieUtility as CkieUtil;
+use App\Libraries\ModelUtility as MdlUtil;
 use App\Models\Tr_users;
 use App\Models\Tr_auth_keys;
 
@@ -212,6 +213,16 @@ class FrontUtility
     }
 
     /**
+     * ログインユーザを1件取得する
+     *
+     * @param int user_id
+     * @return Tr_user / null
+     */
+    public static function getFirstLoginUser(){
+        return Tr_users::getLoginUser()->first();
+    }
+
+    /**
      * ログイン中か判定する
      * @return bool
      */
@@ -244,5 +255,18 @@ class FrontUtility
             $w_obj = Tr_auth_keys::where('auth_task', $ticket)->get()->first();
         } while (!empty($w_obj));
         return $ticket;
+    }
+
+    /**
+     * ソーシャルタイプの数値が正しいかチェックする
+     * @param string $social_type
+     * @return bool
+     */
+    public static function validateSocialType($social_type){
+        return in_array($social_type, [
+            strval(MdlUtil::SOCIAL_TYPE_TWITTER),
+            strval(MdlUtil::SOCIAL_TYPE_FACEBOOK),
+            strval(MdlUtil::SOCIAL_TYPE_GITHUB),
+        ]);
     }
 }

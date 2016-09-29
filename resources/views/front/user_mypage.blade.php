@@ -4,6 +4,7 @@
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
     use App\Libraries\ModelUtility as MdlUtil;
+    use App\Models\Tr_user_social_accounts;
 ?>
 <div class="wrap">
     <div class="main-content user-mypage">
@@ -17,14 +18,51 @@
                         <h2>アカウント</h2>
                         <div class="mypage_elementInr">
                             <div class="dataTable">
+
                                 <div class="data">
                                     <div class="name">会員ID(メールアドレス)</div>
                                     <div class="value">{{ $user->mail }}</div>
                                 </div>
+
                                 <div class="data">
                                     <div class="name">パスワード</div>
-                                    <div class="value"><a href="/user/edit/password">パスワード変更</a></div>
+                                    <div class="value hover-thin"><a href="/user/edit/password">パスワード変更</a></div>
                                 </div>
+
+
+                                <div class="data">
+                                    <div class="name">Facebook連携</div>
+                                    <div class="value">
+@if(Tr_user_social_accounts::getFacebookAccount($user->id)->count() > 0)
+                                        【Facebookアカウント認証済み】<a href="/auth/sns/cancel?social_type={{ MdlUtil::SOCIAL_TYPE_FACEBOOK }}" class="hover-thin">解除する</a>
+@else
+                                        <a href="/login/sns/facebook?func=auth" class="hover-thin">Facebookアカウントの認証</a>
+@endif
+                                    </div>
+                                </div>
+
+                                <div class="data">
+                                    <div class="name">Twitter連携</div>
+                                    <div class="value">
+@if(Tr_user_social_accounts::getTwitterAccount($user->id)->count() > 0)
+                                        【Twitterアカウント認証済み】<a href="/auth/sns/cancel?social_type={{ MdlUtil::SOCIAL_TYPE_TWITTER }}" class="hover-thin">解除する</a>
+@else
+                                        <a href="/login/sns/twitter?func=auth" class="hover-thin">Twitterアカウントの認証</a>
+@endif
+                                    </div>
+                                </div>
+
+                                <div class="data">
+                                    <div class="name">GitHub連携</div>
+                                    <div class="value">
+@if(Tr_user_social_accounts::getGithubAccount($user->id)->count() > 0)
+                                        【GitHubアカウント認証済み】<a href="/auth/sns/cancel?social_type={{ MdlUtil::SOCIAL_TYPE_GITHUB }}" class="hover-thin">解除する</a>
+@else
+                                        <a href="/login/sns/github?func=auth" class="hover-thin">GitHubアカウントの認証</a>
+@endif
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
