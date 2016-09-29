@@ -189,7 +189,7 @@
                                 <p>メールマガジン</p>
                             </div>
                             <div class="input_f_value input_magazine">
-                                <label><input type="checkbox" checked name="main_magazine[]" value="1">配信を希望する</label>
+                                <label><input type="checkbox" @if(old('magazine_flag', $magazine_flag)) checked @endif name="magazine_flag_temp">配信を希望する</label>
                             </div>
                         </div>
                         <hr class="hr-1px-dashed-333">
@@ -345,6 +345,12 @@
                 var year = $('#js-slctBx-birth_y').val();
                 var month = $('#js-slctBx-birth_m').val();
                 var day = $('#js-slctBx-birth_d').val();
+                var $magazine_flag = $('<input />').attr('type', 'hidden').attr('name', 'magazine_flag');
+                if ($('input[name="magazine_flag_temp"]').prop('checked')) {
+                    $magazine_flag.attr('value', 1).appendTo($(this));
+                } else {
+                    $magazine_flag.attr('value', 0).appendTo($(this));
+                }
                 $('<input />')
                     .attr('type', 'hidden')
                     .attr('name', 'birth')

@@ -123,6 +123,7 @@ class UserController extends Controller
         return view('front.user_input',[
             'mail' => $auth_key->mail,
             'ticket' => $ticket,
+            'magazine_flag' => 1,
         ]);
     }
 
@@ -168,6 +169,7 @@ class UserController extends Controller
             'station' => $request->station,
             'mail' => $request->mail,
             'phone_num' => $request->phone_num,
+            'magazine_flag' => $request->magazine_flag,
             'salt' => $prefix_salt,
             'password' => $prefix_salt .$request->password .FrntUtil::FIXED_SALT,
             'now' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -198,6 +200,7 @@ class UserController extends Controller
                 $user->station = !empty($db_data['station']) ? $db_data['station'] : null;
                 $user->mail = $db_data['mail'];
                 $user->tel = $db_data['phone_num'];
+                $user->magazine_flag = $db_data['magazine_flag'];
                 $user->delete_flag = 0;
                 $user->delete_date = null;
                 $user->version = 0;
