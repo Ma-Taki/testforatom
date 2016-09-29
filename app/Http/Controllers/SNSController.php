@@ -222,12 +222,24 @@ class SNSController extends Controller
                 }
 
                 // メールアドレス認証フローを実行
-                $auth_key = new Tr_auth_keys;
-                $auth_key->mail = $t_user->email;
-                $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
-                $auth_key->auth_task = MdlUtil::AUTH_TASK_MAIL_AUHT;
+                $auth_key = Tr_auth_keys::where('mail', $t_user->email)
+                                        ->where('auth_task', MdlUtil::AUTH_TASK_MAIL_AUHT)
+                                        ->first();
+
+                if (empty($auth_key)) {
+                    // 認証鍵テーブルにインサート
+                    $auth_key = new Tr_auth_keys;
+                    $auth_key->mail = $t_user->email;
+                    $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
+                    $auth_key->auth_task = MdlUtil::AUTH_TASK_MAIL_AUHT;
+
+                } else {
+                    // 認証鍵テーブルにアップデート
+                    $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
+                }
                 $auth_key->ticket = FrntUtil::createUUID();
                 $auth_key->save();
+
 
                 $this->log('info', 'success to email auth', [
                     'oauth_func' => $oauth_func,
