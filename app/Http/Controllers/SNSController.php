@@ -257,7 +257,7 @@ class SNSController extends Controller
 
             // ミドルウェアで検証してないので、ここでチェック
             if (empty($login_user)) {
-                return redirect('/')
+                return redirect('/');
             }
 
             // ユーザとソーシャルアカウントの紐付けテーブルを取得
