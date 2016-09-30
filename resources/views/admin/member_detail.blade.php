@@ -1,6 +1,9 @@
 @extends('admin.common.layout')
 @section('title', '会員詳細')
 @section('content')
+<?php
+    use App\Libraries\AdminUtility as AdmnUtil;
+ ?>
 <div class="col-md-10">
 {{-- info：custom --}}
 @if(\Session::has('custom_info_messages'))
@@ -68,6 +71,14 @@
                             <tr>
                                 <th>電話番号</th>
                                 <td>{{ $member->tel }}</td>
+                            </tr>
+                            <tr>
+                                <th>メールマガジン</th>
+                                <td>@if ($member->magazine_flag) 配信を希望する @else 配信を希望しない @endif</td>
+                            </tr>
+                            <tr>
+                                <th>SNS連携</th>
+                                <td>{{ AdmnUtil::convertModelsToSNSString($member->socialAccount) }}</td>
                             </tr>
                             <tr>
                                 <th>登録日</th>

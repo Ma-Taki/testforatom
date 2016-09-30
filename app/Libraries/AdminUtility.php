@@ -62,4 +62,32 @@ class AdminUtility
         }
         return false;
     }
+
+    /**
+     * 受け取った配列のバリューを"、"で連結した文字列に変換する。
+     *
+     * @param Collection $models
+     * @return string
+     **/
+    public static function convertModelsToSNSString($models){
+        $str = '';
+        $function = function($account_type) {
+            switch ($account_type) {
+                case mdlUtil::SOCIAL_TYPE_TWITTER:
+                    return 'Twitter、';
+                case mdlUtil::SOCIAL_TYPE_FACEBOOK:
+                    return 'Facebook、';
+                case mdlUtil::SOCIAL_TYPE_GITHUB:
+                    return 'GitHub、';
+                default:
+                    return '';
+            }
+        };
+        if (!empty($models)) {
+            foreach ($models as $value) {
+                $str .= $function($value->social_account_type);
+            }
+        }
+        return rtrim($str, '、');
+    }
 }
