@@ -14,6 +14,8 @@
             <div class="content__element">
                 <div class="content__body">
 
+                    @include('front.common.validation_error')
+
                     <div class="mypage_element">
                         <h2>アカウント</h2>
                         <div class="mypage_elementInr">

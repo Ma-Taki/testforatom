@@ -6,24 +6,32 @@
     use App\Libraries\FrontUtility as FrntUtil;
 ?>
 <div class="wrap">
-    <div id="user_delete" class="content">
-        <h1 class="pageTitle">退会</h1>
+    <div class="main-content user-delete">
+        <h1 class="main-content__title">退会</h1>
         <hr class="hr-2px-solid-5e8796">
-        <div class="user_delete">
-            <p class="pageInfo">
-                「退会する」ボタンをクリックで、エンジニアルートから退会を行います。<br>
-                退会を行うことで、案件へのエントリーができなくなります。
-            </p>
-            <hr class="hr-1px-dashed-333">
+        <div class="main-content__body">
+            <div class="content__element">
 
-            <form method="post" action="{{ url('/user/delete') }}">
-                <div class="commonCenterBtn">
-                    <a href="/user"><button type="button">キャンセル</button></a>
-                    <button type="submit">退会する</button>
+                <div class="content__info">
+                    <p>
+                        「退会する」ボタンをクリックで、エンジニアルートから退会を行います。<br>
+                        退会を行うことで、案件へのエントリーができなくなります。
+                    </p>
                 </div>
-                {{ csrf_field() }}
-            </form>
+                <hr class="hr-1px-dashed-333">
+
+                <div class="content__body">
+
+                    <form method="post" action="{{ url('/user/delete') }}">
+                        <div class="commonCenterBtn">
+                            <a href="/user"><button type="button">キャンセル</button></a>
+                            <button type="submit">退会する</button>
+                        </div>
+                        {{ csrf_field() }}
+                    </form>
+                </div>
+            </div>
         </div>
-    </div><!-- END CONTENT -->
-</div><!-- END WRAP -->
+    </div><!-- END main-content -->
+</div><!-- END wrap -->
 @endsection

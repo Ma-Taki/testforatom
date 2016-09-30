@@ -458,10 +458,9 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## パスワード変更
 -------------------------------*/
-.edit_password{width: 95%;margin: 0 auto;}
-#edit_password .input_password label{width: 100%;}
-#edit_password .input_password label input{width: 70%;margin-left: 0;}
-#edit_password .input_password label:nth-child(2){margin-top: 1.4rem;}
+.edit-password .input_password label{width: 100%;}
+.edit-password .input_password label input{width: 70%;margin-left: 0;}
+.edit-password .input_password label:nth-child(2){margin-top: 1.4rem;}
 
 
 /*-------------------------------
@@ -609,11 +608,6 @@ h1.SearchTitle:before{
 
 .cmmn-btn .edit-btn {
     width: 32.945%;
-}
-
-.user_delete{
-    width: 95%;
-    margin: 0 auto;
 }
 
 /*-------------------------------
@@ -1495,6 +1489,8 @@ a.login__sns-btn {
     align-self: flex-start;
     width: 35px;
     height: 35px;
+    min-width: 35px;
+    min-height: 35px;
 }
 
 .question__text,
@@ -2497,7 +2493,9 @@ sp.css ~640px
     .user-input,
     .user-reminder,
     .user-reminder-complete,
-    .user-mypage
+    .user-mypage,
+    .user-delete,
+    .edit-password
     {
         margin-bottom: 5rem;
     }
@@ -2607,7 +2605,9 @@ sp.css ~640px
     /*-------------------------------
     ## パスワード変更
     -------------------------------*/
-    #edit_password .input_password label input{width: 100%;}
+    .edit-password .input_password label input {
+        width: 100%;
+    }
 
     /*-------------------------------
     # エントリー

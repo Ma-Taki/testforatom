@@ -54,6 +54,21 @@ class SNSController extends Controller
             'accessToken' => $t_user->token,
         ]);
 
+        // twitterアカウント情報を取得
+        $twitter_account = Tr_user_twitter_accounts::getAccountByTwitterId($t_user->id)->get()->first();
+
+        // twitterアカウント情報がテーブルに存在しない場合、インサートする
+        if (empty($twitter_account)) {
+            $now = Carbon::now()->format('Y-m-d H:i:s');
+            $twitter_account = new Tr_user_twitter_accounts;
+            $twitter_account->twitter_id = $t_user->id;
+            $twitter_account->access_token_key = $t_user->token;
+            $twitter_account->access_token_secret = $t_user->tokenSecret;
+            $twitter_account->registration_date = $now;
+            $twitter_account->last_update_date = $now;
+            $twitter_account->save();
+        }
+
         // ログイン機能
         if(!empty($oauth_func) && $oauth_func == 'login') {
 
@@ -74,21 +89,6 @@ class SNSController extends Controller
 
             // 紐付いたユーザが存在しない場合
             } else {
-
-                // twitterアカウント情報を取得
-                $twitter_account = Tr_user_twitter_accounts::getAccountByTwitterId($t_user->id)->get()->first();
-
-                // アカウント情報がテーブルに存在しない場合、インサートする
-                if (empty($twitter_account)) {
-                    $now = Carbon::now()->format('Y-m-d H:i:s');
-                    $twitter_account = new Tr_user_twitter_accounts;
-                    $twitter_account->twitter_id = $t_user->id;
-                    $twitter_account->access_token_key = $t_user->token;
-                    $twitter_account->access_token_secret = $t_user->tokenSecret;
-                    $twitter_account->registration_date = $now;
-                    $twitter_account->last_update_date = $now;
-                    $twitter_account->save();
-                }
 
                 // ログインユーザを取得
                 $login_user = Tr_users::getLoginUser()->get()->first();
@@ -174,21 +174,6 @@ class SNSController extends Controller
         // 会員登録機能
         } else if(!empty($oauth_func) && $oauth_func == 'regist') {
 
-            // twitterアカウント情報を取得
-            $twitter_account = Tr_user_twitter_accounts::getAccountByTwitterId($t_user->id)->get()->first();
-
-            // twitterアカウント情報がテーブルに存在しない場合、インサートする
-            if (empty($twitter_account)) {
-                $now = Carbon::now()->format('Y-m-d H:i:s');
-                $twitter_account = new Tr_user_twitter_accounts;
-                $twitter_account->twitter_id = $t_user->id;
-                $twitter_account->access_token_key = $t_user->token;
-                $twitter_account->access_token_secret = $t_user->tokenSecret;
-                $twitter_account->registration_date = $now;
-                $twitter_account->last_update_date = $now;
-                $twitter_account->save();
-            }
-
             // アカウント連携テーブルを取得
             $local_t_user_account = Tr_user_social_accounts::join('user_twitter_accounts', 'user_social_accounts.social_account_id', '=', 'user_twitter_accounts.id')
                                                            ->where('user_twitter_accounts.twitter_id', '=', $t_user->id)
@@ -267,13 +252,24 @@ class SNSController extends Controller
             // ログインユーザ取得
             $login_user = FrntUtil::getFirstLoginUser();
 
-            // ミドルウェアで検証してないので、ここでチェック
+            // ミドルウェアで検証してないので、ログイン中であることをここでチェック
             if (empty($login_user)) {
                 return redirect('/');
             }
 
+            // アカウントが別のユーザに紐付いている場合
+            $other_account = Tr_user_social_accounts::where('user_id', '!=', $login_user->id)
+                                                    ->where('social_account_type', MdlUtil::SOCIAL_TYPE_TWITTER)
+                                                    ->where('social_account_id', $twitter_account->id)
+                                                    ->get();
+            if (!$other_account->isEmpty()) {
+                \Session::flash('custom_error_messages', ['ご利用のTwitterアカウントは既に使用されています。']);
+                return redirect('/user');
+            }
+
             // ユーザとソーシャルアカウントの紐付けテーブルを取得
             $social_account = Tr_user_social_accounts::getTwitterAccount($login_user->id)->first();
+
 
             // 既に別のアカウントが紐付いている場合
             if (!empty($social_account)) {
@@ -293,7 +289,7 @@ class SNSController extends Controller
                 $social_account->last_update_date = $now;
                 $social_account->save();
             }
-
+            return redirect('/user');
         }
 
         return redirect('/');
@@ -311,7 +307,7 @@ class SNSController extends Controller
 
         // social_typeパラメータを検証
         if (!(FrntUtil::validateSocialType($request->social_type ?: null))) {
-            $this->log('error', 'fraudulent manipulation');
+            $this->log('error', 'Illegal operation');
             abort(400);
         }
 
