@@ -77,7 +77,7 @@ class Tr_users extends Model
     }
 
     /**
-     * SNSアカウントに紐付いたユーザを取得
+     * SNSアカウントに紐付いた有効なユーザを取得
      */
     public function scopeGetUserBySnsAccount($query, $account) {
         return $query->join('user_social_accounts', 'users.id', '=', 'user_social_accounts.user_id')
