@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\front\UserRegistrationRequest;
 use App\Http\Requests\front\UserEditRequest;
 use App\Http\Requests\front\EditPasswordRequest;
+use App\Http\Requests\front\EditEmailRequest;
 use App\Http\Requests\front\ReminderRequest;
 use App\Http\Requests\front\RecoverPasswordRequest;
 use App\Http\Requests\front\MailAuthRequest;
@@ -44,13 +45,13 @@ class UserController extends Controller
         $ticket = FrntUtil::createUUID();
 
         $auth_key = Tr_auth_keys::where('mail', $request->mail)
-                                ->where('auth_task', MdlUtil::AUTH_TASK_MAIL_AUHT)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT)
                                 ->get()
                                 ->first();
 
         $data_db = [
             'auth_key' => $auth_key,
-            'auth_task' => MdlUtil::AUTH_TASK_MAIL_AUHT,
+            'auth_task' => MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT,
             'ticket' => $ticket,
             'mail' => $request->mail,
             'now' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -88,9 +89,9 @@ class UserController extends Controller
 
         $frntUtil = new FrntUtil();
         Mail::send('front.emails.mail_auth', $data_mail, function ($message) use ($data_mail, $frntUtil) {
-            $message->from($frntUtil->mail_auth_mail_from, $frntUtil->mail_auth_mail_from_name);
+            $message->from($frntUtil->regist_mail_auth_mail_from, $frntUtil->regist_mail_auth_mail_from_name);
             $message->to($data_mail['mail']);
-            $message->subject(FrntUtil::MAIL_TITLE_MAIL_AUTH);
+            $message->subject(FrntUtil::MAIL_TITLE_REGIST_MAIL_AUTH);
         });
 
         return view('front.mail_auth_complete');
@@ -106,7 +107,7 @@ class UserController extends Controller
         $ticket = $request->ticket;
         $now = Carbon::now()->addDay()->format('Y-m-d H:i:s');
         $auth_key = Tr_auth_keys::where('ticket', $ticket)
-                                ->where('auth_task', MdlUtil::AUTH_TASK_MAIL_AUHT)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT)
                                 ->where('application_datetime', '<=', $now)
                                 ->get()
                                 ->first();
@@ -114,7 +115,7 @@ class UserController extends Controller
         if (empty($auth_key)) {
             Log::error('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
                 'ticket' => $ticket,
-                'auth_task' => MdlUtil::AUTH_TASK_MAIL_AUHT,
+                'auth_task' => MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT,
                 'now' => $now,
             ]);
             return redirect('/user/regist/auth')->with('custom_error_messages',['認証済みメールアドレスがありません。']);
@@ -138,7 +139,7 @@ class UserController extends Controller
         $now = Carbon::now()->addDay()->format('Y-m-d H:i:s');
         $auth_key = Tr_auth_keys::where('mail', $request->mail)
                                 ->where('ticket', $ticket)
-                                ->where('auth_task', MdlUtil::AUTH_TASK_MAIL_AUHT)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT)
                                 ->where('application_datetime', '<=', $now)
                                 ->get()
                                 ->first();
@@ -147,7 +148,7 @@ class UserController extends Controller
             Log::error('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
                 'mail' => $request->mail,
                 'ticket' => $ticket,
-                'auth_task' => MdlUtil::AUTH_TASK_MAIL_AUHT,
+                'auth_task' => MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT,
                 'now' => $now,
             ]);
             return redirect('/user/regist/auth')->with('custom_error_messages',['恐れ入りますが、再度メールアドレス認証を行ってください。']);
@@ -250,8 +251,172 @@ class UserController extends Controller
      */
     public function showMyPage(){
         // ログインユーザ情報を取得
-        $user = Tr_users::getLoginUser()->first();
+        $user = FrntUtil::getFirstLoginUser();
         return view('front.user_mypage' , compact('user'));
+    }
+
+    /*
+     * メールアドレス変更画面表示
+     * GET:/user/edit/email
+     */
+    public function showEmailEdit(){
+        // ログインユーザを取得
+        $user = FrntUtil::getFirstLoginUser();
+        return view('front.edit_email' , compact('user'));
+    }
+
+    /*
+     * メールアドレス変更処理
+     * POST:/user/edit/email
+     */
+    public function updateEmailAuth(EditEmailRequest $request){
+
+        // ログインユーザを取得
+        $user = FrntUtil::getFirstLoginUser();
+
+        // UUIDを生成
+        $ticket = FrntUtil::createUUID();
+
+        // 認証鍵を取得
+        $auth_key = Tr_auth_keys::where('user_id', $user->id)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_CHANGE_MAIL_AUHT)
+                                ->get()
+                                ->first();
+
+        $data_db = [
+            'auth_key' => $auth_key,
+            'auth_task' => MdlUtil::AUTH_TASK_CHANGE_MAIL_AUHT,
+            'ticket' => $ticket,
+            'mail' => $request->mail,
+            'user_id' => $user->id,
+            'now' => Carbon::now()->format('Y-m-d H:i:s'),
+
+        ];
+
+        // トランザクション
+        $auth_key = DB::transaction(function () use ($data_db) {
+            try {
+                if (empty($data_db['auth_key'])) {
+                    // インサート
+                    $data_db['auth_key'] = new Tr_auth_keys;
+                    $data_db['auth_key']->mail = $data_db['mail'];
+                    $data_db['auth_key']->user_id = $data_db['user_id'];
+                    $data_db['auth_key']->application_datetime = $data_db['now'];
+                    $data_db['auth_key']->auth_task = $data_db['auth_task'];
+                } else {
+                    // アップデート
+                    $data_db['auth_key']->application_datetime = $data_db['now'];
+                }
+                $data_db['auth_key']->ticket = $data_db['ticket'];
+                $data_db['auth_key']->save();
+
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+            return $data_db['auth_key'];
+        });
+
+        // メール送信
+        $data_mail = [
+            'auth_key' => $auth_key,
+            'mail' => $request->mail,
+            'limit' => FrntUtil::AUTH_KEY_LIMIT_HOUR,
+        ];
+
+        $frntUtil = new FrntUtil();
+        Mail::send('front.emails.edit_mail_auth', $data_mail, function ($message) use ($data_mail, $frntUtil) {
+            $message->from($frntUtil->change_mail_auth_mail_from, $frntUtil->change_mail_auth_mail_from_name);
+            $message->to($data_mail['mail']);
+            $message->subject(FrntUtil::MAIL_TITLE_CHANGE_MAIL_AUTH);
+        });
+
+        $this->log('info', 'send email change email auth', [
+            'auth_key' => $auth_key,
+        ]);
+
+        return redirect('/user')->with('custom_info_messages', ['新しいメールアドレスにメールを送信しました。']);
+    }
+
+    /*
+     * メールアドレス変更処理
+     * GET:/user/edit/email/auth
+     */
+    public function updateEmail(Request $request){
+
+        // id(user_id),ticketパラメータから認証鍵を取得
+        $auth_key = Tr_auth_keys::where('user_id', $request->id)
+                                ->where('ticket', $request->ticket)
+                                ->where('auth_task', MdlUtil::AUTH_TASK_CHANGE_MAIL_AUHT)
+                                ->first();
+
+        // 認証鍵が取得できなかった場合
+        if (empty($auth_key)) {
+            $this->log('error', 'entity not found(Tr_auth_keys)',[
+                'user_id' => $request->id,
+                'ticket' => $request->ticket,
+                'auth_task' => MdlUtil::AUTH_TASK_CHANGE_MAIL_AUHT,
+            ]);
+            return redirect('/');
+        }
+
+        // 更新対象ユーザを取得
+        $user = Tr_users::where('id', $auth_key->user_id)
+                        ->enable()
+                        ->first();
+
+        // 更新対象ユーザが取得できなかった場合
+        if (empty($user)) {
+            $this->log('error', 'entity not found(Tr_users)',[
+                'user_id' => $auth_key->id,
+            ]);
+            return redirect('/');
+        }
+
+        // メールアドレスが一意であることを再チェック
+        $check_user = Tr_users::where('mail', $auth_key->mail)
+                              ->enable()
+                              ->get();
+
+        // 変更後メールアドレスが一意でない場合
+        if (!$check_user->isEmpty()) {
+            $this->log('error', 'duplicate email',[
+                'mail' => $auth_key->mail,
+            ]);
+            return redirect('/');
+        }
+
+        $db_data = [
+            'user' => $user,
+            'auth_key' => $auth_key,
+        ];
+
+        // トランザクション
+        $comp_user = DB::transaction(function () use ($db_data) {
+            try {
+                // ユーザーをアップデート
+                $db_data['user']->mail = $db_data['auth_key']->mail;
+                $db_data['user']->save();
+
+                // 認証鍵をハードデリート
+                $db_data['auth_key']->delete();
+
+                return $db_data['user'];
+
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+
+        $this->log('info', 'success to change email',[
+            'user_id' => $user->id,
+            'before_email' => $user->email,
+            'after_email' => $comp_user->email,
+        ]);
+
+        // マイページへ遷移（ログイン中でなければトップ）
+        return redirect('/user')->with('custom_info_messages', ['メールアドレス変更は正常に完了しました。']);
     }
 
     /*
@@ -492,7 +657,7 @@ class UserController extends Controller
      */
     public function showUserEdit(){
         // ログインユーザを取得
-        $user = Tr_users::getLoginUser()->first();
+        $user = FrntUtil::getFirstLoginUser();
         return view('front.user_edit', compact('user'));
     }
 
@@ -503,8 +668,10 @@ class UserController extends Controller
     public function updateUser(UserEditRequest $request){
 
         // ログインユーザを取得
-        $user = Tr_users::getLoginUser()->first();
+        $user = FrntUtil::getFirstLoginUser();
 
+        // 必須項目以外は、入力されていない場合nullを指定（契約形態以外）
+        // ?:は内部的にはempty()と同義のため、'0'は空文字扱い
         $db_data = [
             'user' => $user,
             'last_name' => $request->last_name,
@@ -513,11 +680,10 @@ class UserController extends Controller
             'first_name_kana' => $request->first_name_kana,
             'gender' => $request->gender,
             'birth' => date('Y-m-d', strtotime($request->birth)),
-            'education' => $request->education,
-            'country' => $request->country,
+            'education' => $request->education ?: null,
+            'country' => $request->country ?: null,
             'prefecture_id' => $request->prefecture_id,
-            'station' => $request->station,
-            'email' => $request->email,
+            'station' => $request->station ?: null,
             'phone_num' => $request->phone_num,
             'contract_types' => $request->contract_types,
             'magazine_flag' => $request->magazine_flag,
@@ -527,19 +693,16 @@ class UserController extends Controller
         DB::transaction(function () use ($db_data) {
             try {
                 // ユーザーテーブルにインサート
-                // 必須項目以外は、入力されていない場合nullを指定
-                // empty()で判別しているため、'0'は空文字扱い
                 $db_data['user']->first_name = $db_data['first_name'];
-                $db_data['user']->last_name = $db_data['last_name'];
+                $db_data['user']->last_name= $db_data['last_name'];
                 $db_data['user']->first_name_kana = $db_data['first_name_kana'];
                 $db_data['user']->last_name_kana = $db_data['last_name_kana'];
                 $db_data['user']->sex = $db_data['gender'];
                 $db_data['user']->birth_date = $db_data['birth'];
-                $db_data['user']->education_level = !empty($db_data['education']) ? $db_data['education'] : null;
-                $db_data['user']->nationality = !empty($db_data['country']) ? $db_data['country'] : null;
+                $db_data['user']->education_level = $db_data['education'];
+                $db_data['user']->nationality = $db_data['country'];
                 $db_data['user']->prefecture_id = $db_data['prefecture_id'];
-                $db_data['user']->station = !empty($db_data['station']) ? $db_data['station'] : null;
-                $db_data['user']->mail = $db_data['email'];
+                $db_data['user']->station = $db_data['station'];
                 $db_data['user']->tel = $db_data['phone_num'];
                 $db_data['user']->magazine_flag = $db_data['magazine_flag'];
                 $db_data['user']->save();

@@ -266,6 +266,9 @@ p.pageInfo{
     padding: 1rem;
     font-size: 1.4rem;
     vertical-align: middle;
+    box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
 }
 
 .main-content {
@@ -694,12 +697,21 @@ h1.SearchTitle:before{
     margin: 0;
 }
 
-.input_email label{
+.input_email label {
     width: 100%;
 }
 
-.input_email label input{
-    width: 70%;margin-left: 0;
+.input_email label input {
+    width: 70%;
+    margin-left: 0;
+}
+
+.input_email .email-change-text {
+    margin-left: 1rem;
+}
+
+.email-change-text a {
+    color: #5E8796;
 }
 
 .input_email label:nth-child(2){
@@ -847,6 +859,9 @@ a.login__sns-btn {
     align-items: center;
     height: 39px;
     margin-bottom: 1rem;
+    box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.3);
 }
 
 .twitter {
@@ -864,28 +879,29 @@ a.login__sns-btn {
 .twitter_logo {
     content: "";
     display: inline-block;
-    background-image: url(/front/images/twitter_logo.png);
+    background-image: url(/front/images/ico-twi.png);
     background-size: 32px;
     width: 32px;
     height: 32px;
+    margin-right: 6px;
 }
 
 .facebook_logo {
     content: "";
     display: inline-block;
-    background-image: url(/front/images/facebook_logo.png);
-    background-size: 28px;
-    width: 28px;
-    height: 28px;
+    background-image: url(/front/images/ico-fb.png);
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
 }
 
 .github_logo {
     content: "";
     display: inline-block;
-    background-image: url(/front/images/github_logo.png);
-    background-size: 26px;
-    width: 26px;
-    height: 26px;
+    background-image: url(/front/images/ico-git.png);
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
     margin-right: 6px;
 }
 
@@ -2494,6 +2510,7 @@ sp.css ~640px
     .user-reminder,
     .user-reminder-complete,
     .user-mypage,
+    .user-edit,
     .user-delete,
     .edit-password
     {
@@ -2693,8 +2710,14 @@ sp.css ~640px
         width: auto;
     }
 
-    .input_email{}
-    .input_email label input{width: 100%; margin: 0 0 0.5rem 0;}
+    .input_email label input{
+        width: 100%;
+        margin: 0 0 0.5rem 0;
+    }
+    .input_email .email-change-text {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
     #user_complete .contentInr p:first-child{
         padding-top: 2rem;
     }

@@ -15,6 +15,7 @@
                 <div class="content__body">
 
                     @include('front.common.validation_error')
+                    @include('front.common.custom_info_message')
 
                     <div class="mypage_element">
                         <h2>アカウント</h2>
@@ -120,6 +121,11 @@
                                 <div class="data">
                                     <div class="name">メールアドレス</div>
                                     <div class="value">{{ $user->mail }}</div>
+                                    <div class="value">
+                                        <p>
+                                            変更する場合は<a class="hover-thin" href="/user/edit/email">コチラ</a>
+                                        </p>
+                                    </div>
                                 </div>
                                 <div class="data">
                                     <div class="name">メールマガジン</div>

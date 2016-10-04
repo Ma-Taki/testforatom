@@ -81,6 +81,10 @@ Route::group(['middleware' => 'front_loginCheck'], function () {
     // パスワード変更
     Route::get('/user/edit/password', function(){ return view('front.edit_password'); });
     Route::post('/user/edit/password', 'front\UserController@updatePassword');
+    // メールアドレス変更
+    Route::get('/user/edit/email', 'front\UserController@showEmailEdit');
+    Route::post('/user/edit/email', 'front\UserController@updateEmailAuth');
+    Route::get('/user/edit/email/auth', 'front\UserController@updateEmail');
     // エントリー
     Route::resource('/entry', 'front\EntryController', ['only' => ['index', 'store']]);
     Route::get('/entry/download', 'front\EntryController@download');

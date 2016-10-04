@@ -208,7 +208,7 @@ class SNSController extends Controller
 
                 // メールアドレス認証フローを実行
                 $auth_key = Tr_auth_keys::where('mail', $t_user->email)
-                                        ->where('auth_task', MdlUtil::AUTH_TASK_MAIL_AUHT)
+                                        ->where('auth_task', MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT)
                                         ->first();
 
                 if (empty($auth_key)) {
@@ -216,7 +216,7 @@ class SNSController extends Controller
                     $auth_key = new Tr_auth_keys;
                     $auth_key->mail = $t_user->email;
                     $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
-                    $auth_key->auth_task = MdlUtil::AUTH_TASK_MAIL_AUHT;
+                    $auth_key->auth_task = MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT;
 
                 } else {
                     // 認証鍵テーブルにアップデート
@@ -469,7 +469,7 @@ class SNSController extends Controller
                         $auth_key = new Tr_auth_keys;
                         $auth_key->mail = $f_user->email;
                         $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
-                        $auth_key->auth_task = MdlUtil::AUTH_TASK_MAIL_AUHT;
+                        $auth_key->auth_task = MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT;
                         $auth_key->ticket = FrntUtil::createUUID();
                         $auth_key->save();
 
@@ -626,7 +626,7 @@ class SNSController extends Controller
                         $auth_key = new Tr_auth_keys;
                         $auth_key->mail = $g_user->email;
                         $auth_key->application_datetime = Carbon::now()->format('Y-m-d H:i:s');
-                        $auth_key->auth_task = MdlUtil::AUTH_TASK_MAIL_AUHT;
+                        $auth_key->auth_task = MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT;
                         $auth_key->ticket = FrntUtil::createUUID();
                         $auth_key->save();
 

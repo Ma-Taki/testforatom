@@ -165,8 +165,12 @@
                                 <p>メールアドレス<span class="color-red">※</span></p>
                             </div>
                             <div class="input_f_value input_email">
+                                <p>{{ $user->mail }}</p>
+                                <p class="email-change-text">変更する場合は<a class="hover-thin" href="/user/edit/email">コチラ</a></p>
+                                <!--
                                 <label><input type="text" maxlength="256" name="email" value="{{ old('email', $user->mail) }}" placeholder="例）info@solidseed.co.jp">（半角）</label>
                                 <label><input type="text" maxlength="256" name="email_confirmation" value="{{ old('email_confirmation') }}" placeholder="確認のため、もう一度入力してください。">（半角）</label>
+                                -->
                             </div>
                         </div>
                         <hr class="hr-1px-dashed-333">

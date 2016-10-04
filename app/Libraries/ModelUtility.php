@@ -49,8 +49,11 @@ class ModelUtility
 
     // 認証キー発行時の目的：パスワード再設定
     const AUTH_TASK_RECOVER_PASSWORD = 'RecoverPassword';
-    // 認証キー発行時の目的：メールアドレス認証
-    const AUTH_TASK_MAIL_AUHT = 'MailAuth';
+    // 認証キー発行時の目的：メールアドレス認証（新規会員登録）
+    const AUTH_TASK_REGIST_MAIL_AUHT = 'RegistMailAuth';
+    // 認証キー発行時の目的：メールアドレス認証（メールアドレス変更）
+    const AUTH_TASK_CHANGE_MAIL_AUHT = 'ChangeMailAuth';
+
 
     // ソーシャルタイプ：Twitter
     const SOCIAL_TYPE_TWITTER = 1;

@@ -106,10 +106,15 @@ class FrontUtility
     public $user_reminder_mail_from = '';
     public $user_reminder_mail_from_name = '';
 
-    // メール：メールアドレス認証
-    const MAIL_TITLE_MAIL_AUTH = '会員登録(無料)にお進みください。';
-    public $mail_auth_mail_from = '';
-    public $mail_auth_mail_from_name = '';
+    // メール：メールアドレス認証（メールアドレス変更）
+    const MAIL_TITLE_CHANGE_MAIL_AUTH = 'メールアドレス変更URL通知メール';
+    public $change_mail_auth_mail_from = '';
+    public $change_mail_auth_mail_from_name = '';
+
+    // メール：メールアドレス認証（新規会員登録）
+    const MAIL_TITLE_REGIST_MAIL_AUTH = '会員登録(無料)にお進みください。';
+    public $regist_mail_auth_mail_from = '';
+    public $regist_mail_auth_mail_from_name = '';
 
     public function __construct(){
         switch (env('APP_ENV')) {
@@ -132,8 +137,11 @@ class FrontUtility
                 $this->user_reminder_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_reminder_mail_from_name = 'エンジニアルート';
 
-                $this->mail_auth_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->mail_auth_mail_from_name = 'エンジニアルート';
+                $this->regist_mail_auth_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->regist_mail_auth_mail_from_name = 'エンジニアルート';
+
+                $this->change_mail_auth_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->change_mail_auth_mail_from_name = 'エンジニアルート';
                 break;
 
             // 開発環境
@@ -155,8 +163,12 @@ class FrontUtility
                 $this->user_reminder_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_reminder_mail_from_name = 'エンジニアルート';
 
-                $this->mail_auth_mail_from = 'y.suzuki@solidseed.co.jp';
-                $this->mail_auth_mail_from_name = 'エンジニアルート';
+                $this->regist_mail_auth_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->regist_mail_auth_mail_from_name = 'エンジニアルート';
+
+                $this->change_mail_auth_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->change_mail_auth_mail_from_name = 'エンジニアルート';
+
                 break;
 
             //　本番環境
@@ -177,6 +189,12 @@ class FrontUtility
 
                 $this->user_reminder_mail_from = 'sender@engineer-route.com';
                 $this->user_reminder_mail_from_name = 'エンジニアルート';
+
+                $this->regist_mail_auth_mail_from = 'sender@engineer-route.com';
+                $this->regist_mail_auth_mail_from_name = 'エンジニアルート';
+
+                $this->change_mail_auth_mail_from = 'sender@engineer-route.com';
+                $this->change_mail_auth_mail_from_name = 'エンジニアルート';
                 break;
 
             default:

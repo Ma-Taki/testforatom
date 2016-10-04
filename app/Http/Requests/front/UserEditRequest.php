@@ -47,8 +47,10 @@ class UserEditRequest extends Request
             'prefecture' => '',
             'station' => '',
             // user_id はViewから送ってる
+            /* メールアドレスの変更は別機能として実装
             'email' => 'required|email|max:256|confirmed|unique:users,mail,'.$this->user_id.',id,delete_date,NULL',
             'email_confirmation' => '',
+            */
             'phone_num' => [
                 'required',
                 'max:14',
