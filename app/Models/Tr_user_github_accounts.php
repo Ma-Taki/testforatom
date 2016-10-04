@@ -16,7 +16,7 @@ class Tr_user_github_accounts extends Model
      * @param int $github_id
      * @return QueryBuilder
      */
-    public function scopeGetFirstByGithubId($query, $github_id) {
+    public function scopeGetAccountByGithubId($query, $github_id) {
         return $query->where('github_id', $github_id);
     }
 }

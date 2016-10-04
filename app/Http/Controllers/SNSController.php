@@ -637,7 +637,7 @@ class SNSController extends Controller
         } else {
             // 存在した場合アップデート
             $now = Carbon::now()->format('Y-m-d H:i:s');
-            $github_account->access_token = $t_user->token;
+            $github_account->access_token = $g_user->token;
             $github_account->last_update_date = $now;
             $github_account->save();
         }
@@ -894,7 +894,7 @@ class SNSController extends Controller
                                    ->delete();
 
         } catch (Exception $e) {
-            $this->log('error', 'failure to Twitter Auth cancel ', [
+            $this->log('error', 'failure to social auth delete', [
                 'error' => $e->getMessage(),
             ]);
             abort(400, 'システムエラーが発生致しました。恐れ入りますが、しばらく時間をおいてから再度アクセスしてください。');

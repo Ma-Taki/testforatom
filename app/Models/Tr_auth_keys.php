@@ -11,4 +11,7 @@ class Tr_auth_keys extends Model
 
     // timestampの自動更新を明示的にOFF
     public $timestamps = false;
+
+    // 日付型で取得するカラム
+    protected $dates = ['application_datetime'];
 }

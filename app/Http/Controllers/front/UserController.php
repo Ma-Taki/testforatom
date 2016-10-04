@@ -103,23 +103,39 @@ class UserController extends Controller
      */
     public function index(Request $request){
 
-        // パラメータのticketから認証したメールアドレスを取得
+        // パラメータのticketから認証鍵を取得
         $ticket = $request->ticket;
-        $now = Carbon::now()->addDay()->format('Y-m-d H:i:s');
         $auth_key = Tr_auth_keys::where('ticket', $ticket)
                                 ->where('auth_task', MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT)
-                                ->where('application_datetime', '<=', $now)
                                 ->get()
                                 ->first();
 
+        // 認証鍵が存在しない場合
         if (empty($auth_key)) {
-            Log::error('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
+            $this->log('error', 'entity not found(Tr_auth_keys)', [
                 'ticket' => $ticket,
                 'auth_task' => MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT,
-                'now' => $now,
             ]);
             return redirect('/user/regist/auth')->with('custom_error_messages',['認証済みメールアドレスがありません。']);
         }
+
+        // 24時間以内のアクセスかチェック
+        $limit = $auth_key->application_datetime->addDay();
+        $now = Carbon::now();
+        if (!$now->lte($limit)) {
+            $this->log('error', 'limit over mail auth', [
+                'regist' => $auth_key->application_datetime,
+                'limit' => $limit,
+                'now' => $now,
+            ]);
+            return redirect('/user/regist/auth')->with('custom_error_messages',['恐れ入りますが、再度メールアドレス認証を行ってください。']);
+        }
+
+        $this->log('info', 'success to limit check', [
+            'regist' => $auth_key->application_datetime,
+            'limit' => $limit,
+            'now' => $now,
+        ]);
 
         return view('front.user_input',[
             'mail' => $auth_key->mail,
@@ -132,27 +148,43 @@ class UserController extends Controller
      * 会員登録処理 & 会員登録完了画面表示
      * POST:/user/regist
      */
-    public function store(UserRegistrationRequest $request){
+    public function store(UserRegistrationRequest $request) {
 
         // ticketとmailが正しいかチェックする
         $ticket = $request->ticket;
-        $now = Carbon::now()->addDay()->format('Y-m-d H:i:s');
         $auth_key = Tr_auth_keys::where('mail', $request->mail)
                                 ->where('ticket', $ticket)
                                 ->where('auth_task', MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT)
-                                ->where('application_datetime', '<=', $now)
                                 ->get()
                                 ->first();
 
+        // 認証鍵が取得できなかった場合
         if (empty($auth_key)) {
-            Log::error('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
+            $this->log('error', 'entity not found(Tr_auth_keys)',[
                 'mail' => $request->mail,
                 'ticket' => $ticket,
                 'auth_task' => MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT,
+            ]);
+            return redirect('/user/regist/auth')->with('custom_error_messages',['恐れ入りますが、再度メールアドレス認証を行ってください。']);
+        }
+
+        // 24時間以内のアクセスかチェック
+        $limit = $auth_key->application_datetime->addDay();
+        $now = Carbon::now();
+        if (!$now->lte($limit)) {
+            $this->log('error', 'limit over mail auth', [
+                'regist' => $auth_key->application_datetime,
+                'limit' => $limit,
                 'now' => $now,
             ]);
             return redirect('/user/regist/auth')->with('custom_error_messages',['恐れ入りますが、再度メールアドレス認証を行ってください。']);
         }
+
+        $this->log('info', 'success to limit check', [
+            'regist' => $auth_key->application_datetime,
+            'limit' => $limit,
+            'now' => $now,
+        ]);
 
         // prefix_saltを作成
         $prefix_salt = FrntUtil::getPrefixSalt(20);
@@ -360,6 +392,24 @@ class UserController extends Controller
             return redirect('/');
         }
 
+        // 24時間以内のアクセスかチェック
+        $limit = $auth_key->application_datetime->addDay();
+        $now = Carbon::now();
+        if (!$now->lte($limit)) {
+            $this->log('error', 'limit over change mail auth', [
+                'regist' => $auth_key->application_datetime,
+                'limit' => $limit,
+                'now' => $now,
+            ]);
+            return redirect('/');
+        }
+
+        $this->log('info', 'success to limit check', [
+            'regist' => $auth_key->application_datetime,
+            'limit' => $limit,
+            'now' => $now,
+        ]);
+
         // 更新対象ユーザを取得
         $user = Tr_users::where('id', $auth_key->user_id)
                         ->enable()
@@ -411,8 +461,8 @@ class UserController extends Controller
 
         $this->log('info', 'success to change email',[
             'user_id' => $user->id,
-            'before_email' => $user->email,
-            'after_email' => $comp_user->email,
+            'before_email' => $user->mail,
+            'after_email' => $comp_user->mail,
         ]);
 
         // マイページへ遷移（ログイン中でなければトップ）
@@ -565,20 +615,38 @@ class UserController extends Controller
      */
     public function showRecovery(Request $request){
 
+        // 認証鍵を取得
         $auth_key = Tr_auth_keys::where('id', $request->id)
                                 ->where('ticket', $request->ticket)
                                 ->where('auth_task', MdlUtil::AUTH_TASK_RECOVER_PASSWORD)
-                                ->where('application_datetime', '<=' ,Carbon::now()->addHour()->format('Y-m-d H:i:s'))
-                                ->get()
                                 ->first();
 
+        // 認証鍵が取得できなかった場合
         if (empty($auth_key)) {
-            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
+            $this->log('error', 'entity not found(Tr_auth_keys)',[
                 'auth_id' => $request->id,
                 'ticket' =>  $request->ticket,
             ]);
             return redirect('/'); // TODO: あとで汎用エラー画面つくる
         }
+
+        // 60分以内のアクセスかチェック
+        $limit = $auth_key->application_datetime->addHour();
+        $now = Carbon::now();
+        if (!$now->lte($limit)) {
+            $this->log('error', 'limit over change password auth', [
+                'regist' => $auth_key->application_datetime,
+                'limit' => $limit,
+                'now' => $now,
+            ]);
+            return redirect('/');
+        }
+
+        $this->log('info', 'success to limit check', [
+            'regist' => $auth_key->application_datetime,
+            'limit' => $limit,
+            'now' => $now,
+        ]);
 
         return view('front.recover_password', [
             'id' => $request->id,
@@ -592,28 +660,47 @@ class UserController extends Controller
      */
     public function recoverPassword(RecoverPasswordRequest $request){
 
+        // 認証鍵を取得
         $auth_key = Tr_auth_keys::where('id', $request->id)
                                 ->where('ticket', $request->ticket)
                                 ->where('auth_task', MdlUtil::AUTH_TASK_RECOVER_PASSWORD)
-                                ->where('application_datetime', '>=' ,Carbon::now()->subHour()->format('Y-m-d H:i:s'))
-                                ->get()
                                 ->first();
 
+        // 認証鍵が存在しない場合
         if (empty($auth_key)) {
-            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_auth_keys)',[
+            $this->log('error', 'entity not found(Tr_auth_keys)',[
                 'auth_id' => $request->id,
                 'ticket' =>  $request->ticket,
             ]);
             return redirect('/'); // TODO: あとで汎用エラー画面つくる
         }
 
+        // 60分以内のアクセスかチェック
+        $limit = $auth_key->application_datetime->addHour();
+        $now = Carbon::now();
+        if (!$now->lte($limit)) {
+            $this->log('error', 'limit over change password auth', [
+                'regist' => $auth_key->application_datetime,
+                'limit' => $limit,
+                'now' => $now,
+            ]);
+            return redirect('/');
+        }
+
+        $this->log('info', 'success to limit check', [
+            'regist' => $auth_key->application_datetime,
+            'limit' => $limit,
+            'now' => $now,
+        ]);
+
+        // 認証鍵から対象のユーザを取得
         $user = Tr_users::where('id', $auth_key->user_id)
                         ->enable()
-                        ->get()
                         ->first();
 
+        // 対象のユーザが存在しない場合
         if (empty($user)) {
-            Log::warning('['.__METHOD__ .'#'.__LINE__.'] entity not found(Tr_users)',[
+            $this->log('error', 'entity not found(Tr_users)',[
                 'auth_id' => $request->id,
                 'user_id' =>  $auth_key->user_id,
             ]);
@@ -646,7 +733,9 @@ class UserController extends Controller
             }
         });
 
-        Log::info('password recovery success',['user_id' => $user->id]);
+        $this->log('info', 'success to password recovery',[
+            'user_id' => $user->id,
+        ]);
 
         return view('front.recover_password_complete');
     }
