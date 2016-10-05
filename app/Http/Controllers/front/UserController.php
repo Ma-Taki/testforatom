@@ -16,6 +16,7 @@ use App\Http\Requests\front\MailAuthRequest;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\ModelUtility as MdlUtil;
 use App\Libraries\CookieUtility as CkieUtil;
+use App\Libraries\SessionUtility as SsnUtil;
 use App\Models\Tr_users;
 use App\Models\Tr_link_users_contract_types;
 use App\Models\Tr_auth_keys;
@@ -40,6 +41,14 @@ class UserController extends Controller
      * POST:/user/regist/auth
      */
     public function mailAuth(MailAuthRequest $request) {
+
+        // SNS連携用のsessionがあれば削除
+        if (session()->has(SsnUtil::SESSION_KEY_SOCIAL_TYPE)){
+            session()->forget(SsnUtil::SESSION_KEY_SOCIAL_TYPE);
+        }
+        if (session()->has(SsnUtil::SESSION_KEY_SOCIAL_ID)){
+            session()->forget(SsnUtil::SESSION_KEY_SOCIAL_ID);
+        }
 
         // UUIDを生成
         $ticket = FrntUtil::createUUID();
@@ -188,6 +197,9 @@ class UserController extends Controller
 
         // prefix_saltを作成
         $prefix_salt = FrntUtil::getPrefixSalt(20);
+
+        // 必須項目以外は、入力されていない場合nullを指定
+        // empty()で判別しているため、'0'は空文字扱い
         $db_data = [
             'last_name' => $request->last_name,
             'first_name' => $request->first_name,
@@ -195,11 +207,11 @@ class UserController extends Controller
             'first_name_kana' => $request->first_name_kana,
             'gender' => $request->gender,
             'birth' => date('Y-m-d', strtotime($request->birth)),
-            'education' => $request->education,
-            'country' => $request->country,
+            'education' => $request->education ?: null,
+            'country' => $request->country ?: null,
             'contract_types' => $request->contract_types,
             'prefecture_id' => $request->prefecture_id,
-            'station' => $request->station,
+            'station' => $request->station ?: null,
             'mail' => $request->mail,
             'phone_num' => $request->phone_num,
             'magazine_flag' => $request->magazine_flag,
@@ -208,14 +220,14 @@ class UserController extends Controller
             'now' => Carbon::now()->format('Y-m-d H:i:s'),
             'contract_types' => $request->contract_types,
             'auth_key' => $auth_key,
+            'social_conection_type' => session()->pull('social_conection_type', null),
+            'social_conection_id' => session()->pull('social_conection_id', null),
         ];
 
         // トランザクション
         DB::transaction(function () use ($db_data) {
             try {
                 // ユーザーテーブルにインサート
-                // 必須項目以外は、入力されていない場合nullを指定
-                // empty()で判別しているため、'0'は空文字扱い
                 $user = new Tr_users;
                 $user->salt = $db_data['salt'];
                 $user->password = md5($db_data['password']);
@@ -227,10 +239,10 @@ class UserController extends Controller
                 $user->last_login_date = $db_data['now'];
                 $user->sex = $db_data['gender'];
                 $user->birth_date = $db_data['birth'];
-                $user->education_level = !empty($db_data['education']) ? $db_data['education'] : null;
-                $user->nationality = !empty($db_data['country']) ? $db_data['country'] : null;
+                $user->education_level = $db_data['education'];
+                $user->nationality = $db_data['country'];
                 $user->prefecture_id = $db_data['prefecture_id'];
-                $user->station = !empty($db_data['station']) ? $db_data['station'] : null;
+                $user->station = $db_data['station'];
                 $user->mail = $db_data['mail'];
                 $user->tel = $db_data['phone_num'];
                 $user->magazine_flag = $db_data['magazine_flag'];
@@ -251,6 +263,18 @@ class UserController extends Controller
 
                 // メールアドレスの認証鍵を物理削除
                 $db_data['auth_key']->delete();
+
+                // SNS連携データが存在する場合
+                if (!empty($db_data['social_conection_type'])
+                    && !empty($db_data['social_conection_id'])) {
+                    $social_account = new Tr_user_social_accounts;
+                    $social_account->user_id = $user->id;
+                    $social_account->social_account_id = $db_data['social_conection_id'];
+                    $social_account->social_account_type = $db_data['social_conection_type'];
+                    $social_account->registration_date = $db_data['now'];
+                    $social_account->last_update_date = $db_data['now'];
+                    $social_account->save();
+                }
 
             } catch (Exception $e) {
                 Log::error($e);

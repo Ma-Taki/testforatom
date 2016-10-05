@@ -61,7 +61,7 @@
                         <a href="/login/sns/twitter?func=regist" class="login__sns-btn twitter">
                             <span class="twitter_logo"></span>Twitter
                         </a>
-                        <a href="/login/sns/github?func=rgist" class="login__sns-btn github">
+                        <a href="/login/sns/github?func=regist" class="login__sns-btn github">
                             <span class="github_logo"></span>GitHub
                         </a>
                         <p>ユーザーの許可なく投稿することはありません</p>

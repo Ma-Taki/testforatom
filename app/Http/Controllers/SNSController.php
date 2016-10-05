@@ -13,6 +13,7 @@ use App\Models\Tr_auth_keys;
 use App\Libraries\ModelUtility as MdlUtil;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\CookieUtility as CkieUtil;
+use App\Libraries\SessionUtility as SsnUtil;
 use Socialite;
 use Log;
 use Carbon\Carbon;
@@ -238,6 +239,12 @@ class SNSController extends Controller
                     'oauth_func' => $oauth_func,
                     'twitter_id' => $t_user->id,
                     'email' => $t_user->email,
+                ]);
+
+                // 会員登録完了時の連携処理のためにsessionに保存
+                session([
+                    SsnUtil::SESSION_KEY_SOCIAL_TYPE => MdlUtil::SOCIAL_TYPE_TWITTER,
+                    SsnUtil::SESSION_KEY_SOCIAL_ID => $t_user->id,
                 ]);
 
                 // 会員登録のユーザ情報入力画面に遷移
@@ -524,6 +531,12 @@ class SNSController extends Controller
                     'email' => $f_user->email,
                 ]);
 
+                // 会員登録完了時の連携処理のためにsessionに保存
+                session([
+                    SsnUtil::SESSION_KEY_SOCIAL_TYPE => MdlUtil::SOCIAL_TYPE_FACEBOOK,
+                    SsnUtil::SESSION_KEY_SOCIAL_ID => $f_user->id,
+                ]);
+
                 // 会員登録のユーザ情報入力画面に遷移
                 return redirect('/user/regist?ticket='.$auth_key->ticket);
 
@@ -804,6 +817,12 @@ class SNSController extends Controller
                     'oauth_func' => $oauth_func,
                     'github_id' => $g_user->id,
                     'email' => $g_user->email,
+                ]);
+
+                // 会員登録完了時の連携処理のためにsessionに保存
+                session([
+                    SsnUtil::SESSION_KEY_SOCIAL_TYPE => MdlUtil::SOCIAL_TYPE_GITHUB,
+                    SsnUtil::SESSION_KEY_SOCIAL_ID => $g_user->id,
                 ]);
 
                 // 会員登録のユーザ情報入力画面に遷移
