@@ -850,11 +850,17 @@ class UserController extends Controller
         $login_user = FrntUtil::getFirstLoginUser();
 
         // 有効なエントリー済み案件を取得、 受付日の降順にソート
+        $entry_list = Tr_item_entries::where('user_id', $login_user->id)
+                                     ->where('delete_flag', 0)
+                                     ->where('delete_date', null)
+                                     ->orderBy('entry_date', 'desc')
+                                     ->get();
+
+        /* developで動かすとここでエントリーがすべて消える
         $entry_list = $login_user->entries->where('delete_flag', 0)
                                           ->where('delete_date', null)
                                           ->sortByDesc('entry_date');
-
-                                          dd($entry_list);
+        */
 
         return view('front.user_entry', compact('entry_list'));
     }
