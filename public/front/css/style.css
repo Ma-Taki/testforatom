@@ -197,7 +197,9 @@ p.pageInfo{
     padding: 2% 0 3%;
 }
 
-.color-red{ color: #ff0000; }
+.color-red{
+    color: #ff0000;
+}
 
 .fs0{ font-size: 0; }
 
@@ -465,6 +467,140 @@ h1.SearchTitle:before{
 .edit-password .input_password label input{width: 70%;margin-left: 0;}
 .edit-password .input_password label:nth-child(2){margin-top: 1.4rem;}
 
+/*-------------------------------
+## エントリー済み案件一覧
+-------------------------------*/
+.items {}
+.user-entry .item {}
+
+.user-entry .item:not(first-child) {
+    margin-top: 4rem;
+}
+
+.item__header {
+    background: #5e8796;
+    color: white;
+    position: relative;
+    padding: 0.5rem 12px;
+    border: 1px solid #5e8796;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.item__header__name {
+    font-size: 1.8rem;
+}
+
+.item__header__id {
+    font-size: 1rem;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    -webkit-transform: translate(0%,-50%);
+    -moz-transform: translate(0%,-50%);
+    transform: translate(0%,-50%);
+}
+
+.item__info {
+    padding: 1rem;
+    border: 1px solid #5e8796;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+
+.item__info__pickup {
+    letter-spacing: -1rem;
+}
+
+.item__info__pickup__element {
+    display: inline-block;
+    width: 49%;
+    letter-spacing: normal;
+    background: #eef3f4
+}
+
+.item__info__pickup .item__info__pickup__element:nth-child(2) {
+    margin-left: 2%;
+}
+
+.item__info__pickup__name {
+    display: inline-block;
+    width: 20%;
+    background: #becfd5;
+    color: #5e8796;
+    text-align: center;
+    padding: 0.8rem;
+}
+
+.item__info__pickup__value {
+    display: inline-block;
+    color: #E38585;
+    padding: 0.8rem;
+}
+
+.item__info__pickup .item__info__pickup__element:nth-child(2) .item__info__pickup__value {
+    color: black;
+}
+
+.item__info__other {
+    margin-top: 1rem;
+}
+
+.item__info__other__element {
+    width: 100%;
+    display: table;
+    letter-spacing: -1rem;
+    border-bottom: 1px dotted #5e8796;
+    line-height: 1.4rem;
+}
+.item__info__other .item__info__other__element:first-child {
+    border-top: 1px dotted #5e8796;
+}
+
+
+.item__info__other__name {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
+    text-align: center;
+    letter-spacing: normal;
+    padding: 0.7rem;
+    color: #5e8796;
+    background: #eef3f4;
+}
+
+.item__info__other__value {
+    display: table-cell;;
+    vertical-align: top;
+    width: 80%;
+    letter-spacing: normal;
+    padding: 0.7rem;
+}
+
+.user-entry .item .cmmn-btn {
+    margin-top: 2rem;
+}
+
+.user-entry .item .cmmn-btn button {
+    padding: 0.6rem;
+}
+
+.user-entry .main-content__title {
+    position: relative;
+}
+
+.main-content__title__count {
+    font-size: 1.8rem;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.main-content__title__count__num {
+    font-size: 2.4rem;
+    color: #5e8796;
+}
 
 /*-------------------------------
 ## エントリー
@@ -2511,6 +2647,7 @@ sp.css ~640px
     .user-reminder-complete,
     .user-mypage,
     .user-edit,
+    .user-entry,
     .user-delete,
     .edit-password
     {
@@ -2617,6 +2754,10 @@ sp.css ~640px
 
     .cmmn-btn .edit-btn {
         width: 81.43%;
+    }
+
+    .cmmn-btn a:nth-child(2) .edit-btn {
+        margin-top: 1.4rem;
     }
 
     /*-------------------------------
@@ -3323,5 +3464,55 @@ sp.css ~640px
         padding: 0;
         padding-left: 1rem;
         line-height: 2rem;
+    }
+
+    /*-------------------------------
+    ## エントリー済み案件一覧
+    -------------------------------*/
+    .item__header__id {
+        color: #5e8796;
+        top: 0px;
+        right: 0px;
+        font-weight: bold;
+        -webkit-transform: translate(0%,-100%);
+        -moz-transform: translate(0%,-100%);
+        transform: translate(0%,-100%);
+    }
+
+    .item__info__pickup__element {
+        width: 100%;
+    }
+
+    .item__info__pickup .item__info__pickup__element:nth-child(2) {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    .item__info__other__element {
+        display: block;
+        border: none;
+        border-bottom: 1px dotted #5e8796;
+        margin: 4px 0;
+    }
+
+    .item__info__other .item__info__other__element:first-child {
+        border-top: none;
+    }
+
+    .item__info__other__name {
+        display: block;
+        width: 100%;
+        background: none;
+        border-left: 4px solid #becfd5;
+        text-align: left;
+        padding: 0.3rem;
+        color: black;
+        font-weight: bold;
+    }
+
+    .item__info__other__value {
+        display: block;
+        width: 100%;
+        padding: 0.5rem;
     }
 }

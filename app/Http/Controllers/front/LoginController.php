@@ -43,7 +43,7 @@ class LoginController extends FrontController
         // 一応、２件以上取得したらcritical
         if ($user->count() >= 2) {
             Log::critical('Duplicate email-address:' .$user->first()->mail);
-            abort(503);
+            abort(400);
         }
 
         // パスワード照合

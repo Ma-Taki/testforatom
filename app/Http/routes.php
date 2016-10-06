@@ -96,6 +96,10 @@ Route::group(['middleware' => 'front_loginCheck'], function () {
     Route::post('/user/edit', 'front\UserController@updateUser');
     // SNS認証解除
     Route::get('/auth/sns/cancel', 'SNSController@deleteSNSAuth');
+    // エントリー済み案件一覧
+    Route::get('/user/entry', 'front\UserController@showEntryList');
+    // エントリーシートのダウンロード
+    Route::get('/user/entry/download', 'front\UserController@donwload');
 });
 
 // パスワード再設定URL送信

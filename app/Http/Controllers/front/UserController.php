@@ -21,7 +21,9 @@ use App\Models\Tr_users;
 use App\Models\Tr_link_users_contract_types;
 use App\Models\Tr_auth_keys;
 use App\Models\Tr_user_social_accounts;
+use App\Models\Tr_item_entries;
 use Mail;
+use Storage;
 use Carbon\Carbon;
 use DB;
 use Log;
@@ -836,5 +838,67 @@ class UserController extends Controller
         });
 
         return redirect('/user');
+    }
+
+    /*
+     * エントリー済み案件一覧表示
+     * GET:/user/entry
+     */
+    public function showEntryList() {
+
+        // ログインユーザを取得
+        $login_user = FrntUtil::getFirstLoginUser();
+
+        // 有効なエントリー済み案件を取得、 受付日の降順にソート
+        $entry_list = $login_user->entries->where('delete_flag', 0)
+                                          ->where('delete_date', null)
+                                          ->sortByDesc('entry_date');
+
+        return view('front.user_entry', compact('entry_list'));
+    }
+
+    /*
+     * スキルシートダウンロード
+     * GET:/user/entry/download
+     */
+    public function donwload(Request $request) {
+
+        // ログインユーザを取得
+        $login_user = FrntUtil::getFirstLoginUser();
+
+        // idパラメータから、該当のエントリー情報を取得
+        $entry = Tr_item_entries::where('id', $request->id ?: null)
+                                ->enable()
+                                ->first();
+
+        // エントリー情報が存在しない場合
+        if (empty($entry)) {
+            $this->log('error', 'entity not found(Tr_item_entries)',[
+                'id' => $request->id,
+            ]);
+            abort(404, '指定されたエントリー情報は存在しません。');
+        }
+
+        // ログインユーザのエントリー情報であることをチェック
+        if ($login_user->id != $entry->user_id) {
+            $this->log('error', 'illegal operation',[
+                'login_user_id' => $login_user->id,
+                'entry_user_id' => $entry->user_id,
+            ]);
+            abort(400);
+        }
+
+        // エントリーシートの存在チェック
+        if (!$entry->skillsheet_upload
+            || !Storage::disk()->exists($entry->skillsheet_filename)) {
+                $this->log('error', 'skillsheet not found',[
+                    'skillsheet_upload' => $entry->skillsheet_upload,
+                    'skillsheet_filename' => $entry->skillsheet_filename,
+                ]);
+                abort(404, 'スキルシートが見つかりません');
+        }
+
+        // ダウンロード
+        return response()->download(storage_path('app/').$entry->skillsheet_filename);
     }
 }

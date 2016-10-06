@@ -137,6 +137,7 @@
                             </div>
                             <div class="cmmn-btn">
                                 <a href="/user/edit"><button class="edit-btn">登録内容変更</button></a>
+                                <a href="/user/entry"><button class="edit-btn">エントリー履歴</button></a>
                             </div>
                         </div>
                     </div>
