@@ -854,6 +854,8 @@ class UserController extends Controller
                                           ->where('delete_date', null)
                                           ->sortByDesc('entry_date');
 
+        dd($entry_list);
+
         return view('front.user_entry', compact('entry_list'));
     }
 
