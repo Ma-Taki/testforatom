@@ -54,13 +54,21 @@ class ModelUtility
     // 認証キー発行時の目的：メールアドレス認証（メールアドレス変更）
     const AUTH_TASK_CHANGE_MAIL_AUHT = 'ChangeMailAuth';
 
-
     // ソーシャルタイプ：Twitter
     const SOCIAL_TYPE_TWITTER = 1;
     // ソーシャルタイプ：Facebook
     const SOCIAL_TYPE_FACEBOOK = 2;
     // ソーシャルタイプ：Github
     const SOCIAL_TYPE_GITHUB = 3;
+
+    // ユーザの印象レベル：優良
+    const USER_IMPRESSION_EXCELLENT = 4;
+    // ユーザの印象レベル：普通
+    const USER_IMPRESSION_NORMAL = 3;
+    // ユーザの印象レベル：いまいち
+    const USER_IMPRESSION_NOTGOOD = 2;
+    // ユーザの印象レベル：ブラック
+    const USER_IMPRESSION_BLACK = 1;
 
     /**
      * 引数のモデル配列のname属性を'、'で連結して返す。

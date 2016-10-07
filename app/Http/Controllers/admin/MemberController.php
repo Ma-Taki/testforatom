@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Requests\admin\MemberSearchRequest;
 use App\Http\Controllers\AdminController;
@@ -12,6 +11,7 @@ use App\Models\Tr_user_social_accounts;
 use Carbon\Carbon;
 use DB;
 use App\Libraries\OrderUtility as OdrUtil;
+use App\Libraries\ModelUtility as MdlUtil;
 
 class MemberController extends AdminController
 {
@@ -25,7 +25,7 @@ class MemberController extends AdminController
         $member_id = $request->input('id');
 
         // 会員情報を取得する
-        $member = Tr_users::where('id', $member_id)->get()->first();
+        $member = Tr_users::where('id', $member_id)->first();
         if (empty($member)) {
             abort(404, '指定された会員は存在しません。');
         }
@@ -50,6 +50,8 @@ class MemberController extends AdminController
         $sort_id = $request->input('sort_id', OdrUtil::ORDER_MEMBER_REGISTRATION_DESC['sortId']);
         // ソート順
         $item_order = OdrUtil::MemberOrder[$sort_id];
+        // 評価
+        $impression_array = (array)$request->impression ?: [];
 
         // パラメータの入力状態によって動的にクエリを発行
         $query = Tr_users::query();
@@ -95,10 +97,16 @@ class MemberController extends AdminController
                 $query->where(DB::raw("CONCAT(last_name_kana, first_name_kana)"),'LIKE',"%".$name_kana_str."%");
             }
         }
+
         // 有効な会員のみの場合、論理削除済みのものは含めない
         if ($enabledOnly) {
             $query = $query->where('delete_flag', '=', 0)
                            ->where('delete_date', '=', null);
+        }
+
+        // 評価にチェックがあった場合、チェックのなかったものは含めない
+        if (!empty($impression_array)) {
+            $query = $query->whereIn('impression', $impression_array);
         }
 
         // 検索結果を取得する
@@ -111,39 +119,44 @@ class MemberController extends AdminController
             'member_mail',
             'member_name',
             'member_name_kana',
-            'enabledOnly'));
+            'enabledOnly',
+            'impression_array'));
     }
 
     /**
-     * 更新処理（メモ）
+     * 更新処理（メモと評価）
      * POST:/admin/member/update
      */
     public function updatehMemberMemo(Request $request){
 
-        // 会員ID
-        $member_id = $request->input('member_id');
-        // メモ
-        $memo = $request->input('memo');
-
         // 更新対象会員を取得
-        $member = Tr_users::where('id', $member_id)->get()->first();
+        $member = Tr_users::where('id', $request->member_id)->first();
         if (empty($member)) {
             abort(404, '指定された会員は存在しません。');
         }
+
+        $data_db = [
+            'member' => $member,
+            'memo' => $request->memo ?: '',
+            'impression' => $request->impression ?: MdlUtil::USER_IMPRESSION_NORMAL,
+        ];
+
         // トランザクション
-        DB::transaction(function () use ($member_id, $memo) {
+        DB::transaction(function () use ($data_db) {
             try {
                 // ユーザーテーブルをアップデート
-                 Tr_users::where('id', $member_id)
-                         ->update(['note' => $memo,]);
+                 $data_db['member']->note = $data_db['memo'];
+                 $data_db['member']->impression = $data_db['impression'];
+                 $data_db['member']->save();
+
             } catch (\Exception $e) {
                 Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
 
-        return redirect('/admin/member/detail?id='.$member_id)
-            ->with('custom_info_messages','会員メモを更新しました。');
+        return redirect('/admin/member/detail?id='.$request->member_id)
+            ->with('custom_info_messages','会員評価 / メモを更新しました。');
     }
 
     /**

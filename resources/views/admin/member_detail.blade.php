@@ -1,9 +1,10 @@
 @extends('admin.common.layout')
-@section('title', '会員詳細')
+@section('title', '会員詳細 | Engineer-Route Admin')
 @section('content')
 <?php
     use App\Libraries\AdminUtility as AdmnUtil;
- ?>
+    use App\Libraries\ModelUtility as MdlUtil;
+?>
 <div class="col-md-10">
 {{-- info：custom --}}
 @if(\Session::has('custom_info_messages'))
@@ -94,12 +95,26 @@
         </div>
         <div class="col-md-6">
             <div class="content-box-header">
-                <div class="panel-title">メモ</div>
+                <div class="panel-title">評価 / メモ</div>
             </div>
             <div class="content-box-large box-with-header">
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/member/update') }}">
                     <div class="form-group">
-                        <textarea name="memo" rows="10" class="form-control">{{ $member->note }}</textarea>
+						<label class="col-md-2 control-label" for="user-impression">評価</label>
+						<div class="col-md-10">
+							<select class="form-control" name="impression" id="user-impression">
+								<option @if($member->impression == MdlUtil::USER_IMPRESSION_EXCELLENT) selected @endif value="{{ MdlUtil::USER_IMPRESSION_EXCELLENT }}">優良</option>
+								<option @if($member->impression == MdlUtil::USER_IMPRESSION_NORMAL) selected @endif value="{{ MdlUtil::USER_IMPRESSION_NORMAL }}">普通</option>
+								<option @if($member->impression == MdlUtil::USER_IMPRESSION_NOTGOOD) selected @endif value="{{ MdlUtil::USER_IMPRESSION_NOTGOOD }}">いまいち</option>
+								<option @if($member->impression == MdlUtil::USER_IMPRESSION_BLACK) selected @endif value="{{ MdlUtil::USER_IMPRESSION_BLACK }}">ブラック</option>
+							</select>
+						</div>
+					</div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="user-memo">メモ</label>
+                            <textarea name="memo" id="user-memo" rows="10" class="form-control">{{ $member->note }}</textarea>
+                        </div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary" align="right">更新</button>
