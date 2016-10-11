@@ -129,15 +129,40 @@ class Tr_items extends Model
          return $this->belongsTo('App\Models\Tr_admin_user', 'admin_id');
      }
 
-     /**
-      * エントリー可能な案件
-      */
-      public function scopeEntryPossible($query) {
+    /**
+     * エントリー可能(受付中)な案件
+     */
+    public function scopeEntryPossible($query) {
         $today = Carbon::today();
         return $query->where('delete_flag', '=', false)
                      ->where('service_start_date', '<=', $today)
                      ->where('service_end_date', '>=', $today);
-      }
+    }
+
+    /**
+     * 案件IDを指定する
+     */
+    public function scopeId($query, $id) {
+        return $query->where('items.id', $id);
+    }
+
+    /**
+     * 案件名を指定する
+     */
+    public function scopeName($query, $name_array) {
+        foreach ($name_array as $name) {
+            $query->where('items.name', 'like', '%'.$name.'%');
+        }
+    }
+
+    /**
+     * タグIDを指定する
+     */
+    public function scopeTagId($query, $id) {
+        return $query->join('link_items_tags', 'items.id', '=', 'link_items_tags.item_id')
+                     ->join('tags', 'tags.id', '=', 'link_items_tags.tag_id')
+                     ->where('tags.id', $id);
+     }
 
     /**
      * スキルIDを配列で受け取り、一つ以上該当の要求スキルを持つ案件を返す。
@@ -250,6 +275,7 @@ class Tr_items extends Model
      * 検索キーワードを受け取り、該当の文字列を対象カラムに含む案件を返す。
      * 対象カラムは案件名、案件詳細、システム種別名、ポジション名、業種名、要求スキル名
      * タグ名、エリア詳細、都道府県名、報酬詳細。
+     * 公開画面用。
      * @param QueryBuilder $query
      * @param string $keyword
      * @return QueryBuilder
@@ -289,5 +315,30 @@ class Tr_items extends Model
                              }
                          });
         });
+    }
+
+    /**
+     * 管理画面用
+     *
+     */
+    public function scopeFreeword($query, $word_array) {
+
+        $query->leftJoin('link_items_sys_types', 'items.id', '=', 'link_items_sys_types.item_id')
+              ->leftJoin('sys_types', 'sys_types.id', '=', 'link_items_sys_types.sys_type_id')
+              ->leftJoin('link_items_job_types', 'items.id', '=', 'link_items_job_types.item_id')
+              ->leftJoin('job_types', 'job_types.id', '=', 'link_items_job_types.job_type_id')
+              ->leftJoin('biz_categories', 'biz_categories.id', '=', 'items.biz_category_id')
+              ->leftJoin('link_items_skills', 'items.id', '=', 'link_items_skills.item_id')
+              ->leftJoin('skills', 'skills.id', '=', 'link_items_skills.skill_id')
+              ->leftJoin('link_items_tags as fw_link_items_tags', 'items.id', '=', 'fw_link_items_tags.item_id')
+              ->leftJoin('tags as fw_tags', 'fw_tags.id', '=', 'fw_link_items_tags.tag_id')
+              ->leftJoin('link_items_areas', 'items.id', '=', 'link_items_areas.item_id')
+              ->leftJoin('areas', 'areas.id', '=', 'link_items_areas.area_id')
+              ->leftJoin('prefectures', 'prefectures.id', '=', 'areas.prefecture_id');
+
+        foreach ($word_array as $word) {
+            $query->where(DB::raw("CONCAT(items.name, IFNULL(items.detail,''), IFNULL(items.note,''), IFNULL(sys_types.name,''), IFNULL(job_types.name,''), biz_categories.name, IFNULL(fw_tags.term,''), IFNULL(skills.name,''), area_detail, prefectures.name, items.rate_detail) collate utf8_general_ci"),'LIKE','%'.$word.'%');
+        }
+        return $query;
     }
 }

@@ -90,4 +90,15 @@ class AdminUtility
         }
         return rtrim($str, '、');
     }
+
+    /**
+     * 引数の文字列をスペースで分割した配列に変換する。
+     * また、空要素は削除し、indexを採番し直す。
+     *
+     * @param string str
+     * @return array
+     */
+    public static function convertArrayToSearchStr($str) {
+        return  array_values(array_filter(explode(' ', mb_convert_kana($str, 's')), 'strlen'));
+    }
 }

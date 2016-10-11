@@ -23,4 +23,24 @@ class Tr_tag_infos extends Model
                           'id',
                           'tag_id');
     }
+
+    /**
+     * 特集タグを取得
+     */
+    public function scopeGetFeatureTagInfo($query) {
+        return $query->where('tag_type', 3)
+                     ->orderBy('sort_order', 'asc')
+                     ->limit(30)
+                     ->get();
+    }
+
+    /**
+     * ピックアップタグを取得
+     */
+    public function scopeGetPickupTagInfo($query) {
+        return $query->where('tag_type', 2)
+                     ->orderBy('sort_order', 'asc')
+                     ->limit(30)
+                     ->get();
+    }
 }

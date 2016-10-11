@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\Tr_tag_infos;
 use DB;
 use Log;
+use App\Libraries\AdminUtility as AdmnUtil;
 use App\Libraries\SessionUtility as ssnUtil;
 use App\Libraries\OrderUtility as OdrUtil;
 use App\Models\Ms_areas;
@@ -37,83 +38,51 @@ class ItemController extends AdminController
      */
     public function searchItem(Request $request){
 
-        // 案件ID
-        $item_id = $request->input('item_id');
-        // 案件名
-        $item_names = $request->input('item_name');
-        // スペシャルタグ
-        $tag_id = $request->input('special_tag');
-        //　有効な案件のみか
-        $enabled_only = $request->input('enabled_only');
-        // ソートID 初期表示の場合は更新日が新しい順を設定
-        $sort_id = $request->input('sort_id', OdrUtil::ORDER_ITEM_UPDATE_DESC['sortId']);
-        // ソート順
-        $item_order = OdrUtil::ItemOrder[$sort_id];
-
         // 再利用するためパラメータを次のリクエストまで保存
         $request->flash();
 
-        $itemList = array();
+        // クエリ生成用データ
+        $data_query = [
+            'id' => $request->item_id ?: null,
+            'name' => $request->item_name ?: null,
+            'freeword' => $request->item_freeword ?: null,
+            'tag_id' => $request->special_tag ?: null,
+            'enabled' => !empty($request->enabled),
+            'sort_id' =>  $request->sort_id ?: OdrUtil::ORDER_ITEM_UPDATE_DESC['sortId'],
+        ];
 
-        // パラメータの入力状態によって動的にクエリを発行
-        $query = Tr_items::query();
+        // クエリを動的に発行
+        $query = Tr_items::select('items.*')
+            ->when(!empty($data_query['id']), function ($query) use ($data_query) {
+                return $query->id($data_query['id']);
+            })
+            ->when(empty($data_query['id']), function ($query) use ($data_query) {
+                return $query->when(!empty($data_query['name']), function ($query) use ($data_query) {
+                    $name_array = AdmnUtil::convertArrayToSearchStr($data_query['name']);
+                    return $query->name($name_array);
+                })->when(!empty($data_query['freeword']), function ($query) use ($data_query) {
+                    $freeword_array = AdmnUtil::convertArrayToSearchStr($data_query['freeword']);
+                    return $query->freeword($freeword_array);
+                })->when(!empty($data_query['tag_id']), function ($query) use ($data_query) {
+                    return $query->tagId($data_query['tag_id']);
+                })->when(!empty($data_query['enabled']), function ($query) use ($data_query) {
+                    return $query->entryPossible();
+                });
+            });
 
-        // 案件IDが入力された場合はその他の検索条件を無視する
-        if (!empty($item_id)) {
-            $query->where('id', $item_id);
+        // ソート順
+        $item_order = OdrUtil::ItemOrder[$data_query['sort_id']];
 
-        // その他の検索条件
-        } else {
-            // 案件名
-            if (!empty($item_names)) {
-                // 全角スペースを半角スペースに置換
-                $item_names = mb_convert_kana($item_names, 's');
-                // 文字列を半角スペースで分割
-                $item_names = explode(' ', $item_names);
-                foreach ($item_names as $item_name) {
-                    $query->where('name', 'like', '%'.$item_name.'%');
-                }
-            }
-            // スペシャルタグ
-            if ($tag_id != null) {
-                $query->join('link_items_tags', 'items.id', '=', 'link_items_tags.item_id')
-                      ->join('tags', 'tags.id', '=', 'link_items_tags.tag_id')
-                      ->where('tags.id', '=', $tag_id)
-                      ->select('items.*');
-            }
-            // 無効案件（掲載期間外または論理削除済み）を含めない場合
-            if ($enabled_only) {
-                // 今日日付を取得
-                $today = Carbon::today();
-                $query->where('delete_flag', '=', false)
-                      ->where('service_start_date', '<=', $today)
-                      ->where('service_end_date', '>=', $today);
-            }
-        }
+        // laravel標準のページネーション
+        $itemList = ($query ?: Tr_items::query())->groupBy('items.id')
+                                                 ->orderBy($item_order['columnName'], $item_order['sort'])
+                                                 ->paginate(30);
 
-        // laravel標準のページネーション処理
-        $itemList = $query->orderBy($item_order['columnName'], $item_order['sort'])
-                          ->paginate(30);
-
-        // 特集タグ取得
-        $featureTagInfos = Tr_tag_infos::where('tag_type', 3)
-            ->orderBy('sort_order', 'asc')
-            ->limit(30)
-            ->get();
-
-        // pickupタグ取得
-        $pickupTagInfos = Tr_tag_infos::where('tag_type', 2)
-            ->orderBy('sort_order', 'asc')
-            ->limit(30)
-            ->get();
-
-        return view('admin.item_list', compact(
-            'itemList',
-            'pickupTagInfos',
-            'featureTagInfos',
-            'sort_id',
-            'enabled_only'
-        ));
+        return view('admin.item_list', [
+            'itemList' => $itemList,
+            'sort_id' => $data_query['sort_id'],
+            'enabled' => $data_query['enabled'],
+        ]);
     }
 
     /**

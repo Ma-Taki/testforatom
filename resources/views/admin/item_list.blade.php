@@ -4,7 +4,8 @@
 <?php
 use App\Libraries\HtmlUtility;
 use App\Libraries\OrderUtility as OdrUtil;
- ?>
+use App\Models\Tr_tag_infos;
+?>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
@@ -42,15 +43,19 @@ use App\Libraries\OrderUtility as OdrUtil;
                                     <td><input type="text" class="form-control" name="item_name" value="{{ old('item_name') }}" /></td>
                             	</tr>
                                 <tr>
+                                    <th><label class="control-label">フリーワード</label></th>
+                                    <td><input type="text" class="form-control" name="item_freeword" value="{{ old('item_freeword') }}" /></td>
+                                </tr>
+                                <tr>
                                     <th><label class="control-label" for="select-1">スペシャルタグ</label></th>
 									<td><select class="form-control" id="select-1" name="special_tag">
 										    <option value="" selected>未選択</option>
 
-@foreach($pickupTagInfos as $tagInfo)
+@foreach(Tr_tag_infos::getPickupTagInfo() as $tagInfo)
 											<option value="{{ $tagInfo->tag->id }}" {{ old('special_tag') == $tagInfo->tag->id ? "selected" : "" }}>{{ $tagInfo->tag->term }}</option>
 @endforeach
 
-@foreach($featureTagInfos as $tagInfo)
+@foreach(Tr_tag_infos::getFeatureTagInfo() as $tagInfo)
 											<option value="{{ $tagInfo->tag->id }}" {{ old('special_tag') == $tagInfo->tag->id ? "selected" : "" }}>{{ $tagInfo->tag->term }}</option>
 @endforeach
 
@@ -59,7 +64,7 @@ use App\Libraries\OrderUtility as OdrUtil;
                             	</tr>
                             	<tr>
                         			<th><label class="control-label">ステータス</label></th>
-                                    <td><input type="checkbox" name="enabled_only" id="eo_label"　@if($enabled_only) checked @endif /><label for="eo_label"><font style="font-weight:normal;">受付中のみ</font></label></td>
+                                    <td><input type="checkbox" name="enabled" id="eo_label"　@if($enabled) checked @endif /><label for="eo_label"><font style="font-weight:normal;">受付中のみ</font></label></td>
                                 </tr>
                                 <tr>
                                     <th><label class="control-label" for="select-2">表示順序</label></th>
@@ -116,7 +121,7 @@ use App\Libraries\OrderUtility as OdrUtil;
 
 				    </tbody>
 				</table>
-                <dev class="pull-right">{!! $itemList->appends(['sort_id' => $sort_id, 'enabled_only' => $enabled_only])->render() !!}</div>
+                <dev class="pull-right">{!! $itemList->appends(['sort_id' => $sort_id, 'enabled' => $enabled])->render() !!}</div>
             </div>
         </div>
     </div>
