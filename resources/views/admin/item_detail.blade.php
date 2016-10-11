@@ -165,6 +165,7 @@
             </thead>
             <tbody>
 @foreach($item->entries as $entry)
+{{ var_dump($entry) }}
                 <tr>
                     <th><a href="/admin/entry/detail?id={{ $entry->id }}">EN{{ $entry->id }}</a></th>
                     <th>{{ $entry->user->last_name }} {{ $entry->user->first_name }}({{ $entry->user->last_name_kana }} {{ $entry->user->first_name_kana }})</th>
