@@ -91,9 +91,7 @@ class ItemController extends AdminController
      */
     public function showItemDetail(Request $request){
 
-        // 案件ID
-        $item_id = $request->input('id');
-        $item = Tr_items::where('id', $item_id)->get()->first();
+        $item = Tr_items::where('id', $request->id)->get()->first();
         if (empty($item)) {
             abort(404, '指定された案件は存在しません。');
         }
