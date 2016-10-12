@@ -20,12 +20,8 @@ class MemberController extends AdminController
      * GET:/admin/member/detail
      */
     public function showMemberDetail(Request $request){
-
-        // 会員ID
-        $member_id = $request->input('id');
-
         // 会員情報を取得する
-        $member = Tr_users::where('id', $member_id)->first();
+        $member = Tr_users::where('id', $request->id)->first();
         if (empty($member)) {
             abort(404, '指定された会員は存在しません。');
         }

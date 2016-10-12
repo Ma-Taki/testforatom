@@ -64,8 +64,8 @@ class AdminUtility
     }
 
     /**
-     * 受け取った配列のバリューを"、"で連結した文字列に変換する。
-     *
+     * Tr_social_accounts配列を受け取り、
+     * SNS名をを"、"で連結した文字列に変換する。
      * @param Collection $models
      * @return string
      **/

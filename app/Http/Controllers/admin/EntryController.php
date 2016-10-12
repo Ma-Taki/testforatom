@@ -56,6 +56,8 @@ class EntryController extends AdminController
         $sort_id = $request->input('sort_id', OdrUtil::ORDER_ENTRY_DATE_DESC['sortId']);
         // ソート順
         $item_order = OdrUtil::EntryOrder[$sort_id];
+        // 評価
+        $impression_array = (array)$request->impression ?: [];
 
         // 追加のvalidation：from日付がto日付より大きい場合エラー
         // エントリーIDが入力されている場合はエラーにしない
@@ -67,6 +69,8 @@ class EntryController extends AdminController
 
         // パラメータの入力状態によって動的にクエリを発行
         $query = Tr_item_entries::query();
+
+        $query->select('item_entries.*');
 
         // ID検索　優先順位１位
         if (!empty($entry_id)) {
@@ -84,7 +88,11 @@ class EntryController extends AdminController
             // すべてブランクの場合全件検索する
         }
 
-
+        // ユーザの評価にチェックがあった場合、チェックのなかったものは含めない
+        if (!empty($impression_array)) {
+            $query->join('users', 'users.id', '=', 'item_entries.user_id');
+            $query = $query->whereIn('users.impression', $impression_array);
+        }
 
         // 有効なエントリーのみの場合、論理削除済みのものは含めない
         if ($enabledOnly) {
@@ -102,7 +110,8 @@ class EntryController extends AdminController
             'entry_date_from',
             'entry_date_to',
             'enabledOnly',
-            'sort_id'
+            'sort_id',
+            'impression_array'
         ));
     }
 

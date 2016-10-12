@@ -2,8 +2,26 @@
 @section('title', 'エントリー一覧')
 @section('content')
 <?php
-use App\Libraries\OrderUtility as OdrUtil;
+    use App\Libraries\OrderUtility as OdrUtil;
+    use App\Libraries\ModelUtility as MdlUtil;
 ?>
+<style>
+    #impression-excellent,
+    #impression-normal,
+    #impression-notgood,
+    #impression-black,
+    #inputEnabledOnly {
+        margin-top: 0px;
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+
+    .user-state td label,
+    .user-impression td label {
+        font-weight: normal;
+        white-space: nowrap;
+    }
+</style>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
@@ -59,10 +77,19 @@ use App\Libraries\OrderUtility as OdrUtil;
                             	<tr>
                         			<th><label class="control-label">ステータス</label></th>
 @if(isset($enabledOnly))
-                                    <td><input type="checkbox" name="enabledOnly" id="eo_label"　@if($enabledOnly) checked @endif /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
+                                    <td><div class="col-md-3"><input type="checkbox" name="enabledOnly" id="eo_label"　@if($enabledOnly) checked @endif /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></div></td>
 @else
-                                    <td><input type="checkbox" name="enabledOnly" id="eo_label"　@if(old('enabledOnly')) checked @endif /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></td>
+                                    <td><div class="col-md-3"><input type="checkbox" name="enabledOnly" id="eo_label"　@if(old('enabledOnly')) checked @endif /><label for="eo_label"><font style="font-weight:normal;">有効なエントリーのみ</font></label></div></td>
 @endif
+                                </tr>
+                                <tr class="user-impression">
+                                    <th><label class="control-label">ユーザの評価</label></th>
+                                    <td>
+                                        <div class="col-md-2"><label for="impression-excellent"><input type="checkbox" name="impression[]" id="impression-excellent" value="{{ MdlUtil::USER_IMPRESSION_EXCELLENT }}" @if(in_array(MdlUtil::USER_IMPRESSION_EXCELLENT, old('impression', isset($impression_array) ? $impression_array : []))) checked @endif />優良</label></div>
+                                        <div class="col-md-2"><label for="impression-normal"><input type="checkbox" name="impression[]" id="impression-normal" value="{{ MdlUtil::USER_IMPRESSION_NORMAL }}" @if(in_array(MdlUtil::USER_IMPRESSION_NORMAL, old('impression', isset($impression_array) ? $impression_array : []))) checked @endif　/>普通</label></div>
+                                        <div class="col-md-2"><label for="impression-notgood"><input type="checkbox" name="impression[]" id="impression-notgood" value="{{ MdlUtil::USER_IMPRESSION_NOTGOOD }}" @if(in_array(MdlUtil::USER_IMPRESSION_NOTGOOD, old('impression', isset($impression_array) ? $impression_array : []))) checked @endif />いまいち</label></div>
+                                        <div class="col-md-2"><label for="impression-black"><input type="checkbox" name="impression[]" id="impression-black" value="{{ MdlUtil::USER_IMPRESSION_BLACK }}" @if(in_array(MdlUtil::USER_IMPRESSION_BLACK, old('impression', isset($impression_array) ? $impression_array : []))) checked @endif />ブラック</label></div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><label class="control-label" for="select-2">表示順序</label></th>
