@@ -167,9 +167,10 @@
 @foreach($item->entries as $entry)
                 <tr>
                     <th><a href="{{ '/admin/entry/detail?id='.$entry->id }}">EN{{ $entry->id }}</a></th>
-                    <th>{{ $entry->user->last_name.' '.$entry->user->first_name.'('.$entry->user->last_name_kana.' '.$entry->user->first_name_kana.')' }}</th>
+                    <th>{{ $entry->user->last_name or '名無し' }}&nbsp;{{ $entry->user->first_name or 'さん' }}&nbsp;({{ $entry->user->last_name_kana or 'ななし' }}&nbsp;{{ $entry->user->first_name_kana or 'さん' }})</th>
+                    <!-- 開発環境でエラーを出さないために名無しを設定 -->
                     <th>{{ $entry->entry_date->format('Y年n月j日 G時i分') }}</th>
-                    <th>{{ $entry->delete_flag }}</th>
+                    <th>{{ $entry->delete_flag ? '無効' : '有効' }}</th>
                 </tr>
 @endforeach
 @endif
