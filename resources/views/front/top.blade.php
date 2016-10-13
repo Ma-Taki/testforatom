@@ -293,14 +293,22 @@ use App\Models\Tr_search_categories;
 @foreach(Tr_search_categories::getParentCategories() as $parent)
                                 <li>
                                     <ul>
-                                        <li class="parentCategory">{{ $parent->name }}<span class="alignright">+</span></li>
+                                        <li class="parentCategory">{{ $parent->name }}
+                                            <div class="arrow">
+                                                <span class="arrow arrow-left"></span>
+                                                <span class="arrow arrow-right"></span>
+                                            </div>
+                                        </li>
                                         <div class="childCategories">
                                             <a href="/item/category/{{ $parent->id }}">
-                                                <li class="childCategory">{{ $parent->name }}一覧<span class="alignright">></span></li>
+                                                <li class="childCategory">{{ $parent->name }}一覧
+                                                    <span></span>
+                                                    <span></span>
+                                                </li>
                                             </a>
 @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
                                             <a href="/item/category/{{ $child->id }}">
-                                                <li class="childCategory">{{ $child->name }}<span class="alignright">></span></li>
+                                                <li class="childCategory">{{ $child->name }}<span class=""></span></li>
                                             </a>
 @endforeach
                                         </div>

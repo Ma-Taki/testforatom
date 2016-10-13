@@ -23,19 +23,16 @@ class EntryController extends AdminController
      */
     public function showEntryDetail(Request $request){
 
-        // エントリーID
-        $entry_id = $request->input('id');
-
-        // 今日日付
-        $today = Carbon::today();
-
         // エントリー情報を取得する
-        $entry = Tr_item_entries::where('id', $entry_id)->get()->first();
+        $entry = Tr_item_entries::where('id', $request->id)->first();
         if (empty($entry)) {
             abort(404, '指定されたエントリーは存在しません。');
         }
 
-        return view('admin.entry_detail', compact('entry', 'today'));
+        return view('admin.entry_detail', [
+            'entry' => $entry,
+            'today' => Carbon::today(),
+        ]);
     }
 
     /**

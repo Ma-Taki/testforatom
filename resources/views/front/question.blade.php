@@ -13,8 +13,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">パスワードを忘れてしまった</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">パスワードを忘れてしまった
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -35,8 +39,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">利用料について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">利用料について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -52,8 +60,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">取り扱う案件の種類について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">取り扱う案件の種類について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -70,8 +82,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">契約形態について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">契約形態について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -87,8 +103,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">支払いサイトについて</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">支払いサイトについて
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -105,8 +125,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">掲載単価と受取金額について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">掲載単価と受取金額について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -123,8 +147,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">就業後のフォローについて</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">就業後のフォローについて
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -141,8 +169,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">プロジェクト終了後について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">プロジェクト終了後について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -165,8 +197,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">応募までの手順</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">応募までの手順
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -182,8 +218,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">応募してから結果が出るまでの期間について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">応募してから結果が出るまでの期間について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -200,8 +240,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">応募取り消し方法について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">応募取り消し方法について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -217,8 +261,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">在職中でも応募について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">在職中でも応募について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -234,8 +282,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">掲載案件の応募期間について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">掲載案件の応募期間について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -254,8 +306,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">応募資格をすべて満たしていない場合について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">応募資格をすべて満たしていない場合について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -272,8 +328,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">未経験の言語や業界・業種への就業について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">未経験の言語や業界・業種への就業について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -289,8 +349,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">年齢制限について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">年齢制限について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -312,8 +376,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">カウンセリング（事前面談）の時間調整・出張面談について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">カウンセリング（事前面談）の時間調整・出張面談について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -330,8 +398,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">面接時の服装について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">面接時の服装について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -348,8 +420,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">面接の内容について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">面接の内容について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -367,8 +443,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">来社について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">来社について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -385,8 +465,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">職務経歴書のフォーマットについて</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">職務経歴書のフォーマットについて
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -402,8 +486,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">職務経歴書の書き方について</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">職務経歴書の書き方について
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -419,8 +507,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">職務経歴書の内容を更新したい場合</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">職務経歴書の内容を更新したい場合
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -442,8 +534,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">フリーエンジニアになるためには</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">フリーエンジニアになるためには
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -461,8 +557,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">フリーの年金・保険・確定申告</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">フリーの年金・保険・確定申告
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -488,8 +588,12 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <p class="question__text">Q&amp;Aで解決できない場合</p>
-                                <p class="question__mark">+</p>
+                                <div class="question__text">Q&amp;Aで解決できない場合
+                                    <div class="arrow">
+                                        <span class="arrow-left"></span>
+                                        <span class="arrow-right"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="question-anser">
                                 <div class="question-anser__inr">
@@ -525,14 +629,9 @@
         $('.question-anser').hide();
         $(".question__text").click(function(){
             var $ansr = $(this).parents('.question__element').find('.question-anser');
-            var $mark = $(this).parents('.question').find('.question__mark');
-            $ansr.slideToggle('normal', function(){
-                if($ansr.is(':hidden')) {
-                    $mark.text('+');
-                } else {
-                    $mark.text('-');
-			    };
-            });
+            var $mark = $(this).parents('.question').find('.arrow span');
+            $mark.toggleClass('js__arrow--open');
+            $ansr.slideToggle('normal');
 		});
     });
 </script>
