@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Libraries\FrontUtility as FrntUtil;
+use App\Libraries\ModelUtility as MdlUtil;
 use DB;
 
 class Tr_items extends Model
@@ -318,8 +319,9 @@ class Tr_items extends Model
     }
 
     /**
-     * 管理画面用
-     *
+     * 管理画面のフリーワード検索
+     * 案件にエントリーがある場合、エントリーユーザの情報（名前、メモ、評価のみ）も検索対象とする。
+     *　
      */
     public function scopeFreeword($query, $word_array) {
 
@@ -334,11 +336,33 @@ class Tr_items extends Model
               ->leftJoin('tags as fw_tags', 'fw_tags.id', '=', 'fw_link_items_tags.tag_id')
               ->leftJoin('link_items_areas', 'items.id', '=', 'link_items_areas.item_id')
               ->leftJoin('areas', 'areas.id', '=', 'link_items_areas.area_id')
-              ->leftJoin('prefectures', 'prefectures.id', '=', 'areas.prefecture_id');
+              ->leftJoin('prefectures', 'prefectures.id', '=', 'areas.prefecture_id')
+              ->leftJoin('item_entries', 'item_entries.item_id', '=', 'items.id')
+              ->leftJoin('users', 'users.id', '=', 'item_entries.user_id');
 
-        foreach ($word_array as $word) {
-            $query->where(DB::raw("CONCAT(items.name, IFNULL(items.detail,''), IFNULL(items.note,''), IFNULL(sys_types.name,''), IFNULL(job_types.name,''), biz_categories.name, IFNULL(fw_tags.term,''), IFNULL(skills.name,''), area_detail, prefectures.name, items.rate_detail) collate utf8_general_ci"),'LIKE','%'.$word.'%');
+        // エントリーユーザの評価を検索対象とするため（本当はDBに評価マスタを作った方が良さげ）
+        $word_collection = collect($word_array);
+        if (($index = $word_collection->search('優良')) !== false) {
+            $query->where('users.impression', MdlUtil::USER_IMPRESSION_EXCELLENT);
+            $word_collection->forget($index);
         }
+        if (($index = $word_collection->search('普通')) !== false) {
+            $query->where('users.impression', MdlUtil::USER_IMPRESSION_NORMAL);
+            $word_collection->forget($index);
+        }
+        if (($index = $word_collection->search('いまいち')) !== false) {
+            $query->where('users.impression', MdlUtil::USER_IMPRESSION_NOTGOOD);
+            $word_collection->forget($index);
+        }
+        if (($index = $word_collection->search('ブラック')) !== false) {
+            $query->where('users.impression', MdlUtil::USER_IMPRESSION_BLACK);
+            $word_collection->forget($index);
+        }
+
+        foreach ($word_collection as $word) {
+            $query->where(DB::raw("CONCAT(items.name, IFNULL(items.detail,''), IFNULL(items.note,''), IFNULL(sys_types.name,''), IFNULL(job_types.name,''), biz_categories.name, IFNULL(fw_tags.term,''), IFNULL(skills.name,''), area_detail, prefectures.name, items.rate_detail, IFNULL(users.last_name,''), IFNULL(users.first_name,''), IFNULL(users.last_name_kana,''), IFNULL(users.first_name_kana,''), IFNULL(users.note,'')) collate utf8_general_ci"),'LIKE','%'.$word.'%');
+        }
+
         return $query;
     }
 }

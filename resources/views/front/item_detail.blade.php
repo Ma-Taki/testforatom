@@ -17,7 +17,8 @@
 @if($item->registration_date->between(Carbon::now(), Carbon::now()->subDays(7)))
                         <p class="new">新着</p>
 @endif
-                        <p class="name">{{ $item->name }}<span class="sys_type">案件ID：AN{{ $item->id }}</span></p>
+                        <p class="name">{{ $item->name }}</p>
+                        <p class="item_id">案件ID：AN{{ $item->id }}</p>
                     </div>
                 </div>
                 <div class="itemInfo clear">

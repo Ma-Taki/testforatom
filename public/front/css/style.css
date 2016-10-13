@@ -1331,9 +1331,19 @@ a.login__sns-btn {
     background: #5e8796;
     vertical-align: middle;
     padding: 0.6rem 1rem;
-    position: relative;
-    border-top-right-radius: 8px;
     border: 1px solid #5e8796;
+}
+
+#item .sys_type {
+    display: table-cell;
+    font-size: 1.2rem;
+    color: #fff;
+    background: #5e8796;
+    vertical-align: middle;
+    border: 1px solid #5e8796;
+    border-top-right-radius: 8px;
+    text-align: right;
+    padding-right: 1rem;
 }
 
 #item .itemHeader p:first-child{
@@ -1458,8 +1468,20 @@ a.login__sns-btn {
 /*-------------------------------
 ## 案件詳細
 -------------------------------*/
+#itemDetail .item_id {
+    display: table-cell;
+    font-size: 1.2rem;
+    color: #fff;
+    background: #5e8796;
+    vertical-align: middle;
+    border: 1px solid #5e8796;
+    border-top-right-radius: 8px;
+    text-align: right;
+    padding-right: 1rem;
+}
+
 #itemDetail .item{
-    padding-top: 3%;
+    padding-top: 10%;
 }
 
 #itemDetail .other:nth-child(2){
@@ -3043,9 +3065,30 @@ sp.css ~640px
     /*-------------------------------
 	# 案件詳細
 	-------------------------------*/
-    #itemDetail .other{display: block;}
+    #itemDetail .itemHeader {
+        position: relative;
+    }
 
-    #itemDetail .otherName{
+    #itemDetail .name {
+        border-top-right-radius: 8px;
+    }
+
+    #itemDetail .itemHeader .item_id {
+        font-size: 1.2rem;
+        color: #5e8796;
+        right: 0;
+        top: -16px;
+        position: absolute;
+        background: none;
+        border: none;
+        padding-right: 10px;
+    }
+
+    #itemDetail .other {
+        display: block;
+    }
+
+    #itemDetail .otherName {
         display: block;
         width: 100%;
         text-align: left;
@@ -3450,19 +3493,6 @@ sp.css ~640px
     .categorySearch .categorySearchInr .parentCategory:before{
         content: "";
     }
-
-    .categorySearch .categorySearchInr .parentCategory span.js__arrow--open:first-child {
-        transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-    }
-
-    .categorySearch .categorySearchInr .parentCategory span.js__arrow--open:last-child {
-        transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
-    }
-*/
 
     .categorySearch .categorySearchInr .childCategory span:after {
     }
