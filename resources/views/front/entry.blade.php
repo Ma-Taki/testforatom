@@ -89,7 +89,7 @@
                         <div class="upload_info">
                             <ul>
                                 <li>・スキルシートは当フォーム上からのアップロード、又はメールでの提出が可能です。</li>
-                                <li>・スキルシートのフォーマットは<a href="/entry/download">こちらから</a>ダウンロードできます。</li>
+                                <li>・スキルシートのフォーマットは<a href="/entry/download" class="hover-thin">こちらから</a>ダウンロードできます。</li>
                                 <li>・アップロード可能なファイル形式はMicrosoft Excel(.xls,xlsx)、Word(.doc,.docx)、PowerPoint(.ppt,pptx)、PDF(.pdf)、ファイルサイズは1MB以内です。</li>
                                 <li>・上記以外のファイルはメールで提出してください。</li>
                             </ul>
@@ -105,7 +105,7 @@
                     <div class="data">
                         <div class="name">メールで提出</div>
                         <div class="value">
-                            <p><a id="entry_mail_address" href="mailto:entry@engineer-route.com">entry@engineer-route.com</a>宛てにスキルシートを添付してお送りください。</p>
+                            <p><a id="entry_mail_address" href="mailto:entry@engineer-route.com" class="hover-thin">entry@engineer-route.com</a>宛てにスキルシートを添付してお送りください。</p>
                         </div>
                     </div>
                 </div>

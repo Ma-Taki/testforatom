@@ -243,32 +243,22 @@ $(function () {
 	var mobile = document.createElement('div');
 	mobile.className = 'nav-mobile';
 	document.querySelector('.nav').appendChild(mobile);
-
-	// hasClass
-	function hasClass(elem, className) {
-		return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-	}
-
-	// toggleClass
-	function toggleClass(elem, className) {
-		var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
-		if (hasClass(elem, className)) {
-			while (newClass.indexOf(' ' + className + ' ') >= 0) {
-				newClass = newClass.replace(' ' + className + ' ', ' ');
-			}
-			elem.className = newClass.replace(/^\s+|\s+$/g, '');
-		} else {
-			elem.className += ' ' + className;
-		}
-	}
+	$('.wrap').prepend('<div class="overlay" id="js__overlay"></div>');
 
 	// Mobile nav function
-	var mobileNav = document.querySelector('.nav-mobile');
-	var toggle = document.querySelector('.nav-list');
-	mobileNav.onclick = function () {
-		toggleClass(this, 'nav-mobile-open');
-		toggleClass(toggle, 'nav-active');
-	};
+	var mobileNav = $('.nav-mobile');
+	var toggle = $('.nav-list');
+	mobileNav.click(function () {
+		$(this).toggleClass('nav-mobile-open');
+		toggle.toggleClass('nav-active');
+		$('.overlay').toggleClass('overlay--show');
+	});
+
+	$('#js__overlay').click(function(){
+		toggle.toggleClass('nav-active');
+		mobileNav.removeClass('nav-mobile-open');
+		$(this).removeClass('overlay--show');
+	});
 });
 
 // itemDetail init selectedTagBox

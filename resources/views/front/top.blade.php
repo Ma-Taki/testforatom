@@ -12,7 +12,8 @@ use App\Models\Ms_areas;
 use App\Models\Ms_job_types;
 use App\Models\Tr_search_categories;
 ?>
-    <div class="content" id="top">
+<div class="wrap">
+    <div id="top">
         <div id="slider">
             <ul class="slider slider-item">
                 <li><a href="/about"><img src="/front/images/topBnr001.jpg"></a></li>
@@ -359,7 +360,6 @@ use App\Models\Tr_search_categories;
 
         </div>
     </div>
-</div>
 <script type="text/javascript">
     jQuery(function($){
         // topJob
