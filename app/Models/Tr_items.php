@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\ModelUtility as MdlUtil;
 use DB;
+use App\Models\Tr_users;
 
 class Tr_items extends Model
 {
@@ -135,9 +136,9 @@ class Tr_items extends Model
      */
     public function scopeEntryPossible($query) {
         $today = Carbon::today();
-        return $query->where('delete_flag', '=', false)
-                     ->where('service_start_date', '<=', $today)
-                     ->where('service_end_date', '>=', $today);
+        return $query->where('items.delete_flag', '=', false)
+                     ->where('items.service_start_date', '<=', $today)
+                     ->where('items.service_end_date', '>=', $today);
     }
 
     /**
@@ -320,7 +321,7 @@ class Tr_items extends Model
 
     /**
      * 管理画面のフリーワード検索
-     * 案件にエントリーがある場合、エントリーユーザの情報（名前、メモ、評価のみ）も検索対象とする。
+     * 案件とユーザで別個に検索し、結果をマージする。
      *　
      */
     public function scopeFreeword($query, $word_array) {
