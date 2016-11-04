@@ -7,7 +7,7 @@
 ?>
 <div class="wrap">
     <div class="main-content mail-auth">
-        <h1 class="main-content__title">メールアドレス認証</h1>
+        <h1 class="main-content__title">新規登録</h1>
         <hr class="hr-2px-solid-5e8796">
         <div class="main-content__body">
             <div class="content__element">

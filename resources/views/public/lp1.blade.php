@@ -41,7 +41,7 @@
             幅広い <span class="mainPcolor">業種</span>・<span class="mainPcolor">業務</span>・<span class="mainPcolor">言語</span> から<br>
             希望に合った仕事を選んでください。<br>
             まずはご登録を!!</p>
-        <a href="https://www.engineer-route.com/user/regist">
+        <a href="https://www.engineer-route.com/user/regist/auth">
             <button class="btn btn-danger btn-lg btn-block">カンタン無料登録<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
         </a>
     <!-- /container --></section>
@@ -104,7 +104,7 @@
                 相談しやすく安心いただける環境です。</p>
         </div>
     <!-- /row --></div>
-            <a href="https://www.engineer-route.com/user/regist">
+            <a href="https://www.engineer-route.com/user/regist/auth">
             <button class="btn btn-danger btn-lg btn-block">カンタン無料登録<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
         </a>
 <!-- /container --></section>
@@ -381,7 +381,7 @@
             <p>条件に合意後、無事に参画となります。参画後も随時フォローして参ります。</p>
         </div>
     <!-- /row --></div>
-            <a href="https://www.engineer-route.com/user/regist">
+            <a href="https://www.engineer-route.com/user/regist/auth">
             <button class="btn btn-danger btn-lg btn-block">カンタン無料登録<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
         </a>
 <!-- /container --></section>
