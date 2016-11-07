@@ -268,56 +268,45 @@ use App\Models\Tr_search_categories;
             </section><!-- /.conditions -->
 
             <div class="contentInr">
-                <section class="categorySearch invisible-sp">
-                    <div class="categorySearchInr">
-                        <h1>カテゴリーから案件を探す</h1>
-                        <div class="categorySearchContent">
+                <section class="category-search invisible-sp">
+                    <h1>カテゴリーから案件を探す</h1>
+                    <div class="category-search__content">
 @foreach(Tr_search_categories::getParentCategories() as $parent)
-                            <div class="parentCategory">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</div>
-                                <div class="childCategory">
+                        <div class="category__parent">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</div>
+                        <div class="category__child">
 @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
-                                    <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
-                                    <span>|</span>
-@endforeach
-                                </div>
-                                <hr class="categoryPartitionLine">
+                            <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
+                            <span>|</span>
 @endforeach
                         </div>
+                        <hr class="category__partition">
+@endforeach
                     </div>
                 </section><!-- /.categorySearch for pc,tablet-->
 
-                <section class="categorySearch invisible-pc invisible-tab">
-                    <div class="categorySearchInr">
-                        <h1>カテゴリーから案件を探す</h1>
-                        <div class="categorySearchContent">
-                            <ul>
+                <section class="category-search invisible-pc invisible-tab">
+                    <h1>カテゴリーから案件を探す</h1>
+                    <div class="category-search__content">
 @foreach(Tr_search_categories::getParentCategories() as $parent)
-                                <li>
-                                    <ul>
-                                        <li class="parentCategory">{{ $parent->name }}
-                                            <div class="arrow">
-                                                <span class="arrow arrow-left"></span>
-                                                <span class="arrow arrow-right"></span>
-                                            </div>
-                                        </li>
-                                        <div class="childCategories">
-                                            <a href="/item/category/{{ $parent->id }}">
-                                                <li class="childCategory">{{ $parent->name }}一覧
-                                                    <span></span>
-                                                    <span></span>
-                                                </li>
-                                            </a>
+                        <ul>
+                            <li class="category__parent">{{ $parent->name }}
+                                <div class="arrow">
+                                    <span class="arrow arrow-left"></span>
+                                    <span class="arrow arrow-right"></span>
+                                </div>
+                            </li>
+                            <div class="category__childs">
+                                <a href="/item/category/{{ $parent->id }}">
+                                    <li class="category__child">{{ $parent->name }}一覧</li>
+                                </a>
 @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
-                                            <a href="/item/category/{{ $child->id }}">
-                                                <li class="childCategory">{{ $child->name }}<span class=""></span></li>
-                                            </a>
+                                <a href="/item/category/{{ $child->id }}">
+                                    <li class="category__child">{{ $child->name }}</li>
+                                </a>
 @endforeach
-                                        </div>
-                                    </ul>
-                                </li>
+                            </div>
+                        </ul>
 @endforeach
-                            </ul>
-                        </div>
                     </div>
                 </section><!-- /.categorySearch for sp-->
 

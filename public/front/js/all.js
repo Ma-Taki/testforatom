@@ -110,21 +110,21 @@ jQuery(function($){
     }
 });
 
-// smart-phone categoty
 jQuery(function($){
+	// sp categoty search
 	if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
-		$('.childCategories').hide();
-		$('.parentCategory').click(function (){
+		$('div.category__childs').hide();
+		$('li.category__parent').click(function (){
 			var $parent = $(this);
-			$('.childCategories:visible').each(function(){
-				if($(this).get(0) != $parent.parent().find('.childCategories').get(0)){
-					$(this).parent().find('.parentCategory span').toggleClass('js__arrow--open');
+			var $arrows = $parent.parent().find('li.category__parent span');
+			$('div.category__childs:visible').each(function(){
+				if($(this).get(0) != $parent.parent().find('div.category__childs').get(0)){
+					$arrows.toggleClass('js__arrow--open');
 					$(this).slideUp('fast');
 				}
 			});
-			var $childs = $(this).parent().find('.childCategories');
-			$(this).parent().find('.parentCategory span').toggleClass('js__arrow--open');
-			$childs.slideToggle('fast');
+			$parent.parent().find('div.category__childs').slideToggle('fast');
+			$arrows.toggleClass('js__arrow--open');
 		});
 	}
 });

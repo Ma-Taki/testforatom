@@ -2410,19 +2410,13 @@ nav ul .active{ background: #536C75; }
 
 }
 
-/* カテゴリーから案件を探す */
-.categorySearchInr{
-	width: 72.8%;
-	margin: 0 auto;
-	float: left;
-}
-
-.categorySearch .categorySearchInr h1{
+/* カテゴリー検索 START */
+.category-search h1 {
 	font-size: 20px;
 	margin-bottom: 24px;
 }
 
-.categorySearch .categorySearchInr h1:before{
+.category-search h1:before {
 	content: " ";
 	background: url(../images/h1search.png)no-repeat;
 	width: 20px;
@@ -2432,42 +2426,49 @@ nav ul .active{ background: #536C75; }
 	display: inline-block;
 }
 
-.categorySearch .categorySearchInr .parentCategory{
+.category-search__content {
+	width: 72.8%;
+	margin: 0 auto;
+	float: left;
+}
+
+.category-search .category__parent {
 	font-size: 1.5rem;
 	line-height: normal;
 	font-weight: bold;
 }
 
-.categorySearch .categorySearchInr .parentCategory:before{
+.category-search .category__parent:before {
 	content: "\a0";
 	background: #5e8796;
 	font-weight: bold;
 	display: inline-block;
 }
 
-.categorySearch .categorySearchInr .childCategory{
+.category-search .category__child {
     opacity: 0.8;
     margin: 0.8rem 0 1.6rem 1rem;
 }
 
-.categorySearch .categorySearchInr .childCategory a{
+.category-search .category__child a {
 	font-size: 13px;
 }
 
-.categorySearch .categorySearchInr .childCategory span{
+.category-search .category__child span {
 	margin-right: 10px;
 	margin-left: 10px;
 }
 
-.categorySearch .categorySearchInr .childCategory span:last-child{
+.category-search .category__child span:last-child {
     display: none;
 }
 
-.categorySearch .categorySearchInr .categoryPartitionLine{
+.category-search .category__partition {
+    border: none;
 	border-top: 1px dashed #5e8796;
-	margin-top: 7px;
-	margin-bottom: 10px;
+	margin: 7px 0 10px 0;
 }
+/* カテゴリー検索 END */
 
 /* キーワードから案件を探す */
 .keyWordSearch{
@@ -3515,21 +3516,18 @@ sp.css ~640px
 		width: 100%;
 	}
 
-    .categorySearchInr{
+    /*** カテゴリー検索 START ***/
+    .category-search__content {
         width: 100%;
         float: none;
     }
 
-    .categorySearchContent{
-        /*padding-left: 16px; */
-    }
-
-    .categorySearch .categorySearchInr h1{
+    .category-search h1 {
         font-size: 16px;
         margin-bottom: 0px;
     }
 
-    .categorySearch .categorySearchInr h1:before{
+    .category-search h1:before {
         content: " ";
         background: url(../images/h1search-sp.png)no-repeat;
         width: 20px;
@@ -3539,7 +3537,7 @@ sp.css ~640px
         display: inline-block;
     }
 
-    .categorySearch .categorySearchInr .parentCategory{
+    .category-search .category__parent {
         color: #5e8796;
         font-size: 15px;
         line-height: 45px;
@@ -3548,12 +3546,11 @@ sp.css ~640px
         padding-left: 16px;
         padding-right: 16px;
         position: relative;
-
     }
 
-    .categorySearch .categorySearchInr .childCategory{
+    .category-search .category__child {
         color: #333;
-        font-size: 13px;
+        font-size: 14px;
         line-height: 45px;
         border-bottom: 1px dotted #5e8796;
         opacity: 1.0;
@@ -3562,13 +3559,10 @@ sp.css ~640px
         padding-right: 16px;
     }
 
-
-    .categorySearch .categorySearchInr .parentCategory:before{
+    .category-search .category__parent:before {
         content: "";
     }
-
-    .categorySearch .categorySearchInr .childCategory span:after {
-    }
+    /*** カテゴリー検索 END ***/
 
     /* サイドバー */
     .sideInfo{clear: both;}
