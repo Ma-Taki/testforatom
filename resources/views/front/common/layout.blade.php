@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url('/front/css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('/front/css/slick.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('/front/css/slick-theme.css') }}">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/slick.min.js') }}"></script>
         <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/jquery.tile.js') }}"></script>
     </head>
