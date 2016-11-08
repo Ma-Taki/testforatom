@@ -59,6 +59,14 @@ class Tr_users extends Model
     }
 
     /**
+     * 無効なユーザー
+     */
+    public function scopeDisable($query) {
+        return $query->where('delete_flag', '>', 0)
+                     ->where('delete_date', '!=', null);
+    }
+
+    /**
      * ログイン中ユーザを取得
      */
     public function scopeGetLoginUser($query) {

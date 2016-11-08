@@ -116,15 +116,15 @@ jQuery(function($){
 		$('div.category__childs').hide();
 		$('li.category__parent').click(function (){
 			var $parent = $(this);
-			var $arrows = $parent.parent().find('li.category__parent span');
+			var $arrow = $parent.parent().find('li.category__parent span');
 			$('div.category__childs:visible').each(function(){
 				if($(this).get(0) != $parent.parent().find('div.category__childs').get(0)){
-					$arrows.toggleClass('js__arrow--open');
+					$(this).parent().find('li.category__parent span').toggleClass('js__arrow--open');
 					$(this).slideUp('fast');
 				}
 			});
 			$parent.parent().find('div.category__childs').slideToggle('fast');
-			$arrows.toggleClass('js__arrow--open');
+			$arrow.toggleClass('js__arrow--open');
 		});
 	}
 });

@@ -34,30 +34,15 @@ class MemberController extends AdminController
      */
     public function searchMember(MemberSearchRequest $request){
 
-        // メールアドレス
-        $member_mail = $request->input('member_mail');
-        // 会員名
-        $member_name = $request->input('member_name');
-        // 会員名（かな）
-        $member_name_kana = $request->input('member_name_kana');
-        // 有効なエントリーのみか
-        $enabledOnly = $request->input('enabledOnly');
-        // ソートID 初期表示の場合は更新日が新しい順を設定
-        $sort_id = $request->input('sort_id', OdrUtil::ORDER_MEMBER_REGISTRATION_DESC['sortId']);
-        // ソート順
-        $item_order = OdrUtil::MemberOrder[$sort_id];
-        // 評価
-        $impression_array = (array)$request->impression ?: [];
-
         // パラメータの入力状態によって動的にクエリを発行
         $query = Tr_users::query();
 
         // メールアドレス検索
-        if (!empty($member_mail)) {
+        if (!empty($request->member_mail)) {
             //　asciiに変換できない文字を含む場合エラー
-            if (mb_check_encoding($member_mail, 'ASCII')) {
+            if (mb_check_encoding($request->member_mail, 'ASCII')) {
                 // 文字列を半角スペースで分割
-                $member_mail_array = explode(' ', $member_mail);
+                $member_mail_array = explode(' ', $request->member_mail);
                 // 空要素を削除
                 $member_mail_array = array_filter($member_mail_array, 'strlen');
                 foreach ($member_mail_array as $mail_str) {
@@ -70,9 +55,9 @@ class MemberController extends AdminController
             }
         }
         // 会員名検索
-        if (!empty($member_name)) {
+        if (!empty($request->member_name)) {
             // 全角スペースを半角に変換する
-            $member_name_hankaku = str_replace('　', ' ', $member_name);
+            $member_name_hankaku = str_replace('　', ' ', $request->member_name);
             // 文字列を半角スペースで分割
             $member_name_array = explode(' ', $member_name_hankaku);
             // 空要素を削除
@@ -82,9 +67,9 @@ class MemberController extends AdminController
             }
         }
         // 会員名（かな）検索
-        if (!empty($member_name_kana)) {
+        if (!empty($request->member_name_kana)) {
             // 全角スペースを半角に変換する
-            $member_name_kana_hankaku = str_replace('　', ' ', $member_name_kana);
+            $member_name_kana_hankaku = str_replace('　', ' ', $request->member_name_kana);
             // 文字列を半角スペースで分割
             $member_name_kana_array = explode(' ', $member_name_kana_hankaku);
             // 空要素を削除
@@ -93,30 +78,86 @@ class MemberController extends AdminController
                 $query->where(DB::raw("CONCAT(last_name_kana, first_name_kana)"),'LIKE',"%".$name_kana_str."%");
             }
         }
+        // フリーワード検索
+        if (!empty($request->freeword)) {
+            // 全角スペースを半角に変換する
+            $freeword_hankaku = str_replace('　', ' ', $request->freeword);
+            // 文字列を半角スペースで分割
+            $freeword_hankaku_array = explode(' ', $freeword_hankaku);
+            // 空要素を削除
+            $freeword_hankaku_array = array_filter($freeword_hankaku_array, 'strlen');
+
+            // 性別、評価、ステータスは定数があれば条件に含める
+            $freeword_collection = collect($freeword_hankaku_array);
+            if (($index = $freeword_collection->search('優良')) !== false) {
+                $query->where('users.impression', MdlUtil::USER_IMPRESSION_EXCELLENT);
+                $freeword_collection->forget($index);
+            }
+            if (($index = $freeword_collection->search('普通')) !== false) {
+                $query->where('users.impression', MdlUtil::USER_IMPRESSION_NORMAL);
+                $freeword_collection->forget($index);
+            }
+            if (($index = $freeword_collection->search('いまいち')) !== false) {
+                $query->where('users.impression', MdlUtil::USER_IMPRESSION_NOTGOOD);
+                $freeword_collection->forget($index);
+            }
+            if (($index = $freeword_collection->search('ブラック')) !== false) {
+                $query->where('users.impression', MdlUtil::USER_IMPRESSION_BLACK);
+                $freeword_collection->forget($index);
+            }
+            if (($index = $freeword_collection->search('男性')) !== false) {
+                $query->where('users.sex', 'Male');
+                $freeword_collection->forget($index);
+            }
+            if (($index = $freeword_collection->search('女性')) !== false) {
+                $query->where('users.sex', 'Female');
+                $freeword_collection->forget($index);
+            }
+            if (($index = $freeword_collection->search('有効')) !== false) {
+                $query->enable();
+                $freeword_collection->forget($index);
+            }
+            if (($index = $freeword_collection->search('無効')) !== false) {
+                $query->disable();
+                $freeword_collection->forget($index);
+            }
+            $query->join('prefectures', 'users.prefecture_id', '=', 'prefectures.id');
+            foreach ($freeword_collection as $freeword_str) {
+                $query->where(DB::raw(
+                    "CONCAT(last_name, first_name, last_name_kana, first_name_kana, sex, IFNULL(education_level,''), IFNULL(nationality,''), prefectures.name, IFNULL(station,''), mail, tel, TIMESTAMPDIFF(YEAR,birth_date,CURDATE()))"),'LIKE',"%".$freeword_str."%"
+                );
+            }
+        }
 
         // 有効な会員のみの場合、論理削除済みのものは含めない
-        if ($enabledOnly) {
-            $query = $query->where('delete_flag', '=', 0)
-                           ->where('delete_date', '=', null);
+        if ($request->enabledOnly) {
+            $query = $query->enable();
         }
 
         // 評価にチェックがあった場合、チェックのなかったものは含めない
+        $impression_array = (array)$request->impression ?: [];
         if (!empty($impression_array)) {
             $query = $query->whereIn('impression', $impression_array);
         }
+
+        // 表示順序を設定(初期表示時は登録日が新しい順)
+        $sort_id = $request->sort_id ?: OdrUtil::ORDER_MEMBER_REGISTRATION_DESC['sortId'];
+        $item_order = OdrUtil::MemberOrder[$sort_id];
 
         // 検索結果を取得する
         $memberList = $query->orderBy($item_order['columnName'], $item_order['sort'])
                             ->paginate(30);
 
-        return view('admin.member_list', compact(
-            'memberList',
-            'sort_id',
-            'member_mail',
-            'member_name',
-            'member_name_kana',
-            'enabledOnly',
-            'impression_array'));
+        return view('admin.member_list', [
+            'memberList' => $memberList,
+            'sort_id' => $sort_id,
+            'member_mail' => $request->member_mail,
+            'member_name' => $request->member_name,
+            'member_name_kana' => $request->member_name_kana,
+            'freeword' => $request->freeword,
+            'enabledOnly' => $request->enabledOnly,
+            'impression_array' => $impression_array,
+        ]);
     }
 
     /**
