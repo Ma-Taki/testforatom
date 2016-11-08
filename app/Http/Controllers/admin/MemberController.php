@@ -124,7 +124,7 @@ class MemberController extends AdminController
             $query->join('prefectures', 'users.prefecture_id', '=', 'prefectures.id');
             foreach ($freeword_collection as $freeword_str) {
                 $query->where(DB::raw(
-                    "CONCAT(last_name, first_name, last_name_kana, first_name_kana, sex, IFNULL(education_level,''), IFNULL(nationality,''), prefectures.name, IFNULL(station,''), mail, tel, TIMESTAMPDIFF(YEAR,birth_date,CURDATE()))"),'LIKE',"%".$freeword_str."%"
+                    "CONCAT(last_name, first_name, last_name_kana, first_name_kana, sex, IFNULL(education_level,''), IFNULL(nationality,''), prefectures.name, IFNULL(station,''), mail, tel, TIMESTAMPDIFF(YEAR,birth_date,CURDATE()), note)"),'LIKE',"%".$freeword_str."%"
                 );
             }
         }
@@ -145,9 +145,10 @@ class MemberController extends AdminController
         $item_order = OdrUtil::MemberOrder[$sort_id];
 
         // 検索結果を取得する
+        $query->select('users.*');
         $memberList = $query->orderBy($item_order['columnName'], $item_order['sort'])
                             ->paginate(30);
-
+                            
         return view('admin.member_list', [
             'memberList' => $memberList,
             'sort_id' => $sort_id,
