@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use DB;
+use Log;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -12,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (config('app.env') !== 'production') {
+            DB::listen(function ($query) {
+                Log::info("Query Time:".$query->time." Sql:".$query->sql." data:".implode(', ', $query->bindings));
+            });
+        }
     }
 
     /**
