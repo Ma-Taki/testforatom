@@ -1,5 +1,11 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルートとは - エンジニアルート')
+@section('title', 'エンジニアルートとは｜エンジニアルート')
+@section('description', 'Engineer-Route（エンジニアルート）では、皆様の夢や目標、可能性をサポートするため、
+それぞれの方に合った案件検索から、カウンセリング、プロジェクトの終了まで
+全てのプロセスを徹底的にサポート致します。')
+@section('keywords', ',Engineer-Route,Engineer Route,エンジニアルート')
+@section('canonical', url('/about'))
+
 @section('content')
 <div class="wrap">
     <div class="main-content about">

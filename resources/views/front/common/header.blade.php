@@ -1,7 +1,7 @@
 <?php use App\Libraries\FrontUtility as FrntUtil; ?>
 <header>
     <div class="headerInr">
-        <p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」</p>
+        <p>フリーランスのためのIT系求人・案件情報サイト｜エンジニアルート</p>
         <div class="user">
             <ul>
 @if(FrntUtil::isLogin())

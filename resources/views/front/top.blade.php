@@ -1,7 +1,10 @@
 @extends('front.common.layout')
+@section('title', 'フリーランスのためのIT系求人・案件情報サイト｜エンジニアルート')
+@section('description', 'Engineer-Route（エンジニアルート）では、フリーランス、フリーエンジニアの方に向けたIT系求人・案件情報を多数取り扱っております。皆様の夢や目標、可能性をサポートするため、 それぞれの方に合った案件紹介から、プロジェクトの終了まで、全てのプロセスを徹底的にサポート致します。')
+@section('keywords', ',Engineer-Route,Engineer Route,エンジニアルート')
+@section('canonical', url('/'))
+
 @section('content')
-@section('title', 'フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」')
-@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 <?php
 use App\Libraries\ModelUtility as mdlUtil;
 use App\Libraries\FrontUtility as FrntUtil;
