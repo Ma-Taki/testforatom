@@ -4,7 +4,7 @@
  *
  */
 namespace App\Libraries;
-
+use App;
 use App\Libraries\ModelUtility as mdlUtil;
 use App\Libraries\SessionUtility as ssnUtil;
 use App\Models\Tr_admin_user;
@@ -35,6 +35,45 @@ class AdminUtility
         'admin/item/modify' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
         'admin/item/delete' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
     ];
+
+    // メール：メルマガ配信
+    public $mail_magazine_mail_from = '';
+    public $mail_magazine_mail_from_name = '';
+    public $test = 'abc';
+
+    // 配信先：メルマガ希望ユーザ
+    const MAIL_MAGAZINE_TO_DESIRED_USER = 0;
+    // 配信先：すべてのユーザ
+    const MAIL_MAGAZINE_TO_ALL_USER = 1;
+    // 配信先：メールアドレス指定
+    const MAIL_MAGAZINE_TO_INPUT = 2;
+
+    // 配信日：即時
+    const MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY = 0;
+    // 配信日：日時を指定
+    const MAIL_MAGAZINE_SEND_DATE_INPUT = 1;
+
+    function __construct(){
+        switch (env('APP_ENV')) {
+            // ローカル環境
+            case 'local':
+                $this->mail_magazine_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->mail_magazine_mail_from_name = 'エンジニアルート';
+                break;
+            // 開発環境
+            case 'develop':
+                $this->mail_magazine_mail_from = 'y.suzuki@solidseed.co.jp';
+                $this->mail_magazine_mail_from_name = 'エンジニアルート';
+                break;
+            //　本番環境
+            case 'production':
+                $this->mail_magazine_mail_from = 'sender@engineer-route.com';
+                $this->mail_magazine_mail_from_name = 'エンジニアルート';
+                break;
+            default:
+                break;
+        }
+    }
 
     /**
      * ログインユーザが指定された権限を持っているかをチェックする
