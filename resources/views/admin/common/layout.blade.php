@@ -7,7 +7,8 @@
     <title>@yield('title')</title>
     <link href="{{ url('/admin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url('/admin/css/styles.css') }}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery.js"></script>-->
     <script src="{{ url('/admin/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ url('/admin/js/custom.js') }}"></script>
   </head>

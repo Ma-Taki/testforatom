@@ -190,7 +190,7 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
 
     // メルマガ管理
     // メルマガ配信画面
-    //Route::get('/admin/mail-magazine', 'admin\MailMagazineController@index');
+    Route::get('/admin/mail-magazine', 'admin\MailMagazineController@index');
+    // メルマガ配信処理
+    Route::post('/admin/mail-magazine', 'admin\MailMagazineController@store');
 });
-Route::get('/admin/mail-magazine', 'admin\MailMagazineController@index');
-Route::post('/admin/mail-magazine', 'admin\MailMagazineController@store');

@@ -27,15 +27,16 @@ class MailMagazineController extends Controller
      */
     public function store(MailMagazineRequest $request) {
 
+        if ($request->sendDateFlag != AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY)
+            insertMailMagazine();
+
         // Fromアドレス
         $admnUtil = new AdmnUtil();
         $from_address = $admnUtil->mail_magazine_mail_from;
         $from_address_name = $admnUtil->mail_magazine_mail_from_name;
 
         // メール送信日時
-        if ($request->) {
-            # code...
-        }
+        if ($request->sendDateFlag != AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){}
 
         // Toアドレス
         $toAddress_array = [];
@@ -45,7 +46,7 @@ class MailMagazineController extends Controller
         } else if ($request->toAddressesFlag == AdmnUtil::MAIL_MAGAZINE_TO_ALL_USER) {
             $toAddress_array = Tr_users::enable();
 
-        } else if (($request->toAddressesFlag == AdmnUtil::MAIL_MAGAZINE_TO_INPUT) {
+        } else if ($request->toAddressesFlag == AdmnUtil::MAIL_MAGAZINE_TO_INPUT) {
             $toAddress_array = explode(',', $request->toAddresses);
 
         } else {
@@ -57,8 +58,6 @@ class MailMagazineController extends Controller
 
         // Bccアドレス
         $bccAddress_array = explode(',', $request->bccAddresses);
-
-
 
         // メール送信用データ
         $data_mail = [
@@ -76,6 +75,14 @@ class MailMagazineController extends Controller
             $message->to($data_mail['toAddresses']);
             $message->subject($data_mail['subject']);
         });
+
+        insertMailMagazine($request);
+    }
+
+    /*
+     * メルマガ情報をインサートする
+     */
+    public function insertMailMagazine(MailMagazineRequest $request) {
 
         return view('admin.mail_magazine');
     }

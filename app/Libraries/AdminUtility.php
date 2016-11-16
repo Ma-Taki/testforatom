@@ -34,6 +34,8 @@ class AdminUtility
         'admin/item/input' => mdlUtil::AUTH_TYPE_ITEM_CREATE,
         'admin/item/modify' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
         'admin/item/delete' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
+        // メルマガ管理
+        'admin/mail-magazine' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
     ];
 
     // メール：メルマガ配信
