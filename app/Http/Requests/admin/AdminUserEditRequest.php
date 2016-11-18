@@ -31,7 +31,7 @@ class AdminUserEditRequest extends Request
         return [
             'admin_name' => 'required|max:30',
             // 論理削除済みのログインIDは再度登録可能
-            'login_id' => 'required|between:8,20|unique:admin_user,login_id,'.$this->admin_id.',id,delete_date,NULL',
+            'login_id' => 'required|between:8,20|unique:admin_user,login_id,'.$this->id.',id,delete_date,NULL',
             // 入力されていた場合のみ8~20文字のチェック
             'password' => 'between:8,20',
             // 必須チェックを行うかをhiddenで仕込む

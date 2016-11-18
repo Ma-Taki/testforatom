@@ -128,10 +128,10 @@ use App\Libraries\HtmlUtility as HtmlUtil;
 
     $('.js__default-check').change(function() {
         var $input = $(this).parents('.management').find('input:not(:first)');
-        if ($(this).prop('checked')) {
-            $input.prop('disabled','');
+        if ($(this).is(':checked')) {
+            $input.removeAttr('disabled');
         } else {
-            $input.prop('disabled','disabled');
+            $input.attr('disabled', 'disabled');
         }
     });
 
