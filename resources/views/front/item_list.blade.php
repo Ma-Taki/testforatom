@@ -1,9 +1,9 @@
 @extends('front.common.layout')
-@section('title', $title_prefix.'案件一覧｜エンジニアルート')
-@section('description', 'フリーランス、フリーエンジニアの方に向けたIT系求人・案件情報サイト「エンジニアルート」')
-@section('keywords', ',Engineer-Route,Engineer Route,エンジニアルート,新着')
-@section('canonical', url('/item/search'))
-
+@if(isset($html_title))
+    @section('title', $html_title.' - エンジニアルート')
+@else
+    @section('title', '案件一覧 - エンジニアルート')
+@endif
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

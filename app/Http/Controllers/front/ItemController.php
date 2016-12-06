@@ -11,6 +11,7 @@ use App\Libraries\OrderUtility as OdrUtil;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Models\Tr_items;
 use App\Models\Tr_tags;
+use App\Models\Tr_search_categories;
 use Carbon\Carbon;
 
 class ItemController extends FrontController
@@ -156,17 +157,17 @@ class ItemController extends FrontController
             'page' => $page,
         ];
 
-        $tag = Tr_tags::find($tag_id);
-        $title_prefix = '';
-        if (!empty($tag)) {
-            $title_prefix = $tag->term;
-            // "案件"で後方一致する場合、タグ名から抜く（htmlのtitleタグにすでに含むため）
-            if (preg_match('/案件\z/', $tag->term)) {
-                $title_prefix = mb_substr($title_prefix, 0, mb_strlen($title_prefix)-2);
-            }
+        // ▽▽▽ 161206 案件一覧のタイトルタグを動的に設定 ▽▽▽
+        $tag = Tr_tags::where('id', $tag_id)->first();
+        $html_title = '';
+        if (empty($tag)) {
+            $html_title = '案件一覧';
+        } else {
+            $html_title = '【'.$tag->term .'】案件一覧';
         }
 
-        return view('front.item_list', compact('itemList','params','title_prefix'));
+        return view('front.item_list', compact('itemList', 'params', 'html_title'));
+        // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△
     }
 
     /**
@@ -180,6 +181,8 @@ class ItemController extends FrontController
         $limit = $this->getLimit($request->limit);
         $page = $this->getPage($request->page);
 
+        // TODO: 親カテゴリーは必須で登録されてるから、もっと効率よくかける気がする。
+        //       search_categoriesまで連結する必要ない
         $itemList = Tr_items::select('items.*')
                             ->join('link_items_search_categories', 'items.id', '=', 'link_items_search_categories.item_id')
                             ->join('search_categories', 'search_categories.id', '=', 'link_items_search_categories.search_category_id')
@@ -198,17 +201,17 @@ class ItemController extends FrontController
             'page' => $page,
         ];
 
-        $tag = Tr_tags::find($tag_id);
-        $title_prefix = '';
-        if (!empty($tag)) {
-            $title_prefix = $tag->term;
-            // "案件"で後方一致する場合、タグ名から抜く（htmlのtitleタグにすでに含まれるため）
-            if (preg_match('/案件\z/', $tag->term)) {
-                $title_prefix = mb_substr($title_prefix, 0, mb_strlen($title_prefix)-2);
-            }
+        // ▽▽▽ 161206 案件一覧のタイトルタグを動的に設定 ▽▽▽
+        $category = Tr_search_categories::where('id', $category_id)->first();
+        $html_title = '';
+        if (empty($category)) {
+            $html_title = '案件一覧';
+        } else {
+            $html_title = '【'.$category->name .'】案件一覧';
         }
 
-        return view('front.item_list', compact('itemList', 'params'));
+        return view('front.item_list', compact('itemList', 'params', 'html_title'));
+        // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△
     }
 
     /**
