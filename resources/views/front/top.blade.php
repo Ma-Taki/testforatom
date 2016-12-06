@@ -67,7 +67,7 @@ use App\Models\Tr_search_categories;
                 <section class="newJob">
                     <div class="topJobWrap">
                         <h1 class="alignleft">新着案件</h1>
-                        <p class="alignright invisible-sp"><a href="/front/search?order=RegistrationDesc">新着案件一覧へ</a></p>
+                        <p class="alignright invisible-sp"><a href="/item/search">新着案件一覧へ</a></p>
                         <ul class="fs0 clear">
 @foreach($newItemList as $newItem)
                             <li>

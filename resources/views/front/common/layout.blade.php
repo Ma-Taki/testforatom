@@ -5,6 +5,7 @@
         <meta name="description" content="@yield('description')">
         <meta name="keywords" content="IT案件,案件情報,求人,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP">
         <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1" />
+        <meta http-equiv="content-language" content="ja">
         <title>@yield('title')</title>
         <link rel="canonical" href="{{ url('/') }}">
         <link rel="icon" href="{{ url('/front/favicon.ico') }}">

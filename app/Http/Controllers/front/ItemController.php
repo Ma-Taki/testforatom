@@ -84,12 +84,20 @@ class ItemController extends FrontController
      */
     public function showItemDetail(Request $request){
 
-        try {
-            $item = parent::getItemById($request->id);
+        // ▽▽▽ 161206 期限切れでも表示するように修正 ▽▽▽
+        $item = Tr_items::where('id', $request->id)->first();
 
-        } catch (ModelNotFoundException $e) {
-            abort(404, '指定された案件情報は掲載期限が過ぎているか、存在しません。');
+        if (empty($item) || $item->delete_flag) {
+            abort(404, '指定された案件情報は存在しません。');
         }
+
+        // エントリー可能かのフラグを立てる
+        $today = Carbon::today();
+        $canEntry = false;
+        if ($today->between($item->service_start_date, $item->service_end_date)) {
+            $canEntry = true;
+        }
+        // △△△ 161206 期限切れでも表示するように修正 △△△
 
         // おすすめ案件を取得する
         $recoItemList = Tr_items::select('items.*')
@@ -105,7 +113,7 @@ class ItemController extends FrontController
                                 ->get();
         // TODO: SQLあとで確認。
 
-        return view('front.item_detail', compact('item', 'recoItemList'));
+        return view('front.item_detail', compact('item', 'recoItemList', 'canEntry'));
     }
 
     /**
