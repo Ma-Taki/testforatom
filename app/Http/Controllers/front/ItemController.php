@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Libraries\OrderUtility as OdrUtil;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Models\Tr_items;
+use App\Models\Tr_tags;
 use Carbon\Carbon;
 
 class ItemController extends FrontController
@@ -49,12 +50,17 @@ class ItemController extends FrontController
         $params['limit'] = $limit;
 
         // htmlのtitleを決める。フォーマットは"***案件一覧｜エンジニアルート"
-        /*
-        $title = '';
-        if (empty($request->skills) )
-        */
+        $title_prefix = '';
+        if (empty($request->skills)
+            && empty($request->sys_types)
+            && empty($request->search_rate)
+            && empty($request->biz_categories)
+            && empty($request->areas)
+            && empty($request->job_types)) {
+                $title_prefix = '新着';
+        }
 
-        return view('front.item_list', compact('itemList','params'));
+        return view('front.item_list', compact('itemList','params','title_prefix'));
     }
 
     /**
@@ -81,7 +87,7 @@ class ItemController extends FrontController
         ];
         $params = array_merge($params, $request->all());
 
-        return view('front.item_list', compact('itemList','params'));
+        return view('front.item_list', compact('itemList','params','title_prefix'));
     }
 
     /**
@@ -120,6 +126,8 @@ class ItemController extends FrontController
      */
     public function searchItemByTag(Request $request, $tag_id){
 
+        // TODO:　正の整数以外弾こう
+
         // 基本のパラメータはデフォルトを設定する
         $sortOrder = $this->getSortOrder($request->order);
         $limit = $this->getLimit($request->limit);
@@ -140,7 +148,17 @@ class ItemController extends FrontController
             'page' => $page,
         ];
 
-        return view('front.item_list', compact('itemList', 'params'));
+        $tag = Tr_tags::find($tag_id);
+        $title_prefix = '';
+        if (!empty($tag)) {
+            $title_prefix = $tag->term;
+            // "案件"で後方一致する場合、タグ名から抜く（htmlのtitleタグにすでに含むため）
+            if (preg_match('/案件\z/', $tag->term)) {
+                $title_prefix = mb_substr($title_prefix, 0, mb_strlen($title_prefix)-2);
+            }
+        }
+
+        return view('front.item_list', compact('itemList','params','title_prefix'));
     }
 
     /**
@@ -171,6 +189,16 @@ class ItemController extends FrontController
             'limit' => $limit,
             'page' => $page,
         ];
+
+        $tag = Tr_tags::find($tag_id);
+        $title_prefix = '';
+        if (!empty($tag)) {
+            $title_prefix = $tag->term;
+            // "案件"で後方一致する場合、タグ名から抜く（htmlのtitleタグにすでに含まれるため）
+            if (preg_match('/案件\z/', $tag->term)) {
+                $title_prefix = mb_substr($title_prefix, 0, mb_strlen($title_prefix)-2);
+            }
+        }
 
         return view('front.item_list', compact('itemList', 'params'));
     }
@@ -262,6 +290,12 @@ class ItemController extends FrontController
         // エンコードして返却
         echo json_encode($data);
     }
+
+    /**
+     *
+     *
+     */
+//    private function getTitle
 
     /**
      * 案件のソート順を取得する。

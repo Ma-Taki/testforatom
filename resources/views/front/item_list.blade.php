@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', '案件一覧｜エンジニアルート')
+@section('title', $title_prefix.'案件一覧｜エンジニアルート')
 @section('description', 'フリーランス、フリーエンジニアの方に向けたIT系求人・案件情報サイト「エンジニアルート」')
 @section('keywords', ',Engineer-Route,Engineer Route,エンジニアルート,新着')
 @section('canonical', url('/item/search'))

@@ -36,7 +36,7 @@ class AuthCheckMiddleware
 
         // ユーザ管理は、自身の照会・更新のみ常に可とする
         if ($request_uri === 'admin/user/modify' && $admin_id == $request->id) {
-                $permission = true;
+             $permission = true;
         }
 
 
