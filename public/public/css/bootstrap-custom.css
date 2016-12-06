@@ -92,9 +92,9 @@ a:focus, a:hover{
     margin: 130px auto 35px;
     line-height: 1.6;
     font-weight: bold;
-    text-shadow: 2px 2px 3px #fff; 
-    -moz-text-shadow: 2px 2px 3px #fff; 
-    -webkit-text-shadow: 2px 2px 3px #fff; 
+    text-shadow: 2px 2px 3px #fff;
+    -moz-text-shadow: 2px 2px 3px #fff;
+    -webkit-text-shadow: 2px 2px 3px #fff;
 }
 
 .mainPcolor{
@@ -437,7 +437,7 @@ a:focus, a:hover{
 }
 
 .icoAny{
-    background-color: #999; 
+    background-color: #999;
 }
 
 .repeatSkill{
@@ -567,14 +567,14 @@ input[type="radio"] + label {
     cursor:pointer;
     height: 20px;
 }
- 
+
 /*　ラジオボタン 選択時の背景指定　*/
 input[type="radio"]:checked + label {
 background:url(../images/radiobtn.svg) no-repeat left bottom;
     background-size:20px 40px;
     cursor:pointer;
 }
- 
+
 .radio-inline{
     padding-top: 5px;
     padding-left: 0;
@@ -586,151 +586,152 @@ background:url(../images/radiobtn.svg) no-repeat left bottom;
   .btn {
     line-height: 35px;
   }
-    
+
     .btn span{
-        margin-top:-28px; 
+        margin-top:-28px;
     }
 }
 
 
 
-@media (max-width: 768px){   
+@media (max-width: 768px){
     .main{
         background: url("../images/mainImg2.jpg")no-repeat;
         background-size: 100%;
         height: auto;
     }
-    
+
     .main p{
-        text-shadow: 0px 0px 5px #fff; 
-        -moz-text-shadow: 0px 0px 5px #fff; 
-        -webkit-text-shadow: 0px 0px 5px #fff; 
+        text-shadow: 0px 0px 5px #fff;
+        -moz-text-shadow: 0px 0px 5px #fff;
+        -webkit-text-shadow: 0px 0px 5px #fff;
     }
-    
+
     .main p{
         margin: 15% auto 2%;
         font-size: 22px;
     }
-    
+
     .mainCap{
         font-size: 28px;
     }
-    
+
     .wrap1{
         padding-bottom: 50px;
     }
-    
+
     .content h1,
     .content h2{
         margin-top: 80px;
     }
-    
+
     .wrap1 h2{
         margin-bottom: 30px;
     }
-    
+
     .anken table th{
         width: 80px;
     }
-    
+
     .content h2{
         margin-top: 60px;
     }
-    
+
     .flow .col-sm-1{
         font-size: 27px;
     }
-    
+
     .head{
     width: 30%;
 }
 
 @media (max-width: 640px){
     header{
-        height: 90px;
+        height: auto;
     }
-    
+
     header h1{
         margin: 10px auto 5px;
         float: none;
     }
-    
+
     header h1 a{
         background: url("../images/logo.png")no-repeat;
         background-size: 200px auto;
         width: 200px;
     }
-    
+
     header p{
         text-align: center;
         float: none;
         line-height: 1;
+        margin: 0px auto 10px;
     }
-    
+
     .mainCap{
         font-size: 22px;
     }
-    
+
     .main p{
         width: 100%;
         margin: 60% auto 30px;
         font-size: 17px;
     }
-    
+
     .mainPcolor{
         font-size: 24px;
     }
-    
+
     .btn{
         width: 100%;
         height: 50px;
         font-size: 18px;
         margin-bottom: 20px;
     }
-    
+
     .content h1{
         width: 100%;
         font-size: 25px;
         padding: 10px;
         margin-top: 20px;
     }
-    
+
     .content h1:before,
     .content h1:after{
         left: 47%;
     }
-    
+
     .wrap1 .col-sm-6{
         margin-bottom: 50px;
     }
-    
+
     .wrap1 .col-sm-2 p{
         background: url("../images/arrowY_sp.svg")no-repeat;
         background-position: center;
         background-size: 80px auto;
         margin-bottom: 10px;
     }
-    
+
     .anken .col-sm-4{
         width: 90%;
         margin: 0 auto;
     }
-    
+
     .anken .col-sm-4 p{
         padding-top: 15px;
     }
-    
+
     .anken table{
         display: block;
         padding-bottom: 15px;
     }
-    
+
     .flow h2{
         margin: 0px;
         font-size: 20px;
         font-weight: bold;
     }
-    
+
     .flow .col-sm-2{
         width: 100%;
         text-align: center;
@@ -740,40 +741,40 @@ background:url(../images/radiobtn.svg) no-repeat left bottom;
         width: 100%;
         text-align: center;
         margin: 50px auto;
-    }    
-    
+    }
+
     .flow .col-sm-1 .glyphicon{
         position: static;
         transform: rotate(90deg);
     }
-    
+
     .head{
     width: 100%;
     }
-    
+
     .icoRequired,
     .icoAny{
         float: none;
         padding: 3px 5px;
         margin-left: 10px;
     }
-    
+
     .form-control{
         margin-bottom: 5px;
     }
-    
+
     .birth,
     .reward,
     .gSkill{
         overflow: auto;
     }
-    
+
     .birth .form-control{
         width: 25%;
         float: left;
         margin-right: 5px;
     }
-    
+
     .birth label,
     .reward label,
     .skillFormSP label{
@@ -781,74 +782,71 @@ background:url(../images/radiobtn.svg) no-repeat left bottom;
         line-height: 35px;
         padding-right: 5px;
     }
-    
+
     .radioBox .radio-inline{
         width: 100%;
         padding-left: 0px;
     }
-    
+
     .radio-inline+.radio-inline{
         margin-left: 0;
         margin-right: 10px;
     }
-    
+
     .reward .form-control{
         width: 34%;
         float: left;
         margin-right: 5px;
     }
-    
+
     .skill form{
         margin-bottom: 10px;
         overflow: auto;
     }
-    
+
     .skillForm{
         padding-bottom: 0px;
         padding-left: 0;
     }
-    
+
     .skillFormSP .form-control{
         width: 40%;
         float: left;
         margin-right: 5px;
         margin-bottom: 25px;
     }
-    
+
     .skillBtn{
         clear: both;
         float: left;
     }
-    
+
     .repeatSkill{
         clear: both;
     }
-    
+
     .w50{
         width: 100% !important;
     }
-    
+
     .name{
         overflow: auto;
     }
-    
+
     .name .inrLabel{
         float:left;
         width: 10%;
         clear: both;
         line-height: 34px;
     }
-    
+
     .name input{
         float: right;
         width: 85%;
         margin-right: 0;
     }
-    
+
     .terms{
         margin: 0;
     }
-    
-
-
 }

@@ -1,5 +1,9 @@
 @extends('front.common.layout')
-@section('title', '案件一覧 - エンジニアルート')
+@if(isset($html_title))
+    @section('title', $html_title.' - エンジニアルート')
+@else
+    @section('title', '案件一覧 - エンジニアルート')
+@endif
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
