@@ -1,15 +1,24 @@
 @extends('front.common.layout')
-@section('title', '【案件詳細】'.$item->name.' - エンジニアルート')
+@section('title', $item->name.' - エンジニアルート')
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
     use Carbon\Carbon;
 ?>
 <div class="wrap">
-    <div id="item" class="content">
-        <div class="content-left">
-            <h1 class="title">案件詳細</h1>
-            <hr class="hr-2px-solid-5e8796">
+  <div id="item" class="content">
+    <div class="content-left">
+      <h1 class="title">案件詳細</h1>
+      <hr class="hr-2px-solid-5e8796">
+
+@if(!$canEntry)
+      <div class="alert alert-danger">
+        <ul>
+          <li>この案件は掲載期間をすぎています。エントリーすることはできません。</li>
+        </ul>
+      </div>
+@endif
+
             <div id="itemDetail">
             <div class="item">
                 <div class="itemHeader">
@@ -80,9 +89,13 @@
                         <div class="itemTagList invisible-sp">
 @foreach($item->tags as $tag)<a href="/item/tag/{{ $tag->id }}"><p class="tag">{{ $tag->term }}</p></a>@endforeach
                         </div>
+
+@if($canEntry)
                         <div class="commonCenterBtn">
                             <a href="/entry?id={{ $item->id }}"><button>この案件にエントリーする</button></a>
                         </div>
+@endif
+
                     </div>
                 </div>
             </div>
