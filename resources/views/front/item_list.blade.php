@@ -4,6 +4,8 @@
 @else
     @section('title', '案件一覧 - エンジニアルート')
 @endif
+@section('canonical', Request::url())
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

@@ -1,7 +1,6 @@
 @extends('front.common.layout')
-@section('title', 'メールアドレス認証｜エンジニアルート')
-@section('description', 'フリーランス、フリーエンジニアの方に向けたIT系求人・案件情報サイト「エンジニアルート」新規会員登録（無料）はこちらから！')
-@section('keywords', ',Engineer-Route,Engineer Route,エンジニアルート,会員,新規,登録,無料')
+@section('title', '新規登録 - エンジニアルート')
+@section('description', 'エンジニアルートの新規会員登録ページです。')
 @section('canonical', url('/user/regist/auth'))
 
 @section('content')

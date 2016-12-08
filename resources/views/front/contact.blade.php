@@ -1,5 +1,8 @@
 @extends('front.common.layout')
 @section('title', 'お問い合わせ - エンジニアルート')
+@section('description', 'エンジニアルートのお問い合わせページです。')
+@section('canonical', url('/contact'))
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
