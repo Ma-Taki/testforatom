@@ -1,5 +1,7 @@
 @extends('front.common.layout')
 @section('title', $item->name.' - エンジニアルート')
+@section('canonical', Request::url().'?id='.$item->id)
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

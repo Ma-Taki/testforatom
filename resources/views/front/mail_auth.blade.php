@@ -1,5 +1,8 @@
 @extends('front.common.layout')
-@section('title', 'メールアドレス認証 - エンジニアルート')
+@section('title', '新規登録 - エンジニアルート')
+@section('description', 'エンジニアルートの新規会員登録ページです。')
+@section('canonical', url('/user/regist/auth'))
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

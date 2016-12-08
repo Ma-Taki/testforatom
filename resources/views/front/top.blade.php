@@ -1,7 +1,9 @@
 @extends('front.common.layout')
-@section('content')
 @section('title', 'フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」')
 @section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
+@section('canonical', url('/'))
+
+@section('content')
 <?php
 use App\Libraries\ModelUtility as mdlUtil;
 use App\Libraries\FrontUtility as FrntUtil;

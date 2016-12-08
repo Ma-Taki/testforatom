@@ -1,6 +1,9 @@
 @extends('front.common.layout')
-@section('content')
 @section('title', 'ログイン - エンジニアルート')
+@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
+@section('canonical', url('/login'))
+
+@section('content')
 <div class="wrap">
     <div class="main-content login">
         <h1 class="main-content__title">ログイン</h1>

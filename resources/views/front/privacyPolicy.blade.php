@@ -1,6 +1,9 @@
 @extends('front.common.layout')
-@section('content')
 @section('title', 'プライバシーポリシー - エンジニアルート')
+@section('description', 'エンジニアルートのプライバシーポリシーページです。')
+@section('canonical', url('/privacy'))
+
+@section('content')
 <div class="wrap">
     <div class="main-content privacy-policy">
         <h1 class="main-content__title">プライバシーポリシー</h1>
