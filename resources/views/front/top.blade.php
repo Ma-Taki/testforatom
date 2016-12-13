@@ -18,12 +18,12 @@ use App\Models\Tr_search_categories;
     <div id="top">
         <div id="slider">
             <ul class="slider slider-item">
-                <li><a href="/about"><img src="/front/images/topBnr001.jpg"></a></li>
-                <li><a href="/item/category/1"><img src="/front/images/topBnr002.jpg"></a></li>
-                <li><a href="/item/search?job_types%5B%5D=12"><img src="/front/images/topBnr003.jpg"></a></li>
-                <li><a href="/item/tag/32"><img src="/front/images/topBnr004.jpg"></a></li>
-                <li><a href="/item/tag/2"><img src="/front/images/topBnr005.jpg"></a></li>
-                <li><a href="/item/search?job_types%5B%5D=1"><img src="/front/images/topBnr006.jpg"></a></li>
+                <li><a href="/about"><img src="/front/images/topBnr001.jpg" alt="エンジニアルート"></a></li>
+                <li><a href="/item/category/1"><img src="/front/images/topBnr002.jpg" alt="スマートフォン・タブレット案件特集"></a></li>
+                <li><a href="/item/search?job_types%5B%5D=12"><img src="/front/images/topBnr003.jpg" alt="ウェブデザイナー案件特集"></a></li>
+                <li><a href="/item/tag/32"><img src="/front/images/topBnr004.jpg" alt="AS/400案件特集"></a></li>
+                <li><a href="/item/tag/2"><img src="/front/images/topBnr005.jpg" alt="働く女性の案件特集"></a></li>
+                <li><a href="/item/search?job_types%5B%5D=1"><img src="/front/images/topBnr006.jpg" alt="プロジェクトマネージャー案件特集"></a></li>
             </ul>
         </div><!-- ./slider -->
 
@@ -75,7 +75,7 @@ use App\Models\Tr_search_categories;
                             <li>
                                 <a href="/item/detail?id={{ $newItem->id }}" target="_blank">
                                     <div class="topJobInr">
-                                        <img src="/front/images/ico-newjob.png">
+                                        <img src="/front/images/ico-newjob.png" alt="新着">
                                         <h2>{{ $newItem->name }}</h2>
                                         <p class="location">{{ $newItem->area_detail }}</p>
                                         <p class="remuneration">{{ $newItem->rate_detail }}</p>
@@ -101,7 +101,7 @@ use App\Models\Tr_search_categories;
                             <li>
                                 <a href="/item/detail?id={{ $pickUpItem->id }}"  target="_blank">
                                     <div class="topJobInr">
-                                        <img src="/front/images/ico-attentionJob.png">
+                                        <img src="/front/images/ico-attentionJob.png" alt="急募">
                                         <h2>{{ $pickUpItem->name }}</h2>
                                         <p class="location">{{ $pickUpItem->area_detail }}</p>
                                         <p class="remuneration">{{ $pickUpItem->rate_detail }}</p>
