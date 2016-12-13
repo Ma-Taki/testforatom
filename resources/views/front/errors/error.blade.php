@@ -1,4 +1,6 @@
 @extends('front.common.layout')
+@section('title', 'エラーが発生しました - エンジニアルート')
+
 @section('content')
 <div class="wrap">
     <div class="content">
