@@ -31,7 +31,7 @@ class ItemController extends FrontController
         $itemList = Tr_items::select('items.*')
                             ->entryPossible() // 受付期間中の案件のみ
                             ->getItemBySkills($request->skills) // スキル
-                            ->getItemBySysTypes($request->sys_type) // システム種別
+                            ->getItemBySysTypes($request->sys_types) // システム種別
                             ->getItemByRate($request->search_rate) // 報酬
                             ->getItemByBizCategories($request->biz_categories) // 業種
                             ->getItemByAreas($request->areas) // 勤務地
@@ -218,7 +218,7 @@ class ItemController extends FrontController
             $itemList = Tr_items::select('items.*')
                                 ->entryPossible() // 受付期間中の案件のみ
                                 ->getItemBySkills($request->skills) // スキル
-                                ->getItemBySysTypes($request->sys_type) // システム種別
+                                ->getItemBySysTypes($request->sys_types) // システム種別
                                 ->getItemByRate($request->search_rate) // 報酬
                                 ->getItemByBizCategories($request->biz_categories) // 業種
                                 ->getItemByAreas($request->areas) // 勤務地
