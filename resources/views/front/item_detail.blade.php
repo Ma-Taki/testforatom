@@ -10,7 +10,7 @@
 <div class="wrap">
   <div id="item" class="content">
     <div class="content-left">
-      <h1 class="title">案件詳細</h1>
+      <h2 class="title">案件詳細</h2>
       <hr class="hr-2px-solid-5e8796">
 
 @if(!$canEntry)

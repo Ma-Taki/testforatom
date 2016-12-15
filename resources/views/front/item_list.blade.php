@@ -1,8 +1,6 @@
 @extends('front.common.layout')
-@if(isset($html_title))
-    @section('title', $html_title.' - エンジニアルート')
-@else
-    @section('title', '案件一覧 - エンジニアルート')
+@if(isset($html_title)) @section('title', $html_title.' - エンジニアルート')
+@else                   @section('title', '案件一覧 - エンジニアルート')
 @endif
 @section('canonical', Request::url())
 
@@ -22,7 +20,7 @@
     <div id="item" class="content">
         <div class="content-left">
             <div class="titleArea">
-                <h1 class="title">該当案件一覧</h1>
+                <h2 class="title">該当案件一覧</h2>
                 <span class="itemCount">該当件数：<span class="num">{{ $itemList->total() }}</span>件</span>
             </div>
             <hr class="hr-2px-solid-5e8796">

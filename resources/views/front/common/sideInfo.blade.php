@@ -12,7 +12,7 @@
 @else
             <li>
                 <a href="{{ url('/user/regist/auth') }}">
-                    <img src="/front/images/sbnrSignup.png" alt="会員登録はこちら">
+                    <img src="/front/images/sbnrSignup.png" alt="無料会員登録。案件紹介をご希望の方はこちら">
                 </a>
             </li>
 @endif
