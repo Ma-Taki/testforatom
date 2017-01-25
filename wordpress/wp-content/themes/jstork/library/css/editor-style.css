@@ -1,0 +1,35 @@
+@import url(../../style.css);
+body.mceContentBody {
+	font-size: 15px!important;
+    padding: 0.7em 1em!important;
+    background: #fff!important;
+}
+ 
+body.mceContentBody .editor-area {
+    margin: 0px 20px 0.5em 20px;
+    font-size:15px!important;
+    line-height:150%;
+}
+body.mceContentBody p{
+	margin-bottom: 2em;
+}
+body.mceContentBody ul{
+	list-style-type: disc!important;
+	padding-left: 2em!important;
+}
+body.mceContentBody ol{
+	list-style-type: decimal!important;
+	padding-left: 2em!important;
+}
+body.mceContentBody blockquote {
+	border: 1px solid #ddd;
+	padding: 0.4em 1em;
+	margin: 0;
+}
+body.mceContentBody pre{
+	background:#333;
+	color:#fff;
+	padding:1em;
+	margin-bottom:1em;
+	font-size:0.9em;
+}
