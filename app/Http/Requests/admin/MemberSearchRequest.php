@@ -23,12 +23,14 @@ class MemberSearchRequest extends Request
      */
     public function rules()
     {
-        // validationいらないかも
-        // 現行のは特にチェックないっぽい
+        // 正直不要
         return [
             'member_mail' => '',
             'member_name' => '',
             'member_name_kana' => '',
+            'freeword' => '',
+            'enabledOnly' => '',
+            'impression' => '',
         ];
     }
 }

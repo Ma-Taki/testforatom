@@ -57,6 +57,20 @@ use App\Libraries\ModelUtility as mdlUtil;
         </div>
     </div>
 @endif
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MAIL_MAGAZINE)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content-box-header">
+                <div class="panel-title"><a href="/admin/mail-magazine">メルマガ管理</a></div>
+            </div>
+            <div class="content-box-large box-with-header">
+                メールマガジンの配信を行います。
+                <br /><br />
+            </div>
+        </div>
+    </div>
+@endif
 @if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
     <div class="row">
         <div class="col-md-12">

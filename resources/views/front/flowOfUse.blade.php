@@ -1,5 +1,8 @@
 @extends('front.common.layout')
 @section('title', 'ご利用の流れ - エンジニアルート')
+@section('description', 'エンジニアルートでは、案件のプロジェクト終了後までエンジニアの皆様を全力でサポート致します。')
+@section('canonical', url('/flow'))
+
 @section('content')
 <div class="wrap">
     <div class="main-content flow">

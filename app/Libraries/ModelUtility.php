@@ -28,6 +28,8 @@ class ModelUtility
     const AUTH_TYPE_ENTRY_DELETE = 'entry.delete';
     // エントリー管理：スキルシートDL
     const AUTH_TYPE_ENTRY_DOWNLOAD = 'entry.download';
+    // メルマガ管理：
+    const AUTH_TYPE_MAIL_MAGAZINE = 'mail_magazine.all';
     /* △△△ 管理権限 △△△ */
 
     // 都道府県：東京

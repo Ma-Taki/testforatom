@@ -63,6 +63,10 @@
                                     <th><label class="control-label">氏名(かな)</label></th>
                                     <td><input type="text" class="form-control input-sm" name="member_name_kana" value="{{ isset($member_name_kana) ? $member_name_kana : old('member_name_kana') }}" /></td>
                                 </tr>
+                                <tr>
+                                    <th><label class="control-label">フリーワード</label></th>
+                                    <td><input type="text" class="form-control input-sm" name="freeword" value="{{ isset($freeword) ? $freeword : old('freeword') }}" /></td>
+                                </tr>
                                 <tr class="user-state">
                                     <th><label class="control-label">ステータス</label></th>
 @if(isset($enabledOnly))

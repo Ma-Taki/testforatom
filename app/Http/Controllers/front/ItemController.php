@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Libraries\OrderUtility as OdrUtil;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Models\Tr_items;
+use App\Models\Tr_tags;
+use App\Models\Tr_search_categories;
 use Carbon\Carbon;
 
 class ItemController extends FrontController
@@ -29,7 +31,7 @@ class ItemController extends FrontController
         $itemList = Tr_items::select('items.*')
                             ->entryPossible() // 受付期間中の案件のみ
                             ->getItemBySkills($request->skills) // スキル
-                            ->getItemBySysTypes($request->sys_type) // システム種別
+                            ->getItemBySysTypes($request->sys_types) // システム種別
                             ->getItemByRate($request->search_rate) // 報酬
                             ->getItemByBizCategories($request->biz_categories) // 業種
                             ->getItemByAreas($request->areas) // 勤務地
@@ -48,7 +50,18 @@ class ItemController extends FrontController
         // mergeで上書きされるので後に入れる
         $params['limit'] = $limit;
 
-        return view('front.item_list', compact('itemList','params'));
+        // htmlのtitleを決める。フォーマットは"***案件一覧｜エンジニアルート"
+        $title_prefix = '';
+        if (empty($request->skills)
+            && empty($request->sys_types)
+            && empty($request->search_rate)
+            && empty($request->biz_categories)
+            && empty($request->areas)
+            && empty($request->job_types)) {
+                $title_prefix = '新着';
+        }
+
+        return view('front.item_list', compact('itemList','params','title_prefix'));
     }
 
     /**
@@ -75,7 +88,7 @@ class ItemController extends FrontController
         ];
         $params = array_merge($params, $request->all());
 
-        return view('front.item_list', compact('itemList','params'));
+        return view('front.item_list', compact('itemList','params','title_prefix'));
     }
 
     /**
@@ -84,12 +97,20 @@ class ItemController extends FrontController
      */
     public function showItemDetail(Request $request){
 
-        try {
-            $item = parent::getItemById($request->id);
+        // ▽▽▽ 161206 期限切れでも表示するように修正 ▽▽▽
+        $item = Tr_items::where('id', $request->id)->first();
 
-        } catch (ModelNotFoundException $e) {
-            abort(404, '指定された案件情報は掲載期限が過ぎているか、存在しません。');
+        if (empty($item) || $item->delete_flag) {
+            abort(404, '指定された案件情報は存在しません。');
         }
+
+        // エントリー可能かのフラグを立てる
+        $today = Carbon::today();
+        $canEntry = false;
+        if ($today->between($item->service_start_date, $item->service_end_date)) {
+            $canEntry = true;
+        }
+        // △△△ 161206 期限切れでも表示するように修正 △△△
 
         // おすすめ案件を取得する
         $recoItemList = Tr_items::select('items.*')
@@ -105,7 +126,7 @@ class ItemController extends FrontController
                                 ->get();
         // TODO: SQLあとで確認。
 
-        return view('front.item_detail', compact('item', 'recoItemList'));
+        return view('front.item_detail', compact('item', 'recoItemList', 'canEntry'));
     }
 
     /**
@@ -113,6 +134,8 @@ class ItemController extends FrontController
      * GET:/item/tag/{id}
      */
     public function searchItemByTag(Request $request, $tag_id){
+
+        // TODO:　正の整数以外弾こう
 
         // 基本のパラメータはデフォルトを設定する
         $sortOrder = $this->getSortOrder($request->order);
@@ -134,7 +157,17 @@ class ItemController extends FrontController
             'page' => $page,
         ];
 
-        return view('front.item_list', compact('itemList', 'params'));
+        // ▽▽▽ 161206 案件一覧のタイトルタグを動的に設定 ▽▽▽
+        $tag = Tr_tags::where('id', $tag_id)->first();
+        $html_title = '';
+        if (empty($tag)) {
+            $html_title = '案件一覧';
+        } else {
+            $html_title = '【'.$tag->term .'】案件一覧';
+        }
+
+        return view('front.item_list', compact('itemList', 'params', 'html_title'));
+        // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△
     }
 
     /**
@@ -148,6 +181,8 @@ class ItemController extends FrontController
         $limit = $this->getLimit($request->limit);
         $page = $this->getPage($request->page);
 
+        // TODO: 親カテゴリーは必須で登録されてるから、もっと効率よくかける気がする。
+        //       search_categoriesまで連結する必要ない
         $itemList = Tr_items::select('items.*')
                             ->join('link_items_search_categories', 'items.id', '=', 'link_items_search_categories.item_id')
                             ->join('search_categories', 'search_categories.id', '=', 'link_items_search_categories.search_category_id')
@@ -166,7 +201,17 @@ class ItemController extends FrontController
             'page' => $page,
         ];
 
-        return view('front.item_list', compact('itemList', 'params'));
+        // ▽▽▽ 161206 案件一覧のタイトルタグを動的に設定 ▽▽▽
+        $category = Tr_search_categories::where('id', $category_id)->first();
+        $html_title = '';
+        if (empty($category)) {
+            $html_title = '案件一覧';
+        } else {
+            $html_title = '【'.$category->name .'】案件一覧';
+        }
+
+        return view('front.item_list', compact('itemList', 'params', 'html_title'));
+        // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△
     }
 
     /**
@@ -186,7 +231,7 @@ class ItemController extends FrontController
             $itemList = Tr_items::select('items.*')
                                 ->entryPossible() // 受付期間中の案件のみ
                                 ->getItemBySkills($request->skills) // スキル
-                                ->getItemBySysTypes($request->sys_type) // システム種別
+                                ->getItemBySysTypes($request->sys_types) // システム種別
                                 ->getItemByRate($request->search_rate) // 報酬
                                 ->getItemByBizCategories($request->biz_categories) // 業種
                                 ->getItemByAreas($request->areas) // 勤務地
@@ -256,6 +301,12 @@ class ItemController extends FrontController
         // エンコードして返却
         echo json_encode($data);
     }
+
+    /**
+     *
+     *
+     */
+//    private function getTitle
 
     /**
      * 案件のソート順を取得する。

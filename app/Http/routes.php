@@ -187,4 +187,10 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::match(['get', 'post'], '/admin/item/search', 'admin\ItemController@searchItem');
     // 論理削除処理
     Route::get('/admin/item/delete', 'admin\ItemController@deleteItem');
+
+    // メルマガ管理
+    // メルマガ配信画面
+    Route::get('/admin/mail-magazine', 'admin\MailMagazineController@index');
+    // メルマガ配信処理
+    Route::post('/admin/mail-magazine', 'admin\MailMagazineController@store');
 });

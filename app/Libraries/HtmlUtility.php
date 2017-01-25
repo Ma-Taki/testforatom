@@ -43,14 +43,14 @@ class HtmlUtility
     }
 
     /**
-    * チェックボックをチェック済みで表示するか判定する
+     * チェックボックをチェック済みで表示するか判定する
      * @param  array  $oldArray
      * @param  int  $intValue
      * @return string "checked" or ""
      */
     public static function isChecked($oldArray, $intValue){
-        if($oldArray == null) return self::NULL_CHARACTER;
-        $exist = in_array($intValue, $oldArray);
+        if(empty($oldArray)) return self::NULL_CHARACTER;
+        $exist = in_array($intValue, (array)$oldArray);
         return $exist ? self::CHECKBOX_CHECKED : self::NULL_CHARACTER;
     }
 

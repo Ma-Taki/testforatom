@@ -1,5 +1,8 @@
 @extends('front.common.layout')
 @section('title', '企業の皆様へ - エンジニアルート')
+@section('description', '弊社では業種・言語問わず、様々な企業様のご支援をさせて頂いております。システム開発・WEB制作に関することでお悩みがございましたら、まずはお気軽にご相談ください。')
+@section('canonical', url('/company'))
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

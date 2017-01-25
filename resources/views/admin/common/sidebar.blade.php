@@ -32,6 +32,11 @@ use App\Libraries\ModelUtility as mdlUtil;
             <li><a href="/admin/entry/search"><i class="glyphicon glyphicon-file"></i> エントリー管理</a></li>
 @endif
 
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MAIL_MAGAZINE)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
+            <li><a href="/admin/mail-magazine"><i class="glyphicon glyphicon-envelope"></i> メルマガ管理</a></li>
+@endif
+
 @if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
             <li class="submenu">
                 <a href="#">

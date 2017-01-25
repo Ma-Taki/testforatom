@@ -1,7 +1,9 @@
 @extends('front.common.layout')
-@section('content')
 @section('title', 'フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」')
 @section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
+@section('canonical', url('/'))
+
+@section('content')
 <?php
 use App\Libraries\ModelUtility as mdlUtil;
 use App\Libraries\FrontUtility as FrntUtil;
@@ -16,12 +18,12 @@ use App\Models\Tr_search_categories;
     <div id="top">
         <div id="slider">
             <ul class="slider slider-item">
-                <li><a href="/about"><img src="/front/images/topBnr001.jpg"></a></li>
-                <li><a href="/item/category/1"><img src="/front/images/topBnr002.jpg"></a></li>
-                <li><a href="/item/search?job_types%5B%5D=12"><img src="/front/images/topBnr003.jpg"></a></li>
-                <li><a href="/item/tag/32"><img src="/front/images/topBnr004.jpg"></a></li>
-                <li><a href="/item/tag/2"><img src="/front/images/topBnr005.jpg"></a></li>
-                <li><a href="/item/search?job_types%5B%5D=1"><img src="/front/images/topBnr006.jpg"></a></li>
+                <li><a href="/about"><img src="/front/images/topBnr001.jpg" alt="エンジニアルート"></a></li>
+                <li><a href="/item/category/1"><img src="/front/images/topBnr002.jpg" alt="スマートフォン・タブレット案件特集"></a></li>
+                <li><a href="/item/search?job_types%5B%5D=12"><img src="/front/images/topBnr003.jpg" alt="ウェブデザイナー案件特集"></a></li>
+                <li><a href="/item/tag/32"><img src="/front/images/topBnr004.jpg" alt="AS/400案件特集"></a></li>
+                <li><a href="/item/tag/2"><img src="/front/images/topBnr005.jpg" alt="働く女性の案件特集"></a></li>
+                <li><a href="/item/search?job_types%5B%5D=1"><img src="/front/images/topBnr006.jpg" alt="プロジェクトマネージャー案件特集"></a></li>
             </ul>
         </div><!-- ./slider -->
 
@@ -67,13 +69,13 @@ use App\Models\Tr_search_categories;
                 <section class="newJob">
                     <div class="topJobWrap">
                         <h1 class="alignleft">新着案件</h1>
-                        <p class="alignright invisible-sp"><a href="/front/search?order=RegistrationDesc">新着案件一覧へ</a></p>
+                        <p class="alignright invisible-sp"><a href="/item/search">新着案件一覧へ</a></p>
                         <ul class="fs0 clear">
 @foreach($newItemList as $newItem)
                             <li>
                                 <a href="/item/detail?id={{ $newItem->id }}" target="_blank">
                                     <div class="topJobInr">
-                                        <img src="/front/images/ico-newjob.png">
+                                        <img src="/front/images/ico-newjob.png" alt="新着">
                                         <h2>{{ $newItem->name }}</h2>
                                         <p class="location">{{ $newItem->area_detail }}</p>
                                         <p class="remuneration">{{ $newItem->rate_detail }}</p>
@@ -99,7 +101,7 @@ use App\Models\Tr_search_categories;
                             <li>
                                 <a href="/item/detail?id={{ $pickUpItem->id }}"  target="_blank">
                                     <div class="topJobInr">
-                                        <img src="/front/images/ico-attentionJob.png">
+                                        <img src="/front/images/ico-attentionJob.png" alt="急募">
                                         <h2>{{ $pickUpItem->name }}</h2>
                                         <p class="location">{{ $pickUpItem->area_detail }}</p>
                                         <p class="remuneration">{{ $pickUpItem->rate_detail }}</p>
@@ -268,56 +270,45 @@ use App\Models\Tr_search_categories;
             </section><!-- /.conditions -->
 
             <div class="contentInr">
-                <section class="categorySearch invisible-sp">
-                    <div class="categorySearchInr">
-                        <h1>カテゴリーから案件を探す</h1>
-                        <div class="categorySearchContent">
+                <section class="category-search invisible-sp">
+                    <h1>カテゴリーから案件を探す</h1>
+                    <div class="category-search__content">
 @foreach(Tr_search_categories::getParentCategories() as $parent)
-                            <div class="parentCategory">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</div>
-                                <div class="childCategory">
+                        <div class="category__parent">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</div>
+                        <div class="category__child">
 @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
-                                    <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
-                                    <span>|</span>
-@endforeach
-                                </div>
-                                <hr class="categoryPartitionLine">
+                            <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
+                            <span>|</span>
 @endforeach
                         </div>
+                        <hr class="category__partition">
+@endforeach
                     </div>
                 </section><!-- /.categorySearch for pc,tablet-->
 
-                <section class="categorySearch invisible-pc invisible-tab">
-                    <div class="categorySearchInr">
-                        <h1>カテゴリーから案件を探す</h1>
-                        <div class="categorySearchContent">
-                            <ul>
+                <section class="category-search invisible-pc invisible-tab">
+                    <h1>カテゴリーから案件を探す</h1>
+                    <div class="category-search__content">
 @foreach(Tr_search_categories::getParentCategories() as $parent)
-                                <li>
-                                    <ul>
-                                        <li class="parentCategory">{{ $parent->name }}
-                                            <div class="arrow">
-                                                <span class="arrow arrow-left"></span>
-                                                <span class="arrow arrow-right"></span>
-                                            </div>
-                                        </li>
-                                        <div class="childCategories">
-                                            <a href="/item/category/{{ $parent->id }}">
-                                                <li class="childCategory">{{ $parent->name }}一覧
-                                                    <span></span>
-                                                    <span></span>
-                                                </li>
-                                            </a>
+                        <ul>
+                            <li class="category__parent">{{ $parent->name }}
+                                <div class="arrow">
+                                    <span class="arrow arrow-left"></span>
+                                    <span class="arrow arrow-right"></span>
+                                </div>
+                            </li>
+                            <div class="category__childs">
+                                <a href="/item/category/{{ $parent->id }}">
+                                    <li class="category__child">{{ $parent->name }}一覧</li>
+                                </a>
 @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
-                                            <a href="/item/category/{{ $child->id }}">
-                                                <li class="childCategory">{{ $child->name }}<span class=""></span></li>
-                                            </a>
+                                <a href="/item/category/{{ $child->id }}">
+                                    <li class="category__child">{{ $child->name }}</li>
+                                </a>
 @endforeach
-                                        </div>
-                                    </ul>
-                                </li>
+                            </div>
+                        </ul>
 @endforeach
-                            </ul>
-                        </div>
                     </div>
                 </section><!-- /.categorySearch for sp-->
 
