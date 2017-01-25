@@ -2,3 +2,8 @@ Homestead.yaml
 Homestead.json
 .env
 .DS_Store
+
+#eclipse
+.settings
+.project
+.buildpath
