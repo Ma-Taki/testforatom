@@ -19,7 +19,7 @@ layout style
 ========================================================================== */
 
 #inner-content{
-background: #eeeeee;
+background: #fff;
 }
 #main{
 background: none;
@@ -322,7 +322,7 @@ margin: 0; }
 /* ==========================================================================
 Forms
 ========================================================================== */
-fieldset {
+/*fieldset {
 border: 1px solid #c0c0c0;
 margin: 0 2px;
 padding: 0.35em 0.625em 0.75em; }
@@ -380,7 +380,7 @@ padding: 0; }
 textarea {
 overflow: auto;
 vertical-align: top;
-}
+}*/
 
 /* ==========================================================================
 Tables
@@ -466,6 +466,7 @@ background-color: #2574a8; }
 /*********************
 INPUTS
 *********************/
+/*
 input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"],select,textarea,.field {display: block;padding: 2% 3%;margin-bottom: 14px;font-size: 1em;color: #666;border: 3px solid rgba(51, 51, 51, 0.1);border-radius: 1px;vertical-align: middle;max-width: 92%;max-width: 100%\9;background-color: #FFFFFF;-webkit-transition: background-color 0.24s ease-in-out;transition: background-color 0.24s ease-in-out;-webkit-appearance: none;appearance: none;}
 #main input[type="text"],#main input[type="password"],#main input[type="datetime"],#main input[type="datetime-local"],#main input[type="date"],#main input[type="month"],#main input[type="time"],#main input[type="week"],#main input[type="number"],#main input[type="email"],#main input[type="url"],#main input[type="search"],#main input[type="tel"],#main input[type="color"],#main select,#main textarea,#main .field {padding: 2% 3%;width:380px;max-width: 96%;max-width: 100%\9;}
 #main textarea{
@@ -640,11 +641,13 @@ background-image: url(library/images/select_arrow.png);
 background-repeat: no-repeat;
 background-position: 97.5% center;
 background-size:9px; }
+*/
 /* IE10用 */
+/*
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"],select,textarea,.field {width: 92%;max-width: 92%;}
 }
-
+*/
 /*********************
 GENERAL STYLES
 *********************/
@@ -1450,7 +1453,16 @@ color:#666;
 .widget a:hover{
 color:#999;
 }
-.widgettitle {background: #1bb4d3;color: #FFF;font-size: 1em;padding: 0;border-radius: 3px;margin-top: 0;margin-bottom: 0.75em;overflow: hidden;}
+.widgettitle {
+background: #5e8796;
+color: #FFF;
+font-size: 1.6em;
+padding: 0;
+border-radius: 3px;
+margin-top: 0;
+margin-bottom: 0.75em;
+overflow: hidden;
+}
 .widgettitle span{
 display:block;
 width: 100%;
@@ -1817,7 +1829,7 @@ display:none;
 }
 .pagination li,
 .page-links li{
-margin: 0!important;
+margin: 0.3em;
 padding:0!important;
 display: inline-block;
 }
@@ -1832,8 +1844,8 @@ text-decoration: none;
 line-height: 1;
 font-size: 1em;
 font-weight: normal;
-color: #1BB4D3;
-border: 1px solid #1BB4D3;
+color: #90adb7;
+border: 1px solid #5e8796;
 }
 .pagination span.dots,
 .page-links ul > li > span.dots{
@@ -1843,13 +1855,13 @@ padding-right: 11px;
 }
 .pagination a:hover, .pagination a:focus, .pagination span:hover, .pagination span:focus,
 .page-links a:hover, .page-links a:focus{
-background-color: #1BB4D3;
+background-color: #5e8796;
 color: #fff; }
 .pagination .current,
 .page-links ul > li > span{
 cursor: default;
 color: #fff;
-background-color: #1BB4D3; }
+background-color: #5e8796; }
 .pagination .current:focus,
 .pagination .dots:hover, .pagination .dots:focus {
 color: #111;}

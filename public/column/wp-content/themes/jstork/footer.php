@@ -1,3 +1,4 @@
+<?php /*
 <div id="page-top">
 	<a href="#header" title="ページトップへ"><i class="fa fa-chevron-up"></i></a>
 </div>
@@ -50,6 +51,20 @@
 	</div>
 </footer>
 </div>
-<?php wp_footer(); ?>
+*/?>
+<?php //wp_footer(); ?>
+
+<footer class="bg clear">
+    <ul>
+        <li><a href="/" target="_blank">運営会社</a></li>
+        <li><a href="/privacy">プライバシーポリシー</a></li>
+        <li><a href="/terms">利用規約</a></li>
+        <li><a href="/contact">お問い合わせ</a></li>
+    </ul>
+    <p>&copy; SolidSeed Co.,Ltd.</p>
+</footer>
+<!-- END FOOTER -->
+<script type="text/javascript" charset="utf-8" src="/front/js/all.js"></script>
+
 </body>
 </html>

@@ -128,11 +128,11 @@ fjs.parentNode.insertBefore(js, fjs);
 </div>
 <?php endif; ?>
 
-<?php comments_template(); ?>
+<?php //comments_template(); ?>
 
 </article>
 
-<?php get_template_part( 'parts_singlefoot' ); ?>
+<?php //get_template_part( 'parts_singlefoot' ); ?>
 
 <?php endwhile; ?>
 <?php endif; ?>

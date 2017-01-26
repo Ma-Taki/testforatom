@@ -1881,6 +1881,10 @@ nav li{
     vertical-align: middle;
 }
 
+nav li.small{
+    width:10%;
+}
+
 nav li a{
 	color: #fff;
 	font-size: 1.4rem;
