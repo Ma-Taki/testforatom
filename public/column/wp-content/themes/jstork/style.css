@@ -20,6 +20,7 @@ layout style
 
 #inner-content{
 background: #fff;
+max-width: 1000px;
 }
 #main{
 background: none;
@@ -77,12 +78,12 @@ margin-bottom:2em;
 }
 /* デスクトップの時にグリッドシステムを使わない */
 #main{
-width: 798px;
+/*width: 798px;*/
 margin: -35px;
 padding: 35px;
 }
 #sidebar1{
-width: 336px;
+/*width: 336px;*/
 float:right;
 padding-right: 0;
 }
