@@ -1,20 +1,12 @@
 <?php
-//require __DIR__.'/../../../../../bootstrap/autoload.php';
-//$app = require_once __DIR__.'/../../../../../bootstrap/app.php';
-//$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-//$response = $kernel->handle(
-//    $request = Illuminate\Http\Request::capture()
-//);
-//require_once '../../../../app/Libraries/FrontUtility.php';
-//require_once 'C:\xampp\htdocs\Engineer-Route\app\Libraries/FrontUtility.php';
-//require_once 'C:\xampp\htdocs\Engineer-Route\vendor\laravel\framework\src\Illuminate\Foundation/helpers.php';
-//require_once 'C:\xampp\htdocs\Engineer-Route\vendor\laravel\framework\src\Illuminate\Support/helpers.php';
-//require_once 'C:\xampp\htdocs\Engineer-Route\vendor\laravel\framework\src\Illuminate\Database\Eloquent/Model.php';
-//require_once 'C:\xampp\htdocs\Engineer-Route\app\Models/Tr_users.php';
+require __DIR__.'/../../../../../bootstrap/autoload.php';
+$app = require_once __DIR__.'/../../../../../bootstrap/app.php';
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
 
-//use App\Libraries\FrontUtility;
-//FrontUtility::isLogin();
-//$frontUtility = new FrontUtility();
+use App\Libraries\FrontUtility;
 
 /*
 <!doctype html>
@@ -68,7 +60,7 @@
 <link rel="icon" href="/front/favicon.ico">
 
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); echo '?' . filemtime( get_stylesheet_directory() . '/style.css'); ?>" />
-<link rel="stylesheet" type="text/css" href="/front/css/style.css?aaaa">
+<link rel="stylesheet" type="text/css" href="/front/css/style.css<?php echo '?' . filemtime(__DIR__.'/../../../../../public/front/css/style.css');?>">
 
 <link rel="stylesheet" type="text/css" href="/front/css/slick.css">
 <link rel="stylesheet" type="text/css" href="/front/css/slick-theme.css">
@@ -95,13 +87,13 @@ ga('send', 'pageview');
 
     <div class="user">
       <ul>
-      <?php //if($frontUtility::isLogin()){ ?>
-        <?php /* <li><a href="/user">マイページ</a></li>
-        <li><a href="/logout" class="invisible-sp">ログアウト</a></li> */?>
-      <?php //}else{ ?>
+      <?php if(FrontUtility::isLogin()){ ?>
+        <li><a href="/user">マイページ</a></li>
+        <li><a href="/logout" class="invisible-sp">ログアウト</a></li>
+      <?php }else{ ?>
         <li><a href="/user/regist/auth" class="signin">新規登録</a></li>
         <li><a href="/login">ログイン</a></li>
-      <?php //} ?>
+      <?php } ?>
       </ul>
     </div>
 
@@ -127,11 +119,9 @@ ga('send', 'pageview');
         <li class="nav-item"><a href="/flow">ご利用の流れ</a></li>
         <li class="nav-item"><a href="/company">企業の皆様へ</a></li>
         <li class="nav-item active small" style="background: #536C75;"><a href="/column">コラム</a></li>
-        <?php //if($frontUtility::isLogin()){ ?>
-        <?php /*
-        <li class="invisible-pc invisible-tab nav-item"><a href="{{ url('/logout') }}">ログアウト</a></li>
-        */ ?>
-        <?php //} ?>
+        <?php if(FrontUtility::isLogin()){ ?>
+        <li class="invisible-pc invisible-tab nav-item"><a href="/logout">ログアウト</a></li>
+        <?php } ?>
     </ul>
 </nav>
 <!-- END NAVI -->

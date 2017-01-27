@@ -2600,6 +2600,9 @@ tablet.css 641px~1024px
         display: flex;
         justify-content: center;
     }
+    nav li.small{
+        width:auto;
+    }
 	nav li a{
         line-height: 2.4rem;
     }
