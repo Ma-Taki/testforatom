@@ -15,7 +15,7 @@
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('cf'); ?> role="article">
 <?php dynamic_sidebar( 'addbanner-titletop' ); ?>
-<header class="article-header entry-header">
+<div class="article-header entry-header">
 <p class="byline entry-meta vcard cf">
 <?php
 $cat = get_the_category();
@@ -38,7 +38,7 @@ $cat = $cat[0];
 <?php if ( !get_option( 'sns_options_hide' ) ) : ?>
 <?php get_template_part( 'parts_sns_short' ); ?>
 <?php endif; ?>
-</header>
+</div>
 
 
 <?php if ( is_active_sidebar( 'addbanner-sp-titleunder' ) ) : ?>
@@ -83,10 +83,10 @@ wp_link_pages( array(
 </div>
 <?php endif; ?>
 
-<footer class="article-footer">
+<div class="article-footer">
 <?php echo get_the_category_list(); ?>
 <?php the_tags( '<p class="tags">', '', '</p>' ); ?>
-</footer>
+</div>
 
 
 <?php if ( get_option( 'fbbox_options_url' ) ) : ?>
