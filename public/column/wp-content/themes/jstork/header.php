@@ -1,13 +1,4 @@
 <?php
-require __DIR__.'/../../../../../bootstrap/autoload.php';
-$app = require_once __DIR__.'/../../../../../bootstrap/app.php';
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
-
-use App\Libraries\FrontUtility;
-
 /*
 <!doctype html>
 <!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
@@ -87,7 +78,7 @@ ga('send', 'pageview');
 
     <div class="user">
       <ul>
-      <?php if(FrontUtility::isLogin()){ ?>
+      <?php if(frontIsLogin()){ ?>
         <li><a href="/user">マイページ</a></li>
         <li><a href="/logout" class="invisible-sp">ログアウト</a></li>
       <?php }else{ ?>
@@ -119,7 +110,7 @@ ga('send', 'pageview');
         <li class="nav-item"><a href="/flow">ご利用の流れ</a></li>
         <li class="nav-item"><a href="/company">企業の皆様へ</a></li>
         <li class="nav-item active small" style="background: #536C75;"><a href="/column">コラム</a></li>
-        <?php if(FrontUtility::isLogin()){ ?>
+        <?php if(frontIsLogin()){ ?>
         <li class="invisible-pc invisible-tab nav-item"><a href="/logout">ログアウト</a></li>
         <?php } ?>
     </ul>

@@ -9,6 +9,17 @@ require_once( 'library/widget.php' );
 require_once( 'library/custom-post-type.php' );
 require_once( 'library/admin.php' );
 
+require __DIR__.'/../../../../../bootstrap/autoload.php';
+$app = require_once __DIR__.'/../../../../../bootstrap/app.php';
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+use App\Libraries\FrontUtility;
+
+function frontIsLogin(){
+    return FrontUtility::isLogin();
+}
 
 /*********************
 titleタグを最適化（ | でつなぐ）

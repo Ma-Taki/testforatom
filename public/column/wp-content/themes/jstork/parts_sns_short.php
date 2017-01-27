@@ -1,5 +1,6 @@
 <?php
   $url_encode=urlencode(get_permalink());
+  $title_encode=urlencode(get_the_title());
   $tw_url = get_the_author_meta( 'twitter' );
   $tw_domain = array("http://twitter.com/"=>"","https://twitter.com/"=>"","//twitter.com/"=>"");
   $tw_user = '&via=' . strtr($tw_url , $tw_domain);
