@@ -305,8 +305,14 @@ class NewEntryImageWidget extends WP_Widget {
         return $instance;
     }
     function form($instance) {
-        $title_new = esc_attr($instance['title_new']);
-        $entry_count = esc_attr($instance['entry_count']);
+        $title_new = '';
+        if(!empty($instance['title_new'])){
+            $title_new = esc_attr($instance['title_new']);
+        }
+        $entry_count = '';
+        if(!empty($instance['entry_count'])){
+            $entry_count = esc_attr($instance['entry_count']);
+        }
         ?>
         <?php //タイトル入力フォーム ?>
         <p>
