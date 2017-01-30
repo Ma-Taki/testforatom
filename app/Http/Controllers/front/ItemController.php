@@ -50,18 +50,7 @@ class ItemController extends FrontController
         // mergeで上書きされるので後に入れる
         $params['limit'] = $limit;
 
-        // htmlのtitleを決める。フォーマットは"***案件一覧｜エンジニアルート"
-        $title_prefix = '';
-        if (empty($request->skills)
-            && empty($request->sys_types)
-            && empty($request->search_rate)
-            && empty($request->biz_categories)
-            && empty($request->areas)
-            && empty($request->job_types)) {
-                $title_prefix = '新着';
-        }
-
-        return view('front.item_list', compact('itemList','params','title_prefix'));
+        return view('front.item_list', compact('itemList','params'));
     }
 
     /**
@@ -88,7 +77,7 @@ class ItemController extends FrontController
         ];
         $params = array_merge($params, $request->all());
 
-        return view('front.item_list', compact('itemList','params','title_prefix'));
+        return view('front.item_list', compact('itemList','params'));
     }
 
     /**
@@ -134,8 +123,6 @@ class ItemController extends FrontController
      * GET:/item/tag/{id}
      */
     public function searchItemByTag(Request $request, $tag_id){
-
-        // TODO:　正の整数以外弾こう
 
         // 基本のパラメータはデフォルトを設定する
         $sortOrder = $this->getSortOrder($request->order);
@@ -301,12 +288,6 @@ class ItemController extends FrontController
         // エンコードして返却
         echo json_encode($data);
     }
-
-    /**
-     *
-     *
-     */
-//    private function getTitle
 
     /**
      * 案件のソート順を取得する。
