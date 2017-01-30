@@ -9,7 +9,7 @@
         <title>@yield('title')</title>
         <link rel="canonical" href="@yield('canonical')">
         <link rel="icon" href="{{ url('/front/favicon.ico') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url('/front/css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('/front/css/style.css') }}<?php echo '?' . filemtime('front/css/style.css');?>">
         <link rel="stylesheet" type="text/css" href="{{ url('/front/css/slick.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('/front/css/slick-theme.css') }}">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

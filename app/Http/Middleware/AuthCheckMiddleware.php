@@ -5,9 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 
 use App\Models\Tr_admin_user;
-use App\Libraries\AdminUtility as admnUtil;
-use App\Libraries\SessionUtility as ssnUtil;
-use App\Libraries\ModelUtility as mdlUtil;
+use App\Libraries\AdminUtility as AdmnUtil;
+use App\Libraries\SessionUtility as SsnUtil;
+use App\Libraries\ModelUtility as MdlUtil;
 
 class AuthCheckMiddleware
 {
@@ -20,24 +20,23 @@ class AuthCheckMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $requestUri = $request->path();
-        $admin_id = session(ssnUtil::SESSION_KEY_ADMIN_ID);
+        $request_uri = $request->path();
+        $admin_id = session(SsnUtil::SESSION_KEY_ADMIN_ID);
         $authList = Tr_admin_user::find($admin_id)->auths;
 
         $permission = false;
         foreach ($authList as $auth) {
             // 権限あり、またはマスター管理者の場合、遷移を行う
-            if ($auth->auth_name.'.'.$auth->auth_type === admnUtil::AUTH_LIST[$requestUri]
-                || $auth->auth_name.'.'.$auth->auth_type === mdlUtil::AUTH_TYPE_MASTER){
+            if ($auth->auth_name.'.'.$auth->auth_type === AdmnUtil::AUTH_LIST[$request_uri]
+                || $auth->auth_name.'.'.$auth->auth_type === MdlUtil::AUTH_TYPE_MASTER){
                 $permission = true;
                 break;
             }
         }
 
-        // ログイン中のIDに紐づくユーザ情報照会、一部更新については、常に許可する
-        if (($requestUri === 'admin/user/modify' && $admin_id == $request->input('id'))
-            || ($requestUri === 'admin/user/update' && $admin_id == $request->input('admin_id'))) {
-                $permission = true;
+        // ユーザ管理は、自身の照会・更新のみ常に可とする
+        if ($request_uri === 'admin/user/modify' && $admin_id == $request->id) {
+             $permission = true;
         }
 
 

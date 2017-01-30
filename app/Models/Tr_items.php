@@ -193,7 +193,7 @@ class Tr_items extends Model
      * @return QueryBuilder
      */
     public function scopeGetItemBySysTypes($query, $sys_types) {
-        return $query->when(empty(!$sys_types), function($query) use ($sys_types) {
+        return $query->when(!empty($sys_types), function($query) use ($sys_types) {
             return $query->join('link_items_sys_types', 'items.id', '=', 'link_items_sys_types.item_id')
                          ->join('sys_types', 'sys_types.id', '=', 'link_items_sys_types.sys_type_id')
                          ->where(function($query) use ($sys_types) {
@@ -226,7 +226,7 @@ class Tr_items extends Model
      * @return QueryBuilder
      */
     public function scopeGetItemByBizCategories($query, $biz_categories) {
-        return $query->when(empty(!$biz_categories), function($query) use ($biz_categories) {
+        return $query->when(!empty($biz_categories), function($query) use ($biz_categories) {
             return $query->where(function($query) use ($biz_categories) {
                 foreach ((array)$biz_categories as $biz_category) {
                     $query->orWhere('items.biz_category_id', $biz_category);
@@ -243,7 +243,7 @@ class Tr_items extends Model
      * @return QueryBuilder
      */
     public function scopeGetItemByAreas($query, $areas) {
-        return $query->when(empty(!$areas), function($query) use ($areas) {
+        return $query->when(!empty($areas), function($query) use ($areas) {
             return $query->join('link_items_areas', 'items.id', '=', 'link_items_areas.item_id')
                          ->join('areas', 'areas.id', '=', 'link_items_areas.area_id')
                          ->where(function($query) use ($areas) {
@@ -262,7 +262,7 @@ class Tr_items extends Model
      * @return QueryBuilder
      */
     public function scopeGetItemByJobTypes($query, $job_types) {
-        return $query->when(empty(!$job_types), function($query) use ($job_types) {
+        return $query->when(!empty($job_types), function($query) use ($job_types) {
             return $query->join('link_items_job_types', 'items.id', '=', 'link_items_job_types.item_id')
                          ->join('job_types', 'job_types.id', '=', 'link_items_job_types.job_type_id')
                          ->where(function($query) use ($job_types) {

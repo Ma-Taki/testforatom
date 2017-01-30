@@ -73,6 +73,7 @@ return [
     'timezone'             => ':attributeは正しいタイムゾーンをしていしてください。',
     'unique'               => ':attributeは既に存在します。',
     'url'                  => ':attributeを正しい書式にしてください。',
+    'email_array'          => '送信先メールアドレス[:attribute]に、正しくないメールアドレスが含まれています。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -88,6 +89,13 @@ return [
         'auths' => [
             'required_if' => '権限は一つ以上のチェックが必須です。',
             'required' => '権限は一つ以上のチェックが必須です。'
+        ],
+        // メルマガ管理
+        'toAddresses' => [
+            'required_if' => 'Toに[メールアドレスを指定]を選択した場合、送信先メールアドレスを入力してください。',
+        ],
+        'sendDateTime' => [
+            'required_if' => '送信日時に[時間を指定する]を選択した場合、送信日時を設定してください。',
         ],
         // お問い合わせ
         'user_name' => [
@@ -174,6 +182,13 @@ return [
         'password' => 'パスワード',
         'admin_name' => '管理者名',
         // △△　管理ユーザ登録　△△
+        // ▽▽　メルマガ管理　▽▽
+        'subject' => '件名',
+        'mailText' => 'メール本文',
+        'toAddresses' => 'To',
+        'ccAddresses' => 'Cc',
+        'bccAddresses' => 'Bcc',
+        // △△　メルマガ管理　△△
         // ▽▽　案件登録　▽▽
         'item_name' => '案件名',
         'item_date_from' => 'エントリー受付期間(開始日)',

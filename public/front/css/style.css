@@ -1881,6 +1881,10 @@ nav li{
     vertical-align: middle;
 }
 
+nav li.small{
+    width:10%;
+}
+
 nav li a{
 	color: #fff;
 	font-size: 1.4rem;
@@ -2595,6 +2599,9 @@ tablet.css 641px~1024px
         min-height: 4.8rem;
         display: flex;
         justify-content: center;
+    }
+    nav li.small{
+        width:auto;
     }
 	nav li a{
         line-height: 2.4rem;

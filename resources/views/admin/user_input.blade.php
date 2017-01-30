@@ -1,43 +1,19 @@
 @extends('admin.common.layout')
 @section('title', 'ユーザ登録')
 @section('content')
-<script type="text/javascript">
-function checkbox_inspection(element) {
-
-    if("item_1" == element.id) {
-         document.getElementById("item_2").disabled = !document.getElementById("item_1").checked;
-         document.getElementById("item_3").disabled = !document.getElementById("item_1").checked;
-         document.getElementById("item_4").disabled = !document.getElementById("item_1").checked;
-    } else if ("member_1" == element.id) {
-        document.getElementById("member_2").disabled = !document.getElementById("member_1").checked;
-    } else if ("entry_1" == element.id) {
-        document.getElementById("entry_2").disabled = !document.getElementById("entry_1").checked;
-        document.getElementById("entry_3").disabled = !document.getElementById("entry_1").checked;
+<style>
+    .panel-title {
+        font-size: 20px;
     }
-}
-
-function checkbox_copy()
-{
-    // チェックのついた権限配列を取得し、hidden値にセットする
-    value_array = new Array();
-    for (i=0; i<document.userForm.elements['auths[]'].length; i++ ){
-        if(document.userForm.elements['auths[]'][i].checked == true){
-            value_array.push(document.userForm.elements['auths[]'][i].value);
-        }
-    }
-    document.userForm.elements['postAuths'].value = value_array;
-
-    return true;
-}
-</script>
+</style>
 <?php
-use App\Libraries\HtmlUtility;
+use App\Libraries\HtmlUtility as HtmlUtil;
  ?>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
             <div class="panel-heading">
-                <div class="panel-title" style="font-size:20px">ユーザ登録</div>
+                <div class="panel-title">ユーザ登録</div>
 			</div>
 		    <div class="panel-body">
 @if(count($errors) > 0)
@@ -81,38 +57,49 @@ use App\Libraries\HtmlUtility;
                             </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">案件権限</label>
-                            <div class="col-md-10">
+                            <div class="col-md-10 management">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_1" value="3" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlUtility::isChecked(old('auths'), 3) }} @else checked @endif>検索・照会
+                                    <input type="checkbox" name="auths[]" value="3" {{ HtmlUtil::isChecked(old('auths'), 3) }} @if(old('auths') == null) checked @endif class="js__default-check">検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_2" value="2" {{ HtmlUtility::isChecked(old('auths'), 2) }}>新規登録</label>
+                                    <input type="checkbox" name="auths[]" value="2" {{ HtmlUtil::isChecked(old('auths'), 2) }}>新規登録
+                                </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_3" value="4" {{ HtmlUtility::isChecked(old('auths'), 4) }}>更新</label>
+                                    <input type="checkbox" name="auths[]" value="4" {{ HtmlUtil::isChecked(old('auths'), 4) }}>更新
+                                </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="item_4" value="5" {{ HtmlUtility::isChecked(old('auths'), 5) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" value="5" {{ HtmlUtil::isChecked(old('auths'), 5) }}>削除
+                                </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">会員権限</label>
-                            <div class="col-md-10">
+                            <div class="col-md-10 management">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_1" value="7" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlUtility::isChecked(old('auths'), 7) }} @else checked @endif>検索・照会
+                                    <input type="checkbox" name="auths[]" value="7" {{ HtmlUtil::isChecked(old('auths'), 7) }} @if(old('auths') === null) checked @endif class="js__default-check">検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="member_2" value="9" {{ HtmlUtility::isChecked(old('auths'), 9) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" value="9" {{ HtmlUtil::isChecked(old('auths'), 9) }}>削除</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">エントリー権限</label>
-                            <div class="col-md-10">
+                            <div class="col-md-10 management">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_1" value="11" onclick="checkbox_inspection(this)" @if(old('auths') != null) {{ HtmlUtility::isChecked(old('auths'), 11) }} @else checked @endif>検索・照会
+                                    <input type="checkbox" name="auths[]" value="11" {{ HtmlUtil::isChecked(old('auths'), 11) }} @if(old('auths') == null) checked @endif class="js__default-check">検索・照会
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_2" value="13" {{ HtmlUtility::isChecked(old('auths'), 13) }}>削除</label>
+                                    <input type="checkbox" name="auths[]" value="13" {{ HtmlUtil::isChecked(old('auths'), 13) }}>削除</label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" id="entry_3" value="14" {{ HtmlUtility::isChecked(old('auths'), 14) }}>スキルシートDL</label>
+                                    <input type="checkbox" name="auths[]" value="14" {{ HtmlUtil::isChecked(old('auths'), 14) }}>スキルシートDL</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">メルマガ権限</label>
+                            <div class="col-md-10 management">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="auths[]" value="15" {{ HtmlUtil::isChecked(old('auths'), 15) }}>メルマガ配信
+                                </label>
                             </div>
                         </div>
                         <div class="col-md-10 text-right">
@@ -127,8 +114,26 @@ use App\Libraries\HtmlUtility;
     </div>
 </div>
 <script type="text/javascript">
-    checkbox_inspection(document.getElementById("item_1"));
-    checkbox_inspection(document.getElementById("member_1"));
-    checkbox_inspection(document.getElementById("entry_1"));
+
+    // init
+    var $d_check = $('.js__default-check');
+    for (var i = 0; i < $d_check.length; i++) {
+        var $child = $d_check.eq(i).parents('.management').find('input:not(:first)');
+        if ($d_check.eq(i).prop('checked')) {
+            $child.prop('disabled','');
+        } else {
+            $child.prop('disabled','disabled');
+        }
+    }
+
+    $('.js__default-check').change(function() {
+        var $input = $(this).parents('.management').find('input:not(:first)');
+        if ($(this).is(':checked')) {
+            $input.removeAttr('disabled');
+        } else {
+            $input.attr('disabled', 'disabled');
+        }
+    });
+
 </script>
 @endsection
