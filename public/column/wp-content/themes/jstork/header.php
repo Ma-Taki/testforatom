@@ -10,7 +10,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title><?php bloginfo('name'); ?><?php wp_title(); ?></title>
+<title><?php wp_title(); ?></title>
 <meta name="description" content="<?php bloginfo('description'); ?>" />
 <meta name="keywords" content="IT案件,案件情報,求人,案件,仕事,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
