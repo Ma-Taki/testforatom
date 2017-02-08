@@ -99,7 +99,7 @@
         </div>
         <div class="col-sm-4">
             <h3 class="taisei03">安心</h3>
-            <p>弊社では、案件の紹介から面談動向・<br>
+            <p>弊社では、案件の紹介から面談同行・<br>
                 参画後のフォロー、お客様対応まで、同一担当者が行うため、
                 相談しやすく安心いただける環境です。</p>
         </div>
@@ -419,11 +419,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window,document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
- fbq('init', '227570807655939'); 
+ fbq('init', '227570807655939');
 fbq('track', 'PageView');
 </script>
 <noscript>
- <img height="1" width="1" 
+ <img height="1" width="1"
 src="https://www.facebook.com/tr?id=227570807655939&ev=PageView
 &noscript=1"/>
 </noscript>

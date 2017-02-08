@@ -1,6 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'Q&A - エンジニアルート')
-@section('description', 'エンジニアルートのQ&Aページです。')
+@section('title', 'エンジニアルート | Q&A')
 @section('canonical', url('/question'))
 
 @section('content')

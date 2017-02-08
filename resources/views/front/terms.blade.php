@@ -1,9 +1,8 @@
 @extends('front.common.layout')
-@section('content')
-@section('description', 'エンジニアルートの利用規約ページです。')
+@section('title', 'エンジニアルート | 利用規約')
 @section('canonical', url('/terms'))
 
-@section('title', '利用規約 - エンジニアルート')
+@section('content')
 <div class="wrap">
     <div class="main-content terms">
         <h1 class="main-content__title">利用規約</h1>

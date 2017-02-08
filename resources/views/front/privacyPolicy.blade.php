@@ -1,6 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'プライバシーポリシー - エンジニアルート')
-@section('description', 'エンジニアルートのプライバシーポリシーページです。')
+@section('title', 'エンジニアルート | プライバシーポリシー')
 @section('canonical', url('/privacy'))
 
 @section('content')

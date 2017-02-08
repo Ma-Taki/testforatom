@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', '認証メール送信完了 - エンジニアルート')
+@section('title', 'エンジニアルート | 認証メール送信完了')
 @section('content')
 <div class="wrap">
     <div class="main-content mail-auth-complete">

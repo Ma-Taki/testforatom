@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'パスワード再設定完了 - エンジニアルート')
+@section('title', 'エンジニアルート | パスワード再設定完了')
 @section('content')
 <div class="wrap">
     <div id="recover_password_complete" class="content">

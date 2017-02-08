@@ -2,7 +2,11 @@
 <header>
   <div class="headerInr">
 
+@if($__env->yieldContent('h1'))
+    <h1 class="header__text invisible-sp">@yield('h1')</h1>
+@else
     <h1 class="header__text invisible-sp">@yield('title')</h1>
+@endif
 
     <div class="user">
       <ul>

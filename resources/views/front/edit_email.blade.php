@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'メールアドレス変更 - エンジニアルート')
+@section('title', 'エンジニアルート | メールアドレス変更')
 @section('content')
 <div class="wrap">
     <div class="main-content user-reminder">

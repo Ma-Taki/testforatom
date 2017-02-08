@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'プロフィール変更 - エンジニアルート')
+@section('title', 'エンジニアルート | プロフィール変更')
 @section('content')
 <?php
     use App\Models\Ms_contract_types;

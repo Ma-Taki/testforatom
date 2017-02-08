@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'エントリー完了 - エンジニアルート')
+@section('title', 'エンジニアルート | エントリー完了')
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

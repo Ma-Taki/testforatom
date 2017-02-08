@@ -298,6 +298,11 @@ p.pageInfo{
     margin-top: 8px;
 }
 
+.hr-1px-dashed-gray {
+    border: 0;
+    border-bottom: 1p
+}
+
 .wsnw {
     white-space:nowrap;
 }
@@ -1773,9 +1778,31 @@ a.login__sns-btn {
 }
 
 .about__text p{
-    padding-top: 2.5%;
-    line-height: 3rem;
+    padding: 2.5% 0 0 0;
+    line-height: 2.4rem;
 }
+
+/* アピールポイント */
+.about .appeal-point {
+    margin: 2rem 0 0 0;
+}
+
+.appeal-point h3 {
+    color: #5e8796;
+    padding: 1rem 0 1rem 0;
+}
+
+.about .appeal-point p {
+    padding: 0 0 1rem 0;
+    line-height: 1.8rem;
+    font-size: 1.2rem;
+}
+
+.appeal-point h3.underline {
+    text-decoration: underline;
+}
+
+
 
 /*-------------------------------
 ## サイドバー
@@ -1938,6 +1965,36 @@ nav ul .active{ background: #536C75; }
 
 #top .contentInr {
     width: 100%;
+}
+
+/* アピールポイント */
+#top .about {
+    max-width:1000px;
+    margin: 0 auto;
+}
+
+#top .about .contentInr {
+    width: 72.8%;
+    float: left;
+}
+
+#top .about h2 {
+    padding: 8px 20px;
+    border-left: 6px solid #5e8796;
+    border-bottom: 1px solid #5e8796;
+    font-size: 1.8rem;
+}
+
+#top .about__text p {
+    line-height: 1.7rem;
+}
+
+#top .appeal-point p {
+    padding-bottom: 1rem;
+}
+
+#top .appeal-point h3 {
+    font-size: 1.6rem;
 }
 
 /* -- slider -- */

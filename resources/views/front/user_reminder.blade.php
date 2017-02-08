@@ -1,7 +1,7 @@
 @extends('front.common.layout')
-@section('title', 'パスワード再設定URLの通知 - エンジニアルート')
-@section('description', 'エンジニアルートのログインパスワード再設定ページです。')
+@section('title', 'エンジニアルート | パスワード再設定URLの通知')
 @section('canonical', url('/user/reminder'))
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
