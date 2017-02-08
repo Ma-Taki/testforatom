@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'お問い合わせ - エンジニアルート')
+@section('title', 'エンジニアルート | お問い合わせ')
 @section('description', 'エンジニアルートのお問い合わせページです。')
 @section('canonical', url('/contact'))
 

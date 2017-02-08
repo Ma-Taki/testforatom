@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'ログイン - エンジニアルート')
+@section('title', 'エンジニアルート | ログイン')
 @section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
 @section('canonical', url('/login'))
 

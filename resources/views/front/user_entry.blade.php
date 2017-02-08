@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'エントリー履歴 - エンジニアルート')
+@section('title', 'エンジニアルート | エントリー履歴')
 @section('content')
 <?php
 use App\Libraries\ModelUtility as MdlUtil;

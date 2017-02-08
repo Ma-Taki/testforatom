@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'お問い合わせ完了 - エンジニアルート')
+@section('title', 'エンジニアルート | お問い合わせ完了')
 @section('content')
 <div class="wrap">
     <div class="main-content contact-complete">

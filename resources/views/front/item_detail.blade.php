@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', $item->name.' - エンジニアルート')
+@section('title', 'エンジニアルート | ' .$item->name .'【AN' .$item->id .'】')
 @section('canonical', Request::url().'?id='.$item->id)
 
 @section('content')

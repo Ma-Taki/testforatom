@@ -1,6 +1,6 @@
 @extends('front.common.layout')
-@if(isset($html_title)) @section('title', $html_title.' - エンジニアルート')
-@else                   @section('title', '案件一覧 - エンジニアルート')
+@if(isset($html_title)) @section('title', 'エンジニアルート | '.$html_title)
+@else                   @section('title', 'エンジニアルート | 案件一覧')
 @endif
 @section('canonical', Request::url())
 

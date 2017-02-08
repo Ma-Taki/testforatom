@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', '新規会員登録完了 - エンジニアルート')
+@section('title', 'エンジニアルート | 新規会員登録完了')
 @section('content')
 <div class="wrap">
     <div class="main-content user-complete">
