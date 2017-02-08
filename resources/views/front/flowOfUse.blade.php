@@ -7,7 +7,7 @@
 <div class="wrap">
     <div class="main-content flow">
         <div class="main-content-left">
-            <h1 class="main-content__title">ご利用の流れ</h1>
+            <h2 class="main-content__title">ご利用の流れ</h2>
             <hr class="hr-2px-solid-5e8796">
             <div class="main-content__body">
                 <div class="content__element">
