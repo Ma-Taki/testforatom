@@ -6,7 +6,7 @@
 <div class="wrap">
     <div class="main-content questions">
         <div class="main-content-left">
-            <h1 class="main-content__title">Q&amp;A&nbsp;&nbsp;ーよくある質問ー</h1>
+            <h2 class="main-content__title">Q&amp;A&nbsp;&nbsp;ーよくある質問ー</h2>
             <hr class="hr-2px-solid-5e8796">
             <div class="main-content__body">
                 <div class="content__element">
