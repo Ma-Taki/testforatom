@@ -2762,7 +2762,6 @@ sp.css ~640px
     }
 
     .content{
-
         margin: 10% 2.5% 5% 2.5%;
     }
 
@@ -2774,7 +2773,7 @@ sp.css ~640px
         margin: 5rem 0 0 0;
     }
 
-    /* main-content-left 使わないページ */
+    /* main-content-left を使わないページ */
     .company,
     .company-confirm,
     .company-complete,
@@ -2966,6 +2965,20 @@ sp.css ~640px
     -------------------------------*/
     .password-reminder .contentInr{
         padding: 4rem 0 0 0;
+    }
+
+    /*-------------------------------
+    # エンジニアルートとは
+    -------------------------------*/
+    /* トップ */
+    #top .about .contentInr {
+        width: 100%;
+        padding: 0 2.5% 32px;
+        margin: 2rem 0 0 0;
+    }
+
+    #top .about h2 {
+        padding: 8px 10px;
     }
 
     /*-------------------------------
