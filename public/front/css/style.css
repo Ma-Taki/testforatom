@@ -1827,6 +1827,7 @@ a.login__sns-btn {
 	font-size: 1.3rem;
     padding-top: 0.8rem;
     font-weight: normal;
+    line-height: 1;
 }
 
 .headerInr .header__logo a {
@@ -2611,6 +2612,14 @@ footer p{
 	font-size: 1.2rem;
 }
 
+/*コラム */
+header,
+nav,
+footer {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: subpixel-antialiased;
+}
+
 /*===============================
 pc.css 1025px~
 ===============================*/
@@ -2980,7 +2989,7 @@ sp.css ~640px
     #top .about h2 {
         padding: 8px 10px;
     }
-    
+
     /*-------------------------------
     # マイページ
     -------------------------------*/
