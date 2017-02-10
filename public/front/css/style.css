@@ -298,9 +298,9 @@ p.pageInfo{
     margin-top: 8px;
 }
 
-.hr-1px-dashed-gray {
-    border: 0;
-    border-bottom: 1p
+.hr-1px-dashed-5e8796 {
+    border: none;
+    border-bottom: 1px dashed #5e8796
 }
 
 .wsnw {
@@ -1777,24 +1777,29 @@ a.login__sns-btn {
     transform: translate(-50%, -50%);
 }
 
+.about__text {
+    padding: 1rem 0;
+}
+
 .about__text p{
-    padding: 2.5% 0 0 0;
+    padding: 1rem 0;
     line-height: 2.4rem;
 }
 
 /* アピールポイント */
 .about .appeal-point {
-    margin: 2rem 0 0 0;
+    margin: 0 0 0 0;
 }
 
 .appeal-point h3 {
+    font-size: 1.6rem;
     color: #5e8796;
-    padding: 1rem 0 1rem 0;
+    padding: 1.3rem 0;
 }
 
 .about .appeal-point p {
-    padding: 0 0 1rem 0;
-    line-height: 1.8rem;
+    padding: 0 0 1.5rem 0;
+    line-height: 2rem;
     font-size: 1.2rem;
 }
 
@@ -1988,14 +1993,6 @@ nav ul .active{ background: #536C75; }
 
 #top .about__text p {
     line-height: 1.7rem;
-}
-
-#top .appeal-point p {
-    padding-bottom: 1rem;
-}
-
-#top .appeal-point h3 {
-    font-size: 1.6rem;
 }
 
 /* -- slider -- */
