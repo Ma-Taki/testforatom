@@ -177,7 +177,7 @@ border-bottom: 1px dotted; }
 b,strong,.strong {
 font-weight: bold; }
 dfn,em,.em {
-font-style: italic; 
+font-style: italic;
 border-bottom: 1px dotted pink;
 }
 hr {
@@ -199,7 +199,7 @@ kbd,
 pre,
 samp {
 font-family: monospace, serif;
-font-size: 0.9em; 
+font-size: 0.9em;
 padding: 0.05em 0.4em;
 border-radius: 3px;
 background: #F6F6F6;
@@ -305,7 +305,7 @@ list-style-image: none; }
 Embedded content
 ========================================================================== */
 img {
-border: 0; 
+border: 0;
 vertical-align: bottom;
 max-width: 100%;
 height: auto;
@@ -675,10 +675,10 @@ color: #E69B9B; }
 /*リンクをゆっくりと */
 a,
 a img{
--webkit-transition: 0.3s ease-in-out;  
--moz-transition: 0.3s ease-in-out;  
--o-transition: 0.3s ease-in-out;  
-transition: 0.3s ease-in-out; 
+-webkit-transition: 0.3s ease-in-out;
+-moz-transition: 0.3s ease-in-out;
+-o-transition: 0.3s ease-in-out;
+transition: 0.3s ease-in-out;
 }
 /*画像をマウスオーバーで半透明に */
 a:hover img{
@@ -718,7 +718,7 @@ line-height: 1.4em;
 font-weight: bold;
 margin-bottom: 0.375em; }
 h3, .h3 {
-font-size: 1.3em; 
+font-size: 1.3em;
 font-weight: bold;
 }
 h4, .h4 {
@@ -898,7 +898,9 @@ NAVIGATION STYLES
 .nav {
 border-bottom: 0;
 }
+/*
 .nav li a {display: block;color: #ffffff;text-decoration: none;padding: 0.75em;position:relative;}
+*/
 .nav > li > a{padding: 12px .7em 6px;}
 .nav li a span{
 display:block;
@@ -1178,7 +1180,7 @@ font-family:"fontawesome";
 line-height: 40px;
 padding: 0 3px;
 position: absolute;
-} 
+}
 .np-post .next a .eyecatch:after{
 content:'\f105';
 right: 0;
@@ -1274,7 +1276,7 @@ padding: 1.5em 0px 1.5em 0px;
 overflow: hidden;
 }
 .entry-content p {
-margin: 0 0 1.6em; 
+margin: 0 0 1.6em;
 line-height: 1.75;
 }
 .entry-content table {
@@ -1438,7 +1440,7 @@ text-decoration: none;
 }
 
 .post-list-magazine .post-list .entry-content{
-padding-bottom: 1em;	
+padding-bottom: 1em;
 }
 .post-list-magazine .post-list .entry-content .entry-title{font-size: 1.15em;margin-top: .5em;margin-bottom: .5em;}
 .post-list-magazine .post-list .entry-content .description{font-size: .7em; opacity: 0.7; filter: alpha(opacity=70);-ms-filter: "alpha(opacity=70)";}
@@ -2198,7 +2200,7 @@ font-size: .7em;
 	float: right;
 }
 .header #searchform #submit {
-	display: none;	
+	display: none;
 }
 .header #searchform #search {
 	-webkit-appearance: none;
@@ -2268,7 +2270,7 @@ width:240px;
 filter: alpha(opacity=80);
 -ms-filter: "alpha(opacity=80)";
 opacity:0.8;
-} 
+}
 .nav li ul.sub-menu li:last-child a,
 .nav li ul.children li:last-child a {
 border-bottom: 0; }
@@ -2280,7 +2282,7 @@ left: 100%; }
 
 
 /*********************
-TOP PAGE 
+TOP PAGE
 *********************/
 #custom_header{
 margin-top: -2.5em;
@@ -2441,7 +2443,7 @@ background:#43638b;
 content:'B!';
 font-weight:bold;
 line-height: 1;
-} 
+}
 
 /* LINE */
 .sns  .line a {
@@ -2565,8 +2567,8 @@ padding: 0;
 }
 .sp_g_nav li + li,
 .sp_g_nav li li:first-child{
-border-top: solid 1px #eee; 
-border-top: solid 1px rgba(255, 255, 255, .05); 
+border-top: solid 1px #eee;
+border-top: solid 1px rgba(255, 255, 255, .05);
 }
 .sp_g_nav > li > a{
 background-color: rgba(0,0,0,.15);

@@ -74,7 +74,7 @@ ga('send', 'pageview');
 <header>
   <div class="headerInr">
 
-    <h1 class="header__text invisible-sp">フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」</h1>
+    <h1 class="header__text invisible-sp">エンジニアルート | Engineer-Route News </h1>
 
     <div class="user">
       <ul>
