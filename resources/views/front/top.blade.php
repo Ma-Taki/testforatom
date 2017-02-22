@@ -263,8 +263,9 @@ use App\Models\Tr_search_categories;
                 </div>
               </div>
             </div>
+            <div class="clear"></div>
 
-            <div class="centerBtn clear">
+            <div class="cmmn-btn">
               <button type="submit">検　索</button>
             </div>
           </form>
@@ -334,7 +335,7 @@ use App\Models\Tr_search_categories;
       </div>
 @endif
 
-      <div class="content-right">
+      <div class="main-content-right">
         @include('front.common.sideInfo')
       </div>
 

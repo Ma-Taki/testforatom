@@ -27,7 +27,7 @@
     <div class="search">
       <form action="/item/keyword" method="get">
         <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
-        <button class="searchBtn" type="submit" />
+        <button class="searchBtn" type="submit"></button>
       </form>
     </div><!-- /.search -->
   </div><!-- /.headerInr -->

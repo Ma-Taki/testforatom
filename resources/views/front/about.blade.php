@@ -5,6 +5,22 @@
 
 @section('content')
 <div class="wrap">
+
+  <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a class="hover-thin" itemprop="item" href="/">
+        <span itemprop="name">エンジニアルート</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </span>
+    <span class="next">></span>
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <span itemprop="name">エンジニアルートとは</span>
+      <meta property="position" content="2">
+    </span>
+  </div>
+  <!-- END .breadcrumbs -->
+
   <div class="main-content about">
     <div class="main-content-left">
       <h2 class="main-content__title">エンジニアルートとは</h2>

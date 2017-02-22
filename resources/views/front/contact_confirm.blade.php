@@ -2,8 +2,24 @@
 @section('title', 'エンジニアルート | お問い合わせ内容確認')
 @section('content')
 <div class="wrap">
-    <div class="main-content contact-confirm">
-        <h1 class="main-content__title">お問い合わせ内容確認</h1>
+
+  <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a class="hover-thin" itemprop="item" href="/">
+        <span itemprop="name">エンジニアルート</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </span>
+    <span class="next">></span>
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <span itemprop="name">お問い合わせ</span>
+      <meta property="position" content="2">
+    </span>
+  </div>
+  <!-- END .breadcrumbs -->
+
+  <div class="main-content contact-confirm">
+        <h2 class="main-content__title">お問い合わせ内容確認</h2>
         <hr class="hr-2px-solid-5e8796">
         <div class="main-content__body">
             <div class="content__element">

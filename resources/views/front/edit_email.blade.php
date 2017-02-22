@@ -2,7 +2,30 @@
 @section('title', 'エンジニアルート | メールアドレス変更')
 @section('content')
 <div class="wrap">
-    <div class="main-content user-reminder">
+
+  <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a class="hover-thin" itemprop="item" href="/">
+        <span itemprop="name">エンジニアルート</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </span>
+    <span class="next">></span>
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a class="hover-thin" itemprop="item" href="/user">
+        <span itemprop="name">マイページ</span>
+      </a>
+      <meta property="position" content="2">
+    </span>
+    <span class="next">></span>
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <span itemprop="name">メールアドレス変更</span>
+      <meta property="position" content="3">
+    </span>
+  </div>
+  <!-- END .breadcrumbs -->
+
+  <div class="main-content user-reminder">
         <h1 class="main-content__title">メールアドレス変更</h1>
         <hr class="hr-2px-solid-5e8796">
         <div class="main-content__body">

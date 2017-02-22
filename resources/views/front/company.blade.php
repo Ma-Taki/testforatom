@@ -9,8 +9,24 @@
     use App\Libraries\FrontUtility as FrntUtil;
 ?>
 <div class="wrap">
+
+  <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a class="hover-thin" itemprop="item" href="/">
+        <span itemprop="name">エンジニアルート</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </span>
+    <span class="next">></span>
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <span itemprop="name">企業の皆様へ</span>
+      <meta property="position" content="2">
+    </span>
+  </div>
+  <!-- END .breadcrumbs -->
+
     <div class="main-content company">
-        <h1 class="main-content__title">企業の皆様へ</h1>
+        <h2 class="main-content__title">企業の皆様へ</h2>
         <hr class="hr-2px-solid-5e8796">
 
         <div class="main-content__body">
