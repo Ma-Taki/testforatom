@@ -52,46 +52,47 @@
                     <hr class="partitionLine">
                   </div>
                   <div id="tagSelectedSysType">
-                    <p class="tagSelectedName">システム種別</a>
+                    <p class="tagSelectedName">システム種別</p>
                     <ul></ul>
                     <hr class="partitionLine">
                   </div>
                   <div id="tagSelectedRate">
-                    <p class="tagSelectedName">報酬</a>
+                    <p class="tagSelectedName">報酬</p>
                     <ul></ul>
                     <hr class="partitionLine">
                     </div>
                   <div id="tagSelectedBizCategory">
-                    <p class="tagSelectedName">業種</a>
+                    <p class="tagSelectedName">業種</p>
                     <ul></ul>
                     <hr class="partitionLine">
                   </div>
                   <div id="tagSelectedArea">
-                    <p class="tagSelectedName">勤務地</a>
+                    <p class="tagSelectedName">勤務地</p>
                     <ul></ul>
                     <hr class="partitionLine">
                   </div>
                   <div id="tagSelectedPosition">
-                    <p class="tagSelectedName">ポジション</a>
+                    <p class="tagSelectedName">ポジション</p>
                     <ul></ul>
                     <hr class="partitionLine">
                   </div>
                 </div>
               </div>
             </div>
-            <div class="tab">
-              <div class="tabMenu">
-                <ul>
-                  <li>スキル</li>
-                  <li>システム種別</li>
-                  <li>報　酬</li>
-                  <li>業　種</li>
-                  <li>勤務地</li>
-                  <li>ポジション</li>
-                </ul>
-              </div><!-- /.tabMenu -->
+            <form id="tabForm" method="GET" action="{{ url('/item/search') }}">
+              <div class="tab">
+                <div class="tabMenu">
+                  <ul>
+                    <li>スキル</li>
+                    <li>システム種別</li>
+                    <li>報　酬</li>
+                    <li>業　種</li>
+                    <li>勤務地</li>
+                    <li>ポジション</li>
+                  </ul>
+                </div><!-- /.tabMenu -->
 
-              <form id="tabForm" method="GET" action="{{ url('/item/search') }}">
+
                 <div class="tabBox">
                   <div class="tabBoxInr">
                     <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
@@ -183,8 +184,8 @@
                     </div>
                   </div>
                 </div><!-- /.tabBox -->
-
               </div>
+
               <div class="cmmn-btn">
                 <button type="submit">検　索</button>
               </div>
@@ -194,14 +195,14 @@
           <div class="sort">
             <label>
               <span class="selectBox">
-                <select id="order" class="">
+                <select id="order">
                   <option value="RegistrationDesc" {{ $params['order'] == 'RegistrationDesc' ? "selected" : ""}}>新着順</option>
                   <option value="ServiceAsc" {{ $params['order'] == 'ServiceAsc' ? "selected" : ""}}>受付終了日が近い順</option>
                   <option value="RateDesc" {{ $params['order'] == 'RateDesc' ? "selected" : ""}}>報酬が高い順</option>
                 </select>
               </span>
               <span class="selectBox">
-                <select id="limit" class="">
+                <select id="limit">
                   <option value="1" {{ $params['limit'] == 1 ? "selected" : ""}}>10</option>
                   <option value="2" {{ $params['limit'] == 2 ? "selected" : ""}}>20</option>
                   <option value="3" {{ $params['limit'] == 3 ? "selected" : ""}}>50</option>
@@ -256,7 +257,7 @@
                 </div>
                 <p class="detail">{{ $item->detail }}</p>
                 <div class="cmmn-btn">
-                  <a href="/item/detail?id={{ $item->id }}"  target="_blank"><button>詳細を見る</button></a>
+                  <button><a href="/item/detail?id={{ $item->id }}"  target="_blank">詳細を見る</a></button>
                 </div>
               </div>
             </div>

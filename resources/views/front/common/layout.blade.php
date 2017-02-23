@@ -33,6 +33,6 @@
     @yield('content')
     @include('front.common.footer')
     <!-- END FOOTER -->
+    <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/all.js') }}"></script>
   </body>
-  <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/all.js') }}"></script>
 </html>

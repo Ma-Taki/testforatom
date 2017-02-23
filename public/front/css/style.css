@@ -284,7 +284,7 @@ p.pageInfo{
     margin-top: 4rem;
 }
 
-.cmmn-btn button{
+.cmmn-btn button {
     width: 30%;
 	border-radius: 18px;
 	background: #5e8796;
@@ -296,6 +296,10 @@ p.pageInfo{
     box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+}
+
+.cmmn-btn button a {
+    color: #fff;
 }
 
 .user-info, .item-info, .send-skillsheet {
@@ -745,15 +749,6 @@ h1.SearchTitle:before{
 
 .user-mypage .data-table .data .value span {
     margin-left: 2rem;
-}
-
-.commonButton button{
-    background: #5E8796;
-    border-radius: 16px;
-    color: #fff;
-    font-size:1.2rem;
-    border-style: none;
-    padding: 0.6rem 3rem;
 }
 
 .cmmn-btn .edit-btn {
