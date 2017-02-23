@@ -242,6 +242,10 @@ p.pageInfo{
     display: block;
 }
 
+.display-block {
+    display: block;
+}
+
 .table {
 	width: 100%;
 	display: table;
@@ -293,6 +297,79 @@ p.pageInfo{
     -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
 }
+
+.user-info, .item-info, .send-skillsheet {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.entry-confirm .data-table {
+    margin-top: 3rem;
+}
+
+/**
+ * 汎用データテーブル START
+ */
+.data-table {
+    width: 100%;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    -moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+}
+
+h3.data-table__title {
+    color: #5e8796;
+    background-color: #eef3f4;;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    border-left: 2px solid #5e8796;
+}
+
+.data-table .data {
+    width: 100%;
+    display: inline-flex;
+    font-size: 1.2rem;
+    border-top: 1px solid #ddd;
+}
+
+.data-table .name {
+    width: 30%;
+    display: inline-flex;
+    background-color: #eef3f4;
+    color: #5e8796;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem 1rem;
+}
+
+.data-table .value {
+    width: 70%;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    line-height: 1.6rem;
+}
+
+.entry-confirm .data-table .data .data__info {
+    width: 100%;
+    padding: 1rem;
+    background-color: #eef3f4;
+}
+
+.entry-confirm .data-table .data .data__info p {
+    font-size: 1rem;
+}
+
+
+.data-table a {
+    color: #E38585;
+    text-decoration: underline;
+}
+
+/**
+ * 汎用データテーブル END
+ */
 
 /* こんにちは〜さん */
 .hello_user {
@@ -589,53 +666,6 @@ h1.SearchTitle:before{
     color: #5e8796;
 }
 
-.dataTable .data {
-    width: 100%;
-    display: inline-flex;
-    font-size: 1.4rem;
-    border-top: 1px dotted black;
-}
-
-.dataTable .data:last-child {
-    border-bottom: 1px dotted black;
-}
-
-.dataTable .name {
-    width: 30%;
-    display: inline-flex;
-    background-color: #eef3f4;
-    color: #5e8796;
-    font-weight: bold;
-    padding: 1.5rem 0;
-    justify-content: center;
-    align-items: center;
-}
-
-.dataTable .value {
-    display: inline-flex;
-    align-items: center;
-    padding: 1.5rem;
-}
-
-.dataTable .detail {
-    line-height: 2.2rem;
-  }
-
-.dataTable .upload_info {
-    width: 100%;
-    padding: 1.5rem;
-    background-color: #eef3f4;
-}
-
-.dataTable a {
-    color: #E38585;
-    text-decoration: underline;
-}
-
-.dataTable .upload {
-    display: inline-block;
-}
-
 #entry_complete .entry_content{width: 70%; margin: 2rem 0;}
 #entry_complete .skillsheet{width: 70%; margin: 2rem 0; border-bottom: 1px solid #E38585;}
 .entry_content .entry_content_title,
@@ -709,24 +739,12 @@ h1.SearchTitle:before{
 /*-------------------------------
 ## マイページ
 -------------------------------*/
-.mypage_element {
+.user-mypage .profile {
     margin-top: 4rem;
 }
-.mypage_element h2 {
-    color: #fff;
-    border: 1px solid #5E8796;
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
-    background: #5E8796;
-    padding: 0.3rem 1.6rem;
-    line-height: normal;
-}
 
-.mypage_elementInr{
-    border: 1px solid #5E8796;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    padding: 3rem;
+.user-mypage .data-table .data .value span {
+    margin-left: 2rem;
 }
 
 .commonButton button{
@@ -1427,11 +1445,11 @@ a.login__sns-btn {
     padding-right: 1rem;
 }
 
-.item-detail .item .item{
+.item-detail .item .item {
     padding-top: 10%;
 }
 
-.item-detail .item .other:nth-child(2){
+.item-detail .item .other:nth-child(2) {
     border-top: 1px dotted #5e8796;
 }
 
@@ -1487,64 +1505,73 @@ a.login__sns-btn {
 	margin: 0;
 }
 
-
-/* こちらもおすすめ */
+/*-------------------------------
+## こちらもおすすめ
+-------------------------------*/
 .recommended {
     background: url(../images/absurdidad.png);
     padding: 24px 0;
 }
 
-.recommendedInr{
+.recommended__inner {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-.recommendedInr h3{
+.recommended h3 {
     font-size: 1.6rem;
     font-weight: bold;
 }
 
-.recoItems {
+.recommended .reco-items {
     margin-top: 2%;
     display: flex;
 }
 
-.recoItem {
+.recommended .reco-items .reco-item {
     width: 19%;
     background-color: #fff;
+    box-shadow: 1px 1px 8px 1px rgba(0,0,0,.2);
+    -webkit-box-shadow: 1px 1px 8px 1px rgba(0,0,0,.2);
+    -moz-box-shadow: 1px 1px 8px 1px rgba(0,0,0,.2);
 }
 
-.recoItem:not(:first-child){
+.recommended .reco-items .reco-item:not(:first-child) {
     margin-left: 1.25%;
 }
 
-.recoItem .header{
+.recommended .reco-items .reco-item .header {
     color: #5e8796;
     background: #becfd5;
     text-align: center;
     padding: 4%;
     font-weight: bold;
+    /*
+    box-shadow: 0px 3px 4px -3px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0px 3px 4px -3px rgba(0,0,0,.2);
+    -moz-box-shadow: 0px 3px 4px -3px rgba(0,0,0,.2);
+    */
 }
 
-.recoItem .detail{
+.recommended .reco-items .reco-item .detail {
     color: #5e8796;
     font-weight: bold;
     padding: 4%;
 }
 
-.recoItem .detail .name{
+.recommended .reco-items .reco-item .detail .name {
     display: table-cell;
     width: 35%;
     font-weight: normal;
 }
 
-.recoItem .detail .rate,
-.recoItem .detail .area{
+.recommended .reco-items .reco-item .detail .rate,
+.recommended .reco-items .reco-item .detail .area {
     display: table-cell;
     width: 65%;
 }
-.recoItem .detail .skill{
+.recommended .reco-items .reco-item .detail .skill {
     font-weight: normal;
     padding-top: 5%;
 }
@@ -2667,7 +2694,10 @@ tablet.css 641px~1024px
   # 案件詳細
   -------------------------------*/
   /* こちらもおすすめ */
-  .recommendedInr{width: 95%;}
+  .recommended__inner {
+      width: 95%;
+  }
+
   .feature{padding: 0 2.5%;}
 
   /*-------------------------------
@@ -2762,7 +2792,8 @@ sp.css ~640px
     .user-edit,
     .user-entry,
     .user-delete,
-    .edit-password
+    .edit-password,
+    .entry-confirm
     {
         margin-bottom: 5rem;
     }
@@ -2861,9 +2892,33 @@ sp.css ~640px
         visibility: visible;
         opacity: 0.4;
     }
-
-
     /* navi ここまで */
+
+    /* 汎用データテーブル START */
+    .data-table .data{
+        display: block;
+        padding: 1rem;
+    }
+
+    h3.data-table__title {
+        padding: 1rem 1.5rem;
+    }
+
+    .data-table .name {
+        width: 100%;
+        display: block;
+        background-color: #fff;
+        padding: 0 0 0 0.8rem;
+        line-height: 2rem;
+    }
+
+    .data-table .value {
+        width: 100%;
+        display: block;
+        padding: 0 1rem;
+        line-height: 2rem;
+    }
+    /* 汎用データテーブル END */
 
     .cmmn-btn {
         margin-top: 2rem;
@@ -2969,6 +3024,11 @@ sp.css ~640px
     /*-------------------------------
     # エントリー
     -------------------------------*/
+    .user-info, .item-info, .send-skillsheet {
+        width: 95%;
+    }
+
+
     #entry_complete .contentInr{padding: 16px 0 32px 0;}
     #entry_complete .entry_content{width: 100%;}
     #entry_complete .skillsheet{width: 100%;}
@@ -3255,14 +3315,16 @@ sp.css ~640px
     }
 
     /* こちらもおすすめ　 */
-    .recommended{
+    .recommended {
         padding: 0;
         background: url(../images/absurdidad.png);
     }
 
-    .recommendedInr{width: 100%;}
+    .recommended__inner {
+        width: 100%;
+    }
 
-    .recommendedInr h3{
+    .recommended h3 {
         background: #5e8796;
         color: white;
         font-size: 16px;
@@ -3271,26 +3333,37 @@ sp.css ~640px
         padding-left: 16px;
     }
 
-    .recoItems{
+    .recommended .reco-items {
         margin-top: 0;
         flex-wrap: wrap;
     }
 
-    .recoItem{
+    .recommended .reco-items .reco-item {
         width: 100%;
         margin: 3% 16px 0 16px;
     }
 
-    .recoItem:not(:first-child){margin-left: 16px;}
-    .recoItem:last-child{margin-bottom: 16px;}
+    .recommended .reco-items .reco-item:not(:first-child){
+        margin-left: 16px;
+        margin-top: 24px;
+    }
 
-    .recoItem .header{
+    .recommended .reco-items .reco-item:last-child {
+        margin-bottom: 24px;
+    }
+
+    .recommended .reco-items .reco-item .header {
         padding: 2%;
         text-align: left;
     }
 
-    .recoItem .detail{padding: 3%;}
-    .recoItem .detail .skill{padding-top: 0;}
+    .recommended .reco-items .reco-item .detail {
+        padding: 3%;
+    }
+
+    .recommended .reco-items .reco-item .detail .skill {
+        padding-top: 0;
+    }
 
     .feature{padding: 0;}
 
@@ -3643,31 +3716,7 @@ sp.css ~640px
     /*-------------------------------
     ## エントリー
     -------------------------------*/
-    .dataTable .data{
-        display: block;
-        border-top: 1px dashed #333;
-        padding: 1rem 0;
-    }
-    .dataTable .data:last-child{border-bottom: 1px dashed #333;}
-    .dataTable .name{
-        width: 100%;
-        display: block;
-        background-color: #fff;
-        padding: 0;
-        line-height: 2rem;
-    }
-    .dataTable .name::before{
-        content: "\a0";
-        background: #5e8796;
-        font-weight: bold;
-        display: inline-block;
-        margin-right: 4px;
-    }
-    .dataTable .value{
-        display: block;
-        padding: 0;
-        padding-left: 1rem;
-        line-height: 2rem;
+
     }
 
     /*-------------------------------

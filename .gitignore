@@ -1,8 +1,8 @@
-Homestead.yaml
+Hiomestead.yaml
 Homestead.json
 .env
 .DS_Store
-.sh
+*.sh
 
 #eclipse
 .settings

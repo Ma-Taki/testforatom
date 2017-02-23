@@ -145,11 +145,11 @@
 
 @if(!$recoItemList->isEmpty())
 <section class="recommended">
-  <div class="recommendedInr">
+  <div class="recommended__inner">
     <h3>こちらもおすすめ</h3>
-    <div class="recoItems">
+    <div class="reco-items">
 @foreach($recoItemList as $item)
-      <div class="recoItem">
+      <div class="reco-item">
         <a href="/item/detail?id={{ $item->id }}"  target="_blank">
           <p class="header">{{ $item->name }}</p>
           <div class="detail">
