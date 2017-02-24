@@ -19,7 +19,7 @@
   <!-- END .breadcrumbs -->
 
   <div class="main-content user-reminder-complete">
-    <h1 class="main-content__title">パスワード再設定案内メール&nbsp;送信完了</h1>
+    <h2 class="main-content__title">パスワード再設定案内メール&nbsp;送信完了</h2>
     <hr class="hr-2px-solid-5e8796">
     <div class="main-content__body">
       <div class="content__element">
