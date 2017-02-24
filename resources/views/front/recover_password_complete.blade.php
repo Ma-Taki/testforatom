@@ -18,18 +18,20 @@
   </div>
   <!-- END .breadcrumbs -->
 
-  <div id="recover_password_complete" class="content">
-    <h1 class="pageTitle">パスワード再設定完了</h1>
+  <div class="main-content recover-password-complete">
+    <h2 class="main-content__title">パスワード再設定完了</h2>
     <hr class="hr-2px-solid-5e8796">
-    <div class="recover_password_complete">
-      <p class="pageInfo">
-        パスワードを再設定致しました。<br />
-        ログイン画面よりログインしてください。
-      </p>
-      <div class="commonCenterBtn">
+    <div class="main-content__body">
+      <div class="content__element">
+        <p>
+          パスワードを再設定致しました。<br />
+          ログイン画面よりログインしてください。
+        </p>
+      </div>
+      <div class="cmmn-btn">
         <a href="{{ url('/login') }}"><button>ログイン画面</button></a>
       </div>
     </div>
-  </div><!-- END CONTENT -->
-</div><!-- END WRAP -->
+  </div><!-- END main-content -->
+</div><!-- END .wrap -->
 @endsection

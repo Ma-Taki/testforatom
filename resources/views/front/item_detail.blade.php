@@ -171,7 +171,7 @@
   </div>
   <script type="text/javascript">
     $(function() {
-      $(".recoItem .header").tile();
+      $(".reco-item .header").tile();
     });
   </script>
 </section>

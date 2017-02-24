@@ -257,7 +257,7 @@
                 </div>
                 <p class="detail">{{ $item->detail }}</p>
                 <div class="cmmn-btn">
-                  <button><a href="/item/detail?id={{ $item->id }}"  target="_blank">詳細を見る</a></button>
+                  <a href="/item/detail?id={{ $item->id }}"  target="_blank"><button>詳細を見る</button></a>
                 </div>
               </div>
             </div>
