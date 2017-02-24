@@ -9,7 +9,7 @@
 <?php
 print_r(frontIsLogin());
 print_r($_COOKIE);
-print_r($_SESSION);
+//print_r($_SESSION);
 print_r($_SERVER);
 ?>
 <!DOCTYPE HTML>
