@@ -60,7 +60,7 @@ class Handler extends ExceptionHandler
                     case 400: $message = '不正な操作です。'; break;
                     case 401: $message = '認証に失敗しました。'; break;
                     case 403: $message = 'アクセス権がありません。'; break;
-                    case 404: $message = '存在しないページです。'; break;
+                    case 404: $message = '指定されたページは存在しません。'; break;
                     case 408: $message = 'タイムアウトしました。'; break;
                     case 414: $message = 'リクエストURIが長すぎます。'; break;
                     case 500: $message = 'Internal Server Error'; break;

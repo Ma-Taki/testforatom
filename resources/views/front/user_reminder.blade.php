@@ -25,7 +25,7 @@
   <!-- END .breadcrumbs -->
 
   <div class="main-content user-reminder">
-    <h1 class="main-content__title">パスワード再設定URLの通知</h1>
+    <h2 class="main-content__title">パスワード再設定URLの通知</h2>
     <hr class="hr-2px-solid-5e8796">
     <div class="main-content__body">
       <div class="content__element">
