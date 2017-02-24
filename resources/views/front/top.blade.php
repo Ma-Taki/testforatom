@@ -139,7 +139,7 @@ use App\Models\Tr_search_categories;
             </ul>
           </div><!-- /.tabMenu -->
 
-          <form name="form" role="form" method="GET" action="{{ url('/item/search') }}">
+          <form name="form" method="GET" action="{{ url('/item/search') }}">
 
             <div class="tabBox">
               <div class="tabBoxInr">
@@ -237,34 +237,35 @@ use App\Models\Tr_search_categories;
                   <hr class="partitionLine">
                 </div>
                 <div id="tagSelectedSysType">
-                  <p class="tagSelectedName">システム種別</a>
+                  <p class="tagSelectedName">システム種別</p>
                   <ul></ul>
                   <hr class="partitionLine">
                 </div>
                 <div id="tagSelectedRate">
-                  <p class="tagSelectedName">報酬</a>
+                  <p class="tagSelectedName">報酬</p>
                   <ul></ul>
                   <hr class="partitionLine">
                 </div>
                 <div id="tagSelectedBizCategory">
-                  <p class="tagSelectedName">業種</a>
+                  <p class="tagSelectedName">業種</p>
                   <ul></ul>
                   <hr class="partitionLine">
                 </div>
                 <div id="tagSelectedArea">
-                  <p class="tagSelectedName">勤務地</a>
+                  <p class="tagSelectedName">勤務地</p>
                   <ul></ul>
                   <hr class="partitionLine">
                 </div>
                 <div id="tagSelectedPosition">
-                  <p class="tagSelectedName">ポジション</a>
+                  <p class="tagSelectedName">ポジション</p>
                   <ul></ul>
                   <hr class="partitionLine">
                 </div>
               </div>
             </div>
+            <div class="clear"></div>
 
-            <div class="centerBtn clear">
+            <div class="cmmn-btn">
               <button type="submit">検　索</button>
             </div>
           </form>
@@ -277,7 +278,7 @@ use App\Models\Tr_search_categories;
         <h1>カテゴリーから案件を探す</h1>
         <div class="category-search__content">
 @foreach(Tr_search_categories::getParentCategories() as $parent)
-          <div class="category__parent">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</div>
+          <div class="category__parent">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</a></div>
           <div class="category__child">
 @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
             <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
@@ -334,7 +335,7 @@ use App\Models\Tr_search_categories;
       </div>
 @endif
 
-      <div class="content-right">
+      <div class="main-content-right">
         @include('front.common.sideInfo')
       </div>
 

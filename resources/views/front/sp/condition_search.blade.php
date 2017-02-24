@@ -134,7 +134,8 @@ use App\Models\Ms_job_types;
                             </div>
                         </div>
         </div>
-        <div class="clear commonCenterBtn">
+        <div class="clear"></div>
+        <div class="cmmn-btn">
             <button type="submit">検　索</button>
         </div>
     </form>

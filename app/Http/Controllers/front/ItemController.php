@@ -113,7 +113,6 @@ class ItemController extends FrontController
                                           OdrUtil::ORDER_ITEM_RATE_DESC['sort'])
                                 ->limit(5)
                                 ->get();
-        // TODO: SQLあとで確認。
 
         return view('front.item_detail', compact('item', 'recoItemList', 'canEntry'));
     }

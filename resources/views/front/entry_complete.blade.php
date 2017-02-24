@@ -6,6 +6,9 @@
     use App\Libraries\ModelUtility as MdlUtil;
 ?>
 <div class="wrap">
+
+  @include('front.common.breadcrumbs')
+
     <div id="entry_complete" class="content">
         <h1 class="pageTitle">エントリー完了</h1>
         <hr class="hr-2px-solid-5e8796">

@@ -1,6 +1,7 @@
 
 // sp_condition_search
 jQuery(function($){
+
 	$('.condition_name').each(function(){
 		$(this).click(function(){
 			var $slideArea = $(this).parents('.condition_content').find('.condition_slideArea');
@@ -15,7 +16,7 @@ jQuery(function($){
 		})
 	})
 
-	$('.sp_condition_search_btn button').click(function(){
+	$('.add-conditions button').click(function(){
 		window.location.href = setParameter(getParameter());
 	})
 
@@ -347,15 +348,15 @@ jQuery(function($){
 	var morePage = {
 		load: false,
 		hide: function() {
-			$('#sp_morePage').hide();
+			$('#js__read-more').hide();
 		},
 		moreText: function() {
-			$('#sp_morePage').text('もっと見る');
+			$('#js__read-more').text('もっと見る');
 		}
 	}
 	var nextPage = 2;
 
-	$('#sp_morePage').click(function(){
+	$('#js__read-more').click(function(){
 		if (morePage.loading) return;
 		$(this).text("読込中です");
 
@@ -412,7 +413,7 @@ jQuery(function($){
 					  '<p class="otherValue">' + data['items'][i].job_type +
 					  '</p></div>' +
 					  '<p class="detail">'+ data['items'][i].detail + '</p>' +
-					  '<div class="commonCenterBtn">' +
+					  '<div class="cmmn-btn">' +
 					  '<a href="/item/detail?id=' + data['items'][i].id +'">' +
 					  '<button><p>詳細を見る<p></button></a>' +
 					  '</div></div></div></div>');
