@@ -180,7 +180,7 @@
 <div id="pucat">
   @include('front.common.feature')
 </div>
-<div class="content-right invisible-pc invisible-tab">
+<div class="main-content-right invisible-pc invisible-tab">
   @include('front.common.sideInfo')
 </div><!-- END CONTENT-RIGHT -->
 @endsection

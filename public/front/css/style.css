@@ -2829,6 +2829,7 @@ sp.css ~640px
     .main-content-right {
         width: 100%;
         float: left;
+        margin-bottom: 2rem;
     }
 
     /* パンくずリスト */
@@ -3438,8 +3439,11 @@ sp.css ~640px
     /*-------------------------------
     ## サイドバー
     -------------------------------*/
-    .sideInfo ul{ margin-left: 0; }
-    .sideInfo li{
+    .sideInfo ul {
+        margin-left: 0;
+    }
+
+    .sideInfo li {
         width: 48%;
         float: left;
         margin: 1%;
