@@ -34,6 +34,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ url('/column') }}">
+                    <img src="/front/images/sBnr05.png" alt="コラム">
+                </a>
+            </li>
+            <li>
                 <a href="{{ url('/question') }}">
                     <img src="/front/images/sBnr04.png" alt="よくある質問">
                 </a>
@@ -47,6 +52,7 @@
 -->
             <li><a href="/question#aboutFreeEngineer"><img src="/front/images/sBnr02.png" alt="フリーエンジニアになるためには？"></a></li>
             <li><a href="/flow"><img src="/front/images/sBnr03.png" alt="ご利用案内"></a></li>
+            <li><a href="/column"><img src="/front/images/sBnr05.png" alt="コラム"></a></li>
             <li><a href="/question"><img src="/front/images/sBnr04.png" alt="よくある質問"></a></li>
         </ul>
     </div>

@@ -1030,6 +1030,7 @@ border-color:#E69B9B;
 }
 .entry-content h2{position: relative;border: none;font-size:1.25em;padding: 1em 1.1em;margin-top: 2.1em;margin-bottom: 1em;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;background: #13acca;color: #ffffff;box-shadow: 0 1px 5px rgba(0, 0, 0, .03);}
 .entry-content h3{
+font-size: 1.25em;
 border-left:4px solid;
 padding: .7em 0 .7em .8em;
 margin-top: 1.8em;
