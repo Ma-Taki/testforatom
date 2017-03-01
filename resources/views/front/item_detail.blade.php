@@ -106,9 +106,7 @@
 
 @if($canEntry)
                 <div class="cmmn-btn">
-                  <a href="/entry?id={{ $item->id }}">
-                      <button>この案件にエントリーする</button>
-                  </a>
+                  <a href="/entry?id={{ $item->id }}">この案件にエントリーする</a>
                 </div>
 @endif
 

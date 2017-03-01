@@ -29,7 +29,7 @@
         </p>
       </div>
       <div class="cmmn-btn">
-        <a href="{{ url('/login') }}"><button>ログイン画面</button></a>
+        <a href="{{ url('/login') }}">ログイン画面へ</a>
       </div>
     </div>
   </div><!-- END main-content -->

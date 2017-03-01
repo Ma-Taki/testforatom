@@ -63,7 +63,7 @@
                         <hr class="hr-1px-dashed-333">
 
                         <div class="cmmn-btn">
-                            <button type="submit">送信</button>
+                            <button type="submit">送　信</button>
                         </div>
                         {{ csrf_field() }}
                     </form>

@@ -414,8 +414,7 @@ jQuery(function($){
 					  '</p></div>' +
 					  '<p class="detail">'+ data['items'][i].detail + '</p>' +
 					  '<div class="cmmn-btn">' +
-					  '<a href="/item/detail?id=' + data['items'][i].id +'">' +
-					  '<button><p>詳細を見る<p></button></a>' +
+					  '<a href="/item/detail?id=' + data['items'][i].id + '" target="_blank">詳細を見る</a>' +
 					  '</div></div></div></div>');
 					  /*  登録が時間単位で一週間以内は新着 */
 					  if (data['items'][i].new_item_flg) {

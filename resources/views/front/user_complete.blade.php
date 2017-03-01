@@ -30,14 +30,14 @@
           <p class="user-id">会員ID：{{  $mail or '*****************' }}</p>
           <p>パスワードと共にお忘れずに管理ください。</p>
           <div class="cmmn-btn">
-            <a href="/"><button>トップページへ</button></a>
+            <a href="/">トップページへ</a>
           </div>
         </div>
         <div class="support">
           <p class="about-support">サポートについて</p>
-          <p>疑問点・ご不明な点などございましたら、お気軽にお問い合わせください。
+          <p>疑問点・ご不明な点などございましたら、お気軽にお問い合わせください。</p>
           <div class="cmmn-btn">
-            <a href="/contact"><button>お問い合わせフォーム</button></a>
+            <a href="/contact">お問い合わせフォーム</a>
           </div>
         </div>
       </div>
