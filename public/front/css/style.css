@@ -24,7 +24,7 @@ textarea{width: 100%;border: 1px solid #5e8796;border-radius: 5px;}
 /*-------------------------------
 ## common
 -------------------------------*/
-.wrap{
+.wrap {
     width:100%;
     margin:0 auto;
 }
@@ -279,17 +279,19 @@ p.pageInfo{
     white-space:nowrap;
 }
 
+/* 汎用ボタン START */
 .cmmn-btn {
     text-align: center;
     margin-top: 4rem;
 }
 
+/* submit用 */
 .cmmn-btn button {
     width: 30%;
-	border-radius: 18px;
-	background: #5e8796;
-	color: #fff;
-	border-style: none;
+    border-radius: 18px;
+    background: #5e8796;
+    color: #fff;
+    border-style: none;
     margin: 0 1rem;
     padding: 0.8rem;
     font-size: 1rem;
@@ -298,9 +300,23 @@ p.pageInfo{
     -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
 }
 
-.cmmn-btn button a {
+/* link用 */
+.cmmn-btn a {
+    display: inline-block;
+    line-height: 1.5rem;
+    width: 30%;
+    border-radius: 18px;
+    background: #5e8796;
     color: #fff;
+    border-style: none;
+    margin: 0 1rem;
+    padding: 0.8rem;
+    font-size: 1rem;
+    box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
 }
+/* 汎用ボタン END */
 
 .user-info, .item-info, .send-skillsheet {
     width: 90%;
@@ -411,24 +427,6 @@ h3.data-table__title {
     width: 95%;
     margin: 0 auto;
     padding-top: 3rem;
-}
-
-.commonCenterBtn {
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 3%
-}
-
-.commonCenterBtn button {
-	width: 30%;
-	border-radius: 32px;
-	background: #5e8796;
-	color: #fff;
-	border-style: none;
-    margin: 0 1%;
-    padding: 1%;
-    font-size: 1.4rem;
-    vertical-align: middle;
 }
 
 .errorMessage{
@@ -2944,26 +2942,21 @@ sp.css ~640px
     }
     /* 汎用データテーブル END */
 
+    /* 汎用ボタン START */
     .cmmn-btn {
         margin-top: 2rem;
     }
 
-    .cmmn-btn button{
+    .cmmn-btn button,
+    .cmmn-btn a {
         width: 70%;
     }
 
-    .cmmn-btn button:not(:first-child) {
+    .cmmn-btn button:not(:first-child),
+    .cmmn-btn a:not(:first-child) {
         margin-top: 1rem;
     }
-    .commonCenterBtn button {
-    	width: 70%;
-        font-size: 1.4rem;
-        padding: 0.7rem;
-    }
-
-    .commonCenterBtn button:not(:first-child) {
-        margin-top: 1rem;
-    }
+    /* 汎用ボタン END */
 
     .question .arrow-left {
         right: 4px;
@@ -3399,13 +3392,6 @@ sp.css ~640px
     /*-------------------------------
     ## ご利用の流れ
     -------------------------------*/
-    .content-left{ width: 100%; }
-
-    .content-right{
-        width: 100%;
-        float: left;
-    }
-
     .flowImage{ width: 25%; }
     .flowImage ul{ margin-top: 10%; }
     .flowImage li h4{ padding: 10% 0%; }

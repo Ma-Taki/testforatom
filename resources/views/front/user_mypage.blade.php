@@ -147,13 +147,13 @@
 
             </div>
             <div class="cmmn-btn">
-              <a href="/user/edit"><button class="edit-btn">登録内容変更</button></a>
-              <a href="/user/entry"><button class="edit-btn">エントリー履歴</button></a>
+              <a class="edit-btn" href="/user/edit">登録内容変更</a>
+              <a class="edit-btn" href="/user/entry">エントリー履歴</a>
             </div>
           </div>
 
           <div class="cmmn-btn">
-            <a href="/user/delete"><button>退会する</button></a>
+            <a href="/user/delete">退会する</a>
           </div>
 
         </div>

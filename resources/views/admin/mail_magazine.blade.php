@@ -69,7 +69,9 @@
 								<div class="form-group">
 								  <label class="col-sm-2 control-label">本文</label>
 								  <div class="col-sm-10">
-								    <textarea class="form-control" name="mailText" placeholder="本文" rows="18" value="mailText"></textarea>
+								    <textarea class="form-control" name="mailText" placeholder="本文" rows="18" value="mailText">
+                                        開発中のため、この機能は使用しないでください。
+                                    </textarea>
 								  </div>
                                 </div>
 							  </div>

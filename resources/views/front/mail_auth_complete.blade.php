@@ -28,7 +28,7 @@
           24時間以内にURLにアクセスし、会員登録を完了してください。
         </p>
         <div class="cmmn-btn">
-          <a href="{{ url('/') }}"><button>トップページへ</button></a>
+          <a href="{{ url('/') }}">トップページへ</a>
         </div>
       </div>
     </div>

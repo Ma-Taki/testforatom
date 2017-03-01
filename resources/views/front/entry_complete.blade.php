@@ -42,7 +42,7 @@
 @endif
 
           <div class="cmmn-btn">
-            <a href="{{ url('/') }}"><button>トップへ戻る</button></a>
+            <a href="{{ url('/') }}">トップへ戻る</a>
           </div>
         </div>
       </div>

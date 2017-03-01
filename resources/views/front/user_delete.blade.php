@@ -47,9 +47,7 @@
           <form method="post" action="{{ url('/user/delete') }}">
 
             <div class="cmmn-btn">
-              <a href="/user">
-                  <button type="button">キャンセル</button>
-              </a>
+              <a href="/user">キャンセル</a>
               <button type="submit">退会する</button>
             </div>
             {{ csrf_field() }}

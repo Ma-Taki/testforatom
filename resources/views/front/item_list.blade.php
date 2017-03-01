@@ -257,7 +257,7 @@
                 </div>
                 <p class="detail">{{ $item->detail }}</p>
                 <div class="cmmn-btn">
-                  <a href="/item/detail?id={{ $item->id }}"  target="_blank"><button>詳細を見る</button></a>
+                  <a href="/item/detail?id={{ $item->id }}" target="_blank">詳細を見る</a>
                 </div>
               </div>
             </div>
@@ -271,7 +271,7 @@
 
 @if($itemList->hasMorePages())
         <div class="read-more cmmn-btn invisible-tab invisible-pc">
-          <button id="js__read-more"><p>もっと見る<p></button>
+          <button id="js__read-more">もっと見る</button>
         </div>
 @endif
 

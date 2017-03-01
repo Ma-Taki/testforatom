@@ -30,7 +30,7 @@
         </p>
 
         <div class="cmmn-btn">
-          <a href="{{ url('/') }}"><button>トップページへ</button></a>
+          <a href="{{ url('/') }}">トップページへ</a>
         </div>
       </div>
     </div>

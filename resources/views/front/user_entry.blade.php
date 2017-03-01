@@ -30,7 +30,7 @@ use Carbon\Carbon;
   <!-- END .breadcrumbs -->
 
   <div class="main-content user-entry">
-    <h1 class="main-content__title">エントリー履歴<span class="main-content__title__count">該当件数：<span class="main-content__title__count__num ">{{ count($entry_list) }}</span>件</span></h1>
+    <h2 class="main-content__title">エントリー履歴<span class="main-content__title__count">該当件数：<span class="main-content__title__count__num ">{{ count($entry_list) }}</span>件</span></h2>
     <hr class="hr-2px-solid-5e8796">
     <div class="main-content__body">
       <div class="content__element">
@@ -110,7 +110,7 @@ use Carbon\Carbon;
                 </div>
 @if($entry->skillsheet_upload)
                 <div class="cmmn-btn">
-                  <a href="/user/entry/download?id={{ $entry->id }}"><button>スキルシートをダウンロード</button></a>
+                  <a href="/user/entry/download?id={{ $entry->id }}">スキルシートをダウンロード</a>
                 </div>
 @endif
               </div>
