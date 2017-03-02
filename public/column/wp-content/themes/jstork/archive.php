@@ -1,6 +1,8 @@
 <?php get_header(); ?>
 <div id="content">
 <div id="inner-content" class="wrap cf">
+<!-- スマホ用パンくず -->
+<div class="invisible-pc invisible-tab"><?php breadcrumb(); ?></div>
 <main id="main" class="m-all t-all d-5of7 cf" role="main">
 <div class="archivettl">
 <?php if (is_category()) { ?>

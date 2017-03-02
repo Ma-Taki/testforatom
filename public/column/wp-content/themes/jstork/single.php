@@ -11,6 +11,9 @@
 <div id="content">
 <div id="inner-content" class="wrap cf">
 
+<!-- スマホ用パンくず -->
+<div class="invisible-pc invisible-tab"><?php breadcrumb(); ?></div>
+
 <main id="main" class="m-all t-all d-5of7 cf" role="main">
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('cf'); ?> role="article">
@@ -66,7 +69,7 @@ wp_link_pages( array(
 'next_or_number'   => 'next',
 'nextpagelink'     => __('次のページへ ≫'),
 'previouspagelink' => __('≪ 前のページへ'),
-) );    
+) );
 ?>
 
 <?php if ( is_active_sidebar( 'addbanner-pc-contentfoot' ) && !is_mobile() ) : ?>
