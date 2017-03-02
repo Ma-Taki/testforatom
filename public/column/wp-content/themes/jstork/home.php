@@ -2,6 +2,9 @@
 <div id="content">
 <div id="inner-content" class="wrap cf">
 
+<!-- スマホ用パンくず -->
+<div class="invisible-pc invisible-tab"><?php breadcrumb(); ?></div>
+
 <main id="main" class="m-all t-all d-5of7 cf" role="main">
 
 <?php get_template_part( 'parts_add_top' ); ?>

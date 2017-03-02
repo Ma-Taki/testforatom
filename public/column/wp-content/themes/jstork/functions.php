@@ -21,20 +21,97 @@ function frontIsLogin(){
     return FrontUtility::isLogin();
 }
 
+/**
+ * パンくず
+ **/
+function breadcrumb(){
+
+    $breadcrumbs = '';
+
+    $content_no = 0;
+
+    $createBreadcrumbsBegin = function () use (&$breadcrumbs) {
+        $breadcrumbs .= '<div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
+    };
+
+    $addElement = function ($name, $url = '') use (&$breadcrumbs, &$content_no) {
+        $breadcrumbs .= '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
+        $breadcrumbs .= empty($url) ? '' : '<a class="hover-thin" itemprop="item" href="' .$url .'">';
+        $breadcrumbs .= '<span itemprop="name">' .$name .'</span>';
+        $breadcrumbs .= empty($url) ? '' : '</a>';
+        $breadcrumbs .= '<meta itemprop="position" content="' .++$content_no .'" /></span>';
+    };
+
+    $addNext = function () use (&$breadcrumbs) {
+        $breadcrumbs .= '<span class="next">></span>';
+    };
+
+    $createBreadcrumbsEnd = function () use (&$breadcrumbs) {
+        $breadcrumbs .= '</div><!-- END .breadcrumbs -->';
+    };
+
+    $createBreadcrumbsBegin();
+
+    $addElement('エンジニアルート', '/');
+    $addNext($breadcrumbs);
+
+    // 照会中のオブジェクトを取得する
+    $queried_obj = get_queried_object();
+
+    // コラムトップページ以外では"コラム"にリンクを設定する
+    $column_url = empty($queried_obj) ? '' : '/column';
+    $addElement('コラム', $column_url);
+
+    // 表示中のページによって処理を分岐させる
+    if (!empty($queried_obj) && get_class($queried_obj) == 'WP_Post') {
+        // 記事のページ
+        // 複数のカテゴリには属さない想定
+        $post_cate = get_the_category($queried_obj->ID)[0];
+        if (!empty($post_cate->category_parent)) {
+            // 親カテゴリ
+            $addNext();
+            $addElement(get_cat_name($post_cate->category_parent), '/column/?cat='.$post_cate->category_parent);
+        }
+
+        // カテゴリ、または子カテゴリ
+        $addNext($breadcrumbs);
+        $addElement($post_cate->cat_name, '/column/?cat='.$post_cate->cat_ID);
+
+        // 記事
+        $addNext($breadcrumbs);
+        $addElement($queried_obj->post_title);
+
+    } else if (!empty($queried_obj) && get_class($queried_obj) == "WP_Term") {
+        // カテゴリーのアーカイブページ
+        if (!empty($queried_obj->category_parent)) {
+            // 親カテゴリ
+            $addNext();
+            $addElement(get_cat_name($queried_obj->category_parent), '/column/?cat='.$queried_obj->category_parent);
+        }
+        // カテゴリ、または子カテゴリ
+        $addNext($breadcrumbs);
+        $addElement($queried_obj->cat_name);
+    }
+
+    $createBreadcrumbsEnd();
+
+    echo $breadcrumbs;
+}
+
 /*********************
 titleタグを最適化（ | でつなぐ）
 *********************/
 if (!function_exists('rw_title')) {
 	function rw_title( $title, $sep, $seplocation ) {
 	  global $page, $paged;
-	
+      
 	  if ( is_feed() ) return $title;
-	
+
 	  $sep = " | ";
 	  if ( 'right' == $seplocation ) {
 	    $title .= get_bloginfo( 'name' );
 	  } elseif ( is_home() || is_front_page() ){
-		$title = $title . get_bloginfo( 'name' );  
+		$title = $title . get_bloginfo( 'name' );
 	  } else {
 	    $title = $title . "{$sep}" . get_bloginfo( 'name' );
 	  }
@@ -152,7 +229,7 @@ if (!function_exists('breadcrumb')) {
 		        $str.= '<div'. $tagAttribute .'>';
 		        $str.= '<ul itemscope itemtype="//data-vocabulary.org/Breadcrumb">';
 		        $str.= '<li><a href="'. home_url() .'/" itemprop="url"><i class="fa fa-home"></i><span itemprop="title"> HOME</span></a></li>';
-		 
+
 		        if(is_category()) {
 		            $cat = get_queried_object();
 		            if($cat -> parent != 0){
@@ -222,9 +299,9 @@ if (!function_exists('breadcrumb')) {
 if (!function_exists('pagination')) {
 	function pagination($pages = '', $range = 2){
 	     global $wp_query, $paged;
-	
+
 		$big = 999999999;
-	
+
 		echo "<div class=\"pagination cf\">\n";
 		echo paginate_links( array(
 			'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
@@ -323,7 +400,7 @@ if (!function_exists('update_profile_fields')) {
 	    $contactmethods['twitter'] = 'Twitter';
 	    $contactmethods['facebook'] = 'Facebook';
 	    $contactmethods['googleplus'] = 'Google+';
-	     
+
 	    return $contactmethods;
 	}
 	add_filter('user_contactmethods','update_profile_fields',10,1);

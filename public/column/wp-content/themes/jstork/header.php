@@ -117,6 +117,8 @@ ga('send', 'pageview');
 </nav>
 <!-- END NAVI -->
 
+<!-- PC用パンくず -->
+<div class="invisible-sp"><?php breadcrumb(); ?></div>
 
 <?php /*
 <div id="container" class="<?php echo esc_html(get_option('post_options_ttl'));?> <?php echo esc_html(get_option('side_options_sidebarlayout'));?> <?php echo esc_html(get_option('post_options_date'));?>">
