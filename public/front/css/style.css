@@ -2596,9 +2596,11 @@ footer p{
 /* コラム */
 header,
 nav,
-footer {
+footer,
+.breadcrumbs
+{
     -webkit-font-smoothing: subpixel-antialiased;
-    -moz-osx-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: initial;
 }
 
 /* パンくずリスト */

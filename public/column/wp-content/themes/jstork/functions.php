@@ -31,23 +31,23 @@ function breadcrumb(){
     $content_no = 0;
 
     $createBreadcrumbsBegin = function () use (&$breadcrumbs) {
-        $breadcrumbs .= '<div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
+        $breadcrumbs .= '<div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">' .PHP_EOL;
     };
 
     $addElement = function ($name, $url = '') use (&$breadcrumbs, &$content_no) {
-        $breadcrumbs .= '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
-        $breadcrumbs .= empty($url) ? '' : '<a class="hover-thin" itemprop="item" href="' .$url .'">';
-        $breadcrumbs .= '<span itemprop="name">' .$name .'</span>';
-        $breadcrumbs .= empty($url) ? '' : '</a>';
-        $breadcrumbs .= '<meta itemprop="position" content="' .++$content_no .'" /></span>';
+        $breadcrumbs .= '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' .PHP_EOL;
+        $breadcrumbs .= empty($url) ? '' : '<a class="hover-thin" itemprop="item" href="' .$url .'">' .PHP_EOL;
+        $breadcrumbs .= '<span itemprop="name">' .$name .'</span>' .PHP_EOL;
+        $breadcrumbs .= empty($url) ? '' : '</a>' .PHP_EOL;
+        $breadcrumbs .= '<meta itemprop="position" content="' .++$content_no .'" /></span>' .PHP_EOL;
     };
 
     $addNext = function () use (&$breadcrumbs) {
-        $breadcrumbs .= '<span class="next">></span>';
+        $breadcrumbs .= '<span class="next">></span>' .PHP_EOL;
     };
 
     $createBreadcrumbsEnd = function () use (&$breadcrumbs) {
-        $breadcrumbs .= '</div><!-- END .breadcrumbs -->';
+        $breadcrumbs .= '</div><!-- END .breadcrumbs -->' .PHP_EOL;
     };
 
     $createBreadcrumbsBegin();
@@ -104,7 +104,7 @@ titleタグを最適化（ | でつなぐ）
 if (!function_exists('rw_title')) {
 	function rw_title( $title, $sep, $seplocation ) {
 	  global $page, $paged;
-      
+
 	  if ( is_feed() ) return $title;
 
 	  $sep = " | ";
