@@ -1982,7 +1982,7 @@ nav ul .active{ background: #536C75; }
 }
 
 #top .about h2 {
-    padding: 8px 20px;
+    padding: 8px 14px;
     border-left: 6px solid #5e8796;
     border-bottom: 1px solid #5e8796;
     font-size: 1.8rem;
@@ -2557,40 +2557,72 @@ nav ul .active{ background: #536C75; }
 	vertical-align: middle;
 }
 
-/* keyword search end */
-/* y.suzuki end */
-
 /*-------------------------------
 # footer
 -------------------------------*/
-footer{
-    margin-top: 5%;
-	text-align: center;
+footer {
+    margin-top: 10rem;
+    padding-top: 3rem;
+    text-align: center;
 }
 
-footer ul{
-    padding-top: 10%;
+footer .footer-links ul {
+  margin-top: 214px;
+  padding-top: 3rem;
 }
 
-footer li{
+footer .footer-links ul li {
 	display: inline-block;
-	padding: 0 3% 2rem 3%;
+	padding: 2rem 3%;
 }
 
-footer li a{
+footer li a {
     font-size: 1.2rem;
 	color: #536c75;
 }
 
-footer li a:hover{
+footer li a:hover {
 	color: #ccc;
 }
 
-footer p{
+footer p {
 	background: #5E8796;
 	color: #fff;
 	padding: 1.6rem 0;
 	font-size: 1.2rem;
+}
+
+footer .footer-inner {
+  position: relative;
+}
+
+footer .facebook-window {
+    position: absolute;
+    left: 30px;
+}
+
+footer .sitemap {
+    position: absolute;
+    left: 370px;
+    vertical-align: top;
+    text-align: left;
+    margin-left: 60px;
+    margin-right: 30px;
+}
+
+footer .sitemap h3 {
+    font-size: 1.4rem;
+    padding: 1rem 0;
+}
+
+footer .sitemap ul {
+    margin: 0;
+    padding: 0;
+}
+
+footer .footer-inner .sitemap ul li {
+    display: inline-block;
+    padding: 0.6rem 1rem;
 }
 
 /* コラム */
@@ -3486,14 +3518,18 @@ sp.css ~640px
 	# footer
 	-------------------------------*/
 
-    footer{margin-top: 0;background: #5E8796;}
+    footer {
+        margin-top: 0;
+        padding-top: 0;
+        background: #5E8796;
+    }
 
-	footer ul{
+	footer ul {
         padding: 0;
 		letter-spacing: -1em; /* inline-blockの隙間対策 */
 	}
 
-	footer li{
+	footer .footer-links ul li {
 		width: 50%;
 		padding: 16px 8px;
 		font-size: 13px;
@@ -3501,14 +3537,29 @@ sp.css ~640px
         border-bottom: #9eb7c0 1px solid;
         letter-spacing: normal;
 	}
-	footer li:nth-child(even){ border-right: 0; }
-	footer li a{ color: #fff; }
-	footer li a:hover{ color: #ccc; }
-	footer p{
+
+	footer li:nth-child(even) {
+        border-right: 0;
+    }
+
+	footer li a {
+        color: #fff;
+    }
+
+    footer li a:hover {
+        color: #ccc;
+    }
+
+    footer p {
 		color: #fff;
 		padding: 16px 0;
 		font-size: 12px;
 	}
+
+    footer .footer-links ul {
+        margin-top: 0;
+        padding-top: 0;
+    }
 
 	/*-------------------------------
 	# page
