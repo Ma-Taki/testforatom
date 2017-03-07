@@ -1,5 +1,7 @@
 @extends('front.common.layout')
 @section('title', 'エンジニアルート | 新規会員登録')
+@section('isSimpleFooter', 'true')
+
 @section('content')
 <?php
     use App\Models\Ms_contract_types;

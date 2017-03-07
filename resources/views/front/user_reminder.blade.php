@@ -1,6 +1,7 @@
 @extends('front.common.layout')
 @section('title', 'エンジニアルート | パスワード再設定URLの通知')
 @section('canonical', url('/user/reminder'))
+@section('isSimpleFooter', 'true')
 
 @section('content')
 <?php
