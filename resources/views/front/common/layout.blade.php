@@ -31,7 +31,17 @@
     @include('front.common.navi')
     <!-- END NAVI -->
     @yield('content')
-    @include('front.common.footer')
+
+    {{-- contentからisSimpleFooterがyieldされる(false評価を受ける値以外ならなんでも良い)時は、facebookと案件のリンクを外す --}}
+    @if($__env->yieldContent('isSimpleFooter'))
+
+      @include('front.common.simple_footer')
+
+    @else
+
+      @include('front.common.footer')
+
+    @endif
     <!-- END FOOTER -->
     <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/all.js') }}"></script>
   </body>

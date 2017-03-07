@@ -2566,14 +2566,23 @@ footer {
     text-align: center;
 }
 
-footer .footer-links ul {
+footer .footer-links {
   margin-top: 214px;
   padding-top: 3rem;
 }
 
-footer .footer-links ul li {
+footer .footer-links ul {
+    border-top: 1px solid #ddd;
+}
+
+footer .footer-links ul li,
+footer .footer-links__no-margin ul li {
 	display: inline-block;
 	padding: 2rem 3%;
+}
+
+footer .footer-links__no-margin {
+    padding-top: 3rem;
 }
 
 footer li a {
@@ -2622,7 +2631,7 @@ footer .sitemap ul {
 
 footer .footer-inner .sitemap ul li {
     display: inline-block;
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 0.8rem;
 }
 
 /* コラム */
@@ -3525,9 +3534,17 @@ sp.css ~640px
     }
 
 	footer ul {
-        padding: 0;
 		letter-spacing: -1em; /* inline-blockの隙間対策 */
 	}
+
+    footer .footer-links {
+        margin: 0;
+        padding: 0;
+	}
+
+    footer .footer-links ul {
+        border: 0;
+    }
 
 	footer .footer-links ul li {
 		width: 50%;

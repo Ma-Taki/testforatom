@@ -1,6 +1,7 @@
 @extends('front.common.layout')
 @section('title', 'エンジニアルート | プライバシーポリシー')
 @section('canonical', url('/privacy'))
+@section('isSimpleFooter', 'true')
 
 @section('content')
 <div class="wrap">

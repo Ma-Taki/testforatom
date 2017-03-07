@@ -1,5 +1,7 @@
 @extends('front.common.layout')
 @section('title', 'エンジニアルート | エントリー履歴')
+@section('isSimpleFooter', 'true')
+
 @section('content')
 <?php
 use App\Libraries\ModelUtility as MdlUtil;

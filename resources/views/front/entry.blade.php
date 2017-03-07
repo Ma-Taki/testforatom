@@ -1,5 +1,7 @@
 @extends('front.common.layout')
 @section('title', 'エンジニアルート | エントリー内容確認・スキルシート提出')
+@section('isSimpleFooter', 'true')
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

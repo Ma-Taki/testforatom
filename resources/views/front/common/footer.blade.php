@@ -30,20 +30,23 @@
         <h3>オススメの案件・求人</h3>
         <ul>
           <li><a href="/item/category/5">Javaの案件・求人</a></li>
-          <li><a href="/item/category/5">PHPの案件・求人</a></li>
-          <li><a href="/item/category/5">AS/400、RPGの案件・求人</a></li>
-          <li><a href="/item/search?job_types%5B%5D=12">WEBデザイナー募集</a></li>
-          <li><a href="/item/search?job_types%5B%5D=12">現場直契約の案件・求人</a></li>
-          <li><a href="/item/search?job_types%5B%5D=12">高単価の案件・求人</a></li>
+          <li><a href="/item/category/8">PHPの案件・求人</a></li>
+          <li><a href="/item/category/13">.NETの案件・求人</a></li>
+<!--
+          <li><a href="/item/category/24">AS/400、RPGの案件・求人</a></li>
+-->
+          <li><a href="/item/search?job_types%5B%5D=12">WEBデザイナーの案件・求人</a></li>
+          <li><a href="/item/tag/43">システムエンジニアの案件・求人</a></li>
+          <li><a href="/item/tag/11">プログラマーの案件・求人</a></li>
+<!--
+          <li><a href="/item/tag/7">現場直契約の案件・求人</a></li>
+          <li><a href="/item/tag/5">高単価の案件・求人</a></li>
+-->
         </ul>
         <h3>お役立ちコラム</h3>
         <ul>
           <li><a href="/column/category/c1/">フリーランスの知識</a></li>
           <li><a href="/column/category/c2/">技術について(開発言語/ツール情報)</a></li>
-          <!--
-          <li><a href="/item/category/5">AS/400、RPGの案件</a></li>
-          <li><a href="/item/search?job_types%5B%5D=12">WEBデザイナー募集</a></li>
-          -->
         </ul>
     </div>
   </div>

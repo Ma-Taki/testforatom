@@ -1,5 +1,7 @@
 @extends('front.common.layout')
 @section('title', 'エンジニアルート | 退会')
+@section('isSimpleFooter', 'true')
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;

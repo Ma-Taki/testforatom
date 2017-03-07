@@ -1,5 +1,7 @@
 @extends('front.common.layout')
 @section('title', 'エンジニアルート | 新規会員登録完了')
+@section('isSimpleFooter', 'true')
+
 @section('content')
 <div class="wrap">
 
