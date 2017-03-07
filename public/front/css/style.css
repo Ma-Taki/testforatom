@@ -2602,7 +2602,9 @@ footer p {
 }
 
 footer .footer-inner {
-  position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
 }
 
 footer .facebook-window {
@@ -3546,7 +3548,8 @@ sp.css ~640px
         border: 0;
     }
 
-	footer .footer-links ul li {
+	footer .footer-links ul li,
+    footer .footer-links__no-margin ul li {
 		width: 50%;
 		padding: 16px 8px;
 		font-size: 13px;
@@ -3554,6 +3557,10 @@ sp.css ~640px
         border-bottom: #9eb7c0 1px solid;
         letter-spacing: normal;
 	}
+
+    footer .footer-links__no-margin {
+        padding: 0;
+    }
 
 	footer li:nth-child(even) {
         border-right: 0;

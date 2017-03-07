@@ -16,10 +16,13 @@
     <div class="facebook-window">
       <div class="fb-page"
            data-href="https://www.facebook.com/engineerroute/?fref=ts"
-           data-small-header="false"
+           data-small-header="true"
            data-adapt-container-width="false"
            data-hide-cover="false"
-           data-show-facepile="true">
+           data-show-facepile="true"
+           data-tabs="timeline"
+           data-width="340"
+           data-height="214">
         <blockquote cite="https://www.facebook.com/engineerroute/?fref=ts" class="fb-xfbml-parse-ignore">
           <a href="https://www.facebook.com/engineerroute/?fref=ts">Engineer-Route</a>
         </blockquote>
@@ -50,6 +53,7 @@
         </ul>
     </div>
   </div>
+
   <div class="footer-links">
     <ul>
       <li><a class="hover-thin" href="http://solidseed.co.jp/" target="_blank">運営会社</a></li>

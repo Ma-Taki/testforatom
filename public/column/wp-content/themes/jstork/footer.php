@@ -13,13 +13,13 @@
 			<?php dynamic_sidebar( 'footer1' ); ?>
 			</div>
 		<?php endif; ?>
-		
+
 		<?php if ( is_active_sidebar( 'footer2' ) ) : ?>
 			<div class="m-all t-1of2 d-1of3">
 			<?php dynamic_sidebar( 'footer2' ); ?>
 			</div>
 		<?php endif; ?>
-		
+
 		<?php if ( is_active_sidebar( 'footer3' ) ) : ?>
 			<div class="m-all t-1of2 d-1of3">
 			<?php dynamic_sidebar( 'footer3' ); ?>
@@ -54,16 +54,18 @@
 */?>
 <?php //wp_footer(); ?>
 
-<footer class="bg clear">
+<footer class="bg">
+  <div class="footer-links__no-margin">
     <ul>
-        <li><a href="/" target="_blank">運営会社</a></li>
-        <li><a href="/privacy">プライバシーポリシー</a></li>
-        <li><a href="/terms">利用規約</a></li>
-        <li><a href="/contact">お問い合わせ</a></li>
+      <li><a class="hover-thin" href="http://solidseed.co.jp/" target="_blank">運営会社</a></li>
+      <li><a class="hover-thin" href="/privacy">プライバシーポリシー</a></li>
+      <li><a class="hover-thin" href="/terms">利用規約</a></li>
+      <li><a class="hover-thin" href="/contact">お問い合わせ</a></li>
     </ul>
-    <p>&copy; SolidSeed Co.,Ltd.</p>
+  </div>
+  <p>&copy; SolidSeed Co.,Ltd.</p>
 </footer>
-<!-- END FOOTER -->
+<!-- END .footer -->
 <script type="text/javascript" charset="utf-8" src="/front/js/all.js"></script>
 
 </body>
