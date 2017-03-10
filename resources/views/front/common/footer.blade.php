@@ -6,7 +6,7 @@
    var js, fjs = d.getElementsByTagName(s)[0];
    if (d.getElementById(id)) return;
    js = d.createElement(s); js.id = id;
-   js.src = "//connect.facebook.net/ja_KS/sdk.js#xfbml=1&version=v2.8";
+   js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
    fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
   </script>
@@ -21,7 +21,7 @@
            data-hide-cover="false"
            data-show-facepile="true"
            data-tabs="timeline"
-           data-width="340"
+           data-width="350"
            data-height="214">
         <blockquote cite="https://www.facebook.com/engineerroute/?fref=ts" class="fb-xfbml-parse-ignore">
           <a href="https://www.facebook.com/engineerroute/?fref=ts">Engineer-Route</a>
@@ -30,27 +30,28 @@
     </div>
 
     <div class="sitemap">
-        <h3>オススメの案件・求人</h3>
-        <ul>
-          <li><a href="/item/category/5">Javaの案件・求人</a></li>
-          <li><a href="/item/category/8">PHPの案件・求人</a></li>
-          <li><a href="/item/category/13">.NETの案件・求人</a></li>
+      <h3>オススメの案件・求人</h3>
+      <ul>
+        <li><a href="/item/category/5">Javaの案件・求人</a></li>
+        <li><a href="/item/category/8">PHPの案件・求人</a></li>
+        <li><a href="/item/category/13">.NETの案件・求人</a></li>
 <!--
-          <li><a href="/item/category/24">AS/400、RPGの案件・求人</a></li>
+        <li><a href="/item/category/24">AS/400、RPGの案件・求人</a></li>
 -->
-          <li><a href="/item/search?job_types%5B%5D=12">WEBデザイナーの案件・求人</a></li>
-          <li><a href="/item/tag/43">システムエンジニアの案件・求人</a></li>
-          <li><a href="/item/tag/11">プログラマーの案件・求人</a></li>
+        <li><a href="/item/search?job_types%5B%5D=12">WEBデザイナーの案件・求人</a></li>
+        <li><a href="/item/tag/43">システムエンジニアの案件・求人</a></li>
+        <li><a href="/item/tag/11">プログラマーの案件・求人</a></li>
 <!--
-          <li><a href="/item/tag/7">現場直契約の案件・求人</a></li>
-          <li><a href="/item/tag/5">高単価の案件・求人</a></li>
+        <li><a href="/item/tag/7">現場直契約の案件・求人</a></li>
+        <li><a href="/item/tag/5">高単価の案件・求人</a></li>
 -->
-        </ul>
-        <h3>お役立ちコラム</h3>
-        <ul>
-          <li><a href="/column/category/c1/">フリーランスの知識</a></li>
-          <li><a href="/column/category/c2/">技術について(開発言語/ツール情報)</a></li>
-        </ul>
+      </ul>
+      <h3>お役立ちコラム</h3>
+      <ul>
+        <li><a href="/column/category/c1/">フリーランスの知識</a></li>
+        <li><a href="/column/category/c2/">技術について(開発言語/ツール情報)</a></li>
+        <li><a href="/column/category/c3/">IT業界事情</a></li>
+      </ul>
     </div>
   </div>
 
