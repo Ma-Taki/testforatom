@@ -73,7 +73,7 @@ class BreadcrumbsUtility
             $breadcrumbs->push($this->getElementItemListHasPath());
             $breadcrumbs->push(
                 collect([
-                    'name' => 'キーワード検索 [' .$query .$suffix .']',
+                    'name' => 'キーワード検索 【' .$query .$suffix .'】',
                     'path' => '',
                 ]));
         // その他の検索

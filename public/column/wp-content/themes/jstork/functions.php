@@ -22,9 +22,16 @@ function frontIsLogin(){
 }
 
 /**
+ * 正規化のためのURLを返却する
+ **/
+function getCanonical() {
+    echo '"'. (empty($_SERVER["HTTPS"]) ? "http://" : "https://"). $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]. '"';
+}
+
+/**
  * パンくず
  **/
-function breadcrumb(){
+function breadcrumb() {
 
     $breadcrumbs = '';
 
@@ -98,11 +105,35 @@ function breadcrumb(){
     echo $breadcrumbs;
 }
 
+/**
+ * description
+ **/
+function description() {
+
+    $description = '';
+
+    if (is_home() || is_front_page()) {
+        $description = get_bloginfo('description');
+    } else {
+        while(have_posts()): the_post();
+            // categoryページで記事数分ループしちゃうのよくないので、先頭一件取得したら処理を抜ける
+            // ……breakしたらデータ消えたので記事数分回すことに
+            if (!$description) {
+                // 本文の先頭から55文字を取得する。文字数は変更可。
+                $description = get_the_excerpt();
+            }
+        endwhile;
+    }
+
+    echo '"'. $description. '"';
+}
 /*********************
 titleタグを最適化（ | でつなぐ）
 *********************/
 if (!function_exists('rw_title')) {
 	function rw_title( $title, $sep, $seplocation ) {
+
+    /*
 	  global $page, $paged;
 
 	  if ( is_feed() ) return $title;
@@ -122,7 +153,18 @@ if (!function_exists('rw_title')) {
 	  if ( $paged >= 2 || $page >= 2 ) {
 	    $title .= " {$sep} " . sprintf( __( '%sページ目', 'dbt' ), max( $paged, $page ) );
 	  }
-	  return $title;
+    */
+
+    // "エンジニアルート | ページ名" の形式
+    $site_name = 'エンジニアルート';
+    $sep = ' | ';
+    $page_name = '';
+    if (is_home() || is_front_page()) {
+        $page_name = get_bloginfo('name');
+    } else {
+        $page_name = $title;
+    }
+    return $page_name. $sep .$site_name;
 	}
 }
 

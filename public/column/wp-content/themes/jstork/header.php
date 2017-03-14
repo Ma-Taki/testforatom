@@ -10,9 +10,9 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title><?php wp_title(); ?></title>
-<meta name="description" content="<?php bloginfo('description'); ?>" />
-<meta name="keywords" content="IT案件,案件情報,求人,案件,仕事,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP">
+<title><?php wp_title(''); ?></title>
+<meta name="description" content=<?php description(); ?> />
+<meta name="keywords" content="IT案件,案件情報,求人,案件,仕事,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP,コラム">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 <?php /*
@@ -53,12 +53,15 @@
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); echo '?' . filemtime( get_stylesheet_directory() . '/style.css'); ?>" />
 <link rel="stylesheet" type="text/css" href="/front/css/style.css<?php echo '?' . filemtime(__DIR__.'/../../../../../public/front/css/style.css');?>">
 
+<link rel="canonical" href=<?php getCanonical(); ?>>
+<!--
 <link rel="stylesheet" type="text/css" href="/front/css/slick.css">
 <link rel="stylesheet" type="text/css" href="/front/css/slick-theme.css">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/front/js/slick.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/front/js/jquery.tile.js"></script>
+-->
 
 </head>
 
@@ -74,7 +77,7 @@ ga('send', 'pageview');
 <header>
   <div class="headerInr">
 
-    <h1 class="header__text invisible-sp">エンジニアルート | コラム</h1>
+    <h1 class="header__text invisible-sp"><?php wp_title(''); ?></h1>
 
     <div class="user">
       <ul>
@@ -105,7 +108,7 @@ ga('send', 'pageview');
     <ul class="nav-list">
         <li class="nav-item small"><a href="/">HOME</a></li>
         <li class="nav-item"><a href="/about">エンジニアルートとは</a></li>
-        <li class="nav-item"><a href="/item/search">新着一覧</a></li>
+        <li class="nav-item"><a href="/item/search">案件一覧</a></li>
         <li class="nav-item small"><a href="/question">Q&amp;A</a></li>
         <li class="nav-item"><a href="/flow">ご利用の流れ</a></li>
         <li class="nav-item"><a href="/company">企業の皆様へ</a></li>
