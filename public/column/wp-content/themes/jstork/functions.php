@@ -114,19 +114,30 @@ function description() {
 
     if (is_home() || is_front_page()) {
         $description = get_bloginfo('description');
+
+    } else if (is_category()) {
+        $queried_obj = get_queried_object();
+        $description = $queried_obj->cat_name. 'についてのコラム一覧ページです。';
+        $description.= 'エンジニアルートでは、フリーランスエンジニアとして成功するための知識や、IT業界事情など、幅広い情報をお届けしています。';
     } else {
         while(have_posts()): the_post();
-            // categoryページで記事数分ループしちゃうのよくないので、先頭一件取得したら処理を抜ける
-            // ……breakしたらデータ消えたので記事数分回すことに
-            if (!$description) {
-                // 本文の先頭から55文字を取得する。文字数は変更可。
-                $description = get_the_excerpt();
-            }
+            $description = get_the_excerpt();
+            break;
         endwhile;
     }
 
     echo '"'. $description. '"';
 }
+
+/**
+ * description のための文字数カスタマイズ
+ */
+function custom_excerpt_length( $length ) {
+     return 110; // 110文字
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+
 /*********************
 titleタグを最適化（ | でつなぐ）
 *********************/
@@ -155,7 +166,7 @@ if (!function_exists('rw_title')) {
 	  }
     */
 
-    // "エンジニアルート | ページ名" の形式
+    // "ページ名 | エンジニアルート" の形式
     $site_name = 'エンジニアルート';
     $sep = ' | ';
     $page_name = '';
