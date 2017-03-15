@@ -124,9 +124,11 @@ function description() {
     } else {
         // 記事ページ
         $queried_obj = get_queried_object();
+        // htmlタグをすべて削除
+        $description = strip_tags($queried_obj->post_content);
         // 先頭から100文字
-        $description = mb_substr($queried_obj->post_content, 0, 100) . '...';
-        // 本文中の改行を半角スペースに変換
+        $description = mb_substr($description, 0, 100) . '...';
+        // 改行を半角スペースに変換
         $description =  str_replace(PHP_EOL, ' ', $description);
     }
 
