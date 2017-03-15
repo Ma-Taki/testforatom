@@ -2,7 +2,23 @@
 @if(isset($html_title)) @section('title', 'エンジニアルート | '.$html_title)
 @else                   @section('title', 'エンジニアルート | 案件一覧')
 @endif
+
+@if ($itemList->previousPageUrl())
+@if ($itemList->currentPage() == 2)
+@section('prev', Request::url())
+@else
+@section('prev', $itemList->previousPageUrl())
+@endif
+@endif
+@if ($itemList->nextPageUrl())
+@section('next', $itemList->nextPageUrl())
+@endif
+
+@if ($itemList->currentPage() == 1)
 @section('canonical', Request::url())
+@else
+@section('canonical', $itemList->url($itemList->currentPage()))
+@endif
 
 @section('content')
 <?php
