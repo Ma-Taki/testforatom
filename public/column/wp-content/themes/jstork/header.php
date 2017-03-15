@@ -54,14 +54,12 @@
 <link rel="stylesheet" type="text/css" href="/front/css/style.css<?php echo '?' . filemtime(__DIR__.'/../../../../../public/front/css/style.css');?>">
 
 <link rel="canonical" href=<?php getCanonical(); ?>>
-<!--
 <link rel="stylesheet" type="text/css" href="/front/css/slick.css">
 <link rel="stylesheet" type="text/css" href="/front/css/slick-theme.css">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/front/js/slick.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/front/js/jquery.tile.js"></script>
--->
 
 </head>
 
