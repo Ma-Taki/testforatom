@@ -116,12 +116,12 @@ jQuery(function($){
 
 	if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
 		$('.js__category-childs').hide();
-		$('li.category__parent').click(function (){
+		$('div.category__parent').click(function (){
 			var $parent = $(this);
-			var $arrow = $parent.parent().find('li.category__parent span');
+			var $arrow = $parent.parent().find('div.category__parent span');
 			$('.js__category-childs:visible').each(function(){
 				if($(this).get(0) != $parent.parent().find('.js__category-childs').get(0)){
-					$(this).parent().find('li.category__parent span').toggleClass('js__arrow--open');
+					$(this).parent().find('div.category__parent span').toggleClass('js__arrow--open');
 					$(this).slideUp('fast');
 				}
 			});
