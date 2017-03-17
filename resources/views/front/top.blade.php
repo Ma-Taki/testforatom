@@ -294,13 +294,13 @@ use App\Models\Tr_search_categories;
         <h1>カテゴリーから案件を探す</h1>
         <div class="category-search__content">
 @foreach(Tr_search_categories::getParentCategories() as $parent)
-          <ul>
-            <li class="category__parent">{{ $parent->name }}
+          <div>
+            <div class="category__parent">{{ $parent->name }}
               <div class="arrow">
                 <span class="arrow arrow-left"></span>
                 <span class="arrow arrow-right"></span>
               </div>
-            </li>
+            </div>
 
             <ul class="js__category-childs">
               <li class="category__child">
@@ -317,7 +317,7 @@ use App\Models\Tr_search_categories;
               </li>
 @endforeach
             </ul>
-          </ul>
+          </div>
 @endforeach
         </div>
       </section><!-- /.categorySearch for sp-->
