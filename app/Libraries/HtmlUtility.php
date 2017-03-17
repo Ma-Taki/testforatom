@@ -175,4 +175,26 @@ class HtmlUtility
         }
         return $result;
     }
+
+    public static function getDescriptionText ($item = null) {
+
+        $description = '';
+
+        if (!empty($item)) {
+            if (is_array($item)) {
+                //　案件一覧
+            } else {
+                // 案件詳細
+                $description  = $item->name .'の案件・求人・仕事内容を掲載。';
+                $description .= 'エンジニアルートでは、この他にもIT・WEB業界のフリーランス、エンジニア向け案件を豊富に取り扱っております。';
+                $description .= 'ぜひご利用ください。';
+            }
+
+        } else {
+
+        }
+
+        return $description;
+    }
+
 }

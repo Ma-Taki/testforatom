@@ -111,20 +111,21 @@ jQuery(function($){
     }
 });
 
+// カテゴリー検索（スマホ）
 jQuery(function($){
-	// sp categoty search
+
 	if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
-		$('div.category__childs').hide();
+		$('.js__category-childs').hide();
 		$('li.category__parent').click(function (){
 			var $parent = $(this);
 			var $arrow = $parent.parent().find('li.category__parent span');
-			$('div.category__childs:visible').each(function(){
-				if($(this).get(0) != $parent.parent().find('div.category__childs').get(0)){
+			$('.js__category-childs:visible').each(function(){
+				if($(this).get(0) != $parent.parent().find('.js__category-childs').get(0)){
 					$(this).parent().find('li.category__parent span').toggleClass('js__arrow--open');
 					$(this).slideUp('fast');
 				}
 			});
-			$parent.parent().find('div.category__childs').slideToggle('fast');
+			$parent.parent().find('.js__category-childs').slideToggle('fast');
 			$arrow.toggleClass('js__arrow--open');
 		});
 	}

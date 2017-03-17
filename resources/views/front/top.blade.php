@@ -301,16 +301,22 @@ use App\Models\Tr_search_categories;
                 <span class="arrow arrow-right"></span>
               </div>
             </li>
-            <div class="category__childs">
-              <a href="/item/category/{{ $parent->id }}">
-                <li class="category__child">{{ $parent->name }}一覧</li>
-              </a>
+
+            <ul class="js__category-childs">
+              <li class="category__child">
+                <a href="/item/category/{{ $parent->id }}">
+                  {{ $parent->name }}一覧
+                </a>
+              </li>
+
 @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
-              <a href="/item/category/{{ $child->id }}">
-                <li class="category__child">{{ $child->name }}</li>
-              </a>
+              <li class="category__child">
+                <a href="/item/category/{{ $child->id }}">
+                  {{ $child->name }}
+                </a>
+              </li>
 @endforeach
-            </div>
+            </ul>
           </ul>
 @endforeach
         </div>

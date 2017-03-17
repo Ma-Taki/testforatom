@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1" />
     <!-- <meta http-equiv="content-language" content="ja"> -->
     <title>@yield('title')</title>
+    @if($__env->yieldContent('canonical'))
     <link rel="canonical" href="@yield('canonical')">
+    @endif
     @if($__env->yieldContent('prev'))
     <link rel="prev" href="@yield('prev')" />
     @endif

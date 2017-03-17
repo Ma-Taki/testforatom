@@ -209,14 +209,14 @@
           </div>
 @endif
           <div class="sort">
+            <span class="selectBox">
+              <select id="order">
+                <option value="RegistrationDesc" {{ $params['order'] == 'RegistrationDesc' ? "selected" : ""}}>新着順</option>
+                <option value="ServiceAsc" {{ $params['order'] == 'ServiceAsc' ? "selected" : ""}}>受付終了日が近い順</option>
+                <option value="RateDesc" {{ $params['order'] == 'RateDesc' ? "selected" : ""}}>報酬が高い順</option>
+              </select>
+            </span>
             <label>
-              <span class="selectBox">
-                <select id="order">
-                  <option value="RegistrationDesc" {{ $params['order'] == 'RegistrationDesc' ? "selected" : ""}}>新着順</option>
-                  <option value="ServiceAsc" {{ $params['order'] == 'ServiceAsc' ? "selected" : ""}}>受付終了日が近い順</option>
-                  <option value="RateDesc" {{ $params['order'] == 'RateDesc' ? "selected" : ""}}>報酬が高い順</option>
-                </select>
-              </span>
               <span class="selectBox">
                 <select id="limit">
                   <option value="1" {{ $params['limit'] == 1 ? "selected" : ""}}>10</option>
