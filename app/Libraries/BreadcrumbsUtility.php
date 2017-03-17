@@ -11,6 +11,7 @@ use App\Models\Tr_search_categories;
  * View用パンくずリスト作成ユーティリティー
  * 案件一覧、案件詳細でのみ使用している。
  * いずれ全画面に対応させたい。
+ * HtmlUtilityに統合すべき
  */
 class BreadcrumbsUtility
 {

@@ -1,12 +1,15 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルート | ' .$item->name .'【AN' .$item->id .'】')
-@section('canonical', Request::url().'?id='.$item->id)
 
-@section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
     use Carbon\Carbon;
 ?>
+
+@section('title', 'エンジニアルート | ' .$item->name .'【AN' .$item->id .'】')
+@section('canonical', Request::url().'?id='.$item->id)
+@section('description', HtmlUtil::getDescriptionText($item))
+
+@section('content')
 <div class="wrap">
 
   @include('front.common.breadcrumbs')
