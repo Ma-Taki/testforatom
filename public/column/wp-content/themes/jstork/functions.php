@@ -110,6 +110,11 @@ function breadcrumb() {
  **/
 function description() {
 
+    if (!get_queried_object()) {
+        echo '""';
+        return;
+    }
+
     $description = '';
 
     if (is_home() || is_front_page()) {
