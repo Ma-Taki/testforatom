@@ -110,33 +110,29 @@ function breadcrumb() {
  **/
 function description() {
 
-    if (!get_queried_object()) {
-        echo '""';
-        return;
-    }
-
     $description = '';
 
     if (is_home() || is_front_page()) {
         // トップページ
         $description = get_bloginfo('description');
 
-    } else if (is_category()) {
-        // カテゴリページ
-        $queried_obj = get_queried_object();
-        $description = $queried_obj->cat_name. 'についてのコラム一覧ページです。';
-        $description.= 'エンジニアルートでは、フリーランスエンジニアとして成功するための知識や、IT業界事情など、幅広い情報をお届けしています。';
-    } else {
-        // 記事ページ
-        $queried_obj = get_queried_object();
-        // htmlタグをすべて削除
-        $description = strip_tags($queried_obj->post_content);
-        // 先頭から100文字
-        $description = mb_substr($description, 0, 100) . '...';
-        // 改行を半角スペースに変換
-        $description =  str_replace(PHP_EOL, ' ', $description);
+    } else if (get_queried_object()) {
+        if (is_category()) {
+            // カテゴリページ
+            $queried_obj = get_queried_object();
+            $description = $queried_obj->cat_name. 'についてのコラム一覧ページです。';
+            $description.= 'エンジニアルートでは、フリーランスエンジニアとして成功するための知識や、IT業界事情など、幅広い情報をお届けしています。';
+        } else {
+            // 記事ページ
+            $queried_obj = get_queried_object();
+            // htmlタグをすべて削除
+            $description = strip_tags($queried_obj->post_content);
+            // 先頭から100文字
+            $description = mb_substr($description, 0, 100) . '...';
+            // 改行を半角スペースに変換
+            $description =  str_replace(PHP_EOL, ' ', $description);
+        }
     }
-
     echo '"'. $description. '"';
 }
 
