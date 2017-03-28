@@ -5,7 +5,7 @@
     use Carbon\Carbon;
 ?>
 
-@section('title', 'エンジニアルート | ' .$item->name .'【AN' .$item->id .'】')
+@section('title', $item->name .' - AN' .$item->id .' | エンジニアルート')
 @section('canonical', Request::url().'?id='.$item->id)
 @section('description', HtmlUtil::getDescriptionText($item))
 

@@ -140,7 +140,7 @@ class BreadcrumbsUtility
         $uri =  parse_url($_SERVER["REQUEST_URI"]);
         if ($uri["path"] == "/entry") {
             $breadcrumbs->push(collect([
-                'name' => $item->name.'【AN' .$item->id .'】',
+                'name' => $item->name.' - AN' .$item->id,
                 'path' => '/item/detail?id='.$item->id,
             ]));
             $breadcrumbs->push(collect([
@@ -151,7 +151,7 @@ class BreadcrumbsUtility
         // 案件詳細画面から呼ばれた場合
         } else {
             $breadcrumbs->push(collect([
-                'name' => $item->name.'【AN' .$item->id .'】',
+                'name' => $item->name.' - AN' .$item->id,
                 'path' => '',
             ]));
         }
