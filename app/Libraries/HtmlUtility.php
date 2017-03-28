@@ -185,8 +185,9 @@ class HtmlUtility
                 //　案件一覧
             } else {
                 // 案件詳細
-                $description  = $item->name .'の案件・求人・仕事内容を掲載。';
-                $description .= 'エンジニアルートでは、この他にもIT・WEB業界のフリーランス、エンジニア向け案件を豊富に取り扱っております。';
+                $description  = $item->area_detail.'エリア、'.$item->rate_detail.'/月。'. $item->name .'の案件・求人・仕事内容を掲載。';
+                $description .= 'その他、この案件と類似したおすすめ案件も紹介しています。気に入った案件にはすぐにエントリー可能。';
+                $description .= 'エンジニアルートでは、この他にもIT・WEB業界のフリーランスエンジニア・デザイナー向け案件を豊富に取り扱っております。';
                 $description .= 'ぜひご利用ください。';
             }
 
