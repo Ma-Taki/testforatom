@@ -1,6 +1,6 @@
 @extends('front.common.layout')
 @section('title', 'エンジニアルート | ご利用の流れ')
-@section('description', 'エンジニアルートでは、案件のプロジェクト終了後までエンジニアの皆様を全力でサポート致します。')
+@section('description', '当サイトをご利用いただいてから、実際に案件に参画するまでの流れを掲載しています。エンジニアルートでは、案件終了までエンジニアの皆様を全力でサポート致します。')
 @section('canonical', url('/flow'))
 
 @section('content')

@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルート | 新規登録')
+@section('title', '新規登録 | エンジニアルート')
 @section('description', 'エンジニアルートの新規会員登録ページです。')
 @section('canonical', url('/user/regist/auth'))
 

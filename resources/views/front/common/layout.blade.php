@@ -5,17 +5,12 @@
     <meta name="description" content="@yield('description')">
     <meta name="keywords" content="IT案件,案件情報,求人,案件,仕事,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP">
     <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1" />
+    @if($__env->yieldContent('noindex'))<meta name="robots" content="noindex,nofollow" />@endif
     <!-- <meta http-equiv="content-language" content="ja"> -->
     <title>@yield('title')</title>
-    @if($__env->yieldContent('canonical'))
-    <link rel="canonical" href="@yield('canonical')">
-    @endif
-    @if($__env->yieldContent('prev'))
-    <link rel="prev" href="@yield('prev')" />
-    @endif
-    @if($__env->yieldContent('next'))
-    <link rel="next" href="@yield('next')" />
-    @endif
+    @if($__env->yieldContent('canonical'))<link rel="canonical" href="@yield('canonical')">@endif
+    @if($__env->yieldContent('prev'))<link rel="prev" href="@yield('prev')" />@endif
+    @if($__env->yieldContent('next'))<link rel="next" href="@yield('next')" />@endif
     <link rel="icon" href="{{ url('/front/favicon.ico') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/front/css/style.css') }}<?php echo '?' . filemtime('front/css/style.css');?>">
     <link rel="stylesheet" type="text/css" href="{{ url('/front/css/slick.css') }}">
@@ -40,7 +35,6 @@
     <!-- END NAVI -->
     @yield('content')
 
-    {{-- contentからisSimpleFooterがyieldされる(false評価を受ける値以外ならなんでも良い)時は、facebookと案件のリンクを外す --}}
     @if($__env->yieldContent('isSimpleFooter'))
 
       @include('front.common.simple_footer')

@@ -1,7 +1,8 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルート | ログイン')
-@section('description', 'フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。')
+@section('title', 'ログイン | エンジニアルート')
+@section('description', '')
 @section('canonical', url('/login'))
+@section('noindex', 'true')
 
 @section('content')
 <div class="wrap">

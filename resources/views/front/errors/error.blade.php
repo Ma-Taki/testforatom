@@ -1,5 +1,6 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルート | エラーが発生しました')
+@section('title', 'エラーが発生しました | エンジニアルート')
+@section('noindex', 'true')
 
 @section('content')
 <div class="wrap">
