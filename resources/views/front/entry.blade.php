@@ -1,6 +1,7 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルート | エントリー内容確認・スキルシート提出')
+@section('title', 'エントリー内容確認・スキルシート提出 | エンジニアルート')
 @section('isSimpleFooter', 'true')
+@section('noindex', 'true')
 
 @section('content')
 <?php

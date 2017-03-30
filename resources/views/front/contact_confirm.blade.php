@@ -1,6 +1,7 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルート | お問い合わせ内容確認')
+@section('title', 'お問い合わせ内容確認 | エンジニアルート')
 @section('isSimpleFooter', 'true')
+@section('noindex', 'true')
 
 @section('content')
 <div class="wrap">

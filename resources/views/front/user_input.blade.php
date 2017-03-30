@@ -1,6 +1,7 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルート | 新規会員登録')
+@section('title', '新規会員登録 | エンジニアルート')
 @section('isSimpleFooter', 'true')
+@section('noindex', 'true')
 
 @section('content')
 <?php

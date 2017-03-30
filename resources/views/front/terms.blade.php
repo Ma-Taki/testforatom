@@ -1,5 +1,5 @@
 @extends('front.common.layout')
-@section('title', 'エンジニアルート | 利用規約')
+@section('title', '利用規約 | エンジニアルート')
 @section('canonical', url('/terms'))
 @section('isSimpleFooter', 'true')
 
