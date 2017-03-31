@@ -1,6 +1,6 @@
 <section class="pickupCat">
     <div class="contentInr">
-    <h1>特集から案件を探す</h1>
+    <h2>特集から案件を探す</h2>
         <ul class="fs0">
             <li class="pucat01"><a href="/item/tag/3">残業少なめ</a></li>
             <li class="pucat02"><a href="/item/tag/4">年齢不問</a></li>
