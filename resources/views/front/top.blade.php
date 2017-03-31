@@ -1,9 +1,7 @@
 @extends('front.common.layout')
 @section('title', 'フリーランスエンジニアのIT求人・案件 | エンジニアルート')
 @section('h1', 'フリーランスエンジニア向けIT系求人・仕事・案件情報サイト')
-@section('description', 'IT・WEB業界のフリーランスエンジニア・デザイナー向けの案件・仕事の求人情報を掲載しています。
-初めてフリーランスになる方からキャリアアップを目指す方まで幅広く皆様をサポートしています。
-案件をお探しの方はEngineer-Route（エンジニアルート）へご相談ください。')
+@section('description', 'IT・WEB業界のフリーランスエンジニア・デザイナー向けの案件・仕事の求人情報を掲載しています。初めてフリーランスになる方からキャリアアップを目指す方まで幅広く皆様をサポートしています。案件をお探しの方はEngineer-Route（エンジニアルート）へご相談ください。')
 @section('canonical', url('/'))
 
 @section('content')
@@ -71,7 +69,7 @@ use App\Models\Tr_search_categories;
     <div class="topItemList clear">
       <section class="newJob">
         <div class="topJobWrap">
-          <h1 class="alignleft">新着案件</h1>
+          <h3 class="alignleft">新着案件</h3>
           <p class="alignright invisible-sp"><a href="/item/search">新着案件一覧へ</a></p>
           <ul class="fs0 clear">
 @foreach($newItemList as $newItem)
@@ -97,7 +95,7 @@ use App\Models\Tr_search_categories;
 @if(!$pickUpItemList->isEmpty())
       <section class="attentionJob">
         <div class="topJobWrap">
-          <h1 class="alignleft">急募案件</h1>
+          <h3 class="alignleft">急募案件</h3>
           <p class="alignright invisible-sp"><a href="/item/tag/1">急募案件一覧へ</a></p>
           <ul class="fs0 clear">
 @foreach($pickUpItemList as $pickUpItem)
@@ -126,7 +124,7 @@ use App\Models\Tr_search_categories;
 
     <section class="conditions invisible-sp">
       <div class="contentInr">
-        <h1>条件から案件を探す</h1>
+        <h2>条件から案件を探す</h2>
         <div class="tabWrap alignleft">
           <div class="tabMenu">
             <ul>
@@ -275,7 +273,7 @@ use App\Models\Tr_search_categories;
 
     <div class="contentInr">
       <section class="category-search invisible-sp">
-        <h1>カテゴリーから案件を探す</h1>
+        <h2>カテゴリーから案件を探す</h2>
         <div class="category-search__content">
 @foreach(Tr_search_categories::getParentCategories() as $parent)
           <div class="category__parent">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</a></div>
@@ -291,7 +289,7 @@ use App\Models\Tr_search_categories;
       </section><!-- /.categorySearch for pc,tablet-->
 
       <section class="category-search invisible-pc invisible-tab">
-        <h1>カテゴリーから案件を探す</h1>
+        <h2>カテゴリーから案件を探す</h2>
         <div class="category-search__content">
 @foreach(Tr_search_categories::getParentCategories() as $parent)
           <div>
@@ -349,7 +347,7 @@ use App\Models\Tr_search_categories;
 
     <section class="keyWordSearch clear invisible-sp">
       <div class="contentInr">
-        <h1>キーワードから案件を探す</h1>
+        <h2>キーワードから案件を探す</h2>
         <div class="">
           <form class="keyWordSearchForm" method="get" action="/item/keyword">
             <input class="keyWordSearchInputForm" type="text" name="keyword">

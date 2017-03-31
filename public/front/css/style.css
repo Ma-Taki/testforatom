@@ -1930,14 +1930,14 @@ nav ul .active{ background: #536C75; }
 # page
 -------------------------------*/
 
-.contentInr{
+.contentInr {
 	width: 95%;
     max-width: 1000px;
 	margin: 0 auto;
 	padding: 24px 0 40px;
 }
 
-.contentInr h1{
+.contentInr h1 {
 	font-size: 20px;
 	margin-bottom: 24px;
 
@@ -1953,6 +1953,21 @@ nav ul .active{ background: #536C75; }
 	display: inline-block;
 }
 
+.contentInr h2 {
+	font-size: 20px;
+	margin-bottom: 24px;
+
+}
+
+.contentInr h2:before{
+	content: " ";
+	background: url(../images/h1search.png)no-repeat;
+	width: 20px;
+	height: 20px;
+	background-size: 16px 16px;
+	background-position: 0 4px;
+	display: inline-block;
+}
 
 /*-------------------------------
 ## top
@@ -1986,6 +2001,11 @@ nav ul .active{ background: #536C75; }
     border-left: 6px solid #5e8796;
     border-bottom: 1px solid #5e8796;
     font-size: 1.8rem;
+}
+
+#top .about h2::before {
+    width: 0px;
+    height: 0px;
 }
 
 #top .about__text p {
@@ -2029,12 +2049,12 @@ nav ul .active{ background: #536C75; }
 	padding: 32px  12px;
 }
 
-.topJobWrap h1{
+.topJobWrap h3 {
 	font-size: 20px;
 	margin-bottom: 16px;
 }
 
-.topJobWrap li{
+.topJobWrap li {
 	width: 25%;
 	display: inline-block;
 	font-size: 14px;
@@ -2043,7 +2063,7 @@ nav ul .active{ background: #536C75; }
 	position: relative;
 }
 
-.topJobWrap .topJobInr{
+.topJobWrap .topJobInr {
     height: auto;
 	background: #fff;
 	border-radius: 8px;
@@ -2130,19 +2150,19 @@ nav ul .active{ background: #536C75; }
 	border-right: 2px solid #D46363;
 }
 
-/* 特集 */
+/* 特集 START */
 .pickupCat {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-.pickupCat h1{
+.pickupCat h2{
 	font-size: 20px;
     margin-bottom: 24px;
 }
 
-.pickupCat h1:before{
+.pickupCat h2:before{
     content: " ";
 	background: url(../images/h1search.png)no-repeat;
     width: 20px;
@@ -2288,6 +2308,7 @@ nav ul .active{ background: #536C75; }
 	background-position: 0 -32px;
 	transition: 0.25s;
 }
+/* 特集 END */
 
 /* 条件 */
 .conditions{
@@ -2784,7 +2805,7 @@ tablet.css 641px~1024px
 		padding: 16px;
 	}
 
-	.topJobWrap h1{
+	.topJobWrap h3 {
 		margin-bottom: 8px;
         font-size: 16px
 	}
@@ -3053,12 +3074,23 @@ sp.css ~640px
     /* トップ */
     #top .about .contentInr {
         width: 100%;
-        padding: 0 2.5% 32px;
+        padding: 0px 0px 32px;
         margin: 2rem 0 0 0;
     }
 
     #top .about h2 {
+        background: none;
+        color: black;
+        line-height: 1;
         padding: 8px 10px;
+    }
+
+    #top .about .about__text {
+        padding: 0px 2.5%;
+    }
+
+    #top .about .appeal-point {
+        padding: 0px 2.5%;
     }
 
     /*-------------------------------
@@ -3310,7 +3342,7 @@ sp.css ~640px
         margin: 3rem 2.5% 0 2.5%;
     }
 
-    .pickupCat h1{
+    .pickupCat h2{
         background: #5e8796;
         color: #fff;
         font-size: 16px;
@@ -3319,7 +3351,7 @@ sp.css ~640px
         padding-left: 16px;
     }
 
-    .pickupCat h1:before{
+    .pickupCat h2:before{
         content: " ";
         background: url(../images/h1search-sp.png)no-repeat;
         width: 20px;
@@ -3618,6 +3650,25 @@ sp.css ~640px
 		display: inline-block;
 	}
 
+    .contentInr h2 {
+		background: #5e8796;
+		color: #fff;
+		font-size: 16px;
+		line-height: 48px;
+        margin-bottom: 16px;
+		padding-left: 16px;
+	}
+
+	.contentInr h2:before {
+		content: " ";
+		background: url(../images/h1search-sp.png)no-repeat;
+		width: 20px;
+		height: 20px;
+		background-size: 14px 14px;
+		background-position: 0 6px;
+		display: inline-block;
+	}
+
 	/* 新着・急募*/
 	.newJob,
 	.attentionJob{
@@ -3630,16 +3681,12 @@ sp.css ~640px
 		padding: 16px;
 	}
 
-	.newJob .topJobWrap h1{
+	.newJob .topJobWrap h3 {
         color: #5e8796;
-		margin-bottom: 5px;
-		font-size: 16px;
 	}
 
-    .attentionJob .topJobWrap h1{
+    .attentionJob .topJobWrap h3 {
         color: #D46363;
-		margin-bottom: 5px;
-		font-size: 16px;
 	}
 
 	.topJobWrap .topJobInr{
@@ -3731,12 +3778,12 @@ sp.css ~640px
         float: none;
     }
 
-    .category-search h1 {
+    .category-search h2 {
         font-size: 16px;
         margin-bottom: 0px;
     }
 
-    .category-search h1:before {
+    .category-search h2:before {
         content: " ";
         background: url(../images/h1search-sp.png)no-repeat;
         width: 20px;
