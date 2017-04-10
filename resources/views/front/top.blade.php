@@ -77,7 +77,7 @@ use App\Models\Tr_search_categories;
               <a href="/item/detail?id={{ $newItem->id }}" target="_blank">
                 <div class="topJobInr">
                   <img src="/front/images/ico-newjob.png" alt="新着">
-                  <h2>{{ $newItem->name }}</h2>
+                  <h4>{{ $newItem->name }}</h4>
                   <p class="location">{{ $newItem->area_detail }}</p>
                   <p class="remuneration">{{ $newItem->rate_detail }}</p>
                   <p class="update">{{ $newItem->service_start_date->format('Y/m/d') }}</p>
@@ -103,7 +103,7 @@ use App\Models\Tr_search_categories;
               <a href="/item/detail?id={{ $pickUpItem->id }}"  target="_blank">
                 <div class="topJobInr">
                   <img src="/front/images/ico-attentionJob.png" alt="急募">
-                  <h2>{{ $pickUpItem->name }}</h2>
+                  <h4>{{ $pickUpItem->name }}</h4>
                   <p class="location">{{ $pickUpItem->area_detail }}</p>
                   <p class="remuneration">{{ $pickUpItem->rate_detail }}</p>
                   <p class="update">{{ $pickUpItem->service_start_date->format('Y/m/d') }}</p>
