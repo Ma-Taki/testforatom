@@ -124,15 +124,6 @@
             </div>
           </div><!-- END .item -->
         </div><!-- END .content__element -->
-
-        <section class="keyWordSearch clear invisible-sp">
-          <h1>キーワードから案件を探す</h1>
-          <form class="keyWordSearchForm" method="get" action="/item/keyword">
-            <input class="keyWordSearchInputForm" type="text" name="keyword">
-            <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
-          </form>
-        </section><!-- /.keyWordSearch for pc,tablet -->
-
       </div><!-- END .main-content__body -->
     </div><!-- END .main-content-left -->
 
@@ -184,4 +175,7 @@
 <div class="main-content-right invisible-pc invisible-tab">
   @include('front.common.sideInfo')
 </div><!-- END CONTENT-RIGHT -->
+
+@include('front.common.keyword_pc')
+
 @endsection
