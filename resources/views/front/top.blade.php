@@ -41,16 +41,7 @@ use App\Models\Tr_search_categories;
     </section>
 @endif
 
-    <section class="keyWordSearch clear invisible-pc invisible-tab">
-      <div class="alignCenter">
-        <div class="keyWordSearchForm">
-          <form action="/item/keyword" method="get">
-            <input type="text" name="keyword" placeholder="キーワード検索" size="40" maxlength="255" class="searchBox">
-            <input type="submit" class="searchBtn">
-          </form>
-        </div>
-      </div>
-    </section><!-- /.keyWordSearch for sp -->
+@include('front.common.keyword_sp')
 
 @if(!FrntUtil::isLogin())
     <div class="user_regist_btn invisible-pc invisible-tab ">
@@ -320,16 +311,7 @@ use App\Models\Tr_search_categories;
         </div>
       </section><!-- /.categorySearch for sp-->
 
-      <section class="keyWordSearch clear invisible-pc invisible-tab">
-        <div class="alignCenter">
-          <div class="keyWordSearchForm">
-            <form action="/item/keyword" method="get">
-              <input type="text" name="keyword" placeholder="キーワード検索" size="40" maxlength="255" class="searchBox">
-              <input type="submit" class="searchBtn">
-            </form>
-          </div>
-        </div>
-      </section><!-- /.keyWordSearch for sp -->
+      @include('front.common.keyword_sp')
 
 @if(!FrntUtil::isLogin())
       <div class="user_regist_btn invisible-pc invisible-tab ">
@@ -345,17 +327,8 @@ use App\Models\Tr_search_categories;
 
     </div><!-- category & sideInfo -->
 
-    <section class="keyWordSearch clear invisible-sp">
-      <div class="contentInr">
-        <h2>キーワードから案件を探す</h2>
-        <div class="">
-          <form class="keyWordSearchForm" method="get" action="/item/keyword">
-            <input class="keyWordSearchInputForm" type="text" name="keyword">
-            <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
-          </form>
-        </div>
-      </div>
-    </section><!-- /.keyWordSearch for pc,tablet -->
+    <div class="clear">
+    @include('front.common.keyword_pc')
 
     <section class="about">
       <div class="contentInr">

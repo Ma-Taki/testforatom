@@ -1876,14 +1876,14 @@ header .search{
 	bottom: 12px;
 }
 
-.searchBox{
+.searchBox {
 	border: #5e8796 1px solid;
 	border-radius: 8px;
 	padding: 8px;
 	margin-right: 4px;
 }
 
-.searchBtn{
+.searchBtn {
 	background: url(../images/search.png)no-repeat;
 	background-size: 26px 26px;
 	width: 26px;
@@ -1891,7 +1891,7 @@ header .search{
 	text-indent: 100%;
 	cursor: pointer;
 	border: none;
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 /* nav */
@@ -2532,18 +2532,19 @@ nav ul .active{ background: #536C75; }
 /* カテゴリー検索 END */
 
 /* キーワードから案件を探す */
-.keyWordSearch{
+.item-search__keyword {
     width: 100%;
-    padding: 24px 0;
+    max-width: 1000px;
+    padding: 24px 0px;
+    margin: 0px auto;
 }
 
-.keyWordSearch h1{
+.item-search__keyword h2 {
 	font-size: 20px;
 	margin-bottom: 24px;
-
 }
 
-.keyWordSearch h1:before{
+.item-search__keyword h2:before {
 	content: " ";
 	background: url(../images/h1search.png)no-repeat;
 	width: 20px;
@@ -2553,22 +2554,25 @@ nav ul .active{ background: #536C75; }
 	display: inline-block;
 }
 
-
-.keyWordSearchForm {
+.item-search__keyword form {
 	width: 72.8%;
+  height: 40px;
+  padding-left: 8px;
 }
 
-.keyWordSearchInputForm {
+.item-search__keyword form input {
 	width: 79%;
+  height: 100%;
 	font-size: 14px;
 	border: 2px solid #5e8796;
 	border-radius: 5px;
 	vertical-align: middle;
-    padding: 0.8rem 1rem;
+  padding: 0.8rem 1rem;
 }
 
-.keyWordSearchSearchBtn {
+.item-search__keyword form button {
 	width: 20%;
+  height: 100%;
 	line-height: 30px;
 	font-size: 14px;
 	border-radius: 5px;
@@ -3825,31 +3829,33 @@ sp.css ~640px
     /* サイドバー */
     .sideInfo{clear: both;}
 
-    .keyWordSearchForm{
-        width: 80%;
-		letter-spacing: -1em; /* inline-blockの隙間対策 */
+    /* キーワードから案件を探す */
+    .item-search__keyword {
+      text-align: center;
     }
 
-    .keyWordSearchSearchBtn{
-        width: 20%;
-        line-height: 30px;
-        font-size: 17px;
-        border-radius: 5px;
-        background: #5e8796;
-        color: #fff;
-        border-style: none;
-        vertical-align: middle;
+    .item-search__keyword form {
+      width: 100%;
+      letter-spacing: -1em; /* inline-blockの隙間対策 */
     }
 
-    .searchBox{
-        width: 85%;
-        margin-top: 20px;
-        letter-spacing: normal;
+    .item-search__keyword form .searchBox {
+      border: #5e8796 1px solid;
+      border-radius: 8px;
+      padding: 8px;
+      margin-right: 4px;
     }
 
-    .searchBtn{
-        margin-top: 20px;
-        letter-spacing: normal;
+    .item-search__keyword form .searchBtn {
+      background: url(../images/search.png)no-repeat;
+    	background-size: 26px 26px;
+    	width: 26px;
+    	height: 26px;
+    	text-indent: 100%;
+    	cursor: pointer;
+    	border: none;
+      vertical-align: middle;
+      padding: 0;
     }
 
     /*-------------------------------

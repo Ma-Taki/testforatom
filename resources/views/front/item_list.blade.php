@@ -20,6 +20,10 @@
 @section('canonical', $itemList->url($itemList->currentPage()))
 @endif
 
+@if ($itemList->total() == 0)
+@section('noindex', 'true')
+@endif
+
 @section('content')
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
@@ -208,6 +212,8 @@
             </form>
           </div>
 @endif
+
+@if ($itemList->total() != 0)
           <div class="sort">
             <span class="selectBox">
               <select id="order">
@@ -227,6 +233,7 @@
               件表示
             </label>
           </div>
+@endif
 
         </div>
 
@@ -291,14 +298,6 @@
         </div>
 @endif
 
-          <section class="keyWordSearch clear invisible-sp">
-            <h1>キーワードから案件を探す</h1>
-            <form class="keyWordSearchForm" method="get" action="/item/keyword">
-              <input class="keyWordSearchInputForm" type="text" name="keyword">
-              <button class="keyWordSearchSearchBtn" type="submit">検　索</button>
-            </form>
-          </section><!-- /.keyWordSearch for pc,tablet -->
-
         </div><!-- END CONTENT-LEFT -->
       </div>
     </div>
@@ -312,6 +311,8 @@
   <div id="pucat">
     @include('front.common.feature')
   </div>
+
+  @include('front.common.keyword_pc')
 
 </div><!-- END WRAP -->
 
