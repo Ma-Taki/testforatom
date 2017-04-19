@@ -46,16 +46,18 @@ class EntryController extends AdminController
             'entry_date_from' => $request->entry_date_from ?: '', // エントリー日付(開始日)
             'entry_date_to'   => $request->entry_date_to ?: '',   // エントリー日付(終了日)
             'impression'      => $request->impression ?: [],      // 評価
-            'enabledOnly'     => $request->enabledOnly ?: 'off',   // 有効なエントリーのみか
+            'enabledOnly'     => $request->enabledOnly ?: 'off',  // 有効なエントリーのみか
             'sort_id' => $request->sort_id ?: OdrUtil::ORDER_ENTRY_DATE_DESC['sortId'],
         ];
         // ソート順 初期表示の場合はエントリー日付が新しい順を設定
         $item_order = OdrUtil::EntryOrder[$data_query['sort_id']];
 
         // from日付とto日付がどちらも入力されていて、fromがtoより大きい場合エラー
-        if (!empty($entry_date_from) && !empty($entry_date_to) && $entry_date_from > $entry_date_to) {
+        if (!empty($data_query['entry_date_from'])
+            && !empty($data_query['entry_date_to'])
+            && $data_query['entry_date_from'] > $data_query['entry_date_to']) {
             // エントリーIDが入力されている場合はエラーにしない
-            if (empty($entry_id)) {
+            if (empty($data_query['entry_id'])) {
                 // フラッシュセッションにエラーメッセージを保存
                 \Session::flash('custom_error_messages', 'エントリー日付(終了日)がエントリー日付(開始日)より過去になっています。');
                 return back()->withInput();
