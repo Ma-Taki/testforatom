@@ -322,7 +322,6 @@ class Tr_items extends Model
     /**
      * 管理画面のフリーワード検索
      * 案件とユーザで別個に検索し、結果をマージする。
-     *　
      */
     public function scopeFreeword($query, $word_array) {
 

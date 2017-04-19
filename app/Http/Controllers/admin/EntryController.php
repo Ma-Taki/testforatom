@@ -37,79 +37,71 @@ class EntryController extends AdminController
 
     /**
      * 検索処理
-     * GET,POST:/admin/entry/search
+     * GET:/admin/entry/search
      */
     public function searchEntry(EntrySearchRequest $request){
 
-        // エントリーID
-        $entry_id = $request->input('entry_id');
-        // エントリー日付(開始日)
-        $entry_date_from = $request->input('entry_date_from');
-        // エントリー日付(終了日)
-        $entry_date_to = $request->input('entry_date_to');
-        // 有効なエントリーのみか
-        $enabledOnly = $request->input('enabledOnly');
-        // ソートID 初期表示の場合はエントリー日付が新しい順を設定
-        $sort_id = $request->input('sort_id', OdrUtil::ORDER_ENTRY_DATE_DESC['sortId']);
-        // ソート順
-        $item_order = OdrUtil::EntryOrder[$sort_id];
-        // 評価
-        $impression_array = (array)$request->impression ?: [];
+        $data_query = [
+            'entry_id'        => $request->entry_id ?: '',        // エントリーID
+            'entry_date_from' => $request->entry_date_from ?: '', // エントリー日付(開始日)
+            'entry_date_to'   => $request->entry_date_to ?: '',   // エントリー日付(終了日)
+            'impression'      => $request->impression ?: [],      // 評価
+            'enabledOnly'     => $request->enabledOnly ?: 'off',  // 有効なエントリーのみか
+            'sort_id' => $request->sort_id ?: OdrUtil::ORDER_ENTRY_DATE_DESC['sortId'],
+        ];
+        // ソート順 初期表示の場合はエントリー日付が新しい順を設定
+        $item_order = OdrUtil::EntryOrder[$data_query['sort_id']];
 
-        // 追加のvalidation：from日付がto日付より大きい場合エラー
-        // エントリーIDが入力されている場合はエラーにしない
-        if (!empty($entry_date_from) && !empty($entry_date_to) && $entry_date_from > $entry_date_to && empty($entry_id)) {
-            // フラッシュセッションにエラーメッセージを保存
-            \Session::flash('custom_error_messages', 'エントリー日付(終了日)がエントリー日付(開始日)より過去になっています。');
-            return back()->withInput();
+        // from日付とto日付がどちらも入力されていて、fromがtoより大きい場合エラー
+        if (!empty($data_query['entry_date_from'])
+            && !empty($data_query['entry_date_to'])
+            && $data_query['entry_date_from'] > $data_query['entry_date_to']) {
+            // エントリーIDが入力されている場合はエラーにしない
+            if (empty($data_query['entry_id'])) {
+                // フラッシュセッションにエラーメッセージを保存
+                \Session::flash('custom_error_messages', 'エントリー日付(終了日)がエントリー日付(開始日)より過去になっています。');
+                return back()->withInput();
+            }
         }
 
         // パラメータの入力状態によって動的にクエリを発行
         $query = Tr_item_entries::query();
 
-        $query->select('item_entries.*');
+        // ID検索
+        if (!empty($data_query['entry_id'])) {
+            $query = $query->where('id', $data_query['entry_id']);
 
-        // ID検索　優先順位１位
-        if (!empty($entry_id)) {
-            $query = $query->where('id', $entry_id);
-        // エントリー日付検索 from~to
-        } else if (!empty($entry_date_from) && !empty($entry_date_to)) {
-            $query = $query->whereBetween('entry_date', array($entry_date_from.' 00:00:00', $entry_date_to.' 23:59:59'));
-        // エントリー日付検索 from~
-        } else if (!empty($entry_date_from) && empty($entry_date_to)) {
-            $query = $query->where('entry_date', '>=',$entry_date_from.' 00:00:00');
-        // エントリー日付検索 ~to
-        } else if (empty($entry_date_from) && !empty($entry_date_to)) {
-            $query = $query->where('entry_date', '<=',$entry_date_to.' 23:59:59');
         } else {
-            // すべてブランクの場合全件検索する
-        }
-
-        // ユーザの評価にチェックがあった場合、チェックのなかったものは含めない
-        if (!empty($impression_array)) {
-            $query->join('users', 'users.id', '=', 'item_entries.user_id');
-            $query = $query->whereIn('users.impression', $impression_array);
-        }
-
-        // 有効なエントリーのみの場合、論理削除済みのものは含めない
-        if ($enabledOnly) {
-            $query = $query->where('delete_flag', '=', 0)
-                           ->where('delete_date', '=', null);
+            // from日付
+            if (!empty($data_query['entry_date_from'])) {
+                $query = $query->where('entry_date', '>=',$data_query['entry_date_from'].' 00:00:00');
+            }
+            // to日付
+            if (!empty($data_query['entry_date_to'])) {
+                $query = $query->where('entry_date', '<=',$data_query['entry_date_to'].' 23:59:59');
+            }
+            // 評価
+            // valueが'off'の要素を削除する
+            $data_query['impression'] = array_filter($data_query['impression'], function ($value) {
+                return $value !== 'off';
+            });
+            if (!empty($data_query['impression'])) {
+                $query->join('users', 'users.id', '=', 'item_entries.user_id');
+                $query = $query->whereIn('users.impression', $data_query['impression']);
+            }
+            // 有効なエントリーのみの場合、論理削除済みのものは含めない
+            if ($data_query['enabledOnly'] == 'on') {
+                $query = $query->where('item_entries.delete_flag', '=', 0)
+                               ->where('item_entries.delete_date', '=', null);
+            }
         }
 
         // 検索結果を取得する
-        $entryList = $query->orderBy($item_order['columnName'], $item_order['sort'])
+        $entry_list = $query->select('item_entries.*')
+                           ->orderBy($item_order['columnName'], $item_order['sort'])
                            ->paginate(30);
 
-        return view('admin.entry_list', compact(
-            'entryList',
-            'entry_id',
-            'entry_date_from',
-            'entry_date_to',
-            'enabledOnly',
-            'sort_id',
-            'impression_array'
-        ));
+        return view('admin.entry_list', compact('entry_list', 'data_query'));
     }
 
     /**
