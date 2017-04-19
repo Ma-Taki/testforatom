@@ -144,7 +144,7 @@ class MemberController extends AdminController
         // 検索結果を取得する
         $memberList = $query->select('users.*')
                             ->orderBy($item_order['columnName'], $item_order['sort'])
-                            ->paginate(2);
+                            ->paginate(30);
 
         return view('admin.member_list', compact('memberList', 'data_query'));
     }
