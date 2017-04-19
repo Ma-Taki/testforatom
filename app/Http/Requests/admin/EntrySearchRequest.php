@@ -24,7 +24,6 @@ class EntrySearchRequest extends Request
     public function rules()
     {
         return [
-            'entry_id' => '', // 0~9の正規表現
             'entry_date_from' => 'date', // コントローラで追加のチェックあり
             'entry_date_to' => 'date',   // コントローラで追加のチェックあり
         ];

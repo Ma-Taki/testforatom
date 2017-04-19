@@ -38,17 +38,14 @@ class ItemController extends AdminController
      */
     public function searchItem(Request $request){
 
-        // 再利用するためパラメータを次のリクエストまで保存
-        $request->flash();
-
         // クエリ生成用データ
         $data_query = [
-            'id' => $request->item_id ?: null,
-            'name' => $request->item_name ?: null,
-            'freeword' => $request->item_freeword ?: null,
-            'tag_id' => $request->special_tag ?: null,
-            'enabled' => !empty($request->enabled),
-            'sort_id' =>  $request->sort_id ?: OdrUtil::ORDER_ITEM_UPDATE_DESC['sortId'],
+            'id'       => $request->id ?: '',
+            'name'     => $request->name ?: '',
+            'freeword' => $request->freeword ?: '',
+            'tag_id'   => $request->tag_id ?: '',
+            'enabled'  => $request->enabled ?: '',
+            'sort_id'  => $request->sort_id ?: OdrUtil::ORDER_ITEM_UPDATE_DESC['sortId'],
         ];
 
         // クエリを動的に発行
@@ -74,15 +71,11 @@ class ItemController extends AdminController
         $item_order = OdrUtil::ItemOrder[$data_query['sort_id']];
 
         // laravel標準のページネーション
-        $itemList = ($query ?: Tr_items::query())->groupBy('items.id')
-                                                 ->orderBy($item_order['columnName'], $item_order['sort'])
-                                                 ->paginate(30);
+        $itemList = $query->groupBy('items.id')
+                          ->orderBy($item_order['columnName'], $item_order['sort'])
+                          ->paginate(30);
 
-        return view('admin.item_list', [
-            'itemList' => $itemList,
-            'sort_id' => $data_query['sort_id'],
-            'enabled' => $data_query['enabled'],
-        ]);
+        return view('admin.item_list', compact('itemList', 'data_query'));
     }
 
     /**
