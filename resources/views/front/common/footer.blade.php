@@ -51,6 +51,7 @@
         <li><a href="/column/category/c1/">フリーランスの知識</a></li>
         <li><a href="/column/category/c2/">技術について(開発言語/ツール情報)</a></li>
         <li><a href="/column/category/c3/">IT業界事情</a></li>
+        <li><a href="/column/category/c4/">キャリア・ファイナンス</a></li>
         <li><a href="/column/category/c_other/">その他</a></li>
       </ul>
     </div>
