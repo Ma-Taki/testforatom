@@ -1,4 +1,3 @@
-
 // sp_condition_search
 jQuery(function($){
 
@@ -174,6 +173,7 @@ jQuery(function($){
 jQuery(function($){
     $('.srchCndtns_chkBx').each(function(){
         $(this).click(function(){
+
             var click_chkBox = $(this);
             var chkBox_label = $(this).parent('label').text();
             var selected_cndtns_type;
@@ -193,7 +193,6 @@ jQuery(function($){
 					// pc tab用DOM
 					addValue = $('<li>' + chkBox_label + '<span id="' + chkBox_label + '">×</span></li>');
 				}
-
                 addValue.children('span').click(function(){
                     $(this).parent('li').remove();
                     if (selected_cndtns_type.find('li').length <= 0) {
@@ -217,6 +216,9 @@ jQuery(function($){
         });
     });
 });
+
+
+
 
 // current page
 $(function(){
@@ -332,6 +334,10 @@ jQuery(function($){
         	var params   = parameters[1].split("&");
         	for ( i = 0; i < params.length; i++ ) {
            		var paramItem = params[i].split("=");
+
+							//修正部分：ページ遷移時のパラーメータから[]の中にある数字（例:skills[0]など）を除去(2017.04.27)
+							paramItem[0] = paramItem[0].replace(/\[.*\]/,"[]");
+
 				if (paramItem[0] in paramsArray) {
 					paramsArray[paramItem[0]].push(paramItem[1]);
 				} else {
@@ -339,6 +345,7 @@ jQuery(function($){
 				}
         	}
     	}
+
     	return paramsArray;
     }
 });
@@ -384,6 +391,7 @@ jQuery(function($){
 				   'page': nextPage,
 				   'path': location.pathname},
 			success: function(data) {
+
 				// DOM作成
 				for(var i in data['items']){
 					var $item_dom =
