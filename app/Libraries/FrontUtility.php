@@ -294,7 +294,7 @@ class FrontUtility
     public static function getItemsByRandom($itemList,$length){
       if($itemList->total() == 0){
         $today = Carbon::today();
-        $randoms = DB::table('items')->inRandomOrder()->where('items.service_end_date', '>=', $today)->limit($length)->get();
+        $randoms = DB::table('items')->inRandomOrder()->where('items.service_end_date', '<', $today)->limit($length)->get();
         return $randoms;
       }
       return null;
