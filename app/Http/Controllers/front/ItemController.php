@@ -13,6 +13,7 @@ use App\Models\Tr_items;
 use App\Models\Tr_tags;
 use App\Models\Tr_search_categories;
 use Carbon\Carbon;
+use DB;
 
 class ItemController extends FrontController
 {
@@ -49,6 +50,9 @@ class ItemController extends FrontController
         $params = array_merge($params, $request->all());
         // mergeで上書きされるので後に入れる
         $params['limit'] = $limit;
+        //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
+        $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
+
 
         return view('front.item_list', compact('itemList','params'));
     }
@@ -76,6 +80,9 @@ class ItemController extends FrontController
             'page' => $page,
         ];
         $params = array_merge($params, $request->all());
+
+        //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
+        $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
 
         return view('front.item_list', compact('itemList','params'));
     }
@@ -152,6 +159,10 @@ class ItemController extends FrontController
             $html_title = '【'.$tag->term .'】案件一覧';
         }
 
+        //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
+        $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
+
+
         return view('front.item_list', compact('itemList', 'params', 'html_title'));
         // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△
     }
@@ -195,6 +206,9 @@ class ItemController extends FrontController
         } else {
             $html_title = '【'.$category->name .'】案件一覧';
         }
+
+        //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
+        $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
 
         return view('front.item_list', compact('itemList', 'params', 'html_title'));
         // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△

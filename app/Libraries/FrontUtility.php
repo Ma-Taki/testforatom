@@ -9,6 +9,8 @@ use App\Libraries\CookieUtility as CkieUtil;
 use App\Libraries\ModelUtility as MdlUtil;
 use App\Models\Tr_users;
 use App\Models\Tr_auth_keys;
+use Carbon\Carbon;
+use DB;
 
 class FrontUtility
 {
@@ -287,4 +289,15 @@ class FrontUtility
             strval(MdlUtil::SOCIAL_TYPE_GITHUB),
         ]);
     }
+
+    //案件数が０の場合$lengthの件数だけランダムで案件を表示する
+    public static function getItemsByRandom($itemList,$length){
+      if($itemList->total() == 0){
+        $today = Carbon::today();
+        $randoms = DB::table('items')->inRandomOrder()->where('items.service_end_date', '>=', $today)->limit($length)->get();
+        return $randoms;
+      }
+      return null;
+    }
+
 }
