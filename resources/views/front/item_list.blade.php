@@ -296,11 +296,9 @@
                 </div>
 @endif
                 <p class="detail">{{ $item->detail }}</p>
-@if(!$params['nodata'])
                 <div class="cmmn-btn">
                   <a href="/item/detail?id={{ $item->id }}" target="_blank">詳細を見る</a>
                 </div>
-@endif
               </div>
             </div>
           </div>
