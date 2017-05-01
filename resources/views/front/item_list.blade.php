@@ -257,9 +257,11 @@
 @endif
 @endif
                 <p class="name">{{ $item->name }}</p>
+                <p class="sys_type">
 @if(!$params['nodata'])
-                <p class="sys_type">{{ $item->bizCategorie->name }}</p>
+                  {{ $item->bizCategorie->name }}
 @endif
+                </p>
               </div>
             </div>
             <div class="itemInfo clear">
