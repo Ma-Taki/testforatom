@@ -3,6 +3,9 @@
 @else                   @section('title', 'エンジニアルート | 案件一覧')
 @endif
 
+@if(!$params["nodata"])
+
+
 @if ($itemList->previousPageUrl())
 @if ($itemList->currentPage() == 2)
 @section('prev', Request::url())
@@ -14,14 +17,14 @@
 @section('next', $itemList->nextPageUrl())
 @endif
 
+
 @if ($itemList->currentPage() == 1)
 @section('canonical', Request::url())
 @else
 @section('canonical', $itemList->url($itemList->currentPage()))
 @endif
 
-@if ($itemList->total() == 0)
-@section('noindex', 'true')
+
 @endif
 
 @section('content')
@@ -36,21 +39,22 @@
     use App\Models\Ms_areas;
     use App\Models\Ms_job_types;
 ?>
+
 <div class="wrap">
 
   @include('front.common.breadcrumbs')
 
   <div class="main-content item-all">
     <div class="main-content-left">
-      <h2 class="main-content__title">該当案件一覧</h2>
-      <span class="item-all-count">該当件数：<span class="num">{{ $itemList->total() }}</span>件</span>
-      <hr class="hr-2px-solid-5e8796">
+        <h2 class="main-content__title">該当案件一覧</h2>
+        <span class="item-all-count">該当件数：<span class="num">{{ $itemList->total() }}</span>件</span>
+        <hr class="hr-2px-solid-5e8796">
       <div class="main-content__body">
         <div class="content__element">
 
 @if(strstr(Request::url(), '/item/search'))
           <div class="add-conditions invisible-pc invisible-tab">
-            <button class="shadow">条件を指定して検索する</button>
+            <button class="shadow">条件を指定してする</button>
           </div>
 @endif
 
@@ -63,7 +67,6 @@
                 <span class="mark">+</span>
                 <span class="text">検索条件を変更する</span>
               </span>
-
               <div class="tabSelectedInr">
                 <div class="searchElement">
                   <div id="tagSelectedSkill">
@@ -111,7 +114,6 @@
                     <li>ポジション</li>
                   </ul>
                 </div><!-- /.tabMenu -->
-
 
                 <div class="tabBox">
                   <div class="tabBoxInr">
@@ -205,15 +207,13 @@
                   </div>
                 </div><!-- /.tabBox -->
               </div>
-
               <div class="cmmn-btn">
                 <button type="submit">検　索</button>
               </div>
             </form>
           </div>
 @endif
-
-@if ($itemList->total() != 0)
+@if(!$params["nodata"])
           <div class="sort">
             <span class="selectBox">
               <select id="order">
@@ -234,22 +234,34 @@
             </label>
           </div>
 @endif
-
         </div>
 
-        <div id="itemList">
+<?php
+  //ヒット数が０だった場合...
+  if($params['nodata']){
+    $itemList = $params['nodata']; //ランダムに取得した掲載終了案件に入れ替え
+  }
+?>
+
+@if($params['nodata'])
+        <h2 style="margin-top:20px;">終了した案件ですが、探す際の参考としてご覧ください。</h2>
+@endif
 @foreach($itemList as $item)
+        <div id="itemList">
           <div class="item">
             <div class="itemHeader">
               <div class="table-row">
+@if(!$params['nodata'])
 @if($item->registration_date->between(Carbon::now(), Carbon::now()->subDays(7)))
                 <p class="new">新着</p>
 @endif
+@endif
                 <p class="name">{{ $item->name }}</p>
+@if(!$params['nodata'])
                 <p class="sys_type">{{ $item->bizCategorie->name }}</p>
+@endif
               </div>
             </div>
-
             <div class="itemInfo clear">
               <div class="itemInfoInr">
                 <div class="pickUp">
@@ -262,6 +274,7 @@
                     <div class="area_detail"><p>{{ $item->area_detail }}</p></div>
                   </div>
                 </div>
+@if(!$params['nodata'])
                 <div class="other">
                   <p class="otherName">システム種別</p>
                   <p class="otherValue">
@@ -270,34 +283,38 @@
 @endforeach
                   </p>
                 </div>
+@endif
+@if(!$params['nodata'])
                 <div class="other">
-                  <p class="otherName">ポジション</p>
-                  <p class="otherValue">
+                <p class="otherName">ポジション</p>
 @foreach($item->jobTypes as $jobType)
                     {{ $jobType->name }}<span class="wordPunctuation">、</span>
 @endforeach
-                  </p>
+                </p>
                 </div>
+@endif
                 <p class="detail">{{ $item->detail }}</p>
+@if(!$params['nodata'])
                 <div class="cmmn-btn">
                   <a href="/item/detail?id={{ $item->id }}" target="_blank">詳細を見る</a>
                 </div>
+@endif
               </div>
             </div>
           </div>
-@endforeach
         </div>
+@endforeach
 
+@if(!$params['nodata'])
         <div class="paginate invisible-sp">
           {!! (new App\Libraries\Pagination\CustomBootstrapPresenter($itemList->appends($params)))->render() !!}
         </div>
-
 @if($itemList->hasMorePages())
         <div class="read-more cmmn-btn invisible-tab invisible-pc">
           <button id="js__read-more">もっと見る</button>
         </div>
 @endif
-
+@endif
         </div><!-- END CONTENT-LEFT -->
       </div>
     </div>
@@ -317,6 +334,7 @@
 </div><!-- END WRAP -->
 
 <script type="text/javascript">
+
   jQuery(function($){
 
     var $conditions_box = $(".conditions .tab");
@@ -334,5 +352,6 @@
       $conditions_box.slideToggle(700);
 	  });
 	});
+
 </script>
 @endsection
