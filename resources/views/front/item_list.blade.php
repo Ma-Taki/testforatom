@@ -54,7 +54,7 @@
 
 @if(strstr(Request::url(), '/item/search'))
           <div class="add-conditions invisible-pc invisible-tab">
-            <button class="shadow">条件を指定してする</button>
+            <button class="shadow">条件を指定して検索する</button>
           </div>
 @endif
 
@@ -246,8 +246,8 @@
 @if($params['nodata'])
         <h2 style="margin-top:20px;">終了した案件ですが、探す際の参考としてご覧ください。</h2>
 @endif
+<div id="itemList">
 @foreach($itemList as $item)
-        <div id="itemList">
           <div class="item">
             <div class="itemHeader">
               <div class="table-row">
@@ -289,6 +289,7 @@
 @if(!$params['nodata'])
                 <div class="other">
                 <p class="otherName">ポジション</p>
+                <p class="otherValue">
 @foreach($item->jobTypes as $jobType)
                     {{ $jobType->name }}<span class="wordPunctuation">、</span>
 @endforeach
@@ -302,8 +303,8 @@
               </div>
             </div>
           </div>
-        </div>
 @endforeach
+</div>
 
 @if(!$params['nodata'])
         <div class="paginate invisible-sp">

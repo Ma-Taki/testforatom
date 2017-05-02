@@ -399,8 +399,8 @@ jQuery(function($){
 					  '<div class="itemHeader">' +
 					  '<div class="table-row">' +
 					  '<p class="name">' + data['items'][i].name +
-					  '<span class="sys_type">' + data['items'][i].biz_category_name +
-					  '</span></p></div></div>' +
+					  '<p class="sys_type">' + data['items'][i].biz_category_name +
+					  '</p></p></div></div>' +
 					  '<div class="itemInfo clear">' +
 					  '<div class="itemInfoInr">' +
 					  '<div class="pickUp">' +
@@ -418,6 +418,7 @@ jQuery(function($){
 					  '<p class="otherName">システム種別</p>' +
 					  '<p class="otherValue">' + data['items'][i].sys_type +
 					  '</p></div>' +
+						'<div class="other">' +
 					  '<p class="otherName">ポジション</p>' +
 					  '<p class="otherValue">' + data['items'][i].job_type +
 					  '</p></div>' +
