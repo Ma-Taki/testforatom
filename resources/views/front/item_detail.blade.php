@@ -110,6 +110,11 @@
 @if($canEntry)
                 <div class="cmmn-btn">
                   <a href="/entry?id={{ $item->id }}">この案件にエントリーする</a>
+@if($isConsidering)
+                  <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider_delete-btn">この案件を検討中から外す</a>
+@else
+                  <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider-btn">検討する</a>
+@endif
                 </div>
 @endif
 

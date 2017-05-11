@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ConsiderController;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Libraries\OrderUtility as OdrUtil;
 use App\Libraries\FrontUtility as FrntUtil;
@@ -52,7 +53,6 @@ class ItemController extends FrontController
         $params['limit'] = $limit;
         //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
         $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
-
 
         return view('front.item_list', compact('itemList','params'));
     }
@@ -121,7 +121,10 @@ class ItemController extends FrontController
                                 ->limit(5)
                                 ->get();
 
-        return view('front.item_detail', compact('item', 'recoItemList', 'canEntry'));
+        //この案件が検討中かどうか
+        $isConsidering = ConsiderController::isConsidering($request->id);
+
+        return view('front.item_detail', compact('item', 'recoItemList', 'canEntry','isConsidering'));
     }
 
     /**

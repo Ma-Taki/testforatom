@@ -5,7 +5,6 @@
 
 @if(!$params["nodata"])
 
-
 @if ($itemList->previousPageUrl())
 @if ($itemList->currentPage() == 2)
 @section('prev', Request::url())
@@ -24,7 +23,6 @@
 @section('canonical', $itemList->url($itemList->currentPage()))
 @endif
 
-
 @endif
 
 @section('content')
@@ -38,6 +36,9 @@
     use App\Models\Ms_biz_categories;
     use App\Models\Ms_areas;
     use App\Models\Ms_job_types;
+    use App\Libraries\CookieUtility as CkieUtil;
+    use App\Models\Tr_users;
+    use App\Http\Controllers\ConsiderController;
 ?>
 
 <div class="wrap">
@@ -299,6 +300,8 @@
                 <p class="detail">{{ $item->detail }}</p>
                 <div class="cmmn-btn">
                   <a href="/item/detail?id={{ $item->id }}" target="_blank">詳細を見る</a>
+<?php $styles = ConsiderController::makeConsiderButtonStyle($item->id); ?>
+                  <a href="javascript:void(0);" class="consider-btn {{ $styles['class'] }}" name="{{ $item->id }}">{{ $styles['text'] }}</a>
                 </div>
               </div>
             </div>
@@ -353,6 +356,5 @@
       $conditions_box.slideToggle(700);
 	  });
 	});
-
 </script>
 @endsection

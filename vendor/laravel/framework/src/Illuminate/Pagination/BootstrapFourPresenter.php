@@ -78,7 +78,7 @@ class BootstrapFourPresenter implements PresenterContract
     {
         $rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
 
-        return '<li class="page-item"><a class="page-link" href="'.htmlentities($url).'"'.$rel.'>'.$page.'</a></li>';
+        return '<li class="page-item"><a class="page-link" href="'.htmlentities($url).'"'.$rel.'>p'.$page.'</a></li>';
     }
 
     /**

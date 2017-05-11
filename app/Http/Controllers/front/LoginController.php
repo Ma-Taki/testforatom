@@ -8,6 +8,7 @@ use App\Http\Controllers\FrontController;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests;
 use App\Models\Tr_users;
+use App\Models\Tr_considers;
 use App\Libraries\{FrontUtility as FrontUtil, CookieUtility as CkieUtil};
 use Log;
 use Cookie;
@@ -75,6 +76,28 @@ class LoginController extends FrontController
         // cookieを付与する
         CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $user->id);
 
+        //cookieに検討中案件があればデータベースに追加
+        if (CkieUtil::get('considers')){
+          $cookies = CkieUtil::get('considers');
+          foreach ($cookies as $key => $value) {
+            //すでに検討中かデータベース検索（user_idとitem_idの複合インデックス）
+            $considers = Tr_considers::where('user_id',$user->id)->where('item_id',$key);
+            //すでに検討中であればアップデート
+            if($considers->count() > 0){
+              $considers->update(['user_id' => $user->id,'item_id'=>$key,'delete_flag'=>0]);
+            //まだ検討中でなければインサート
+            }else{
+              //データベースに登録
+              $csd = new Tr_considers;
+              $csd->user_id = $user->id;
+              $csd->item_id = $key;
+              $csd->delete_flag = 0;
+              $csd->save();
+            }
+            //もうcookieに入っているデータは必要ないので削除
+            CkieUtil::delete('considers['.$key.']');
+          }
+        }
         return redirect($request->next);
     }
 

@@ -335,7 +335,6 @@ jQuery(function($){
         	for ( i = 0; i < params.length; i++ ) {
            		var paramItem = params[i].split("=");
 
-							//修正部分：ページ遷移時のパラーメータから[]の中にある数字（例:skills[0]など）を除去(2017.04.27)
 							paramItem[0] = paramItem[0].replace(/\[.*\]/,"[]");
 
 				if (paramItem[0] in paramsArray) {
@@ -425,6 +424,7 @@ jQuery(function($){
 					  '<p class="detail">'+ data['items'][i].detail + '</p>' +
 					  '<div class="cmmn-btn">' +
 					  '<a href="/item/detail?id=' + data['items'][i].id + '" target="_blank">詳細を見る</a>' +
+						'<a href="javascript:void(0);" class="consider-btn" name="'+ data['items'][i].id +'">検討する</a>' +
 					  '</div></div></div></div>');
 					  /*  登録が時間単位で一週間以内は新着 */
 					  if (data['items'][i].new_item_flg) {
@@ -446,4 +446,82 @@ jQuery(function($){
 	   });
 	   return false;
    })
+});
+
+jQuery(function($){
+
+	//検討中[登録]ボタン
+	$(document).on("click",".consider-btn",function(){
+
+		var self = $(this);
+		var url = window.location.href ;
+
+		if(!self.hasClass('registrated')){
+
+			self.text("登録中...");
+
+			$.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+
+			$.ajax({
+				type: "POST",
+				url: "/considers/register",
+				data: {
+					item_id : self.attr("name") //案件id
+				},
+				success: function(data){
+					if(url.match(/detail\?id\=/) != null){
+						self.removeClass("consider-btn").addClass("consider_delete-btn").text("この案件を検討中から外す");
+					}else{
+						self.addClass("registrated").text("検討中");
+					}
+					var considers_count = Number($("#considers_length").text()) + 1;
+					$("#considers_length").text(considers_count);
+				},
+				error: function(XMLHttpRequest,textStatus, errorThrown){
+					self.text("検討する");
+					alert("通信に失敗しました。もう一度ボタンを押してください。");
+				}
+			});
+			return false;
+		}
+	});
+
+	//検討中[削除]ボタン
+	$(document).on("click",'.consider_delete-btn',function(){
+
+	  var self = $(this);
+		var url = window.location.href ;
+
+		if(url.match(/detail\?id\=/) == null){
+			var html = self.parent().parent().parent().parent();
+			html.fadeOut('fast', function() { $(this).remove(); });
+		}
+
+	  $.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+
+	  $.ajax({
+	    type: "POST",
+	    url: "/considers/delete",
+	    data: {
+	      item_id : self.attr("name") //案件id
+	    },
+	    success: function(data){
+
+				if(url.match(/detail\?id\=/) != null){
+					self.removeClass("consider_delete-btn").addClass("consider-btn").text("検討する");
+				}
+
+	      var considers_count = Number($("#considers_length").text()) - 1;
+	      $("#considers_length").text(considers_count);
+	      if(Number(considers_count)　==　0){
+	        $("#no_consider_message").text("あながた検討している案件はありません");
+	      }
+	    },
+	    error: function(XMLHttpRequest,textStatus, errorThrown){
+	      alert("通信に失敗しました。もう一度ボタンを押してください。");
+	    }
+	  });
+	  return false;
+	});
+
 });

@@ -28,19 +28,6 @@ use App\Models\Tr_search_categories;
       </ul>
     </div><!-- ./slider -->
 
-    <!-- パスワード変更のお願い -->
-@if(!FrntUtil::isLogin())
-    <section class="password-reminder">
-      <div class="contentInr">
-        <div class="password-reminder__inr">
-          <p>【会員の皆様へお知らせ】</p>
-          <p>リニューアルに伴いログインパスワードがリセットされています。</p>
-          <p>お手数ですが<a class="hover-thin" href="/user/reminder">こちら</a>よりパスワードの再設定をお願いします。</p>
-        </div>
-      </div>
-    </section>
-@endif
-
 @include('front.common.keyword_sp')
 
 @if(!FrntUtil::isLogin())

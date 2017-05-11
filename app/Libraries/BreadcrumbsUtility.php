@@ -80,7 +80,7 @@ class BreadcrumbsUtility
         // その他の検索
         } elseif ($uri_array[1] == "search") {
             $breadcrumbs->push($this->getElementItemList());
-        }
+        } 
 
         return $breadcrumbs;
     }

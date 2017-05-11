@@ -79,12 +79,13 @@ ga('send', 'pageview');
 
     <div class="user">
       <ul>
+        <li><a href="/considers"><span>検討中</span><span><span id="considers_length"> {{ $considers_length }}</span><span id="considers_unit">件</span></span></a></li>
       <?php if(frontIsLogin()){ ?>
-        <li><a href="/user">マイページ</a></li>
-        <li><a href="/logout" class="invisible-sp">ログアウト</a></li>
+        <li><a href="/user"><span>マイ</span><span>ページ</span></a></li>
+        <li><a href="/logout" class="invisible-sp"><span>ログ</span><span>アウト</span></a></li>
       <?php }else{ ?>
         <li><a href="/user/regist/auth" class="signin">新規登録</a></li>
-        <li><a href="/login">ログイン</a></li>
+        <li><a href="/login"><span>ログ</span><span>イン</span></a></li>
       <?php } ?>
       </ul>
     </div>

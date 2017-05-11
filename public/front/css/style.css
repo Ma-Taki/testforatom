@@ -318,6 +318,22 @@ p.pageInfo{
 }
 /* 汎用ボタン END */
 
+/* 検討中ボタン */
+
+.cmmn-btn a.consider-btn {
+ background:orange;
+}
+
+.cmmn-btn a.consider_delete-btn {
+ background:red;
+}
+
+.cmmn-btn a.registrated {
+ background:gray;
+}
+
+
+
 .user-info, .item-info, .send-skillsheet {
     width: 90%;
     margin: 0 auto;
@@ -1863,10 +1879,25 @@ a.login__sns-btn {
 }
 
 .user li a{
+  display:inline-block;
 	color: #fff;
-	line-height: 3.2rem;
-	padding: 0 2.5rem;
-	font-size: 1.4rem;
+	line-height:1;
+	padding: 10px;
+	font-size:12px;
+}
+
+
+.user li a span{
+  display:inline-block;
+}
+
+.user li a span#considers_length{
+  color:gold;
+  font-weight:bold;
+  display: inline;
+}
+.user li a span#considers_unit{
+  display: inline;
 }
 
 /* キーワード検索 */
@@ -3552,10 +3583,35 @@ sp.css ~640px
 		border-radius: 8px;
 	}
 
-    .user li a {
-        line-height: 32px;
-    	padding: 0 1rem;
-    }
+  .user li a {
+    width:42px;
+    height:42px;
+    padding:3px;
+    padding-top:10px;
+  }
+
+  .user li a.invisible-sp{
+    display:none;
+  }
+
+  .user li a span{
+    display: block;
+    font-size:9px;
+    padding:2px 0px;
+    text-align: center;
+  }
+
+  .user li a span:first-child{
+    padding-bottom:1px;
+  }
+
+  .user li a span:last-child{
+    padding-top:1px;
+  }
+
+
+
+
 
 	/* search */
 	.headerInr .signin,
