@@ -51,15 +51,6 @@ class Tr_users extends Model
     }
 
     /**
-     * 検討中案件一覧を取得
-     */
-    public function considers() {
-        return $this->hasMany('App\Models\Tr_considers',
-                              'user_id');
-    }
-
-
-    /**
      * 有効なユーザー
      */
     public function scopeEnable($query) {

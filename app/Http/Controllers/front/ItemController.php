@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\ConsiderController;
+use App\Http\Controllers\front\ConsiderController;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Libraries\OrderUtility as OdrUtil;
 use App\Libraries\FrontUtility as FrntUtil;

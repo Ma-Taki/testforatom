@@ -25,67 +25,24 @@ class ConsiderController extends FrontController
   public function showConsiderItems(Request $request)
  {
 
-   $itemList = "";
-   $considers_list = array();
-
-    echo "【ログイン時】:";
-    echo nl2br("\n");
-    echo nl2br("\n");
-    echo "▼ログインチェック（クッキー）: ";
-    echo nl2br("\n");
-    var_dump(FrntUtil::isLogin());
-    echo nl2br("\n");
-    echo nl2br("\n");
-    echo "▼ユーザーID取得（クッキー） : ";
-    echo nl2br("\n");
-    var_dump(\Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID));
-    echo nl2br("\n");
-    echo nl2br("\n");
-    echo "▼ログインユーザーの情報取得（データーベース）: ";
-    echo nl2br("\n");
-    var_dump(Tr_users::find(\Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID)));
-    echo nl2br("\n");
-    echo nl2br("\n");
-    echo "▼ログインユーザーの検討中案件ID取得（データベース）: ";
-    echo nl2br("\n");
-    $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
-    if($cookie){
-      $user = Tr_users::find($cookie);
-      $considers = $user->considers;
-      foreach($considers as $consider){
-        $consider->delete_flag === 0 ? array_push($considers_list,$consider->item_id) : 0;
-      }
-    }
-    print_r($considers_list);
-    echo nl2br("\n");
-    echo nl2br("\n");
-    echo "▼ログインユーザーの検討中案件データ情報取得（データベース）: ";
-    echo nl2br("\n");
-    print_r(Tr_items::select('items.*')->whereIn('items.id',$considers_list)->get());
-
+   $itemList = array();
 
    if(FrntUtil::isLogin()){
      $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
-     if($cookie){
-       $user = Tr_users::find($cookie);
-       $considers = $user->considers;
+     if(!empty($cookie)){
+       $considers = Tr_considers::where("user_id",$cookie)->where("delete_flag",0)->get();
        foreach($considers as $consider){
-         $consider->delete_flag === 0 ? array_push($considers_list,$consider->item_id) : 0;
+         array_push($itemList,Tr_items::where('id',$consider->item_id)->get()->first());
        }
      }
    }else{
      if(!empty(CkieUtil::get("considers"))){
        foreach(CkieUtil::get("considers") as $key => $value){
-         array_push($considers_list,$key);
+         array_push($itemList,Tr_items::where('id',$key)->get()->first());
        }
       }
    }
-
-
-   $itemList = Tr_items::select('items.*')->whereIn('items.id',$considers_list)->get();
-
    return view('front.considers_list', compact('itemList'));
-
  }
 
 
@@ -137,7 +94,6 @@ class ConsiderController extends FrontController
   }
 }
 
-
  /**
   * 検討中ボタンのスタイル処理
   * 引数:案件id
@@ -160,19 +116,17 @@ class ConsiderController extends FrontController
  public static function isConsidering($item_id){
    //ログインしていない時
    if(!FrntUtil::isLogin() && !empty(CkieUtil::get("considers"))){
-     foreach(CkieUtil::get("considers") as $key => $value){
-       //クッキーにあったら
-       if($key == $item_id) return true;
+     $considers = CkieUtil::get("considers");
+     if(isset($considers[$item_id]) && $considers[$item_id] === true){
+       return true;
      }
    //ログインしている時
    }else{
      $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
-     if($cookie){
-       $user = Tr_users::find($cookie);
-       $considers = $user->considers;
-       foreach($considers as $consider){
-         //データベースにあったら
-         if($item_id == $consider->item_id && $consider->delete_flag === 0) return true;
+     if(!empty($cookie)){
+       $considers = Tr_considers::where("user_id",$cookie)->where("item_id",$item_id)->first();
+       if(!empty($considers) && $considers->delete_flag === 0){
+         return true;
        }
      }
    }
