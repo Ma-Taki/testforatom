@@ -125,8 +125,9 @@ class ConsiderController extends FrontController
      $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
      if($cookie){
        dump($cookie);
-       $considers = Tr_considers::where("user_id",$cookie)->where("item_id",$item_id)->first();
-       if(!empty($considers) && $considers->delete_flag === 0){
+       $consider = Tr_considers::where("user_id",$cookie)->where("item_id",$item_id)->where("delete_flag",0)->first();
+       dump($consider->delete_flag)
+       if(!empty($consider)){
          return true;
        }
      }
