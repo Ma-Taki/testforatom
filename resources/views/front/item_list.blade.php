@@ -38,7 +38,7 @@
     use App\Models\Ms_job_types;
     use App\Libraries\CookieUtility as CkieUtil;
     use App\Models\Tr_users;
-    use App\Http\Controllers\ConsiderController;
+    use App\Http\Controllers\front\ConsiderController;
 ?>
 
 <div class="wrap">

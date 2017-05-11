@@ -110,6 +110,11 @@ Route::post('/user/reminder', 'front\UserController@sendReminder');
 Route::get('/user/recovery', 'front\UserController@showRecovery');
 Route::post('/user/recovery', 'front\UserController@recoverPassword');
 
+//検討中
+Route::post('/considers/register', 'front\ConsiderController@ajaxRegister');//登録ボタン
+Route::post('/considers/delete', 'front\ConsiderController@ajaxDelete');//削除ボタン
+Route::get('/considers', 'front\ConsiderController@showConsiderItems');//一覧ページ
+
 // △△△ 公開画面ルート　△△△
 
 // ▽▽▽ 管理画面ルート　▽▽▽
@@ -194,8 +199,3 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     // メルマガ配信処理
     Route::post('/admin/mail-magazine', 'admin\MailMagazineController@store');
 });
-
-//検討中
-Route::post('/considers/register', 'ConsiderController@ajaxRegister');//登録ボタン
-Route::post('/considers/delete', 'ConsiderController@ajaxDelete');//削除ボタン
-Route::get('/considers', 'ConsiderController@showConsiderItems');//一覧ページ

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\front;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\FrontController;
 use App\Http\Requests;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\CookieUtility as CkieUtil;
@@ -14,7 +15,7 @@ use App\Models\Tr_users;
 use App\Models\Tr_items;
 
 
-class ConsiderController extends Controller
+class ConsiderController extends FrontController
 {
 
   /**
@@ -26,6 +27,42 @@ class ConsiderController extends Controller
 
    $itemList = "";
    $considers_list = array();
+
+    echo "【ログイン時】:";
+    echo nl2br("\n");
+    echo nl2br("\n");
+    echo "▼ログインチェック（クッキー）: ";
+    echo nl2br("\n");
+    var_dump(FrntUtil::isLogin());
+    echo nl2br("\n");
+    echo nl2br("\n");
+    echo "▼ユーザーID取得（クッキー） : ";
+    echo nl2br("\n");
+    var_dump(\Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID));
+    echo nl2br("\n");
+    echo nl2br("\n");
+    echo "▼ログインユーザーの情報取得（データーベース）: ";
+    echo nl2br("\n");
+    var_dump(Tr_users::find(\Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID)));
+    echo nl2br("\n");
+    echo nl2br("\n");
+    echo "▼ログインユーザーの検討中案件ID取得（データベース）: ";
+    echo nl2br("\n");
+    $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
+    if($cookie){
+      $user = Tr_users::find($cookie);
+      $considers = $user->considers;
+      foreach($considers as $consider){
+        $consider->delete_flag === 0 ? array_push($considers_list,$consider->item_id) : 0;
+      }
+    }
+    print_r($considers_list);
+    echo nl2br("\n");
+    echo nl2br("\n");
+    echo "▼ログインユーザーの検討中案件データ情報取得（データベース）: ";
+    echo nl2br("\n");
+    print_r(Tr_items::select('items.*')->whereIn('items.id',$considers_list)->get());
+
 
    if(FrntUtil::isLogin()){
      $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
