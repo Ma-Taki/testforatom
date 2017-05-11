@@ -123,7 +123,8 @@ class ConsiderController extends FrontController
    //ログインしている時
    }else{
      $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
-     if(!empty($cookie)){
+     if($cookie){
+       dump($cookie);
        $considers = Tr_considers::where("user_id",$cookie)->where("item_id",$item_id)->first();
        if(!empty($considers) && $considers->delete_flag === 0){
          return true;

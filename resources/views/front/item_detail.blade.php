@@ -21,7 +21,6 @@
 
       <div class="main-content__body">
         <div class="content__element">
-<?php var_dump( $isConsidering); ?>
 @if(!$canEntry)
           <div class="alert alert-danger">
             <ul>
@@ -110,8 +109,7 @@
 @if($canEntry)
                 <div class="cmmn-btn">
                   <a href="/entry?id={{ $item->id }}">この案件にエントリーする</a>
-<?php echo $isConsidering ?>
-@if($isConsidering == 1)
+@if($isConsidering)
                   <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider_delete-btn">この案件を検討中から外す</a>
 @else
                   <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider-btn">検討する</a>
