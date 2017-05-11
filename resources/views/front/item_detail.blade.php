@@ -21,7 +21,7 @@
 
       <div class="main-content__body">
         <div class="content__element">
-
+<?php var_dump( $isConsidering); ?>
 @if(!$canEntry)
           <div class="alert alert-danger">
             <ul>
