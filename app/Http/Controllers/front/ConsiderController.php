@@ -126,7 +126,7 @@ class ConsiderController extends FrontController
      if($cookie){
        dump($cookie);
        $consider = Tr_considers::where("user_id",$cookie)->where("item_id",$item_id)->where("delete_flag",0)->first();
-       dump($consider->delete_flag)
+       dump($consider);
        if(!empty($consider)){
          return true;
        }
