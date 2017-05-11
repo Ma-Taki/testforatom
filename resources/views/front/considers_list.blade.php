@@ -92,4 +92,5 @@
   </div>
 @include('front.common.keyword_pc')
 </div><!-- END WRAP -->
+
 @endsection
