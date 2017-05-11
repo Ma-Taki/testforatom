@@ -16,7 +16,7 @@ $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
 use App\Libraries\FrontUtility as FrntUtil;
-use App\Http\Controllers\ConsiderController;
+use App\Http\Controllers\front\ConsiderController;
 
 function frontIsLogin(){
     return FrntUtil::isLogin();
