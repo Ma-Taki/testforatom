@@ -514,7 +514,7 @@ jQuery(function($){
 	      var considers_count = Number($("#considers_length").text()) - 1;
 	      $("#considers_length").text(considers_count);
 	      if(Number(considers_count)　==　0){
-	        $("#no_consider_message").text("あながた検討している案件はありません");
+	        $("#no_consider_message").text("検討している案件はありません");
 	      }
 	    },
 	    error: function(XMLHttpRequest,textStatus, errorThrown){

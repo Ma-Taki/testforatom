@@ -24,7 +24,7 @@
     <div class="main-content-left">
       <h2 class="main-content__title">検討中案件一覧</h2>
       <hr class="hr-2px-solid-5e8796">
-      <p id="no_consider_message">@if(count($itemList)==0) あなたが検討している案件はありません @endif</p>
+      <p id="no_consider_message" style="padding-left:10px;">@if(count($itemList)==0) 検討している案件はありません @endif</p>
     <div class="main-content__body">
       <div class="content__element">
         <div id="itemList">
