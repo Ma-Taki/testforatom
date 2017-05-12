@@ -29,7 +29,7 @@
       <div class="content__element">
         <div id="itemList">
 @foreach($itemList as $item)
-          <div class="item">
+          <div class="item considers_item">
             <div class="itemHeader">
               <div class="table-row">
 @if($item->registration_date->between(Carbon::now(), Carbon::now()->subDays(7)))
