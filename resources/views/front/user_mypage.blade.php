@@ -36,6 +36,11 @@
           @include('front.common.validation_error')
           @include('front.common.custom_info_message')
 
+          <div class="cmmn-btn">
+            <a class="edit-btn" href="/user/edit">登録内容変更</a>
+            <a class="edit-btn entrylog" href="/user/entry">エントリー履歴</a>
+          </div>
+
           <div class="account-info">
             <div class="data-table">
               <h3 class="data-table__title">アカウント</h3>
@@ -151,12 +156,12 @@
             </div>
             <div class="cmmn-btn">
               <a class="edit-btn" href="/user/edit">登録内容変更</a>
-              <a class="edit-btn" href="/user/entry">エントリー履歴</a>
+              <a class="edit-btn entrylog" href="/user/entry">エントリー履歴</a>
             </div>
           </div>
 
           <div class="cmmn-btn">
-            <a href="/user/delete">退会する</a>
+            <a href="/user/delete" class="unsubscribe">退会する</a>
           </div>
 
         </div>

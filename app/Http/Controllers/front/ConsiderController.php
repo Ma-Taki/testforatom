@@ -7,9 +7,6 @@ use App\Http\Controllers\FrontController;
 use App\Http\Requests;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\CookieUtility as CkieUtil;
-use Input;
-use Carbon\Carbon;
-use DB;
 use App\Models\Tr_considers;
 use App\Models\Tr_users;
 use App\Models\Tr_items;
@@ -70,9 +67,9 @@ class ConsiderController extends FrontController
        $csd->delete_flag = 0;
        $csd->save();
      }
-   //ログインしていなければクッキーに追加
+   //ログインしていなければクッキーに追加（有効期間２ヶ月）
    }else{
-     CkieUtil::set("considers[$request->item_id]",true);
+     CkieUtil::set("considers[$request->item_id]",true,CkieUtil::COOKIE_TIME_MONTH*2);
    }
  }
 
@@ -80,74 +77,18 @@ class ConsiderController extends FrontController
   * 検討中リストから削除
   */
 
- public function ajaxDelete(Request $request)
-{
-  //ログインしている時
-  if(FrntUtil::isLogin()){
-    //クッキーからuser_id取得
-    $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
-    $user = Tr_users::find($cookie);
-    $considers = Tr_considers::where('user_id',$user->id)->where('item_id',$request->item_id)->update(['delete_flag'=>1]);
-  //ログインしていなければクッキーから削除
-  }else{
-    CkieUtil::delete('considers['.$request->item_id.']');
+   public function ajaxDelete(Request $request)
+  {
+    //ログインしている時
+    if(FrntUtil::isLogin()){
+      //クッキーからuser_id取得
+      $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
+      $user = Tr_users::find($cookie);
+      $considers = Tr_considers::where('user_id',$user->id)->where('item_id',$request->item_id)->update(['delete_flag'=>1]);
+    //ログインしていなければクッキーから削除
+    }else{
+      CkieUtil::delete('considers['.$request->item_id.']');
+    }
   }
-}
-
- /**
-  * 検討中ボタンのスタイル処理
-  * 引数:案件id
-  */
- public static function makeConsiderButtonStyle($item_id){
-   //スタイル初期化
-   $class = '';
-   $text = '検討する';
-   $isConsidering = self::isConsidering($item_id);
-   if($isConsidering){
-     $class = 'registrated';
-     $text = '検討中';
-   }
-   return array('class' => $class, 'text' => $text);
- }
-
- /**
-  * 検討中案件かどうかの判定
-  */
- public static function isConsidering($item_id){
-   //ログインしていない時
-   if(!FrntUtil::isLogin() && !empty(CkieUtil::get("considers"))){
-     $considers = CkieUtil::get("considers");
-     if(isset($considers[$item_id]) && $considers[$item_id] === true){
-       return true;
-     }
-   //ログインしている時
-   }else{
-     $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
-     if($cookie){
-       $consider = Tr_considers::where("user_id",$cookie)->where("item_id",$item_id)->first();
-       if(!empty($consider) && $consider->delete_flag == 0){
-         return true;
-       }
-     }
-   }
-   return false;
- }
-
- /**
-  * 検討中案件数を計算
-  */
- public static function culcConsiderLength(){
-   $consider_length = 0;
-   if(FrntUtil::isLogin()){
-     $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
-     if($cookie){
-       $user = Tr_considers::where("user_id",$cookie)->where("delete_flag",0)->get();
-       $consider_length = count($user);
-     }
-   }else{
-     $consider_length = CkieUtil::get("considers") ? count(CkieUtil::get("considers")) : 0;
-   }
-   return $consider_length;
- }
 
 }

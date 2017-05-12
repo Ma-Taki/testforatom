@@ -181,6 +181,13 @@ textarea{width: 100%;border: 1px solid #5e8796;border-radius: 5px;}
     line-height: 2rem;
 }
 
+.alert-nodata ul li{
+    list-style-type: none;
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+
 .alert-danger{
     border: 1px solid #e9b2bd;
     color: #bf1939;
@@ -325,7 +332,7 @@ p.pageInfo{
 }
 
 .cmmn-btn a.consider_delete-btn {
- background:red;
+ background:#d9333f;
 }
 
 .cmmn-btn a.registrated {
@@ -783,6 +790,19 @@ h1.SearchTitle:before{
 .cmmn-btn .edit-btn {
     width: 32.945%;
 }
+
+.user-mypage .cmmn-btn:first-child{
+  margin-bottom:4rem;
+}
+
+.user-mypage .cmmn-btn .entrylog{
+  background-color : #e9bc00;
+}
+
+.user-mypage .cmmn-btn .unsubscribe{
+  background-color : #d9333f;
+}
+
 
 /*-------------------------------
 ## 新規会員登録
@@ -1459,7 +1479,7 @@ a.login__sns-btn {
 -------------------------------*/
 
 .item.considers_item:first-child{
-padding-top:0px;
+  padding-top:0px;
 }
 
 
@@ -3596,7 +3616,7 @@ sp.css ~640px
     width:38px;
     height:38px;
     padding:0px;
-    padding-top:8px;
+    padding-top:7px;
   }
 
   .user li a.invisible-sp{

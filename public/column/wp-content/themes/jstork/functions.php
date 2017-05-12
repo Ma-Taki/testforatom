@@ -16,14 +16,14 @@ $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
 use App\Libraries\FrontUtility as FrntUtil;
-use App\Http\Controllers\front\ConsiderController;
+use App\Libraries\ConsiderUtility as CnsUtil;
 
 function frontIsLogin(){
     return FrntUtil::isLogin();
 }
 
 function culcConsiderLength(){
-  return ConsiderController::culcConsiderLength();
+  return CnsUtil::culcConsiderLength();
 }
 
 /**

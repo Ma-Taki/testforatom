@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\front\ConsiderController;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Libraries\OrderUtility as OdrUtil;
 use App\Libraries\FrontUtility as FrntUtil;
+use App\Libraries\ConsiderUtility as CnsUtil;
 use App\Models\Tr_items;
 use App\Models\Tr_tags;
 use App\Models\Tr_search_categories;
@@ -83,6 +83,8 @@ class ItemController extends FrontController
 
         //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
         $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
+        //検索ワードを$paramsに渡す
+        $params['keyword'] = $request->keyword;
 
         return view('front.item_list', compact('itemList','params'));
     }
@@ -122,7 +124,7 @@ class ItemController extends FrontController
                                 ->get();
 
         //この案件が検討中かどうか
-        $isConsidering = ConsiderController::isConsidering($request->id);
+        $isConsidering = CnsUtil::isConsidering($request->id);
 
         return view('front.item_detail', compact('item', 'recoItemList', 'canEntry','isConsidering'));
     }

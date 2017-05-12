@@ -81,6 +81,7 @@ ga('send', 'pageview');
       <ul>
         <li><a href="/considers"><span>検討中</span><span><span id="considers_length"> <?php echo culcConsiderLength() ?></span><span id="considers_unit">件</span></span></a></li>
       <?php if(frontIsLogin()){ ?>
+        <li><a href="/user/entry"><span>応募</span><span>履歴</span></a></li>
         <li><a href="/user"><span>マイ</span><span>ページ</span></a></li>
         <li><a href="/logout" class="invisible-sp"><span>ログ</span><span>アウト</span></a></li>
       <?php }else{ ?>

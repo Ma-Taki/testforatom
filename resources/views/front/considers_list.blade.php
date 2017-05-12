@@ -1,6 +1,6 @@
 @extends('front.common.layout')
 @if(isset($html_title)) @section('title', 'エンジニアルート | '.$html_title)
-@else                   @section('title', 'エンジニアルート | 案件一覧')
+@else                   @section('title', 'エンジニアルート | 検討中案件一覧')
 @endif
 @section('content')
 <?php

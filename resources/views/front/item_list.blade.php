@@ -29,6 +29,7 @@
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
     use App\Libraries\FrontUtility as FrntUtil;
+    use App\Libraries\ConsiderUtility as CnsUtil;
     use App\Libraries\ModelUtility as mdlUtil;
     use Carbon\Carbon;
     use App\Models\Ms_skill_categories;
@@ -38,7 +39,6 @@
     use App\Models\Ms_job_types;
     use App\Libraries\CookieUtility as CkieUtil;
     use App\Models\Tr_users;
-    use App\Http\Controllers\front\ConsiderController;
 ?>
 
 <div class="wrap">
@@ -214,6 +214,12 @@
             </form>
           </div>
 @endif
+@if(isset($params['keyword']))
+        <p style="color:#5e8796;">検索キーワード：<span style="font-weight:bold;color:#d9333f;">
+<?php $keyword_str = preg_replace("/( |　)/", "", $params["keyword"] ); ?>
+@if($keyword_str == "") 未入力 @else {{ $params['keyword'] }} @endif
+        </p>
+@endif
 @if(!$params["nodata"])
           <div class="sort">
             <span class="selectBox">
@@ -245,7 +251,7 @@
 ?>
 
 @if($params['nodata'])
-        <h2 style="margin-top:20px;">終了した案件ですが、探す際の参考としてご覧ください。</h2>
+        <div class="alert alert-danger alert-nodata"><ul><li>該当案件はありませんでした。終了した案件ですが、探す際の参考としてご覧ください</li></ul></div>
 @endif
 <div id="itemList">
 @foreach($itemList as $item)
@@ -300,8 +306,10 @@
                 <p class="detail">{{ $item->detail }}</p>
                 <div class="cmmn-btn">
                   <a href="/item/detail?id={{ $item->id }}" target="_blank">詳細を見る</a>
-<?php $styles = ConsiderController::makeConsiderButtonStyle($item->id); ?>
+@if(!$params["nodata"])
+<?php $styles = CnsUtil::makeConsiderButtonStyle($item->id); ?>
                   <a href="javascript:void(0);" class="consider-btn {{ $styles['class'] }}" name="{{ $item->id }}">{{ $styles['text'] }}</a>
+@endif
                 </div>
               </div>
             </div>

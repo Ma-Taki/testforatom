@@ -1,9 +1,6 @@
 <?php
  use App\Libraries\FrontUtility as FrntUtil;
- use App\Libraries\CookieUtility as CkieUtil;
- use App\Models\Tr_users;
- use App\Models\Tr_considers;
- use App\Http\Controllers\front\ConsiderController;
+ use App\Libraries\ConsiderUtility as CnsUtil;
  ?>
 <header>
   <div class="headerInr">
@@ -16,8 +13,9 @@
 
     <div class="user">
       <ul>
-        <li><a href="/considers"><span>検討中</span><span><span id="considers_length">{{ ConsiderController::culcConsiderLength() }}</span><span id="considers_unit"> 件</span></span></a></li>
+        <li><a href="/considers"><span>検討中</span><span><span id="considers_length">{{ CnsUtil::culcConsiderLength() }}</span><span id="considers_unit"> 件</span></span></a></li>
 @if(FrntUtil::isLogin())
+        <li><a href="/user/entry"><span>応募</span><span>履歴</span></a></li>
         <li><a href="/user"><span>マイ</span><span>ページ</span></a></li>
         <li><a href="/logout" class="invisible-sp"><span>ログ</span><span>アウト</span></a></li>
 @else
@@ -33,7 +31,7 @@
 
     <div class="search">
       <form action="/item/keyword" method="get">
-        <input type="text" name="keyword" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+        <input type="text" name="keyword" placeholder="キーワードで検索" size="40" maxlength="255" class="searchBox">
         <button class="searchBtn" type="submit"></button>
       </form>
     </div><!-- /.search -->
