@@ -30,7 +30,7 @@ if(FrntUtil::isLogin()){
   $considers_length = CkieUtil::get("considers") ? count(CkieUtil::get("considers")) : 0;
 }
 ?>
-        <li><a href="/considers"><span>検討中</span><span><span id="considers_length"> {{ $considers_length }}</span><span id="considers_unit">件</span></span></a></li>
+        <li><a href="/considers"><span>検討中</span><span><span id="considers_length">{{ $considers_length }}</span><span id="considers_unit"> 件</span></span></a></li>
 @if(FrntUtil::isLogin())
         <li><a href="/user"><span>マイ</span><span>ページ</span></a></li>
         <li><a href="/logout" class="invisible-sp"><span>ログ</span><span>アウト</span></a></li>

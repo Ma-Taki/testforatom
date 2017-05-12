@@ -3584,10 +3584,10 @@ sp.css ~640px
 	}
 
   .user li a {
-    width:42px;
-    height:42px;
-    padding:3px;
-    padding-top:10px;
+    width:38px;
+    height:38px;
+    padding:0px;
+    padding-top:8px;
   }
 
   .user li a.invisible-sp{
@@ -3595,7 +3595,7 @@ sp.css ~640px
   }
 
   .user li a span{
-    display: block;
+    display:block;
     font-size:9px;
     padding:2px 0px;
     text-align: center;
