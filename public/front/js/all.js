@@ -469,6 +469,7 @@ jQuery(function($){
 					item_id : self.attr("name") //案件id
 				},
 				success: function(data){
+					console.log(data);
 					if(url.match(/detail\?id\=/) != null){
 						self.removeClass("consider-btn").addClass("consider_delete-btn").text("この案件を検討中から外す");
 					}else{

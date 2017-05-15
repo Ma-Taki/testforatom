@@ -71,6 +71,7 @@ class ConsiderController extends FrontController
    //ログインしていなければクッキーに追加（有効期間２ヶ月）
    }else{
      CkieUtil::set("considers[$request->item_id]",true,CkieUtil::COOKIE_TIME_MONTH*2);
+     usleep(2000000);
    }
    //検討中案件数を返す
    echo json_encode(CnsUtil::culcConsiderLength());

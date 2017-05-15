@@ -55,8 +55,8 @@ class ConsiderUtility
       if(FrntUtil::isLogin()){
         $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
         if($cookie){
-          $user = Tr_considers::where("user_id",$cookie)->where("delete_flag",0)->get();
-          $consider_length = count($user);
+          $considers = Tr_considers::where("user_id",$cookie)->where("delete_flag",0)->get();
+          $consider_length = count($considers);
         }
       }else{
         $consider_length = CkieUtil::get("considers") ? count(CkieUtil::get("considers")) : 0;
