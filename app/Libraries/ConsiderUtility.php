@@ -6,6 +6,7 @@
 namespace App\Libraries;
 use App\Libraries\CookieUtility as CkieUtil;
 use App\Libraries\FrontUtility as FrntUtil;
+use App\Libraries\SessionUtility as SsnUtil;
 use App\Models\Tr_considers;
 class ConsiderUtility
 {
@@ -59,7 +60,8 @@ class ConsiderUtility
           $consider_length = count($considers);
         }
       }else{
-        $consider_length = CkieUtil::get("considers") ? count(CkieUtil::get("considers")) : 0;
+        $consider_length = session()->get(SsnUtil::SESSION_KEY_CONSIDERS,0);
+        //session()->put(SsnUtil::SESSION_KEY_CONSIDERS,0);
       }
       return $consider_length;
     }

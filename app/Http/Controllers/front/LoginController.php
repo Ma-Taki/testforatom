@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests;
 use App\Models\Tr_users;
 use App\Models\Tr_considers;
-use App\Libraries\{FrontUtility as FrontUtil, CookieUtility as CkieUtil};
+use App\Libraries\{FrontUtility as FrontUtil, CookieUtility as CkieUtil, SessionUtility as SsnUtil};
 use Log;
 use Cookie;
 use Carbon\Carbon;
@@ -108,6 +108,8 @@ class LoginController extends FrontController
     public function logout(){
         // cookieを削除
         CkieUtil::delete(CkieUtil::COOKIE_NAME_USER_ID);
+        //sessionを削除
+        session()->forget(SsnUtil::SESSION_KEY_CONSIDERS);
         // トップ画面に遷移
         return redirect('/');
     }

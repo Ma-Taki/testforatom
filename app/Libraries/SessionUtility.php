@@ -24,4 +24,8 @@ class SessionUtility
     // SNS連携　ソーシャルID
     const SESSION_KEY_SOCIAL_ID = 'social_conection_id';
     /* △△△ 公開画面用 △△△ */
+
+    //検討中案件数
+    const SESSION_KEY_CONSIDERS = 'considers';
+
 }

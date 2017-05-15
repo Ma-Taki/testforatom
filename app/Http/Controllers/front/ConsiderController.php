@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\CookieUtility as CkieUtil;
 use App\Libraries\ConsiderUtility as CnsUtil;
+use App\Libraries\SessionUtility as SsnUtil;
 use App\Models\Tr_considers;
 use App\Models\Tr_users;
 use App\Models\Tr_items;
@@ -68,13 +69,15 @@ class ConsiderController extends FrontController
        $csd->delete_flag = 0;
        $csd->save();
      }
+     echo json_encode(CnsUtil::culcConsiderLength());
    //ログインしていなければクッキーに追加（有効期間２ヶ月）
    }else{
      CkieUtil::set("considers[$request->item_id]",true,CkieUtil::COOKIE_TIME_MONTH*2);
-     usleep(2000000);
+     //案件数カウントだけセッションで管理
+     $cnt = session()->get(SsnUtil::SESSION_KEY_CONSIDERS,0);
+     session()->put(SsnUtil::SESSION_KEY_CONSIDERS,$cnt+1);
+     echo json_encode($cnt+1);
    }
-   //検討中案件数を返す
-   echo json_encode(CnsUtil::culcConsiderLength());
  }
 
  /**
@@ -89,12 +92,16 @@ class ConsiderController extends FrontController
       $cookie = \Cookie::get(CkieUtil::COOKIE_NAME_PREFIX .CkieUtil::COOKIE_NAME_USER_ID);
       $user = Tr_users::find($cookie);
       $considers = Tr_considers::where('user_id',$user->id)->where('item_id',$request->item_id)->update(['delete_flag'=>1]);
+      echo json_encode(CnsUtil::culcConsiderLength());
     //ログインしていなければクッキーから削除
     }else{
       CkieUtil::delete('considers['.$request->item_id.']');
+      //案件数カウントだけセッションで管理
+      $cnt = session()->get(SsnUtil::SESSION_KEY_CONSIDERS,0);
+      $cnt>0 ? $cnt -- : 0;
+      session()->put(SsnUtil::SESSION_KEY_CONSIDERS,$cnt);
+      echo json_encode($cnt);
     }
-    //検討中案件数を返す
-    echo json_encode(CnsUtil::culcConsiderLength());
   }
 
 }
