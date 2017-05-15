@@ -454,7 +454,7 @@ jQuery(function($){
 	$(document).on("click",".consider-btn",function(){
 
 		var self = $(this);
-		var url = window.location.href ;
+		var url = window.location.href;
 
 		if(!self.hasClass('registrated')){
 
@@ -469,13 +469,13 @@ jQuery(function($){
 					item_id : self.attr("name") //案件id
 				},
 				success: function(data){
+					console.log(data);
 					if(url.match(/detail\?id\=/) != null){
 						self.removeClass("consider-btn").addClass("consider_delete-btn").text("この案件を検討中から外す");
 					}else{
 						self.addClass("registrated").text("検討中");
 					}
-					var considers_count = Number($("#considers_length").text()) + 1;
-					$("#considers_length").text(considers_count);
+					$("#considers_length").text(data);
 				},
 				error: function(XMLHttpRequest,textStatus, errorThrown){
 					self.text("検討する");
@@ -510,12 +510,8 @@ jQuery(function($){
 				if(url.match(/detail\?id\=/) != null){
 					self.removeClass("consider_delete-btn").addClass("consider-btn").text("検討する");
 				}
-
-	      var considers_count = Number($("#considers_length").text()) - 1;
-	      $("#considers_length").text(considers_count);
-	      if(Number(considers_count)　==　0){
-	        $("#no_consider_message").text("検討している案件はありません");
-	      }
+				$("#considers_length").text(data);
+	      if(Number(data)　==　0) $("#no_consider_message").text("検討している案件はありません");
 	    },
 	    error: function(XMLHttpRequest,textStatus, errorThrown){
 	      alert("通信に失敗しました。もう一度ボタンを押してください。");

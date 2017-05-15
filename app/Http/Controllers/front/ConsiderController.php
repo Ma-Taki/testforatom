@@ -7,6 +7,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Requests;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\CookieUtility as CkieUtil;
+use App\Libraries\ConsiderUtility as CnsUtil;
 use App\Models\Tr_considers;
 use App\Models\Tr_users;
 use App\Models\Tr_items;
@@ -71,6 +72,8 @@ class ConsiderController extends FrontController
    }else{
      CkieUtil::set("considers[$request->item_id]",true,CkieUtil::COOKIE_TIME_MONTH*2);
    }
+   //検討中案件数を返す
+   echo json_encode(CnsUtil::culcConsiderLength());
  }
 
  /**
@@ -89,6 +92,8 @@ class ConsiderController extends FrontController
     }else{
       CkieUtil::delete('considers['.$request->item_id.']');
     }
+    //検討中案件数を返す
+    echo json_encode(CnsUtil::culcConsiderLength());
   }
 
 }
