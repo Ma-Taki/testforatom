@@ -326,8 +326,6 @@ $(document).on('click','#tag-suggest-list ul li',function(){
   $('textarea[name=item_tag]').val($('textarea[name=item_tag]').val()+$(this).text()+'\n');
 });
 
-
-
 </script>
 
 @endsection
