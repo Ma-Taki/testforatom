@@ -617,7 +617,8 @@ body {
 }
 
 #tag-suggest-list ul li:hover{
-  background:gray;
+  background:#4682b4;
+  color:white;
 }
 
 #tag-box{
