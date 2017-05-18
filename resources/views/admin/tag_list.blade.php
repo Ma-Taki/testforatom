@@ -39,10 +39,12 @@ use App\Models\Tr_tag_infos;
               <tr>
                 <th><label class="control-label">表示順</label></th>
                 <td>
-                  <input class='checks' type="checkbox" name="enabled" id="eo_label2" value = 'tags.id-asc' @if(old('enabled')==='tags.id-asc') checked @endif />
-                  <label for="eo_label2"><font style="font-weight:normal;">タグID順</font></label>
-                  <input class='checks' type="checkbox" name="enabled" id="eo_label1" value = 'total_cnt-asc' @if(old('enabled')==='total_cnt-asc') checked @endif />
-                  <label for="eo_label1"><font style="font-weight:normal;">使用数が少ない順</font></label>
+                  <input class='checks' type="checkbox" name="enabled" id="eo_label0" value = 'tags.id-desc' @if(old('enabled')==='tags.id-desc') checked @endif />
+                  <label for="eo_label0"><font style="font-weight:normal;">新しい順</font></label>
+                  <input class='checks' type="checkbox" name="enabled" id="eo_label1" value = 'tags.id-asc' @if(old('enabled')==='tags.id-asc') checked @endif />
+                  <label for="eo_label1"><font style="font-weight:normal;">古い順</font></label>
+                  <input class='checks' type="checkbox" name="enabled" id="eo_label2" value = 'total_cnt-asc' @if(old('enabled')==='total_cnt-asc') checked @endif />
+                  <label for="eo_label2"><font style="font-weight:normal;">使用数が少ない順</font></label>
                   <input class='checks' type="checkbox" name="enabled" id="eo_label3" value = 'total_cnt-desc' @if(old('enabled')==='total_cnt-desc') checked @endif />
                   <label for="eo_label3"><font style="font-weight:normal;">使用数が多い順</font></label>
                 </td>
