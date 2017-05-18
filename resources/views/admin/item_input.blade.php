@@ -215,10 +215,12 @@ use App\Libraries\HtmlUtility;
                         <div class="form-group">
                             <label for="input_sys_type" class="col-md-2 control-label">タグ</label>
                             <div class="col-md-8">
-                                (20文字以内、80個まで。キーワード毎に改行してください。)</br>
+                                (20文字以内、80個まで。キーワード毎に改行してください。)</br></br>
+                                <span>タグ予測変換：</span><input type=text id='tag-input' autocomplete="off" class="form-control">
+                                <div id='tag-suggest-list'><p id='tag-suggest-list-cap'></p><ul></ul></div>
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px" id="tagTextArea">{{ old('item_tag') }}</textarea>
+                                        <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px;" id="tagTextArea">{{ old('item_tag') }}</textarea>
                                     </div>
                                     <div class="col-md-7">
                                         <button type="button" class="btn btn-sm btn-default" onclick="mutualApply()">相互反映</button>
@@ -281,4 +283,51 @@ use App\Libraries\HtmlUtility;
         </div>
     </div>
 </div>
+<script>
+$(window).keyup(function(e){
+  var input = $('#tag-input');
+  if(input.val().trim().length != 0){
+
+    $('#tag-suggest-list').show();
+
+    $.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+
+    $.ajax({
+      type: "POST",
+      url: "/admin/item/input/suggesttags",
+      dataType:'json',
+      data: {
+        input : input.val()
+      },
+      success: function(data){
+        $('#tag-suggest-list ul').html("");
+        if(data.length>0){
+          $('#tag-suggest-list-cap').text(data.length+"件の候補があります。クリックして追加してください。");
+        }else{
+          $('#tag-suggest-list-cap').text("候補はありません。下のテキストエリアで新規作成してください。");
+        }
+        for (key in data){
+          $('#tag-suggest-list ul').append('<li class="suggest-tag">' + data[key].term + '</li>');
+        }
+      },
+      error: function(XMLHttpRequest,textStatus, errorThrown){
+        alert("通信に失敗しました");
+      }
+    });
+    return false;
+  }else{
+    $('#tag-suggest-list ul').html("");
+    $('#tag-suggest-list').hide();
+  }
+
+});
+
+$(document).on('click','#tag-suggest-list ul li',function(){
+  $('textarea[name=item_tag]').val($('textarea[name=item_tag]').val()+$(this).text()+'\n');
+});
+
+
+
+</script>
+
 @endsection

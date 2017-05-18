@@ -59,7 +59,7 @@ use App\Libraries\HtmlUtility as HtmlUtil;
                             <label class="col-md-2 control-label">案件権限</label>
                             <div class="col-md-10 management">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="auths[]" value="3" {{ HtmlUtil::isChecked(old('auths'), 3) }} @if(old('auths') == null) checked @endif class="js__default-check">検索・照会
+                                    <input type="checkbox" name="auths[]" value="3" {{ HtmlUtil::isChecked(old('auths'), 3) }} @if(old('auths') == null) checked @endif class="js__default-check">検索・照会（タグ一覧を含む）
                                 </label>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="auths[]" value="2" {{ HtmlUtil::isChecked(old('auths'), 2) }}>新規登録

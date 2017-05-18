@@ -706,4 +706,78 @@ class ItemController extends AdminController
         return redirect('/admin/item/search')
             ->with('custom_info_messages','案件削除は正常に終了しました。');;
     }
+
+    /**
+     * タグ一覧表示
+     * GET:/admin/item/tags
+     */
+    public function showTags(Request $request){
+      $sql="
+        select tags.id,tags.term,count(link_items_tags.item_id) as total_cnt,count(case when items.service_end_date > now() then 1 else null end) as in_cnt,count(case when items.service_end_date < now() then 1 else null end) as out_cnt
+        from tags
+        left join link_items_tags on tags.id = link_items_tags.tag_id
+        left join items on link_items_tags.item_id = items.id
+        group by tags.id
+      ";
+      $itemList = DB::select($sql);
+      return view('admin.tag_list',compact('itemList'));
+    }
+
+    /**
+     * タグ削除
+     * GET:/admin/item/tags/delete
+     */
+    public function deleteTags(Request $request){
+
+      Tr_tags::where('id', $request->id)->delete();
+
+      return redirect('/admin/item/tags')
+        ->with('custom_info_messages','タグは正常に削除されました');
+
+    }
+
+    /**
+     * タグ検索
+     * GET,POST:/admin/item/tags/search
+     */
+    public function searchTags(Request $request){
+
+        // クエリ生成用データ
+        $data_query = [
+            'freeword' => $request->freeword ?: '',
+            'enabled'  => $request->enabled ?: ''
+        ];
+
+
+        // クエリを動的に発行
+        $query = Tr_tags::select()
+            ->when(empty($data_query['id']), function ($query) use ($data_query) {
+                return $query->when(!empty($data_query['name']), function ($query) use ($data_query) {
+                    $name_array = AdmnUtil::convertArrayToSearchStr($data_query['name']);
+                    return $query->name($name_array);
+                })->when(!empty($data_query['freeword']), function ($query) use ($data_query) {
+                    $freeword_array = AdmnUtil::convertArrayToSearchStr($data_query['freeword']);
+                    return $query->freeword($freeword_array);
+                })->when(!empty($data_query['tag_id']), function ($query) use ($data_query) {
+                    return $query->tagId($data_query['tag_id']);
+                })->when(!empty($data_query['enabled']), function ($query) use ($data_query) {
+                    return $query->entryPossible();
+                });
+            });
+
+        // ソート順
+        $item_order = OdrUtil::ItemOrder[$data_query['sort_id']];
+
+        // laravel標準のページネーション
+        $itemList = $query->groupBy('items.id')
+                          ->orderBy($item_order['columnName'], $item_order['sort'])
+                          ->paginate(30);
+
+        return view('admin.item_list', compact('itemList', 'data_query'));
+    }
+
+
+
+
+
 }

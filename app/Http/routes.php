@@ -182,6 +182,7 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/item/input', 'admin\ItemController@showItemInput');
     // 新規登録処理
     Route::post('/admin/item/input', 'admin\ItemController@insertItem');
+    Route::post('/admin/item/input/suggesttags', 'admin\TagController@suggestTags');
     // 詳細画面
     Route::get('/admin/item/detail', 'admin\ItemController@showItemDetail');
     // 編集画面
@@ -192,6 +193,10 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::match(['get', 'post'], '/admin/item/search', 'admin\ItemController@searchItem');
     // 論理削除処理
     Route::get('/admin/item/delete', 'admin\ItemController@deleteItem');
+    //タグ画面
+    Route::get('/admin/item/tags', 'admin\TagController@showTags');
+    Route::get('/admin/item/tags/delete', 'admin\TagController@deleteTags');
+    Route::match(['get'],'/admin/item/tags/search', 'admin\TagController@searchTags');
 
     // メルマガ管理
     // メルマガ配信画面
