@@ -18,13 +18,19 @@ class TagController extends AdminController
      * GET:/admin/item/tags
      */
     public function showTags(Request $request){
+
+      $data_query = [
+          'freeword' => $request->freeword ?: '',
+          'enabled'  => $request->enabled ?: ''
+      ];
+
       $itemList = DB::table('tags')
                      ->select(DB::raw('count(link_items_tags.item_id) as total_cnt,count(case when items.service_end_date > now() then 1 else null end) as in_cnt,count(case when items.service_end_date < now() then 1 else null end) as out_cnt, tags.id,tags.term'))
                      ->leftJoin('link_items_tags', 'tags.id' ,'=', 'link_items_tags.tag_id')
                      ->leftJoin('items','link_items_tags.item_id', '=' ,'items.id')
                      ->groupBy('tags.id')
                      ->paginate(30);
-      return view('admin.tag_list',compact('itemList'));
+      return view('admin.tag_list',compact('itemList','data_query'));
     }
 
     /**
@@ -45,7 +51,13 @@ class TagController extends AdminController
 
       $request->flash();
 
-      $splited_order = explode("-",$request->enabled);
+      $data_query = [
+          'freeword' => $request->freeword ?: '',
+          'enabled'  => $request->enabled ?: ''
+      ];
+
+
+      $splited_order = explode("-",$data_query['enabled']);
 
       if(empty($splited_order[1])){
         $splited_order[0]='tags.id';
@@ -56,12 +68,12 @@ class TagController extends AdminController
                      ->select(DB::raw('count(link_items_tags.item_id) as total_cnt,count(case when items.service_end_date > now() then 1 else null end) as in_cnt,count(case when items.service_end_date < now() then 1 else null end) as out_cnt, tags.id,tags.term'))
                      ->leftJoin('link_items_tags', 'tags.id' ,'=', 'link_items_tags.tag_id')
                      ->leftJoin('items','link_items_tags.item_id', '=' ,'items.id')
-                     ->where('tags.term','like','%'.$request->freeword.'%')
+                     ->where('tags.term','like','%'.$data_query['freeword'].'%')
                      ->groupBy('tags.id')
                      ->orderBY($splited_order[0],$splited_order[1])
                      ->paginate(30);
 
-      return view('admin.tag_list',compact('itemList'));
+      return view('admin.tag_list',compact('itemList','data_query'));
     }
 
     /**

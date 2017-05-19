@@ -92,7 +92,10 @@ use App\Models\Tr_tag_infos;
 @endforeach
           </tbody>
         </table>
-        <dev class="pull-right">{!! $itemList->render() !!}</div>
+        <dev class="pull-right">{!! $itemList->appends([
+          'freeword' => $data_query['freeword'],
+          'enabled'  => $data_query['enabled']
+         ])->render() !!}</div>
       </div>
     </div>
   </div>
