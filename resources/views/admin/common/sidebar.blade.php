@@ -18,6 +18,7 @@ use App\Libraries\ModelUtility as mdlUtil;
                 <ul>
                     <li><a href="/admin/item/search">案件一覧</a></li>
                     <li><a href="/admin/item/input">案件登録</a></li>
+                    <li><a href="/admin/item/tags">タグ一覧</a></li>
                 </ul>
             </li>
 @endif
