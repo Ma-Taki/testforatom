@@ -176,7 +176,7 @@ class MailMagazineController extends Controller
 
         $emails = ['idutsu.solid@gmail.com','idutsudaisuke@gmail.com'];
 
-          Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail, $admnUtil) {
+          Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail, $admnUtil,$emails) {
             $message->from($admnUtil->mail_magazine_mail_from, $admnUtil->mail_magazine_mail_from_name);
             $message->to($emails);
             $message->subject($data_mail['subject']);
