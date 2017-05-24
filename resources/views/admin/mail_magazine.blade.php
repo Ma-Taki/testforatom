@@ -86,7 +86,7 @@
                                   <div class="wrap-table">
                                     <div class="input-group input-to-address">
                                       <span class="input-group-addon">to</span>
-                                      <input type="text" class="form-control" name="toAddresses" id="js__toAddresses" data-role="tagsinput" value="@if($request['type']=='edit') @foreach($itemList->mailaddresses as $addresses){{$addresses->mail_address}},@endforeach @endif">
+                                      <input type="text" class="form-control" name="toAddresses" id="js__toAddresses" data-role="tagsinput" value="@if($request['type']=='new'){{ old('toAddresses') }} @elseif($request['type']=='edit' && $itemList->send_to == 2)@foreach($itemList->mailaddresses as $addresses){{$addresses->mail_address}},@endforeach @endif">
                                     </div>
                                   </div>
             </div>
@@ -96,14 +96,14 @@
                         <div class="form-group input-cc-address">
         <label for="ccEmailAddress" class="col-sm-2 control-label">Cc</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="ccAddresses" id="js__ccAddresses" data-role="tagsinput" value="@if($request['type']=='new'){{ old('ccAddresses') }} @elseif($request['type']=='edit'&& $itemList!=null){{$itemList->cc}}@endif">
+            <input type="text" class="form-control" name="ccAddresses" id="js__ccAddresses" data-role="tagsinput" value="@if($request['type']=='new'){{ old('ccAddresses') }} @elseif($request['type']=='edit'){{$itemList->cc}}@endif">
         </div>
     </div>
 
                         <div class="form-group input-bcc-address">
         <label for="bccEmailAddress" class="col-sm-2 control-label">Bcc</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="bccAddresses" id="js__bccAddresses" data-role="tagsinput" value="@if($request['type']=='new'){{ old('bccAddresses') }} @elseif($request['type']=='edit'&& $itemList!=null){{$itemList->bcc}}@endif">
+            <input type="text" class="form-control" name="bccAddresses" id="js__bccAddresses" data-role="tagsinput" value="@if($request['type']=='new'){{ old('bccAddresses') }} @elseif($request['type']=='edit'){{$itemList->bcc}}@endif">
         </div>
     </div>
 
