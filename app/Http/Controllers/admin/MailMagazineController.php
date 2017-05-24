@@ -159,7 +159,7 @@ class MailMagazineController extends Controller
                 $link_users_mail_magazines->mail_magazine_id=$mail->id;
                 $link_users_mail_magazines->admin_id=$data_mail['adminID'];
                 $user = Tr_users::getUserByMail($address)->first();
-                $link_users_mail_magazines->user_id=$user->id;
+                $link_users_mail_magazines->user_id=$user ? $user->id : null;
                 $link_users_mail_magazines->save();
                 //mail_magazines_send_toテーブルに追加
                 $mail_magazines_send_to = new Tr_mail_magazines_send_to;
