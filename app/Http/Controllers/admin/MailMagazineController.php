@@ -178,7 +178,7 @@ class MailMagazineController extends Controller
 
           Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail, $admnUtil,$emails) {
             $message->from($admnUtil->mail_magazine_mail_from, $admnUtil->mail_magazine_mail_from_name);
-            $message->to($emails);
+            $message->to($data_mail['toAddressArray']);
             $message->subject($data_mail['subject']);
             // $message->cc($data_mail['ccAddressArray']);
             // $message->bcc($data_mail['bccAddressArray']);
