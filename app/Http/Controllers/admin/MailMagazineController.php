@@ -175,10 +175,10 @@ class MailMagazineController extends Controller
         //if($data_mail['addressFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
           Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail, $admnUtil) {
             $message->from($admnUtil->mail_magazine_mail_from, $admnUtil->mail_magazine_mail_from_name);
-            $message->to($data_mail['toAddressArray']);
+            $message->to("idutsu.solid@gmail.com");
             $message->subject($data_mail['subject']);
-            $message->cc($data_mail['ccAddressArray']);
-            $message->bcc($data_mail['bccAddressArray']);
+            // $message->cc($data_mail['ccAddressArray']);
+            // $message->bcc($data_mail['bccAddressArray']);
           });
         //}
 
