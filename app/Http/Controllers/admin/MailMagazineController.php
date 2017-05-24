@@ -172,7 +172,7 @@ class MailMagazineController extends Controller
         });
 
         //即時送信の場合は今すぐ送信
-        if($data_mail['addressFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
+        //if($data_mail['addressFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
           Mail::send(['text'=>'view'],$data_mail['body'],function ($message) use ($data_mail, $admnUtil) {
             $message->from($admnUtil->mail_magazine_mail_from, $admnUtil->mail_magazine_mail_from_name);
             $message->to($data_mail['toAddressArray']);
@@ -180,7 +180,7 @@ class MailMagazineController extends Controller
             $message->cc($data_mail['ccAddressArray']);
             $message->bcc($data_mail['bccAddressArray']);
           });
-        }
+        //}
 
     }
 
