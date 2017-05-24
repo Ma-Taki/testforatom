@@ -177,6 +177,8 @@ class MailMagazineController extends Controller
             $message->from($admnUtil->mail_magazine_mail_from, $admnUtil->mail_magazine_mail_from_name);
             $message->to($data_mail['toAddressArray']);
             $message->subject($data_mail['subject']);
+            dump($data_mail['ccAddressArray'][0]);
+            dump($data_mail['bccAddressArray'][1]);
             if($data_mail['ccAddressArray'][0]!=''){
               $message->cc($data_mail['ccAddressArray']);
             }
