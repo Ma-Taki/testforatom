@@ -86,7 +86,7 @@
                                   <div class="wrap-table">
                                     <div class="input-group input-to-address">
                                       <span class="input-group-addon">to</span>
-                                      <input type="text" class="form-control" name="toAddresses" id="js__toAddresses" data-role="tagsinput" value="@foreach($itemList->mailaddresses as $addresses){{$addresses->mail_address}},@endforeach">
+                                      <input type="text" class="form-control" name="toAddresses" id="js__toAddresses" data-role="tagsinput" value="@if($request['type']=='edit') @foreach($itemList->mailaddresses as $addresses){{$addresses->mail_address}},@endforeach @endif">
                                     </div>
                                   </div>
             </div>
