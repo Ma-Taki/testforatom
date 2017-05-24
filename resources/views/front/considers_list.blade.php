@@ -1,7 +1,8 @@
 @extends('front.common.layout')
-@if(isset($html_title)) @section('title', 'エンジニアルート | '.$html_title)
-@else                   @section('title', 'エンジニアルート | 検討中案件一覧')
+@if(isset($html_title)) @section('title', $html_title .' | エンジニアルート')
+@else                   @section('title', '検討中案件一覧 | エンジニアルート')
 @endif
+@section('noindex', 'true')
 @section('content')
 <?php
     use Carbon\Carbon;
