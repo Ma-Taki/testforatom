@@ -580,6 +580,25 @@ body {
   clear:both;
 }
 
+input.checks{
+  margin-left: 10px;
+}
+
+
+/* メルマガ設定*/
+
+[class^="detail-"]{
+  display:none;
+  padding:10px;
+  height:200px;
+  overflow-y:scroll;
+}
+
+.mailmagazine-detail-btn,.mailmagazine-detail-btn:visited,.mailmagazine-detail-btn:hover{
+  background:orange;
+  border-color:orange;
+  color:white;
+}
 
 /* Tag設定*/
 

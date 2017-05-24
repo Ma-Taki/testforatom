@@ -35,7 +35,16 @@ use App\Libraries\ModelUtility as mdlUtil;
 
 @if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MAIL_MAGAZINE)
     || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
-            <li><a href="/admin/mail-magazine"><i class="glyphicon glyphicon-envelope"></i> メルマガ管理</a></li>
+            <li class="submenu">
+                <a href="#">
+                    <i class="glyphicon glyphicon-briefcase"></i> メルマガ管理
+                    <span class="caret pull-right"></span>
+                </a>
+                <ul>
+                    <li><a href="/admin/mail-magazine?type=new">新規作成</a></li>
+                    <li><a href="/admin/mail-magazine/search">送信履歴</a></li>
+                </ul>
+            </li>
 @endif
 
 @if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
