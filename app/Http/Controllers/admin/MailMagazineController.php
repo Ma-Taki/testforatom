@@ -170,17 +170,7 @@ class MailMagazineController extends Controller
 
         //即時送信の場合は今すぐ送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
-          Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail, $admnUtil) {
-            $message->from($admnUtil->mail_magazine_mail_from, $admnUtil->mail_magazine_mail_from_name);
-            $message->to($data_mail['toAddressArray']);
-            $message->subject($data_mail['subject']);
-            if(trim($data_mail['ccAddressArray'][0])!=''){
-              $message->cc($data_mail['ccAddressArray']);
-            }
-            if(trim($data_mail['bccAddressArray'][0])!=''){
-              $message->cc($data_mail['bccAddressArray']);
-            }
-          });
+          self::sendMail($data_mail);
         }
 
     }
@@ -217,7 +207,14 @@ class MailMagazineController extends Controller
 
       $request->flash();
 
-      $data_query = self::setDataQuery($request);
+      $data_query = array();
+      $data_query['subject'] = isset($request->subject) ? self::deleteSpace($request->subject) : '';
+      $data_query['body'] = isset($request->body) ? self::deleteSpace($request->body) : '';
+      $data_query['send_at0'] = isset($request->send_at0) ? $request->send_at0 : '';
+      $data_query['send_at1'] = isset($request->send_at1) ? $request->send_at1 : '';
+      $data_query['send_to0'] = isset($request->send_to0) ? $request->send_to0 : '';
+      $data_query['send_to1'] = isset($request->send_to1) ? $request->send_to1 : '';
+      $data_query['send_to2'] = isset($request->send_to2) ? $request->send_to2 : '';
 
       $query = Tr_mail_magazines::query();
 
@@ -260,20 +257,21 @@ class MailMagazineController extends Controller
       return preg_replace('/^[ 　]+/u', '',$str);
     }
 
-    //$requestをセット
-    public function setDataQuery($request){
-
-      $data_query = array();
-      $data_query['subject'] = isset($request->subject) ? self::deleteSpace($request->subject) : '';
-      $data_query['body'] = isset($request->body) ? self::deleteSpace($request->body) : '';
-      $data_query['send_at0'] = isset($request->send_at0) ? $request->send_at0 : '';
-      $data_query['send_at1'] = isset($request->send_at1) ? $request->send_at1 : '';
-      $data_query['send_to0'] = isset($request->send_to0) ? $request->send_to0 : '';
-      $data_query['send_to1'] = isset($request->send_to1) ? $request->send_to1 : '';
-      $data_query['send_to2'] = isset($request->send_to2) ? $request->send_to2 : '';
-
-      return $data_query;
-
+    /**
+     * メール送信
+     */
+    public function sendMail($data_mail){
+      Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail) {
+        $message->from($data_mail['fromAddress'], $data_mail['fromAddressName']);
+        $message->to($data_mail['toAddressArray']);
+        $message->subject($data_mail['subject']);
+        if(trim($data_mail['ccAddressArray'][0])!=''){
+          $message->cc($data_mail['ccAddressArray']);
+        }
+        if(trim($data_mail['bccAddressArray'][0])!=''){
+          $message->cc($data_mail['bccAddressArray']);
+        }
+      });
     }
 
 }
