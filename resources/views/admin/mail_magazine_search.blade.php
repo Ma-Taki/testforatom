@@ -89,8 +89,10 @@
               <td>@if($item->send_at < date("Y-m-d H:i:s"))<span style="color:#007bbb;">送信済</span>@endif @if($item->delete_flag==1)<span style="color:red;">（配信停止中）</span>@endif</td>
               <td nowrap>
                 <a class="getbody" name="{{ $item->id }}" ><button type="button" class="btn btn-xs mailmagazine-detail-btn">詳細</button></a>
-@if($item->send_at > date("Y-m-d H:i:s",strtotime("-1 hour")))
-                <a href="/admin/mail-magazine/?type=edit&id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">編集</button></a>
+@if($item->send_at > date("Y-m-d H:i:s"))
+  @if($item->send_at > date("Y-m-d H:i:s",strtotime("-1 hour")))
+              <a href="/admin/mail-magazine/?type=edit&id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">編集</button></a>
+  @endif
 @endif
 @if($item->delete_flag == 0)
                 <a href="/admin/mail-magazine/search/stop?id={{ $item->id }}"><button type="button" class="btn btn-danger btn-xs">配信停止</button></a>
