@@ -45,8 +45,6 @@ class SendEmails extends Command
      */
     public function handle()
     {
-
-echo Carbon::now();
       $items = Tr_mail_magazines::where('send_flag',1)->where('status',0)->where('send_at','<=',Carbon::now())->where('delete_flag',0)->get();
       foreach($items as $item){
         $controller = new MailMagazineController;
