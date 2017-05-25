@@ -200,7 +200,7 @@ class MailMagazineController extends Controller
     }
 
     /**
-     * メルマガ送信履歴および検索
+     * メルマガ送信履歴（検索機能あり）
      * GET:/admin/mail-magazine/search
      */
     public function search(Request $request){
@@ -272,6 +272,9 @@ class MailMagazineController extends Controller
           $message->cc($data_mail['bccAddressArray']);
         }
       });
+
+      dump Mail::failures();
+}
     }
 
 }
