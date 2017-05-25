@@ -48,7 +48,7 @@ class SendEmails extends Command
       $items = Tr_mail_magazines::where('send_flag',1)->where('status',0)->where('send_at','<=',Carbon::now())->where('delete_flag',0)->get();
       foreach($items as $item){
         $controller = new MailMagazineController;
-        $controller->id = $item->id;
+        $controller->target_id = $item->id;
         $toAddress_array = array();
         foreach($item->mailaddresses as $address){
           array_push($toAddress_array,$address->mail_address);
