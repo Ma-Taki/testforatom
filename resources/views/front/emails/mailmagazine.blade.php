@@ -7,6 +7,7 @@
         &nbsp;*　エンジニアルート<br>
         &nbsp;*/
     </p>
+    <p>{{$subject}}</p>
     <div>
       {{$body}}
     </div>
