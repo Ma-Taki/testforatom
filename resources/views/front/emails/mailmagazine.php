@@ -8,7 +8,7 @@
         &nbsp;*/
     </p>
     <div>
-      {{$body}}
+      {{$data_mail->body}}
     </div>
 
     <p>

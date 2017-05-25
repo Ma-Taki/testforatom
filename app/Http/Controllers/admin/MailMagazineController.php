@@ -170,7 +170,7 @@ class MailMagazineController extends Controller
 
         //即時送信の場合は今すぐ送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
-          Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail, $admnUtil) {
+          Mail::send('front.emails.mailmagazine',['data_mail' => $data_mail],function ($message) use ($data_mail, $admnUtil) {
             $message->from($admnUtil->mail_magazine_mail_from, $admnUtil->mail_magazine_mail_from_name);
             $message->to($data_mail['toAddressArray']);
             $message->subject($data_mail['subject']);

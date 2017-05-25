@@ -48,7 +48,7 @@
 								<div class="form-group">
 								  <label for="subject" class="col-sm-2 control-label">件名</label>
 								  <div class="col-sm-10">
-									<input type="text" class="form-control" id="subject" name="subject" placeholder="件名" value="@if($request['type']=='new'){{ old('subject') }} @elseif($request['type']=='edit'&& $itemList!=null){{$itemList->subject}}@endif">
+									<input type="text" class="form-control" id="subject" name="subject" placeholder="件名" value="@if($request['type']=='new'){{ old('subject') }} @elseif($request['type']=='edit'){{$itemList->subject}}@endif">
 								  </div>
 								</div>
                 <div class="tab-pane active" id="tab2">
@@ -142,7 +142,7 @@
 								<div class="form-group">
 								  <label class="col-sm-2 control-label">本文</label>
 								  <div class="col-sm-10">
-								    <textarea class="form-control" name="mailText" placeholder="本文" rows="18" value="mailText">@if($request['type']=='edit'){{$itemList->body}}@else{{old('mailText')}}@endif</textarea>
+								    <textarea class="form-control" name="mailText" placeholder="本文" rows="18" value="mailText">@if($request['type']=='edit'){{$itemList->body}}@elseif($request['type']=='new'){{old('mailText')}}@endif</textarea>
 								  </div>
                                 </div>
 							  </div>
@@ -153,7 +153,7 @@
                 <input type="hidden" name="id" value=@if($request['type'] == 'edit' && !empty($itemList))"{{$itemList->id}}"@else''@endif>
                                 {{ csrf_field() }}
                                 <button type="button" class="btn btn-primary pull-right" id="js__submit">
-                                    &nbsp;@if($request['type']=='edit') 更新 @else 作成 @endif&nbsp;
+                                    &nbsp;@if($request['type']=='new') 作成 @elseif($request['type']=='edit') 更新 @endif&nbsp;
                                 </button>
 					</div>
                     </form>
