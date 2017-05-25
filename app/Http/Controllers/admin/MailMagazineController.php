@@ -23,6 +23,9 @@ class MailMagazineController extends Controller
 
     private $target_id;
 
+    /*
+     * 初期化
+     */
     public function __construct() {
       $this->target_id = null;
     }
@@ -45,7 +48,7 @@ class MailMagazineController extends Controller
 
     /*
      * メルマガ送信処理
-     * POST:/admin/mail-magazine
+     * POST:/admin/mail-magazine/store
      */
     public function store(MailMagazineRequest $request) {
 
@@ -294,7 +297,7 @@ class MailMagazineController extends Controller
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3]);
       }else{
         //ステータスフラグを送信成功に
-        if($this->new_id) Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
+        Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
       }
 
     }
