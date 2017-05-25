@@ -4,7 +4,11 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use App\Http\Controllers\admin\MailMagazineController;
+use App\Models\Tr_users;
+use App\Models\Tr_mail_magazines;
+use App\Models\Tr_link_users_mail_magazines;
+use App\Models\Tr_mail_magazines_send_to;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,6 +31,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        //$schedule->call()->everyTenMinutes();
+        $schedule->call(function(){
+
+          $controller = new MailMagazineController;
+          $controller->sendMail($data_mail);
+       })->->everyTenMinutes();
+
     }
 }
