@@ -9,6 +9,7 @@ use App\Models\Tr_mail_magazines;
 use App\Models\Tr_link_users_mail_magazines;
 use App\Models\Tr_mail_magazines_send_to;
 use App\Libraries\AdminUtility as AdmnUtil;
+use Carbon\Carbon;
 
 
 class SendEmails extends Command
@@ -44,33 +45,27 @@ class SendEmails extends Command
      */
     public function handle()
     {
-      $item = Tr_mail_magazines::where('send_flag',1)->where('status',0))->orderBy('id','asc');
 
-      $admnUtil = new AdmnUtil();
-      $from_address = $admnUtil->mail_magazine_mail_from;
-      $from_address_name = $admnUtil->mail_magazine_mail_from_name;
-
-      $toAddress_array = array();
-
-      foreach($item->mailaddresses as $address){
-        array_push($toAddress_array,$address->mail_address);
+      $items = Tr_mail_magazines::where('send_flag',0)->where('status',2)->where('send_at','<=',Carbon::now())->get();
+      foreach($items as $item){
+        $controller = new MailMagazineController;
+        $controller->id = $item->id;
+        $toAddress_array = array();
+        foreach($item->mailaddresses as $address){
+          array_push($toAddress_array,$address->mail_address);
+        }
+        $ccAddress_array = explode(',', $item->cc);
+        $bccAddress_array = explode(',', $item->bcc);
+        $data_mail = [
+            'fromAddress'      => $controller->from_address,
+            'fromAddressName'  => $controller->from_address_name,
+            'subject'          => $item->subject,
+            'body'             => $item->body,
+            'toAddressArray'   => $toAddress_array,
+            'ccAddressArray'   => $ccAddress_array,
+            'bccAddressArray'  => $bccAddress_array,
+        ];
+        $controller->sendMail($data_mail);
       }
-
-      $ccAddress_array = explode(',', $item->cc);
-      $bccAddress_array = explode(',', $item->bcc);
-
-      // メール送信用データ
-      $data_mail = [
-          'fromAddress'      => $from_address,
-          'fromAddressName'  => $from_address_name,
-          'subject'          => $item->subject,
-          'body'             => $item->body,
-          'toAddressArray'   => $toAddress_array,
-          'ccAddressArray'   => $ccAddress_array,
-          'bccAddressArray'  => $bccAddress_array,
-      ];
-
-      $controller = new MailMagazineController;
-      $controller->sendMail($data_mail);
     }
 }

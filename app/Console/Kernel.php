@@ -24,10 +24,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call('emails:send')
-        ->everyTenMinutes();
-        // ->sendOutputTo($filePath);
-        // ->thenPing($url);
-        // ->emailOutputTo('foo@example.com');
+        $schedule->call('emails:send')->everyTenMinutes();
     }
 }

@@ -21,13 +21,18 @@ use Log;
 class MailMagazineController extends Controller
 {
 
-    private $target_id;
+    public $target_id;
+    public $from_address;
+    public $from_address_name;
 
     /*
      * 初期化
      */
     public function __construct() {
       $this->target_id = null;
+      $admnUtil = new AdmnUtil();
+      $this->from_address = $admnUtil->mail_magazine_mail_from;
+      $this->from_address_name = $admnUtil->mail_magazine_mail_from_name;
     }
 
     /*
@@ -51,11 +56,6 @@ class MailMagazineController extends Controller
      * POST:/admin/mail-magazine/store
      */
     public function store(MailMagazineRequest $request) {
-
-        // Fromアドレス
-        $admnUtil = new AdmnUtil();
-        $from_address = $admnUtil->mail_magazine_mail_from;
-        $from_address_name = $admnUtil->mail_magazine_mail_from_name;
 
         // メール送信日時
         if ($request->sendDateFlag == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_INPUT){ //指定あり
@@ -93,8 +93,8 @@ class MailMagazineController extends Controller
         // メール送信用データ
         $data_mail = [
             'adminID'          => session(SsnUtil::SESSION_KEY_ADMIN_ID),
-            'fromAddress'      => $from_address,
-            'fromAddressName'  => $from_address_name,
+            'fromAddress'      => $this->from_address,
+            'fromAddressName'  => $this->from_address_name,
             'toAddressArray'   => $toAddress_array,
             'ccAddressArray'   => $ccAddress_array,
             'bccAddressArray'  => $bccAddress_array,
@@ -185,6 +185,8 @@ class MailMagazineController extends Controller
 
         //即時送信の場合は今すぐ送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
+          dump($this->from_address);
+          dump($this->from_address_name);
           self::sendMail($data_mail);
         }
 
