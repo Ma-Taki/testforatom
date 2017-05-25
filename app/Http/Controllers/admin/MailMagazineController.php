@@ -273,7 +273,7 @@ class MailMagazineController extends Controller
         }
       });
 
-      dump Mail::failures();
+      dump(Mail::failures());
 }
     }
 
