@@ -295,9 +295,11 @@ class MailMagazineController extends Controller
       });
 
       if(count(Mail::failures()) > 0){
+        echo "成功";
         //ステータスフラグを送信失敗に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3]);
       }else{
+        echo "失敗"
         //ステータスフラグを送信成功に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
       }
