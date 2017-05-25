@@ -299,7 +299,7 @@ class MailMagazineController extends Controller
         //ステータスフラグを送信失敗に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3]);
       }else{
-        echo "失敗"
+        echo "失敗";
         //ステータスフラグを送信成功に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
       }
