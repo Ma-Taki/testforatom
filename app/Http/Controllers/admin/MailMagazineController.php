@@ -20,6 +20,13 @@ use Log;
 
 class MailMagazineController extends Controller
 {
+
+    private $target_id;
+
+    public function __construct() {
+      $this->target_id = null;
+    }
+
     /*
      * メルマガ管理画面
      * GET:/admin/mail-magazine
@@ -99,6 +106,9 @@ class MailMagazineController extends Controller
         DB::transaction(function () use ($data_mail,$request,$toAddress_array){
             //編集の場合はUPDATE
             if($request->type=='edit'){
+
+              $this->target_id = $request->id;
+
               //lin_users_mail_magazinesテーブルを更新
               Tr_mail_magazines::where('id',$request->id)
                                ->update([
@@ -149,6 +159,8 @@ class MailMagazineController extends Controller
               $mail->send_at=$data_mail['sendTime'];
               $mail->delete_flag=0;
               $mail->save();
+
+              $this->target_id = $mail->id;
 
               foreach ($toAddress_array as $address) {
                 //link_users_mail_magazinesテーブルに追加
@@ -261,7 +273,11 @@ class MailMagazineController extends Controller
      * メール送信
      */
     public function sendMail($data_mail){
-      $result = Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail) {
+
+      //ステータスフラグを送信中に
+      Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>1]);
+
+      Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail) {
         $message->from($data_mail['fromAddress'], $data_mail['fromAddressName']);
         $message->to($data_mail['toAddressArray']);
         $message->subject($data_mail['subject']);
@@ -273,7 +289,14 @@ class MailMagazineController extends Controller
         }
       });
 
-      dump($result);
+      if(count(Mail::failures()) > 0){
+        //ステータスフラグを送信失敗に
+        Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3]);
+      }else{
+        //ステータスフラグを送信成功に
+        if($this->new_id) Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
+      }
+
     }
 
 }
