@@ -263,7 +263,7 @@ class MailMagazineController extends Controller
     public function sendMail($data_mail){
       Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail) {
         $message->from($data_mail['fromAddress'], $data_mail['fromAddressName']);
-        $message->to($data_mail['toAddressArray']);
+        $message->to('あいうえお');
         $message->subject($data_mail['subject']);
         if(trim($data_mail['ccAddressArray'][0])!=''){
           $message->cc($data_mail['ccAddressArray']);
