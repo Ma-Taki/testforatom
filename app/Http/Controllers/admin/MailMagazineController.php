@@ -72,9 +72,6 @@ class MailMagazineController extends Controller
         //メールアドレスを指定する
         } else if ($request->toAddressesFlag == AdmnUtil::MAIL_MAGAZINE_TO_INPUT) {
             $toAddress_array = explode(',', $request->toAddresses);
-
-        } else {
-            // エラー
         }
 
         // Ccアドレス

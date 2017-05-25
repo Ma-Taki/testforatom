@@ -104,7 +104,7 @@
             <tr>
               <td colspan="8" style="background:#ebf6f7;padding:0px;">
                 <div class="detail-{{$item->id}}">
-                  <p>【送信アドレス】</p>
+                  <p>【To】</p>
                   <p>
 @foreach($item->mailaddresses as $address)
                     <span>{{ $address->mail_address}} , </span>

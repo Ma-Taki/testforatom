@@ -27,7 +27,7 @@
 <div class="col-md-10">
 	<div class="content-box-large">
 		  <div class="panel-heading">
-				<div class="panel-title">@if($itemList==null) メルマガ新規作成 @else メルマガ編集(ID：{{$itemList->id}}) @endif</div>
+				<div class="panel-title">@if($itemList==null) メルマガ 新規作成 @else メルマガ 編集(記事ID：{{$itemList->id}}) @endif</div>
 
 		  			<div class="panel-body">
 
