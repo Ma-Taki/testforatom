@@ -17,6 +17,7 @@ use App\Models\Tr_link_users_mail_magazines;
 use App\Models\Tr_mail_magazines_send_to;
 use DB;
 use Log;
+use Redirect;
 
 class MailMagazineController extends Controller
 {
@@ -187,14 +188,12 @@ class MailMagazineController extends Controller
 
         //即時送信の場合は送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
-          $res = "";
           self::sendMail($data_mail,function($err){
             $res="失敗";
+            Redirect::to('/admin/mail-magazine/search')->send();
           },function($scc){
             $res="成功";
           });
-        echo '結果は'.$res.'です';
-
         //日時指定の場合は保存
         }else{
           echo "保存";
