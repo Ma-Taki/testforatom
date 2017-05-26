@@ -311,7 +311,7 @@ class MailMagazineController extends Controller
         //送信できなかったメールアドレス配列をカンマ区切りで文字列化
         $error_address = '';
         foreach(Mail::failures() as $address){
-          $error_address .= $address.',');
+          $error_address .= $address.',';
         }
         //ステータスを[送信失敗]にして、送信できなかったメールアドレスをデータベースに追加
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3,'error_address']=>$error_address);
