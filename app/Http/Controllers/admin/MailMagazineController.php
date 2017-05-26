@@ -187,8 +187,8 @@ class MailMagazineController extends Controller
 
         //即時送信の場合のみ送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
-          self::sendMail($data_mail,function($id){
-            echo "失敗";
+          self::sendMail($data_mail,function($e){
+            dump($e);
           },function($id){
             echo "成功";
           });
@@ -306,7 +306,7 @@ class MailMagazineController extends Controller
       if(count(Mail::failures()) > 0){
         //送信失敗したら[送信失敗]に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3]);
-        call_user_func($error,$this->target_id);
+        call_user_func($error,Mail::failures());
       }else{
         //送信成功したら[送信済]に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
