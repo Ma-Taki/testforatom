@@ -314,7 +314,7 @@ class MailMagazineController extends Controller
           $error_address .= $address.',';
         }
         //ステータスを[送信失敗]にして、送信できなかったメールアドレスをデータベースに追加
-        Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3,'error_address'=>$error_address)];
+        Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3,'error_address'=>$error_address]);
         call_user_func($error,Mail::failures());
       //メール送信成功
       }else{
