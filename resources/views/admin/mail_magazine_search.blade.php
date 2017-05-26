@@ -93,7 +93,18 @@
               <td>{{ $item->send_at }}</td>
               <td>{{ $item->users->count() }}</td>
               <td>@if($item->send_to==0) 配信希望者  @elseif ($item->send_to==1) ユーザ全員　@else 個別指定　@endif</td>
-              <td>@if($item->status==2)<span style="color:#007bbb;">送信済</span>@elseif($item->status==1)<span style="color:gray;">送信中</span>else@if($item->status==3)<span style="color:red;">送信失敗</span>@endif @if($item->delete_flag==1)<span style="color:red;">（配信停止中）</span>@endif</td>
+              <td>
+                @if($item->status==2)
+                <span style="color:#007bbb;">送信済</span>
+                @elseif($item->status==1)
+                <span style="color:gray;">送信中</span>
+                else@if($item->status==3)
+                <span style="color:red;">送信失敗</span>
+                @endif
+                @if($item->delete_flag==1)
+                <span style="color:red;">（配信停止中）</span>
+                @endif
+              </td>
               <td nowrap>
                 <a class="getbody" name="{{ $item->id }}" ><button type="button" class="btn btn-xs mailmagazine-detail-btn">詳細</button></a>
 @if($item->status==0)
