@@ -13,8 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-      Commands\Inspire::class,
-      Commands\SendMailMagazine::class,
+      Commands\SendMailMagazine::class
     ];
 
     /**
@@ -28,11 +27,10 @@ class Kernel extends ConsoleKernel
       $schedule->command('mailmagazine:send')
       ->everyTenMinutes()
       ->before(function () {
-          // $filename = '/var/www/Engineer-Route/storage/logs/laravel-'.date("Y-m-d").'.log';
-          // if(file_exists($filename)){
-            //chmod('/var/www/Engineer-Route/storage/logs/laravel-2017-05-26.log', 0777);
-            exec('chmod 777 /var/www/Engineer-Route/storage/logs/laravel-2017-05-26.log');
-          // }
+          $filename = '/var/www/Engineer-Route/storage/logs/laravel-'.date("Y-m-d").'.log';
+          if(file_exists($filename)){
+            exec('chmod 777 '.$filename);
+          }
       });
     }
 }
