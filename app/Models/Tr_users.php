@@ -101,7 +101,7 @@ class Tr_users extends Model
      * メルマガ配信希望者ユーザを取得
      */
     public function scopeGetUserMailMagazine($query) {
-        return $query->where('magazine_flag', 0)
+        return $query->where('magazine_flag', 1)
                      ->where('delete_flag', 0)
                      ->where('delete_date', null);
     }

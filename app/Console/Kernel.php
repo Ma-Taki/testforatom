@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\SendEmails::class
+        Commands\SendMailMagazine::class
     ];
 
     /**
@@ -24,6 +24,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-      $schedule->command('emails:send --force')->everyTenMinutes();
+      $schedule->command('mailmagazine:send --force')
+      ->everyTenMinutes()
+      ->before(function () {
+          $filename = '/var/www/Engineer-Route/storage/logs/laravel-'.date("Y-m-d").'.log';
+          if(glob($filename)){
+            chmod($filename, 777);
+          }
+      });
     }
 }

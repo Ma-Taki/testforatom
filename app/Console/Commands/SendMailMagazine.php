@@ -12,14 +12,14 @@ use App\Libraries\AdminUtility as AdmnUtil;
 use Carbon\Carbon;
 
 
-class SendEmails extends Command
+class SendMailMagazine extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'emails:send';
+    protected $signature = 'mailmagazine:send';
 
     /**
      * The console command description.
@@ -56,13 +56,13 @@ class SendEmails extends Command
         $ccAddress_array = explode(',', $item->cc);
         $bccAddress_array = explode(',', $item->bcc);
         $data_mail = [
-            'fromAddress'      => $controller->from_address,
-            'fromAddressName'  => $controller->from_address_name,
-            'subject'          => $item->subject,
-            'body'             => $item->body,
-            'toAddressArray'   => $toAddress_array,
-            'ccAddressArray'   => $ccAddress_array,
-            'bccAddressArray'  => $bccAddress_array,
+          'fromAddress'      => $controller->from_address,
+          'fromAddressName'  => $controller->from_address_name,
+          'subject'          => $item->subject,
+          'body'             => $item->body,
+          'toAddressArray'   => $toAddress_array,
+          'ccAddressArray'   => $ccAddress_array,
+          'bccAddressArray'  => $bccAddress_array,
         ];
         $controller->sendMail($data_mail);
       }
