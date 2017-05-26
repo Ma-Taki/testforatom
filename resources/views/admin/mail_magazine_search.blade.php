@@ -117,6 +117,10 @@
                     <span>{{ $address->mail_address}} , </span>
 @endforeach
                   </p><br>
+@if($item->status==3)
+                  <p style="color:red;">【送信失敗アドレス】</p>
+                  <p style="color:red;">{{$item->error_address}}</p><br>
+@endif
                   <p>【Cc】</p>
                   <p>{{$item->cc}}</p><br>
                   <p>【Bcc】</p>
