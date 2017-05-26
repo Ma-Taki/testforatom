@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
       ->before(function () {
           // $filename = '/var/www/Engineer-Route/storage/logs/laravel-'.date("Y-m-d").'.log';
           // if(file_exists($filename)){
-            chmod('/var/www/Engineer-Route/storage/logs/laravel-2017-05-26.log', 0777);
+            //chmod('/var/www/Engineer-Route/storage/logs/laravel-2017-05-26.log', 0777);
+            exec('chmod 777 /var/www/Engineer-Route/storage/logs/laravel-2017-05-26.log');
           // }
       });
     }
