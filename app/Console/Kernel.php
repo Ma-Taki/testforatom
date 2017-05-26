@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
       ->everyTenMinutes()
       ->before(function () {
           $filename = '/var/www/Engineer-Route/storage/logs/laravel-'.date("Y-m-d").'.log';
-          if(glob($filename)){
+          if(file_exists($filename)){
             chmod($filename, 777);
           }
       });
