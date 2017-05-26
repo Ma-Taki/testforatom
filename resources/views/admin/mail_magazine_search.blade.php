@@ -9,6 +9,13 @@
 			</div>
   	  <div class="panel-body">
 @if(\Session::has('custom_info_messages'))
+        <div class="alert alert-danger">
+          <ul>
+            <li>{{ \Session::get('custom_info_messages') }}</li>
+          </ul>
+        </div>
+@endif
+@if(\Session::has('custom_alert_messages'))
         <div class="alert alert-info">
           <ul>
             <li>{{ \Session::get('custom_info_messages') }}</li>
