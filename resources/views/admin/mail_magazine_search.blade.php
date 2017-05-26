@@ -98,10 +98,10 @@
                 <span style="color:#007bbb;">送信済</span>
                 @elseif($item->status==1)
                 <span style="color:gray;">送信中</span>
-                else@if($item->status==3)
+                @elseif($item->status==3)
                 <span style="color:red;">送信失敗</span>
                 @endif
-                @if($item->delete_flag==1)
+                @if($item->delete_flag==1 && $item->status!=2)
                 <span style="color:red;">（配信停止中）</span>
                 @endif
               </td>
@@ -112,7 +112,7 @@
               <a href="/admin/mail-magazine/?type=edit&id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">編集</button></a>
   @endif
 @endif
-@if($item->delete_flag == 0)
+@if($item->delete_flag == 0 && $item->status!=2)
                 <a href="/admin/mail-magazine/search/stop?id={{ $item->id }}"><button type="button" class="btn btn-danger btn-xs">配信停止</button></a>
 @else
                 <a href="/admin/mail-magazine/search/start?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs" style="background:green;border-color:green;">停止解除</button></a>
