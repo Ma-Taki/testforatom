@@ -190,7 +190,6 @@ class MailMagazineController extends Controller
           self::sendMail($data_mail,function($id){
             return redirect('/admin/mail-magazine/search')
                 ->with('custom_alert_messages','メルマガ送信に失敗しました。');
-          });
           },function($id){
             return redirect('/admin/mail-magazine/search')
                 ->with('custom_info_messages','メルマガ送信に成功しました。');
