@@ -189,8 +189,9 @@ class MailMagazineController extends Controller
         //即時送信の場合は送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
           self::sendMail($data_mail,function($err){
-          },function($scc){
             Redirect::to('/admin/mail-magazine/search')->send();
+          },function($scc){
+            Redirect::to('/admin/mail-magazine/search')->with('custom_info_messages','メルマガは正常に送信されました')->send();
           });
         //日時指定の場合は保存
         }else{
