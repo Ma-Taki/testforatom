@@ -191,7 +191,7 @@ class MailMagazineController extends Controller
           self::sendMail($data_mail,function($err){
             Redirect::to('/admin/mail-magazine/search')->with('custom_alert_messages','メルマガは正常に送信されました')->send();
           },function($scc){
-            Redirect::to('/admin/mail-magazine/search')->with('custom_info_messages','メルマガは正常に送信されました');
+            Redirect::to('/admin/mail-magazine/search')->send()->with('custom_info_messages','メルマガは正常に送信されました');
           });
         //日時指定の場合は保存
         }else{
