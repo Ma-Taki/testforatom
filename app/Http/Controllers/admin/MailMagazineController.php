@@ -188,16 +188,14 @@ class MailMagazineController extends Controller
         //即時送信の場合は送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
           self::sendMail($data_mail,function($id){
-            return redirect('/admin/mail-magazine/search')
-                ->with('custom_alert_messages','メルマガ送信に失敗しました。');
+            return redirect('/admin/mail-magazine/search')->with('custom_alert_messages','メルマガ送信に失敗しました。');
           },function($id){
-            return redirect('/admin/mail-magazine/search')
-                ->with('custom_info_messages','メルマガ送信に成功しました。');
+            echo "成功";
+            return redirect('/admin/mail-magazine/search')->with('custom_info_messages','メルマガ送信に成功しました。');
           });
         //日時指定の場合は保存
         }else{
-          return redirect('/admin/mail-magazine/search')
-              ->with('custom_info_messages','メルマガを保存しました。');
+          return redirect('/admin/mail-magazine/search')->with('custom_info_messages','メルマガを保存しました。');
         }
 
     }
