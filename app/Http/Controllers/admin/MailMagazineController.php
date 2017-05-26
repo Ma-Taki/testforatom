@@ -189,7 +189,7 @@ class MailMagazineController extends Controller
         //即時送信の場合は送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
           self::sendMail($data_mail,function($err){
-            Redirect::to('/admin/mail-magazine/search')->with('custom_alert_messages','メルマガは正常に送信されました')->send();
+            Redirect::to('/admin/mail-magazine/search')->send()->with('custom_alert_messages','メルマガの送信に失敗しました');
           },function($scc){
             Redirect::to('/admin/mail-magazine/search')->send()->with('custom_info_messages','メルマガは正常に送信されました');
           });
@@ -290,10 +290,10 @@ class MailMagazineController extends Controller
      */
     public function sendMail($data_mail,$error,$success){
 
-      //１.ステータスを[送信中]に
+      //ステータスを[送信中]に
       Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>1]);
 
-      //２.メール送信
+      //メール送信
       Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail) {
         $message->from($data_mail['fromAddress'], $data_mail['fromAddressName']);
         $message->to($data_mail['toAddressArray']);
@@ -306,13 +306,19 @@ class MailMagazineController extends Controller
         }
       });
 
-      //３.ステータスを...
+      //メール送信失敗
       if(count(Mail::failures()) > 0){
-        //送信失敗したら[送信失敗]に
-        Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3]);
+        //送信できなかったメールアドレス配列をカンマ区切りで文字列化
+        $error_address = '';
+        foreach(Mail::failures() as $address){
+          $error_address .= $address.',');
+        }
+        //ステータスを[送信失敗]にして、送信できなかったメールアドレスをデータベースに追加
+        Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3,'error_address']=>$error_address);
         call_user_func($error,Mail::failures());
+      //メール送信成功
       }else{
-        //送信成功したら[送信済]に
+        //ステータスを[送信済]に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
         call_user_func($success,$this->target_id);
       }
