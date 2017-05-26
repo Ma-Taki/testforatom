@@ -73,7 +73,11 @@ class SendMailMagazine extends Command
           'bccAddressArray'  => $bccAddress_array,
         ];
         //メール送信
-        $controller->sendMail($data_mail);
+        $controller->sendMail($data_mail,function($error){
+          echo "送信失敗";
+        },function($sccess){
+          echo "送信成功";
+        }););
       }
     }
 }
