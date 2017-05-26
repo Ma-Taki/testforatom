@@ -193,7 +193,7 @@ $(function() {
 
     $('#js__submit').click(function() {
 
-        if (confirm('テスト送信で確認しましたか？')) {
+        if (confirm('この内容で保存しますか？')) {
             // LaravelのValidationを一件づつ通すため送信前に分割...しない
             /*
             var $addresses = $('.input-to-address .tag');

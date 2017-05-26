@@ -97,7 +97,7 @@
 @if($item->delete_flag == 0)
                 <a href="/admin/mail-magazine/search/stop?id={{ $item->id }}"><button type="button" class="btn btn-danger btn-xs">配信停止</button></a>
 @else
-                <a href="/admin/mail-magazine/search/start?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs" style="background:green;border-color:green;">配信開始</button></a>
+                <a href="/admin/mail-magazine/search/start?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs" style="background:green;border-color:green;">停止解除</button></a>
 @endif
               </td>
 				    </tr>

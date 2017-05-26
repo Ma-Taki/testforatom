@@ -31,8 +31,14 @@ class MailMagazineRequest extends Request
             'ccAddresses' => 'email_array',
             'bccAddresses' => 'email_array',
             'sendDateFlag' => 'required',
-            'sendDateTime' => 'required_if:sendDateFlag,1|date',
-
+            'sendDateTime' => ['required_if:sendDateFlag,1','date','regex:/0$/'],
         ];
     }
+
+    public function messages() {
+        return [
+            'sendDateTime.regex' => '送信日時は１０分単位で指定する必要があります',
+        ];
+    }
+
 }

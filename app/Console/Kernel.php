@@ -8,7 +8,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * The Artisan commands provided by your application.
+     * Commandsに登録したコマンドを設置する
      *
      * @var array
      */
@@ -17,16 +17,16 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
-     * Define the application's command schedule.
+     *スケジュール内容を書く
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-      $schedule->command('mailmagazine:send')
-      ->everyTenMinutes()
-      ->before(function () {
+      $schedule->command('mailmagazine:send') //メルマガ送信コマンドを呼び出し(Commands\SendMailMagazineに登録している)
+      ->everyTenMinutes() //１０分おきに実行
+      ->before(function () { //スケジューラ実行前にログのpermissionエラーを防ぐため777権限を与える
           $filename = '/var/www/Engineer-Route/storage/logs/laravel-'.date("Y-m-d").'.log';
           if(file_exists($filename)){
             exec('chmod 777 '.$filename);
