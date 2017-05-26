@@ -112,10 +112,12 @@
               <a href="/admin/mail-magazine/?type=edit&id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">編集</button></a>
   @endif
 @endif
-@if($item->delete_flag == 0 && $item->status!=2)
+@if($item->status!=2)
+@if($item->delete_flag == 0)
                 <a href="/admin/mail-magazine/search/stop?id={{ $item->id }}"><button type="button" class="btn btn-danger btn-xs">配信停止</button></a>
 @else
                 <a href="/admin/mail-magazine/search/start?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs" style="background:green;border-color:green;">停止解除</button></a>
+@endif
 @endif
               </td>
 				    </tr>
