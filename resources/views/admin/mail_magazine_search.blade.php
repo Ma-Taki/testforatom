@@ -39,7 +39,7 @@
               <tr>
               </tr>
               <tr>
-                <th><label class="control-label">送信フラグ</label></th>
+                <th><label class="control-label">送信日時</label></th>
                 <td>
                   <input class='checks' type="checkbox" name="send_at0" id="send_at0" value = '0' @if(old('send_at0')==='0') checked @endif />
                   <label for="send_at0"><font style="font-weight:normal;">即時</font></label>
@@ -48,7 +48,7 @@
                 </td>
               </tr>
               <tr>
-                <th><label class="control-label">宛先フラグ</label></th>
+                <th><label class="control-label">宛先</label></th>
                 <td>
                   <input class='checks' type="checkbox" name="send_to0" id="send_to0" value = '0' @if(old('send_to0')==='0') checked @endif />
                   <label for="send_to0"><font style="font-weight:normal;">配信希望ユーザのみ</font></label>
