@@ -187,9 +187,9 @@ class MailMagazineController extends Controller
 
         //即時送信の場合のみ送信
         if($data_mail['sendFlag'] == AdmnUtil::MAIL_MAGAZINE_SEND_DATE_IMMEDIATELY){
-          self::sendMail($data_mail,function($error){
+          self::sendMail($data_mail,function($id){
             echo "失敗";
-          },function($success){
+          },function($id){
             echo "成功";
           });
 
