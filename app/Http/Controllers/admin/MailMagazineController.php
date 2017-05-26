@@ -195,9 +195,6 @@ class MailMagazineController extends Controller
 
         }
 
-        return redirect($_SERVER['HTTP_REFERER'])
-          ->with('custom_info_messages','メルマガは正常に保存されました');
-
     }
 
     /**
