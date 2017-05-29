@@ -1,5 +1,5 @@
 <?php
-use Log;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -57,8 +57,8 @@ $app -> configureMonologUsing(function ($monolog) {
   $filename = storage_path('logs/laravel-testlog.log');
   $handler = new Monolog\Handler\RotatingFileHandler($filename);
   $monolog -> pushHandler($handler);
-Log::debug('configureMonologUsingconfigureMonologUsingconfigureMonologUsing');
-Log::debug($filename);
+error_log('configureMonologUsingconfigureMonologUsingconfigureMonologUsing');
+error_log($filename);
   //if(file_exists($filename)){
     //exec('chmod 777 '.$filename);
   //}
