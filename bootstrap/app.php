@@ -58,9 +58,9 @@ $app -> configureMonologUsing(function ($monolog) {
   $handler = new Monolog\Handler\RotatingFileHandler($filename);
   $monolog -> pushHandler($handler);
 
-  if(file_exists($filename)){
-    exec('chmod 777 '.$filename);
-  }
+  // if(file_exists($filename)){
+  //   exec('chmod 777 '.$filename);
+  // }
 
 });
 
