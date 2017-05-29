@@ -60,7 +60,7 @@ $app -> configureMonologUsing(function ($monolog) {
 
   $url = $monolog->getHandlers()[0]->getUrl();
 
-  if(file_exists($url))){
+  if(file_exists($url)){
     exec('chmod 777 '.$url);
   }
 
