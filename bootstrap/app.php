@@ -58,7 +58,7 @@ $app -> configureMonologUsing(function ($monolog) {
   $handler = new Monolog\Handler\RotatingFileHandler($filename);
   $monolog -> pushHandler($handler);
 
-  file_put_contents('/var/www/Engineer-Route/storage/logs/test.log',$filename);
+  file_put_contents('/var/www/Engineer-Route/storage/logs/test.log',var_export($monolog));
 
 // error_log('configureMonologUsingconfigureMonologUsingconfigureMonologUsing');
 // error_log($filename);
