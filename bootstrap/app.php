@@ -60,6 +60,7 @@ $app -> configureMonologUsing(function ($monolog) {
 
   $url = $monolog->getHandlers()[0]->getUrl();
 
+  //パーミッションエラーが起こるのでログ出力時に777権限を与えておく
   if(file_exists($url)){
     exec('chmod 777 '.$url);
   }

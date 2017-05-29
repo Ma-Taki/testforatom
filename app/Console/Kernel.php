@@ -25,12 +25,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
       $schedule->command('mailmagazine:send') //メルマガ送信コマンドを呼び出し(Commands\SendMailMagazineに登録している)
-      ->everyTenMinutes() //１０分おきに実行
-      ->before(function () { //スケジューラ実行前にログのpermissionエラーを防ぐため777権限を与える
-          $filename = '/var/www/Engineer-Route/storage/logs/laravel-'.date("Y-m-d").'.log';
-          if(file_exists($filename)){
-            exec('chmod 777 '.$filename);
-          }
-      });
+      ->everyTenMinutes(); //１０分おきに実行
+      // ->before(function () { //スケジューラ実行前にログのpermissionエラーを防ぐため777権限を与える
+      //     $filename = '/var/www/Engineer-Route/storage/logs/laravel-'.date("Y-m-d").'.log';
+      //     if(file_exists($filename)){
+      //       exec('chmod 777 '.$filename);
+      //     }
+      // });
     }
 }

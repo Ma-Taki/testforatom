@@ -44,7 +44,6 @@ class MailMagazineController extends Controller
      */
     public function index(MailMagazineTopPageRequest $request) {
 
-      dump(storage_path('logs/laravel-testlog.log'));
 
       //編集モードの場合
       if($request->type=='edit'){
