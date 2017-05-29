@@ -77,7 +77,7 @@ class SendMailMagazine extends Command
           echo "送信失敗";
         },function($sccess){
           echo "送信成功";
-        }););
+        });
       }
     }
 }
