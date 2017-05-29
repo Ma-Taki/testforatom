@@ -58,7 +58,7 @@ $app -> configureMonologUsing(function ($monolog) {
   $handler = new Monolog\Handler\RotatingFileHandler($filename);
   $monolog -> pushHandler($handler);
 
-  file_put_contents('/var/www/Engineer-Route/storage/logs/test.log',var_export($monolog,true));
+  file_put_contents('/var/www/Engineer-Route/storage/logs/test.log',var_export($monolog->name,true));
 
   // if(file_exists($monolog->url))){
   //   exec('chmod 777 '.$monolog->url);
