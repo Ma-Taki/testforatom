@@ -53,22 +53,15 @@ $app->singleton(
 */
 
 //ログファイル出力カスタマイズ
-// $app -> configureMonologUsing(function ($monolog) {
-//   $userinfo = posix_getpwuid(posix_geteuid());
-//   $username = $userinfo['name'];
-//   $filename = storage_path('logs/laravel-'.$username.'.log');
-//   $handler = new Monolog\Handler\RotatingFileHandler($filename);
-//   $monolog -> pushHandler($handler);
-// });
-
-//ログファイル出力カスタマイズ
 $app -> configureMonologUsing(function ($monolog) {
-  $username="idutsu";
-  $filename = storage_path('logs/laravel-'.$username.'.log');
+  $filename = storage_path('logs/laravel-'.'test'.'.log');
   $handler = new Monolog\Handler\RotatingFileHandler($filename);
   $monolog -> pushHandler($handler);
-});
 
+  if(file_exists($filename)){
+    exec('chmod 777 '.$filename);
+
+});
 
 
 return $app;

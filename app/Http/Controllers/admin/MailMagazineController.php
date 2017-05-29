@@ -42,9 +42,6 @@ class MailMagazineController extends Controller
      */
     public function index(MailMagazineTopPageRequest $request) {
 
-       var_dump(posix_getpwuid(posix_geteuid()));
-
-
       //編集モードの場合
       if($request->type=='edit'){
         $itemList = Tr_mail_magazines::where('id',$request->id)->first();
