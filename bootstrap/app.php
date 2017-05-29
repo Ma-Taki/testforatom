@@ -54,19 +54,14 @@ $app->singleton(
 
 //ログファイル出力カスタマイズ
 $app -> configureMonologUsing(function ($monolog) {
-  $filename = storage_path('logs/laravel-testlog.log');
+  $filename = storage_path('logs/laravel-Engineer_Route.log');
   $handler = new Monolog\Handler\RotatingFileHandler($filename);
   $monolog -> pushHandler($handler);
 
-  file_put_contents('/var/www/Engineer-Route/storage/logs/test.log',var_export($monolog,true));
+  //file_put_contents('/var/www/Engineer-Route/storage/logs/test.log',var_export($monolog,true));
 
-// error_log('configureMonologUsingconfigureMonologUsingconfigureMonologUsing');
-// error_log($filename);
-
-  $fn = '/var/www/Engineer-Route/storage/logs/laravel-testlog-'.date("Y-m-d").'.log';
-
-  if(file_exists($fn)){
-    exec('chmod 777 '.$fn);
+  if(file_exists($monolog->url))){
+    exec('chmod 777 '.$monolog->url);
   }
 
 });
