@@ -52,4 +52,13 @@ $app->singleton(
 |
 */
 
+//ログファイル出力カスタマイズ
+$app -> configureMonologUsing(function ($monolog) {
+  // 作成されるファイル名 => laravel-[:ユーザー名].log
+  $filename = storage_path('logs/laravel-'."customlog".date("Y-m-d").'.log');
+  $handler = new Monolog\Handler\RotatingFileHandler($filename);
+  $monolog -> pushHandler($handler);
+});
+
+
 return $app;
