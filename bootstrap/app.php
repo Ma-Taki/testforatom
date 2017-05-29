@@ -54,7 +54,7 @@ $app->singleton(
 
 //ログファイル出力カスタマイズ
 $app -> configureMonologUsing(function ($monolog) {
-  $filename = storage_path('logs/laravel-'.'test'.'.log');
+  $filename = storage_path('logs/laravel-testlog.log');
   $handler = new Monolog\Handler\RotatingFileHandler($filename);
   $monolog -> pushHandler($handler);
 
