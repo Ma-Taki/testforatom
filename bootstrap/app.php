@@ -60,6 +60,7 @@ $app -> configureMonologUsing(function ($monolog) {
 
   if(file_exists($filename)){
     exec('chmod 777 '.$filename);
+  }
 
 });
 
