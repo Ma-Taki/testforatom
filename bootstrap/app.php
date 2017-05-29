@@ -61,10 +61,10 @@ $app -> configureMonologUsing(function ($monolog) {
 // error_log('configureMonologUsingconfigureMonologUsingconfigureMonologUsing');
 // error_log($filename);
 
-  $filename = '/storage/logs/laravel-testlog-'.date("Y-m-d").'.log';
+  $fn = '/var/www/Engineer-Route/storage/logs/laravel-testlog-'.date("Y-m-d").'.log';
 
-  if(file_exists($filename)){
-    exec('chmod 777 '.$filename);
+  if(file_exists($fn)){
+    exec('chmod 777 '.$fn);
   }
 
 });

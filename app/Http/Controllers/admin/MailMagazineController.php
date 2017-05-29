@@ -19,6 +19,8 @@ use DB;
 use Log;
 use Redirect;
 
+use Monolog\Handler\RotatingFileHandler;
+
 class MailMagazineController extends Controller
 {
 
