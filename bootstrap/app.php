@@ -57,10 +57,11 @@ $app -> configureMonologUsing(function ($monolog) {
   $filename = storage_path('logs/laravel-testlog.log');
   $handler = new Monolog\Handler\RotatingFileHandler($filename);
   $monolog -> pushHandler($handler);
-
-  // if(file_exists($filename)){
-  //   exec('chmod 777 '.$filename);
-  // }
+Log::debug('configureMonologUsingconfigureMonologUsingconfigureMonologUsing');
+Log::debug($filename);
+  //if(file_exists($filename)){
+    //exec('chmod 777 '.$filename);
+  //}
 
 });
 
