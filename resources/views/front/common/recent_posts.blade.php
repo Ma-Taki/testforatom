@@ -1,8 +1,5 @@
 <?php
 
-    $html = file_get_contents('http://dev.engineer-route.com/column/getnewcolums/');
-    echo $html;
-
     // $url = "http://er-git/robots.txt";
     // $conn = curl_init(); // cURLセッションの初期化
     // curl_setopt($conn, CURLOPT_URL, $url); //　取得するURLを指定

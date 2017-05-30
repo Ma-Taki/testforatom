@@ -316,8 +316,6 @@ use App\Models\Tr_search_categories;
 
     <div class="clear">
     @include('front.common.keyword_pc')
-    @include('front.common.recent_posts')
-
     <section class="about">
       <div class="contentInr">
         <h2>エンジニアルートとは？</h2>
