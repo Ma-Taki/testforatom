@@ -304,18 +304,19 @@ class MailMagazineController extends Controller
           $message->from($data_mail['fromAddress'], $data_mail['fromAddressName']);
           $message->to($toAddress);
           $message->subject($data_mail['subject']);
+          //CcとBccは使わない
           // if(trim($data_mail['ccAddressArray'][0])!=''){
           //   $message->cc($data_mail['ccAddressArray']);
           // }
           // if(trim($data_mail['bccAddressArray'][0])!=''){
           //   $message->cc($data_mail['bccAddressArray']);
           // }
-          //メール送信失敗
-          if(count(Mail::failures()) > 0){
-            //送信できなかったメールアドレス配列をカンマ区切りで文字列化
-            $error_addresses .= Mail::failures()[0].',';
-          }
         });
+        //送信失敗の場合
+        if(count(Mail::failures()) > 0){
+          //送信できなかったメールアドレス配列をカンマ区切りで文字列化
+          $error_addresses .= Mail::failures()[0].',';
+        }
       }
 
       //メール送信失敗
