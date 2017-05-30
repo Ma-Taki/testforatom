@@ -196,11 +196,12 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     //タグ画面
     Route::get('/admin/item/tags', 'admin\TagController@showTags');
     Route::get('/admin/item/tags/delete', 'admin\TagController@deleteTags');
-    Route::match(['get'],'/admin/item/tags/search', 'admin\TagController@searchTags');
+    Route::get('/admin/item/tags/search', 'admin\TagController@searchTags');
 
     // メルマガ管理
-    // メルマガ配信画面
     Route::get('/admin/mail-magazine', 'admin\MailMagazineController@index');
-    // メルマガ配信処理
     Route::post('/admin/mail-magazine', 'admin\MailMagazineController@store');
+    Route::get('/admin/mail-magazine/search', 'admin\MailMagazineController@search');
+    Route::get('/admin/mail-magazine/search/stop', 'admin\MailMagazineController@stopMailMagazine');
+    Route::get('/admin/mail-magazine/search/start', 'admin\MailMagazineController@startMailMagazine');
 });

@@ -13,6 +13,7 @@ use App\Models\Tr_considers;
 use App\Models\Tr_users;
 use App\Models\Tr_items;
 
+use Monolog\Handler\RotatingFileHandler;
 
 class ConsiderController extends FrontController
 {
@@ -23,6 +24,14 @@ class ConsiderController extends FrontController
 
   public function showConsiderItems(Request $request)
  {
+
+   $filename = storage_path('logs/laravel-testlog.log');
+   $handler = new Monolog\Handler\RotatingFileHandler($filename);
+   $monolog -> pushHandler($handler);
+
+   var_dump($monolog);
+
+
 
    $itemList = array();
 

@@ -52,4 +52,20 @@ $app->singleton(
 |
 */
 
+//ログファイル出力カスタマイズ
+$app -> configureMonologUsing(function ($monolog) {
+  $filename = storage_path('logs/laravel-Engineer_Route.log');
+  $handler = new Monolog\Handler\RotatingFileHandler($filename);
+  $monolog -> pushHandler($handler);
+
+  $url = $monolog->getHandlers()[0]->getUrl();
+
+  //パーミッションエラーが起こるのでログ出力時に777権限を与えておく
+  if(file_exists($url)){
+    exec('chmod 777 '.$url);
+  }
+
+});
+
+
 return $app;

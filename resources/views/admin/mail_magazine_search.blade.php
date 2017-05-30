@@ -15,6 +15,13 @@
           </ul>
         </div>
 @endif
+@if(\Session::has('custom_alert_messages'))
+        <div class="alert alert-danger">
+          <ul>
+            <li>{{ \Session::get('custom_info_messages') }}</li>
+          </ul>
+        </div>
+@endif
         <fieldset>
           <legend><div class="panel-title">検索</div></legend>
 		  		<form class="form-inline" role="form" method="GET" action="{{url('/admin/mail-magazine/search')}}">
@@ -32,7 +39,7 @@
               <tr>
               </tr>
               <tr>
-                <th><label class="control-label">送信フラグ</label></th>
+                <th><label class="control-label">送信日時</label></th>
                 <td>
                   <input class='checks' type="checkbox" name="send_at0" id="send_at0" value = '0' @if(old('send_at0')==='0') checked @endif />
                   <label for="send_at0"><font style="font-weight:normal;">即時</font></label>
@@ -41,7 +48,7 @@
                 </td>
               </tr>
               <tr>
-                <th><label class="control-label">宛先フラグ</label></th>
+                <th><label class="control-label">宛先</label></th>
                 <td>
                   <input class='checks' type="checkbox" name="send_to0" id="send_to0" value = '0' @if(old('send_to0')==='0') checked @endif />
                   <label for="send_to0"><font style="font-weight:normal;">配信希望ユーザのみ</font></label>
@@ -86,32 +93,51 @@
               <td>{{ $item->send_at }}</td>
               <td>{{ $item->users->count() }}</td>
               <td>@if($item->send_to==0) 配信希望者  @elseif ($item->send_to==1) ユーザ全員　@else 個別指定　@endif</td>
-              <td>@if($item->send_at < date("Y-m-d H:i:s"))<span style="color:#007bbb;">送信済</span>@endif @if($item->delete_flag==1)<span style="color:red;">（配信停止中）</span>@endif</td>
+              <td>
+                @if($item->status==2)
+                <span style="color:#007bbb;">送信済</span>
+                @elseif($item->status==1)
+                <span style="color:gray;">送信中</span>
+                @elseif($item->status==3)
+                <span style="color:red;">送信失敗</span>
+                @endif
+                @if($item->delete_flag==1 && $item->status!=2)
+                <span style="color:red;">（配信停止中）</span>
+                @endif
+              </td>
               <td nowrap>
                 <a class="getbody" name="{{ $item->id }}" ><button type="button" class="btn btn-xs mailmagazine-detail-btn">詳細</button></a>
-@if($item->send_at > date("Y-m-d H:i:s",strtotime("-1 hour")))
-                <a href="/admin/mail-magazine/?type=edit&id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">編集</button></a>
+@if($item->status==0)
+  @if($item->send_at > date("Y-m-d H:i:s",strtotime("1 hour")))
+              <a href="/admin/mail-magazine/?type=edit&id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">編集</button></a>
+  @endif
 @endif
+@if($item->status!=2)
 @if($item->delete_flag == 0)
-                <a href="/admin/mail-magazine/search/stop?id={{ $item->id }}"><button type="button" class="btn btn-danger btn-xs">配信停止</button></a>
+                <a href="/admin/mail-magazine/search/stop?id={{ $item->id }}"><button type="button" class="btn btn-danger btn-xs" onClick="javascript:return confirm('本当に配信停止しますか？')">配信停止</button></a>
 @else
-                <a href="/admin/mail-magazine/search/start?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs" style="background:green;border-color:green;">配信開始</button></a>
+                <a href="/admin/mail-magazine/search/start?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs" style="background:green;border-color:green;" onClick="javascript:return confirm('本当に配信解除しますか？')">停止解除</button></a>
+@endif
 @endif
               </td>
 				    </tr>
             <tr>
               <td colspan="8" style="background:#ebf6f7;padding:0px;">
                 <div class="detail-{{$item->id}}">
-                  <p>【送信アドレス】</p>
+                  <p>【To】</p>
                   <p>
 @foreach($item->mailaddresses as $address)
                     <span>{{ $address->mail_address}} , </span>
 @endforeach
                   </p><br>
-                  <p>【Cc】</p>
+@if($item->status==3)
+                  <p style="color:red;">【送信失敗アドレス】</p>
+                  <p style="color:red;">{{$item->error_address}}</p><br>
+@endif
+                  <!-- <p>【Cc】</p>
                   <p>{{$item->cc}}</p><br>
                   <p>【Bcc】</p>
-                  <p>{{$item->bcc}}</p><br>
+                  <p>{{$item->bcc}}</p><br> -->
                   <p>【本文】</p>
                   <div>{{$item->body}}</div>
                 </div>

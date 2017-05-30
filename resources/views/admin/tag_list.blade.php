@@ -2,8 +2,6 @@
 @section('title', 'タグ一覧')
 @section('content')
 <?php
-use App\Libraries\HtmlUtility;
-use App\Libraries\OrderUtility as OdrUtil;
 use App\Libraries\AdminUtility as admnUtil;
 use App\Libraries\ModelUtility as mdlUtil;
 use App\Models\Tr_tag_infos;
@@ -110,7 +108,7 @@ $(function(){
         $('.checks').prop('checked', false);
         $(this).prop('checked', true);
     }
-  }).css('margin-left',10);
+  });
 });
 </script>
 @endsection

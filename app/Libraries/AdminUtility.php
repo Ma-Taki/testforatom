@@ -41,6 +41,9 @@ class AdminUtility
         'admin/item/tags/delete' => mdlUtil::AUTH_TYPE_MASTER,
         // メルマガ管理
         'admin/mail-magazine' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
+        'admin/mail-magazine/search' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
+        'admin/mail-magazine/search/stop' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
+        'admin/mail-magazine/search/start' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
     ];
 
     // メール：メルマガ配信
