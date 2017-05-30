@@ -298,7 +298,7 @@ class MailMagazineController extends Controller
 
       //メール送信（宛先の数だけループで送信）
       foreach($data_mail['toAddressArray'] as $toAddress){
-        Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail) {
+        Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail,$toAddress) {
           $message->from($data_mail['fromAddress'], $data_mail['fromAddressName']);
           $message->to($toAddress);
           $message->subject($data_mail['subject']);
