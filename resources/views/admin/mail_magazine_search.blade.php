@@ -114,9 +114,9 @@
 @endif
 @if($item->status!=2)
 @if($item->delete_flag == 0)
-                <a href="/admin/mail-magazine/search/stop?id={{ $item->id }}"><button type="button" class="btn btn-danger btn-xs">配信停止</button></a>
+                <a href="/admin/mail-magazine/search/stop?id={{ $item->id }}"><button type="button" class="btn btn-danger btn-xs" onClick="javascript:return confirm('本当に配信停止しますか？')">配信停止</button></a>
 @else
-                <a href="/admin/mail-magazine/search/start?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs" style="background:green;border-color:green;">停止解除</button></a>
+                <a href="/admin/mail-magazine/search/start?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs" style="background:green;border-color:green;" onClick="javascript:return confirm('本当に配信解除しますか？')">停止解除</button></a>
 @endif
 @endif
               </td>
