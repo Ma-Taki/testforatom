@@ -296,21 +296,24 @@ class MailMagazineController extends Controller
       //ステータスを[送信中]に
       Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>1]);
 
-      //メール送信
-      Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail) {
-        $message->from($data_mail['fromAddress'], $data_mail['fromAddressName']);
-        $message->to($data_mail['toAddressArray']);
-        $message->subject($data_mail['subject']);
-        if(trim($data_mail['ccAddressArray'][0])!=''){
-          $message->cc($data_mail['ccAddressArray']);
-        }
-        if(trim($data_mail['bccAddressArray'][0])!=''){
-          $message->cc($data_mail['bccAddressArray']);
-        }
-      });
+      //メール送信（宛先の数だけループで送信）
+      foreach($data_mail['toAddressArray'] as $toAddress){
+        Mail::send('front.emails.mailmagazine',$data_mail,function ($message) use ($data_mail) {
+          $message->from($data_mail['fromAddress'], $data_mail['fromAddressName']);
+          $message->to($toAddress);
+          $message->subject($data_mail['subject']);
+          // if(trim($data_mail['ccAddressArray'][0])!=''){
+          //   $message->cc($data_mail['ccAddressArray']);
+          // }
+          // if(trim($data_mail['bccAddressArray'][0])!=''){
+          //   $message->cc($data_mail['bccAddressArray']);
+          // }
+        });
+      }
 
       //メール送信失敗
       if(count(Mail::failures()) > 0){
+        echo"失敗";
         //送信できなかったメールアドレス配列をカンマ区切りで文字列化
         $error_address = '';
         foreach(Mail::failures() as $address){
@@ -321,6 +324,7 @@ class MailMagazineController extends Controller
         call_user_func($error,Mail::failures());
       //メール送信成功
       }else{
+        echo"成功";
         //ステータスを[送信済]に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
         call_user_func($success,$this->target_id);
@@ -329,7 +333,7 @@ class MailMagazineController extends Controller
     }
 
     //検索文字列の前後空白除去
-    public function deleteSpace($str){
+    private function deleteSpace($str){
       return preg_replace('/^[ 　]+/u', '',$str);
     }
 

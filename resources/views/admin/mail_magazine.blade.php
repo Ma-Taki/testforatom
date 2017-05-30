@@ -93,7 +93,7 @@
         </div>
                         </div>
 
-                        <div class="form-group input-cc-address">
+                        <!-- <div class="form-group input-cc-address">
         <label for="ccEmailAddress" class="col-sm-2 control-label">Cc</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" name="ccAddresses" id="js__ccAddresses" data-role="tagsinput" value="@if($request['type']=='new'){{ old('ccAddresses') }} @elseif($request['type']=='edit'){{$itemList->cc}}@endif">
@@ -105,7 +105,7 @@
         <div class="col-sm-10">
             <input type="text" class="form-control" name="bccAddresses" id="js__bccAddresses" data-role="tagsinput" value="@if($request['type']=='new'){{ old('bccAddresses') }} @elseif($request['type']=='edit'){{$itemList->bcc}}@endif">
         </div>
-    </div>
+    </div> -->
 
 <?php
   $sf="";

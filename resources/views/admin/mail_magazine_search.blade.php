@@ -134,10 +134,10 @@
                   <p style="color:red;">【送信失敗アドレス】</p>
                   <p style="color:red;">{{$item->error_address}}</p><br>
 @endif
-                  <p>【Cc】</p>
+                  <!-- <p>【Cc】</p>
                   <p>{{$item->cc}}</p><br>
                   <p>【Bcc】</p>
-                  <p>{{$item->bcc}}</p><br>
+                  <p>{{$item->bcc}}</p><br> -->
                   <p>【本文】</p>
                   <div>{{$item->body}}</div>
                 </div>
