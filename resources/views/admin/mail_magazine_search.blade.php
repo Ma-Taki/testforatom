@@ -108,7 +108,7 @@
               <td nowrap>
                 <a class="getbody" name="{{ $item->id }}" ><button type="button" class="btn btn-xs mailmagazine-detail-btn">詳細</button></a>
 @if($item->status==0)
-  @if($item->send_at > date("Y-m-d H:i:s",strtotime("-1 hour")))
+  @if($item->send_at > date("Y-m-d H:i:s",strtotime("1 hour")))
               <a href="/admin/mail-magazine/?type=edit&id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">編集</button></a>
   @endif
 @endif
