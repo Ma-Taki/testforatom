@@ -23,10 +23,6 @@ class ConsiderController extends FrontController
   public function showConsiderItems(Request $request)
  {
 
-   $filename = storage_path('logs/laravel-testlog.log');
-   $handler = new Monolog\Handler\RotatingFileHandler($filename);
-   $monolog -> pushHandler($handler);
-
    $itemList = array();
 
    if(FrntUtil::isLogin()){
