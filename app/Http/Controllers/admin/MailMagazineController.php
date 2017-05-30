@@ -198,7 +198,6 @@ class MailMagazineController extends Controller
           });
         //日時指定の場合は保存
         }else{
-          echo "保存";
           return redirect('/admin/mail-magazine/search')->with('custom_info_messages','メルマガは正常に保存されました');
         }
 
@@ -293,6 +292,9 @@ class MailMagazineController extends Controller
      */
     public function sendMail($data_mail,$error,$success){
 
+      //送信エラー用のメールアドレス（カンマ区切りの文字列）
+      $error_addresses = "";
+
       //ステータスを[送信中]に
       Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>1]);
 
@@ -308,23 +310,21 @@ class MailMagazineController extends Controller
           // if(trim($data_mail['bccAddressArray'][0])!=''){
           //   $message->cc($data_mail['bccAddressArray']);
           // }
+          //メール送信失敗
+          if(count(Mail::failures()) > 0){
+            //送信できなかったメールアドレス配列をカンマ区切りで文字列化
+            $error_addresses .= Mail::failures()[0].',';
+          }
         });
       }
 
       //メール送信失敗
-      if(count(Mail::failures()) > 0){
-        echo"失敗";
-        //送信できなかったメールアドレス配列をカンマ区切りで文字列化
-        $error_address = '';
-        foreach(Mail::failures() as $address){
-          $error_address .= $address.',';
-        }
+      if($error_addresses != ""){
         //ステータスを[送信失敗]にして、送信できなかったメールアドレスをデータベースに追加
-        Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3,'error_address'=>$error_address]);
+        Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>3,'error_address'=>$error_addresses]);
         call_user_func($error,Mail::failures());
       //メール送信成功
       }else{
-        echo"成功";
         //ステータスを[送信済]に
         Tr_mail_magazines::where('id',$this->target_id)->update(['status'=>2]);
         call_user_func($success,$this->target_id);
