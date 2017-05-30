@@ -1,6 +1,6 @@
 <?php
 
-    $html = file_get_contents('http://dev.engineer-route/column/getnewcolums/');
+    $html = file_get_contents('http://dev.engineer-route.com/column/getnewcolums/');
     echo $html;
 
     // $url = "http://er-git/robots.txt";
