@@ -118,7 +118,6 @@
 
                 <div class="tabBox">
                   <div class="tabBoxInr">
-                    <p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
 @foreach(Ms_skill_categories::getNotIndexOnly() as $skill_category)
 @if(!$skill_category->skills->isEmpty())
                     <div class="tabContent">
@@ -139,7 +138,7 @@
                 </div>
                 <div class="tabBox">
                   <div class="tabBoxInr">
-                    <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+
                     <div class="tabContent">
                       <ul>
 @foreach(Ms_sys_types::getNotIndexOnly() as $sys_type)
@@ -153,7 +152,6 @@
                 </div>
                 <div class="tabBox">
                   <div class="tabBoxInr">
-                    <p class="attention">1個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                     <div class="tabContent">
                       <ul>
 @foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
@@ -167,7 +165,6 @@
                 </div>
                 <div class="tabBox">
                   <div class="tabBoxInr">
-                    <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                     <div class="tabContent">
                       <ul>
 @foreach(Ms_biz_categories::getNotIndexOnly() as $biz_category)
@@ -181,7 +178,6 @@
                 </div>
                 <div class="tabBox">
                   <div class="tabBoxInr">
-                    <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                     <div class="tabContent">
                       <ul>
 @foreach(Ms_areas::getNotIndexOnly() as $area)
@@ -195,7 +191,6 @@
                 </div>
                 <div class="tabBox">
                   <div class="tabBoxInr">
-                    <p class="attention">5個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
                     <div class="tabContent">
                       <ul>
 @foreach(Ms_job_types::getNotIndexOnly() as $job_type)
