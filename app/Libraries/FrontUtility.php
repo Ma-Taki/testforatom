@@ -8,6 +8,8 @@ use App;
 use App\Libraries\CookieUtility as CkieUtil;
 use App\Libraries\ModelUtility as MdlUtil;
 use App\Models\Tr_users;
+use App\Models\Tr_wp_posts;
+use App\Models\Tr_wp_terms;
 use App\Models\Tr_auth_keys;
 use Carbon\Carbon;
 use DB;
@@ -299,5 +301,45 @@ class FrontUtility
       }
       return null;
     }
+
+    //コラムの最新記事をn件取得する
+    public static function getRecentPosts($length){
+
+      //記事を取得
+      $itemList = Tr_wp_posts::select()
+      ->where('post_type', 'post')
+      ->where('post_status','publish')
+      ->orderBy('post_date', 'desc')
+      ->take($length)
+      ->get();
+
+      //各種設定
+      foreach($itemList as $item){
+        //アイキャッチ設定
+        foreach($item->metas as $meta){
+          if($meta->meta_key=="_thumbnail_id"){
+            $eyecatch = Tr_wp_posts::select("guid")->where("ID",$meta->meta_value)->first();
+            $item['thumb'] = $eyecatch->guid;
+          }
+        }
+        //カテゴリー設定
+        $cat_list = [];
+        foreach($item->categories as $category){
+          $cats = Tr_wp_terms::select("name")->where("term_id",'!=',1)->where("term_id",$category->term_taxonomy_id)->get();
+          foreach($cats as $cat){
+            array_push($cat_list,$cat->name);
+          }
+        }
+        $item['category']=$cat_list;
+      }
+      return $itemList;
+    }
+
+    //コラムのカテゴリーを取得する
+    public static function getPostCategories(){
+      $itemList = Tr_wp_terms::where("term_id",'!=',1)->get();
+      return $itemList;
+    }
+
 
 }

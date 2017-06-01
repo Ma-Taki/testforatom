@@ -44,6 +44,7 @@
         </a>
       </li>
     </ul>
+
   </div>
 
   <div class="invisible-pc invisible-tab">
@@ -57,4 +58,46 @@
       <li><a href="/question"><img src="/front/images/sBnr04.png" alt="よくある質問"></a></li>
     </ul>
   </div>
+
+  <div>
+
+<?php
+  //コラム最新５件
+  $posts=FrntUtil::getRecentPosts(5);
+?>
+
+    <div class='wordpress-sidebar'>
+      <ul>
+        <p>最新コラム</p>
+        @foreach($posts as $post)
+        <a href = "{{$post->guid}}">
+          <li>
+              {{$post->post_title}}
+              <span class='date'>{{$post->post_date}}</span>
+          </li>
+        </a>
+        @endforeach
+      </ul>
+    </div>
+
+<?php
+  //コラムカテゴリー一覧
+  $categories=FrntUtil::getPostCategories();
+?>
+
+    <div class='wordpress-sidebar'>
+      <ul>
+        <p>コラムカテゴリー</p>
+        @foreach($categories as $category)
+        <a href = "/column/category/{{$category->slug}}/">
+          <li>
+              {{$category->name}}
+            <span class='arrow'>&rsaquo;</span>
+          </li>
+        </a>
+        @endforeach
+      </ul>
+    </div>
+  </div>
+
 </section><!-- END SIDE-INFO -->
