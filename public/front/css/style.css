@@ -1836,6 +1836,100 @@ a.login__sns-btn {
     text-decoration: underline;
 }
 
+/*-------------------------------
+## 最新コラム
+-------------------------------*/
+
+.recent-post-box{
+  margin:0 auto;
+}
+
+.recent-post-box .post-list{
+  box-sizing:border-box;
+  display:table;
+  width:100%;
+  padding:10px 0px;
+  border-bottom:1px dotted lightgray;
+}
+
+.recent-post-box figure.eyecatch{
+  width:200px;
+  position:relative;
+  display:table-cell;
+  text-align:center;
+  vertical-align:top;
+}
+
+.recent-post-box section.entry-content{
+  padding:10px;
+  display:table-cell;
+  text-align:left;
+  vertical-align:top;
+}
+
+.recent-post-box figure.eyecatch>img{
+  width:100%;
+}
+
+.recent-post-box .title{
+  font-size:1.8rem;
+  font-weight:bold;
+  color:black;
+}
+
+.recent-post-box .description{
+  font-size:1.4rem;
+  line-height:1.3;
+}
+
+.recent-post-box .date{
+  display:block;
+  font-size:1.2rem;
+  padding:1rem 0;
+}
+
+.recent-post-box a,.recent-post-box a:visited,.recent-post-box a:hover{
+  text-decoration:none;
+  color:gray;
+}
+
+.cat-container{
+  position:absolute;
+  text-align:right;
+  width:100%;
+}
+
+.cat-box{
+  background:#fcee21;
+  margin-left:3px;
+  display:inline-block;
+  color:black;
+  padding:4px;"
+}
+
+.recent-post-box .post-list{
+  position:relative;
+}
+
+.recent-post-box .post-list:before{
+content: "";
+display: block;
+width: 0%;
+height: 100%;
+background: #111;
+position: absolute;
+top:0;
+left:50%;
+z-index: 0;
+transition:.3s;
+opacity: .05;
+filter: alpha(opacity=5);-ms-filter: "alpha(opacity=5)";
+}
+.recent-post-box .post-list:hover:before{
+width: 100%;
+height: 100%;
+left:0;
+}
 
 
 /*-------------------------------
@@ -1858,6 +1952,55 @@ a.login__sns-btn {
     text-align: center;
     border-radius:8px;
 }
+
+  /*最新コラム*/
+
+  .wordpress-sidebar{
+    clear:both;
+    margin-top:40px;
+  }
+
+  .wordpress-sidebar>ul>p{
+    background-color:#5E8796;
+    letter-spacing:3px;
+    border-radius:5px;
+    padding:8px 10px;
+    color:white;
+    box-sizing: border-box;
+  }
+
+  .wordpress-sidebar>ul>a>li{
+    display: block;
+    color:gray;
+    position:relative;
+    border-bottom:1px dotted lightgray;
+    padding:14px 0px;
+    padding-right:20px;
+    margin:0;
+  }
+
+  .wordpress-sidebar>ul>a>li::before{
+    content:"〉";
+    position:absolute;
+    font-size:14px;
+    color:gray;
+    font-weight:bold;
+    right:5px;
+    transition:.2s;
+    top:calc(50% - 7px);
+  }
+
+  .wordpress-sidebar>ul>a>li:hover::before{
+    right:0px;
+  }
+
+  .wordpress-sidebar>ul>a>li>.date{
+    display:block;
+    font-size:10px;
+    margin-top:5px;
+    color:lightgray;
+    font-weight:bold;
+  }
 
 /*-------------------------------
 # ヘッダー
@@ -3570,6 +3713,7 @@ sp.css ~640px
     -------------------------------*/
     .sideInfo ul {
         margin-left: 0;
+
     }
 
     .sideInfo li {
@@ -3577,6 +3721,15 @@ sp.css ~640px
         float: left;
         margin: 1%;
     }
+
+    .wordpress-sidebar{
+      padding:5px;
+    }
+
+    .wordpress-sidebar>ul>a>li{
+      width:100%;
+    }
+
 
 	/*-------------------------------
 	# header

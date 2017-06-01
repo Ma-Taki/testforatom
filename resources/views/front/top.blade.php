@@ -263,8 +263,11 @@ use App\Models\Tr_search_categories;
           </div>
           <hr class="category__partition">
 @endforeach
+        @include('front.common.keyword_pc')
         </div>
       </section><!-- /.categorySearch for pc,tablet-->
+
+
 
       <section class="category-search invisible-pc invisible-tab">
         <h2>カテゴリーから案件を探す</h2>
@@ -314,10 +317,11 @@ use App\Models\Tr_search_categories;
 
     </div><!-- category & sideInfo -->
 
-    <div class="clear">
-    @include('front.common.keyword_pc')
-
     <section class="about">
+      <div class="contentInr invisible-sp invisible-tab">
+        <h2>最新コラム</h2>
+      @include('front.common.recent_posts')
+      </div>
       <div class="contentInr">
         <h2>エンジニアルートとは？</h2>
         <div class="about__text">
