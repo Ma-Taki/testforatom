@@ -73,7 +73,7 @@
         <a href = "{{$post->guid}}">
           <li>
               {{$post->post_title}}
-              <span class='date'>{{$post->post_date}}</span>
+              <span class='date'>{{$post->post_date->format('Y.m.d')}}</span>
           </li>
         </a>
         @endforeach
@@ -90,10 +90,7 @@
         <p>コラムカテゴリー</p>
         @foreach($categories as $category)
         <a href = "/column/category/{{$category->slug}}/">
-          <li>
-              {{$category->name}}
-            <span class='arrow'>&rsaquo;</span>
-          </li>
+          <li>{{$category->name}}</li>
         </a>
         @endforeach
       </ul>

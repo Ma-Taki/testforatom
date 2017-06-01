@@ -26,7 +26,7 @@ $posts=FrntUtil::getRecentPosts(5);
 @endforeach
 <section class="entry-content">
 <h3 class='title'>{{$post->post_title}}</h3>
-<p><span class="date">{{$post->post_date}}</span></p>
+<p><span class="date">{{$post->post_date->format('Y.m.d')}}</span></p>
 <div class="description">
   <?php $body = mb_substr($post->post_content,0,80)?>
   {{$body}} ...

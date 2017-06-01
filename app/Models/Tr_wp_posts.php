@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tr_wp_posts extends Model
 {
   protected $table = 'wp_posts';
+  protected $dates = ['post_date'];
 
   /**
    * メタ情報を取得（アイキャッチ取得に使う）
