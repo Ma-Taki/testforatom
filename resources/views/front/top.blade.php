@@ -200,6 +200,7 @@ use App\Models\Tr_search_categories;
 
             <div class="tabSelected">
               <div class="tabSelectedInr">
+                <div class="searchElement">
                 <p class="attention">選択した項目</p>
                 <div id="tagSelectedSkill">
                   <p class="tagSelectedName">スキル</p>
@@ -231,12 +232,14 @@ use App\Models\Tr_search_categories;
                   <ul></ul>
                   <hr class="partitionLine">
                 </div>
+                </div>
               </div>
             </div>
             <div class="clear"></div>
 
             <div class="cmmn-btn">
               <button type="submit">検　索</button>
+              <a id="check-all-clear-btn" class="bg-color-red" href="javascript:void(0);">選択をクリア</a>
             </div>
           </form>
         </div>

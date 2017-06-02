@@ -137,6 +137,7 @@ use App\Models\Ms_job_types;
         <div class="clear"></div>
         <div class="cmmn-btn">
             <button type="submit">検　索</button>
+            <a id="check-all-clear-btn" style="background:#d9333f;" href="javascript:void(0);">選択をクリア</a>
         </div>
     </form>
     </section>

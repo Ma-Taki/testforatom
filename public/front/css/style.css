@@ -215,6 +215,10 @@ p.pageInfo{
     color: #ff0000;
 }
 
+.bg-color-red{
+    background-color: #d9333f !important;
+}
+
 .fs0{ font-size: 0; }
 
 .bg{ background: url(../images/absurdidad.png)repeat; }
