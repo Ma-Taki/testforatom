@@ -222,7 +222,7 @@ jQuery(function($){
 $(function(){
 	$("#check-all-clear-btn").on("click",function(){
 		//すべてのチェックボックスをオフにする
-		$(".srchCndtns_chkBx").prop("checked",false);
+		$(".srchCndtns_chkBx,.srchCndtns_radio").prop("checked",false);
 		//選択中ボックスに追加されたすべての条件を削除
 		$(".searchElement > div > ul").empty();
 		//選択中ボックスを非表示
