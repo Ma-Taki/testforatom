@@ -205,6 +205,7 @@
               </div>
               <div class="cmmn-btn">
                 <button type="submit">検　索</button>
+                <a id="check-all-clear-btn" class="bg-color-red" href="javascript:void(0);">選択をクリア</a>
               </div>
             </form>
           </div>

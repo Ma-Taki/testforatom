@@ -46,6 +46,6 @@
 
     @endif
     <!-- END FOOTER -->
-    <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/all.js') }}"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/all.js?20170602') }}"></script>
   </body>
 </html>
