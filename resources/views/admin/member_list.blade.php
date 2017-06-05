@@ -16,11 +16,77 @@
         vertical-align: middle;
     }
 
+    .col-md-2{
+      width:15em;
+    }
+
     .user-state td label,
-    .user-impression td label {
+    .user-impression td label,
+    .user-flow td label{
         font-weight: normal;
         white-space: nowrap;
     }
+
+    table#memberList>tbody>tr>td.memoTD{
+      padding:0;
+    }
+
+    table#menberList a,table#menberList a:visited,table#menberList a:hover{
+    }
+
+    [class^="memo-"]{
+      display:none;
+      position:relative;
+      background:#ebf6f7;
+      height:200px;
+      width:100%;
+    }
+
+    [class^="body-box-"]{
+      padding:10px;
+    }
+
+    [class^="textarea-box-"]{
+      display:none;
+      overflow: hidden;
+      width:100%;
+      height:100%;
+      background:yellow;
+    }
+
+    [class^="textarea-box-"] > textarea{
+      resize:none;
+      padding:10px;
+      border:none;
+      outline:none;
+      width:100%;
+      height:100%;
+      background-color:white;
+    }
+
+    .edit-btn,.edit-btn:visited,.edit-btn:hover{
+      color:white;
+      display:block;
+      text-align:center;
+      padding:3px 7px;
+      background-color:#5e8796;
+      border-color:#5e8796;
+      border-radius:3px;
+      position: absolute;
+      bottom:10px;
+      right:10px;
+      opacity:0.5;
+      transition:.2s;
+      color:white;
+      text-decoration:none;
+    }
+
+    .edit-btn:hover{
+      color:white;
+      text-decoration:none;
+      opacity:1;
+    }
+
 </style>
 <div class="col-md-10">
   <div class="row">
@@ -117,7 +183,74 @@
                   </div>
                 </td>
               </tr>
-              <tr>
+              <tr class="user-flow">
+              <th>進捗状況</th>
+              <td>
+                  <div class="col-md-2">
+                    <label for="status0">
+                      <input type="hidden"   name="status[0]" value="off">
+                      <input type="checkbox" name="status[0]" id="status0" value="{{ MdlUtil::UNSUPPORTED }}" {{ in_array(MdlUtil::UNSUPPORTED, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      未対応
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status1">
+                      <input type="hidden"   name="status[1]" value="off">
+                      <input type="checkbox" name="status[1]" id="status1" value="{{ MdlUtil::IN_ADJUSTMENT_COUNCELING }}" {{ in_array(MdlUtil::IN_ADJUSTMENT_COUNCELING, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      カウンセリング調整中
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status2">
+                      <input type="hidden"   name="status[2]" value="off">
+                      <input type="checkbox" name="status[2]" id="status2" value="{{ MdlUtil::FINISHED_COUNCELING }}" {{ in_array(MdlUtil::FINISHED_COUNCELING, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      カウンセリング済み
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status3">
+                      <input type="hidden"   name="status[3]" value="off">
+                      <input type="checkbox" name="status[3]" id="status3" value="{{ MdlUtil::IN_ADJUSTMENT_INTERVIEW }}" {{ in_array(MdlUtil::IN_ADJUSTMENT_INTERVIEW, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      案件面談調整中
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status4">
+                      <input type="hidden"   name="status[4]" value="off">
+                      <input type="checkbox" name="status[4]" id="status4" value="{{ MdlUtil::FINISHED_INTERVIEW }}" {{ in_array(MdlUtil::FINISHED_INTERVIEW, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      案件面談済み
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status5">
+                      <input type="hidden"   name="status[5]" value="off">
+                      <input type="checkbox" name="status[5]" id="status5" value="{{ MdlUtil::IN_OPERATION }}" {{ in_array(MdlUtil::IN_OPERATION, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      稼働中
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status6">
+                      <input type="hidden"   name="status[6]" value="off">
+                      <input type="checkbox" name="status[6]" id="status6" value="{{ MdlUtil::EXIT_OPERATION }}" {{ in_array(MdlUtil::EXIT_OPERATION, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      終了
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status7">
+                      <input type="hidden"   name="status[7]" value="off">
+                      <input type="checkbox" name="status[7]" id="status7" value="{{ MdlUtil::STOP_OPERATION }}" {{ in_array(MdlUtil::STOP_OPERATION, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      営業中止
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status8">
+                      <input type="hidden"   name="status[8]" value="off">
+                      <input type="checkbox" name="status[8]" id="status8" value="{{ MdlUtil::IN_OPARATION_AT_OTHER_COMPANY }}" {{ in_array(MdlUtil::IN_OPARATION_AT_OTHER_COMPANY, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      他社稼働中
+                    </label>
+                  </div>
+                </td>
+              </tr>
                 <th><label class="control-label" for="select-2">表示順序</label></th>
 								<td>
                   <select class="form-control" id="select-2" name="sort_id">
@@ -147,8 +280,8 @@
               <th>性別</th>
               <th>都道府県</th>
               <th>ステータス</th>
+              <th>進捗状況</th>
               <th><!-- レイアウト用Blank --></th>
-            </tr>
           </thead>
           <tbody>
 
@@ -160,6 +293,23 @@
               <td>{{ $member->sex === 'Male' ? '男性' : '女性' }}</td>
               <td>{{ $member->prefecture->name }}</td>
               <td>{{ $member->delete_flag > 0 ? '無効' : '有効' }}</td>
+              <td>
+                <div class="select-box" name="{{ $member->id }}">
+                	<select name="status" class="member-status">
+                    <option value="0" @if($member->status==MdlUtil::UNSUPPORTED) selected @endif>未対応</option>
+                    <option value="1" @if($member->status==MdlUtil::IN_ADJUSTMENT_COUNCELING) selected @endif>カウンセリング調整中</option>
+                		<option value="2" @if($member->status==MdlUtil::FINISHED_COUNCELING) selected @endif>カウンセリング済み</option>
+                    <option value="3" @if($member->status==MdlUtil::IN_ADJUSTMENT_INTERVIEW) selected @endif>案件面談調整中</option>
+                		<option value="4" @if($member->status==MdlUtil::FINISHED_INTERVIEW) selected @endif>案件面談済み</option>
+                    <option value="5" @if($member->status==MdlUtil::IN_OPERATION) selected @endif>稼働中</option>
+                    <option value="6" @if($member->status==MdlUtil::EXIT_OPERATION) selected @endif>終了</option>
+                    <option value="7" @if($member->status==MdlUtil::STOP_OPERATION) selected @endif>営業中止</option>
+                    <option value="8" @if($member->status==MdlUtil::IN_OPARATION_AT_OTHER_COMPANY) selected @endif>他社稼働中</option>
+                	</select>
+                </div>
+                <br>
+                <a href="javascript:void(0);"><button type="button" class="slide-memo-btn btn btn-info btn-xs" name="{{$member->id}}" style="background-color:#5e8796;border-color:#5e8796;">進捗メモ</button></a>
+              </td>
               <td nowrap>
                 <a href="/admin/member/detail?id={{ $member->id }}"><button type="button" class="btn btn-info btn-xs">詳細</button></a>
 @if(!$member->delete_flag)
@@ -167,6 +317,17 @@
 @endif
               </td>
 					  </tr>
+            <tr>
+              <td colspan="8" class="memoTD">
+                <div class="memo-{{$member->id}}">
+                  <div class="textarea-box-{{$member->id}}">
+                    <textarea class="memoTEXTAREA"></textarea>
+                  </div>
+                  <p class="body-box-{{$member->id}}">{!!nl2br($member->memo)!!}</p>
+                  <a class="edit-btn" href="javascript:void(0);" name="{{ $member->id }}">編集</a>
+                </div>
+              </td>
+            </tr>
 @endforeach
 
           </tbody>
@@ -180,10 +341,75 @@
             'enabledOnly'      => $data_query['enabledOnly'],
             'impression'       => $data_query['impression'],
             'sort_id'          => $data_query['sort_id'],
+            'status'           => $data_query['status']
           ])->render() !!}
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+
+$('.slide-memo-btn').on('click',function(){
+  $(".memo-"+$(this).attr('name')).slideToggle('fast');
+});
+
+//切り替え
+$('.edit-btn').on('click',function(){
+  var self = $(this);
+  var id = self.attr('name');
+  if($(".body-box-"+id).is(':visible')){
+    $(".body-box-"+id).hide();
+    var html = $(".body-box-"+id).html();
+    $(".textarea-box-"+id+">textarea").val(html.replace(/(<br>|<br \/>)/gi, '\n'));
+    self.text("保存").css({"color":"white","text-decoration":"none"});
+    $(".textarea-box-"+id).show();
+  }else{
+    self.text("保存しています...");
+    $.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+    $.ajax({
+      type: "POST",
+      url: "/admin/member/editstatus",
+      dataType:'json',
+      data: {
+        id : id,
+        text :$(".textarea-box-"+id+">textarea").val() //テキストエリアのテキスト
+      },
+      success: function(data){
+        $(".body-box-"+id).html(data.replace(/\r?\n/g,"<br>"));
+        $(".body-box-"+id).show();
+        $(".textarea-box-"+id).hide();
+        self.text("編集").css({"color":"white","text-decoration":"none"});
+      },
+      error: function(XMLHttpRequest,textStatus, errorThrown){
+        alert("通信に失敗しました。もう一度ボタンを押してください。");
+      }
+    });
+  }
+});
+
+$(".member-status").change(function(){
+  var self = $(this);
+  var id = self.parent().attr("name");
+  $.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+  $.ajax({
+    type: "POST",
+    url: "/admin/member/selectstatus",
+    dataType:'json',
+    data: {
+      id : id,
+      selected : $(this).val() //セレクトボックスの値
+    },
+    success: function(data){
+    },
+    error: function(XMLHttpRequest,textStatus, errorThrown){
+      alert("通信に失敗しました。もう一度選択してください。");
+    }
+  });
+
+});
+
+</script>
+
 @endsection

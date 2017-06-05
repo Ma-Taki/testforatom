@@ -44,6 +44,7 @@ class MemberController extends AdminController
             'freeword'         => $request->freeword ?: '',
             'enabledOnly'      => $request->enabledOnly ?: '',
             'impression'       => $request->impression ?: [],
+            'status'           => $request->status ?: [],
             'sort_id'          => $request->sort_id ?: OdrUtil::ORDER_MEMBER_REGISTRATION_DESC['sortId'],
         ];
 
@@ -139,6 +140,16 @@ class MemberController extends AdminController
             $query = $query->whereIn('impression', $data_query['impression']);
         }
 
+        // valueが'off'の要素を削除する
+        $data_query['status'] = array_filter($data_query['status'], function ($value) {
+            return $value !== 'off';
+        });
+
+        if (!empty($data_query['status'])) {
+            $query = $query->whereIn('status', $data_query['status']);
+        }
+
+
         $item_order = OdrUtil::MemberOrder[$data_query['sort_id']];
 
         // 検索結果を取得する
@@ -225,6 +236,109 @@ class MemberController extends AdminController
 
         return redirect('/admin/member/search')
             ->with('custom_info_messages','会員削除は正常に終了しました。');
+    }
+
+    /**
+     * 進捗状況メモ編集
+     * GET:/admin/member/memo
+     */
+    public function ajaxEditMemberStatus(Request $request){
+
+      // 更新対象会員を取得
+      $member = Tr_users::where('id', $request->id)->first();
+      if (empty($member)) {
+          abort(404, '指定された会員は存在しません。');
+      }
+
+      $data_db = [
+          'member' => $member,
+          'memo' => $request->text ?: ''
+      ];
+
+      // トランザクション
+      DB::transaction(function () use ($data_db) {
+          try {
+              // ユーザーテーブルをアップデート
+               $data_db['member']->memo = $data_db['memo'];
+               $data_db['member']->save();
+
+          } catch (\Exception $e) {
+              Log::error($e);
+              abort(400, 'トランザクションが異常終了しました。');
+          }
+      });
+
+      echo json_encode($data_db['memo']);
+    }
+
+    /**
+     * 進捗状況選択
+     * GET:/admin/member/selectstatus
+     */
+    public function ajaxSelectMemberStatus(Request $request){
+
+      // 更新対象会員を取得
+      $member = Tr_users::where('id', $request->id)->first();
+      if (empty($member)) {
+          abort(404, '指定された会員は存在しません。');
+      }
+
+      $data_db = [
+          'member' => $member,
+          'status' => $request->selected
+      ];
+
+      // トランザクション
+      DB::transaction(function () use ($data_db) {
+          try {
+              // ユーザーテーブルをアップデート
+               $data_db['member']->status = $data_db['status'];
+               $data_db['member']->save();
+
+          } catch (\Exception $e) {
+              Log::error($e);
+              abort(400, 'トランザクションが異常終了しました。');
+          }
+      });
+
+      echo json_encode($data_db['status']);
+    }
+
+    /**
+     * 詳細画面にて進捗状況更新
+     * GET:/admin/member/updatestatus
+     */
+    public function updateMemberStatus(Request $request){
+
+      // 更新対象会員を取得
+      $member = Tr_users::where('id', $request->member_id)->first();
+      if (empty($member)) {
+          abort(404, '指定された会員は存在しません。');
+      }
+
+      $data_db = [
+          'member' => $member,
+          'status' => $request->selected,
+          'memo' => $request->text ?: ''
+      ];
+
+      // トランザクション
+      DB::transaction(function () use ($data_db) {
+          try {
+              // ユーザーテーブルをアップデート
+               $data_db['member']->status = $data_db['status'];
+               $data_db['member']->memo = $data_db['memo'];
+               $data_db['member']->save();
+
+          } catch (\Exception $e) {
+              Log::error($e);
+              abort(400, 'トランザクションが異常終了しました。');
+          }
+      });
+
+      return redirect('/admin/member/detail?id='.$request->member_id)
+          ->with('custom_info_messages',' 進捗状況を更新しました。');
+
     }
 
     /**

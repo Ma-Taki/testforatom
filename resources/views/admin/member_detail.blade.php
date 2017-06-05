@@ -125,6 +125,43 @@
             </div>
         </div>
 
+        <div class="col-md-6">
+            <div class="content-box-header">
+                <div class="panel-title">進捗状況</div>
+            </div>
+            <div class="content-box-large box-with-header">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/member/updatestatus') }}">
+                    <div class="form-group">
+            <label class="col-md-2 control-label" for="user-impression">ステータス</label>
+            <div class="col-md-10">
+              <select class="form-control" name="selected">
+                <option value="0" @if($member->status==MdlUtil::UNSUPPORTED) selected @endif>未対応</option>
+                <option value="1" @if($member->status==MdlUtil::IN_ADJUSTMENT_COUNCELING) selected @endif>カウンセリング調整中</option>
+                <option value="2" @if($member->status==MdlUtil::FINISHED_COUNCELING) selected @endif>カウンセリング済み</option>
+                <option value="3" @if($member->status==MdlUtil::IN_ADJUSTMENT_INTERVIEW) selected @endif>案件面談調整中</option>
+                <option value="4" @if($member->status==MdlUtil::FINISHED_INTERVIEW) selected @endif>案件面談済み</option>
+                <option value="5" @if($member->status==MdlUtil::IN_OPERATION) selected @endif>稼働中</option>
+                <option value="6" @if($member->status==MdlUtil::EXIT_OPERATION) selected @endif>終了</option>
+                <option value="7" @if($member->status==MdlUtil::STOP_OPERATION) selected @endif>営業中止</option>
+                <option value="8" @if($member->status==MdlUtil::IN_OPARATION_AT_OTHER_COMPANY) selected @endif>他社稼働中</option>
+              </select>
+            </div>
+          </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="user-memo">メモ</label>
+                            <textarea name="text" id="user-memo" rows="10" class="form-control">{{ $member->memo }}</textarea>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" align="right">更新</button>
+                    </div>
+                    <input type="hidden" name="member_id" value="{{ $member->id }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                </form>
+            </div>
+        </div>
+
 @if($member->entries->isEmpty())
         <div class="col-md-12">
             <div class="content-box-large">

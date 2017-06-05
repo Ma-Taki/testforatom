@@ -72,6 +72,17 @@ class ModelUtility
     // ユーザの印象レベル：ブラック
     const USER_IMPRESSION_BLACK = 1;
 
+    //ユーザー進捗状況
+    const UNSUPPORTED = 0;//未対応
+    const IN_ADJUSTMENT_COUNCELING = 1;//カウンセリング調整中
+    const FINISHED_COUNCELING = 2;//カウンセリング済
+    const IN_ADJUSTMENT_INTERVIEW = 3;//クライアント面談調整中
+    const FINISHED_INTERVIEW = 4;//クライアント面談済
+    const IN_OPERATION = 5; //稼働中
+    const EXIT_OPERATION = 6; //終了
+    const STOP_OPERATION = 7; //営業中止
+    const IN_OPARATION_AT_OTHER_COMPANY = 8;//他社稼働中
+
     /**
      * 引数のモデル配列のname属性を'、'で連結して返す。
      * @param array $array
