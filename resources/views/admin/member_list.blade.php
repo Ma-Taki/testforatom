@@ -16,6 +16,10 @@
         vertical-align: middle;
     }
 
+    .col-md-2{
+      width:15em;
+    }
+
     .user-state td label,
     .user-impression td label,
     .user-flow td label{
@@ -192,29 +196,57 @@
                   <div class="col-md-2">
                     <label for="status1">
                       <input type="hidden"   name="status[1]" value="off">
-                      <input type="checkbox" name="status[1]" id="status1" value="{{ MdlUtil::FINISHED_COUNCELING }}" {{ in_array(MdlUtil::FINISHED_COUNCELING, old('status', $data_query['status'])) ? "checked" : "" }} />
-                      カウンセリング済
+                      <input type="checkbox" name="status[1]" id="status1" value="{{ MdlUtil::IN_ADJUSTMENT_COUNCELING }}" {{ in_array(MdlUtil::IN_ADJUSTMENT_COUNCELING, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      カウンセリング調整中
                     </label>
                   </div>
                   <div class="col-md-2">
                     <label for="status2">
                       <input type="hidden"   name="status[2]" value="off">
-                      <input type="checkbox" name="status[2]" id="status2" value="{{ MdlUtil::FINISHED_INTERVIEW }}" {{ in_array(MdlUtil::FINISHED_INTERVIEW, old('status', $data_query['status'])) ? "checked" : "" }} />
-                      面談済
+                      <input type="checkbox" name="status[2]" id="status2" value="{{ MdlUtil::FINISHED_COUNCELING }}" {{ in_array(MdlUtil::FINISHED_COUNCELING, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      カウンセリング済み
                     </label>
                   </div>
                   <div class="col-md-2">
                     <label for="status3">
                       <input type="hidden"   name="status[3]" value="off">
-                      <input type="checkbox" name="status[3]" id="status3" value="{{ MdlUtil::IN_FINAL_ADJUSTMENT }}" {{ in_array(MdlUtil::IN_FINAL_ADJUSTMENT, old('status', $data_query['status'])) ? "checked" : "" }} />
-                      最終調整中
+                      <input type="checkbox" name="status[3]" id="status3" value="{{ MdlUtil::IN_ADJUSTMENT_INTERVIEW }}" {{ in_array(MdlUtil::IN_ADJUSTMENT_INTERVIEW, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      案件面談調整中
                     </label>
                   </div>
                   <div class="col-md-2">
                     <label for="status4">
                       <input type="hidden"   name="status[4]" value="off">
-                      <input type="checkbox" name="status[4]" id="status4" value="{{ MdlUtil::FINISHED_ALL }}" {{ in_array(MdlUtil::FINISHED_ALL, old('status', $data_query['status'])) ? "checked" : "" }} />
-                      案件終了
+                      <input type="checkbox" name="status[4]" id="status4" value="{{ MdlUtil::FINISHED_INTERVIEW }}" {{ in_array(MdlUtil::FINISHED_INTERVIEW, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      案件面談済み
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status5">
+                      <input type="hidden"   name="status[5]" value="off">
+                      <input type="checkbox" name="status[5]" id="status5" value="{{ MdlUtil::IN_OPERATION }}" {{ in_array(MdlUtil::IN_OPERATION, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      稼働中
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status6">
+                      <input type="hidden"   name="status[6]" value="off">
+                      <input type="checkbox" name="status[6]" id="status6" value="{{ MdlUtil::EXIT_OPERATION }}" {{ in_array(MdlUtil::EXIT_OPERATION, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      終了
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status7">
+                      <input type="hidden"   name="status[7]" value="off">
+                      <input type="checkbox" name="status[7]" id="status7" value="{{ MdlUtil::STOP_OPERATION }}" {{ in_array(MdlUtil::STOP_OPERATION, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      営業中止
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status8">
+                      <input type="hidden"   name="status[8]" value="off">
+                      <input type="checkbox" name="status[8]" id="status8" value="{{ MdlUtil::IN_OPARATION_AT_OTHER_COMPANY }}" {{ in_array(MdlUtil::IN_OPARATION_AT_OTHER_COMPANY, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      他社稼働中
                     </label>
                   </div>
                 </td>
@@ -265,10 +297,14 @@
                 <div class="select-box" name="{{ $member->id }}">
                 	<select name="status" class="member-status">
                     <option value="0" @if($member->status==MdlUtil::UNSUPPORTED) selected @endif>未対応</option>
-                		<option value="1" @if($member->status==MdlUtil::FINISHED_COUNCELING) selected @endif>カウンセリング済</option>
-                		<option value="2" @if($member->status==MdlUtil::FINISHED_INTERVIEW) selected @endif>面談済</option>
-                		<option value="3" @if($member->status==MdlUtil::IN_FINAL_ADJUSTMENT) selected @endif>最終調整中</option>
-                		<option value="4" @if($member->status==mdlUtil::FINISHED_ALL) selected @endif>案件終了</option>
+                    <option value="1" @if($member->status==MdlUtil::IN_ADJUSTMENT_COUNCELING) selected @endif>カウンセリング調整中</option>
+                		<option value="2" @if($member->status==MdlUtil::FINISHED_COUNCELING) selected @endif>カウンセリング済み</option>
+                    <option value="3" @if($member->status==MdlUtil::IN_ADJUSTMENT_INTERVIEW) selected @endif>案件面談調整中</option>
+                		<option value="4" @if($member->status==MdlUtil::FINISHED_INTERVIEW) selected @endif>案件面談済み</option>
+                    <option value="5" @if($member->status==MdlUtil::IN_OPERATION) selected @endif>稼働中</option>
+                    <option value="6" @if($member->status==MdlUtil::EXIT_OPERATION) selected @endif>終了</option>
+                    <option value="7" @if($member->status==MdlUtil::STOP_OPERATION) selected @endif>営業中止</option>
+                    <option value="8" @if($member->status==MdlUtil::IN_OPARATION_AT_OTHER_COMPANY) selected @endif>他社稼働中</option>
                 	</select>
                 </div>
                 <br>

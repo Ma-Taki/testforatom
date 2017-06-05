@@ -74,10 +74,20 @@ class ModelUtility
 
     //ユーザー進捗状況
     const UNSUPPORTED = 0;//未対応
-    const FINISHED_COUNCELING = 1;//担当者カウンセリング済
-    const FINISHED_INTERVIEW = 2;//クライアント面談済
-    const IN_FINAL_ADJUSTMENT = 3;//最終調整中
-    const FINISHED_ALL = 4;//案件終了
+    const IN_ADJUSTMENT_COUNCELING = 1;//カウンセリング調整中
+    const FINISHED_COUNCELING = 2;//カウンセリング済
+    const IN_ADJUSTMENT_INTERVIEW = 3;//クライアント面談調整中
+    const FINISHED_INTERVIEW = 4;//クライアント面談済
+    const IN_OPERATION = 5; //稼働中
+    const EXIT_OPERATION = 6; //終了
+    const STOP_OPERATION = 7; //営業中止
+    const IN_OPARATION_AT_OTHER_COMPANY = 8;//他社稼働中
+
+
+
+
+
+
 
     /**
      * 引数のモデル配列のname属性を'、'で連結して返す。
