@@ -83,12 +83,6 @@ class ModelUtility
     const STOP_OPERATION = 7; //営業中止
     const IN_OPARATION_AT_OTHER_COMPANY = 8;//他社稼働中
 
-
-
-
-
-
-
     /**
      * 引数のモデル配列のname属性を'、'で連結して返す。
      * @param array $array
