@@ -27,6 +27,9 @@ class AdminUtility
         'admin/member/detail' => mdlUtil::AUTH_TYPE_MEMBER_READ,
         'admin/member/search' => mdlUtil::AUTH_TYPE_MEMBER_READ,
         'admin/member/update' => mdlUtil::AUTH_TYPE_MEMBER_READ,
+        'admin/member/editstatus' => mdlUtil::AUTH_TYPE_MEMBER_READ,
+        'admin/member/selectstatus' => mdlUtil::AUTH_TYPE_MEMBER_READ,
+        'admin/member/updatestatus' => mdlUtil::AUTH_TYPE_MEMBER_READ,
         'admin/member/delete' => mdlUtil::AUTH_TYPE_MEMBER_DELETE,
         // 案件管理
         'admin/item/search' => mdlUtil::AUTH_TYPE_ITEM_READ,

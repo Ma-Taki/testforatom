@@ -176,6 +176,12 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::post('/admin/member/update', 'admin\MemberController@updatehMemberMemo');
     // 論理削除処理
     Route::get('/admin/member/delete', 'admin\MemberController@deleteMember');
+    // 進捗状況選択
+    Route::post('/admin/member/selectstatus', 'admin\MemberController@ajaxSelectMemberStatus');
+    // 進捗状況メモ編集
+    Route::post('/admin/member/editstatus', 'admin\MemberController@ajaxEditMemberStatus');
+    // 進捗状況メモ編集
+    Route::post('/admin/member/updatestatus', 'admin\MemberController@updateMemberStatus');
 
     // 案件管理
     // 新規登録画面

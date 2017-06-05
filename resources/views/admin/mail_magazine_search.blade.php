@@ -131,8 +131,8 @@
 @endforeach
                   </p><br>
 @if($item->status==3)
-                  <p style="color:red;">【送信失敗アドレス】</p>
-                  <p style="color:red;">{{$item->error_address}}</p><br>
+                  <p class="color-red">【送信失敗アドレス】</p>
+                  <p class="color-red">{{$item->error_address}}</p><br>
 @endif
                   <!-- <p>【Cc】</p>
                   <p>{{$item->cc}}</p><br>
