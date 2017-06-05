@@ -22,6 +22,67 @@
         font-weight: normal;
         white-space: nowrap;
     }
+
+    table#memberList>tbody>tr>td.memoTD{
+      padding:0;
+    }
+
+    table#menberList a,table#menberList a:visited,table#menberList a:hover{
+    }
+
+    [class^="memo-"]{
+      display:none;
+      position:relative;
+      background:#ebf6f7;
+      height:200px;
+      width:100%;
+    }
+
+    [class^="body-box-"]{
+      padding:10px;
+    }
+
+    [class^="textarea-box-"]{
+      display:none;
+      overflow: hidden;
+      width:100%;
+      height:100%;
+      background:yellow;
+    }
+
+    [class^="textarea-box-"] > textarea{
+      resize:none;
+      padding:10px;
+      border:none;
+      outline:none;
+      width:100%;
+      height:100%;
+      background-color:white;
+    }
+
+    .edit-btn,.edit-btn:visited,.edit-btn:hover{
+      color:white;
+      display:block;
+      text-align:center;
+      padding:3px 7px;
+      background-color:#5e8796;
+      border-color:#5e8796;
+      border-radius:3px;
+      position: absolute;
+      bottom:10px;
+      right:10px;
+      opacity:0.5;
+      transition:.2s;
+      color:white;
+      text-decoration:none;
+    }
+
+    .edit-btn:hover{
+      color:white;
+      text-decoration:none;
+      opacity:1;
+    }
+
 </style>
 <div class="col-md-10">
   <div class="row">
@@ -244,77 +305,13 @@
             'enabledOnly'      => $data_query['enabledOnly'],
             'impression'       => $data_query['impression'],
             'sort_id'          => $data_query['sort_id'],
+            'status'           => $data_query['status']
           ])->render() !!}
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<style>
-
-table#memberList>tbody>tr>td.memoTD{
-  padding:0;
-}
-
-table#menberList a,table#menberList a:visited,table#menberList a:hover{
-}
-
-[class^="memo-"]{
-  display:none;
-  position:relative;
-  background:#ebf6f7;
-  height:200px;
-  width:100%;
-}
-
-[class^="body-box-"]{
-  padding:10px;
-}
-
-[class^="textarea-box-"]{
-  display:none;
-  overflow: hidden;
-  width:100%;
-  height:100%;
-  background:yellow;
-}
-
-[class^="textarea-box-"] > textarea{
-  resize:none;
-  padding:10px;
-  border:none;
-  outline:none;
-  width:100%;
-  height:100%;
-  background-color:white;
-}
-
-.edit-btn,.edit-btn:visited,.edit-btn:hover{
-  color:white;
-  display:block;
-  text-align:center;
-  padding:3px 7px;
-  background-color:#5e8796;
-  border-color:#5e8796;
-  border-radius:3px;
-  position: absolute;
-  bottom:10px;
-  right:10px;
-  opacity:0.5;
-  transition:.2s;
-  color:white;
-  text-decoration:none;
-}
-
-.edit-btn:hover{
-  color:white;
-  text-decoration:none;
-  opacity:1;
-}
-
-
-</style>
 
 <script>
 
@@ -359,7 +356,6 @@ $('.edit-btn').on('click',function(){
 $(".member-status").change(function(){
   var self = $(this);
   var id = self.parent().attr("name");
-  console.log(id)
   $.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
   $.ajax({
     type: "POST",
@@ -370,7 +366,6 @@ $(".member-status").change(function(){
       selected : $(this).val() //セレクトボックスの値
     },
     success: function(data){
-      console.log("通信成功しました");
     },
     error: function(XMLHttpRequest,textStatus, errorThrown){
       alert("通信に失敗しました。もう一度選択してください。");
@@ -378,9 +373,6 @@ $(".member-status").change(function(){
   });
 
 });
-
-
-
 
 </script>
 
