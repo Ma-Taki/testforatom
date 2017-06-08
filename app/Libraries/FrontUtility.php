@@ -19,7 +19,7 @@ class FrontUtility
     // スキルシートアップロードルール
     const FILE_UPLOAD_RULE = [
         'maximumSize' => 1024000,
-		'allowedExtensions' => [
+        'allowedExtensions' => [
             'docx',
 			'xlsx',
 			'pptx',
@@ -334,12 +334,4 @@ class FrontUtility
       }
       return $itemList;
     }
-
-    //コラムのカテゴリーを取得する
-    public static function getPostCategories(){
-      $itemList = Tr_wp_terms::where("term_id",'!=',1)->get();
-      return $itemList;
-    }
-
-
 }

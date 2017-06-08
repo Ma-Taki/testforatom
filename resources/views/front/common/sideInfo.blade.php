@@ -1,4 +1,7 @@
-<?php use App\Libraries\FrontUtility as FrntUtil; ?>
+<?php
+    use App\Libraries\FrontUtility as FrntUtil;
+    use App\Models\Tr_wp_terms;
+?>
 <section class="sideInfo">
   <div class="invisible-sp">
     <ul>
@@ -80,17 +83,12 @@
       </ul>
     </div>
 
-<?php
-  //コラムカテゴリー一覧
-  $categories=FrntUtil::getPostCategories();
-?>
-
     <div class='wordpress-sidebar'>
       <ul>
         <p>コラムカテゴリー</p>
-        @foreach($categories as $category)
-        <a href = "/column/category/{{$category->slug}}/">
-          <li>{{$category->name}}</li>
+        @foreach(Tr_wp_terms::getAllCategories() as $category)
+        <a href = "/column/category/{{ $category->slug }}/">
+          <li>{{ $category->name }}</li>
         </a>
         @endforeach
       </ul>
