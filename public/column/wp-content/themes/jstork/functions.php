@@ -95,14 +95,21 @@ function breadcrumb() {
 
     } else if (!empty($queried_obj) && get_class($queried_obj) == "WP_Term") {
         // カテゴリーのアーカイブページ
-        if (!empty($queried_obj->category_parent)) {
-            // 親カテゴリ
+        if ($queried_obj->taxonomy == 'category') {
+            if (!empty($queried_obj->category_parent)) {
+                // 親カテゴリ
+                $addNext();
+                $addElement(get_cat_name($queried_obj->category_parent), '/column/?cat='.$queried_obj->category_parent);
+            }
+            // カテゴリ、または子カテゴリ
+            $addNext($breadcrumbs);
+            $addElement($queried_obj->cat_name);
+
+        // タグのアーカイブページ
+        } else if ($queried_obj->taxonomy == 'post_tag') {
             $addNext();
-            $addElement(get_cat_name($queried_obj->category_parent), '/column/?cat='.$queried_obj->category_parent);
+            $addElement($queried_obj->name);
         }
-        // カテゴリ、または子カテゴリ
-        $addNext($breadcrumbs);
-        $addElement($queried_obj->cat_name);
     }
 
     $createBreadcrumbsEnd();
