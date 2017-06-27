@@ -1905,10 +1905,11 @@ a.login__sns-btn {
 
 .cat-box{
   background:#fcee21;
-  margin-left:3px;
+  /* margin-left:3px; */
   display:inline-block;
   color:black;
-  padding:4px;"
+  padding:4px;
+  opacity: 0.9;
 }
 
 .recent-post-box .post-list{
