@@ -324,14 +324,14 @@ class FrontUtility
         }
         //カテゴリー設定
         $cat_list = [];
-        foreach($item->categories as $category){
-          $cats = Tr_wp_terms::select("name")->where("term_id",'!=',1)->where("term_id",$category->term_taxonomy_id)->get();
-          foreach($cats as $cat){
-            array_push($cat_list,$cat->name);
-          }
+        foreach($item->relationships as $relationship) {
+            if ($relationship->taxonomy->taxonomy === 'category') {
+                array_push($cat_list, $relationship->taxonomy->term->name);
+            }
         }
-        $item['category']=$cat_list;
+        $item['category'] = $cat_list;
       }
+
       return $itemList;
     }
 }
