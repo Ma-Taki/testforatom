@@ -12,7 +12,7 @@
     @if($__env->yieldContent('prev'))<link rel="prev" href="@yield('prev')" />@endif
     @if($__env->yieldContent('next'))<link rel="next" href="@yield('next')" />@endif
     <link rel="icon" href="{{ url('/front/favicon.ico') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('/front/css/style.css') }}<?php echo '?' . filemtime('front/css/style.css');?>">
+    <link rel="stylesheet" type="text/css" href="{{ url('/front/css/style.css') . '?' . filemtime( __DIR__.'/../../../public/front/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/front/css/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/front/css/slick-theme.css') }}">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
