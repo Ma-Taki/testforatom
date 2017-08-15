@@ -26,6 +26,7 @@
     ga('send', 'pageview');
 
     </script>
+    @include('front.common.inside_head_tag')
 </head>
 
 <body>
