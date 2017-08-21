@@ -46,6 +46,14 @@
           <img src="/front/images/sBnr04.png" alt="よくある質問">
         </a>
       </li>
+      <li>
+        <a href="http://jitel.jp/">
+          <img src="/front/images/sbnr_jitel.jpg" alt="株式会社日本IT教育研修機構">
+        </a>
+      </li>
+
+
+
     </ul>
 
   </div>
