@@ -47,7 +47,7 @@
         </a>
       </li>
       <li>
-        <a href="http://jitel.jp/">
+        <a href="http://jitel.jp/" target="_blank">
           <img src="/front/images/sbnr_jitel.jpg" alt="株式会社日本IT教育研修機構">
         </a>
       </li>
