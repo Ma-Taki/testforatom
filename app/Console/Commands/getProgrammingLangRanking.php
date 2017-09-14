@@ -41,8 +41,6 @@ class getProgrammingLangRanking extends Command
     public function handle()
     {
 
-      echo "yes";
-
       //プログラミング言語、人気ランキングサイト解析
       $html = file_get_contents('https://www.tiobe.com/tiobe-index/');
       $domDocument = new \DOMDocument();
@@ -64,6 +62,9 @@ class getProgrammingLangRanking extends Command
 
       //今月のランキングがすでに存在していたらUPDATE
       if(Tr_programming_lang_ranking::where('month', $month)->exists()){
+
+        echo "yes";
+
         for($i=0; $i<count($top20); $i ++){
           Tr_programming_lang_ranking::where('month', $month)->where('language',$top20[$i])->update(['ranking' => $i+1 ]);
         }
