@@ -12,7 +12,7 @@
 <h3>人気ランキング（{{ $pop_ranking['month'] }}現在）</h3>
 @foreach($pop_ranking['ranking'] as $number => $language)
   <li>
-    <span class="rank">{{$number+1}}</span><span class="lang">{{$language}}</span>
+    <span class="rank">{{$number+1}}位</span><span class="lang">{{$language}}</span>
   </li>
 @endforeach
 <p class="ranking-from">出典：<a href="https://www.tiobe.com/tiobe-index/" target="_blank">https://www.tiobe.com/tiobe-index/</a></p>
@@ -23,7 +23,7 @@
 <h3>当サイト案件数ランキング</h3>
 @foreach($item_ranking as $number => $ranking)
   <li>
-    <span class="rank">{{$number+1}}</span><span class="lang"><a href="/item/search?skills%5B%5D={{ $ranking['id'] }}">{{$ranking['lang']}}</a></span>
+    <span class="rank">{{$number+1}}位</span><span class="lang"><a href="/item/search?skills%5B%5D={{ $ranking['id'] }}">{{$ranking['lang']}}</a></span>
   </li>
 @endforeach
 <p class="ranking-from"></p>
@@ -95,7 +95,8 @@
 .ranking-box .rank{
   display:inline-block;
   margin-right:10px;
-  width:24px;
+  width:40px;
+  letter-spacing:2px;
   /*background-color:#5e8796;*/
   color:white;
   text-align:center;
