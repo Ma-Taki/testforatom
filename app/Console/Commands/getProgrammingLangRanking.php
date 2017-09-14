@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Tr_programming_lang_ranking;
 use Carbon\Carbon;
-use DOMDocument;
+// use DOMDocument;
 
 class getProgrammingLangRanking extends Command
 {
