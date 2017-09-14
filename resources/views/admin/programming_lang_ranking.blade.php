@@ -180,9 +180,9 @@ $(function() {
       success: function(data)
       {
 
-        for(var i=0; i<data.length; i++){
+        for(var i=0; i<data['ranking'].length; i++){
           $(".rank")[i].innerHTML = i+1;
-          $(".lang")[i].innerHTML = data[i];
+          $(".lang")[i].innerHTML = data['ranking'][i];
         }
 
         showMessage("最新ランキングに変更されました")

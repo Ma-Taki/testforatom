@@ -62,8 +62,7 @@ use Carbon\Carbon;
 @endif
 @if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
             <li>
-              <?php $month = Carbon::now()->format('Ym'); ?>
-                <a href="/admin/programming-lang-ranking?month={{$month}}"><i class="glyphicon glyphicon-wrench"></i>人気言語ランキング</a>
+                <a href="/admin/programming-lang-ranking"><i class="glyphicon glyphicon-wrench"></i>人気言語ランキング</a>
             </li>
 @endif
         </ul>
