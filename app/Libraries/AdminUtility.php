@@ -47,6 +47,12 @@ class AdminUtility
         'admin/mail-magazine/search' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
         'admin/mail-magazine/search/stop' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
         'admin/mail-magazine/search/start' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
+
+        //人気言語ランキング管理
+        'admin/programming-lang-ranking' => mdlUtil::AUTH_TYPE_MASTER,
+        'admin/edit-programming-lang-ranking' => mdlUtil::AUTH_TYPE_MASTER,
+        'admin/reset-programming-lang-ranking' => mdlUtil::AUTH_TYPE_MASTER,
+
     ];
 
     // メール：メルマガ配信

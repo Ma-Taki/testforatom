@@ -30,6 +30,9 @@ class ModelUtility
     const AUTH_TYPE_ENTRY_DOWNLOAD = 'entry.download';
     // メルマガ管理：
     const AUTH_TYPE_MAIL_MAGAZINE = 'mail_magazine.all';
+    // 人気言語ランキング管理：
+    const AUTH_TYPE_PROGRAMMING_LANG_RANKING = 'programming_lang_ranking.all';
+
     /* △△△ 管理権限 △△△ */
 
     // 都道府県：東京

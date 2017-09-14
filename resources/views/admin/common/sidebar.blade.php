@@ -1,6 +1,7 @@
 <?php
 use App\Libraries\AdminUtility as admnUtil;
 use App\Libraries\ModelUtility as mdlUtil;
+use Carbon\Carbon;
 ?>
 @if (!strstr(Request::url(), '/admin/login'))
 <div class="col-md-2">
@@ -59,7 +60,12 @@ use App\Libraries\ModelUtility as mdlUtil;
                 </ul>
             </li>
 @endif
-
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
+            <li>
+              <?php $month = Carbon::now()->format('Ym'); ?>
+                <a href="/admin/programming-lang-ranking?month={{$month}}"><i class="glyphicon glyphicon-wrench"></i>人気言語ランキング</a>
+            </li>
+@endif
         </ul>
     </div>
 </div>

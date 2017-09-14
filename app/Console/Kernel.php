@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-      Commands\SendMailMagazine::class
+      Commands\SendMailMagazine::class,
+      Commands\getProgrammingLangRanking::class,
     ];
 
     /**
@@ -32,5 +33,8 @@ class Kernel extends ConsoleKernel
       //       exec('chmod 777 '.$filename);
       //     }
       // });
+
+      //毎週月曜日に人気プログラミング言語ランキングT0P20解析
+      $schedule->command('getprogramminglangranking')->weekly()->mondays()->at('6:00');
     }
 }

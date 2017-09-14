@@ -210,4 +210,12 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/mail-magazine/search', 'admin\MailMagazineController@search');
     Route::get('/admin/mail-magazine/search/stop', 'admin\MailMagazineController@stopMailMagazine');
     Route::get('/admin/mail-magazine/search/start', 'admin\MailMagazineController@startMailMagazine');
+
+    //人気プログラミング言語ランキング
+    Route::get('/admin/programming-lang-ranking', 'admin\ProgrammingLangRankingController@index');
+    Route::post('/admin/edit-programming-lang-ranking', 'admin\ProgrammingLangRankingController@editProgrammingLangRanking');
+    Route::get('/admin/reset-programming-lang-ranking', 'admin\ProgrammingLangRankingController@getProgrammingLangRankingFromWebsite');
+
+
+
 });

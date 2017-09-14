@@ -8,9 +8,12 @@ use App;
 use App\Libraries\CookieUtility as CkieUtil;
 use App\Libraries\ModelUtility as MdlUtil;
 use App\Models\Tr_users;
+use App\Models\Tr_items;
 use App\Models\Tr_wp_posts;
 use App\Models\Tr_wp_terms;
 use App\Models\Tr_auth_keys;
+use App\Models\Tr_programming_lang_ranking;
+use App\Models\Ms_skills;
 use Carbon\Carbon;
 use DB;
 
@@ -334,4 +337,72 @@ class FrontUtility
 
       return $itemList;
     }
+
+
+    /**
+     * 人気プログラミング言語ランキング取得
+     * @param int $length トップ10を取得したい場合は10
+     */
+    public static function getProgrammingLangRanking($length){
+      //戻り値のランキング配列
+      $top = [];
+      //まずは今月のランキングを取得したい
+      $dt = Carbon::now();
+      $month = $dt->format('Ym');
+      $month_for_display = $dt->format('Y年m月');
+      //もし今月のランキングがなかったら
+      if(!Tr_programming_lang_ranking::where('month', $month)->exists()){
+        //先月のランキングを取得することにする
+        $dt = Carbon::now()->subMonth();
+        $month = $dt->format('Ym');
+        $month_for_display = $dt->format('Y年m月');
+      }
+      //データベースから１０位までを取得
+      $ranking = Tr_programming_lang_ranking::where('month',$month)->orderBy('ranking', 'asc')->take(10)->get();
+      //テンプレートに渡すために配列に入れる
+      foreach($ranking as $ranker){
+        $top[] = $ranker['language'];
+      }
+      //ランキングと取得した月を返す
+      return array( "ranking" => $top, "month" => $month_for_display);
+    }
+
+
+
+    /**
+     * プログラミング言語別エンジニアルート案件数ランキング取得
+     * @param int $length トップ10を取得したい場合は10
+     */
+    public static function getItemRankingByProgrammingLanguage($length){
+
+      //戻り値のランキング配列
+      $ranking = [];
+
+      //登録されている全てのプログラミング言語を取得
+      $langs = Ms_skills::where('skill_category_id',1) //言語のみを取得
+                        ->where('id','!=',14) //HTMLは省く
+                        ->get();
+
+      //プログラミング言語別の案件数を取得
+      foreach($langs as $lang){
+        //各プログラミング言語の案件数を取得
+        $count = Tr_items::select('items.*')
+                          ->entryPossible()
+                          ->getItemBySkills($lang['id'])
+                          ->count();
+        //各プログラミング言語の案件数と言語名を入れる
+        $ranking[] = array("count" => $count, "lang" =>$lang['name'], "id" => $lang['id']);
+      }
+
+      //案件数が多い順にソート
+      array_multisort(array_column($ranking, 'count'), SORT_DESC, $ranking);
+      //10位より下は削除
+      array_splice($ranking, $length);
+
+      return $ranking;
+
+    }
+
+
+
 }

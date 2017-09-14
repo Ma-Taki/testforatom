@@ -319,6 +319,13 @@ use App\Models\Tr_search_categories;
         <h2>最新コラム</h2>
       @include('front.common.recent_posts')
       </div>
+
+      <div class="contentInr invisible-sp invisible-tab">
+        <h2>人気プログラミング言語ランキング</h2>
+      @include('front.common.programming_lang_ranking')
+      </div>
+
+
       <div class="contentInr">
         <h2>エンジニアルートとは？</h2>
         <div class="about__text">
