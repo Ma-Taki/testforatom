@@ -41,6 +41,8 @@ class getProgrammingLangRanking extends Command
     public function handle()
     {
 
+      echo "yes";
+
       //プログラミング言語、人気ランキングサイト解析
       $html = file_get_contents('https://www.tiobe.com/tiobe-index/');
       $domDocument = new \DOMDocument();
