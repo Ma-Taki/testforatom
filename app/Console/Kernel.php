@@ -35,6 +35,16 @@ class Kernel extends ConsoleKernel
       // });
 
       //毎週月曜日に人気プログラミング言語ランキングT0P20解析
-      $schedule->command('getprogramminglangranking')->weekly()->mondays()->at('6:00');
+      // $schedule->command('getprogramminglangranking')->weekly()->mondays()->at('6:00');
+      $schedule->command('getprogramminglangranking')->everyTenMinutes();
+
+
+
+
+
+
+
+
+
     }
 }
