@@ -315,12 +315,12 @@ use App\Models\Tr_search_categories;
     </div><!-- category & sideInfo -->
 
     <section class="about">
-      <div class="contentInr invisible-sp invisible-tab">
+      <div class="contentInr invisible-sp">
         <h2>最新コラム</h2>
       @include('front.common.recent_posts')
       </div>
 
-      <div class="contentInr invisible-sp invisible-tab">
+      <div class="contentInr">
         <h2>人気プログラミング言語ランキング</h2>
       @include('front.common.programming_lang_ranking')
       </div>

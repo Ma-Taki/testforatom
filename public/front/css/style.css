@@ -2818,6 +2818,7 @@ nav ul .active{ background: #536C75; }
 .ranking-box>ul{
   background-color:white;
   padding:10px 0px;
+  border-radius:5px;
 }
 
 .ranking-box:first-child>ul{
@@ -3413,6 +3414,16 @@ sp.css ~640px
 
     #top .about .appeal-point {
         padding: 0px 2.5%;
+    }
+
+    /*-------------------------------
+    # プログラミング言語ランキング
+    -------------------------------*/
+
+    .ranking-box{
+      width:100%;
+      padding-top:10px;
+      padding-bottom:10px;
     }
 
     /*-------------------------------
