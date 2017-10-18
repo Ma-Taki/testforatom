@@ -1,3 +1,4 @@
+<?php /*
 <!-- mieruca heat map -->
 <!-- Begin Mieruca Embed Code -->
 <script type="text/javascript" id="mierucajs">
@@ -8,3 +9,4 @@ setTimeout(mieruca, 500); document.readyState != "complete" ? (window.attachEven
 })();
 </script>
 <!-- End Mieruca Embed Code -->
+*/?>
