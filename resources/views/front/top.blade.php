@@ -317,7 +317,7 @@ use App\Models\Tr_search_categories;
     <section class="about">
       <div class="contentInr invisible-sp">
         <h2>最新コラム</h2>
-      @include('front.common.recent_posts')
+test
       </div>
 
       <div class="contentInr">
