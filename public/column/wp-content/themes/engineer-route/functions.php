@@ -351,6 +351,14 @@ if (!function_exists('opencage_excerpt_more')) {
 
 // is_mobile追加
 function is_mobile(){
+	if(empty($_SERVER['HTTP_USER_AGENT'])) {
+	    return array(
+	        'name' => 'unrecognized',
+	        'version' => 'unknown',
+	        'platform' => 'unrecognized',
+	        'userAgent' => ''
+	    );
+	}
 	$useragents = array(
 		'iPhone', // iPhone
 		'iPod', // iPod touch
