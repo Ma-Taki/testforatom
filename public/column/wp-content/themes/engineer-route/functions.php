@@ -67,19 +67,20 @@ function breadcrumb() {
 
     // 表示中のページによって処理を分岐させる
     if (!empty($queried_obj) && get_class($queried_obj) == 'WP_Post') {
-        // 記事のページ
-        // 複数のカテゴリには属さない想定
-        $post_cate = get_the_category($queried_obj->ID)[0];
-        if (!empty($post_cate->category_parent)) {
-            // 親カテゴリ
-            $addNext();
-            $addElement(get_cat_name($post_cate->category_parent), '/column/?cat='.$post_cate->category_parent);
-        }
-
-        // カテゴリ、または子カテゴリ
-        $addNext($breadcrumbs);
-        $addElement($post_cate->cat_name, '/column/?cat='.$post_cate->cat_ID);
-
+        // 固定ページ以外の記事のページ
+        if(!is_page()){
+	        // 複数のカテゴリには属さない想定
+	        $post_cate = get_the_category($queried_obj->ID)[0];
+	        if (!empty($post_cate->category_parent)) {
+	            // 親カテゴリ
+	            $addNext();
+	            $addElement(get_cat_name($post_cate->category_parent), '/column/?cat='.$post_cate->category_parent);
+	        }
+	        // カテゴリ、または子カテゴリ
+	        $addNext($breadcrumbs);
+	        $addElement($post_cate->cat_name, '/column/?cat='.$post_cate->cat_ID);
+		}
+		
         // 記事
         $addNext($breadcrumbs);
         $addElement($queried_obj->post_title);
