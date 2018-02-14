@@ -64,6 +64,24 @@ textarea{width: 100%;border: 1px solid #5e8796;border-radius: 5px;}
     margin-top: 4rem;
 }
 
+.content__element_bottomSpace {
+    margin-bottom: 2rem;
+}
+
+.content__element_bottomSpace h2{
+    position: relative;
+    border: none;
+    font-size:1.25em;
+    padding: 1em;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #eef3f4;
+    color: #5e8796;
+}
+
 .content__info {
     color: #5e8796;
     margin-bottom: 2rem;
@@ -415,6 +433,22 @@ h3.data-table__title {
 }
 
 /**
+ * プログラミング言語解説ページ
+ */
+
+.getContents-programming__body {
+
+    width: 100%;
+    margin: 20;
+    padding: 2%;
+    border: 1px solid #5e8796;
+    border-radius: 8px;
+
+
+}
+
+
+/**
  * 汎用データテーブル END
  */
 
@@ -469,18 +503,18 @@ h3.data-table__title {
     margin: 0 auto;
 }
 
-.page{
+.invisible-sp .page{
     width: 100%;
     padding-top: 4rem;
     text-align: center;
 }
 
-.page li{
+.invisible-sp .page li{
     display: inline-block;
     margin: 0.3rem;
 }
 
-.page li a{
+.invisible-sp .page li a{
     color: #90adb7;
     border: 1px solid #5e8796;
     padding: 0.6rem 1.3rem;
@@ -488,7 +522,7 @@ h3.data-table__title {
     vertical-align: -webkit-baseline-middle;
 }
 
-.page li span{
+.invisible-sp .page li span{
     color: #90adb7;
     border: 1px solid #5e8796;
     padding: 0.6rem 1.3rem;
@@ -496,13 +530,13 @@ h3.data-table__title {
     vertical-align: -webkit-baseline-middle;
 }
 
-.page .active span{
+.invisible-sp .page .active span{
     color: #fff;
     background-color: #5e8796;
     pointer-events: none;
 }
 
-.page .disabled{
+.invisible-sp .page .disabled{
     pointer-events: none;
 }
 
@@ -3174,6 +3208,7 @@ sp.css ~640px
     .main-content {
         margin: 3rem 0 0 0;
     }
+
 
     /* main-content-left を使わないページ */
     .company,

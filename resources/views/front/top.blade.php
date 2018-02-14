@@ -317,7 +317,7 @@ use App\Models\Tr_search_categories;
     <section class="about">
       <div class="contentInr invisible-sp">
         <h2>最新コラム</h2>
-test
+      @include('front.common.recent_posts')
       </div>
 
       <div class="contentInr">
@@ -390,7 +390,6 @@ test
     jQuery(function($){
         // topJob
         $('.topJobInr').tile();
-
         // slick-slider
         if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
             $('.slider-item').slick({
