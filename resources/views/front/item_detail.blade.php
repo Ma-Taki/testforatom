@@ -18,7 +18,8 @@
     <div class="main-content-left">
       <!-- wordPress固定ページを表示-->
       @foreach($item->skills as $skill)
-        @if(HtmlUtil::urlCheck("/column/id".$skill->id))
+        <?php echo $skill; ?>
+        <?php /* @if(HtmlUtil::urlCheck("/column/id".$skill->id))
           <div class="main-content__body">
             <div class="content__element_bottomSpace">
               <div class="item">
@@ -38,7 +39,7 @@
               </div>
             </div>
           </div>
-        @endif
+        @endif */?>
       @endforeach  
       <h2 class="main-content__title">案件詳細</h2>
       <hr class="hr-2px-solid-5e8796">
