@@ -18,11 +18,7 @@
     <div class="main-content-left">
       <!-- wordPress固定ページを表示-->
       @foreach($item->skills as $skill)
-        <?php 
-          echo $skill; 
-          echo (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . "/column/id" . $skill->id;
-        ?>
-        <?php /* @if(HtmlUtil::urlCheck("/column/id".$skill->id))
+        @if(HtmlUtil::urlCheck("/column/id".$skill->id))
           <div class="main-content__body">
             <div class="content__element_bottomSpace">
               <div class="item">
@@ -42,7 +38,7 @@
               </div>
             </div>
           </div>
-        @endif */?>
+        @endif
       @endforeach  
       <h2 class="main-content__title">案件詳細</h2>
       <hr class="hr-2px-solid-5e8796">
