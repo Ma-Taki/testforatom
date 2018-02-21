@@ -7,9 +7,14 @@ require_once( 'widget.php' );
 require __DIR__.'/../../../../../bootstrap/autoload.php';
 $app = require_once __DIR__.'/../../../../../bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
+
+/* 案件詳細ページで固定ページを表示するとき以外に処理する */
+if (!isset($_GET['file_get_contents'])) {
+	$response = $kernel->handle(
+    	$request = Illuminate\Http\Request::capture()
+	);
+}
+
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\ConsiderUtility as CnsUtil;
 
@@ -388,3 +393,17 @@ function opencage_ahoy() {
 	add_action( 'widgets_init', 'theme_register_sidebars' );
 }
 add_action( 'after_setup_theme', 'opencage_ahoy' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
