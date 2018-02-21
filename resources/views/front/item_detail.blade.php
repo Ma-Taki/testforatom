@@ -2,6 +2,7 @@
 
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
+    use App\Libraries\test as test;
     use Carbon\Carbon;
 ?>
 
@@ -11,35 +12,13 @@
 
 @section('content')
 <div class="wrap">
-
   @include('front.common.breadcrumbs')
-
   <div class="main-content item-detail">
     <div class="main-content-left">
-      <!-- wordPress固定ページを表示-->
       @foreach($item->skills as $skill)
-        @if(HtmlUtil::urlCheck("/column/id".$skill->id))
-          <div class="main-content__body">
-            <div class="content__element_bottomSpace">
-              <div class="item">
-                <div class="itemHeader">
-                  <div class="table-row">
-                    <p class="name">{{ HtmlUtil::urlTitleSubstr("/column/id".$skill->id) }}</p>
-                    <p class="item_id"><!-- 案件詳細と同じレイアウトにするため空タグ --></p>
-                  </div>
-                </div>
-                <div class="itemInfo clear">
-                  <div class="itemInfoInr">
-                    <a href=<?php echo (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . "/column/id{$skill->id}"; ?>  target="_blank">
-                      {{ HtmlUtil::urlContentsSubstr("/column/id".$skill->id) }}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        @endif
-      @endforeach  
+        <!-- wordPress固定ページを表示 -->
+        {{ HtmlUtil::urlContents(Request::root()."/column/id".$skill->id) }}
+      @endforeach
       <h2 class="main-content__title">案件詳細</h2>
       <hr class="hr-2px-solid-5e8796">
 

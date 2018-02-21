@@ -199,79 +199,41 @@ class HtmlUtility
     }
 
     /**
-     * URLの存在を確認する
-     * @param  String　$requestUri
-     * @return boolean
+     * スキルに対応する固定ページがあれば表示する
+     * @param  String　$url
+     * @return String
      */
-    public static function urlCheck($requestUri){
-        $return = false;
-        $pageContents = @file_get_contents((empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $requestUri);
-        if($pageContents !== false) {
-          $return = true;
+    public static function urlContents($url){
+        $return = "";
+        $title = @file_get_contents($url.'/?file_get_contents=0');
+        $contents = @file_get_contents($url.'/?file_get_contents=1');
+        if($title !== false){
+            $return = 
+            '<div class="main-content__body">
+                <div class="content__element_bottomSpace">
+                    <div class="item">
+                        <a href='.$url.' target="_blank">
+                            <div class="itemHeader">
+                                <div class="table-row">
+                                    <p class="name">'.$title.'</p>
+                                    <p class="item_id"><!-- 案件詳細と同じレイアウトにするため空タグ --></p>
+                                </div>
+                            </div>
+                            <div class="itemInfo clear">
+                                <div class="itemInfoInr">
+                                    '.$contents.'
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>';
         }
-        return $return;
+        echo $return;
     }
 
-    /**
-     * URL内のページタイトルを抽出する
-     * @param  String $requestUri
-     *  String
-     */
-    public static function urlTitleSubstr($requestUri){
-        $pageTitle = @file_get_contents((empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $requestUri);
-        $pattern = array(
-            '!<head>.*?>.*?</head.*?>!is',
-            '!<header>.*?</header>!is',
-            '!<script.*?>.*?</script.*?>!is',
-            '!<style.*?>.*?</style.*?>!is',
-            '!<nav.*?>.*?</nav.*?>!is',
-            '!<div class="invisible-sp">.*?</div>!is',//PC用パンくず
-            '!<div class="invisible-pc invisible-tab">.*?</div>!is',//スマホ用パンくず
-            '!<p class="byline entry-meta vcard cf">.*?</p>!is',//公開・更新日時
-            '!<div class="sns">.*?</div>!is',//SNS上ボタン
-            '!<div class="sharewrap wow animated fadeIn" data-wow-delay="0.5s">.*?</div>!is',//SNS下ボタン
-            '!<h2>.*?</h2>!is',//h2タグ
-            '!<p>.*?</p>!is',//pタグ
-            '!<div class="article-footer">.*?</div>!is',//タグ表示
-            '!<div id="sidebar1" class="sidebar m-all t-all d-2of7 cf" role="complementary">.*?</div>!is',//最近の投稿
-            '!<div id="categories-2" class="widget widget_categories"><h4 class="widgettitle">.*?</div>!is',//カテゴリー
-            '!<footer class="bg">.*?</footer>!is'//footer
-        );
-        //strip_tagsに対応していないタグをpreg_replaceで先に除去する
-        $pageTitle = preg_replace($pattern, '', $pageTitle);
-        //titleタグのみ表示する
-        $pageTitle = strip_tags($pageTitle,'<title>');
-        echo $pageTitle;
-    }
+    
 
-    /**
-     * URL内のコンテンツ内容を抽出する
-     * @param  String $requestUri
-     *  String
-     */
-    public static function urlContentsSubstr($requestUri){
-        $pageContents = @file_get_contents((empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $requestUri);
-        $pattern = array(
-            '!<head>.*?>.*?</head.*?>!is',
-            '!<header>.*?</header>!is',
-            '!<script.*?>.*?</script.*?>!is',
-            '!<style.*?>.*?</style.*?>!is',
-            '!<nav.*?>.*?</nav.*?>!is',
-            '!<div class="invisible-sp">.*?</div>!is',//PC用パンくず
-            '!<div class="invisible-pc invisible-tab">.*?</div>!is',//スマホ用パンくず
-            '!<p class="byline entry-meta vcard cf">.*?</p>!is',//公開・更新日時
-            '!<div class="sns">.*?</div>!is',//SNS上ボタン
-            '!<h1 class="entry-title page-title" itemprop="headline" rel="bookmark">.*?</h1>!is',//h1タグ
-        );
-        //strip_tagsに対応していないタグをpreg_replaceで先に除去する
-        $pageContents = preg_replace($pattern, '', $pageContents);
-        //h2,pタグのみ表示する
-        $pageContents = strip_tags($pageContents,'<h2><p>');
-        //400文字抽出
-        $num = 400;
-        if( mb_strlen($pageContents) > $num ) {
-             $pageContents = mb_substr($pageContents,0,$num).'･･･';
-        }
-        echo $pageContents;
-    }
+
+    
 }
