@@ -2211,6 +2211,9 @@ nav ul .active{ background: #536C75; }
 	display: inline-block;
 }
 
+img.pageImg{
+    width: auto;
+}
 /*-------------------------------
 ## top
 -------------------------------*/
