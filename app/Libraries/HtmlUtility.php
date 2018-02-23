@@ -198,4 +198,42 @@ class HtmlUtility
         return $description;
     }
 
+    /**
+     * スキルに対応する固定ページがあれば表示する
+     * @param  String　$url
+     * @return String
+     */
+    public static function urlContents($url){
+        $return = "";
+        $title = @file_get_contents($url.'/?file_get_contents=0');
+        $contents = @file_get_contents($url.'/?file_get_contents=1');
+        if($title !== false){
+            $return = 
+            '<div class="main-content__body">
+                <div class="content__element_bottomSpace">
+                    <div class="item">
+                        <a href='.$url.' target="_blank">
+                            <div class="itemHeader">
+                                <div class="table-row">
+                                    <p class="name">'.$title.'</p>
+                                    <p class="item_id"><!-- 案件詳細と同じレイアウトにするため空タグ --></p>
+                                </div>
+                            </div>
+                            <div class="itemInfo clear">
+                                <div class="itemInfoInr">
+                                    '.$contents.'
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>';
+        }
+        echo $return;
+    }
+
+    
+
+
+    
 }

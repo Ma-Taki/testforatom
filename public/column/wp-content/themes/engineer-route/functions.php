@@ -7,9 +7,14 @@ require_once( 'widget.php' );
 require __DIR__.'/../../../../../bootstrap/autoload.php';
 $app = require_once __DIR__.'/../../../../../bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
+
+/* 案件詳細ページで固定ページを表示するとき以外に処理する */
+if (!isset($_GET['file_get_contents'])) {
+	$response = $kernel->handle(
+    	$request = Illuminate\Http\Request::capture()
+	);
+}
+
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\ConsiderUtility as CnsUtil;
 
@@ -67,19 +72,20 @@ function breadcrumb() {
 
     // 表示中のページによって処理を分岐させる
     if (!empty($queried_obj) && get_class($queried_obj) == 'WP_Post') {
-        // 記事のページ
-        // 複数のカテゴリには属さない想定
-        $post_cate = get_the_category($queried_obj->ID)[0];
-        if (!empty($post_cate->category_parent)) {
-            // 親カテゴリ
-            $addNext();
-            $addElement(get_cat_name($post_cate->category_parent), '/column/?cat='.$post_cate->category_parent);
-        }
-
-        // カテゴリ、または子カテゴリ
-        $addNext($breadcrumbs);
-        $addElement($post_cate->cat_name, '/column/?cat='.$post_cate->cat_ID);
-
+        // 固定ページ以外の記事のページ
+        if(!is_page()){
+	        // 複数のカテゴリには属さない想定
+	        $post_cate = get_the_category($queried_obj->ID)[0];
+	        if (!empty($post_cate->category_parent)) {
+	            // 親カテゴリ
+	            $addNext();
+	            $addElement(get_cat_name($post_cate->category_parent), '/column/?cat='.$post_cate->category_parent);
+	        }
+	        // カテゴリ、または子カテゴリ
+	        $addNext($breadcrumbs);
+	        $addElement($post_cate->cat_name, '/column/?cat='.$post_cate->cat_ID);
+		}
+		
         // 記事
         $addNext($breadcrumbs);
         $addElement($queried_obj->post_title);
@@ -351,6 +357,14 @@ if (!function_exists('opencage_excerpt_more')) {
 
 // is_mobile追加
 function is_mobile(){
+	if(empty($_SERVER['HTTP_USER_AGENT'])) {
+	    return array(
+	        'name' => 'unrecognized',
+	        'version' => 'unknown',
+	        'platform' => 'unrecognized',
+	        'userAgent' => ''
+	    );
+	}
 	$useragents = array(
 		'iPhone', // iPhone
 		'iPod', // iPod touch
@@ -379,3 +393,17 @@ function opencage_ahoy() {
 	add_action( 'widgets_init', 'theme_register_sidebars' );
 }
 add_action( 'after_setup_theme', 'opencage_ahoy' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+

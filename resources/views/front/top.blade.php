@@ -390,7 +390,6 @@ use App\Models\Tr_search_categories;
     jQuery(function($){
         // topJob
         $('.topJobInr').tile();
-
         // slick-slider
         if (window.matchMedia( 'screen and (max-width: 640px)' ).matches) {
             $('.slider-item').slick({

@@ -2,6 +2,7 @@
 
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
+    use App\Libraries\test as test;
     use Carbon\Carbon;
 ?>
 
@@ -11,11 +12,13 @@
 
 @section('content')
 <div class="wrap">
-
   @include('front.common.breadcrumbs')
-
   <div class="main-content item-detail">
     <div class="main-content-left">
+      @foreach($item->skills as $skill)
+        <!-- wordPress固定ページを表示 -->
+        {{ HtmlUtil::urlContents(Request::root()."/column/id".$skill->id) }}
+      @endforeach
       <h2 class="main-content__title">案件詳細</h2>
       <hr class="hr-2px-solid-5e8796">
 
