@@ -396,14 +396,73 @@ add_action( 'after_setup_theme', 'opencage_ahoy' );
 
 
 
+//post・page保存時に実行するアクションフックを作成
+add_action('save_post', 'my_save_post', 10, 3);
+/**
+ * @param $post_id: 保存された投稿のID
+ * @param $post: 保存された投稿のオブジェクト
+ */
+function my_save_post($post_id, $post){
+	$post_type = $post->post_type;
 
+	//固定ページのとき
+	if($post_type === 'page'){
+		//ファイル名(タイトル名, 内容名)
+		$files = array($post->post_name.'_title.php', $post->post_name.'_content.php');
+		//記事のタイトル
+		$sWriteTitle = get_the_title();
+		//記事の内容
+		$sWriteContent = "";
+		if(mb_strlen($post->post_content, 'UTF-8')>150){
+			//最初の150文字を挿入
+			$sWriteContent = mb_substr($post->post_content, 0, 150, 'UTF-8')."…";
+		}else{
+			$sWriteContent = $post->post_content;
+		}
 
+		foreach ($files as $valu => $file) {
+			//ファイルパス
+			$sPath = './../../../storage/app/public/'.$file;
 
+			//新規作成のとき
+			if(!file_exists($sPath)){
+				//ファイルを作成
+				if(!touch($sPath)){
+					echo 'ファイルの作成を失敗しました。<br/>';
+				    exit;
+				}
+			}
+			//ファイルをオープン
+			$filepoint = fopen($sPath,"w");
+			//ファイルのロック
+			if(!flock($filepoint, LOCK_EX)){
+				echo 'ファイルのロックを失敗しました。<br/>';
+			    exit;
+			}
+			if($valu == 0){
+				//ファイルへタイトル書き込み
+				if(!fwrite($filepoint,$sWriteTitle)){
+					echo 'タイトルの書き込みを失敗しました。<br/>';
+				    exit;
+				}
+			}elseif ($valu == 1) {
+				//ファイルへ内容書き込み
+				if(!fwrite($filepoint,$sWriteContent)){
+					echo '内容の書き込みを失敗しました。<br/>';
+				    exit;
+				}
+			}
+			//ファイルのロック解除
+			if(!flock($filepoint, LOCK_UN)){
+				echo 'ロック解除を失敗しました。<br/>';
+			    exit;
+			}
+			//ファイルを閉じる
+			if(!fclose($filepoint)){
+				echo 'ファイルを閉じることに失敗しました。<br/>';
+			    exit;
+			}
 
-
-
-
-
-
-
-
+		}
+	}
+}

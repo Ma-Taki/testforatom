@@ -2,7 +2,6 @@
 
 <?php
     use App\Libraries\HtmlUtility as HtmlUtil;
-    use App\Libraries\test as test;
     use Carbon\Carbon;
 ?>
 
@@ -16,8 +15,30 @@
   <div class="main-content item-detail">
     <div class="main-content-left">
       @foreach($item->skills as $skill)
-        <!-- wordPress固定ページを表示 -->
-        {{ HtmlUtil::urlContents(Request::root()."/column/id".$skill->id) }}
+        @if(\File::exists('./../storage/app/public/id'.$skill->id.'_title.php'))
+          <!-- wordPress固定ページを表示 -->
+          <div class="main-content__body">
+            <div class="content__element_bottomSpace">
+              <div class="item">
+                <a href={{Request::root().'/column/id'.$skill->id.'/'}} target="_blank">
+                  <div class="itemHeader">
+                    <div class="table-row">
+                      <p class="name">
+                        {{ File::get('./../storage/app/public/id'.$skill->id.'_title.php') }}
+                      </p>
+                      <p class="item_id"><!-- 案件詳細と同じレイアウトにするため空タグ --></p>
+                    </div>
+                  </div>
+                  <div class="itemInfo clear">
+                    <div class="itemInfoInr">
+                      {!! File::get('./../storage/app/public/id'.$skill->id.'_content.php') !!}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        @endif
       @endforeach
       <h2 class="main-content__title">案件詳細</h2>
       <hr class="hr-2px-solid-5e8796">
