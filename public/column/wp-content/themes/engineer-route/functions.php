@@ -397,16 +397,14 @@ add_action( 'after_setup_theme', 'opencage_ahoy' );
 
 
 //post・page保存時に実行するアクションフックを作成
-add_action('edit_post', 'my_save_post', 10, 3);
+add_action('save_post', 'my_save_post', 10, 3);
 /**
  * @param $post_id: 保存された投稿のID
  * @param $post: 保存された投稿のオブジェクト
  */
 function my_save_post($post_id, $post){
-	$post_type = $post->post_type;
-
-	//固定ページのとき
-	if($post_type === 'page'){
+	//固定ページで新規作成以外のとき
+	if($post->post_type === 'page' && !empty($post->post_name) && !empty(get_the_title()) && !empty($post->post_content)){
 		//ファイル名(タイトル名, 内容名)
 		$files = array($post->post_name.'_title.php', $post->post_name.'_content.php');
 		//記事のタイトル
