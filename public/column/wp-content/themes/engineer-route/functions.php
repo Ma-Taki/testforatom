@@ -397,7 +397,7 @@ add_action( 'after_setup_theme', 'opencage_ahoy' );
 
 
 //post・page保存時に実行するアクションフックを作成
-add_action('save_post', 'my_save_post', 10, 3);
+add_action('edit_post', 'my_save_post', 10, 3);
 /**
  * @param $post_id: 保存された投稿のID
  * @param $post: 保存された投稿のオブジェクト
