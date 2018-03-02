@@ -2,6 +2,7 @@
 @section('title', '新規会員登録完了 | エンジニアルート')
 @section('isSimpleFooter', 'true')
 @section('noindex', 'true')
+@section('fbq_add', 'fbq(\'track\', \'CompleteRegistration\');')
 
 @section('content')
 <div class="wrap">
