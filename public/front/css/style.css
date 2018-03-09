@@ -1508,14 +1508,6 @@ a.login__sns-btn {
     padding: 4rem 0 0 0;
 }
 
-.item .background01,
-.item-detail .item .background01{
-    background-color: #7B951C;
-}
-.item .border01{
-    border-color: #7B951C;
-}
-
 .wordPunctuation:last-child{
     display: none;
 }
@@ -3046,6 +3038,14 @@ footer,
 
 .breadcrumbs .next {
     padding: 0 4px;
+}
+
+.item .background01,
+.item-detail .item .background01{
+    background-color: #7B951C;
+}
+.item .border01{
+    border-color: #7B951C;
 }
 
 /*===============================
