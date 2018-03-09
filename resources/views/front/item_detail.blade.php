@@ -23,13 +23,13 @@
                 <a href={{Request::root().'/column/id'.$skill->id.'/'}} target="_blank">
                   <div class="itemHeader">
                     <div class="table-row">
-                      <p class="name">
+                      <p class="name background01">
                         {{ File::get('./../storage/app/public/id'.$skill->id.'_title.php') }}
                       </p>
-                      <p class="item_id"><!-- 案件詳細と同じレイアウトにするため空タグ --></p>
+                      <p class="item_id background01"><!-- 案件詳細と同じレイアウトにするため空タグ --></p>
                     </div>
                   </div>
-                  <div class="itemInfo clear">
+                  <div class="itemInfo clear border01">
                     <div class="itemInfoInr">
                       {!! File::get('./../storage/app/public/id'.$skill->id.'_content.php') !!}
                     </div>

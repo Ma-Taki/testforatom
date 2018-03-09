@@ -10,6 +10,7 @@
 			<?php while (have_posts()) : the_post(); ?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf' ); ?> role="article">
 					<div class="article-header entry-header">
+						<?php /*
 						<p class="byline entry-meta vcard cf">
 							<time class="date gf entry-date <?php if ($mtime = !get_mtime('Y.m.d')):?>updated<?php endif;?>">
 								<?php the_time('Y.m.d'); ?>
@@ -21,6 +22,7 @@
 								</span>
 							</span>
 						</p>
+						*/?>
 						<h1 class="entry-title page-title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
 						<?php if ( has_post_thumbnail() && !get_option( 'post_options_eyecatch' ) ) :?>
 							<figure class="eyecatch">
