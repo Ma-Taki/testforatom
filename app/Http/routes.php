@@ -216,6 +216,15 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::post('/admin/edit-programming-lang-ranking', 'admin\ProgrammingLangRankingController@editProgrammingLangRanking');
     Route::get('/admin/reset-programming-lang-ranking', 'admin\ProgrammingLangRankingController@getProgrammingLangRankingFromWebsite');
 
-
-
+    //スライド画像管理画面
+    // 一覧画面
+    Route::get('/admin/slide/list', 'admin\SlideController@showSlideList');
+    // 新規登録
+    Route::resource('/admin/slide/input', 'admin\SlideController', ['only' => ['index', 'store']]);
+    // 編集画面
+    Route::get('/admin/slide/modify', 'admin\SlideController@showSlideModify');
+    // 更新処理
+    Route::post('/admin/slide/modify', 'admin\SlideController@updateAdminSlide');
+    // 論理削除処理
+    Route::get('/admin/slide/delete', 'admin\SlideController@deleteAdminSlide');
 });

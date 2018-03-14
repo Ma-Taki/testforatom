@@ -10,6 +10,11 @@ use Illuminate\Session\TokenMismatchException;
 
 class VerifyCsrfToken
 {
+    //CSRFを除外したいURLリスト
+    protected $routes = [
+        'admin/slide/input',
+        'front/entry',
+    ];
     /**
      * The application instance.
      *
@@ -59,7 +64,8 @@ class VerifyCsrfToken
             $this->isReading($request) ||
             $this->runningUnitTests() ||
             $this->shouldPassThrough($request) ||
-            $this->tokensMatch($request)
+            $this->tokensMatch($request) ||
+            $this->excludedRoutes($request)
         ) {
             return $this->addCookieToResponse($request, $next($request));
         }
@@ -151,5 +157,18 @@ class VerifyCsrfToken
     protected function isReading($request)
     {
         return in_array($request->method(), ['HEAD', 'GET', 'OPTIONS']);
+    }
+
+    /*
+    * CSRFを除外したいURLであるかどうかをチェックする。
+    * @param Request リクエスト
+    * @return boolean CSRFを除外したいURLであればtrue
+    **/
+    protected function excludedRoutes($request){
+        foreach($this->routes as $route){
+            if ($request->is($route)){ 
+                return true; 
+            }
+        }
     }
 }

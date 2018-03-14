@@ -74,6 +74,7 @@ return [
     'unique'               => ':attributeは既に存在します。',
     'url'                  => ':attributeを正しい書式にしてください。',
     'email_array'          => '送信先メールアドレス[:attribute]に、正しくないメールアドレスが含まれています。',
+    'dimensions'           => ':attributeは無効なサイズです。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -212,7 +213,12 @@ return [
         'user_name' => '氏名',
         'mail' => 'メールアドレス',
         'contactMessage' => 'お問い合わせ内容',
-
+        // △△　お問い合わせ △△
+        // ▽▽　スライド画像管理　▽▽
+        'image_title' => 'タイトル(alt属性)',
+        'image_link' => 'リンク',
+        'image_file' => '画像',
+        // △△　スライド画像管理 △△
 
 
     ],

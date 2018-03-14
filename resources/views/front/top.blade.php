@@ -14,20 +14,21 @@ use App\Models\Ms_biz_categories;
 use App\Models\Ms_areas;
 use App\Models\Ms_job_types;
 use App\Models\Tr_search_categories;
+use App\Models\Tr_slide_images;
 ?>
 <div class="wrap">
   <div id="top">
     <div id="slider">
       <ul class="slider slider-item">
-        <li><a href="/about"><img src="/front/images/topBnr001.jpg" alt="エンジニアルート"></a></li>
-        <li><a href="/item/category/1"><img src="/front/images/topBnr002.jpg" alt="スマートフォン・タブレット案件特集"></a></li>
-        <li><a href="/item/search?job_types%5B%5D=12"><img src="/front/images/topBnr003.jpg" alt="ウェブデザイナー案件特集"></a></li>
-        <li><a href="/item/tag/32"><img src="/front/images/topBnr004.jpg" alt="AS/400案件特集"></a></li>
-        <li><a href="/item/tag/2"><img src="/front/images/topBnr005.jpg" alt="働く女性の案件特集"></a></li>
-        <li><a href="/item/search?job_types%5B%5D=1"><img src="/front/images/topBnr006.jpg" alt="プロジェクトマネージャー案件特集"></a></li>
+        @foreach(Tr_slide_images::getDeleteFlagOFF() as $image)
+          <li>
+            <a href="{{ $image->link }}">
+              <img src="/front/images/slide/{{ $image->id }}.jpg" alt="{{ $image->title }}">
+            </a>
+          </li>           
+        @endforeach
       </ul>
     </div><!-- ./slider -->
-
 @include('front.common.keyword_sp')
 
 @if(!FrntUtil::isLogin())

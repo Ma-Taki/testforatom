@@ -84,5 +84,20 @@ use App\Libraries\ModelUtility as mdlUtil;
         </div>
     </div>
 @endif
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_SLIDE_IMAGE)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content-box-header">
+                <div class="panel-title"><a href="/admin/slide/list">スライド画像管理</a></div>
+            </div>
+            <div class="content-box-large box-with-header">
+                トップ画面スライドの照会、登録、修正、削除を行います。
+                <br /><br />
+            </div>
+        </div>
+    </div>
+@endif
 </div>
+
 @endsection
