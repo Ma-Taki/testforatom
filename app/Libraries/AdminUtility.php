@@ -53,6 +53,19 @@ class AdminUtility
         'admin/edit-programming-lang-ranking' => mdlUtil::AUTH_TYPE_MASTER,
         'admin/reset-programming-lang-ranking' => mdlUtil::AUTH_TYPE_MASTER,
 
+        //スライド画像管理
+        'admin/slide/list' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
+        'admin/slide/input' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
+        'admin/slide/modify' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
+        'admin/slide/delete' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
+
+    ];
+
+    // スライド画像アップロードルール
+    const FILE_UPLOAD_RULE = [
+        'maximumSize'       => 1024000,
+        'allowedExtensions' => ['jpg'],
+        'allowedTypes'      => ['image/jpeg'],
     ];
 
     // メール：メルマガ配信

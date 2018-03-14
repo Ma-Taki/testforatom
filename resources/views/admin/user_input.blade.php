@@ -14,8 +14,8 @@ use App\Libraries\HtmlUtility as HtmlUtil;
         <div class="content-box-large">
             <div class="panel-heading">
                 <div class="panel-title">ユーザ登録</div>
-			</div>
-		    <div class="panel-body">
+            </div>
+            <div class="panel-body">
 @if(count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>
@@ -114,7 +114,6 @@ use App\Libraries\HtmlUtility as HtmlUtil;
     </div>
 </div>
 <script type="text/javascript">
-
     // init
     var $d_check = $('.js__default-check');
     for (var i = 0; i < $d_check.length; i++) {
@@ -125,7 +124,6 @@ use App\Libraries\HtmlUtility as HtmlUtil;
             $child.prop('disabled','disabled');
         }
     }
-
     $('.js__default-check').change(function() {
         var $input = $(this).parents('.management').find('input:not(:first)');
         if ($(this).is(':checked')) {
@@ -134,6 +132,5 @@ use App\Libraries\HtmlUtility as HtmlUtil;
             $input.attr('disabled', 'disabled');
         }
     });
-
 </script>
 @endsection
