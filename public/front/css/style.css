@@ -3040,6 +3040,15 @@ footer,
     padding: 0 4px;
 }
 
+.item .background_color01,
+.item-detail .item .background_color01{
+    background-color: #7B951C;
+}
+.item .border_color01,
+.item-detail .item .border_color01{
+    border-color: #7B951C;
+}
+
 /*===============================
 pc.css 1025px~
 ===============================*/
