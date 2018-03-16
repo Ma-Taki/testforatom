@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests;
 use App\Http\Controllers\AdminController;
 use App\Models\Tr_slide_images;
 use App\Http\Requests\admin\SlideImageRegistRequest;
