@@ -9,7 +9,7 @@ use App\Models\Tr_slide_images;
  * スライド画像更新用FormRequest
  *
  **/
-class SlideImageEditRequest2 extends Request
+class Test extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
