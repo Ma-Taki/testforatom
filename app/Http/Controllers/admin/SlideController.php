@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\AdminController;
 use App\Models\Tr_slide_images;
-use App\Http\Requests\admin\SlideImageRegistRequest;
-use App\Http\Requests\admin\Test;
-use App\Http\Requests\admin\SlideimageEditRequest;
+use App\Http\Requests\admin\SlideImgRegistRequest;
+use App\Http\Requests\admin\SlideImgEditRequest;
 use App\Libraries\AdminUtility as AdminUtil;
 use DB;
 use Carbon\Carbon;
@@ -39,7 +38,7 @@ class SlideController extends AdminController
      * 新規登録処理
      * POST:/admin/slide/input
      */
-    public function store(SlideImageRegistRequest $request){
+    public function store(SlideImgRegistRequest $request){
 
         $file = !empty($request->image_file) ? $request->image_file : null;
         $original_name = null;
@@ -148,7 +147,7 @@ class SlideController extends AdminController
      * 更新処理
      * POST:/admin/slide/modify
      */
-    public function updateAdminSlide(Test $request){
+    public function updateAdminSlide(SlideImgEditRequest $request){
         $update_db[] = array(
                         'id'        => $request->id,
                         'title'     => $request->image_title,
