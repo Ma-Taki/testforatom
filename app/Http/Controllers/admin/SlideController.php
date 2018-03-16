@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\AdminController;
 use App\Models\Tr_slide_images;
 use App\Http\Requests\admin\SlideImageRegistRequest;
+use App\Http\Requests\admin\SlideimageEditRequest2;
 use App\Http\Requests\admin\SlideimageEditRequest;
 use App\Libraries\AdminUtility as AdminUtil;
 use DB;
@@ -147,7 +148,7 @@ class SlideController extends AdminController
      * 更新処理
      * POST:/admin/slide/modify
      */
-    public function updateAdminSlide(SlideImageRegistRequest $request){
+    public function updateAdminSlide(SlideimageEditRequest2 $request){
         $update_db[] = array(
                         'id'        => $request->id,
                         'title'     => $request->image_title,
