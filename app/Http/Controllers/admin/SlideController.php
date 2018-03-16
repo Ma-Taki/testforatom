@@ -147,7 +147,7 @@ class SlideController extends AdminController
      * 更新処理
      * POST:/admin/slide/modify
      */
-    public function updateAdminSlide(SlideImageEditRequest $request){
+    public function updateAdminSlide(SlideImageRegistRequest $request){
         $update_db[] = array(
                         'id'        => $request->id,
                         'title'     => $request->image_title,
