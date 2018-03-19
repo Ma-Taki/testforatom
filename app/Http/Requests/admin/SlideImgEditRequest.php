@@ -32,6 +32,7 @@ class SlideImgEditRequest extends Request
             'image_title' => 'required|max:30',
             'image_link'  => 'required|max:100',
             'image_sort'  => '',
+            'image_file'  => 'dimensions:width=1000,height=320',
         ];
     }
 }

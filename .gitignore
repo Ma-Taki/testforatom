@@ -14,3 +14,6 @@ Homestead.json
 /public/column/wp-content/uploads/*
 /public/column/wp-content/plugins/*
 /public/column/wp-content/languages/plugins/*
+
+#admin
+/public/front/images/slide/*

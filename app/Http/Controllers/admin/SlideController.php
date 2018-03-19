@@ -12,6 +12,7 @@ use App\Libraries\AdminUtility as AdminUtil;
 use DB;
 use Carbon\Carbon;
 use Log;
+use Cache;
 
 class SlideController extends AdminController
 {
@@ -28,10 +29,10 @@ class SlideController extends AdminController
      * GET:/admin/slide/input
      */
     public function index(){
-        //有効ステータス画像の最大表示順値を取得
-        $maxValidSort = Tr_slide_images::where('delete_flag', 'false')->max('sort_order');
-        $maxValidSort = $maxValidSort + 1;
-        return view('admin.slide_input', compact('maxValidSort'));
+        //最大表示順値を取得
+        $sortMax = Tr_slide_images::max('sort_order');
+        $sortMax = $sortMax + 1;
+        return view('admin.slide_input', compact('sortMax'));
     }
 
     /**
@@ -71,7 +72,6 @@ class SlideController extends AdminController
                         'title'      => $request->image_title,
                         'link'       => $request->image_link,
                         'sort_order' => $request->image_sort,
-                        'file_extension' => !is_null($original_name) ? $original_name->last() : ''
                     );
 
         //表示順の最大値
@@ -99,7 +99,7 @@ class SlideController extends AdminController
                         $insert_image->delete_flag = false;
                         $insert_image->save();
 
-                        return['file_name' => $insert_image->id.'.'.$data['file_extension']];
+                        return['file_name' => $insert_image->id.'.jpg'];
                     } catch (Exception $e) {
                         Log::error($e);
                         abort(400, 'トランザクションが異常終了しました。');
@@ -119,7 +119,7 @@ class SlideController extends AdminController
                 });
             }
         }
-        // ファイルをローカルに保存
+        //ファイルをローカルに保存
         if(!empty($file)) {
             $file->move(base_path().'/public/front/images/slide',$dbTran['file_name']);
         }
@@ -135,12 +135,10 @@ class SlideController extends AdminController
         $image = Tr_slide_images::where('id', $request->id)->get()->first();
         if (empty($image)) {
             abort(404, '指定された画像情報は存在しません。');
-        } elseif ($image->delete_flag) {
-            abort(404, '指定された画像情報は既に削除されています。');
         }
-        //有効ステータス画像の最大表示順値を取得
-        $maxValidSort = Tr_slide_images::where('delete_flag', 'false')->max('sort_order');
-        return view('admin.slide_modify', compact('image','maxValidSort'));
+        //最大表示順値を取得
+        $sortMax = Tr_slide_images::max('sort_order');
+        return view('admin.slide_modify', compact('image','sortMax'));
     }
 
     /**
@@ -148,21 +146,53 @@ class SlideController extends AdminController
      * POST:/admin/slide/modify
      */
     public function updateAdminSlide(SlideImgEditRequest $request){
+
+        //画像を変更したいとき
+        if(!empty($request->image_file)){
+           
+            $file = !empty($request->image_file) ? $request->image_file : null;
+            $original_name = null;
+
+            //▽▽▽ 画像アップロード時のバリデーション ▽▽▽
+            if(!empty($file)) {
+                $custom_error_messages = [];
+            
+                //拡張子チェック
+                $original_name = collect(explode('.', $file->getClientOriginalName()));
+                if ($original_name->count() != 2 || !in_array($original_name->last(), AdminUtil::FILE_UPLOAD_RULE['allowedExtensions'])) {
+                        array_push($custom_error_messages, '画像の拡張子が正しくありません。.jpgの画像をアップロードしてください。');
+                }
+
+                //mimeTypeチェック
+                $mime_type = $file->getClientMimeType();
+                if (!in_array($mime_type, AdminUtil::FILE_UPLOAD_RULE['allowedTypes'])) {
+                        array_push($custom_error_messages, '画像のファイル形式が正しくありません。');
+                }
+
+                if (!empty($custom_error_messages)) {
+                    //フラッシュセッションにエラーメッセージを保存
+                    \Session::flash('custom_error_messages', $custom_error_messages);
+                    return back()->withInput();
+                }
+            }
+            // △△△ 画像アップロード時のバリデーション △△△
+        }
         $update_db[] = array(
-                        'id'        => $request->id,
-                        'title'     => $request->image_title,
-                        'link'      => $request->image_link,
-                        'sort_order'=> $request->image_sort,
-                    );
+                            'id'        => $request->id,
+                            'title'     => $request->image_title,
+                            'link'      => $request->image_link,
+                            'sort_order'=> $request->image_sort,
+                        );
+
         //編集対象画像を取得
         $image = Tr_slide_images::where('id', $update_db[0]['id'])->get()->first();
 
-        //表示順を更新したいとき
+        //表示順を変更したいとき
         if($update_db[0]['sort_order'] !== $image->sort_order){
             if($update_db[0]['sort_order'] < $image->sort_order){
                 //表示順をあげたいとき
                 for($value = $update_db[0]['sort_order']; $value < $image->sort_order; $value++){
-                    //表示順に紐づいた賀状情報を取得
+                    //表示順に紐づいた画像情報を取得
                     $update_image = Tr_slide_images::where('sort_order', $value)->first();
                     $update_db[] = array(
                                         'id'          => $update_image->id,
@@ -175,7 +205,7 @@ class SlideController extends AdminController
                 //表示順をさげたいとき
                 $sortNum = $image->sort_order + 1;
                 for($value = $sortNum; $value <= $update_db[0]['sort_order']; $value++){
-                    //表示順に紐づいた賀状情報を取得
+                    //表示順に紐づいた画像情報を取得
                     $update_image = Tr_slide_images::where('sort_order', $value)->get()->first();
                     $update_db[] = array(
                                         'id'          => $update_image->id,
@@ -186,6 +216,7 @@ class SlideController extends AdminController
                 }
             }
         }
+
         //更新処理
         foreach ($update_db as $update) {
             //トランザクション
@@ -201,6 +232,12 @@ class SlideController extends AdminController
                     abort(400, 'トランザクションが異常終了しました。');
                 }
             });
+        }
+        //ファイルをローカルに保存
+        if(!empty($file)) {
+            $file->move(base_path().'/public/front/images/slide',$update_db[0]['id'].'.jpg');
+            //キャッシュを取得後に削除
+            Cache::pull($request->id);
         }
         return redirect('/admin/slide/list')->with('custom_info_messages','編集処理は正常に終了しました。');
     }
@@ -253,6 +290,30 @@ class SlideController extends AdminController
             }
         }
         return redirect('/admin/slide/list')->with('custom_info_messages',$messages);
+    }
+
+     /**
+     * 論理削除から復活処理
+     * GET:/admin/slide/insert
+     */
+    public function insertAdminSlide(Request $request){
+
+        $update = array(
+                        'id'          => $request->id,
+                        'delete_flag' => false,
+                    );
+
+        DB::transaction(function () use ($update) {
+            try {
+                Tr_slide_images::where('id', $update['id'])->update([
+                    'delete_flag' => $update['delete_flag'],
+                ]);
+            } catch (\Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+        return redirect('/admin/slide/list')->with('custom_info_messages','復活処理は正常に終了しました。');
     }
 }
 ?>

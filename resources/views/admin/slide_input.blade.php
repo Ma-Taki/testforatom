@@ -34,28 +34,31 @@ use App\Models\Tr_slide_images;
                         </ul>
                     </div>
                 @endif
+                <div class="row">
+                    <div class="col-md-4">画像情報入力（<font color="#FF0000">*</font>は入力必須項目）</div>
+                </div>
+                </br>
                 <form class="form-horizontal" method="POST" action="{{ url('/admin/slide/input') }}" enctype="multipart/form-data">
 			  		<fieldset>
-						<legend style="font-size:16px">画像情報</legend>
                         <div class="form-group">
-                            <label for="inputTitle" class="col-md-2 control-label">タイトル (alt属性)</label>
+                            <label for="inputTitle" class="col-md-2 control-label">タイトル (alt属性)<font color="#FF0000">*</font></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="inputTitle" name="image_title" value="{{ old('image_title') }}" maxlength="20" placeholder="タイトル (alt属性)">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputLink" class="col-md-2 control-label">リンク</label>
+                            <label for="inputLink" class="col-md-2 control-label">リンク<font color="#FF0000">*</font></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="inputLink" name="image_link" value="{{ old('image_link') }}" maxlength="20" placeholder="リンク">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputLink" class="col-md-2 control-label">表示順</label>
+                            <label for="inputLink" class="col-md-2 control-label">表示順<font color="#FF0000">*</font></label>
                             <div class="col-sm-8">
                                 <span class="selectBox">
                                     <select id="js-slctBx-birth_y" class="form-control" name="image_sort">
-                                        @for($sortNum = 1; $sortNum <= $maxValidSort; $sortNum++)
-                                            <option @if(old('image_sort',$maxValidSort) == $sortNum) selected @endif value="{{ $sortNum }}">
+                                        @for($sortNum = 1; $sortNum <= $sortMax; $sortNum++)
+                                            <option @if(old('image_sort',$sortMax) == $sortNum) selected @endif value="{{ $sortNum }}">
                                                 {{ $sortNum }}
                                             </option>
                                         
@@ -65,9 +68,10 @@ use App\Models\Tr_slide_images;
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputLink" class="col-md-2 control-label">画像</label>
+                            <label for="exampleInputFile" class="col-md-2 control-label">画像<font color="#FF0000">*</font></label>
                             <div class="col-sm-8">
-                                <input type="file" name="image_file"><br>
+                                <input type="file" name="image_file" id="exampleInputFile">
+                                <p style="padding:6px 0 0 0">拡張子: jpg　大きさ: 1000 × 320</p><br>
                             </div>
                         </div>
 						<div class="col-md-10 text-right">
