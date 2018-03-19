@@ -233,11 +233,10 @@ class SlideController extends AdminController
                 }
             });
         }
+
         //ファイルをローカルに保存
         if(!empty($file)) {
             $file->move(base_path().'/public/front/images/slide',$update_db[0]['id'].'.jpg');
-            //キャッシュを取得後に削除
-            Cache::pull($request->id);
         }
         return redirect('/admin/slide/list')->with('custom_info_messages','編集処理は正常に終了しました。');
     }

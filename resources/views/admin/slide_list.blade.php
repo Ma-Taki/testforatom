@@ -38,7 +38,7 @@ use App\Models\Tr_slide_images;
 	                        <tr>
 	                            <td>
 	                            	<p>
-		                            	<img src="{{ asset('/front/images/slide/'. $image->id .'.jpg') }}" width="60%" height="60%" >		   
+		                            	<img src="{{ asset('/front/images/slide/'. $image->id .'.jpg') }}?<?php echo date("YmdHis");?>" width="60%" height="60%" >		   
         							</p>
 	                            </td>
 	                            <td>{{ $image->title }}</td>
