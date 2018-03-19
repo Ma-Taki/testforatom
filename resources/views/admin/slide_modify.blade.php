@@ -41,7 +41,7 @@ use App\Models\Tr_slide_images;
 							<label class="col-md-2 control-label">現在の画像</label>
 							<div class="col-sm-8">
 								<p>
-			        				<img src="{{ asset('/front/images/slide/'. $image->id .'.jpg') }}?<?php echo date("YmdHis");?>" width="80%" height="80%" >
+			        				<img src="{{ asset('/front/images/slide/'. $image->id .'.jpg') }}?<?php echo filemtime(base_path().'/public/front/images/slide/'.$image->id.'.jpg'); ?>" width="80%" height="80%" >
 								</p>
 							</div>
 			            </div>
