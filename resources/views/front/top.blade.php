@@ -23,7 +23,7 @@ use App\Models\Tr_slide_images;
         @foreach(Tr_slide_images::getDeleteFlagOFF() as $image)
           <li>
             <a href="{{ $image->link }}">
-              <img src="{{ asset('/front/images/slide/'. $image->id .'.jpg') }}?<?php echo date("YmdHis");?>" alt="{{ $image->title }}">
+              <img src="{{ asset('/front/images/slide/'. $image->id .'.jpg') }}?<?php echo filemtime(base_path().'/public/front/images/slide/'.$image->id.'.jpg'); ?>" alt="{{ $image->title }}">
             </a>
           </li>           
         @endforeach
