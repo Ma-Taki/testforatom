@@ -65,6 +65,19 @@ use Carbon\Carbon;
                 <a href="/admin/programming-lang-ranking"><i class="glyphicon glyphicon-wrench"></i>人気言語ランキング</a>
             </li>
 @endif
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_SLIDE_IMAGE)
+    || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
+            <li class="submenu">
+                <a href="#">
+                    <i class="glyphicon glyphicon-picture"></i> スライド画像管理
+                    <span class="caret pull-right"></span>
+                </a>
+                <ul>
+                    <li><a href="/admin/slide/list">画像一覧</a></li>
+                    <li><a href="/admin/slide/input">画像登録</a></li>
+                </ul>
+            </li>
+@endif
         </ul>
     </div>
 </div>
