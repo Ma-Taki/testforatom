@@ -58,6 +58,7 @@ class AdminUtility
         'admin/slide/input' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
         'admin/slide/modify' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
         'admin/slide/delete' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
+        'admin/slide/insert' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
 
     ];
 

@@ -227,4 +227,6 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::post('/admin/slide/modify', 'admin\SlideController@updateAdminSlide');
     // 論理削除処理
     Route::get('/admin/slide/delete', 'admin\SlideController@deleteAdminSlide');
+    // 論理削除から復活処理
+    Route::get('/admin/slide/insert', 'admin\SlideController@insertAdminSlide');
 });

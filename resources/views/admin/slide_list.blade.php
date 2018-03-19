@@ -46,14 +46,19 @@ use App\Models\Tr_slide_images;
 	                            <td>{{ $image->sort_order }}</td>
 	                            <td>{{ $image->created_at }}</td>
 	                            <td>{{ $image->updated_at }}</td>
-	                            <td>{{ $image->delete_flag ? '無効' : '有効' }}</td>
+	                            <td>{{ $image->delete_flag ? '非表示' : '表示' }}</td>
 	                            <td>
+
+	                            <a href="/admin/slide/modify?id={{ $image->id }}">
+	                                <button type="button" class="btn btn-warning btn-xs">編集</button>
+	                            </a>
 									@if(!$image->delete_flag)
-	                                	<a href="/admin/slide/modify?id={{ $image->id }}">
-	                                		<button type="button" class="btn btn-warning btn-xs">編集</button>
-	                                	</a>
 	                               		<a href="/admin/slide/delete?id={{ $image->id }}&sort_order={{ $image->sort_order }}" onClick="javascript:return confirm('本当に削除しますか？')">
 	                               			<button type="button" class="btn btn-danger btn-xs">削除</button>
+	                               		</a>
+	                               	@else
+										<a href="/admin/slide/insert?id={{ $image->id }}" onClick="javascript:return confirm('本当に復活させますか？')">
+	                               			<button type="button" class="btn btn-primary btn-xs">復活</button>
 	                               		</a>
 									@endif
                             	</td>
