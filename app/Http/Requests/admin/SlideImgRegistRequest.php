@@ -29,8 +29,8 @@ class SlideImgRegistRequest extends Request
     public function rules()
     {
         return [
-            'image_title' => 'required',
-            'image_link'  => 'required',
+            'image_title' => 'required|max:50',
+            'image_link'  => 'required|max:100',
             'image_file'  => 'required|dimensions:width=1000,height=320',
             'image_sort'  => 'required',
         ];
