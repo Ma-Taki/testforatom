@@ -29,9 +29,9 @@ class SlideImgEditRequest extends Request
     public function rules()
     {
         return [
-            'image_title' => 'required|max:30',
+            'image_title' => 'required|max:50',
             'image_link'  => 'required|max:100',
-            'image_sort'  => '',
+            'image_sort'  => 'required',
             'image_file'  => 'dimensions:width=1000,height=320',
         ];
     }
