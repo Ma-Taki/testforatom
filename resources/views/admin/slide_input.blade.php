@@ -43,13 +43,13 @@ use App\Models\Tr_slide_images;
                         <div class="form-group">
                             <label for="inputTitle" class="col-md-2 control-label">タイトル (alt属性)<font color="#FF0000">*</font></label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputTitle" name="image_title" value="{{ old('image_title') }}" maxlength="20" placeholder="タイトル (alt属性)">
+                                <input type="text" class="form-control" id="inputTitle" name="image_title" value="{{ old('image_title') }}" placeholder="タイトル (alt属性)">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputLink" class="col-md-2 control-label">リンク<font color="#FF0000">*</font></label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputLink" name="image_link" value="{{ old('image_link') }}" maxlength="20" placeholder="リンク">
+                                <input type="text" class="form-control" id="inputLink" name="image_link" value="{{ old('image_link') }}" placeholder="リンク">
                             </div>
                         </div>
                         <div class="form-group">
