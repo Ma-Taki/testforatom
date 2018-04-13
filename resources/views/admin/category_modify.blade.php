@@ -113,7 +113,7 @@ use App\Libraries\HtmlUtility;
                                         <select id="js-slctBx-birth_y" class="form-control selectChildeSort" id="selectChildeSort" name="child_sort">
                                             @for($sortNum = 1; $sortNum <= $sortMax; $sortNum++)
                                                 <option 
-                                                    @if(old('child_sort') == $sortNum)
+                                                    @if(old('child_sort',$category->child_sort) == $sortNum)
                                                         selected
                                                     @endif
                                                         value="{{ $sortNum }}">
