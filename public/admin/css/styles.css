@@ -303,7 +303,7 @@ footer .copy{
    margin-right:5px;
 }
 
-.sidebar .nav > li > ul > li > a {
+.sidebar .nav > li > ul > li > a, .sidebar .nav > li > ul > li > ul > li > a {
 	font-size: 13px;
 	line-height: 20px;
 	padding: 8px 10px 8px 40px;

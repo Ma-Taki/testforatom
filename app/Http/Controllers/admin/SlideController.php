@@ -263,7 +263,7 @@ class SlideController extends AdminController
             $sortMin = $request->sort_order + 1;
 
             for($value = $sortMin; $value <= $update_db[0]['sort_order']; $value++){
-                //表示順に紐づいた賀状情報を取得
+                //表示順に紐づいた画像情報を取得
                 $update_image = Tr_slide_images::where('sort_order', $value)->get()->first();
                 $update_db[] = array(
                                     'id'          => $update_image->id,

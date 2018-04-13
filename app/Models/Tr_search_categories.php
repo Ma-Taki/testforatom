@@ -17,6 +17,8 @@ class Tr_search_categories extends Model
      */
     public function scopeGetParentCategories($query){
         return $query->where('parent_id', null)
+                     ->where('delete_flag', false)
+                     ->orderBy('parent_sort', 'asc')
                      ->get();
     }
 
@@ -25,6 +27,7 @@ class Tr_search_categories extends Model
      */
     public function scopeGetChildCategories($query){
         return $query->where('parent_id', '!=', null)
+                     ->orderBy('child_sort', 'asc')
                      ->get();
     }
 
@@ -33,7 +36,25 @@ class Tr_search_categories extends Model
      */
     public function scopeGetChildByParent($query, $id){
         return $query->where('parent_id', $id)
-                     ->orderBy('sort_order', 'desc')
+                     ->where('delete_flag', false)
+                     ->orderBy('parent_sort', 'asc')
+                     ->orderBy('child_sort', 'asc')
                      ->get();
     }
+
+    /**
+     * 親カテゴリーのみを昇順で取得
+     */
+    public function scopeParent($query){
+        return $query->where('parent_id', null)
+                    ->orderBy('parent_sort', 'asc');            
+    }
+
+    /**
+     * 親カテゴリーを取得
+     */
+    public function scopeGetParentFlag($query, $id){
+        return $query->where('id', $id)->get();
+    }
+
 }

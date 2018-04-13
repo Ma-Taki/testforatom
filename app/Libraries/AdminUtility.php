@@ -38,10 +38,18 @@ class AdminUtility
         'admin/item/input/suggesttags' => mdlUtil::AUTH_TYPE_ITEM_CREATE,
         'admin/item/modify' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
         'admin/item/delete' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
-        //タグ管理
+        // タグ管理
         'admin/item/tags' => mdlUtil::AUTH_TYPE_ITEM_READ,
         'admin/item/tags/search' => mdlUtil::AUTH_TYPE_ITEM_READ,
         'admin/item/tags/delete' => mdlUtil::AUTH_TYPE_MASTER,
+        // カテゴリー管理
+        'admin/category/search' => mdlUtil::AUTH_TYPE_ITEM_READ,
+        'admin/category/detail' => mdlUtil::AUTH_TYPE_ITEM_READ,
+        'admin/category/input' => mdlUtil::AUTH_TYPE_ITEM_CREATE,
+        'admin/category/modify' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
+        'admin/category/delete' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
+        'admin/category/insert' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
+        'admin/category/selectBox' => mdlUtil::AUTH_TYPE_ITEM_READ,
         // メルマガ管理
         'admin/mail-magazine' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
         'admin/mail-magazine/search' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,

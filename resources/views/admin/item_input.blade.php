@@ -130,23 +130,21 @@ use App\Libraries\HtmlUtility;
                         <div class="form-group">
                             <label for="inputArea" class="col-md-2 control-label">カテゴリ</label>
                             <div class="col-md-8 tagTarget">
-                            (20個まで。子カテゴリを登録すると、親カテゴリも登録されます)</br>
-
-@foreach($master_search_categories_parent as $search_category_parent)
-                                <label class="checkbox">
-                                    <input type="checkbox" name="search_categories[]" value="{{ $search_category_parent->id }}" {{ HtmlUtility::isChecked(old('search_categories'), $search_category_parent->id) }}>{{ $search_category_parent->name }}
-                                </label>
-                                <div class="col-md-offset-1">
-@foreach($master_search_categories_child as $search_category_child)
-@if($search_category_parent->id == $search_category_child->parent_id)
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="search_categories[]" value="{{ $search_category_child->id }}" {{ HtmlUtility::isChecked(old('search_categories'), $search_category_child->id) }}>{{ $search_category_child->name }}
+                                (20個まで。子カテゴリを登録すると、親カテゴリも登録されます)</br>
+                                @foreach($master_search_categories_parent as $search_category_parent)
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="search_categories[]" value="{{ $search_category_parent->id }}" {{ HtmlUtility::isChecked(old('search_categories'), $search_category_parent->id) }}>{{ $search_category_parent->name }}
                                     </label>
-@endif
-@endforeach
-                            </div>
-@endforeach
-
+                                    <div class="col-md-offset-1">
+                                        @foreach($master_search_categories_child as $search_category_child)
+                                            @if($search_category_parent->id == $search_category_child->parent_id)
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="search_categories[]" value="{{ $search_category_child->id }}" {{ HtmlUtility::isChecked(old('search_categories'), $search_category_child->id) }}>{{ $search_category_child->name }}
+                                                </label>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
 

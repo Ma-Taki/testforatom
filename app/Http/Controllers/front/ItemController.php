@@ -205,17 +205,21 @@ class ItemController extends FrontController
 
         // ▽▽▽ 161206 案件一覧のタイトルタグを動的に設定 ▽▽▽
         $category = Tr_search_categories::where('id', $category_id)->first();
-        $html_title = '';
+        $html_title       = '';
+        $html_description = '';
+        $html_keywords    = '';
         if (empty($category)) {
             $html_title = '案件一覧';
         } else {
-            $html_title = '【'.$category->name .'】案件一覧';
+            $html_title       = $category->page_title;
+            $html_description = $category->page_description;
+            $html_keywords    = $category->page_keywords;
         }
 
         //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
         $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
 
-        return view('front.item_list', compact('itemList', 'params', 'html_title'));
+        return view('front.item_list', compact('itemList', 'params', 'html_title','html_description','html_keywords'));
         // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△
     }
 

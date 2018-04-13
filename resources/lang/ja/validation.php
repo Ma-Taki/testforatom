@@ -208,6 +208,13 @@ return [
         'item_tag' => 'タグ',
         'item_detail' => '詳細',
         'item_note' => 'メモ(社内用)',
+        'name'              => 'カテゴリー名',
+        'page_title'        => 'ページタイトル',
+        'page_keywords'     => 'ページキーワード',
+        'page_description'  => 'ページディスクリプション',
+        'detail'            => '詳細',
+        'path'              => 'パス',
+        'search_key'        => '検索キー',
         // △△　案件登録　△△
         // ▽▽　お問い合わせ　▽▽
         'user_name' => '氏名',
