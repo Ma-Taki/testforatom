@@ -251,17 +251,17 @@ use App\Models\Tr_slide_images;
       <section class="category-search invisible-sp">
         <h2>カテゴリーから案件を探す</h2>
         <div class="category-search__content">
-@foreach(Tr_search_categories::getParentCategories() as $parent)
-          <div class="category__parent">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</a></div>
-          <div class="category__child">
-@foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
-            <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
-            <span>|</span>
-@endforeach
-          </div>
-          <hr class="category__partition">
-@endforeach
-        @include('front.common.keyword_pc')
+          @foreach(Tr_search_categories::getParentCategories() as $parent)
+            <div class="category__parent">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</a></div>
+            <div class="category__child">
+              @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
+                <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
+                <span>|</span>
+              @endforeach
+            </div>
+            <hr class="category__partition">
+          @endforeach
+          @include('front.common.keyword_pc')
         </div>
       </section><!-- /.categorySearch for pc,tablet-->
 
