@@ -102,6 +102,14 @@ use App\Libraries\HtmlUtility as HtmlUtil;
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">スライド画像権限</label>
+                            <div class="col-md-10 management">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="auths[]" value="16" {{ HtmlUtil::isChecked(old('auths'), 16) }}>スライド画像権限
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-md-10 text-right">
                             <button type="submit" class="btn btn-primary">登録</button>
                             <a href="/admin/user/list"><button type="button" class="btn btn-default">キャンセル</button></a>
