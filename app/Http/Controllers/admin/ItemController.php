@@ -392,9 +392,9 @@ class ItemController extends AdminController
         // エリア
         $master_areas = Ms_areas::where('master_type', '!=', 3)->get();
         // 親カテゴリ
-        $master_search_categories_parent = Tr_search_categories::where('parent_id', null)->where('delete_flag', false)->get();
+        $master_search_categories_parent = Tr_search_categories::where('parent_id', null)->where('delete_flag', false)->orderBy('parent_sort', 'asc')->get();
         // 子カテゴリ
-        $master_search_categories_child = Tr_search_categories::where('parent_id', '!=', null)->where('delete_flag', false)->get();
+        $master_search_categories_child = Tr_search_categories::where('parent_id', '!=', null)->where('delete_flag', false)->orderBy('child_sort', 'asc')->get();
         // 業種
         $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)
                                                   ->orderBy('sort_order', 'desc')
