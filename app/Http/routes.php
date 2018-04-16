@@ -199,10 +199,29 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::match(['get', 'post'], '/admin/item/search', 'admin\ItemController@searchItem');
     // 論理削除処理
     Route::get('/admin/item/delete', 'admin\ItemController@deleteItem');
-    //タグ画面
+    // タグ画面
     Route::get('/admin/item/tags', 'admin\TagController@showTags');
     Route::get('/admin/item/tags/delete', 'admin\TagController@deleteTags');
     Route::get('/admin/item/tags/search', 'admin\TagController@searchTags');
+    // カテゴリー管理
+    // 新規登録画面
+    Route::get('/admin/category/input', 'admin\CategoryController@showCategoryInput');
+    // 新規登録処理
+    Route::post('/admin/category/input', 'admin\CategoryController@insertCategory');
+    // 詳細画面
+    Route::get('/admin/category/detail', 'admin\CategoryController@showCategoryDetail');
+    // 編集画面
+    Route::get('/admin/category/modify', 'admin\CategoryController@showCategoryModify');
+    // 更新処理
+    Route::post('/admin/category/modify', 'admin\CategoryController@updateCategory');
+    // 検索処理
+    Route::get('/admin/category/search', 'admin\CategoryController@searchCategory');
+    // 論理削除処理
+    Route::get('/admin/category/delete', 'admin\CategoryController@deleteCategory');
+    // 論理削除から復活処理
+    Route::get('/admin/category/insert', 'admin\CategoryController@insertAgainCategory');
+    // セレクトボックス切り替え
+    Route::post('/admin/category/selectBox', 'admin\CategoryController@ajaxSelectBox');
 
     // メルマガ管理
     Route::get('/admin/mail-magazine', 'admin\MailMagazineController@index');

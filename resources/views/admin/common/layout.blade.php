@@ -23,5 +23,6 @@
     </div>
 </div>
 @include('admin.common.footer')
+  <script type="text/javascript" charset="utf-8" src="{{ url('/admin/js/all.js?20180403') }}"></script>
   </body>
 </html>

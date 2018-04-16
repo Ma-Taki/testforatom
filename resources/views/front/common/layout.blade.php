@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="description" content="@yield('description')">
-    <meta name="keywords" content="IT案件,案件情報,求人,案件,仕事,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP">
+    <meta name="keywords" content="@yield('keywords'),IT案件,案件情報,求人,案件,仕事,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP">
     <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1" />
     @if($__env->yieldContent('noindex'))<meta name="robots" content="noindex,nofollow" />@endif
     <!-- <meta http-equiv="content-language" content="ja"> -->
