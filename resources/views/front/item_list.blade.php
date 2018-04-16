@@ -1,10 +1,16 @@
 @extends('front.common.layout')
 @if(isset($html_title))
   @section('title', 'エンジニアルート | '.$html_title)
-  @section('description', $html_description)
-  @section('keywords', $html_keywords)
 @else
   @section('title', 'エンジニアルート | 案件一覧')
+@endif
+
+@if(isset($html_description))
+  @section('description', $html_description)
+@endif
+
+@if(isset($html_keywords))
+  @section('keywords', $html_keywords)
 @endif
 
 @if(!$params["nodata"])
