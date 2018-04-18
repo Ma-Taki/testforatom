@@ -13,7 +13,6 @@ use App\Models\Ms_sys_types;
 use App\Models\Ms_biz_categories;
 use App\Models\Ms_areas;
 use App\Models\Ms_job_types;
-use App\Models\Tr_search_categories;
 use App\Models\Tr_slide_images;
 ?>
 <div class="wrap">
@@ -248,57 +247,67 @@ use App\Models\Tr_slide_images;
     </section><!-- /.conditions -->
 
     <div class="contentInr">
+      <!-- カテゴリーから案件を探す パソコン版-->
       <section class="category-search invisible-sp">
         <h2>カテゴリーから案件を探す</h2>
         <div class="category-search__content">
-          @foreach(Tr_search_categories::getParentCategories() as $parent)
-            <div class="category__parent">&nbsp;<a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</a></div>
-            <div class="category__child">
-              @foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
-                <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
-                <span>|</span>
-              @endforeach
-            </div>
-            <hr class="category__partition">
-          @endforeach
+          @if(!empty($parents))
+            @foreach($parents as $parent)
+              <div class="category__parent">&nbsp;
+                <a href="/item/category/{{ $parent->id }}">{{ $parent->name }}</a>
+              </div>
+              <div class="category__child">
+                @if(!empty($children))
+                  @foreach($children as $child)
+                    @if($parent->id == $child->parent_id)
+                      <a href="/item/category/{{ $child->id }}">{{ $child->name }}</a>
+                      <span>|</span>
+                    @endif
+                  @endforeach
+                @endif
+              </div>
+              <hr class="category__partition">
+            @endforeach
+          @endif
           @include('front.common.keyword_pc')
         </div>
-      </section><!-- /.categorySearch for pc,tablet-->
-
-
-
+      </section>
+      <!-- カテゴリーから案件を探す スマートフォン版-->
       <section class="category-search invisible-pc invisible-tab">
         <h2>カテゴリーから案件を探す</h2>
         <div class="category-search__content">
-@foreach(Tr_search_categories::getParentCategories() as $parent)
-          <div>
-            <div class="category__parent">{{ $parent->name }}
-              <div class="arrow">
-                <span class="arrow arrow-left"></span>
-                <span class="arrow arrow-right"></span>
+          @if(!empty($parents))
+            @foreach($parents as $parent)
+              <div>
+                <div class="category__parent">{{ $parent->name }}
+                  <div class="arrow">
+                    <span class="arrow arrow-left"></span>
+                    <span class="arrow arrow-right"></span>
+                  </div>
+                </div>
+                <ul class="js__category-childs">
+                  <li class="category__child">
+                    <a href="/item/category/{{ $parent->id }}">
+                      {{ $parent->name }}一覧
+                    </a>
+                  </li>
+                  @if(!empty($children))
+                    @foreach($children as $child)
+                      @if($parent->id == $child->parent_id)
+                        <li class="category__child">
+                          <a href="/item/category/{{ $child->id }}">
+                            {{ $child->name }}
+                          </a>
+                        </li>
+                      @endif
+                    @endforeach
+                  @endif
+                </ul>
               </div>
-            </div>
-
-            <ul class="js__category-childs">
-              <li class="category__child">
-                <a href="/item/category/{{ $parent->id }}">
-                  {{ $parent->name }}一覧
-                </a>
-              </li>
-
-@foreach(Tr_search_categories::getChildByParent($parent->id) as $child)
-              <li class="category__child">
-                <a href="/item/category/{{ $child->id }}">
-                  {{ $child->name }}
-                </a>
-              </li>
-@endforeach
-            </ul>
-          </div>
-@endforeach
+            @endforeach
+          @endif
         </div>
-      </section><!-- /.categorySearch for sp-->
-
+      </section>
       @include('front.common.keyword_sp')
 
 @if(!FrntUtil::isLogin())

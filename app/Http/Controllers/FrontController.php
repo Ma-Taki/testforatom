@@ -8,7 +8,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use App\Models\Tr_search_categories;
+use App\Models\Tr_search_categories_display;
 use Illuminate\Http\Request;
 use App\Libraries\{ModelUtility as mdlUtil, FrontUtility as frntUtil};
 use App\Http\Requests;
@@ -45,8 +46,33 @@ class FrontController extends BaseController
                                        ->get();
         }
 
-        return view('front.top', compact('newItemList',
-                                         'pickUpItemList'));
+        //表示するカテゴリーを取得
+        $display_category = Tr_search_categories_display::all();
+        $parent_array = array();
+        $child_array = array();
+        foreach ($display_category as $value) {
+            if(!in_array($value->parent_id, $parent_array)){
+                array_push($parent_array,$value->parent_id);
+            }
+
+            if($value->child_id != 0 && !in_array($value->child_id, $child_array)){
+                array_push($child_array,$value->child_id);
+            }
+        }
+
+        if(!empty($parent_array)){
+            $parents = Tr_search_categories::whereIn('id', $parent_array)
+                                 ->orderBy('parent_sort', 'asc')
+                                 ->get();
+        }
+ 
+        if(!empty($child_array)){
+            $children = Tr_search_categories::whereIn('id', $child_array)
+                                 ->orderBy('child_sort', 'asc')
+                                 ->get();
+        }
+
+        return view('front.top', compact('newItemList','pickUpItemList','parents','children'));
     }
 
     /**
