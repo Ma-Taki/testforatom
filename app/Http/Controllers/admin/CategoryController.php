@@ -263,12 +263,9 @@ class CategoryController extends AdminController
                         'id'                => $request->id,
                         'parent_id'         => $request->parent_id,
                         'delete_flag'       => $request->delete_flag,
-                        // 'path'              => $request->path,
                         'name'              => $request->name,
                         'parent_sort'       => $request->parent_sort,
                         'child_sort'        => $request->child_sort,
-                        // 'detail'            => $request->detail,
-                        // 'search_key'        => $request->search_key,
                         'page_title'        => $request->page_title,
                         'page_keywords'     => $request->page_keywords,
                         'page_description'  => $request->page_description
@@ -287,12 +284,9 @@ class CategoryController extends AdminController
                                     'id'                => $update->id,
                                     'parent_id'         => $update->parent_id,
                                     'delete_flag'       => $update->delete_flag,
-                                    // 'path'              => $update->path,
                                     'name'              => $update->name,
                                     'parent_sort'       => $update_db[0]['parent_sort'],
                                     'child_sort'        => $update->child_sort,
-                                    // 'detail'            => $update->detail,
-                                    // 'search_key'        => $update->search_key,
                                     'page_title'        => $update->page_title,
                                     'page_keywords'     => $update->page_keywords,
                                     'page_description'  => $update->page_description
@@ -308,12 +302,9 @@ class CategoryController extends AdminController
                                             'id'                => $update->id,
                                             'parent_id'         => $update->parent_id,
                                             'delete_flag'       => $update->delete_flag,
-                                            // 'path'              => $update->path,
                                             'name'              => $update->name,
                                             'parent_sort'       => $value + 1,
                                             'child_sort'        => $update->child_sort,
-                                            // 'detail'            => $update->detail,
-                                            // 'search_key'        => $update->search_key,
                                             'page_title'        => $update->page_title,
                                             'page_keywords'     => $update->page_keywords,
                                             'page_description'  => $update->page_description
@@ -331,12 +322,9 @@ class CategoryController extends AdminController
                                             'id'                => $update->id,
                                             'parent_id'         => $update->parent_id,
                                             'delete_flag'       => $update->delete_flag,
-                                            // 'path'              => $update->path,
                                             'name'              => $update->name,
                                             'parent_sort'       => $value - 1,
                                             'child_sort'        => $update->child_sort,
-                                            // 'detail'            => $update->detail,
-                                            // 'search_key'        => $update->search_key,
                                             'page_title'        => $update->page_title,
                                             'page_keywords'     => $update->page_keywords,
                                             'page_description'  => $update->page_description
@@ -362,12 +350,9 @@ class CategoryController extends AdminController
                                     'id'                => $update->id,
                                     'parent_id'         => $update->parent_id,
                                     'delete_flag'       => $update->delete_flag,
-                                    // 'path'              => $update->path,
                                     'name'              => $update->name,
                                     'parent_sort'       => $update->parent_sort,
                                     'child_sort'        => $sortNum,
-                                    // 'detail'            => $update->detail,
-                                    // 'search_key'        => $update->search_key,
                                     'page_title'        => $update->page_title,
                                     'page_keywords'     => $update->page_keywords,
                                     'page_description'  => $update->page_description
@@ -396,12 +381,9 @@ class CategoryController extends AdminController
                                             'id'                =>  $update->id,
                                             'parent_id'         =>  $update->parent_id,
                                             'delete_flag'       =>  $update->delete_flag,
-                                            // 'path'              =>  $update->path,
                                             'name'              =>  $update->name,
                                             'parent_sort'       =>  $update->parent_sort,
                                             'child_sort'        =>  $value + 1,
-                                            // 'detail'            =>  $update->detail,
-                                            // 'search_key'        =>  $update->search_key,
                                             'page_title'        =>  $update->page_title,
                                             'page_keywords'     =>  $update->page_keywords,
                                             'page_description'  =>  $update->page_description
@@ -425,12 +407,9 @@ class CategoryController extends AdminController
                                             'id'                => $update_category->id,
                                             'parent_id'         => $update_category->parent_id,
                                             'delete_flag'       => $update_category->delete_flag,
-                                            // 'path'              => $update_category->path,
                                             'name'              => $update_category->name,
                                             'parent_sort'       => $update_category->parent_sort,
                                             'child_sort'        => $value + 1,
-                                            // 'detail'            => $update_category->detail,
-                                            // 'search_key'        => $update_category->search_key,
                                             'page_title'        => $update_category->page_title,
                                             'page_keywords'     => $update_category->page_keywords,
                                             'page_description'  => $update_category->page_description
@@ -450,12 +429,9 @@ class CategoryController extends AdminController
                                             'id'                => $update_category->id,
                                             'parent_id'         => $update_category->parent_id,
                                             'delete_flag'       => $update_category->delete_flag,
-                                            // 'path'              => $update_category->path,
                                             'name'              => $update_category->name,
                                             'parent_sort'       => $update_category->parent_sort,
                                             'child_sort'        => $value - 1,
-                                            // 'detail'            => $update_category->detail,
-                                            // 'search_key'        => $update_category->search_key,
                                             'page_title'        => $update_category->page_title,
                                             'page_keywords'     => $update_category->page_keywords,
                                             'page_description'  => $update_category->page_description
@@ -476,9 +452,7 @@ class CategoryController extends AdminController
                         'delete_flag'       => $update['delete_flag'],
                         'name'              => $update['name'],
                         'parent_sort'       => $update['parent_sort'],
-                        'child_sort'        => $update['child_sort'],
-                        // 'detail'            => $update['detail'],
-                        // 'search_key'        => $update['search_key'],
+                        'child_sort'        => $update['child_sort'],     
                         'page_title'        => $update['page_title'],
                         'page_keywords'     => $update['page_keywords'],
                         'page_description'  => $update['page_description'],
@@ -508,6 +482,10 @@ class CategoryController extends AdminController
                             'parent_sort' => $sortMax,
                             'child_sort'  => null,
                         );
+            $delete_db[] = array(
+                            'parent_id' => $request->id,
+                            'child_id'  => 0,
+                        );
 
             //編集対象の子ども
             $update_category = Tr_search_categories::where('parent_sort', $request->parent_sort)
@@ -521,6 +499,10 @@ class CategoryController extends AdminController
                                     'parent_sort' => $sortMax,
                                     'child_sort'  => $update->child_sort,
                                 );
+                $delete_db[] = array(
+                            'parent_id' => $update->parent_id,
+                            'child_id'  => $update->id,
+                        );
             }
 
             $sortMin = $request->parent_sort + 1;
@@ -552,6 +534,10 @@ class CategoryController extends AdminController
                             'parent_sort' => $request->parent_sort,
                             'child_sort'  => $sortMax,
                         );
+            $delete_db[] = array(
+                            'parent_id' => $request->parent_id,
+                            'child_id'  => $request->id,
+                        );
 
             $sortMin = $request->child_sort + 1;
 
@@ -580,6 +566,21 @@ class CategoryController extends AdminController
                         'parent_sort' => $update['parent_sort'],
                         'child_sort'  => $update['child_sort'],
                     ]);
+                } catch (\Exception $e) {
+                    Log::error($e);
+                    abort(400, 'トランザクションが異常終了しました。');
+                }
+            });
+        }
+
+        //削除処理
+        foreach ($delete_db as $delete) {
+            //トランザクション
+            DB::transaction(function () use ($delete) {
+             try {
+                    Tr_search_categories_display::where('parent_id', $delete['parent_id'])
+                                                ->where('child_id', $delete['child_id'])
+                                                ->delete();
                 } catch (\Exception $e) {
                     Log::error($e);
                     abort(400, 'トランザクションが異常終了しました。');
@@ -744,9 +745,9 @@ class CategoryController extends AdminController
             //トランザクション
             DB::transaction(function () use ($delete) {
              try {
-                    Tr_search_categories_display::where('parent_id', $delete['parent_id'])->delete([
-                        'child_id' => $delete['child_id'],
-                    ]);
+                    Tr_search_categories_display::where('parent_id', $delete['parent_id'])
+                                                ->where('child_id', $delete['child_id'])
+                                                ->delete();
                 } catch (\Exception $e) {
                     Log::error($e);
                     abort(400, 'トランザクションが異常終了しました。');

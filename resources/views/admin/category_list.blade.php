@@ -51,7 +51,7 @@ use App\Models\Tr_search_categories;
         <br>
         <br>
         <legend><div class="panel-title">一覧</div></legend>
-        <p>親ステータス・子ステータスの表示/非表示は、案件登録・編集時の表示ステータス</p>
+        <p>親ステータス・子ステータスの表示/非表示は、案件登録・編集・カテゴリーのトップページ表示管理画面のチェック項目の表示または非表示</p>
         <table class="table table-striped table-bordered">
           <thead>
             @if(count($categoryList)!=0)
