@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AdminController;
 use App\Models\Tr_search_categories;
+use App\Models\Tr_search_categories_display;
 use App\Http\Requests\admin\CategoryRegistRequest;
 use App\Libraries\AdminUtility as AdminUtil;
 use DB;
@@ -630,4 +631,128 @@ class CategoryController extends AdminController
         return redirect('/admin/category/search')->with('custom_info_messages','復活処理は正常に終了しました。');
     }
 
+    /**
+     * トップページ表示管理画面
+     * GET:/admin/category/list
+     */
+    public function displayCategorylist(Request $request){
+        //親カテゴリ
+        $parents = Tr_search_categories::where('parent_id', null)
+                                        ->where('delete_flag', false)
+                                        ->orderBy('parent_sort', 'asc')
+                                        ->get();
+        //子カテゴリ
+        $children = Tr_search_categories::where('parent_id', '!=', null)
+                                        ->where('delete_flag', false)
+                                        ->orderBy('child_sort', 'asc')
+                                        ->get();
+        //表示カテゴリー
+        $display_category = Tr_search_categories_display::all();
+
+        return view('/admin/category_display', compact('parents','children','display_category'));
+    }
+
+    /**
+     * トップページ表示更新処理
+     * GET:/admin/category/list
+     */
+    public function displayUpdateCategory(Request $request){
+        $data_db = [];
+        if(!empty($request->search_categories)){
+            foreach ($request->search_categories as $value) {
+                $category = Tr_search_categories::where('id', $value)->get()->first();
+
+                if(empty($category->parent_id)){
+                    //親のとき
+                    $data_db[] = array(
+                                        'parent_id' => $category->id,
+                                        'child_id'  => 0,
+                                        );
+                    //チェック用
+                    $parents[] = array('parent_id' => $category->id);
+                }else{
+                    //子のとき
+                    $data_db[] = array(
+                                        'parent_id' => $category->parent_id,
+                                        'child_id'  => $category->id,
+                                        );
+                }
+            }
+
+            //子に対して親が揃っているかチェック
+            $custom_error_messages = [];
+            foreach ($data_db as $key => $data) {
+                $error[] = array($data);
+                if(!empty($parents)){
+                    foreach ($parents as $parent) {
+                        if($parent["parent_id"] == $data["parent_id"]){
+                            unset($error[$key]);
+                        }
+                    }
+                }
+            }
+            if(!empty($error)){
+                array_push($custom_error_messages, '子のみ表示することはできません。子に対応する親のチェックボックスにチェックを入れてください。');
+                //フラッシュセッションにエラーメッセージを保存
+                \Session::flash('custom_error_messages', $custom_error_messages);
+                return back()->withInput();
+            }
+        }
+        //表示カテゴリー
+        $display_category = Tr_search_categories_display::all();
+
+        //非表示チェック
+        $delete_db = [];
+        foreach ($display_category as $key => $display) {
+            $delete_db[] = array(
+                                'parent_id' => $display->parent_id,
+                                'child_id'  => $display->child_id,
+                                );
+
+            foreach ($data_db as $data) {
+                if($display->parent_id == $data['parent_id']){
+                    unset($delete_db[$key]);
+                }
+            }
+        }
+        
+        //挿入処理
+        foreach ($data_db as $data) {
+            $display_category = Tr_search_categories_display::where('parent_id', $data['parent_id'])
+                                                            ->where('child_id', $data['child_id'])
+                                                            ->get()
+                                                            ->first();
+            if(empty($display_category)){
+                //トランザクション
+                DB::transaction(function () use ($data) {
+                    try {
+                        //テーブルに挿入
+                        $insert = new Tr_search_categories_display;
+                        $insert->parent_id = $data['parent_id'];
+                        $insert->child_id = $data['child_id'];
+                        $insert->save();
+
+                    } catch (Exception $e) {
+                        Log::error($e);
+                        abort(400, 'トランザクションが異常終了しました。');
+                    }
+                });
+            }
+        }
+        //削除処理
+        foreach ($delete_db as $delete) {
+            //トランザクション
+            DB::transaction(function () use ($delete) {
+             try {
+                    Tr_search_categories_display::where('parent_id', $delete['parent_id'])->delete([
+                        'child_id' => $delete['child_id'],
+                    ]);
+                } catch (\Exception $e) {
+                    Log::error($e);
+                    abort(400, 'トランザクションが異常終了しました。');
+                }
+            });
+        }
+        return redirect('/admin/category/list')->with('custom_info_messages','処理は正常に終了しました。');
+    }
 }
