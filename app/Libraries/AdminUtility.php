@@ -50,6 +50,7 @@ class AdminUtility
         'admin/category/delete' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
         'admin/category/insert' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
         'admin/category/selectBox' => mdlUtil::AUTH_TYPE_ITEM_READ,
+        'admin/category/list' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
         // メルマガ管理
         'admin/mail-magazine' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,
         'admin/mail-magazine/search' => mdlUtil::AUTH_TYPE_MAIL_MAGAZINE,

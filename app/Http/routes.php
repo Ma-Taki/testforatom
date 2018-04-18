@@ -222,6 +222,10 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/category/insert', 'admin\CategoryController@insertAgainCategory');
     // セレクトボックス切り替え
     Route::post('/admin/category/selectBox', 'admin\CategoryController@ajaxSelectBox');
+    // トップページ表示管理画面
+    Route::get('/admin/category/list', 'admin\CategoryController@displayCategorylist');
+    // トップページ表示更新処理
+    Route::post('/admin/category/list', 'admin\CategoryController@displayUpdateCategory');
 
     // メルマガ管理
     Route::get('/admin/mail-magazine', 'admin\MailMagazineController@index');

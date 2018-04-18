@@ -51,17 +51,18 @@ use App\Models\Tr_search_categories;
         <br>
         <br>
         <legend><div class="panel-title">一覧</div></legend>
+        <p>親ステータス・子ステータスの表示/非表示は、案件登録・編集時の表示ステータス</p>
         <table class="table table-striped table-bordered">
           <thead>
             @if(count($categoryList)!=0)
               <tr>
-                <th width="25%">親カテゴリー名</th>
+                <th width="20%">親カテゴリー名</th>
                 <th width="5%">親表示順</th>
-                <th width="5%">親ステータス</th>
-                <th width="25%">子カテゴリー名</th>
+                <th width="8%">親ステータス</th>
+                <th width="20%">子カテゴリー名</th>
                 <th width="5%">子表示順</th>
-                <th width="5%">子ステータス</th>
-                <th width="20%">ページタイトル</th>
+                <th width="8%">子ステータス</th>
+                <th width="24%">ページタイトル</th>
                 <th width="10%"><!-- 詳細/編集/削除ボタン --></th>
               </tr>
             @endif

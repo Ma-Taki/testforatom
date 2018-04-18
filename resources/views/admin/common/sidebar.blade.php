@@ -31,6 +31,7 @@ use Carbon\Carbon;
                                     <li><a href="/admin/category/search">カテゴリー一覧</a></li>
                                     <li><a href="/admin/category/input?type=parent">親カテゴリー登録</a></li>
                                     <li><a href="/admin/category/input?type=child">子カテゴリー登録</a></li>
+                                    <li><a href="/admin/category/list">トップページ表示管理</a></li>
                                 </ul>
                             </li>
                         </ul>
