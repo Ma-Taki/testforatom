@@ -97,13 +97,13 @@ class FrontUtility
     public $company_contact_mail_to = '';
 
     // メール：会員登録完了
-    const USER_REGIST_MAIL_TITLE = 'エンジニアルートにご登録頂きありがとうございます。';
+    const USER_REGIST_MAIL_TITLE = '【Engineer-Route運営事務局】 ご登録ありがとうございます（自動送信メール）';
     public $user_regist_mail_from = '';
     public $user_regist_mail_from_name = '';
     public $user_regist_mail_to_bcc = '';
 
     // メール：エントリー完了
-    const USER_ENTRY_MAIL_TITLE = '案件にエントリー頂きありがとうございます。';
+    const USER_ENTRY_MAIL_TITLE = '【Engineer-Route運営事務局】 案件へエントリーありがとうございます（自動送信メール）';
     public $user_entry_mail_from = '';
     public $user_entry_mail_from_name = '';
     public $user_entry_mail_to_bcc = '';
