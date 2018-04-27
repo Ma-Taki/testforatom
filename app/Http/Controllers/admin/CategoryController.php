@@ -20,7 +20,7 @@ class CategoryController extends AdminController
 {
     /**
      * 検索一覧画面・処理
-     * GET,POST:/admin/item/category/search
+     * GET,POST:/admin/category/search
      */
     public function searchCategory(Request $request){
     
@@ -91,10 +91,10 @@ class CategoryController extends AdminController
      */
     public function insertCategory(CategoryRegistRequest $request){
         
-        $data_db[] = array(
+        $data = array(
                         'parent_id'         => $request->parent_id,
                         'delete_flag'       => false,
-                        'name'              => $request->name,
+                        'name'              => $request->category_name,
                         'parent_sort'       => $request->parent_sort,
                         'child_sort'        => $request->child_sort,
                         'page_title'        => $request->page_title,
@@ -102,12 +102,12 @@ class CategoryController extends AdminController
                         'page_description'  => $request->page_description
                     );
 
-        if(empty($data_db[0]['parent_id']) && empty($data_db[0]['child_sort'])){
+        if(empty($data['parent_id']) && empty($data['child_sort'])){
             //親のとき
             //親の最大表示順
             $sortMax = Tr_search_categories::max('parent_sort');
 
-            for($value = $data_db[0]['parent_sort']; $value <= $sortMax; $value++){
+            for($value = $data['parent_sort']; $value <= $sortMax; $value++){
                 //表示順に紐づいた情報を取得
                 $update_category = Tr_search_categories::where('parent_sort', $value)->get();
                 foreach ($update_category as $update) {
@@ -122,20 +122,20 @@ class CategoryController extends AdminController
         }else{
             //子どものとき
             //登録する親の表示ステータスを確認
-            $parentCategory = Tr_search_categories::where('id', $data_db[0]['parent_id'])->get()->first();
+            $parentCategory = Tr_search_categories::where('id', $data['parent_id'])->get()->first();
 
             //非表示のとき
             if($parentCategory->delete_flag){
-                $data_db[0]['delete_flag'] = true;
+                $data['delete_flag'] = true;
             }
 
             //登録する親の子ども最大表示順を取得
-            $maxSort = Tr_search_categories::where('parent_id', $data_db[0]['parent_id'])->max('child_sort');
+            $maxSort = Tr_search_categories::where('parent_id', $data['parent_id'])->max('child_sort');
 
-            for($value = $data_db[0]['child_sort']; $value <= $maxSort; $value++){
+            for($value = $data['child_sort']; $value <= $maxSort; $value++){
                 //表示順に紐づいた情報を取得
-                $update_category = Tr_search_categories::where('parent_id', $data_db[0]['parent_id'])
-                                                            ->where('parent_sort', $data_db[0]['parent_sort'])
+                $update_category = Tr_search_categories::where('parent_id', $data['parent_id'])
+                                                            ->where('parent_sort', $data['parent_sort'])
                                                             ->where('child_sort', $value)
                                                             ->get()
                                                             ->first();
@@ -147,31 +147,29 @@ class CategoryController extends AdminController
             }
         }
 
-        //挿入処理
-        foreach ($data_db as $data) {
-            //トランザクション
-            DB::transaction(function () use ($data) {
-                try {
-                    //テーブルに挿入
-                    $insert_category = new Tr_search_categories;
-                    $insert_category->parent_id         = $data['parent_id'];
-                    $insert_category->delete_flag       = $data['delete_flag'];
-                    $insert_category->name              = $data['name'];
-                    $insert_category->parent_sort       = $data['parent_sort'];
-                    $insert_category->child_sort        = $data['child_sort'];
-                    $insert_category->page_title        = $data['page_title'];
-                    $insert_category->page_keywords     = $data['page_keywords'];
-                    $insert_category->page_description  = $data['page_description'];
-                    $insert_category->save();
+        //挿入処理    
+        DB::transaction(function () use ($data) {
+            try {
+                //テーブルに挿入
+                $insert_category = new Tr_search_categories;
+                $insert_category->parent_id         = $data['parent_id'];
+                $insert_category->delete_flag       = $data['delete_flag'];
+                $insert_category->name              = $data['name'];
+                $insert_category->parent_sort       = $data['parent_sort'];
+                $insert_category->child_sort        = $data['child_sort'];
+                $insert_category->page_title        = $data['page_title'];
+                $insert_category->page_keywords     = $data['page_keywords'];
+                $insert_category->page_description  = $data['page_description'];
+                $insert_category->save();
 
-                } catch (Exception $e) {
-                    Log::error($e);
-                    abort(400, 'トランザクションが異常終了しました。');
-                }
-            });
-        }
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
+
+        //更新処理
         if(!empty($update_db)){
-            //更新処理
             foreach ($update_db as $update) {
                 //トランザクション
                 DB::transaction(function () use ($update) {
@@ -263,7 +261,7 @@ class CategoryController extends AdminController
                         'id'                => $request->id,
                         'parent_id'         => $request->parent_id,
                         'delete_flag'       => $request->delete_flag,
-                        'name'              => $request->name,
+                        'name'              => $request->category_name,
                         'parent_sort'       => $request->parent_sort,
                         'child_sort'        => $request->child_sort,
                         'page_title'        => $request->page_title,

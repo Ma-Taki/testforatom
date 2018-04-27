@@ -72,4 +72,61 @@ $(function() {
           alert('正しい結果を得られませんでした。');
         });
     }
+
+    /**
+     * スキルカテゴリー変更時に表示順を切り替え
+     * POST:/admin/skill/selectBox
+     */
+    
+    //スキルの表示順を変えたとき
+    $('.selectSkillSort').change(function() {
+        var skillVal = $(this).val();
+        window.sessionStorage.setItem(['skillVal'],[skillVal]);
+    });
+    
+    //新規登録画面
+    if("/admin/skill/input" == $(location).attr('pathname')){
+        //エラー文字が表示されたとき
+        if($('.alert-danger').is(':visible')){
+            var skillCategoryVal = $('.selectSkillCategoryName').val();
+            var oldSKillSort = window.sessionStorage.getItem(['skillVal']);
+            selectSkillCategoryAjax(skillCategoryVal, oldSKillSort);
+        }
+    }
+
+    //スキルカテゴリーを変更したとき
+    $('.selectSkillCategoryName').change(function() {
+        var skillCategoryVal = $(this).val();
+        selectSkillCategoryAjax(skillCategoryVal);
+    });
+    
+    //スキルカテゴリーに対するスキルのセレクトボックスを表示
+    function selectSkillCategoryAjax(skillCategoryId, oldSKillSort) {
+        $.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+        
+        $.ajax({
+            url: '/admin/skill/selectBox',
+            type: 'POST',
+            data: { 
+                'id' : skillCategoryId,
+                },
+            dataType: 'json',
+        })
+        .done(function(data){   
+            for(var max in data){
+                var options = "";
+                for (var sortNum = 1; sortNum <= data[max]; sortNum++) {
+                    options += '<option ';
+                    if(oldSKillSort == sortNum) {
+                            options += 'selected ';
+                    }
+                    options += 'value="'+ sortNum +'">'+ sortNum +'</option>';
+                }
+                $('.selectSkillSort').html(options);
+            }
+        })
+        .fail(function(){
+          alert('正しい結果を得られませんでした。');
+        });
+    }
 });

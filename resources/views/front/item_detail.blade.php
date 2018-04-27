@@ -1,8 +1,11 @@
 @extends('front.common.layout')
 
 <?php
-    use App\Libraries\HtmlUtility as HtmlUtil;
-    use Carbon\Carbon;
+use App\Libraries\HtmlUtility as HtmlUtil;
+use Carbon\Carbon;
+use App\Models\Ms_sys_types;
+use App\Models\Ms_job_types;
+use App\Models\Ms_skills;
 ?>
 
 @section('title', $item->name .' - AN' .$item->id .' | エンジニアルート')
@@ -14,7 +17,7 @@
   @include('front.common.breadcrumbs')
   <div class="main-content item-detail">
     <div class="main-content-left">
-      @foreach($item->skills as $skill)
+      @foreach(Ms_skills::itemSkills($item->id) as $skill)
         @if(\File::exists('./../storage/app/public/id'.$skill->id.'_title.php'))
           <!-- wordPress固定ページを表示 -->
           <div class="main-content__body">
@@ -83,17 +86,15 @@
                 <div class="other">
                   <p class="otherName">システム種別</p>
                   <p class="otherValue">
-
-@foreach($item->sysTypes as $sys_type)
-                    {{ $sys_type->name }}<span class="wordPunctuation">、</span>
-@endforeach
-
+                    @foreach(Ms_sys_types::getSysTypes($item->id) as $sys_type)
+                      {{ $sys_type->name }}<span class="wordPunctuation">、</span>
+                    @endforeach
                   </p>
                 </div>
                 <div class="other">
                   <p class="otherName">ポジション</p>
                   <p class="otherValue">
-                    @foreach($item->jobTypes as $jobType)
+                    @foreach(Ms_job_types::getJobTypes($item->id) as $jobType)
                     {{ $jobType->name }}<span class="wordPunctuation">、</span>
                     @endforeach
                   </p>
@@ -182,7 +183,7 @@
               <p class="area">{{ $item->area_detail }}</p>
             </div>
             <p class="skill">要求スキル</p>
-            <p class="skills">{{ HtmlUtil::convertSkillsMdlToNameStr($item->skills) }}</p>
+            <p class="skills">{{ HtmlUtil::convertSkillsMdlToNameStr(Ms_skills::itemSkills($item->id)) }}</p>
           </div>
         </a>
       </div>

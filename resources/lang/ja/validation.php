@@ -208,13 +208,21 @@ return [
         'item_tag' => 'タグ',
         'item_detail' => '詳細',
         'item_note' => 'メモ(社内用)',
-        'name'              => 'カテゴリー名',
+        // カテゴリー
+        'category_name'     => 'カテゴリー名',
         'page_title'        => 'ページタイトル',
         'page_keywords'     => 'ページキーワード',
         'page_description'  => 'ページディスクリプション',
         'detail'            => '詳細',
         'path'              => 'パス',
         'search_key'        => '検索キー',
+        //ポジション
+        'position_name'     => 'ポジション名',
+        //システム種別
+        'sysType_name'      => 'システム種別名',
+        //スキル
+        'skillCategory_name' => 'スキルカテゴリー名',
+        'skill_name'        => 'スキル名',
         // △△　案件登録　△△
         // ▽▽　お問い合わせ　▽▽
         'user_name' => '氏名',

@@ -3,13 +3,13 @@
 namespace App\Http\Requests\admin;
 
 use App\Http\Requests\Request;
-use App\Models\Tr_search_categories;
+use App\Models\Ms_sys_types;
 
 /**
- * カテゴリー登録用FormRequest
+ * システム種別登録・編集用FormRequest
  *
  **/
-class CategoryRegistRequest extends Request
+class SystemTypeRegistRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,10 +29,7 @@ class CategoryRegistRequest extends Request
     public function rules()
     {
         return [
-            'category_name'     => 'required|max:20',
-            'page_title'        => 'required|max:50',
-            'page_keywords'     => 'required|max:255',
-            'page_description'  => 'required|max:255',
+            'sysType_name'  => 'required|max:20'
         ];
     }
 }
