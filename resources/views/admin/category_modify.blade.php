@@ -45,7 +45,7 @@ use App\Libraries\HtmlUtility;
                                     <font color="#FF0000">*</font>
                                 </label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="inputParentName" name="name" value="{{ HtmlUtility::setTextValueByRequest($category->name, old('category_name')) }}" maxlength="20" placeholder="親カテゴリー名">
+                                    <input type="text" class="form-control" id="inputParentName" name="category_name" value="{{ HtmlUtility::setTextValueByRequest($category->name, old('category_name')) }}" maxlength="20" placeholder="親カテゴリー名">
                                     <span>(20文字まで)</span>
                                 </div>
                             @else
@@ -77,7 +77,7 @@ use App\Libraries\HtmlUtility;
                                     <font color="#FF0000">*</font>
                                 </label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="inputChildName" name="name" value="{{ HtmlUtility::setTextValueByRequest($category->name, old('category_name')) }}" maxlength="20" placeholder="子カテゴリー名">
+                                    <input type="text" class="form-control" id="inputChildName" name="category_name" value="{{ HtmlUtility::setTextValueByRequest($category->name, old('category_name')) }}" maxlength="20" placeholder="子カテゴリー名">
                                     <span>(20文字まで)</span>
                                 </div>
                             </div>

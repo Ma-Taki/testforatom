@@ -25,8 +25,30 @@ class Ms_skill_categories extends Model
      * indexOnly以外を取得
      */
      public function scopeGetNotIndexOnly($query){
-         return $query->where('master_type', '!=', mdlUtil::MASTER_TYPE_INDEX_ONLY)
+         return $query->where('delete_flag', false)
                       ->orderBy('sort_order', 'asc')
                       ->get();
      }
+
+    /**
+     * indexOnly以外を取得
+     */
+     public function scopeGetSkillCategoryFlag($query,$id){
+            return $query->where('id', $id)
+                      ->get();
+
+     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

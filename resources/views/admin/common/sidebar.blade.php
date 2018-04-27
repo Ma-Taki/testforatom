@@ -23,15 +23,46 @@ use Carbon\Carbon;
                             <li><a href="/admin/item/input">案件登録</a></li>
                             <li><a href="/admin/item/tags">タグ一覧</a></li>
                             <li class="undermenu">
-                            <a href="#">
-                                <i class="glyphicon glyphicon-list-alt"></i> カテゴリー
-                                <span class="caret pull-right"></span>
-                            </a>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-list-alt"></i> カテゴリー
+                                    <span class="caret pull-right"></span>
+                                </a>
                                 <ul style="display: none;">
                                     <li><a href="/admin/category/search">カテゴリー一覧</a></li>
                                     <li><a href="/admin/category/input?type=parent">親カテゴリー登録</a></li>
                                     <li><a href="/admin/category/input?type=child">子カテゴリー登録</a></li>
                                     <li><a href="/admin/category/list">トップページ表示管理</a></li>
+                                </ul>
+                            </li>
+                            <li class="undermenu">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-star"></i> ポジション
+                                    <span class="caret pull-right"></span>
+                                </a>
+                                <ul style="display: none;">
+                                    <li><a href="/admin/position/search">ポジション一覧</a></li>
+                                    <li><a href="/admin/position/input">ポジション登録</a></li>
+                                </ul>
+                            </li>
+                            <li class="undermenu">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-link"></i> システム種別
+                                    <span class="caret pull-right"></span>
+                                </a>
+                                <ul style="display: none;">
+                                    <li><a href="/admin/system-type/search">システム種別一覧</a></li>
+                                    <li><a href="/admin/system-type/input">システム種別登録</a></li>
+                                </ul>
+                            </li>
+                            <li class="undermenu">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-pencil"></i> スキル
+                                    <span class="caret pull-right"></span>
+                                </a>
+                                <ul style="display: none;">
+                                    <li><a href="/admin/skill-category/search">スキルカテゴリー一覧</a></li>
+                                    <li><a href="/admin/skill-category/input">スキルカテゴリー登録</a></li>
+                                    <li><a href="/admin/skill/input">スキル登録</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -78,7 +109,7 @@ use Carbon\Carbon;
                 @if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
                     <li>
                         <a href="/admin/programming-lang-ranking">
-                            <i class="glyphicon glyphicon-wrench"></i>人気言語ランキング
+                            <i class="glyphicon glyphicon-ok"></i>人気言語ランキング
                         </a>
                     </li>
                 @endif

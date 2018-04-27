@@ -29,6 +29,8 @@ use App\Models\Tr_link_items_skills;
 use App\Models\Tr_link_items_sys_types;
 use App\Models\Tr_link_items_tags;
 use App\Models\Tr_tags;
+use App\Models\Ms_skill_categories;
+use App\Libraries\ModelUtility as mdlUtil;
 
 class ItemController extends AdminController
 {
@@ -108,17 +110,28 @@ class ItemController extends AdminController
         // 業種
         $master_biz_categories = Ms_biz_categories::where('master_type', '!=', 3)->orderBy('sort_order', 'desc')->get();
         // 職種
-        $master_job_types = Ms_job_types::where('master_type', '!=', 3)
+        $master_job_types = Ms_job_types::where('delete_flag', false)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
         // システム種別
-        $master_sys_types = Ms_sys_types::where('master_type', '!=', 3)
+        $master_sys_types = Ms_sys_types::where('delete_flag', false)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
-        // スキル ABC順で取得
-        $master_skills = Ms_skills::where('master_type', '!=', 3)
-                                        ->orderBy('name', 'asc')
-                                        ->get();
+        //スキルカテゴリーを取得
+        $master_skill_category = Ms_skill_categories::select('skill_categories.*')
+                                                ->whereExists(function ($query) {
+                                                    $query->select(DB::raw(1))
+                                                          ->from('skills')
+                                                          ->whereRaw('skills.skill_category_id = skill_categories.id')
+                                                          ->where('skills.delete_flag',false);
+                                                })
+                                                ->where('skill_categories.delete_flag',false)
+                                                ->orderBy('skill_categories.sort_order', 'asc')
+                                                ->get();
+        // スキル
+        $master_skills = Ms_skills::where('delete_flag', false)
+                                    ->orderBy('sort_order', 'asc')
+                                    ->get();
         // 特集タグ取得
         $featureTagInfos = Tr_tag_infos::where('tag_type', 3)
                                         ->orderBy('sort_order', 'desc')
@@ -137,6 +150,7 @@ class ItemController extends AdminController
             'master_biz_categories',
             'master_job_types',
             'master_sys_types',
+            'master_skill_category',
             'master_skills',
             'featureTagInfos',
             'pickupTagInfos'
@@ -400,17 +414,28 @@ class ItemController extends AdminController
                                                   ->orderBy('sort_order', 'desc')
                                                   ->get();
         // 職種
-        $master_job_types = Ms_job_types::where('master_type', '!=', 3)
+        $master_job_types = Ms_job_types::where('delete_flag', false)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
         // システム種別
-        $master_sys_types = Ms_sys_types::where('master_type', '!=', 3)
+        $master_sys_types = Ms_sys_types::where('delete_flag', false)
                                         ->orderBy('sort_order', 'asc')
                                         ->get();
-        // スキル ABC順に表示
-        $master_skills = Ms_skills::where('master_type', '!=', 3)
-                                        ->orderBy('name', 'asc')
-                                        ->get();
+        //スキルカテゴリーを取得
+        $master_skill_category = Ms_skill_categories::select('skill_categories.*')
+                                                ->whereExists(function ($query) {
+                                                    $query->select(DB::raw(1))
+                                                          ->from('skills')
+                                                          ->whereRaw('skills.skill_category_id = skill_categories.id')
+                                                          ->where('skills.delete_flag',false);
+                                                })
+                                                ->where('skill_categories.delete_flag',false)
+                                                ->orderBy('skill_categories.sort_order', 'asc')
+                                                ->get();
+        // スキル
+        $master_skills = Ms_skills::where('delete_flag', false)
+                                ->orderBy('sort_order', 'asc')
+                                ->get();
         // 特集タグ取得
         $featureTagInfos = Tr_tag_infos::where('tag_type', 3)
                                         ->orderBy('sort_order', 'desc')
@@ -430,6 +455,7 @@ class ItemController extends AdminController
             'master_biz_categories',
             'master_job_types',
             'master_sys_types',
+            'master_skill_category',
             'master_skills',
             'featureTagInfos',
             'pickupTagInfos'

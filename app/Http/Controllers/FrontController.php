@@ -9,11 +9,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Tr_search_categories;
+use App\Models\Ms_skills;
+use App\Models\Ms_skill_categories;
 use App\Models\Tr_search_categories_display;
 use Illuminate\Http\Request;
 use App\Libraries\{ModelUtility as mdlUtil, FrontUtility as frntUtil};
 use App\Http\Requests;
 use App\Models\{Tr_items, Tr_tag_infos, Tr_users};
+use DB;
 
 class FrontController extends BaseController
 {
@@ -72,7 +75,19 @@ class FrontController extends BaseController
                                  ->get();
         }
 
-        return view('front.top', compact('newItemList','pickUpItemList','parents','children'));
+        //スキルカテゴリーを取得
+        $skillCategories = Ms_skill_categories::select('skill_categories.*')
+                                                ->whereExists(function ($query) {
+                                                    $query->select(DB::raw(1))
+                                                          ->from('skills')
+                                                          ->whereRaw('skills.skill_category_id = skill_categories.id')
+                                                          ->where('skills.delete_flag',false);
+                                                })
+                                                ->where('skill_categories.delete_flag',false)
+                                                ->orderBy('skill_categories.sort_order', 'asc')
+                                                ->get();
+
+        return view('front.top', compact('newItemList','pickUpItemList','parents','children','skillCategories'));
     }
 
     /**

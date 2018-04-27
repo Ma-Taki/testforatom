@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tr_items;
+use App\Models\Tr_link_items_search_categories;
 
 class Tr_search_categories extends Model
 {
@@ -57,4 +59,17 @@ class Tr_search_categories extends Model
         return $query->where('id', $id)->get();
     }
 
+    /**
+     * 1つの案件に登録されているカテゴリー(表示ステータス)を昇順取得
+     */
+    public function scopeGetItemCategories($query,$id){
+        return $query->select('search_categories.*')
+                    ->join('link_items_search_categories', 'search_categories.id', '=', 'link_items_search_categories.search_category_id')
+                    ->join('items', 'items.id', '=', 'link_items_search_categories.item_id')
+                    ->where('items.id', $id)
+                    ->where('search_categories.delete_flag', false)
+                    ->orderBy('search_categories.parent_sort', 'asc')
+                    ->orderBy('search_categories.child_sort', 'asc')
+                    ->get();
+    }
 }

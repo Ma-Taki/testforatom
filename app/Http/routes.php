@@ -203,6 +203,7 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/item/tags', 'admin\TagController@showTags');
     Route::get('/admin/item/tags/delete', 'admin\TagController@deleteTags');
     Route::get('/admin/item/tags/search', 'admin\TagController@searchTags');
+
     // カテゴリー管理
     // 新規登録画面
     Route::get('/admin/category/input', 'admin\CategoryController@showCategoryInput');
@@ -226,6 +227,70 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/category/list', 'admin\CategoryController@displayCategorylist');
     // トップページ表示更新処理
     Route::post('/admin/category/list', 'admin\CategoryController@displayUpdateCategory');
+
+    // ポジション管理
+    // 新規登録画面
+    Route::get('/admin/position/input', 'admin\PositionController@showPositionInput');
+    // 新規登録処理
+    Route::post('/admin/position/input', 'admin\PositionController@insertPosition');
+    // 編集画面
+    Route::get('/admin/position/modify', 'admin\PositionController@showPositionModify');
+    // 更新処理
+    Route::post('/admin/position/modify', 'admin\PositionController@updatePosition');
+    // 検索処理
+    Route::get('/admin/position/search', 'admin\PositionController@searchPosition');
+    // 論理削除処理
+    Route::get('/admin/position/delete', 'admin\PositionController@deletePosition');
+    // 論理削除から復活処理
+    Route::get('/admin/position/insert', 'admin\PositionController@insertAgainPosition');
+
+    // システム種別管理
+    // 新規登録画面
+    Route::get('/admin/system-type/input', 'admin\SystemTypeController@showSystemtypeInput');
+    // 新規登録処理
+    Route::post('/admin/system-type/input', 'admin\SystemTypeController@insertSystemtype');
+    // 編集画面
+    Route::get('/admin/system-type/modify', 'admin\SystemTypeController@showSystemtypeModify');
+    // 更新処理
+    Route::post('/admin/system-type/modify', 'admin\SystemTypeController@updateSystemtype');
+    // 検索処理
+    Route::get('/admin/system-type/search', 'admin\SystemTypeController@searchSystemtype');
+    // 論理削除処理
+    Route::get('/admin/system-type/delete', 'admin\SystemTypeController@deleteSystemtype');
+    // 論理削除から復活処理
+    Route::get('/admin/system-type/insert', 'admin\SystemTypeController@insertAgainSystemtype');
+
+    // 要求スキル管理
+    // 新規登録画面
+    Route::get('/admin/skill-category/input', 'admin\SkillCategoryController@showSkillInput');
+    // 新規登録処理
+    Route::post('/admin/skill-category/input', 'admin\SkillCategoryController@insertSkill');
+    // 編集画面
+    Route::get('/admin/skill-category/modify', 'admin\SkillCategoryController@showSkillModify');
+    // 更新処理
+    Route::post('/admin/skill-category/modify', 'admin\SkillCategoryController@updateSkill');
+    // 検索処理
+    Route::get('/admin/skill-category/search', 'admin\SkillCategoryController@searchSkill');
+    // 論理削除処理
+    Route::get('/admin/skill-category/delete', 'admin\SkillCategoryController@deleteSkill');
+    // 論理削除から復活処理
+    Route::get('/admin/skill-category/insert', 'admin\SkillCategoryController@insertAgainSkill');
+    // 新規登録画面
+    Route::get('/admin/skill/input', 'admin\SkillController@showSkillInput');
+    // 新規登録処理
+    Route::post('/admin/skill/input', 'admin\SkillController@insertSkill');
+    // 編集画面
+    Route::get('/admin/skill/modify', 'admin\SkillController@showSkillModify');
+    // 更新処理
+    Route::post('/admin/skill/modify', 'admin\SkillController@updateSkill');
+    // 検索処理
+    Route::get('/admin/skill/search', 'admin\SkillController@searchSkill');
+    // 論理削除処理
+    Route::get('/admin/skill/delete', 'admin\SkillController@deleteSkill');
+    // 論理削除から復活処理
+    Route::get('/admin/skill/insert', 'admin\SkillController@insertAgainSkill');
+    // セレクトボックス切り替え
+    Route::post('/admin/skill/selectBox', 'admin\SkillController@ajaxSelectBox');
 
     // メルマガ管理
     Route::get('/admin/mail-magazine', 'admin\MailMagazineController@index');

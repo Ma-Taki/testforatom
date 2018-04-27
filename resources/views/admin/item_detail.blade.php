@@ -2,6 +2,14 @@
 @section('title', '案件詳細')
 @section('content')
 
+<?php
+use App\Models\Tr_items;
+use App\Models\Ms_sys_types;
+use App\Models\Ms_job_types;
+use App\Models\Ms_skills;
+use App\Models\Tr_search_categories;
+?>
+
 @if($item->delete_flag)
 <div class="col-md-10">
     <div class="row">
@@ -47,8 +55,8 @@
                         </tr>
                         <tr>
                             <th>カテゴリ</th>
-                            <td>@foreach($item->searchCategorys as $category)
-                                {{ $category->name }}</br>
+                            <td>@foreach(Tr_search_categories::getItemCategories($item->id) as $category)
+                                    {{ $category->name }}</br>
                                 @endforeach
                             </td>
                         </tr>
@@ -83,22 +91,22 @@
                         </tr>
                         <tr>
                             <th>システム種別</th>
-                            <td>@foreach($item->sysTypes as $systype)
-                                {{ $systype->name }}</br>
+                            <td>@foreach(Ms_sys_types::getSysTypes($item->id) as $systype)
+                                    {{ $systype->name }}</br>
                                 @endforeach
                             </td>
                         </tr>
                         <tr>
                             <th>ポシション</th>
-                            <td>@foreach($item->jobTypes as $jobtype)
-                                {{ $jobtype->name }}</br>
+                            <td>@foreach(Ms_job_types::getJobTypes($item->id) as $jobtype)
+                                    {{ $jobtype->name }}</br>
                                 @endforeach
                             </td>
                         </tr>
                         <tr>
                             <th>要求スキル</th>
-                            <td>@foreach($item->skills as $skill)
-                                {{ $skill->name }}</br>
+                            <td>@foreach(Ms_skills::getItemSkills($item->id) as $skill)   
+                                    {{ $skill->name }}</br>
                                 @endforeach
                             </td>
                         </tr>
