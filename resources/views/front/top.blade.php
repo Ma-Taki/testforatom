@@ -10,6 +10,7 @@ use App\Libraries\ModelUtility as mdlUtil;
 use App\Libraries\FrontUtility as FrntUtil;
 use App\Models\Ms_skill_categories;
 use App\Models\Ms_sys_types;
+use App\Models\Ms_skills;
 use App\Models\Ms_biz_categories;
 use App\Models\Ms_areas;
 use App\Models\Ms_job_types;
@@ -116,83 +117,88 @@ use App\Models\Tr_slide_images;
           </div><!-- /.tabMenu -->
 
           <form name="form" method="GET" action="{{ url('/item/search') }}">
-
             <div class="tabBox">
+              <!-- スキル -->
               <div class="tabBoxInr">
-@foreach(Ms_skill_categories::getNotIndexOnly() as $skill_category)
-@if(!$skill_category->skills->isEmpty())
-                <div class="tabContent">
-                  <h3>{{ $skill_category->name }}</h3>
-                  <ul>
-@foreach($skill_category->skills as $skill)
-@if($skill->master_type != mdlUtil::MASTER_TYPE_INDEX_ONLY)
-                    <li class="tabContentElementOneThird">
-                      <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
-                    </li>
-@endif
-@endforeach
-                  </ul>
-                </div>
-@endif
-@endforeach
+                @foreach($skillCategories as $skill_category)
+                  <div class="tabContent">
+                    <h3>{{ $skill_category->name }}</h3>
+                    <ul>
+                      @foreach(Ms_skills::getSkills($skill_category->id) as $skill)
+                        <li class="tabContentElementOneThird">
+                          <label>
+                            <input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">
+                            {{ $skill->name }}
+                          </label>
+                        </li> 
+                      @endforeach  
+                    </ul>
+                  </div>
+                @endforeach
               </div>
-
+              <!-- システム種別 -->
               <div class="tabBoxInr">
                 <div class="tabContent">
                   <ul>
-@foreach(Ms_sys_types::getNotIndexOnly() as $sys_type)
-                    <li class="tabContentElementHalf">
-                      <label><input class="srchCndtns_chkBx" type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}">{{ $sys_type->name }}</label>
-                    </li>
-@endforeach
-                  </ul>
-                </div>
-              </div>
-
-              <div class="tabBoxInr">
-                <div class="tabContent">
-                  <ul>
-@foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
-                    <li class="tabContentElementHalf">
-                      <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
-                    </li>
-@endforeach
+                    @foreach(Ms_sys_types::getNotIndexOnly() as $sys_type)
+                      <li class="tabContentElementHalf">
+                        <label>
+                          <input class="srchCndtns_chkBx" type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}">{{ $sys_type->name }}
+                        </label>
+                      </li>
+                    @endforeach
                   </ul>
                 </div>
               </div>
-
+              <!-- 報酬 -->
               <div class="tabBoxInr">
                 <div class="tabContent">
                   <ul>
-@foreach(Ms_biz_categories::getNotIndexOnly() as $biz_category)
-                    <li class="tabContentElementHalf">
-                      <label><input class="srchCndtns_chkBx" type="checkbox" name="biz_categories[]" value="{{ $biz_category->id }}">{{ $biz_category->name }}</label>
-                    </li>
-@endforeach
+                    @foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
+                      <li class="tabContentElementHalf">
+                        <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
+                      </li>
+                    @endforeach
                   </ul>
                 </div>
               </div>
-
+              <!-- 業種 -->
               <div class="tabBoxInr">
                 <div class="tabContent">
                   <ul>
-@foreach(Ms_areas::getNotIndexOnly() as $area)
-                    <li class="tabContentElementHalf">
-                      <label><input class="srchCndtns_chkBx" type="checkbox" name="areas[]" value="{{ $area->id }}">{{ $area->name }}</label>
-                    </li>
-@endforeach
+                    @foreach(Ms_biz_categories::getNotIndexOnly() as $biz_category)
+                      <li class="tabContentElementHalf">
+                        <label>
+                          <input class="srchCndtns_chkBx" type="checkbox" name="biz_categories[]" value="{{ $biz_category->id }}">{{ $biz_category->name }}
+                        </label>
+                      </li>
+                    @endforeach
                   </ul>
                 </div>
               </div>
-
+              <!-- 勤務地 -->
               <div class="tabBoxInr">
                 <div class="tabContent">
                   <ul>
-@foreach(Ms_job_types::getNotIndexOnly() as $job_type)
-                    <li class="tabContentElementHalf">
-                      <label><input class="srchCndtns_chkBx" type="checkbox" name="job_types[]" value="{{ $job_type->id }}">{{ $job_type->name }}</label>
-                    </li>
-@endforeach
+                    @foreach(Ms_areas::getNotIndexOnly() as $area)
+                      <li class="tabContentElementHalf">
+                        <label>
+                          <input class="srchCndtns_chkBx" type="checkbox" name="areas[]" value="{{ $area->id }}">{{ $area->name }}
+                        </label>
+                      </li>
+                    @endforeach
+                  </ul>
+                </div>
+              </div>
+              <!-- ポジション -->
+              <div class="tabBoxInr">
+                <div class="tabContent">
+                  <ul>
+                    @foreach(Ms_job_types::getNotIndexOnly() as $job_type)
+                      <li class="tabContentElementHalf">
+                        <label><input class="srchCndtns_chkBx" type="checkbox" name="job_types[]" value="{{ $job_type->id }}">{{ $job_type->name }}</label>
+                      </li>
+                    @endforeach
                   </ul>
                 </div>
               </div>

@@ -15,6 +15,9 @@ use App\Models\Tr_tags;
 use App\Models\Tr_search_categories;
 use Carbon\Carbon;
 use DB;
+use App\Models\Ms_sys_types;
+use App\Models\Ms_job_types;
+use App\Models\Ms_skills;
 
 class ItemController extends FrontController
 {
@@ -111,12 +114,15 @@ class ItemController extends FrontController
         // △△△ 161206 期限切れでも表示するように修正 △△△
 
         // おすすめ案件を取得する
+        $sysTypes = Ms_sys_types::sysTypes($request->id);
+        $jobTypes = Ms_job_types::jobTypes($request->id);
+        $skills = Ms_skills::itemSkills($request->id);
         $recoItemList = Tr_items::select('items.*')
                                 ->where('items.id', '!=', $request->id)
                                 ->entryPossible()
-                                ->getItemByJobTypes(FrntUtil::convertCollectionToIdList($item->jobTypes))
-                                ->getItemBySkills(FrntUtil::convertCollectionToIdList($item->skills))
-                                ->getItemBySysTypes(FrntUtil::convertCollectionToIdList($item->sysTypes))
+                                ->getItemByJobTypes(FrntUtil::convertCollectionToIdList($jobTypes))
+                                ->getItemBySkills(FrntUtil::convertCollectionToIdList($skills))
+                                ->getItemBySysTypes(FrntUtil::convertCollectionToIdList($sysTypes))
                                 ->groupBy('items.id')
                                 ->orderBy(OdrUtil::ORDER_ITEM_RATE_DESC['columnName'],
                                           OdrUtil::ORDER_ITEM_RATE_DESC['sort'])

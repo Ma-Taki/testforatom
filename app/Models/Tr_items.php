@@ -8,6 +8,12 @@ use App\Libraries\FrontUtility as FrntUtil;
 use App\Libraries\ModelUtility as MdlUtil;
 use DB;
 use App\Models\Tr_users;
+use App\Models\Tr_link_items_skills;
+use App\Models\Tr_link_items_job_types;
+use App\Models\Tr_link_items_sys_types;
+use App\Models\Ms_job_types;
+use App\Models\Ms_sys_types;
+use App\Models\Ms_skills;
 
 class Tr_items extends Model
 {
@@ -94,7 +100,6 @@ class Tr_items extends Model
                                     'item_id',
                                     'job_type_id');
     }
-
 
     /**
      * スキルを取得

@@ -4,6 +4,7 @@
 
 <?php
 use App\Libraries\HtmlUtility;
+use App\Models\Ms_skills;
  ?>
 <div class="col-md-10">
     <div class="row">
@@ -152,13 +153,14 @@ use App\Libraries\HtmlUtility;
                             <div class="col-md-8">
                                 (20個まで)</br>
                                 <div class="row tagTarget">
-@foreach($master_job_types as $job_type)
-                                    <div class="col-md-6">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="job_types[]" value="{{ $job_type->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->jobTypes), old('jobTypes'), $job_type->id) }}>{{ $job_type->name }}
-                                        </label>
-                                    </div>
-@endforeach
+                                    @foreach($master_job_types as $job_type)
+                                        <div class="col-md-6">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" name="job_types[]" value="{{ $job_type->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->jobTypes), old('jobTypes'), $job_type->id) }}>
+                                                {{ $job_type->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -168,13 +170,14 @@ use App\Libraries\HtmlUtility;
                             <div class="col-md-8">
                                 (20個まで)</br>
                                 <div class="row tagTarget">
-@foreach($master_sys_types as $sys_type)
-                                    <div class="col-md-4">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->sysTypes), old('sys_types'), $sys_type->id) }}>{{ $sys_type->name }}
-                                        </label>
-                                    </div>
-@endforeach
+                                    @foreach($master_sys_types as $sys_type)
+                                        <div class="col-md-4">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" name="sys_types[]" value="{{ $sys_type->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->sysTypes), old('sys_types'), $sys_type->id) }}>
+                                                {{ $sys_type->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -184,14 +187,23 @@ use App\Libraries\HtmlUtility;
                             <div class="col-md-8">
                                 (20個まで)</br>
                                 <div class="row tagTarget">
-
-@foreach($master_skills as $skill)
-                                    <div class="col-md-4">
-                                        <div class="checkbox-inline">
-                                            <label><input type="checkbox" name="skills[]" value="{{ $skill->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->skills), old('skills'), $skill->id) }}><font style="font-weight:normal;">{{ $skill->name }}</font></label>
+                                    @foreach($master_skill_category as $skill_category)
+                                        <div class="tabContent">
+                                            <p><font style="font-weight:bold;">{{ $skill_category->name }}</font></p>
+                                            <div class="col-md-offset-1">
+                                                @foreach(Ms_skills::getSkills($skill_category->id) as $skill)
+                                                    <div class="checkbox-inline">
+                                                        <label>
+                                                            <input type="checkbox" name="skills[]" value="{{ $skill->id }}" {{ HtmlUtility::isCheckedOldRequest(HtmlUtility::convertModelListToIdList($item->skills), old('skills'), $skill->id) }}>
+                                                            <font style="font-weight:normal;">
+                                                                {{ $skill->name }}
+                                                            </font>
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
-                                    </div>
-@endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

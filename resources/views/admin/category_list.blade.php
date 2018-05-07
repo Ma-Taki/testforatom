@@ -123,8 +123,8 @@ use App\Models\Tr_search_categories;
                       </a>
                     @else
                       <!-- 子どもとき 親が非表示のときは子も非表示 -->
-                      @foreach(Tr_search_categories::getParentFlag($category->parent_id) as $test)
-                        @if(!$test->delete_flag)
+                      @foreach(Tr_search_categories::getParentFlag($category->parent_id) as $category)
+                        @if(!$category->delete_flag)
                           <a href="/admin/category/insert?id={{ $category->id }}&parent_id={{ $category->parent_id }}" onClick="javascript:return confirm('本当に復活させますか？')">
                             <button type="button" class="btn btn-primary btn-xs">復活</button>
                           </a>
