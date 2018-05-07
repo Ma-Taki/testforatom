@@ -83,6 +83,8 @@ class EntryController extends FrontController
             $mime_type = shell_exec('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name']));
             print_r("①");
             print_r('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name']));
+            print_r("  ------");
+            print_r(shell_exec('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name'])));
             $mime_type = trim($mime_type);
             print_r("②");
             print_r(explode(';', $mime_type));
