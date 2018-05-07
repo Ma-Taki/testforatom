@@ -423,7 +423,8 @@ h3.data-table__title {
 }
 
 .entry-confirm .data-table .data .data__info p {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
 }
 
 
