@@ -81,8 +81,23 @@ class EntryController extends FrontController
 
             // mimeTypeチェック
             $mime_type = shell_exec('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name']));
+            print_r("①");
+            print_r('file -bi '.escapeshellcmd($_FILES['skillSheet']['tmp_name']));exit();
             $mime_type = trim($mime_type);
+            print_r("②");
+            print_r(explode(';', $mime_type));
             $mime_type = collect(explode(';', $mime_type));
+            print_r("③");
+            print_r($mime_type);
+            print_r("④");
+            print_r($mime_type->isEmpty());
+            print_r("⑤");
+            print_r($mime_type->first());
+
+            // if (!$mime_type->isEmpty() && !in_array($mime_type->first(), FrntUtil::FILE_UPLOAD_RULE['allowedTypes'])) {
+            //         print_r("eeeeeeeeee");
+            // }
+            
             if ($mime_type->isEmpty()
                 || (!$mime_type->isEmpty()
                     && !in_array($mime_type->first(), FrntUtil::FILE_UPLOAD_RULE['allowedTypes']))) {
