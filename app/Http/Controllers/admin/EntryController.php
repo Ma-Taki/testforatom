@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Storage;
 use DB;
 use App\Libraries\OrderUtility as OdrUtil;
+use ZipArchive;
 
 class EntryController extends AdminController
 {
@@ -166,10 +167,44 @@ class EntryController extends AdminController
         }
 
         // ストレージへエントリーシートの存在チェック
-        if (!Storage::disk('local')->exists($entry->skillsheet_filename)) {
+        if (!empty($entry->skillsheet_filename_first) && !Storage::disk('local')->exists($entry->skillsheet_filename_first )) {
+            abort(404, 'エントリーシートが見つかりません。');
+        }
+        if (!empty($entry->skillsheet_filename_second) && !Storage::disk('local')->exists($entry->skillsheet_filename_second )) {
+            abort(404, 'エントリーシートが見つかりません。');
+        }
+        if (!empty($entry->skillsheet_filename_third) && !Storage::disk('local')->exists($entry->skillsheet_filename_third )) {
             abort(404, 'エントリーシートが見つかりません。');
         }
 
-        return response()->download($localStoragePath.$entry->skillsheet_filename);
+        $zip = new ZipArchive();
+        //$path = storage_path('app/');
+        $targetfiles = array(
+                    $entry->skillsheet_filename_first, 
+                    $entry->skillsheet_filename_second, 
+                    $entry->skillsheet_filename_third
+                );
+
+        //処理対象のファイルの存在チェックを行い、存在するもののみのリストを作成
+        $existsfiles = array();
+        foreach($targetfiles as $targetfile){
+            if (file_exists($localStoragePath.$targetfile) && is_file($localStoragePath.$targetfile)) {
+                $existsfiles[] = $targetfile;
+            }
+        }
+
+        // 存在するもののみのリストにしたがってzipを作成
+        if (count($existsfiles) > 0) {
+            $zip->open(storage_path('app/').'skillsheet.zip', ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+            foreach($existsfiles as $targetfile){
+                $zip->addFile($localStoragePath.$targetfile, $targetfile);
+            }
+            $zip->close();
+        } else {
+            abort(404, 'ZIPファイルを作ることができませんでした');
+        }
+
+        // ダウンロード
+        return response()->download($localStoragePath.'skillsheet.zip');
     }
 }
