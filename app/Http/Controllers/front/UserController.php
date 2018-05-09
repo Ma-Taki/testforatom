@@ -27,6 +27,7 @@ use Storage;
 use Carbon\Carbon;
 use DB;
 use Log;
+use ZipArchive;
 
 class UserController extends Controller
 {
@@ -897,16 +898,54 @@ class UserController extends Controller
         }
 
         // エントリーシートの存在チェック
-        if (!$entry->skillsheet_upload
-            || !Storage::disk()->exists($entry->skillsheet_filename)) {
-                $this->log('error', 'skillsheet not found',[
-                    'skillsheet_upload' => $entry->skillsheet_upload,
-                    'skillsheet_filename' => $entry->skillsheet_filename,
-                ]);
-                abort(404, 'スキルシートが見つかりません');
+        $skillsheetCheck = false;
+        if(Storage::disk()->exists($entry->skillsheet_filename_first)){
+            $skillsheetCheck = true;
+        }
+        if(Storage::disk()->exists($entry->skillsheet_filename_second)){
+            $skillsheetCheck = true;
+        }
+        if(Storage::disk()->exists($entry->skillsheet_filename_third)){
+            $skillsheetCheck = true;
+        }
+        if(!$entry->skillsheet_upload || !$skillsheetCheck){
+            $this->log('error', 'skillsheet not found',[
+                'skillsheet_upload'             => $entry->skillsheet_upload,
+                'skillsheet_filename_first'  => $entry->skillsheet_filename_first,
+                'skillsheet_filename_second' => $entry->skillsheet_filename_second,
+                'skillsheet_filename_third'  => $entry->skillsheet_filename_third,
+            ]);
+            abort(404, 'エントリーシートが見つかりません');
+        }
+
+        $zip = new ZipArchive();
+        $path = storage_path('app/');
+        $targetfiles = array(
+                    $entry->skillsheet_filename_first, 
+                    $entry->skillsheet_filename_second, 
+                    $entry->skillsheet_filename_third
+                );
+
+        //処理対象のファイルの存在チェックを行い、存在するもののみのリストを作成
+        $existsfiles = array();
+        foreach($targetfiles as $targetfile){
+            if (file_exists($path.$targetfile) && is_file($path.$targetfile)) {
+                $existsfiles[] = $targetfile;
+            }
+        }
+
+        // 存在するもののみのリストにしたがってzipを作成
+        if (count($existsfiles) > 0) {
+            $zip->open(storage_path('app/').'skillsheet.zip', ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+            foreach($existsfiles as $targetfile){
+                $zip->addFile($path.$targetfile, $targetfile);
+            }
+            $zip->close();
+        } else {
+            abort(404, 'ZIPファイルを作ることができませんでした');
         }
 
         // ダウンロード
-        return response()->download(storage_path('app/').$entry->skillsheet_filename);
+        return response()->download(storage_path('app/').'skillsheet.zip');
     }
 }
