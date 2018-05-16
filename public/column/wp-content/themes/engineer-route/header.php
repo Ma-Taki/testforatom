@@ -7,9 +7,12 @@
 <meta name="keywords" content="IT案件,案件情報,求人,案件,仕事,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP,コラム">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="icon" href="/front/favicon.ico">
+<link rel="canonical" href=<?php getCanonical(); ?>>
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); echo '?' . filemtime( get_stylesheet_directory() . '/style.css'); ?>" />
 <link rel="stylesheet" type="text/css" href="/front/css/style.css<?php echo '?' . filemtime(__DIR__.'/../../../../../public/front/css/style.css');?>">
-<link rel="canonical" href=<?php getCanonical(); ?>>
+<?php if( in_category('技術者の視点') ): ?>
+      <link rel="stylesheet" type="text/css" href="/front/css/pointview-engineer.css<?php echo '?' . filemtime(__DIR__.'/../../../../../public/front/css/pointview-engineer.css');?>">
+<?php endif; ?>
 <link rel="stylesheet" type="text/css" href="/front/css/slick.css">
 <link rel="stylesheet" type="text/css" href="/front/css/slick-theme.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
