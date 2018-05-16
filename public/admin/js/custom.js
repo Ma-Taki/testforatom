@@ -8,7 +8,7 @@ $(document).ready(function(){
     if($li.hasClass("open")) {
       $ul.slideUp(350);
       $li.removeClass("open");
-    } else {
+     } else {
       $(".nav > li > ul").slideUp(350);
       $(".nav > li").removeClass("open");
       $ul.slideDown(350);
@@ -18,8 +18,8 @@ $(document).ready(function(){
 
   $(".undermenu > a").click(function(e) {
     e.preventDefault();
-    var $li = $(this).parent("li");//親
-    var $ul = $(this).next("ul");//一つ前の兄弟要素を指定
+    var $li = $(this).parent("li");
+    var $ul = $(this).next("ul");
 
     if($li.hasClass("open")) {
       $ul.slideUp(350);
@@ -31,5 +31,23 @@ $(document).ready(function(){
       $li.addClass("open");
     }
   });
-
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
