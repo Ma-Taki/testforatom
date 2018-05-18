@@ -269,7 +269,7 @@
                   <!-- 未チェックでも状態を送信する　 -->
                   <!-- フェイスブック -->
                   <div class="col-md-2">
-                    <label for="sns">
+                    <label for="sns0">
                       <input type="hidden"   name="sns[0]" value="off">
                       <input type="checkbox" name="sns[0]" id="sns0" value="{{ MdlUtil::SOCIAL_TYPE_FACEBOOK }}" {{ in_array(MdlUtil::SOCIAL_TYPE_FACEBOOK, old('sns', $data_query['sns'])) ? "checked" : "" }} />
                       Facebook
