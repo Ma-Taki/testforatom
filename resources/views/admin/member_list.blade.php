@@ -4,6 +4,7 @@
 <?php
     use App\Libraries\OrderUtility as OdrUtil;
     use App\Libraries\ModelUtility as MdlUtil;
+    use App\Libraries\AdminUtility as AdmnUtil;
 ?>
 <style>
     #impression-excellent,
@@ -22,7 +23,8 @@
 
     .user-state td label,
     .user-impression td label,
-    .user-flow td label{
+    .user-flow td label,
+    .user-sns td label{
         font-weight: normal;
         white-space: nowrap;
     }
@@ -252,16 +254,45 @@
                 </td>
               </tr>
                 <th><label class="control-label" for="select-2">表示順序</label></th>
-								<td>
+                <td>
                   <select class="form-control" id="select-2" name="sort_id">
-
-@foreach(OdrUtil::MemberOrder as $memberOrder)
-                    <option value="{{ $memberOrder['sortId'] }}" {{ old("sort_id", $data_query['sort_id']) ==  $memberOrder['sortId'] ? "selected" : "" }}>{{ $memberOrder['sortName'] }}</option>
-@endforeach
-
+                    @foreach(OdrUtil::MemberOrder as $memberOrder)
+                      <option value="{{ $memberOrder['sortId'] }}" {{ old("sort_id", $data_query['sort_id']) ==  $memberOrder['sortId'] ? "selected" : "" }}>{{ $memberOrder['sortName'] }}</option>
+                    @endforeach
                   </select>
                 </td>
               </tr>
+
+              <tr class="user-sns">
+                <th><label class="control-label">SNS連携</label></th>
+                <td>
+                  <!-- 未チェックでも状態を送信する　 -->
+                  <!-- フェイスブック -->
+                  <div class="col-md-2">
+                    <label for="sns">
+                      <input type="hidden"   name="sns[0]" value="off">
+                      <input type="checkbox" name="sns[0]" id="sns0" value="{{ MdlUtil::SOCIAL_TYPE_FACEBOOK }}" {{ in_array(MdlUtil::SOCIAL_TYPE_FACEBOOK, old('sns', $data_query['sns'])) ? "checked" : "" }} />
+                      Facebook
+                    </label>
+                  </div>
+                  <!-- ツイッター -->
+                  <div class="col-md-2">
+                    <label for="sns1">
+                      <input type="hidden"   name="sns[1]" value="off">
+                      <input type="checkbox" name="sns[1]" id="sns1" value="{{ MdlUtil::SOCIAL_TYPE_TWITTER }}" {{ in_array(MdlUtil::SOCIAL_TYPE_TWITTER, old('sns', $data_query['sns'])) ? "checked" : "" }} />
+                      Twitter
+                    </label>
+                  </div>
+                  <!-- github -->
+                  <div class="col-md-2">
+                    <label for="sns2">
+                      <input type="hidden"   name="sns[2]" value="off">
+                      <input type="checkbox" name="sns[2]" id="sns2" value="{{ MdlUtil::SOCIAL_TYPE_GITHUB }}" {{ in_array(MdlUtil::SOCIAL_TYPE_GITHUB, old('sns', $data_query['sns'])) ? "checked" : "" }} />
+                      Github
+                    </label>
+                  </div>
+                </td>
+              </tr>								
               <tr>
                 <td colspan="2"><button type="submit" class="btn btn-primary btn-md col-xs-2 col-xs-offset-5">検索</button></td>
               </tr>
@@ -281,54 +312,70 @@
               <th>都道府県</th>
               <th>ステータス</th>
               <th>進捗状況</th>
+              <th>SNS連携</th>
               <th><!-- レイアウト用Blank --></th>
           </thead>
           <tbody>
 
-@foreach($memberList as $member)
-            <tr>
-              <td>{{ $member->mail }}</td>
-              <td>{{ $member->last_name }} {{ $member->first_name }} ({{ $member->last_name_kana }} {{ $member->first_name_kana }})</td>
-              <td>{{ $member->birth_date->age }}</td>
-              <td>{{ $member->sex === 'Male' ? '男性' : '女性' }}</td>
-              <td>{{ $member->prefecture->name }}</td>
-              <td>{{ $member->delete_flag > 0 ? '無効' : '有効' }}</td>
-              <td>
-                <div class="select-box" name="{{ $member->id }}">
-                	<select name="status" class="member-status">
-                    <option value="0" @if($member->status==MdlUtil::UNSUPPORTED) selected @endif>未対応</option>
-                    <option value="1" @if($member->status==MdlUtil::IN_ADJUSTMENT_COUNCELING) selected @endif>カウンセリング調整中</option>
-                		<option value="2" @if($member->status==MdlUtil::FINISHED_COUNCELING) selected @endif>カウンセリング済み</option>
-                    <option value="3" @if($member->status==MdlUtil::IN_ADJUSTMENT_INTERVIEW) selected @endif>案件面談調整中</option>
-                		<option value="4" @if($member->status==MdlUtil::FINISHED_INTERVIEW) selected @endif>案件面談済み</option>
-                    <option value="5" @if($member->status==MdlUtil::IN_OPERATION) selected @endif>稼働中</option>
-                    <option value="6" @if($member->status==MdlUtil::EXIT_OPERATION) selected @endif>終了</option>
-                    <option value="7" @if($member->status==MdlUtil::STOP_OPERATION) selected @endif>営業中止</option>
-                    <option value="8" @if($member->status==MdlUtil::IN_OPARATION_AT_OTHER_COMPANY) selected @endif>他社稼働中</option>
-                	</select>
-                </div>
-                <br>
-                <a href="javascript:void(0);"><button type="button" class="slide-memo-btn btn btn-info btn-xs" name="{{$member->id}}" style="background-color:#5e8796;border-color:#5e8796;">進捗メモ</button></a>
-              </td>
-              <td nowrap>
-                <a href="/admin/member/detail?id={{ $member->id }}"><button type="button" class="btn btn-info btn-xs">詳細</button></a>
-@if(!$member->delete_flag)
-                <a href="/admin/member/delete?id={{ $member->id }}" onClick="javascript:return confirm('本当に削除しますか？')"><button type="button" class="btn btn-danger btn-xs">削除</button></a>
-@endif
-              </td>
-					  </tr>
-            <tr>
-              <td colspan="8" class="memoTD">
-                <div class="memo-{{$member->id}}">
-                  <div class="textarea-box-{{$member->id}}">
-                    <textarea class="memoTEXTAREA"></textarea>
+            @foreach($memberList as $member)
+              <tr>
+                <!-- 会員ID -->
+                <td>{{ $member->mail }}</td>
+                <!-- 氏名/氏名(かな) -->
+                <td>{{ $member->last_name }} {{ $member->first_name }} ({{ $member->last_name_kana }} {{ $member->first_name_kana }})</td>
+                <!-- 年齢 -->
+                <td>{{ $member->birth_date->age }}</td>
+                <!-- 性別 -->
+                <td>{{ $member->sex === 'Male' ? '男性' : '女性' }}</td>
+                <!-- 都道府県 -->
+                <td>{{ $member->prefecture->name }}</td>
+                <!-- ステータス -->
+                <td>{{ $member->delete_flag > 0 ? '無効' : '有効' }}</td>
+                <!-- 進捗状況 -->
+                <td>
+                  <div class="select-box" name="{{ $member->id }}">
+                  	<select name="status" class="member-status">
+                      <option value="0" @if($member->status==MdlUtil::UNSUPPORTED) selected @endif>未対応</option>
+                      <option value="1" @if($member->status==MdlUtil::IN_ADJUSTMENT_COUNCELING) selected @endif>カウンセリング調整中</option>
+                  		<option value="2" @if($member->status==MdlUtil::FINISHED_COUNCELING) selected @endif>カウンセリング済み</option>
+                      <option value="3" @if($member->status==MdlUtil::IN_ADJUSTMENT_INTERVIEW) selected @endif>案件面談調整中</option>
+                  		<option value="4" @if($member->status==MdlUtil::FINISHED_INTERVIEW) selected @endif>案件面談済み</option>
+                      <option value="5" @if($member->status==MdlUtil::IN_OPERATION) selected @endif>稼働中</option>
+                      <option value="6" @if($member->status==MdlUtil::EXIT_OPERATION) selected @endif>終了</option>
+                      <option value="7" @if($member->status==MdlUtil::STOP_OPERATION) selected @endif>営業中止</option>
+                      <option value="8" @if($member->status==MdlUtil::IN_OPARATION_AT_OTHER_COMPANY) selected @endif>他社稼働中</option>
+                  	</select>
                   </div>
-                  <p class="body-box-{{$member->id}}">{!!nl2br($member->memo)!!}</p>
-                  <a class="edit-btn" href="javascript:void(0);" name="{{ $member->id }}">編集</a>
-                </div>
-              </td>
-            </tr>
-@endforeach
+                  <br>
+                  <a href="javascript:void(0);"><button type="button" class="slide-memo-btn btn btn-info btn-xs" name="{{$member->id}}" style="background-color:#5e8796;border-color:#5e8796;">進捗メモ</button></a>
+                </td>
+                <!-- SNS連携 -->
+                <td>
+                    @foreach(AdmnUtil::imgSNS($member->socialAccount) as $imgSNS)
+                      <img src="/admin/images/{{ $imgSNS }}.png" width="20px"> 
+                    @endforeach
+                    
+                </td>
+                <!-- 詳細・削除 -->
+                <td nowrap>
+                  <a href="/admin/member/detail?id={{ $member->id }}"><button type="button" class="btn btn-info btn-xs">詳細</button></a>
+                  @if(!$member->delete_flag)
+                    <a href="/admin/member/delete?id={{ $member->id }}" onClick="javascript:return confirm('本当に削除しますか？')"><button type="button" class="btn btn-danger btn-xs">削除</button></a>
+                  @endif
+                </td>
+  					  </tr>
+              <tr>
+                <td colspan="8" class="memoTD">
+                  <div class="memo-{{$member->id}}">
+                    <div class="textarea-box-{{$member->id}}">
+                      <textarea class="memoTEXTAREA"></textarea>
+                    </div>
+                    <p class="body-box-{{$member->id}}">{!!nl2br($member->memo)!!}</p>
+                    <a class="edit-btn" href="javascript:void(0);" name="{{ $member->id }}">編集</a>
+                  </div>
+                </td>
+              </tr>
+            @endforeach
 
           </tbody>
         </table>
@@ -341,7 +388,8 @@
             'enabledOnly'      => $data_query['enabledOnly'],
             'impression'       => $data_query['impression'],
             'sort_id'          => $data_query['sort_id'],
-            'status'           => $data_query['status']
+            'status'           => $data_query['status'],
+            'sns'              => $data_query['sns'],
           ])->render() !!}
         </div>
       </div>
