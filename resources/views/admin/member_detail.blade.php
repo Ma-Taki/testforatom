@@ -79,7 +79,12 @@
                             </tr>
                             <tr>
                                 <th>SNS連携</th>
-                                <td>{{ AdmnUtil::convertModelsToSNSString($member->socialAccount) }}</td>
+                                <td>
+                                    @foreach(AdmnUtil::imgSNS($member->socialAccount) as $imgSNS)
+                                        <img src="/admin/images/{{ $imgSNS }}.png" width="20px"> 
+                                    @endforeach
+
+                                </td>
                             </tr>
                             <tr>
                                 <th>登録日</th>
