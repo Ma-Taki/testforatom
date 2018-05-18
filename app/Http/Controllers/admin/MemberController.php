@@ -46,6 +46,7 @@ class MemberController extends AdminController
             'impression'       => $request->impression ?: [],
             'status'           => $request->status ?: [],
             'sort_id'          => $request->sort_id ?: OdrUtil::ORDER_MEMBER_REGISTRATION_DESC['sortId'],
+            'sns'              => $request->sns ?: [],
         ];
 
         // パラメータの入力状態によって動的にクエリを発行
@@ -127,11 +128,13 @@ class MemberController extends AdminController
         }
 
         // 有効な会員のみの場合、論理削除済みのものは含めない
+        //ステータス
         if ($data_query['enabledOnly'] == 'on') {
             $query = $query->enable();
         }
 
         // valueが'off'の要素を削除する
+        //評価
         $data_query['impression'] = array_filter($data_query['impression'], function ($value) {
             return $value !== 'off';
         });
@@ -140,6 +143,7 @@ class MemberController extends AdminController
             $query = $query->whereIn('impression', $data_query['impression']);
         }
 
+        //進捗状況
         // valueが'off'の要素を削除する
         $data_query['status'] = array_filter($data_query['status'], function ($value) {
             return $value !== 'off';
@@ -149,8 +153,24 @@ class MemberController extends AdminController
             $query = $query->whereIn('status', $data_query['status']);
         }
 
-
+        //表示順
         $item_order = OdrUtil::MemberOrder[$data_query['sort_id']];
+
+        //SNS連携
+        // valueが'off'の要素を削除する
+        $data_query['sns'] = array_filter($data_query['sns'], function ($value) {
+            return $value !== 'off';
+        });
+
+        if (!empty($data_query['sns'])) {
+          $sns =$data_query['sns'];
+          $query = $query->whereExists(function ($query) use ($sns) {
+                                            $query->select(DB::raw(1))
+                                                  ->from('user_social_accounts')
+                                                  ->whereRaw('user_social_accounts.user_id = users.id')
+                                                  ->whereIn('user_social_accounts.social_account_type', $sns);
+                                        });
+        }
 
         // 検索結果を取得する
         $memberList = $query->select('users.*')

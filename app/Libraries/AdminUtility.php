@@ -174,26 +174,45 @@ class AdminUtility
      * @param Collection $models
      * @return string
      **/
-    public static function convertModelsToSNSString($models){
-        $str = '';
-        $function = function($account_type) {
-            switch ($account_type) {
-                case mdlUtil::SOCIAL_TYPE_TWITTER:
-                    return 'Twitter、';
-                case mdlUtil::SOCIAL_TYPE_FACEBOOK:
-                    return 'Facebook、';
-                case mdlUtil::SOCIAL_TYPE_GITHUB:
-                    return 'GitHub、';
-                default:
-                    return '';
-            }
-        };
+    // public static function convertModelsToSNSString($models){
+    //     $str = '';
+    //     $function = function($account_type) {
+    //         switch ($account_type) {
+    //             case mdlUtil::SOCIAL_TYPE_TWITTER:
+    //                 return 'Twitter、';
+    //             case mdlUtil::SOCIAL_TYPE_FACEBOOK:
+    //                 return 'Facebook、';
+    //             case mdlUtil::SOCIAL_TYPE_GITHUB:
+    //                 return 'GitHub、';
+    //             default:
+    //                 return '';
+    //         }
+    //     };
+
+    //     if (!empty($models)) {
+    //         foreach ($models as $value) {
+    //             $str .= $function($value->social_account_type);
+
+    //         }
+    //     }
+    //     return rtrim($str, '、');
+    // }
+
+    /**
+     * Tr_social_accounts配列を受け取り、
+     * social_account_typeを配列で返す。
+     * @param Collection $models
+     * @return array
+     **/
+    public static function imgSNS($models){
+        $sns = array();
         if (!empty($models)) {
             foreach ($models as $value) {
-                $str .= $function($value->social_account_type);
+                $sns[]= $value->social_account_type;
             }
         }
-        return rtrim($str, '、');
+
+        return $sns;
     }
 
     /**
