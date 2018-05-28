@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Models\Ms_sys_types;
 use App\Models\Ms_job_types;
 use App\Models\Ms_skills;
+use App\Models\Tr_tags;
+use App\Models\Tr_column_connects;
 ?>
 
 @section('title', $item->name .' - AN' .$item->id .' | エンジニアルート')
@@ -17,50 +19,24 @@ use App\Models\Ms_skills;
   @include('front.common.breadcrumbs')
   <div class="main-content item-detail">
     <div class="main-content-left">
-      @foreach(Ms_skills::itemSkills($item->id) as $skill)
-        @if(\File::exists('./../storage/app/public/id'.$skill->id.'_title.php'))
-          <!-- wordPress固定ページを表示 -->
-          <div class="main-content__body">
-            <div class="content__element_bottomSpace">
-              <div class="item">
-                <a href={{Request::root().'/column/id'.$skill->id.'/'}} target="_blank">
-                  <div class="itemHeader">
-                    <div class="table-row">
-                      <p class="name background_color01 border_color01">
-                        {{ File::get('./../storage/app/public/id'.$skill->id.'_title.php') }}
-                      </p>
-                      <p class="item_id background_color01 border_color01"><!-- 案件詳細と同じレイアウトにするため空タグ --></p>
-                    </div>
-                  </div>
-                  <div class="itemInfo clear border_color01">
-                    <div class="itemInfoInr">
-                      {!! File::get('./../storage/app/public/id'.$skill->id.'_content.php') !!}
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        @endif
-      @endforeach
+      @include('front.common.column_connect')
       <h2 class="main-content__title">案件詳細</h2>
       <hr class="hr-2px-solid-5e8796">
-
       <div class="main-content__body">
         <div class="content__element">
-@if(!$canEntry)
-          <div class="alert alert-danger">
-            <ul>
-              <li>この案件は掲載期間をすぎています。エントリーすることはできません。</li>
-            </ul>
-          </div>
-@endif
+          @if(!$canEntry)
+            <div class="alert alert-danger">
+              <ul>
+                <li>この案件は掲載期間をすぎています。エントリーすることはできません。</li>
+              </ul>
+            </div>
+          @endif
           <div class="item">
             <div class="itemHeader">
               <div class="table-row">
-@if($item->registration_date->between(Carbon::now(), Carbon::now()->subDays(7)))
-                <p class="new">新着</p>
-@endif
+                @if($item->registration_date->between(Carbon::now(), Carbon::now()->subDays(7)))
+                  <p class="new">新着</p>
+                @endif
                 <p class="name">{{ $item->name }}</p>
                 <p class="item_id">案件ID：AN{{ $item->id }}</p>
               </div>
@@ -95,7 +71,7 @@ use App\Models\Ms_skills;
                   <p class="otherName">ポジション</p>
                   <p class="otherValue">
                     @foreach(Ms_job_types::getJobTypes($item->id) as $jobType)
-                    {{ $jobType->name }}<span class="wordPunctuation">、</span>
+                      {{ $jobType->name }}<span class="wordPunctuation">、</span>
                     @endforeach
                   </p>
                 </div>
@@ -122,44 +98,38 @@ use App\Models\Ms_skills;
                   </p>
                 </div>
                 <div class="itemTagList invisible-sp">
-
-@foreach($item->tags as $tag)
-                  <a href="/item/tag/{{ $tag->id }}">
-                    <p class="tag">{{ $tag->term }}</p>
-                  </a>
-@endforeach
-
+                  @foreach($item->tags as $tag)
+                    <a href="/item/tag/{{ $tag->id }}">
+                      <p class="tag">{{ $tag->term }}</p>
+                    </a>
+                  @endforeach
                 </div>
-
-@if($canEntry)
-                <div class="cmmn-btn">
-                  <a href="/entry?id={{ $item->id }}">この案件にエントリーする</a>
-@if($isConsidering)
-                  <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider_delete-btn">この案件を検討中から外す</a>
-@else
-                  <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider-btn">検討する</a>
-@endif
-                </div>
-@endif
-
+                @if($canEntry)
+                  <div class="cmmn-btn">
+                    <a href="/entry?id={{ $item->id }}">この案件にエントリーする</a>
+                    @if($isConsidering)
+                      <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider_delete-btn">この案件を検討中から外す</a>
+                    @else
+                      <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider-btn">検討する</a>
+                    @endif
+                  </div>
+                @endif
               </div><!-- END .itemInfoInr -->
             </div><!-- END .itemInfo -->
             <div class="itemTagList invisible-pc invisible-tab">
-@foreach($item->tags as $tag)
-              <a href="/item/tag/{{ $tag->id }}">
-                <p class="tag">{{ $tag->term }}</p>
-              </a>
-@endforeach
+              @foreach($item->tags as $tag)
+                <a href="/item/tag/{{ $tag->id }}">
+                  <p class="tag">{{ $tag->term }}</p>
+                </a>
+              @endforeach
             </div>
           </div><!-- END .item -->
         </div><!-- END .content__element -->
       </div><!-- END .main-content__body -->
     </div><!-- END .main-content-left -->
-
     <div class="main-content-right invisible-sp">
       @include('front.common.sideInfo')
     </div><!-- END .main-content-right -->
-
     <div class="clear "></div>
   </div><!-- END .main-content -->
 </div><!-- END WRAP -->
@@ -169,25 +139,27 @@ use App\Models\Ms_skills;
   <div class="recommended__inner">
     <h3>こちらもおすすめ</h3>
     <div class="reco-items">
-@foreach($recoItemList as $item)
-      <div class="reco-item">
-        <a href="/item/detail?id={{ $item->id }}"  target="_blank">
-          <p class="header">{{ $item->name }}</p>
-          <div class="detail">
-            <div class="table">
-              <p class="name">報酬</p>
-              <p class="rate">{{ $item->rate_detail }}</p>
+      @foreach($recoItemList as $item)
+        <div class="reco-item">
+          <a href="/item/detail?id={{ $item->id }}"  target="_blank">
+            <p class="header">{{ $item->name }}</p>
+            <div class="detail">
+              <div class="table">
+                <p class="name">報酬</p>
+                <p class="rate">{{ $item->rate_detail }}</p>
+              </div>
+              <div class="table">
+                <p class="name">エリア</p>
+                <p class="area">{{ $item->area_detail }}</p>
+              </div>
+              <p class="skill">要求スキル</p>
+              <p class="skills">
+                {{ HtmlUtil::convertSkillsMdlToNameStr(Ms_skills::itemSkills($item->id)) }}
+              </p>
             </div>
-            <div class="table">
-              <p class="name">エリア</p>
-              <p class="area">{{ $item->area_detail }}</p>
-            </div>
-            <p class="skill">要求スキル</p>
-            <p class="skills">{{ HtmlUtil::convertSkillsMdlToNameStr(Ms_skills::itemSkills($item->id)) }}</p>
-          </div>
-        </a>
-      </div>
-@endforeach
+          </a>
+        </div>
+      @endforeach
     </div>
   </div>
   <script type="text/javascript">
@@ -204,7 +176,5 @@ use App\Models\Ms_skills;
 <div class="main-content-right invisible-pc invisible-tab">
   @include('front.common.sideInfo')
 </div><!-- END CONTENT-RIGHT -->
-
 @include('front.common.keyword_pc')
-
 @endsection

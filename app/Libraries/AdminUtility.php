@@ -93,6 +93,13 @@ class AdminUtility
         'admin/slide/delete' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
         'admin/slide/insert' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
 
+        //特集記事紐付け管理
+        'admin/column-connect/list' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
+        'admin/column-connect/input' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
+        'admin/column-connect/modify' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
+        'admin/column-connect/delete' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
+        'admin/column-connect/insert' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
+
     ];
 
     // スライド画像アップロードルール
