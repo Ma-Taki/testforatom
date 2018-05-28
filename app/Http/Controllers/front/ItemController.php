@@ -397,7 +397,8 @@ class ItemController extends FrontController
     private function getColumn($keywords){
         $connectIDs = Tr_link_column_connects::select('column_connects.connect_id')
                                         ->join('column_connects', 'column_connects.id','=','link_column_connects.connect_id' )
-                                        ->whereIn('keyword', $keywords)
+                                        ->whereIn('link_column_connects.keyword', $keywords)
+                                        ->where('column_connects.delete_flag', false)
                                         ->groupBy('id')
                                         ->get();
         $columnConnects = array();  
