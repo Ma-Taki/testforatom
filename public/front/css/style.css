@@ -1194,6 +1194,10 @@ a.login__sns-btn {
 .item-all h2 {
   display: inline-block;
 }
+/*固定ページ表示*/
+.item-all .main-content-left .main-content__body .content__element_bottomSpace .item .itemInfo .itemInfoInr h2 {
+  display: flex;
+}
 
 .item-all-count {
   float: right;
@@ -1269,7 +1273,7 @@ a.login__sns-btn {
     appearance: none;
 }
 
-/* 条件から検索 */
+/*条件から検索 */
 .item-all .tabMenu{
     width: 100%;
     float: none;
@@ -1355,6 +1359,11 @@ a.login__sns-btn {
 
 .item-all .item {
     padding-top: 6%;
+}
+
+/*固定ページ表示*/
+.item-all .main-content-left .main-content__body .content__element_bottomSpace .item {
+    padding-top: 0%;
 }
 
 .item .itemHeader {
@@ -1523,9 +1532,10 @@ a.login__sns-btn {
 
 
 /*-------------------------------
-## 案件詳細
+## 案件詳細(案件一覧の固定ページ表示)
 -------------------------------*/
-.item-detail .item .item_id {
+.item-detail .item .item_id,
+.item-all .item .item_id {
     display: table-cell;
     font-size: 1.2rem;
     color: #fff;
@@ -1537,7 +1547,8 @@ a.login__sns-btn {
     padding-right: 1rem;
 }
 
-.item-detail .item .item {
+.item-detail .item .item,
+.item-all .item .item {
     padding-top: 10%;
 }
 
@@ -1545,7 +1556,7 @@ a.login__sns-btn {
     border-top: 1px dotted #5e8796;
 }
 
-.item-detail .item .otherName{
+.item-detail .item .otherName {
     text-align: center;
     font-size: 1.3rem;
     color: #5e8796;
@@ -3042,11 +3053,13 @@ footer,
 }
 
 .item .background_color01,
-.item-detail .item .background_color01{
+.item-detail .item .background_color01,
+.item-all .item .background_color01 {
     background-color: #7B951C;
 }
 .item .border_color01,
-.item-detail .item .border_color01{
+.item-detail .item .border_color01,
+.item-all .item .border_color01 {
     border-color: #7B951C;
 }
 

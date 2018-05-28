@@ -317,4 +317,21 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/slide/delete', 'admin\SlideController@deleteAdminSlide');
     // 論理削除から復活処理
     Route::get('/admin/slide/insert', 'admin\SlideController@insertAdminSlide');
+
+    //特集記事紐付け管理画面
+    // 一覧画面
+    Route::get('/admin/column-connect/list', 'admin\ColumnConnectController@showColumnConnectList');
+    //新規登録画面
+    Route::get('/admin/column-connect/input', 'admin\ColumnConnectController@showColumnConnectInput');
+    // 新規登録処理
+    Route::post('/admin/column-connect/input', 'admin\ColumnConnectController@insertColumnConnect');
+    // 編集画面
+    Route::get('/admin/column-connect/modify', 'admin\ColumnConnectController@showColumnConnectModify');
+    // 更新処理
+    Route::post('/admin/column-connect/modify', 'admin\ColumnConnectController@updateColumnConnect');
+    // 論理削除処理
+    Route::get('/admin/column-connect/delete', 'admin\ColumnConnectController@deleteColumnConnect');
+    // 論理削除から復活処理
+    Route::get('/admin/column-connect/insert', 'admin\ColumnConnectController@insertAgainColumnConnect');
+
 });

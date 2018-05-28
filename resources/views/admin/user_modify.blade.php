@@ -112,6 +112,14 @@ use App\Libraries\AdminUtility as admnUtil;
               </div>
             </div>
 
+            <div class="form-group management">
+              <label class="col-md-2 control-label">特集記事紐付け権限</label>
+              <div class="col-md-10">
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="auths[]" value="17" {{ HtmlUtility::isCheckedOldRequest($authList, old('auths'), 17) }} class="js__default-check">特集記事紐付け権限</label>
+              </div>
+            </div>
+
             <div class="col-md-10 text-right">
               <button type="submit" class="btn btn-primary" onclick="checkbox_copy()">更新</button>
 @if(!session(ssnUtil::SESSION_KEY_MASTER_FLG) && $master_flg == 0)
