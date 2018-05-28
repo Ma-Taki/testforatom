@@ -18,6 +18,8 @@ use DB;
 use App\Models\Ms_sys_types;
 use App\Models\Ms_job_types;
 use App\Models\Ms_skills;
+use App\Models\Tr_column_connects;
+use App\Models\Tr_link_column_connects;
 
 class ItemController extends FrontController
 {
@@ -57,7 +59,21 @@ class ItemController extends FrontController
         //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
         $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
 
-        return view('front.item_list', compact('itemList','params'));
+        //wordpress固定ページ表示チェック(スキル検索)
+        $columnConnects = array();
+        if(!empty($request->skills)){
+            foreach ($request->skills as $id) {
+                $skillNames[] = Ms_skills::select('name')->where('id',$id)->get();
+            }
+            foreach ($skillNames as $skillName) {
+                foreach ($skillName as $skill) {
+                    $skillKeywords[] = $skill['name'];
+                }
+            }
+            $columnConnects = $this->getColumn($skillKeywords);
+        }
+
+        return view('front.item_list', compact('itemList','params', 'columnConnects'));
     }
 
     /**
@@ -89,7 +105,15 @@ class ItemController extends FrontController
         //検索ワードを$paramsに渡す
         $params['keyword'] = $request->keyword;
 
-        return view('front.item_list', compact('itemList','params'));
+        //wordpress固定ページ表示チェック(キーワード検索)
+        $columnConnects = array();
+        if(!empty($request->keyword)){
+            $keywords = explode(' ', $request->keyword);
+            $keywords = array_filter($keywords, 'strlen');
+            $columnConnects = $this->getColumn($keywords);
+        }
+
+        return view('front.item_list', compact('itemList','params', 'columnConnects'));
     }
 
     /**
@@ -132,7 +156,16 @@ class ItemController extends FrontController
         //この案件が検討中かどうか
         $isConsidering = CnsUtil::isConsidering($request->id);
 
-        return view('front.item_detail', compact('item', 'recoItemList', 'canEntry','isConsidering'));
+        //wordpress固定ページ表示チェック(タグ検索)
+        $columnConnects = array();
+        if(!empty($item->tags)){
+            foreach ($item->tags as $tag) {
+                $tagKeywords[] = $tag->term;
+            }
+            $columnConnects = $this->getColumn($tagKeywords);
+        }
+
+        return view('front.item_detail', compact('item', 'recoItemList', 'canEntry','isConsidering','columnConnects'));
     }
 
     /**
@@ -173,8 +206,11 @@ class ItemController extends FrontController
         //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
         $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
 
+        //wordpress固定ページ表示チェック(タグ検索)
+        $tagKeywords[] = $tag->term;
+        $columnConnects = $this->getColumn($tagKeywords);
 
-        return view('front.item_list', compact('itemList', 'params', 'html_title'));
+        return view('front.item_list', compact('itemList', 'params', 'html_title', 'columnConnects'));
         // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△
     }
 
@@ -225,7 +261,14 @@ class ItemController extends FrontController
         //ヒット案件数が0だった場合は掲載終了した案件をランダムに10件取得する
         $params['nodata'] = FrntUtil::getItemsByRandom($itemList,10);
 
-        return view('front.item_list', compact('itemList', 'params', 'html_title','html_description','html_keywords'));
+        //wordpress固定ページ表示チェック(カテゴリー検索)
+        $columnConnects = array();
+        if(!empty($category_id)){
+            $categoryKeywords = Tr_search_categories::select('name')->where('id',$category_id)->get();
+            $columnConnects = $this->getColumn($categoryKeywords);
+        }
+
+        return view('front.item_list', compact('itemList', 'params', 'html_title','html_description','html_keywords', 'columnConnects'));
         // △△△ 161206 案件一覧のタイトルタグを動的に設定 △△△
     }
 
@@ -346,5 +389,22 @@ class ItemController extends FrontController
      */
     private function getPage($page){
         return is_int($page) ? $page : 1;
+    }
+
+    /**
+     * wordpress固定ページの接続IDを取得
+     */
+    private function getColumn($keywords){
+        $connectIDs = Tr_link_column_connects::select('column_connects.connect_id')
+                                        ->join('column_connects', 'column_connects.id','=','link_column_connects.connect_id' )
+                                        ->whereIn('link_column_connects.keyword', $keywords)
+                                        ->where('column_connects.delete_flag', false)
+                                        ->groupBy('id')
+                                        ->get();
+        $columnConnects = array();  
+        foreach ($connectIDs as $connectID) {
+                $columnConnects[] = $connectID;
+        }
+        return $columnConnects;
     }
 }

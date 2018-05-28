@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tr_link_items_tags;
+use App\Models\Tr_items;
 
 class Tr_tags extends Model
 {

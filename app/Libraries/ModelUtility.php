@@ -34,6 +34,8 @@ class ModelUtility
     const AUTH_TYPE_PROGRAMMING_LANG_RANKING = 'programming_lang_ranking.all';
     // スライド画像管理：
     const AUTH_TYPE_SLIDE_IMAGE = 'slide_image.all';
+    // 特集記事紐付け管理：
+    const AUTH_TYPE_COLUMN_CONNECT = 'column_connect.all';
 
     /* △△△ 管理権限 △△△ */
 
