@@ -14,7 +14,7 @@
 	                	<div class="panel-title">{{ $news->release_date->format('Y/m/d') }}　{{ $news->title }}</div>
 	                </legend>
              		<div>
-             			<p>{{ $news->contents }}</p>
+             			<p>{!! nl2br(e($news->contents)) !!}</p>
              		</div>
 		       	@endforeach
 		    </div>
