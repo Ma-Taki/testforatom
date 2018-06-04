@@ -4405,3 +4405,9 @@ dd.news-title {
 .clearFix {
     min-height: 1px;
 }
+
+h3.news-title {
+    font-size: 1.6rem;
+    color: #5e8796;
+    padding: 0 0 10px 0;
+}

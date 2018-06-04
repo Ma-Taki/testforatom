@@ -27,42 +27,22 @@
             <hr class="hr-2px-solid-5e8796">
             <div class="main-content__body">
                 <div class="content__element">
-
-          
-
-           
-            
-          
-
-
-
-
-
-
-
-
-
-
-
                     <div class="col-md-10">
                         <div class="row">
                             <div class="content-box-large">
-                                
                     		  	<div class="panel-body">
                     				@foreach($detail as $news)
                     	                <legend>
-                    	                	<div class="panel-title">{{ $news->release_date->format('Y/m/d') }}　{{ $news->title }}</div>
+                    	                	<h3 class="news-title">{{ $news->release_date->format('Y/m/d') }}　{{ $news->title }}</h3>
                     	                </legend>
                                  		<div>
-                                 			<p>{{ $news->contents }}</p>
+                                 			<p>{!! nl2br(e($news->contents)) !!}</p>
                                  		</div>
                     		       	@endforeach
                         		</div>
                             </div>
                         </div>
                     </div>
-        
-
                 </div>
             </div>
         </div>
