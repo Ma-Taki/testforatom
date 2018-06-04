@@ -176,8 +176,12 @@ class MemberController extends AdminController
         $memberList = $query->select('users.*')
                             ->orderBy($item_order['columnName'], $item_order['sort'])
                             ->paginate(30);
-
-        return view('admin.member_list', compact('memberList', 'data_query'));
+        //有効会員人数                    
+        $enable = Tr_users::where('delete_flag','=',0)->count();
+        //退会人数                    
+        $Unsubscribe = Tr_users::where('delete_flag','>', 0)->count();
+        
+        return view('admin.member_list', compact('memberList', 'data_query', 'enable', 'Unsubscribe'));
     }
 
     /**

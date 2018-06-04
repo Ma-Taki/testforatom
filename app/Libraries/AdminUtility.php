@@ -94,11 +94,26 @@ class AdminUtility
         'admin/slide/insert' => mdlUtil::AUTH_TYPE_SLIDE_IMAGE,
 
         //特集記事紐付け管理
-        'admin/column-connect/list' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
+        'admin/column-connect/search' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
         'admin/column-connect/input' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
         'admin/column-connect/modify' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
         'admin/column-connect/delete' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
         'admin/column-connect/insert' => mdlUtil::AUTH_TYPE_COLUMN_CONNECT,
+
+        //お知らせ管理
+        //管理画面
+        'admin/admin-news/detail' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/admin-news/search' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/admin-news/input' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/admin-news/modify' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/admin-news/delete' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/admin-news/insert' => mdlUtil::AUTH_TYPE_NEWS,
+        //フロント画面
+        'admin/front-news/search' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/front-news/input' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/front-news/modify' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/front-news/delete' => mdlUtil::AUTH_TYPE_NEWS,
+        'admin/front-news/insert' => mdlUtil::AUTH_TYPE_NEWS,
 
     ];
 

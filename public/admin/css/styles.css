@@ -733,3 +733,64 @@ input.checks{
       border-radius:10px;
    }
 }
+
+/* ============================================================ お知らせ */
+/* --- 枠 --- */
+dl.news-box {
+  width: 100%; /* 新着リストの幅 */
+  margin: 0;
+}
+
+/* 訪問済みのリンク */
+dl.news-box a:visited{
+  color: #999;
+}
+
+/* --- 日付エリア --- */
+dt.news-date {
+  width: 8em; /* 日付エリアの幅 */
+  float: left;
+  padding: 10px 0 8px 3px; /* 日付エリアのパディング（上右下左） */
+  line-height: 120%;
+}
+
+/* --- タイトルエリア --- */
+dd.news-title {
+  margin: 0;
+  padding: 10px 3px 8px 6.6em; /* 本文エリアのパディング（上右下左） */
+  border-bottom: 1px #eee dashed; /* 本文エリア下境界線 */
+  line-height: 120%;
+}
+
+/* --- clearfix --- */
+.clearFix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearFix {
+  min-height: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

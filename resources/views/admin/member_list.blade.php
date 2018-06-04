@@ -89,6 +89,11 @@
       opacity:1;
     }
 
+    .alert-member{
+      font-weight: bold;
+      padding-bottom: 1.6%;
+    }
+
 </style>
 <div class="col-md-10">
   <div class="row">
@@ -97,30 +102,26 @@
         <div class="panel-title" style="font-size:20px">会員一覧</div>
 			</div>
   		<div class="panel-body">
+        <p class="alert-member">有効会員: {{ $enable }}人　退会: {{ $Unsubscribe }}人</p>
+          {{-- info：custom --}}
+          @if(\Session::has('custom_info_messages'))
 
-{{-- info：custom --}}
-@if(\Session::has('custom_info_messages'))
-
-        <div class="alert alert-info">
-          <ul>
-            <li>{{ \Session::get('custom_info_messages') }}</li>
-          </ul>
-        </div>
-
-@endif
-
-{{-- error：customValidation --}}
-@if(Session::has('custom_error_messages'))
-
-        <div class="alert alert-danger">
-          <ul>
-@foreach(Session::get('custom_error_messages') as $message)
-            <li>{{ $message }}</li>
-@endforeach
-          </ul>
-        </div>
-
-@endif
+            <div class="alert alert-info">
+              <ul>
+                <li>{{ \Session::get('custom_info_messages') }}</li>
+              </ul>
+            </div>
+          @endif
+          {{-- error：customValidation --}}
+          @if(Session::has('custom_error_messages'))
+            <div class="alert alert-danger">
+              <ul>
+                @foreach(Session::get('custom_error_messages') as $message)
+                  <li>{{ $message }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
 
         <fieldset>
           <legend><div class="panel-title">検索</div></legend>

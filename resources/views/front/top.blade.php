@@ -29,41 +29,57 @@ use App\Models\Tr_slide_images;
         @endforeach
       </ul>
     </div><!-- ./slider -->
-@include('front.common.keyword_sp')
+    @include('front.common.keyword_sp')
 
-@if(!FrntUtil::isLogin())
-    <div class="user_regist_btn invisible-pc invisible-tab ">
-      <a href="{{ url('/user/regist/auth') }}">
-        <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
-      </a>
-    </div>
-@else
-    <section class="hello_user clear">
-      <div class="contentInr">
-        <p>こんにちは、<a href="/user">{{ FrntUtil::getLoginUserName() }}さん</a></p>
+    @if(!FrntUtil::isLogin())
+      <div class="user_regist_btn invisible-pc invisible-tab ">
+        <a href="{{ url('/user/regist/auth') }}">
+          <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
+        </a>
       </div>
-    </section>
-@endif
-
+    @else
+      <section class="hello_user clear">
+        <div class="contentInr">
+          <p>こんにちは、<a href="/user">{{ FrntUtil::getLoginUserName() }}さん</a></p>
+        </div>
+      </section>
+    @endif
+    @if(!(count($newsList) === 0))
+      <section class="news">
+        <div class="topJobWrap">
+          <h2>お知らせ</h2>
+            <dl class="clearFix news-box">
+              @foreach($newsList as $news)
+                <div class="news-item">
+                  <a href="front-news/detail?id={{ $news->id }}">
+                    <dt class="news-date">{{ $news->release_date->format('Y/m/d') }}</dt>
+                    <dd class="news-title">{{ $news->title }}</dd>
+                </a>
+                </div> 
+              @endforeach
+            </dl> 
+        </div>     
+      </section>
+    @endif
     <div class="topItemList clear">
       <section class="newJob">
         <div class="topJobWrap">
           <h3 class="alignleft">新着案件</h3>
           <p class="alignright invisible-sp"><a href="/item/search">新着案件一覧へ</a></p>
           <ul class="fs0 clear">
-@foreach($newItemList as $newItem)
-            <li>
-              <a href="/item/detail?id={{ $newItem->id }}" target="_blank">
-                <div class="topJobInr">
-                  <img src="/front/images/ico-newjob.png" alt="新着">
-                  <h4>{{ $newItem->name }}</h4>
-                  <p class="location">{{ $newItem->area_detail }}</p>
-                  <p class="remuneration">{{ $newItem->rate_detail }}</p>
-                  <p class="update">{{ $newItem->service_start_date->format('Y/m/d') }}</p>
-                </div>
-              </a>
-            </li>
-@endforeach
+            @foreach($newItemList as $newItem)
+              <li>
+                <a href="/item/detail?id={{ $newItem->id }}" target="_blank">
+                  <div class="topJobInr">
+                    <img src="/front/images/ico-newjob.png" alt="新着">
+                    <h4>{{ $newItem->name }}</h4>
+                    <p class="location">{{ $newItem->area_detail }}</p>
+                    <p class="remuneration">{{ $newItem->rate_detail }}</p>
+                    <p class="update">{{ $newItem->service_start_date->format('Y/m/d') }}</p>
+                  </div>
+                </a>
+              </li>
+            @endforeach
           </ul>
           <div class="newItemListLink clear invisible-pc invisible-tab">
             <a href="/item/search">新着案件一覧へ</a>
@@ -71,32 +87,32 @@ use App\Models\Tr_slide_images;
         </div>
       </section><!-- /.newJob -->
 
-@if(!$pickUpItemList->isEmpty())
-      <section class="attentionJob">
-        <div class="topJobWrap">
-          <h3 class="alignleft">急募案件</h3>
-          <p class="alignright invisible-sp"><a href="/item/tag/1">急募案件一覧へ</a></p>
-          <ul class="fs0 clear">
-@foreach($pickUpItemList as $pickUpItem)
-            <li>
-              <a href="/item/detail?id={{ $pickUpItem->id }}"  target="_blank">
-                <div class="topJobInr">
-                  <img src="/front/images/ico-attentionJob.png" alt="急募">
-                  <h4>{{ $pickUpItem->name }}</h4>
-                  <p class="location">{{ $pickUpItem->area_detail }}</p>
-                  <p class="remuneration">{{ $pickUpItem->rate_detail }}</p>
-                  <p class="update">{{ $pickUpItem->service_start_date->format('Y/m/d') }}</p>
-                </div>
-              </a>
-            </li>
-@endforeach
-          </ul>
-          <div class="wantedItemListLink clear invisible-pc invisible-tab">
-            <a href="/item/tag/1">急募案件一覧へ</a>
+      @if(!$pickUpItemList->isEmpty())
+        <section class="attentionJob">
+          <div class="topJobWrap">
+            <h3 class="alignleft">急募案件</h3>
+            <p class="alignright invisible-sp"><a href="/item/tag/1">急募案件一覧へ</a></p>
+            <ul class="fs0 clear">
+              @foreach($pickUpItemList as $pickUpItem)
+                <li>
+                  <a href="/item/detail?id={{ $pickUpItem->id }}"  target="_blank">
+                    <div class="topJobInr">
+                      <img src="/front/images/ico-attentionJob.png" alt="急募">
+                      <h4>{{ $pickUpItem->name }}</h4>
+                      <p class="location">{{ $pickUpItem->area_detail }}</p>
+                      <p class="remuneration">{{ $pickUpItem->rate_detail }}</p>
+                      <p class="update">{{ $pickUpItem->service_start_date->format('Y/m/d') }}</p>
+                    </div>
+                  </a>
+                </li>
+              @endforeach
+            </ul>
+            <div class="wantedItemListLink clear invisible-pc invisible-tab">
+              <a href="/item/tag/1">急募案件一覧へ</a>
+            </div>
           </div>
-        </div>
-      </section><!-- /.attentionJob -->
-@endif
+        </section><!-- /.attentionJob -->
+      @endif
     </div><!-- /.topItemList -->
 
     @include('front.common.feature')
