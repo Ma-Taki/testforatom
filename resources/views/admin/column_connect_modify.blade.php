@@ -40,11 +40,11 @@ use App\Libraries\HtmlUtility;
 							<label for="inputConnectID" class="col-md-2 control-label">紐付けID<font color="#FF0000">*</font></label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" id="inputConnectID" name="connect_id" maxlength="3" value="{{ HtmlUtility::setTextValueByRequest($connect->connect_id, old('connect_id')) }}" placeholder="紐付けID" >
-								<span>(3文字まで)</span>
+								<span>(3桁までの数字)</span>
 							</div>
 			            </div>
 						<div class="form-group">
-							<label for="inputTitle" class="col-md-2 control-label">記事タイトル<font color="#FF0000">*</font></label>
+							<label for="inputTitle" class="col-md-2 control-label">タイトル<font color="#FF0000">*</font></label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" id="inputTitle" name="title" maxlength="50" value="{{ HtmlUtility::setTextValueByRequest($connect->title, old('title')) }}" placeholder="記事タイトル" >
 								<span>(50文字まで)</span>

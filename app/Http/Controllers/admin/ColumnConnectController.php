@@ -18,15 +18,32 @@ class ColumnConnectController extends AdminController
 {
 	/**
      * 一覧画面の表示
-     * GET:/admin/admin/column-connect/list
+     * GET:/admin/admin/column-connect/search
      */
-    public function showColumnConnectList(){
-        $connectsList = Tr_column_connects::select('column_connects.*',DB::raw("(GROUP_CONCAT(link_column_connects.keyword SEPARATOR '<br>')) as `keyword`"))
+    public function showColumnConnectList(Request $request){
+
+        $data_query = [
+            'title'       => $request->title ?: '',
+            'delete_flag' => $request->delete_flag ?: '',
+        ];
+
+
+        $query = Tr_column_connects::select('column_connects.*',DB::raw("(GROUP_CONCAT(link_column_connects.keyword SEPARATOR '<br>')) as `keyword`"))
                                         ->leftjoin('link_column_connects', 'column_connects.id','=','link_column_connects.connect_id' )
-                                        ->groupBy('column_connects.id')
-                                        ->orderBy('column_connects.id')    
-                                        ->get();
-        return view('admin.column_connect_list', compact('connectsList'));
+                                        ->groupBy('column_connects.id');
+                                        
+                                        
+        if(!empty($request->title)){
+            //検索「タイトル」に入力したとき
+            $query = $query->where('column_connects.title', 'like', '%'.$request->title.'%');
+        }
+        if(!empty($request->delete_flag)){
+            //検索「ステータス」にチェックしたとき
+            $query = $query->where('column_connects.delete_flag', false);
+        }
+        $connectsList = $query->orderBy('column_connects.id')->paginate(20);
+
+        return view('admin.column_connect_list', compact('connectsList','data_query'));
     }
 
     /**
@@ -43,6 +60,13 @@ class ColumnConnectController extends AdminController
      */
     public function insertColumnConnect(ColumnConnectRegistRequest $request){
 
+        if(!ctype_digit($request->connect_id)){
+            abort(404, '入力された紐付けIDは数値ではありません。');
+        }
+        $checkConnectId = Tr_link_column_connects::where('connect_id', $request->connect_id)->get();
+        if(!empty($checkConnectId)){
+            abort(404, '入力された紐付けIDはすでに使われています。');
+        }
         $column_connect_data = array(
                         'connect_id'  => $request->connect_id,
                         'title'       => $request->title,
@@ -84,7 +108,7 @@ class ColumnConnectController extends AdminController
                 }
             });
         }
-        return redirect('/admin/column-connect/list')->with('custom_info_messages','紐付け登録は正常に終了しました。');
+        return redirect('/admin/column-connect/search')->with('custom_info_messages','紐付け登録は正常に終了しました。');
     }
 
     /**
@@ -109,6 +133,10 @@ class ColumnConnectController extends AdminController
      * POST:/admin/column-connect/modify
      */
     public function updateColumnConnect(ColumnConnectRegistRequest $request){
+
+        if(!ctype_digit($request->connect_id)){
+            abort(404, '入力された紐付けIDは数字ではありません。');
+        }
 
         $column_connect_data = array(
                     'id'        => $request->id,
@@ -168,7 +196,7 @@ class ColumnConnectController extends AdminController
                 }
             });
         }
-        return redirect('/admin/column-connect/list')->with('custom_info_messages','紐付け更新は正常に終了しました。');
+        return redirect('/admin/column-connect/search')->with('custom_info_messages','紐付け更新は正常に終了しました。');
     }
 
     /**
@@ -193,7 +221,7 @@ class ColumnConnectController extends AdminController
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
-        return redirect('/admin/column-connect/list')->with('custom_info_messages','紐付け削除は正常に終了しました。');
+        return redirect('/admin/column-connect/search')->with('custom_info_messages','紐付け削除は正常に終了しました。');
     }
      /**
      * 論理削除から復活処理
@@ -216,7 +244,7 @@ class ColumnConnectController extends AdminController
                 abort(400, 'トランザクションが異常終了しました。');
             }
         });
-        return redirect('/admin/column-connect/list')->with('custom_info_messages','復活処理は正常に終了しました。');
+        return redirect('/admin/column-connect/search')->with('custom_info_messages','復活処理は正常に終了しました。');
     }
  }
 

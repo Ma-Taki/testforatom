@@ -14,7 +14,27 @@ use App\Libraries\ModelUtility as mdlUtil;
         </ul>
     </div>
 @endif
-
+@if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_NEWS) || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
+    @if(!(count($newsList) === 0))
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box-header">
+                    <div class="panel-title">お知らせ</div>
+                </div>
+                <div class="content-box-large box-with-header">
+                    <dl class="clearFix news-box">
+                        @foreach($newsList as $news)
+                            <a href="admin-news/detail?id={{ $news->id }}">
+                                <dt class="news-date">{{ $news->release_date->format('Y/m/d') }}</dt>
+                                <dd class="news-title">{{ $news->title }}</dd>
+                            </a>
+                        @endforeach
+                    </dl>
+                </div>
+            </div>
+        </div>
+    @endif
+@endif
 @if(admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_ITEM_READ)
     || admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_MASTER))
     <div class="row">

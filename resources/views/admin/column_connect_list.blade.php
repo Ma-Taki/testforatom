@@ -17,12 +17,41 @@
 					    </ul>
 					</div>
 				@endif
+				<fieldset>
+			        <legend>
+			        	<div class="panel-title">検索</div>
+			        </legend>
+			        <form class="form-inline" role="form" method="GET" action="{{ url('/admin/column-connect/search') }}">
+			        	<table class="table table-bordered">
+			            	<tr>
+			                	<th><label class="control-label">タイトル</label></th>
+			                	<td>
+			                		<input type="text" class="form-control" name="title" value="{{ $data_query['title'] }}" />
+			                	</td>
+			              	</tr>
+			              	<tr>
+				                <th><label class="control-label">ステータス</label></th>
+				                <td>
+				                	<input type="checkbox" name="delete_flag" id="eo_label" {{ empty($data_query['delete_flag']) ?: "checked" }} />
+				                	<label for="eo_label">
+				                    	<font style="font-weight:normal;">表示のみ</font>
+				                  	</label>
+				                </td>
+				            </tr>
+			              	<tr>
+				                <td colspan="2">
+				                  <button type="submit" class="btn btn-primary btn-md col-xs-2 col-xs-offset-5">検索</button>
+				                </td>
+			              	</tr>
+			            </table>
+			        </form>
+		        </fieldset>
                 <legend><div class="panel-title">一覧</div></legend>
 		        <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                              <th>紐付けID</th>
-                             <th>記事タイトル</th>
+                             <th>タイトル</th>
                              <th>キーワード</th>
                              <th>ステータス</th>
                              <th><!-- 編集/削除ボタン --></th>
@@ -53,6 +82,12 @@
 						@endforeach
                     </tbody>
                 </table>
+                <div class="pull-right">
+	          		{!! $connectsList->appends([
+			            'title'   => $data_query['title'],
+			            'enabled' => $data_query['delete_flag'],
+			          ])->render() !!}
+		        </div>
             </div>
         </div>
     </div>

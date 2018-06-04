@@ -1,11 +1,27 @@
 @extends('admin.common.layout')
-@section('title', '特集記事紐付け登録')
+@section('title', 'お知らせ登録(フロント画面)')
 @section('content')
+<link rel="stylesheet" type="text/css" href="{{ url('/admin/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
+<script type="text/javascript" src="{{ url('/admin/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/admin/bootstrap-datepicker/locales/bootstrap-datepicker.ja.min.js') }}"></script>
+<script type="text/javascript">
+$(function() {
+    $('.datepicker').datepicker({
+      format: 'yyyy/mm/dd',
+      language: 'ja',
+      autoclose: true,
+      clearBtn: true,
+      todayHighlight: true,
+  });
+});
+</script>
+{{-- 相互反映用js --}}
+<script src="{{ url('/admin/js/item.js') }}"></script>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">
             <div class="panel-heading">
-                <div class="panel-title" style="font-size:20px">記事紐付け登録</div>
+                <div class="panel-title" style="font-size:20px">お知らせ登録(フロント画面)</div>
             </div>
             <div class="panel-body">
                 {{-- error：validation --}}
@@ -29,36 +45,36 @@
                     </div>
                 @endif
                 <div class="row">
-                    <div class="col-md-4">紐付け情報入力（<font color="#FF0000">*</font>は入力必須項目）</div>
+                    <div class="col-md-4">お知らせ情報入力（<font color="#FF0000">*</font>は入力必須項目）</div>
                 </div>
                 </br>
-                <form class="form-horizontal" name="itemForm" role="form" method="POST" onSubmit="mutualApplyBeforeSubmit()" action="{{ url('/admin/column-connect/input') }}">
+                <form class="form-horizontal" name="newsForm" role="form" method="POST" onSubmit="mutualApplyBeforeSubmit()" action="{{ url('/admin/front-news/input') }}">
                     <fieldset>
-                        <div class="form-group">    
-                            <label for="inputConnectID" class="col-md-2 control-label">紐付けID
+                        <div class="form-group">
+                            <label for="inputDate" class="col-md-2 control-label">日付
                                 <font color="#FF0000">*</font>
                             </label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputConnectID" name="connect_id" value="{{ old('connect_id') }}" maxlength="3" placeholder="紐付けID">
-                                <span>(3桁までの数字)</span>
+
+                                <input type="text" class="datepicker" name="release_date" value="{{ old('release_date') }}" maxlength="10" readonly="readonly"/>
+                                <span>(YYYY/MM/DD形式)</span>
                             </div>
                         </div>
-                        <div class="form-group">    
+                        <div class="form-group">
                             <label for="inputTitle" class="col-md-2 control-label">タイトル
                                 <font color="#FF0000">*</font>
                             </label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputTitle" name="title" value="{{ old('title') }}" maxlength="50" placeholder="記事タイトル">
-                                <span>(50文字まで)</span>
+                                <input type="text" class="form-control" id="inputTitle" name="title" value="{{ old('tilte') }}" maxlength="200" placeholder="タイトル">
+                                <span>(200文字まで)</span>
                             </div>
                         </div>
-                        <div class="form-group">    
-                            <label for="inputKeyword" class="col-md-2 control-label">キーワード
+                        <div class="form-group">
+                            <label for="inputContents" class="col-md-2 control-label">内容
                                 <font color="#FF0000">*</font>
                             </label>
                             <div class="col-md-8">
-                                <textarea class="form-control" id="inputKeyword" name="keyword"  placeholder="キーワード" rows="8" >{{ old('keyword') }}</textarea>
-                                <span>(改行区切り・大文字小文字区別なし・3000文字まで)</span>
+                                <textarea class="form-control" id="inputPageKeywords" name="contents"  placeholder="内容" rows="30" >{{ old('contents') }}</textarea>
                             </div>
                         </div>
                         </br>

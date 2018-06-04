@@ -272,7 +272,7 @@ $menus = array(
             array(
                 'check_url'     => array('column-connect'),
                 'class'         => '',
-                'url'           => '/admin/column-connect/list',
+                'url'           => '/admin/column-connect/search',
                 'name'          => '紐付け一覧',
                 'i_class'       => '',
                 'span_flag'     => 0,
@@ -286,6 +286,56 @@ $menus = array(
                 'i_class'       => '',
                 'span_flag'     => 0,
                 'sub_sub_menus' => null,
+            ),
+        )
+    ),
+    //お知らせ管理
+    array(
+        'check_url' => array('admin-news', 'front-news'),
+        'auth_item' => admnUtil::isExistAuth(mdlUtil::AUTH_TYPE_NEWS),
+        'class'     => 'submenu', 
+        'url'       => '#',
+        'i_class'   => 'glyphicon  glyphicon-bell',
+        'name'      => 'お知らせ管理',
+        'span_flag' => 1,
+        'sub_menus' => array(
+            array(
+                //管理画面
+                'check_url'     => array('admin-news'),
+                'class'         => 'undermenu',
+                'url'           => '#',
+                'name'          => '管理画面',
+                'i_class'       => 'glyphicon glyphicon-home',
+                'span_flag'     => 1,
+                'sub_sub_menus' => array(
+                    array(
+                        'url'   => '/admin/admin-news/search',
+                        'name'  => 'お知らせ一覧',
+                    ),
+                    array(
+                        'url'   => '/admin/admin-news/input',
+                        'name'  => 'お知らせ登録',
+                    ),
+                ),
+            ),
+            array(
+                //フロント画面
+                'check_url'     => array('front-news'),
+                'class'         => 'undermenu',
+                'url'           => '#',
+                'name'          => 'フロント画面',
+                'i_class'       => 'glyphicon glyphicon-bullhorn',
+                'span_flag'     => 1,
+                'sub_sub_menus' => array(
+                    array(
+                        'url'   => '/admin/front-news/search',
+                        'name'  => 'お知らせ一覧',
+                    ),
+                    array(
+                        'url'   => '/admin/front-news/input',
+                        'name'  => 'お知らせ登録',
+                    ),
+                ),
             ),
         )
     ),

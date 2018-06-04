@@ -33,6 +33,9 @@ Route::get('/privacy', function () { return view('front.privacyPolicy'); });
 // 利用規約画面
 Route::get('/terms', function () { return view('front.terms'); });
 
+//お知らせ画面
+Route::get('/front-news/detail', 'front\NewsController@showDetail');
+
 // お問い合わせ
 Route::resource('/contact', 'front\ContactController', ['only' => ['index', 'store']]);
 Route::post('/contact/confirm', 'front\ContactController@confirm');
@@ -131,9 +134,11 @@ Route::get('/admin/logout', 'AdminController@logout');
 // ログインチェックを行うルート
 Route::group(['middleware' => 'loginCheck'], function () {
     // トップ画面
-    Route::get('/admin/top', function () {
-        return view('admin.top');
-    });
+    // Route::get('/admin/top', function () {
+    //     return view('admin.top');
+    // });
+    Route::get('/admin/top', 'admin\TopController@show');
+
     // エラー画面
     Route::get('/admin/error', function () {
         return view('admin.errors.error');
@@ -320,7 +325,7 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
 
     //特集記事紐付け管理画面
     // 一覧画面
-    Route::get('/admin/column-connect/list', 'admin\ColumnConnectController@showColumnConnectList');
+    Route::get('/admin/column-connect/search', 'admin\ColumnConnectController@showColumnConnectList');
     //新規登録画面
     Route::get('/admin/column-connect/input', 'admin\ColumnConnectController@showColumnConnectInput');
     // 新規登録処理
@@ -334,4 +339,37 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     // 論理削除から復活処理
     Route::get('/admin/column-connect/insert', 'admin\ColumnConnectController@insertAgainColumnConnect');
 
+    //お知らせ管理(管理画面)
+    // 詳細画面
+    Route::get('/admin/admin-news/detail', 'admin\AdminNewsController@showDetail');
+    // 一覧画面
+    Route::get('/admin/admin-news/search', 'admin\AdminNewsController@showAdminNews');
+    // 新規登録画面
+    Route::get('/admin/admin-news/input', 'admin\AdminNewsController@showAdminNewsInput');
+    // 新規登録処理
+    Route::post('/admin/admin-news/input', 'admin\AdminNewsController@insertAdminNews');
+    // 編集画面
+    Route::get('/admin/admin-news/modify', 'admin\AdminNewsController@showAdminNewsModify');
+    // 更新処理
+    Route::post('/admin/admin-news/modify', 'admin\AdminNewsController@updateAdminNews');
+    // 論理削除処理
+    Route::get('/admin/admin-news/delete', 'admin\AdminNewsController@deleteAdminNews');
+    // 論理削除から復活処理
+    Route::get('/admin/admin-news/insert', 'admin\AdminNewsController@insertAgainAdminNews');
+
+    //お知らせ管理(フロント画面)
+    // 一覧画面
+    Route::get('/admin/front-news/search', 'admin\FrontNewsController@showFrontNews');
+    // 新規登録画面
+    Route::get('/admin/front-news/input', 'admin\FrontNewsController@showFrontNewsInput');
+    // 新規登録処理
+    Route::post('/admin/front-news/input', 'admin\FrontNewsController@insertFrontNews');
+    // 編集画面
+    Route::get('/admin/front-news/modify', 'admin\FrontNewsController@showFrontNewsModify');
+    // 更新処理
+    Route::post('/admin/front-news/modify', 'admin\FrontNewsController@updateFrontNews');
+    // 論理削除処理
+    Route::get('/admin/front-news/delete', 'admin\FrontNewsController@deleteFrontNews');
+    // 論理削除から復活処理
+    Route::get('/admin/front-news/insert', 'admin\FrontNewsController@insertAgainFrontNews');
 });

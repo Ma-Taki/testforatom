@@ -2750,7 +2750,7 @@ img.pageImg{
 	float: left;
 }
 
-.category-search .category__parent {
+.category-search .category__parent{
 	font-size: 1.5rem;
 	line-height: normal;
 	font-weight: bold;
@@ -2781,7 +2781,7 @@ img.pageImg{
     display: none;
 }
 
-.category-search .category__partition {
+.category-search .category__partition{
     border: none;
 	border-top: 1px dashed #5e8796;
 	margin: 7px 0 10px 0;
@@ -4222,7 +4222,7 @@ sp.css ~640px
         display: inline-block;
     }
 
-    .category-search .category__parent {
+    .category-search .category__parent{
         color: #5e8796;
         font-size: 15px;
         line-height: 45px;
@@ -4233,7 +4233,7 @@ sp.css ~640px
         position: relative;
     }
 
-    .category-search .category__child {
+    .category-search .category__child{
         color: #333;
         font-size: 14px;
         line-height: 45px;
@@ -4336,4 +4336,72 @@ sp.css ~640px
         width: 100%;
         padding: 0.5rem;
     }
+}
+
+/* ============================================================ お知らせ */
+section.news{
+    width: 95%;
+    margin: 0 auto;
+}
+
+section.news .topJobWrap h2{
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+/* --- 枠 --- */
+dl.news-box {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    margin: 7px 0 10px 0;
+    letter-spacing: 1px;
+}
+dl.news-box .news-item{
+    margin: 13px;
+}
+
+/* 未訪問のリンク */
+dl.news-box a:link{
+    color: #000;
+}
+
+/* 訪問済みのリンク */
+dl.news-box a:visited{
+    color: #999;
+}
+
+/* ポイント時のリンク・選択中のリンク */
+dl.news-box a:hover, dl.news-box a:active{
+    text-decoration: underline;
+}
+
+/* --- 日付エリア --- */
+dt.news-date {
+    width: 8em; /* 日付エリアの幅 */
+    float: left;
+    padding: 3px 0 4px 3px; /* 日付エリアのパディング（上右下左） */
+    line-height: 120%;   
+    border-left: 6px solid #5e8796;
+}
+
+/* --- タイトルエリア --- */
+dd.news-title {
+    margin: 0;
+    padding: 3px 3px 4px 6.6em; /* 本文エリアのパディング（上右下左） */
+    border-bottom: 1px dashed #5e8796;
+    font-weight: bold;
+    line-height: 120%;
+}
+
+/* --- clearfix --- */
+.clearFix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearFix {
+    min-height: 1px;
 }
