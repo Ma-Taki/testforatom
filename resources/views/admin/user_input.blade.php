@@ -110,6 +110,22 @@ use App\Libraries\HtmlUtility as HtmlUtil;
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">特集記事紐付け権限</label>
+                            <div class="col-md-10 management">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="auths[]" value="17" {{ HtmlUtil::isChecked(old('auths'), 17) }}>特集記事紐付け権限
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">お知らせ権限</label>
+                            <div class="col-md-10 management">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="auths[]" value="18" {{ HtmlUtil::isChecked(old('auths'), 18) }}>お知らせ権限
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-md-10 text-right">
                             <button type="submit" class="btn btn-primary">登録</button>
                             <a href="/admin/user/list"><button type="button" class="btn btn-default">キャンセル</button></a>

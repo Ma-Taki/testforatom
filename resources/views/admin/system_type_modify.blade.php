@@ -3,7 +3,7 @@
 @section('content')
 <?php 
 use App\Libraries\HtmlUtility;
- ?>
+?>
 <div class="col-md-10">
     <div class="row">
         <div class="content-box-large">

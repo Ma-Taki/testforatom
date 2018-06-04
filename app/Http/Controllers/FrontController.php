@@ -12,6 +12,7 @@ use App\Models\Tr_search_categories;
 use App\Models\Ms_skills;
 use App\Models\Ms_skill_categories;
 use App\Models\Tr_search_categories_display;
+use App\Models\Tr_front_news;
 use Illuminate\Http\Request;
 use App\Libraries\{ModelUtility as mdlUtil, FrontUtility as frntUtil};
 use App\Http\Requests;
@@ -87,7 +88,10 @@ class FrontController extends BaseController
                                                 ->orderBy('skill_categories.sort_order', 'asc')
                                                 ->get();
 
-        return view('front.top', compact('newItemList','pickUpItemList','parents','children','skillCategories'));
+        //お知らせを取得
+        $newsList = Tr_front_news::where('delete_flag', false)->orderBy('release_date', 'DESC')->limit(5)->get();
+
+        return view('front.top', compact('newItemList','pickUpItemList','parents','children','skillCategories','newsList'));
     }
 
     /**

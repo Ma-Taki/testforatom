@@ -36,6 +36,8 @@ class ModelUtility
     const AUTH_TYPE_SLIDE_IMAGE = 'slide_image.all';
     // 特集記事紐付け管理：
     const AUTH_TYPE_COLUMN_CONNECT = 'column_connect.all';
+    // お知らせ管理：
+    const AUTH_TYPE_NEWS = 'news.all';
 
     /* △△△ 管理権限 △△△ */
 
