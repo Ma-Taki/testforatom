@@ -21,7 +21,7 @@
     </div>
   <!-- END .breadcrumbs -->
 
-    <div class="main-content about">
+    <div class="main-content item-all">
         <div class="main-content-left">
             <h2 class="main-content__title">お知らせ</h2>
             <hr class="hr-2px-solid-5e8796">
@@ -45,13 +45,12 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div><!-- END main-content-left -->
+        </div><!-- END main-content-left -->
 
-    <div class="main-content-right">
-      @include('front.common.sideInfo')
-    </div><!-- END main-content-right -->
-    <div class="clear"></div>
-  </div><!-- END main-content -->
+        <div class="main-content-right">
+          @include('front.common.sideInfo')
+        </div><!-- END main-content-right -->
+        <div class="clear"></div>
+    </div><!-- END main-content -->
 </div><!-- END wrap -->
 @endsection
