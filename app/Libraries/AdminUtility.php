@@ -46,10 +46,13 @@ class AdminUtility
         'admin/category/search' => mdlUtil::AUTH_TYPE_ITEM_READ,
         'admin/category/detail' => mdlUtil::AUTH_TYPE_ITEM_READ,
         'admin/category/input' => mdlUtil::AUTH_TYPE_ITEM_CREATE,
+        'admin/category/copy-child-input' => mdlUtil::AUTH_TYPE_ITEM_CREATE,
+        'admin/category/copy-parent-input' => mdlUtil::AUTH_TYPE_ITEM_CREATE,
         'admin/category/modify' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
         'admin/category/delete' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
         'admin/category/insert' => mdlUtil::AUTH_TYPE_ITEM_DELETE,
         'admin/category/selectBox' => mdlUtil::AUTH_TYPE_ITEM_READ,
+        'admin/category/session-forget' => mdlUtil::AUTH_TYPE_ITEM_READ,
         'admin/category/list' => mdlUtil::AUTH_TYPE_ITEM_UPDATE,
         // ポジション管理
         'admin/position/search' => mdlUtil::AUTH_TYPE_ITEM_READ,

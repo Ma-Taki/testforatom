@@ -56,14 +56,14 @@ use App\Models\Tr_search_categories;
           <thead>
             @if(count($categoryList)!=0)
               <tr>
-                <th width="20%">親カテゴリー名</th>
+                <th width="15%">親カテゴリー名</th>
                 <th width="5%">親表示順</th>
-                <th width="8%">親ステータス</th>
-                <th width="20%">子カテゴリー名</th>
+                <th width="5%">親ステータス</th>
+                <th width="15%">子カテゴリー名</th>
                 <th width="5%">子表示順</th>
-                <th width="8%">子ステータス</th>
-                <th width="24%">ページタイトル</th>
-                <th width="10%"><!-- 詳細/編集/削除ボタン --></th>
+                <th width="5%">子ステータス</th>
+                <th width="20%">ページタイトル</th>
+                <th width="20%"><!-- 詳細/編集/削除ボタン --></th>
               </tr>
             @endif
           </thead>
@@ -104,7 +104,16 @@ use App\Models\Tr_search_categories;
                   <td>{{ $category->page_title }}</td>
                 @endif
                 <td nowrap>
-                  <!-- 詳細/編集/削除/復活ボタン -->
+                  <!-- コピーして新規登録/詳細/編集/削除/復活ボタン -->
+                  @if(empty($category->parent_id))
+                    <a href="/admin/category/copy-parent-input?id={{ $category->id }}">
+                      <button type="button" class="btn btn-success btn-xs">コピーして登録</button>
+                    </a>
+                  @else
+                    <a href="/admin/category/copy-child-input?id={{ $category->id }}">
+                      <button type="button" class="btn btn-success btn-xs">コピーして登録</button>
+                    </a>
+                  @endif
                   <a href="/admin/category/detail?id={{ $category->id }}&parent_id={{ $category->parent_id }}">
                     <button type="button" class="btn btn-info btn-xs">詳細</button>
                   </a>
