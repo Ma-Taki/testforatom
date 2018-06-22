@@ -209,13 +209,10 @@ return [
         'item_detail' => '詳細',
         'item_note' => 'メモ(社内用)',
         // カテゴリー
-        'category_name'     => 'カテゴリー名',
-        'page_title'        => 'ページタイトル',
-        'page_keywords'     => 'ページキーワード',
-        'page_description'  => 'ページディスクリプション',
-        'detail'            => '詳細',
-        'path'              => 'パス',
-        'search_key'        => '検索キー',
+        'category_name' => 'カテゴリー名',
+        'page_title' => 'ページタイトル',
+        'page_keywords' => 'ページキーワード',
+        'page_description' => 'ページディスクリプション',
         //ポジション
         'position_name'     => 'ポジション名',
         //システム種別

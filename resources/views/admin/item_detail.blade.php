@@ -41,6 +41,7 @@ use App\Models\Tr_search_categories;
     <div class="row">
             <div class="content-box-header">
                 <div class="panel-title">案件詳細</div>
+                <a href="/admin/item/modify?id={{ $item->id }}"><button type="button" class="btn btn-warning btn-xs">編集</button></a>
             </div>
             <div class="content-box-large box-with-header">
                 <div word-wrap:break-word>
@@ -77,7 +78,7 @@ use App\Models\Tr_search_categories;
                         </tr>
                         <tr>
                             <th>報酬</th>
-                            <td>{{ $item->max_rate }}円
+                            <td>{{ number_format($item->max_rate) }}円
                                 {!! isset($entry->item->rate_detail) ? '</br>'.$entry->item->rate_detail : '' !!}
                             </td>
                         </tr>
