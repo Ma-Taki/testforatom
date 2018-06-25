@@ -9,12 +9,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\AdminController;
 use App\Models\Tr_search_categories;
 use App\Models\Tr_search_categories_display;
+use App\Models\Tr_link_items_search_categories;
 use App\Http\Requests\admin\CategoryRegistRequest;
+use App\Http\Requests\admin\CopyCategoryRegistRequest;
 use App\Libraries\AdminUtility as AdminUtil;
 use DB;
 use Carbon\Carbon;
 use Log;
-use Cache;
+use Session;
+
 
 class CategoryController extends AdminController
 {
@@ -40,7 +43,7 @@ class CategoryController extends AdminController
             $query = $query->where('delete_flag', false);
         }
         $categoryList = $query->orderBy('parent_sort', 'asc')->orderBy('child_sort', 'asc')->paginate(20);
-                                                                                   
+                                 
         return view('admin.category_list',compact('categoryList','data_query'));
     }
     
@@ -190,6 +193,448 @@ class CategoryController extends AdminController
     }
 
     /**
+     * コピーして新規登録画面表示(親)
+     * GET:/admin/category/copy-parent-input
+     */
+    public function showCopyParentInput(Request $request){
+        //親カテゴリー最大表示順を取得
+        $sortMax = Tr_search_categories::max('parent_sort');
+        $sortMax = $sortMax + 1;
+        //コピー元の親情報
+        $copyParent = Tr_search_categories::where('id', $request->id)->first();
+        //コピー元の子情報
+        $copysChild = Tr_search_categories::where('parent_id', $request->id)->get();
+        
+        return view('admin.category_copy_parent_input', compact('sortMax','copyParent','copysChild'));
+    }
+
+    /**
+     * コピーして新規登録画面表示(子)
+     * GET:/admin/category/copy-input
+     */
+    public function showCopyChildInput(Request $request){
+        //親カテゴリーのみを昇順で取得
+        $parents = Tr_search_categories::parent()->get();
+        //親に対する子カテゴリー最大表示順を取得
+        $sortMax = Tr_search_categories::where('parent_sort', 1)->where('child_sort', '!=', null)->max('child_sort');
+        $sortMax = $sortMax + 1;
+        //コピー元の子情報
+        $copysChild[] = Tr_search_categories::where('id', $request->id)->first();
+        //子のコピー数
+        $copysChildNum = 0;
+
+        return view('admin.category_copy_child_input', compact('copysChild','copysChildNum','parents','sortMax'));
+    }
+
+    /**
+     * コピーして新規登録処理
+     * POST:/admin/category/copy-child-input
+     */
+    public function insertCopyCategory(CopyCategoryRegistRequest $request){
+        $parentFlag = false;
+        //案件カテゴリー挿入用配列
+        $insItem  = array();
+        // *****************************************************************
+        // 親画面から子画面へ遷移したときの表示
+        // *****************************************************************
+        //入力した親の情報
+        if(!empty($request->children)){
+            $ParentData = array(
+                'parent_id'         => $request->parent_id[0],
+                'delete_flag'       => false,        
+                'name'              => $request->category_name[0],      
+                'parent_sort'       => $request->parent_sort[0],
+                'child_sort'        => $request->child_sort[0],
+                'page_title'        => $request->page_title[0],
+                'page_keywords'     => $request->page_keywords[0],
+                'page_description'  => $request->page_description[0]
+            );
+
+            foreach ($request->children as $key => $id) {
+                //コピー元の子情報
+                $copysChild[] = Tr_search_categories::where('id', $id)->first();
+                if($key == 0){
+                    $sortMax = 1;
+                }else{
+                    $sortMax = $sortMax + 1;
+                } 
+            }
+            
+            //子のコピー数
+            $copysChildNum = count($copysChild);
+            //親カテゴリーを昇順で取得
+            $parents = Tr_search_categories::parent()->get();
+
+            //セッションへ保存
+            Session::put('parentData', $ParentData);
+            Session::put('copysChild', $copysChild);
+            Session::put('copysChildNum', $copysChildNum);
+            Session::put('copyParentId', $request->id);
+            Session::put('sortMax', $sortMax);
+            Session::put('parents', $parents);
+            Session::put('parentName', $request->category_name[0]);
+            return view('admin.category_copy_child_input');
+
+        }else{
+            // *****************************************************************
+            //  登録ボタンを押したとき
+            //  親画面から登録(親のみ)
+            //  子画面から登録(子のみ)
+            //  親画面・子画面から登録(親・子)
+            // *****************************************************************
+            if(empty($request->parent_id) && empty($request->child_sort)){
+                // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                // 親のみのとき
+                // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                //挿入用配列
+                $onlyParent = array(
+                    'parent_id'         => $request->parent_id[0],
+                    'delete_flag'       => false,        
+                    'name'              => $request->category_name[0],      
+                    'parent_sort'       => $request->parent_sort[0],
+                    'child_sort'        => $request->child_sort[0],
+                    'page_title'        => $request->page_title[0],
+                    'page_keywords'     => $request->page_keywords[0],
+                    'page_description'  => $request->page_description[0]
+                );
+
+                //親の最大表示順
+                $sortMax = Tr_search_categories::max('parent_sort');
+                for($value = $onlyParent['parent_sort']; $value <= $sortMax; $value++){
+                    //表示順に紐づいた情報を取得
+                    $update_category = Tr_search_categories::where('parent_sort', $value)->get();
+                    foreach ($update_category as $update) {
+                        //更新用配列
+                        $update_db[] = array(
+                                        'id'          => $update->id,
+                                        'parent_sort' => $value + 1,
+                                        'child_sort'  => $update->child_sort
+                                    );
+                    }
+                }   
+            }else{
+                //親のセッションデータがあるとき
+                if(Session::has('parentData')){
+                    // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                    // 親・子のとき
+                    // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                    //挿入用配列(親)
+                    $parent = array(
+                        'parent_id'         => Session::get('parentData.parent_id'),
+                        'delete_flag'       => false,        
+                        'name'              => Session::get('parentData.name'),      
+                        'parent_sort'       => Session::get('parentData.parent_sort'),
+                        'child_sort'        => Session::get('parentData.child_sort'),
+                        'page_title'        => Session::get('parentData.page_title'),
+                        'page_keywords'     => Session::get('parentData.page_keywords'),
+                        'page_description'  => Session::get('parentData.page_description')
+                    );
+                    //表示順重複チェック(子)
+                    $unique_array = array_unique($request->child_sort);
+                    if (count($unique_array) === count($request->child_sort)) {
+                        for($count = 0; $count <= count($request->category_name) - 1; $count++){
+                            //挿入用配列(子)表示順重複なし
+                            $child[] = array(
+                                'parent_id'         => null,
+                                'delete_flag'       => false,        
+                                'name'              => $request->category_name[$count],      
+                                'parent_sort'       => Session::get('parentData.parent_sort'),
+                                'child_sort'        => $request->child_sort[$count],
+                                'page_title'        => $request->page_title[$count],
+                                'page_keywords'     => $request->page_keywords[$count],
+                                'page_description'  => $request->page_description[$count]
+                            );
+                        }
+                    }else{
+                        for($count = 0; $count <= count($request->category_name) - 1; $count++){
+                            //挿入用配列(子)表示順重複あり
+                            $child[] = array(
+                                'parent_id'         => null,
+                                'delete_flag'       => false,        
+                                'name'              => $request->category_name[$count],      
+                                'parent_sort'       => Session::get('parentData.parent_sort'),
+                                'child_sort'        => $count + 1,
+                                'page_title'        => $request->page_title[$count],
+                                'page_keywords'     => $request->page_keywords[$count],
+                                'page_description'  => $request->page_description[$count]
+                            );
+                        }
+                    }
+
+                    //親の最大表示順
+                    $sortMax = Tr_search_categories::max('parent_sort');
+                    for($value = $parent['parent_sort']; $value <= $sortMax; $value++){
+                        //表示順に紐づいた情報を取得
+                        $update_category = Tr_search_categories::where('parent_sort', $value)->get();
+                        foreach ($update_category as $update) {
+                            //更新用配列
+                            $update_db[] = array(
+                                            'id'          => $update->id,
+                                            'parent_sort' => $value + 1,
+                                            'child_sort'  => $update->child_sort
+                                        );
+                        }
+                    }
+                }else{
+                    // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                    // 子のみのとき
+                    // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                    //登録する親の表示ステータスを確認
+                    $parentCategory = Tr_search_categories::where('id', $request->parent_id[0])->first();
+                    if($parentCategory->delete_flag){
+                        $delete_flag = true;
+                    }else{
+                        $delete_flag = false;
+                    }
+
+                    //挿入用配列
+                    $onlyChild = array(
+                        'parent_id'         => $request->parent_id[0],
+                        'delete_flag'       => $delete_flag,        
+                        'name'              => $request->category_name[0],      
+                        'parent_sort'       => $request->parent_sort[0],
+                        'child_sort'        => $request->child_sort[0],
+                        'page_title'        => $request->page_title[0],
+                        'page_keywords'     => $request->page_keywords[0],
+                        'page_description'  => $request->page_description[0]
+                    );
+                    
+                    //登録する親の子ども最大表示順を取得
+                    $maxSort = Tr_search_categories::where('parent_id', $onlyChild['parent_id'])->max('child_sort');
+                    for($value = $onlyChild['child_sort']; $value <= $maxSort; $value++){
+                        //表示順に紐づいた情報を取得
+                        $update_category = Tr_search_categories::where('parent_id', $onlyChild['parent_id'])
+                                                                    ->where('parent_sort', $onlyChild['parent_sort'])
+                                                                    ->where('child_sort', $value)->first();
+                        //更新用配列
+                        $update_db[] = array(
+                                            'id'          => $update_category->id,
+                                            'parent_sort' => $update_category->parent_sort,
+                                            'child_sort'  => $value + 1,
+                                        );
+                    }
+                    //コピー元と異なる親を選択したとき
+                    $checkParent = Tr_search_categories::where('id', $request->id[0])->first();
+                    if($request->parent_id[0] != $checkParent->parent_id){
+                        $parentFlag = true;
+                    }
+                }  
+            }
+
+            // *****************************************************************
+            // 挿入処理
+            // *****************************************************************
+            // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+            // 親・子のとき
+            // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+            if(!empty($parent)) {
+                // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                // 親・子の親の処理
+                // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                $parentTran = DB::transaction(function () use ($parent) {
+                    try {
+                        //テーブルに挿入
+                        $insert_category = new Tr_search_categories;
+                        $insert_category->parent_id         = $parent['parent_id'];
+                        $insert_category->delete_flag       = $parent['delete_flag'];
+                        $insert_category->name              = $parent['name'];
+                        $insert_category->parent_sort       = $parent['parent_sort'];
+                        $insert_category->child_sort        = $parent['child_sort'];
+                        $insert_category->page_title        = $parent['page_title'];
+                        $insert_category->page_keywords     = $parent['page_keywords'];
+                        $insert_category->page_description  = $parent['page_description'];
+                        $insert_category->save();
+                        return['id' => $insert_category->id];
+                    } catch (Exception $e) {
+                        Log::error($e);
+                        abort(400, 'トランザクションが異常終了しました。');
+                    }
+                });
+
+                //コピーして登録する案件のカテゴリー情報
+                if(Session::has('copyParentId')){
+                    $copyParent = Tr_link_items_search_categories::where('search_category_id', Session::get('copyParentId'))->get();
+                    foreach ($copyParent as $item) {
+                        //挿入用配列
+                        $insItem[] = array(
+                                        'item_id'            => $item->item_id,
+                                        'search_category_id' => $parentTran['id'],
+                                    );
+                    }
+                }
+                // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                // 親・子の子の処理
+                // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+                $parentId = $parentTran['id'];
+                foreach ($child as $data) {   
+                    $childTran[] = DB::transaction(function () use ($data,$parentId) {
+                        try {
+                            //テーブルに挿入
+                            $insert_category = new Tr_search_categories;
+                            $insert_category->parent_id         = $parentId;
+                            $insert_category->delete_flag       = $data['delete_flag'];
+                            $insert_category->name              = $data['name'];
+                            $insert_category->parent_sort       = $data['parent_sort'];
+                            $insert_category->child_sort        = $data['child_sort'];
+                            $insert_category->page_title        = $data['page_title'];
+                            $insert_category->page_keywords     = $data['page_keywords'];
+                            $insert_category->page_description  = $data['page_description'];
+                            $insert_category->save();
+                            return['id' => $insert_category->id];
+                        } catch (Exception $e) {
+                            Log::error($e);
+                            abort(400, 'トランザクションが異常終了しました。');
+                        }
+                    });
+                }
+
+                //コピーして登録する案件のカテゴリー情報
+                foreach ($request->id as $key => $id) {
+                    $copy = Tr_link_items_search_categories::where('search_category_id', $id)->get();
+                    foreach ($copy as $item) {
+                        //挿入用配列
+                        $insItem[] = array(
+                                        'item_id'            => $item->item_id,
+                                        'search_category_id' => $childTran[$key]['id'],
+                                    );
+                    }
+                }
+            }
+            // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+            // 親のみ、または子のみの処理
+            // ~*~*~*~*~*~*~*~*~*~*~*~*~*
+            if(!empty($onlyParent) || !empty($onlyChild)) {
+                if(!empty($onlyParent)){
+                    $data = $onlyParent;
+                }elseif(!empty($onlyChild)){
+                    $diffParent = array(); 
+                    $data = $onlyChild;
+                }
+                $onlyTran = DB::transaction(function () use ($data) {
+                    try {
+                        //テーブルに挿入
+                        $insert_category                    = new Tr_search_categories;
+                        $insert_category->parent_id         = $data['parent_id'];
+                        $insert_category->delete_flag       = $data['delete_flag'];
+                        $insert_category->name              = $data['name'];
+                        $insert_category->parent_sort       = $data['parent_sort'];
+                        $insert_category->child_sort        = $data['child_sort'];
+                        $insert_category->page_title        = $data['page_title'];
+                        $insert_category->page_keywords     = $data['page_keywords'];
+                        $insert_category->page_description  = $data['page_description'];
+                        $insert_category->save();
+                        return[
+                                'id'        => $insert_category->id,
+                                'parent_id' => $insert_category->parent_id
+                            ];
+                    } catch (Exception $e) {
+                        Log::error($e);
+                        abort(400, 'トランザクションが異常終了しました。');
+                    }
+                });
+
+                //コピーして登録する案件のカテゴリー情報
+                $copy = Tr_link_items_search_categories::where('search_category_id', $request->id)->get();
+                foreach ($copy as $key => $item) {
+                    //挿入用配列
+                    $insItem[] = array(
+                                    'item_id'            => $item->item_id,
+                                    'search_category_id' => $onlyTran['id'],
+                                );
+                    if($parentFlag){
+                        $diffParent[] = $item->item_id;
+                    }
+                }
+
+                //コピー元と異なる親を選択したとき
+                if($parentFlag){
+                    foreach ($diffParent as $item) {
+                        $checkUpdate = Tr_link_items_search_categories::where('item_id', $item)->where('search_category_id', $onlyTran['parent_id'])->get();
+                        if(count($checkUpdate) === 0){
+                            //挿入用配列
+                            $insItem[] = array(
+                                            'item_id'            => $item,
+                                            'search_category_id' => $onlyTran['parent_id'],
+                                        );
+                        }
+                    }
+                }
+            }
+
+            // *****************************************************************
+            // カテゴリー表示順更新処理
+            // *****************************************************************
+            if(!empty($update_db)){
+                foreach ($update_db as $update) {
+                    //トランザクション
+                    DB::transaction(function () use ($update) {
+                     try {
+                            Tr_search_categories::where('id', $update['id'])->update([
+                                'parent_sort' => $update['parent_sort'],
+                                'child_sort'  => $update['child_sort']
+                            ]);
+                        } catch (\Exception $e) {
+                            Log::error($e);
+                            abort(400, 'トランザクションが異常終了しました。');
+                        }
+                    });
+                }
+            }
+
+            // *****************************************************************
+            // 案件のカテゴリー挿入処理
+            // *****************************************************************
+            foreach ($insItem as $data) {
+                DB::transaction(function () use ($data) {
+                    try {
+                        //テーブルに挿入
+                        $insert_link_items_search_categories                     = new Tr_link_items_search_categories;
+                        $insert_link_items_search_categories->item_id            = $data['item_id'];
+                        $insert_link_items_search_categories->search_category_id = $data['search_category_id'];
+                        $insert_link_items_search_categories->save();
+                    } catch (Exception $e) {
+                        Log::error($e);
+                        abort(400, 'トランザクションが異常終了しました。');
+                    }
+                });
+            }
+        }
+
+        return redirect('/admin/category/search')->with('custom_info_messages','カテゴリー登録は正常に終了しました。');
+    }
+
+    /**
+     * セッションデータ削除
+     * ①登録前
+     * ②コピーして登録後一覧画面に遷移したとき
+     * ③コピーして登録の親画面で入力、その後子画面の入力途中でもどるボタン2回押下、一覧画面を表示したとき
+     * POST:/admin/category/session-forget
+     */
+    public function ajaxSessionForget(){
+        if(Session::has('parentData')){
+            Session::forget('parentData');
+        }
+        if(Session::has('copysChild')){
+            Session::forget('copysChild');
+        }
+        if(Session::has('copysChildNum')){
+            Session::forget('copysChildNum');
+        }
+        if(Session::has('copyParentId')){
+            Session::forget('copyParentId');
+        }
+        if(Session::has('sortMax')){
+            Session::forget('sortMax');
+        }
+        if(Session::has('parents')){
+            Session::forget('parents');
+        }
+        if(Session::has('parentName')){
+            Session::forget('parentName');
+        }
+    }
+
+    /**
      * 編集画面表示
      * GET:/admin/category/modify
      */
@@ -221,14 +666,14 @@ class CategoryController extends AdminController
      * POST:/admin/category/selectBox
      */
     public function ajaxSelectBox(Request $request){
+      
         //親に対する子カテゴリー最大表示順を取得
         $sortMax = Tr_search_categories::where('parent_id', $request->parent_id)
                                                      ->where('child_sort', '!=', null)
                                                      ->max('child_sort');
         //親の表示順                         
         $category = Tr_search_categories::where('id', $request->parent_id)->get()->first();
-                                                     
-                                                                                              
+                                                                                        
         if($request->status == 1){
             //新規登録画面
             $data = [
@@ -246,6 +691,7 @@ class CategoryController extends AdminController
                         'parent_sort' => $category->parent_sort
                     ];
         }
+        
         //エンコードして返却
         echo json_encode($data);
     }
@@ -552,7 +998,7 @@ class CategoryController extends AdminController
                                     'child_sort'  => $value - 1,
                                 );
             }
-        }  
+        }
 
         //更新処理
         foreach ($update_db as $update) {

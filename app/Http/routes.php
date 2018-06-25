@@ -214,6 +214,11 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/category/input', 'admin\CategoryController@showCategoryInput');
     // 新規登録処理
     Route::post('/admin/category/input', 'admin\CategoryController@insertCategory');
+    // コピーして新規登録画面(parent)
+    Route::get('/admin/category/copy-parent-input', 'admin\CategoryController@showCopyParentInput');
+    // コピーして新規登録処理(child)    
+    Route::get('/admin/category/copy-child-input', 'admin\CategoryController@showCopyChildInput');
+    Route::post('/admin/category/copy-child-input', 'admin\CategoryController@insertCopyCategory');
     // 詳細画面
     Route::get('/admin/category/detail', 'admin\CategoryController@showCategoryDetail');
     // 編集画面
@@ -228,6 +233,8 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::get('/admin/category/insert', 'admin\CategoryController@insertAgainCategory');
     // セレクトボックス切り替え
     Route::post('/admin/category/selectBox', 'admin\CategoryController@ajaxSelectBox');
+    // セッション削除
+    Route::post('/admin/category/session-forget', 'admin\CategoryController@ajaxSessionForget');
     // トップページ表示管理画面
     Route::get('/admin/category/list', 'admin\CategoryController@displayCategorylist');
     // トップページ表示更新処理
