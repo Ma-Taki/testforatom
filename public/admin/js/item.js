@@ -13,7 +13,7 @@ function addTag(tags)
 
 	var outputTags = uniqueAndTrim(origTags);
 
-	$("#tagTextArea").val(outputTags.join("\n"));
+	$("#tagTextArea").val(outputTags.join('\n'));
 }
 
 function checkboxToTag()
@@ -32,8 +32,7 @@ function checkboxToTag()
 	addTag(labelTexts);
 }
 
-function mutualApply()
-{
+function mutualApply(){
 	checkboxToTag();
 	tagToCheckbox();
 }
@@ -47,35 +46,30 @@ function mutualApplyBeforeSubmit()
 	return true;
 }
 
-function tagToCheckbox()
-{
+function tagToCheckbox(){
+
 	var labelText = "";
 	var tagText = "";
 	var tagLines = $("#tagTextArea").val().split(/\r|\r\n|\n/);
 
-	jQuery.each(tagLines, function(i)
-	{
-		tagText = trim(this)
+	jQuery.each(tagLines, function(i){
+		tagText = trim(this);
 
-		if (tagText == "")
-		{
+		if (tagText == ""){
 			return true;
 		}
+		tagTextReplace = zenkakuToHankaku(this).toLowerCase().replace(/[ !"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~]/g, "\\$&");
+		tagTextRegExp = new RegExp("^" + tagTextReplace + "$");
 
-		tagText = zenkakuToHankaku(this).toLowerCase();
-
-		$(".tagTarget input:checkbox").each(function()
-		{
-			labelText = $(this).parent("label").text();
-			if(tagText == zenkakuToHankaku(labelText).toLowerCase())
-			{
+		$(".tagTarget input:checkbox").each(function(){
+			labelText = trim(zenkakuToHankaku($(this).parent("label").text()).toLowerCase());
+			
+			if(labelText.match(tagTextRegExp)) {
 				$(this).prop("checked", true);
-				tagLines[i] = labelText;
 			}
 		});
 	});
-
-	$("#tagTextArea").val(tagLines.join("\n"));
+	$("#tagTextArea").val(tagLines.join('\n'));
 }
 
 function uniqueAndTrim(textArray)
