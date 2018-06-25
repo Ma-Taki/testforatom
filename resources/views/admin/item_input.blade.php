@@ -237,9 +237,9 @@ use App\Models\Ms_skills;
                                         </br>
                                         ▼pickupタグ</br>
                                         <select id="pkts" class="input-sm btn-default">
-@foreach($pickupTagInfos as $tagInfo)
-                                            <option value="{{ $tagInfo->tag->term }}">{{ $tagInfo->tag->term }}</option>
-@endforeach
+                                            @foreach($pickupTagInfos as $tagInfo)
+                                                <option value="{{ $tagInfo->tag->term }}">{{ $tagInfo->tag->term }}</option>
+                                            @endforeach
                                         </select>
                                         <button type="button" class="btn btn-sm btn-default" onclick="addTag(document.getElementById('pkts').value)">追加</button>
                                         </br>

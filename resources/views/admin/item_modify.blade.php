@@ -218,6 +218,12 @@ use App\Models\Ms_skills;
                                     <div class="col-md-5">
                                         <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px" id="tagTextArea">{{ HtmlUtility::setTextValueByRequest(HtmlUtility::convertTagModelToString($item->tags), old('item_tag')) }}</textarea>
                                     </div>
+
+                                    <div class="col-md-5">
+                                        <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px;" id="tagTextArea">{{ old('item_tag') }}</textarea>
+                                    </div>
+
+
                                     <div class="col-md-7">
                                         <button type="button" class="btn btn-sm btn-default" onclick="mutualApply()">相互反映</button>
                                         ポジション、システム種別、要求スキル("その他"以外)</br>
@@ -329,8 +335,7 @@ function checkboxToTag()
 	addTag(labelTexts);
 }
 
-function mutualApply()
-{
+function mutualApply(){
 	checkboxToTag();
 	tagToCheckbox();
 }
@@ -350,28 +355,23 @@ function tagToCheckbox()
 	var tagText = "";
 	var tagLines = $("#tagTextArea").val().split(/\r|\r\n|\n/);
 
-	jQuery.each(tagLines, function(i)
-	{
-		tagText = trim(this)
+	jQuery.each(tagLines, function(i){
+		tagText = trim(this);
 
-		if (tagText == "")
-		{
+		if (tagText == ""){
 			return true;
 		}
+        tagTextReplace = zenkakuToHankaku(this).toLowerCase().replace(/[ !"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~]/g, "\\$&");
+        tagTextRegExp = new RegExp("^" + tagTextReplace + "$");
 
-		tagText = zenkakuToHankaku(this).toLowerCase();
-
-		$(".tagTarget input:checkbox").each(function()
-		{
-			labelText = $(this).parent("label").text();
-			if(tagText == zenkakuToHankaku(labelText).toLowerCase())
-			{
-				$(this).prop("checked", true);
-				tagLines[i] = labelText;
-			}
-		});
+        $(".tagTarget input:checkbox").each(function(){
+            labelText = trim(zenkakuToHankaku($(this).parent("label").text()).toLowerCase());
+            
+            if(labelText.match(tagTextRegExp)) {
+                $(this).prop("checked", true);
+            }
+        });
 	});
-
 	$("#tagTextArea").val(tagLines.join("\n"));
 }
 
