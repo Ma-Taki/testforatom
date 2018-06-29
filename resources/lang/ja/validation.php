@@ -151,6 +151,9 @@ return [
             'between' => 'パスワードは:min〜:max文字で入力してください。',
             'confirmed' => '再入力したパスワードが一致しません。'
         ],
+        'resume' => [
+            'required' => 'スキルシートが入力されておりません。',
+        ],
         'contact_type' => [
             'required' => 'お問い合わせ項目が選択されておりません。'
         ],

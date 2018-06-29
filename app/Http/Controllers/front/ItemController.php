@@ -158,6 +158,7 @@ class ItemController extends FrontController
 
         //wordpress固定ページ表示チェック(タグ検索)
         $columnConnects = array();
+        $tagKeywords = array();
         if(!empty($item->tags)){
             foreach ($item->tags as $tag) {
                 $tagKeywords[] = $tag->term;
