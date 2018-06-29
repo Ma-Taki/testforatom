@@ -59,6 +59,7 @@ class UserRegistrationRequest extends Request
                 'regex:/^[\x21-\x7E]+$/',
             ],
             'password_confirmation' => '',
+            'resume' => 'required',
         ];
     }
 }
