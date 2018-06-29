@@ -530,4 +530,89 @@ jQuery(function($){
 	  return false;
 	});
 
+	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+	//スキルシート提出のラジオボタン
+	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+	//後で登録・今登録
+	$('[name="resume"]:radio').change( function() {
+	    if($('[value="later"]').prop('checked')){
+	    	//ドラッグ&ドロップ・ファイル選択・メール選択枠
+	    	$('.input_file').css('display', 'none');
+	    	//ドラッグ&ドロップ
+			$('.ddrop_files').css('display', 'none');
+			//ファイル選択
+			$('.explorer_files').css('display', 'none');
+			//メール
+			$('.mail_files').css('display', 'none');
+			//説明文
+			$('.resume-note').css('display', 'none');
+	    
+	    } else if ($('[value="now"]').prop('checked')) {
+	    
+			$('.input_file').css('display', 'block');
+			$('.ddrop_files').css('display', 'block');
+			$('.explorer_files').css('display', 'none');
+			$('.mail_files').css('display', 'none');
+			$('.resume-note').css('display', 'block');
+    	}
+	});
+
+	//ドラッグ&ドロップ・ファイル選択・メールのどれかを選択したとき
+	$('[name="file"]:radio').change( function() {
+		if($('[value="dd"]').prop('checked')){
+	    	
+	    	$('.ddrop_files').css('display', 'block');
+			$('.explorer_files').css('display', 'none');
+			$('.mail_files').css('display', 'none');
+			$('.resume-note').css('display', 'block');
+	    
+	    } else if ($('[value="fe"]').prop('checked')) {
+	    	
+	    	$('.ddrop_files').css('display', 'none');
+			$('.explorer_files').css('display', 'block');
+			$('.mail_files').css('display', 'none');
+			$('.resume-note').css('display', 'block');
+
+    	}else if ($('[value="fma"]').prop('checked')) {
+	    	
+	    	$('.ddrop_files').css('display', 'none');
+			$('.explorer_files').css('display', 'none');
+			$('.mail_files').css('display', 'block');
+			$('.resume-note').css('display', 'block');
+    	}
+
+
+
+
+
+
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });

@@ -121,7 +121,7 @@
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <div class="question__text">支払いサイトについて
+                                <div class="question__text">支払いについて
                                     <div class="arrow">
                                         <span class="arrow-left"></span>
                                         <span class="arrow-right"></span>
