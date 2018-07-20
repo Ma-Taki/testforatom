@@ -60,63 +60,70 @@ class EntryController extends FrontController
             abort(400, 'すでにエントリー済みです。');
         }
 
-        $files = array(
+        //スキルシート空チェック
+        if(is_null($request->skillsheet_filename_first) && is_null($request->skillsheet_filename_second) && is_null($request->skillsheet_filename_third)){
+            $files = null;
+            $file_extension = null;
+
+        }else{
+            $files = array(
                         $request->skillsheet_filename_first, 
                         $request->skillsheet_filename_second, 
                         $request->skillsheet_filename_third
                     );
-     //   $files = array_filter($skillFiles);
-        $filesName = array(
+
+            $filesName = array(
                         "skillsheet_filename_first", 
                         "skillsheet_filename_second", 
                         "skillsheet_filename_third"
                     );
 
-        $original_name = null;
-        $file_extension = array();
-        foreach ($files as $key => $file) {
-    
-            // ▽▽▽ スキルシートアップロード時のバリデーション ▽▽▽
-            if(!empty($file)) {
-                $custom_error_messages = [];
-                // サイズチェック
-                if ($file->getClientSize() > FrntUtil::FILE_UPLOAD_RULE['maximumSize']) {
-                    array_push($custom_error_messages, 'スキルシートが1MBを超えています。');
+            $original_name = null;
+            $file_extension = array();
+            foreach ($files as $key => $file) {
+        
+                // ▽▽▽ スキルシートアップロード時のバリデーション ▽▽▽
+                if(!empty($file)) {
+                    $custom_error_messages = [];
+                    // サイズチェック
+                    if ($file->getClientSize() > FrntUtil::FILE_UPLOAD_RULE['maximumSize']) {
+                        array_push($custom_error_messages, 'スキルシートが1MBを超えています。');
+                    }
+     
+                    // 拡張子チェック
+                    $original_name = collect(explode('.', $file->getClientOriginalName()));
+                    if ($original_name->count() != 2
+                        || !in_array($original_name->last(), FrntUtil::FILE_UPLOAD_RULE['allowedExtensions'])) {
+                            array_push($custom_error_messages, 'スキルシートの拡張子が正しくありません。');
+                    }
+                    
+                    // mimeTypeチェック
+                    $mime_type = shell_exec('file -b --mime '.escapeshellcmd($_FILES[$filesName[$key]]['tmp_name']));
+                    $mime_type = trim($mime_type);
+                    $mime_type = collect(explode(';', $mime_type));
+
+                    if ($mime_type->isEmpty()
+                        || (!$mime_type->isEmpty()
+                            && !in_array($mime_type->first(), FrntUtil::FILE_UPLOAD_RULE['allowedTypes']))) {
+                            array_push($custom_error_messages, 'スキルシートのファイル形式が正しくありません。');
+                    }
+
+                    if (!empty($custom_error_messages)) {
+                        // フラッシュセッションにエラーメッセージを保存
+                        \Session::flash('custom_error_messages', $custom_error_messages);
+                        return back()->withInput();
+                    }
+
+                    $file_extension[] = $original_name->last();
+
+                }else{
+
+                    $file_extension[] = null;
                 }
- 
-                // 拡張子チェック
-                $original_name = collect(explode('.', $file->getClientOriginalName()));
-                if ($original_name->count() != 2
-                    || !in_array($original_name->last(), FrntUtil::FILE_UPLOAD_RULE['allowedExtensions'])) {
-                        array_push($custom_error_messages, 'スキルシートの拡張子が正しくありません。');
-                }
-                
-                // mimeTypeチェック
-                $mime_type = shell_exec('file -b --mime '.escapeshellcmd($_FILES[$filesName[$key]]['tmp_name']));
-                $mime_type = trim($mime_type);
-                $mime_type = collect(explode(';', $mime_type));
-
-                if ($mime_type->isEmpty()
-                    || (!$mime_type->isEmpty()
-                        && !in_array($mime_type->first(), FrntUtil::FILE_UPLOAD_RULE['allowedTypes']))) {
-                        array_push($custom_error_messages, 'スキルシートのファイル形式が正しくありません。');
-                }
-
-                if (!empty($custom_error_messages)) {
-                    // フラッシュセッションにエラーメッセージを保存
-                    \Session::flash('custom_error_messages', $custom_error_messages);
-                    return back()->withInput();
-                }
-
-                $file_extension[] = $original_name->last();
-
-            }else{
-
-                $file_extension[] = null;
             }
         }
+   
         // △△△ スキルシートアップロード時のバリデーション △△△
-
         $data = [
             'user_id'                    => $user->id,
             'item_id'                    => $item->id,
@@ -130,7 +137,8 @@ class EntryController extends FrontController
             'file_name'                  => 'skillsheetEN',
             'file_extension'             => $file_extension,
         ];
-        
+
+
         // トランザクション
         $db_return_data = DB::transaction(function () use ($data, $files) {
             try {
@@ -148,8 +156,8 @@ class EntryController extends FrontController
                 $insert_entry->save();
 
                 // 採番されたIDでファイル名を生成、アップデート
-                $name = $data['file_name'].$insert_entry->id;
                 if ($insert_entry->skillsheet_upload) {
+                    $name = $data['file_name'].$insert_entry->id;
                     foreach ($files as $key => $file) {
                         switch ($key) {
                         case 0:
@@ -179,6 +187,8 @@ class EntryController extends FrontController
                         }
                     }                  
                     $insert_entry->save();
+                }else{
+                    $file_name = null;
                 }
                 return [
                     'file_name' => $file_name,
@@ -191,9 +201,11 @@ class EntryController extends FrontController
         });
 
         // ファイルをローカルに保存
-        foreach ($files as $key => $file) {
-            if(!empty($file)) {
-                $file->move(storage_path('app'), $db_return_data['file_name'][$key]);
+        if(count($files) > 0){
+            foreach ($files as $key => $file) {
+                if(!empty($file)) {
+                    $file->move(storage_path('app'), $db_return_data['file_name'][$key]);
+                }
             }
         }
 
