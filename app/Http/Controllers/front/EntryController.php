@@ -65,7 +65,7 @@ class EntryController extends FrontController
                         $request->skillsheet_filename_second, 
                         $request->skillsheet_filename_third
                     );
-        $files = array_filter($skillFiles);
+     //   $files = array_filter($skillFiles);
         $filesName = array(
                         "skillsheet_filename_first", 
                         "skillsheet_filename_second", 
