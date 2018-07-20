@@ -60,11 +60,12 @@ class EntryController extends FrontController
             abort(400, 'すでにエントリー済みです。');
         }
 
-        $files = array(
+        $skillFiles = array(
                         $request->skillsheet_filename_first, 
                         $request->skillsheet_filename_second, 
                         $request->skillsheet_filename_third
                     );
+        $files = array_filter($skillFiles);
         $filesName = array(
                         "skillsheet_filename_first", 
                         "skillsheet_filename_second", 
@@ -72,7 +73,7 @@ class EntryController extends FrontController
                     );
 
         $original_name = null;
-
+        $file_extension = array();
         foreach ($files as $key => $file) {
     
             // ▽▽▽ スキルシートアップロード時のバリデーション ▽▽▽
