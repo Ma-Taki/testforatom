@@ -60,12 +60,12 @@ class EntryController extends FrontController
             abort(400, 'すでにエントリー済みです。');
         }
 
-        $skillFiles = array(
+        $files = array(
                         $request->skillsheet_filename_first, 
                         $request->skillsheet_filename_second, 
                         $request->skillsheet_filename_third
                     );
-        $files = array_filter($skillFiles);
+     //   $files = array_filter($skillFiles);
         $filesName = array(
                         "skillsheet_filename_first", 
                         "skillsheet_filename_second", 
