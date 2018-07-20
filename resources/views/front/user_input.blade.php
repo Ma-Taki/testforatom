@@ -200,7 +200,7 @@
                 <input type="checkbox" @if(old('magazine_flag', $magazine_flag)) checked @endif name="magazine_flag_temp">配信を希望する</label>
             </div>
           </div>
-          <hr class="hr-1px-dashed-333">
+          <?php /* <hr class="hr-1px-dashed-333">
           <div class="input_field fs0">
             <div class="input_f_name">
               <p>スキルシートを提出<span class="color-red">※</span></p>
@@ -252,7 +252,7 @@
                 <p>・上記以外のファイルはメールで提出してください。</p>
               </div>
             </div>
-          </div>
+          </div> */ ?>
           <hr class="hr-1px-dashed-333">
           <p class="textAreaInfo">下記の「利用規約」、「個人情報の取扱いについて」に同意の上、「利用規約・個人情報の取扱いに同意して会員登録する」ボタンをクリックしてください。</p>
           <div class="textArea">
