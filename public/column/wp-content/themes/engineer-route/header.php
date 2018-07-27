@@ -59,7 +59,7 @@ ga('send', 'pageview');
                         </a>
                     </li>
                 <?php }else{ ?>
-                    <li>
+                    <li id="user-signin">
                         <a href="/user/regist/auth" class="signin">新規登録</a>
                     </li>
                     <li>
