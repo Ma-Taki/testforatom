@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+z<?php get_header(); ?>
 <div id="content">
 	<div id="inner-content" class="wrap cf">
 		<!-- スマホ用パンくず -->
@@ -36,7 +36,7 @@
 					<section class="entry-content cf">
 						<?php the_content(); ?>
 					</section>
-					<!-- タグ表示 -->
+										<!-- タグ表示 -->
 					<div class="article-footer">
 						<?php echo get_the_category_list(); ?>
 						<?php the_tags( '<p class="tags">', '', '</p>' ); ?>
