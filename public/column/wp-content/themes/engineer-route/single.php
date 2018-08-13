@@ -59,7 +59,7 @@
 								) );?>
 						</section>
 						<div class="article-footer">
-						<!-- バナー表示 -->
+						<!-- バナー作成 -->
 					<p>
 						<a href="https://www.engineer-route.com/user/regist/auth">
 						<img src="https://www.engineer-route.com/column/wp-content/uploads/engineer-route_yoko_bnr03-1.png" alt="プロのコーディネーターによる 非公開案件のご紹介 充実してます" width="615" height="219" class="alignnone size-full wp-image-1092" /></a>
