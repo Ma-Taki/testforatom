@@ -60,6 +60,8 @@ Route::get('/item/search/condition', function() { return view('front.sp.conditio
 Route::get('/user/regist/auth', 'front\UserController@showMailAuth');
 Route::post('/user/regist/auth', 'front\UserController@mailAuth');
 Route::resource('/user/regist', 'front\UserController', ['only' => ['index', 'store']]);
+// ファイルアップロード
+Route::get('/user/regist/completion', 'front\UserController@ajaxRegistComp');
 
 // ログイン
 Route::resource('/login', 'front\LoginController', ['only' => ['index', 'store']]);
@@ -90,7 +92,9 @@ Route::group(['middleware' => 'front_loginCheck'], function () {
     Route::get('/user/edit/email/auth', 'front\UserController@updateEmail');
     // エントリー
     Route::resource('/entry', 'front\EntryController', ['only' => ['index', 'store']]);
-    Route::get('/entry/download', 'front\EntryController@download');
+    Route::get('/entry/con', 'front\EntryController@download');
+    // ファイルアップロード
+    Route::get('/entry/completion', 'front\EntryController@ajaxRegistComp');
     // 退会
     Route::get('/user/delete', function(){ return view('front.user_delete'); });
     Route::post('/user/delete', 'front\UserController@deleteUser');
@@ -103,6 +107,8 @@ Route::group(['middleware' => 'front_loginCheck'], function () {
     Route::get('/user/entry', 'front\UserController@showEntryList');
     // エントリーシートのダウンロード
     Route::get('/user/entry/download', 'front\UserController@donwload');
+    Route::get('/user/skillsheet/download', 'front\UserController@downloadSkillSheet');
+    Route::get('/user/skillsheet/download/oneByOne', 'front\UserController@downloadOneByOne');
 });
 
 // パスワード再設定URL送信
@@ -187,6 +193,8 @@ Route::group(['middleware' => ['loginCheck', 'authCheck']], function () {
     Route::post('/admin/member/editstatus', 'admin\MemberController@ajaxEditMemberStatus');
     // 進捗状況メモ編集
     Route::post('/admin/member/updatestatus', 'admin\MemberController@updateMemberStatus');
+    // スキルシートダウンロード処理
+    Route::get('/admin/member/download', 'admin\MemberController@downloadSkillSheet');
 
     // 案件管理
     // 新規登録画面

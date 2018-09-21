@@ -94,6 +94,10 @@
                                 <th>ステータス</th>
                                 <td>{{ $member->delete_flag ? '無効' : '有効' }}</td>
                             </tr>
+                            <tr>
+                                <th>スキルシート</th>
+                                <td>{!! $member->skillsheet_upload ? "<a href='/admin/member/download?id=$member->id'>アップロード済み</a>" : '未アップロード' !!}</td>
+                            </tr>
                         </table>
                     </div>
                 </div>

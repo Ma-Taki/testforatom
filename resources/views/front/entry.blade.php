@@ -19,9 +19,10 @@
           <p class="content__info">
             下記の内容を確認後、スキルシートの提出方法をお選び頂き、「この内容でエントリーする」ボタンをクリックしてください。
           </p>
+          <div class="alert_design"></div>
           @include ('front.common.validation_error')
           <hr class="hr-1px-dashed-333">
-          <form method="post" action="{{ url('/entry') }}" enctype="multipart/form-data">
+          <form method="post" name="js-entry-form" action="{{ url('/entry') }}" enctype="multipart/form-data">
             <div class="user-info">
               <div class="data-table">
                 <h3 class="data-table__title">会員情報</h3>
@@ -82,67 +83,66 @@
             </div><!-- END .item-info -->
             <div class="send-skillsheet">
               <div class="data-table">
-                <h3 class="data-table__title">スキルシート提出</h3>
+                <h3 class="data-table__title">履歴書・職務経歴書・スキルシート</h3>
                 <div class="data">
                   <div class="data__info">
-                    <p>
-                      ・スキルシートは当フォーム上からのアップロード、又はメールでの提出が可能です。
-                    </p>
-                    <p>
-                      ・スキルシートのフォーマットは
-                      <a href="/entry/download" class="hover-thin">こちらから</a>
-                      ダウンロードできます。
-                    </p>
-                    <p>
-                      ・アップロード可能なファイル形式はMicrosoft Excel(.xls,xlsx)、Word(.doc,.docx)、PowerPoint(.ppt,pptx)、PDF(.pdf)です。
-                    </p>
-                    <p>
-                      ・1つのファイルサイズは1MB以内です。
-                    </p>
-                    <p>
-                      ・上記以外のファイルはメールで提出してください。
-                    </p>
+                    <p>・スキルシートのフォーマットは<a href="/entry/download" class="hover-thin">こちらから</a>ダウンロードできます。</p>
+                    <p>・アップロード可能なファイル形式はMicrosoft Excel(xls,xlsx)、Word(doc,docx)、PowerPoint(ppt,pptx)、PDF(pdf)です。</p>
+                    <p>・アップロードは3ファイルまでです。</p>
+                    <p>・1つのファイルサイズは1MB以内です。</p>
+                    <p> ・上記以外のファイルはメールで提出してください。</p>
                   </div>
                 </div>
                 <div class="data">
-                  <div class="name">アップロードで提出</div>
+                  <div class="name">提出方法</div>
                   <div class="value">
-                    <div class="display-block">
-                      <input type="file" name="skillsheet_filename_first"><br>
-                      ※ メールで提出する場合は空欄のままにしてください。
+                    <div class="spNone">
+                      <label>
+                      <!-- ~640px 641px~1024pxのときはドラッグ&ドロップ非表示 -->
+                        <input type="radio" name="file_type" id="file_ddrop" value="entry_dd">ドラッグ&amp;ドロップ
+                      </label>
+                    </div>
+                    <label>
+                      <input type="radio" name="file_type" id="file_explorer" value="entry_fe">ファイルを選択
+                    </label>
+                    <label>
+                      <input type="radio" name="file_type" id="file_mail" value="entry_fma">メール
+                    </label>
+                  </div>
+                </div>
+                <div class="data upload-box" style="display:none;">
+                  <div class="value-box">
+                    <!-- ドラッグ&ドロップ -->
+                    <div class="input_fma_value ddrop_files" id="ddrop" style="display:none;">
+                      <div id="dragandrop" class="registry-upload-dd">
+                        <p id="js-dd-uploaded" class="registry-upload-dd__txt">
+                          ここへファイルを<br>
+                          1つずつドロップしてください。
+                        </p>
+                        <span id="dd_text" style="display:block;"></span>
+                      </div>
+                    </div>
+                    <!-- ファイル選択 -->
+                    <div class="input_fma_value explorer_files">
+                      @for($num=0; $num<=2; $num++)
+                        <div class="input-file-box">
+                          <div class="input-file-btn">
+                            <p>ファイルを選択</p>
+                            <input type="file" class="input-file">
+                          </div>
+                          <span>選択されていません</span>
+                        </div>
+                      @endfor
+                    </div>
+                    <!-- メール -->
+                    <div class="input_fma_value mail_files">
+                      <p>
+                        <a class="skillsheet__email hover-thin" href="mailto:entry@engineer-route.com">entry@engineer-route.com</a>宛てにスキルシートを添付してお送りください。
+                      </p>
                     </div>
                   </div>
                 </div>
-                <div class="data">
-                  <div class="name"></div>
-                  <div class="value">
-                    <div class="display-block">
-                      <input type="file" name="skillsheet_filename_second"><br>
-                      ※ メールで提出する場合は空欄のままにしてください。
-                    </div>
-                  </div>
-                </div>
-                <div class="data">
-                  <div class="name"></div>
-                  <div class="value">
-                    <div class="display-block">
-                      <input type="file" name="skillsheet_filename_third"><br>
-                      ※ メールで提出する場合は空欄のままにしてください。
-                    </div>
-                  </div>
-                </div>
-                <div class="data">
-                  <div class="name">メールで提出</div>
-                  <div class="value">
-                    <p>
-                      <a class="skillsheet__email hover-thin" href="mailto:entry@engineer-route.com">
-                        entry@engineer-route.com
-                      </a>
-                      宛てにスキルシートを添付してお送りください。
-                    </p>
-                  </div>
-                </div>
-              </div><!-- END .data-table -->
+              </div>
             </div>
             <div class="cmmn-btn">
               <button type="submit">この内容でエントリーする</button>

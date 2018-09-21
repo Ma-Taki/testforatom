@@ -521,7 +521,7 @@ class ItemController extends AdminController
         $item_tags = trim($item_tags);
         // 配列に変換する
         $item_tagList = explode('\n',$item_tags);
-        //　すべての文字列要素の前後の空白を削除する
+        // すべての文字列要素の前後の空白を削除する
         $item_tagList = array_map('trim', $item_tagList);
         // 空要素を削除
         $item_tagList = array_filter($item_tagList, 'strlen');
@@ -594,7 +594,6 @@ class ItemController extends AdminController
 
         // 現在時刻
         $timestamp = time();
-
         // トランザクション
         DB::transaction(function () use ($item_name,
                                          $item_biz_category,
