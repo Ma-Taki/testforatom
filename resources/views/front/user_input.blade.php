@@ -31,13 +31,14 @@
     <hr class="hr-2px-solid-5e8796">
     <div class="main-content__body">
       <div class="content__element">
+        <div class="alert_design"></div>
         @include('front.common.validation_error')
         <div class="content__info">
           <p>以下のフォームに必要な情報を入力してください。<span class="color-red">※</span>印の項目は入力必須です。</p>
         </div>
         <hr class="hr-1px-dashed-333">
         <div class="content__body">
-          <form method="post" name="js-user-input-form" action="{{ url('/user/regist') }}">
+          <form method="post" name="js-user-input-form" action="{{ url('/user/regist/completion') }}" enctype="multipart/form-data">
             <div class="input_field fs0">
               <div class="input_f_name">
                 <p>お名前<span class="color-red">※</span></p>
@@ -200,43 +201,64 @@
                 <input type="checkbox" @if(old('magazine_flag', $magazine_flag)) checked @endif name="magazine_flag_temp">配信を希望する</label>
             </div>
           </div>
-          <?php /* <hr class="hr-1px-dashed-333">
-          <div class="input_field fs0">
+          <hr class="hr-1px-dashed-333">
+          <div class="input_field">
             <div class="input_f_name">
-              <p>スキルシートを提出<span class="color-red">※</span></p>
+              <p>履歴書・職務経歴書・スキルシート<span class="color-red">※</span></p>
             </div>
             <div class="input_f_value">
               <div class="input_f_value input_resume">
                 <label>
-                  <input type="radio" name="resume" @if(old('resume') == "later") checked @endif value="later">後で登録する
+                  <input type="radio" name="resume" @if(old('resume') =="now") checked @endif value="now">今登録する
                 </label>
                 <label>
-                  <input type="radio" name="resume" @if(old('resume') == "now") checked @endif value="now">今登録する
+                  <input type="radio" name="resume" @if(old('resume') =="later") checked @endif value="later">後で登録する
                 </label>
               </div>
-              <div class="input_f_value input_file">
+            </div>
+          </div>
+          <span class="input_resume_type" style="border: 0;border-top: 1px dashed #333;"></span>
+          <div class="input_resume_type">
+          <div class="input_field">
+            <div class="input_f_name">
+              <p>登録方法<span class="color-red">※</span></p>
+            </div>
+            <div class="input_f_value">
+              <div class="input_fresume_type_value input_resume_type">
+                <div class="spNone">
+                  <label>
+                    <!-- ~640px 641px~1024pxのときはドラッグ&ドロップ非表示 -->
+                    <input type="radio" name="file_type" id="file_ddrop" value="user_input_dd">ドラッグ&amp;ドロップ
+                  </label>
+                </div>
                 <label>
-                  <input type="radio" name="file" id="file_ddrop" value="dd" checked>ドラッグ&amp;ドロップ
+                  <input type="radio" name="file_type" id="file_explorer" value="user_input_fe">ファイルを選択
                 </label>
                 <label>
-                  <input type="radio" name="file" id="file_explorer" value="fe">ファイルを選択
-                </label>
-                <label>
-                  <input type="radio" name="file" id="file_mail" value="fma">メール
+                  <input type="radio" name="file_type" id="file_mail" value="user_input_fma">メール
                 </label>
               </div>
-             <!-- ドラッグ&ドロップ -->
-              <div class="input_fma_value ddrop_files">
-                <p id="js-dd-uploaded" class="upload-dd__txt">
-                  ここへファイルを<br>
-                  1つずつドロップしてください。
-                </p>
+              <!-- ドラッグ&ドロップ -->
+              <div class="input_fma_value ddrop_files" id="ddrop" style="display:none;">
+                <div id="dragandrop" class="registry-upload-dd">
+                  <p id="js-dd-uploaded" class="registry-upload-dd__txt">
+                    ここへファイルを<br>
+                    1つずつドロップしてください。
+                  </p>
+                  <span id="dd_text" style="display:block;"></span>
+                </div>
               </div>
               <!-- ファイル選択 -->
               <div class="input_fma_value explorer_files">
-                <div class="display-block"><input type="file" name="skillsheet_filename_first"></div>
-                <div class="display-block"><input type="file" name="skillsheet_filename_second"></div>
-                <div class="display-block"><input type="file" name="skillsheet_filename_third"></div>
+                @for($num=0; $num<=2; $num++)
+                  <div class="input-file-box">
+                    <div class="input-file-btn">
+                      <p>ファイルを選択</p>
+                      <input type="file" class="input-file">
+                    </div>
+                    <span>選択されていません</span>
+                  </div>
+                @endfor
               </div>
               <!-- メール -->
               <div class="input_fma_value mail_files">
@@ -247,12 +269,16 @@
               <!-- 説明文 -->
               <div class="input_f_value resume-note">
                 <p>・スキルシートのフォーマットは<a href="/entry/download" class="hover-thin">こちらから</a>ダウンロードできます。</p>
-                <p>・アップロード可能なファイル形式はMicrosoft Excel(.xls,xlsx)、Word(.doc,.docx)、PowerPoint(.ppt,pptx)、PDF(.pdf)です。</p>
-                <p>・1つのファイルサイズは1MB以内です。</p>
-                <p>・上記以外のファイルはメールで提出してください。</p>
+                <p>
+                  ・アップロード可能なファイル形式はMicrosoft Excel(xls,xlsx)、Word(doc,docx)、PowerPoint(ppt,pptx)、PDF(pdf)です。<br>
+                  ・アップロードは合計3ファイルまでです。<br>
+                  ・1つのファイルサイズは1MB以内です。<br>
+                  ・上記以外のファイルはメールで提出してください。<br>
+                </p>
               </div>
             </div>
-          </div> */ ?>
+          </div>
+          </div>
           <hr class="hr-1px-dashed-333">
           <p class="textAreaInfo">下記の「利用規約」、「個人情報の取扱いについて」に同意の上、「利用規約・個人情報の取扱いに同意して会員登録する」ボタンをクリックしてください。</p>
           <div class="textArea">
@@ -377,6 +403,7 @@
     </div>
   </div>
 <script type="text/javascript">
+
   $('form[name="js-user-input-form"]').submit(function(){
     var year = $('#js-slctBx-birth_y').val();
     var month = $('#js-slctBx-birth_m').val();

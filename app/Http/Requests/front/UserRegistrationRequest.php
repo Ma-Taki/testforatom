@@ -3,6 +3,8 @@
 namespace App\Http\Requests\front;
 
 use App\Http\Requests\Request;
+// use Illuminate\Foundation\Http\FormRequest;
+// use Illuminate\Http\JsonResponse;
 
 class UserRegistrationRequest extends Request
 {
@@ -59,7 +61,7 @@ class UserRegistrationRequest extends Request
                 'regex:/^[\x21-\x7E]+$/',
             ],
             'password_confirmation' => '',
-            //'resume' => 'required',
+             'resume' => 'required',
         ];
     }
 }

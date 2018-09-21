@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Tr_tags;
 use App\Models\Tr_search_categories;
+use App\Models\Tr_items;
+use App\Models\Tr_link_items_search_categories;
+use DB;
 
 /**
  * View用パンくずリスト作成ユーティリティー
@@ -107,6 +110,7 @@ class BreadcrumbsUtility
         if (!$category_childs->isEmpty()) {
           // エンジニアルート > 案件一覧 > 親カテゴリ > 子カテゴリ > 案件名
           $category_child = $category_childs->values()[0];
+
           foreach ($category_parents as $key => $value) {
             if ($value->id == $category_child->parent_id) {
                 $category_parent = $value;
@@ -138,6 +142,7 @@ class BreadcrumbsUtility
 
         // エントリー確認画面から呼ばれた場合
         $uri =  parse_url($_SERVER["REQUEST_URI"]);
+
         if ($uri["path"] == "/entry") {
             $breadcrumbs->push(collect([
                 'name' => $item->name.' - AN' .$item->id,
@@ -150,8 +155,90 @@ class BreadcrumbsUtility
 
         // 案件詳細画面から呼ばれた場合
         } else {
+
             $breadcrumbs->push(collect([
                 'name' => $item->name.' - AN' .$item->id,
+                'path' => '',
+            ]));
+        }
+
+        return $breadcrumbs;
+    }
+
+    /**
+     * 一つの案件情報を受け取り、パンくずリストを返却する(Ajax処理後の画面遷移)
+     */
+    public function createBreadcrumbsByItemPiece($item_id, $item_name) {
+
+        // 紐付いた親カテゴリーを取得
+        $category_parents = null;
+        $category_parents = DB::table('items')
+                            ->join('link_items_search_categories', 'items.id' ,'=', 'link_items_search_categories.item_id')
+                            ->join('search_categories','link_items_search_categories.search_category_id', '=' ,'search_categories.id')
+                            ->where('items.id', $item_id)
+                            ->whereNull('search_categories.parent_id')
+                            ->get();
+
+
+        // 紐付いた子カテゴリーを取得
+        $category_childs = null;
+        $category_childs = DB::table('items')
+                            ->join('link_items_search_categories', 'items.id' ,'=', 'link_items_search_categories.item_id')
+                            ->join('search_categories','link_items_search_categories.search_category_id', '=' ,'search_categories.id')
+                            ->where('items.id', $item_id)
+                            ->whereNotNull('search_categories.parent_id')
+                            ->get();
+
+        $category_child  = null;
+        $category_parent = null;
+        if (!empty($category_childs)) {
+          // エンジニアルート > 案件一覧 > 親カテゴリ > 子カテゴリ > 案件名
+          $category_child = $category_childs[0];
+          foreach ($category_parents as $key => $value) {
+            if ($value->id == $category_child->parent_id) {
+                $category_parent = $value;
+                break;
+            }
+          }
+        } else if (!empty($category_parents)) {
+          // エンジニアルート > 案件一覧 > 親カテゴリ > 案件名
+          $category_parent = $category_parents[0];
+        } else {
+          // エンジニアルート > 案件一覧 > 案件名
+        }
+
+        $breadcrumbs = $this->getRootByItemDetail();
+
+        if ($category_parent) {
+            $breadcrumbs->push(collect([
+                'name' => $category_parent->name,
+                'path' => '/item/category/'.$category_parent->id,
+            ]));
+        }
+
+        if ($category_child) {
+            $breadcrumbs->push(collect([
+                'name' => $category_child->name,
+                'path' => '/item/category/'.$category_child->id,
+            ]));
+        }
+
+        // エントリー確認画面から呼ばれた場合
+        $uri =  parse_url($_SERVER["REQUEST_URI"]);
+        if ($uri["path"] == "/entry") {
+            $breadcrumbs->push(collect([
+                'name' => $item_name.' - AN' .$item_id,
+                'path' => '/item/detail?id='.$item_id,
+            ]));
+            $breadcrumbs->push(collect([
+                'name' => 'エントリー',
+                'path' => '',
+            ]));
+
+        // 案件詳細画面から呼ばれた場合
+        } else {
+            $breadcrumbs->push(collect([
+                'name' => $item_name.' - AN' .$item_id,
                 'path' => '',
             ]));
         }

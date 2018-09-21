@@ -30,9 +30,10 @@
     <hr class="hr-2px-solid-5e8796">
     <div class="main-content__body">
       <div class="content__element">
-@include('front.common.validation_error')
-{{-- SNS認証用メッセージ --}}
-@if(Session::has('custom_info_messages'))
+        <div class="alert_design"></div>
+          @include('front.common.validation_error')
+          {{-- SNS認証用メッセージ --}}
+          @if(Session::has('custom_info_messages'))
         <div class="alert alert-info">
           <ul>
     @foreach(Session::get('custom_info_messages') as $message)

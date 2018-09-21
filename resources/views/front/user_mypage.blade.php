@@ -152,6 +152,12 @@
                   @if($user->magazine_flag) 配信を希望する @else 配信を希望しない @endif
                 </div>
               </div>
+              <div class="data">
+                <div class="name">スキルシート</div>
+                <div class="value">
+                  {!! $user->skillsheet_upload ? "<a href='/user/skillsheet/download?id=$user->id'>アップロード済み</a>" : '未アップロード' !!}
+                </div>
+              </div>
 
             </div>
             <div class="cmmn-btn">
