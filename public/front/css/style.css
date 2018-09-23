@@ -3765,6 +3765,9 @@ sp.css ~640px
         width: 70%;
     }
 
+    /* 新規会員登録ボタン */
+    .banner{text-align:center; margin-bottom:2rem; }
+    .banner img{width: 70%;padding-top:20px;}
     /*-------------------------------
     ## トップページ：お知らせ
     -------------------------------*/
