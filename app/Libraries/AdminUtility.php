@@ -31,6 +31,7 @@ class AdminUtility
         'admin/member/selectstatus' => mdlUtil::AUTH_TYPE_MEMBER_READ,
         'admin/member/updatestatus' => mdlUtil::AUTH_TYPE_MEMBER_READ,
         'admin/member/delete' => mdlUtil::AUTH_TYPE_MEMBER_DELETE,
+        'admin/member/download' => mdlUtil::AUTH_TYPE_MEMBER_READ,
         // 案件管理
         'admin/item/search' => mdlUtil::AUTH_TYPE_ITEM_READ,
         'admin/item/detail' => mdlUtil::AUTH_TYPE_ITEM_READ,

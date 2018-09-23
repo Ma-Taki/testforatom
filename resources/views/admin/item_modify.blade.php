@@ -346,7 +346,8 @@ function mutualApplyBeforeSubmit()
 	{
 		mutualApply();
 	}
-	return true;
+	//return true;
+    return false;
 }
 
 function tagToCheckbox()

@@ -16,10 +16,8 @@ var indeed_conversion_label = '';
 @section('isSimpleFooter', 'true')
 @section('noindex', 'true')
 @section('fbq_add', 'fbq(\'track\', \'CompleteRegistration\');')
-
 @section('content')
 <div class="wrap">
-
   <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
     <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
       <a class="hover-thin" itemprop="item" href="/">
@@ -34,13 +32,11 @@ var indeed_conversion_label = '';
     </span>
   </div>
   <!-- END .breadcrumbs -->
-
   <div class="main-content user-complete">
     <h1 class="main-content__title">会員登録完了</h1>
     <hr class="hr-2px-solid-5e8796">
     <div class="main-content__body">
       <div class="content__element">
-
         <p>この度はエンジニアルートに会員登録をしていただき、誠にありがとうございます。</p>
         <div class="regist-thanks">
           <p>会員IDはご登録いただいたメールアドレスになります。</p>

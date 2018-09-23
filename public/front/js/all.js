@@ -531,88 +531,813 @@ jQuery(function($){
 	});
 
 	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-	//スキルシート提出のラジオボタン
+	//
+	//履歴書・職務経歴書・スキルシートのアップロード処理
+	//
 	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-	//後で登録・今登録
+	//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+	//新規登録のとき
+	//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+	//後で登録、または今登録を選択したときの表示
 	$('[name="resume"]:radio').change( function() {
-	    if($('[value="later"]').prop('checked')){
-	    	//ドラッグ&ドロップ・ファイル選択・メール選択枠
-	    	$('.input_file').css('display', 'none');
-	    	//ドラッグ&ドロップ
-			$('.ddrop_files').css('display', 'none');
-			//ファイル選択
-			$('.explorer_files').css('display', 'none');
-			//メール
-			$('.mail_files').css('display', 'none');
-			//説明文
-			$('.resume-note').css('display', 'none');
-	    
-	    } else if ($('[value="now"]').prop('checked')) {
-	    
-			$('.input_file').css('display', 'block');
-			$('.ddrop_files').css('display', 'block');
-			$('.explorer_files').css('display', 'none');
-			$('.mail_files').css('display', 'none');
-			$('.resume-note').css('display', 'block');
+		switch($(this).val()){
+	        case "later" : 	laterDisplay();
+	        				break;
+	        case "now"   : 	nowDisplay();
+	        				break;
+	        default		 :  break;
     	}
 	});
 
-	//ドラッグ&ドロップ・ファイル選択・メールのどれかを選択したとき
-	$('[name="file"]:radio').change( function() {
-		if($('[value="dd"]').prop('checked')){
-	    	
-	    	$('.ddrop_files').css('display', 'block');
-			$('.explorer_files').css('display', 'none');
-			$('.mail_files').css('display', 'none');
-			$('.resume-note').css('display', 'block');
-	    
-	    } else if ($('[value="fe"]').prop('checked')) {
-	    	
-	    	$('.ddrop_files').css('display', 'none');
-			$('.explorer_files').css('display', 'block');
-			$('.mail_files').css('display', 'none');
-			$('.resume-note').css('display', 'block');
+	//新規登録画面のドラッグ&ドロップ、またはファイル選択、またはメールを選択したときの表示
+	if('/user/regist' == $(location).attr('pathname') && 'ticket' == $(location).attr('search').substr(1,6)){
+		$('[name="file_type"]:radio').change( function() {
+			switch($(this).val()){
+		        case "user_input_dd":  	ddDisplay();
+		        						break;
+		        case "user_input_fe":   feDisplay();
+		        						break;
+		        case "user_input_fma":  fmaDisplay();
+		        						break;
+		        default:   break;
+			}
+		});
 
-    	}else if ($('[value="fma"]').prop('checked')) {
-	    	
-	    	$('.ddrop_files').css('display', 'none');
-			$('.explorer_files').css('display', 'none');
-			$('.mail_files').css('display', 'block');
-			$('.resume-note').css('display', 'block');
-    	}
+		//セッション値があるとき
+		if(window.sessionStorage.getItem('resumeCheck')){
+			//後で登録・今登録
+			switch(window.sessionStorage.getItem('resumeCheck')){
+		        case "later": 	laterDisplay();
+		        				$('input[name="resume"]:eq(0)').prop('checked', true);
+		        				window.sessionStorage.removeItem('file');
+		        				break;
+		        case "now"  : 	nowDisplay();
+		        				$('input[name="resume"]:eq(1)').prop('checked', true);
+				    			break;
+		        default		: 	break;
+	    	}
 
+			//ドラッグ&ドロップ・ファイル選択・メール
+			switch(window.sessionStorage.getItem('file')){
+		        case "user_input_dd":   ddDisplay();
+				        				$('input[name="file_type"]:eq(0)').prop('checked', true);
+				        				break;
 
+		        case "user_input_fe":   feDisplay();
+				        				$('input[name="file_type"]:eq(1)').prop('checked', true);
+				        				break;
 
+		        case "user_input_fma": 	fmaDisplay();
+				        				$('input[name="file_type"]:eq(2)').prop('checked', true);
+				        				break;
 
+	        	default    			: 	break;
+			}
+		}
+	}
 
+	//登録URLのとき
+	if('/user/regist' == $(location).attr('pathname') && '' == $(location).attr('search').substr(1,7)){
+		//セッションデータがあれば削除
+		if(window.sessionStorage.getItem('resumeCheck')){
+			window.sessionStorage.removeItem('resumeCheck');
+		}
+		if(window.sessionStorage.getItem('file')){
+			window.sessionStorage.removeItem('file');
+		}
+	}
 
+	//「後で登録」を選択したときの表示
+	function laterDisplay(){
+		$('.input_resume_type').css('display', 'none');
+		$('.ddrop_files').css('display', 'none');
+		$('.explorer_files').css('display', 'none');
+		$('.mail_files').css('display', 'none');
+		$('.resume-note').css('display', 'none');
+		window.sessionStorage.setItem('resumeCheck','later');
+	}
+
+	//「今登録」を選択したときの表示
+	function nowDisplay(){
+		$('.input_resume_type').css('display', 'block');
+		$('.ddrop_files').css('display', 'none');
+		$('.explorer_files').css('display', 'none');
+		$('.mail_files').css('display', 'none');
+		$('.resume-note').css('display', 'block');
+		window.sessionStorage.setItem('resumeCheck','now');
+	}
+
+	//「ドラッグ&ドロップ」を選択したときの表示
+	function ddDisplay(){
+		$('.ddrop_files').css('display', 'block');
+		$('.explorer_files').css('display', 'none');
+		$('.mail_files').css('display', 'none');
+		$('.resume-note').css('display', 'block');
+		window.sessionStorage.setItem('file','dd');
+	}
+
+	//「ファイルを選択する」を選択したときの表示
+	function feDisplay(){
+		$('.ddrop_files').css('display', 'none');
+		$('.explorer_files').css('display', 'block');
+		$('.mail_files').css('display', 'none');
+		$('.resume-note').css('display', 'block');
+		window.sessionStorage.setItem('file','fe');
+	}
+
+	//「メール」を選択したときの表示
+	function fmaDisplay(){
+		$('.ddrop_files').css('display', 'none');
+		$('.explorer_files').css('display', 'none');
+		$('.mail_files').css('display', 'block');
+		$('.resume-note').css('display', 'block');
+		window.sessionStorage.setItem('file','fma');
+	}
+
+	//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	//ユーザー登録・同意して会員登録ボタンを押したとき
+	//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	$('form[name="js-user-input-form"]').submit(function(e){
+		var file_type = '';
+		var resume = '';
+		// HTMLでの送信をキャンセル
+		e.preventDefault();
+
+		//お名前(性)
+		fd.append('last_name', $('[name=last_name]').val());
+		//お名前(名)
+		fd.append('first_name', $('[name=first_name]').val());
+		//お名前(せい)
+		fd.append('last_name_kana', $('[name=last_name_kana]').val());
+		//お名前(めい)
+		fd.append('first_name_kana', $('[name=first_name_kana]').val());
+		//性別
+		if(!$('input[name="gender"]:checked').val()){
+			fd.append('gender', '');
+		}else{
+			fd.append('gender', $('input[name="gender"]:checked').val());
+		}
+		//生年月日
+		fd.append('birth', $('[name=birth]').val());
+		fd.append('birth_year', $('[name=birth_year]').val());
+		fd.append('birth_month', $('[name=birth_month]').val());
+		fd.append('birth_day', $('[name=birth_day]').val());
+		//最終学歴
+		fd.append('education', $('[name=education]').val());
+		//国籍
+		fd.append('country', $('[name=country]').val());
+		//希望の契約形態
+		$("[name='contract_types[]']:checked").map(function () {
+			fd.append('contract_types_' + uploadCount + '[]', $(this).val());
+		}).get();
+		//住所（都道府県）
+		fd.append('prefecture_id', $('[name=prefecture_id]').val());
+		//最寄り駅
+		fd.append('station', $('[name=station]').val());
+		//電話番号
+		fd.append('phone_num', $('[name=phone_num]').val());
+		//メールアドレス
+		fd.append('mail', $('[name=mail]').val());
+		//パスワード
+		fd.append('password', $('[name=password]').val());
+		fd.append('password_confirmation', $('[name=password_confirmation]').val());
+		//メールマガジン配信
+		if(!$('input[name="magazine_flag_temp"]:checked').val()){
+			//未選択
+			fd.append('magazine_flag', 0);
+		}else{
+			//選択済
+			fd.append('magazine_flag', 1);
+		}
+		//経歴書・職務経歴書・スキルシートの登録時期
+		if(!$('input[name="resume"]:checked').val()){
+			fd.append('resume', '');
+		}else{
+			fd.append('resume', $('input[name="resume"]:checked').val());
+			resume = $('input[name="resume"]:checked').val();
+		}
+
+		//経歴書・職務経歴書・スキルシートの登録形式
+		if(!$('input[name="file_type"]:checked').val()){
+			//未選択
+			fd.append('file_type', '');
+		}else{
+			//選択済
+			fd.append('file_type', $('input[name="file_type"]:checked').val());
+		}
+
+		//「ファイルを選択」のとき
+		file_type = $('input[name="file_type"]:checked').val();
+		if(resume == 'now' && file_type == 'user_input_fe'){
+			$(".input-file").each(function(i) {
+				if(typeof $(this)[0].files[0] === "undefined") {
+					fd.append('skillsheet_' + uploadCount + '[' + i + ']', '');
+				}else{
+					fd.append('skillsheet_' + uploadCount + '[' + i + ']', $(this)[0].files[0]);
+				}
+			});
+		}
+
+		//「ドラッグ&ドロップ」のとき
+		if(resume == 'now' && file_type == 'user_input_dd'){
+			if(0 < fileList.length){
+				for(var i=0;i < fileList.length;i++){
+					fd.append('skillsheet_' + uploadCount + '[' + i + ']', fileList[i]);
+				}
+			}else{
+				fd.append('skillsheet_' + uploadCount + '[0]', '');
+				fd.append('skillsheet_' + uploadCount + '[1]', '');
+				fd.append('skillsheet_' + uploadCount + '[2]', '');
+			}
+		}
+		fd.append('uploadCount', uploadCount);
+		uploadCount++;
+		fd.append('ticket', $('[name=ticket]').val());
+
+		//Ajaxデータ送信
+		$.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+		$.ajax({
+        	url: '/user/regist',
+            type: 'POST',
+            data: fd,
+            processData: false,
+      		contentType: false,
+      		cache: false,
+           	dataType: 'json',
+           	timeout: 10000,
+        })
+        .done(function(dataContent){
+            for(var val in dataContent){
+				switch(val){
+                    case "custom_error_messages":
+			        	var str = '<div class="alert alert-danger"><ul>';
+			        	for(var item in dataContent[val]){
+							str = str + '<li>' + dataContent[val][item] + '</li>';
+			        	}
+			        	str = str + '</ul></div>';
+			        	$('div.alert_design').html(str);
+			        	$('html,body').animate({scrollTop:0}, 'fast');
+			        	break;
+			        case "url":
+			        	//画面遷移
+                        window.location.assign(dataContent[val]);
+                        break;
+                    default:break;
+                }
+            }
+        }).
+        fail(function( jqXHR, textStatus, errorThrown ){
+        	//422HTTPステータスコードのとき(バリデーションチェックで引っかかったとき)
+        	if(jqXHR.status == 422){
+	        	var str = '<div class="alert alert-danger"><ul>';
+	        	var resJson = jqXHR.responseJSON;
+	        	for(var item in resJson){
+					str = str + '<li>' + resJson[item] + '</li>';
+	        	}
+	        	str = str + '</ul></div>';
+	        	$('div.alert_design').html(str);
+	        	$('html,body').animate({scrollTop:0}, 'fast');
+        	}
+        });
 	});
 
+	//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+	//エントリーするとき
+	//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+	//ドラッグ&ドロップ、またはファイル選択、またはメールを選択したときの表示
+	$('[name="file_type"]:radio').change( function() {
+		if($('.upload-box').is(':hidden')){
+			$('.upload-box').css('display', 'block');
+		}
+		switch($(this).val()){
+	        case "entry_dd": 	$('.ddrop_files').css('display', 'block');
+								$('.explorer_files').css('display', 'none');
+								$('.mail_files').css('display', 'none');
+        						break;
 
+	        case "entry_fe":   	$('.ddrop_files').css('display', 'none');
+								$('.explorer_files').css('display', 'block');
+								$('.mail_files').css('display', 'none');
+	        					break;
 
+	        case "entry_fma":  	$('.ddrop_files').css('display', 'none');
+								$('.explorer_files').css('display', 'none');
+								$('.mail_files').css('display', 'block');
+	        					break;
 
+	        default     	:   break;
+		}
+	});
 
+	//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	//エントリー・この内容でエントリーするボタンを押したとき
+	//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	$('form[name="js-entry-form"]').submit(function(e){
+		var file_type = '';
+		// HTMLでの送信をキャンセル
+		e.preventDefault();
 
+		//案件ID
+		fd.append('item_id', $('[name=item_id]').val());
+		//トークン
+		fd.append('_token', $('[name=_token]').val());
+		//経歴書・職務経歴書・スキルシートの登録形式
+		if(!$('input[name="file_type"]:checked').val()){
+			//未選択
+			fd.append('file_type', '');
+		}else{
+			//選択済
+			fd.append('file_type', $('input[name="file_type"]:checked').val());
+			file_type = $('input[name="file_type"]:checked').val();
+		}
 
+		//「ファイルを選択」のとき
+		file_type = $('input[name="file_type"]:checked').val();
+		if(file_type == 'entry_fe'){
+			$(".input-file").each(function(i) {
+				if(typeof $(this)[0].files[0] === "undefined") {
+					fd.append('skillsheet_' + uploadCount + '[' + i + ']', '');
+				}else{
+					fd.append('skillsheet_' + uploadCount + '[' + i + ']', $(this)[0].files[0]);
+				}
+			});
+		}
 
+		//「ドラッグアンドドロップ」のとき
+		if(file_type == 'entry_dd'){
+			if(0 < fileList.length){
+				for(var i=0;i < fileList.length;i++){
+					fd.append('skillsheet_' + uploadCount + '[' + i + ']', fileList[i]);
+				}
+			}else{
+				fd.append('skillsheet_' + uploadCount + '[0]', '');
+				fd.append('skillsheet_' + uploadCount + '[1]', '');
+				fd.append('skillsheet_' + uploadCount + '[2]', '');
+			}
+		}
+		fd.append('uploadCount', uploadCount);
+		uploadCount++;
 
+		//Ajaxデータ送信
+     	$.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+		$.ajax({
+        	url: '/entry',
+            type: 'POST',
+            data: fd,
+            processData: false,
+      		contentType: false,
+      		cache: false,
+           	dataType: 'json',
+           	timeout: 10000,
+        })
+        .done(function(dataContent){
+             for(var val in dataContent){
+				switch(val){
+                    case "custom_error_messages":
+			        	var str = '<div class="alert alert-danger"><ul>';
+			        	for(var item in dataContent[val]){
+							str = str + '<li>' + dataContent[val][item] + '</li>';
+			        	}
+			        	str = str + '</ul></div>';
+			        	$('div.alert_design').html(str);
+			        	$('html,body').animate({scrollTop:0}, 'fast');
+			        	break;
+			        case "url":
+			        	//画面遷移
+                        window.location.assign(dataContent[val]);
+                        break;
+                    default:break;
+                }
+            }
+        }).
+        fail(function( jqXHR, textStatus, errorThrown ){
+        	console.log(jqXHR, textStatus, errorThrown);
+        });
+	});
 
+	//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+	//プロフィール変更のとき
+	//=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+	var tag_visible_count = 0;
+	if('/user/edit' == $(location).attr('pathname') && '' == $(location).attr('search').substr(1,7)){
+		//ファイルカウントを更新
+		editUploadCount = $('.delete_btn').filter(':visible').length;
 
+		//ドラッグ&ドロップ、またはファイル選択、またはメールを選択したときの表示
+		$('[name="file_type"]:radio').change(function(){
+			switch($(this).val()){
+		        case "user_edit_dd" :  	$('.ddrop_files').css('display', 'block');
+										$('.explorer_files').css('display', 'none');
+										$('.mail_files').css('display', 'none');
+		        						break;
 
+		        case "user_edit_fe" :   $('.ddrop_files').css('display', 'none');
+										$('.explorer_files').css('display', 'block');
+										$('.mail_files').css('display', 'none');
+										//表示しているスキルシートの個数
+										tag_visible_count = $('.uploadfile_edit_frame').filter(':visible').length;
+										var str = [];
+										for(var i = 0; i <= 2 - tag_visible_count; i++){
+									 		str[i] = '<div class="input-file-box"><div class="input-file-btn"><p>ファイルを選択</p><input type="file" class="input-file"></div><span>選択されていません</span></div>';
+										}
+										$('.explorer_files').html(str);
+										
+		        						break;
 
+		        case "user_edit_fma":   $('.ddrop_files').css('display', 'none');
+										$('.explorer_files').css('display', 'none');
+										$('.mail_files').css('display', 'block');
+		        						break;
 
+		        default     		:   break;
+    		}
+		});
+	}
 
+	$('.delete_btn').each(function(){
+		//アップロードファイル　削除ボタンをクリックしたとき
+		$(this).click(function(e){
+			// HTMLでの送信をキャンセル
+			e.preventDefault();
+			var result = confirm('削除しますか？');
+			if(result){
+				var str = '';
+				$(this).parent().css('display', 'none');
+				//ラジオボタン
+				if($('.input_resume_type_edit').is(':hidden')){
+					$('.input_resume_type_edit').css('display', 'block');
+				}
+				//説明文
+				if($('.resume-note-edit').is(':hidden')){
+					$('.resume-note-edit').css('display', 'block');
+					$('.resume-note').css('display', 'none');
+				}
 
+				switch($('input[name="file_type"]:checked').val()){
+			        case "user_edit_dd" :  	if($('.ddrop_files').is(':hidden')){
+												$('.ddrop_files').css('display', 'block');
+											}
+			        						break;
 
+			        case "user_edit_fe" :   if($('.explorer_files').is(':hidden')){
+												$('.explorer_files').css('display', 'block');
+											}
+											//表示しているスキルシートの個数
+											tag_visible_count = $('.uploadfile_edit_frame').filter(':visible').length;
+											var str = [];
+											for(var i = 0; i <= 2 - tag_visible_count; i++){
+									 			str[i] = '<div class="input-file-box"><div class="input-file-btn"><p>ファイルを選択</p><input type="file" class="input-file"></div><span>選択されていません</span></div>';
+									 		}
+									 		$('.explorer_files').html(str);
+			        						break;
 
+			        case "user_edit_fma":   if($('.mail_files').is(':hidden')){
+												$('.mail_files').css('display', 'block');
+											}
+			        						break;
 
+			        default     		:   break;
+				}		
+			}
+			//ファイルカウントを更新
+			editUploadCount = $('.delete_btn').filter(':visible').length;
+		})
+	})
 
+	//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	//プロフィール変更・変更内容を登録するボタンを押したとき
+	//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	$('form[name="userForm"]').submit(function(e){
+		//スキルシートアップのみ
+		var skillsheet_upOnly  = ['','',''];
+		//スキルシート全部
+		var skillsheet_all = ['','',''];
+		var file_type = '';
 
+		// HTMLでの送信をキャンセル
+		e.preventDefault();
 
+		//お名前(性)
+		fd.append('last_name', $('[name=last_name]').val());
+		//お名前(名)
+		fd.append('first_name', $('[name=first_name]').val());
+		//お名前(せい)
+		fd.append('last_name_kana', $('[name=last_name_kana]').val());
+		//お名前(めい)
+		fd.append('first_name_kana', $('[name=first_name_kana]').val());
+		//性別
+		if(!$('input[name="gender"]:checked').val()){
+			fd.append('gender', '');
+		}else{
+			fd.append('gender', $('input[name="gender"]:checked').val());
+		}
+		//生年月日
+		fd.append('birth', $('[name=birth]').val());
+		fd.append('birth_year', $('[name=birth_year]').val());
+		fd.append('birth_month', $('[name=birth_month]').val());
+		fd.append('birth_day', $('[name=birth_day]').val());
+		//最終学歴
+		fd.append('education', $('[name=education]').val());
+		//国籍
+		fd.append('country', $('[name=country]').val());
+		//希望の契約形態
+		$("[name='contract_types[]']:checked").map(function () {
+			fd.append('contract_types_' + uploadCount + '[]', $(this).val());
+		}).get();
+		//住所（都道府県）
+		fd.append('prefecture_id', $('[name=prefecture_id]').val());
+		//最寄り駅
+		fd.append('station', $('[name=station]').val());
+		//電話番号
+		fd.append('phone_num', $('[name=phone_num]').val());
+		//メールマガジン配信
+		if(!$('input[name="magazine_flag_temp"]:checked').val()){
+			//未選択
+			fd.append('magazine_flag', 0);
+		}else{
+			//選択済
+			fd.append('magazine_flag', 1);
+		}
+		//経歴書・職務経歴書・スキルシートの登録形式
+		if(!$('input[name="file_type"]:checked').val()){
+			//未選択
+			fd.append('file_type', '');
+		}else{
+			//選択済
+			fd.append('file_type', $('input[name="file_type"]:checked').val());
+			file_type = $('input[name="file_type"]:checked').val();
+		}
+		
+		//表示されているスキルシート
+		for(var i=0;i<3;i++){
+			if ($('#filename' + i).is(':visible')) {
+		    	skillsheet_all[i] = $('#filename' + i).data('file');
+			}
+		}
 
+		//「ファイルを選択」のとき
+		if(file_type == 'user_edit_fe'){
+			$(".input-file").each(function(i) {
+				if(typeof $(this)[0].files[0] === "undefined") {
+				}else{
+					//スキルシート全部・スキルシートアップのみに追加
+					if($.isEmptyObject(skillsheet_all[i])){
+						skillsheet_all[i] = $(this)[0].files[0];
+						if($.isEmptyObject(skillsheet_upOnly[i])){
+							skillsheet_upOnly[i] = $(this)[0].files[0];
+						}
+					}else if($.isEmptyObject(skillsheet_all[i+1])){
+						skillsheet_all[i+1] = $(this)[0].files[0];
+						if($.isEmptyObject(skillsheet_upOnly[i+1])){
+							skillsheet_upOnly[i+1] = $(this)[0].files[0];
+						}
+					}else if($.isEmptyObject(skillsheet_all[i+2])){
+						skillsheet_all[i+2] = $(this)[0].files[0];
+						if($.isEmptyObject(skillsheet_upOnly[i+2])){
+							skillsheet_upOnly[i+2] = $(this)[0].files[0];
+						}
+					}
+				}
+			});
+		}
 
+		//「ドラッグアンドドロップ」のとき、かつファイルがあるとき
+		if(file_type == 'user_edit_dd' && 0 < fileList.length){
+			for(var i=0;i < fileList.length;i++){
+				//スキルシート全部・スキルシートアップのみに追加
+				if($.isEmptyObject(skillsheet_all[i])){
+					skillsheet_all[i] = fileList[i];
+					if($.isEmptyObject(skillsheet_upOnly[i])){
+						skillsheet_upOnly[i] = fileList[i];
+					}
+				}else if($.isEmptyObject(skillsheet_all[i+1])){
+					skillsheet_all[i+1] = fileList[i];
+					if($.isEmptyObject(skillsheet_upOnly[i+1])){
+						skillsheet_upOnly[i+1] = fileList[i];
+					}
+				}else if($.isEmptyObject(skillsheet_all[i+2])){
+					skillsheet_all[i+2] = fileList[i];
+					if($.isEmptyObject(skillsheet_upOnly[i+2])){
+						skillsheet_upOnly[i+2] = fileList[i];
+					}
+				}
+			}
+		}
 
+		//スキルシートの値を入れていく
+		for(var i=0;i<3;i++){
+			//アップのみ
+			fd.append('skillsheet_upOnly_' + uploadCount + '[' + i + ']', skillsheet_upOnly[i]);
+			//全部
+			fd.append('skillsheet_all_' + uploadCount + '[' + i + ']', skillsheet_all[i]);
+		}
+		fd.append('uploadCount', uploadCount);
+		uploadCount++;
+		
+		//Ajaxデータ送信
+     	$.ajaxSetup({ headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+		$.ajax({
+        	url: '/user/edit',
+            type: 'POST',
+            data: fd,
+            processData: false,
+      		contentType: false,
+      		cache: false,
+           	dataType: 'json',
+           	timeout: 10000,
+        })
+        .done(function(dataContent){
+             for(var val in dataContent){
+				switch(val){
+                    case "custom_error_messages":
+			        	var str = '<div class="alert alert-danger"><ul>';
+			        	for(var item in dataContent[val]){
+							str = str + '<li>' + dataContent[val][item] + '</li>';
+			        	}
+			        	str = str + '</ul></div>';
+			        	$('div.alert_design').html(str);
+			        	$('html,body').animate({scrollTop:0}, 'fast');
+			        	break;
+			        case "url":
+			        	//画面遷移
+                        window.location.assign(dataContent[val]);
+                        break;
+                    default:break;
+                }
+            }
+        }).
+        fail(function( jqXHR, textStatus, errorThrown ){
+        	//422HTTPステータスコードのとき(バリデーションチェックで引っかかったとき)
+        	if(jqXHR.status == 422){
+	        	var str = '<div class="alert alert-danger"><ul>';
+	        	var resJson = jqXHR.responseJSON;
+	        	for(var item in resJson){
+					str = str + '<li>' + resJson[item] + '</li>';
+	        	}
+	        	str = str + '</ul></div>';
+	        	$('div.alert_design').html(str);
+	        	$('html,body').animate({scrollTop:0}, 'fast');
+        	}
+        });
+	});
 
+	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+	//
+	//履歴書・職務経歴書・スキルシート
+	//ドラッグ&ドロップしたときの処理
+	//
+	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+	if( window.FormData ){
+		var fd = new FormData();
+	}
+	var fileCount = 0;
+	var objDdField = $("#dragandrop");
+	//ファイルデータ送信用配列
+	var fileList = [];
+	var ramdomList = [];
+	var uploadCount = 0;
+	//プロフィール変更のときのアップロードファイルカウント
+	var editUploadCount = 0;
 
+	//ドロップ領域に入ったとき
+	objDdField.on('dragenter', function (e){
+	    $(this).css('background-color', '#F8F3F0');
+	    $(this).css('border', '1px solid #D46363');
+	    $(this).css('color', '#D46363');
+	   return false;
+	});
 
+	//ドラッグ＆ドロップ必須
+	objDdField.on('dragover', function (e){
+		e.preventDefault();
+	    return false;
+	});
+
+	//領域内にドロップされたとき
+	objDdField.on('drop', function (_e){
+		$(this).css('background-color', '#eef3f4');
+		$(this).css('border', '1px solid #5e8796');
+		$(this).css('color', '#5e8796');
+		
+	    var e = _e;
+        if( _e.originalEvent ){
+            e = _e.originalEvent;
+        }
+       	e.stopPropagation();
+        e.preventDefault();
+        var dt = e.dataTransfer;
+        var files = dt.files;
+
+        $('.registry-upload-dd__txt').css('display', 'none');
+        //領域内にファイル情報を表示
+	   	addWaitList(files, editUploadCount);
+	});
+
+	$(document).on('dragenter', function (e) {
+    	return false;
+	});
+	$(document).on('dragover', function (e) {
+		return false;
+	});
+	$(document).on('drop', function (e) {
+		return false;
+	});
+
+	//領域内にファイル情報を表示
+	function addWaitList(files, editUploadCount){
+		//プロフィール変更のとき
+		if('/user/edit' == $(location).attr('pathname') && '' == $(location).attr('search').substr(1,7)){
+			for(var i=0;i<files.length;i++){
+				if(fileList.length + editUploadCount < 3){
+					//ファイルデータ送信用配列に追加
+					fileList.push(files.item(i));
+					var addIndex = fileList.indexOf(files.item(i));
+					var status = new createStatusbar($("#dd_text"), addIndex);
+					//ファイルサイズを表示
+				    status.setFileNameSize(files[i].name, files[i].size);
+				    //削除ボタンを押したときの処理
+				    status.setAbort($.ajax());
+				    $('#js-dd-uploaded').hide();
+				}
+			}
+		}else{
+			for(var i=0;i<files.length;i++){
+				if(fileList.length < 3){
+					//ファイルデータ送信用配列に追加
+					fileList.push(files.item(i));
+					var addIndex = fileList.indexOf(files.item(i));
+					var status = new createStatusbar($("#dd_text"), addIndex);
+					//ファイルサイズを表示
+				    status.setFileNameSize(files[i].name, files[i].size);
+				    //削除ボタンを押したときの処理
+				    status.setAbort($.ajax());
+				}
+			}
+		}
+	}
+	
+	//ドラッグ&ドロップしたときのファイル表示
+	function createStatusbar(obj, addIndex){
+		fileCount++;
+		var row = "odd";
+		if(fileCount % 2 == 0){
+			row = "even";
+		}
+		
+		//html要素を追加
+		this.statusbar = $("<div class='statusbar " + row + "'></div>");
+		//ファイル名
+		this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
+		//サイズ
+		this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
+		//削除ボタン
+		this.abort = $("<div class='abort' id='" + addIndex + "'>×</div>").appendTo(this.statusbar);
+		obj.after(this.statusbar);
+
+		//ファイルサイズを表示
+		this.setFileNameSize = function(name, size){
+			var sizeMB = size / 1024 / 1024;
+			var sizeStr = sizeMB.toFixed(2) + " MB";
+			this.filename.html(name);
+			this.size.html(sizeStr);
+		}
+
+		//削除ボタンを押したときの処理
+		this.setAbort = function(jqxhr){
+			var sb = this.statusbar;
+			var delNum = 0;
+
+			this.abort.click(function(){
+				fileCount--;
+				jqxhr.abort();
+				//表示削除
+				sb.remove();
+				//ファイルデータ送信用配列から削除
+				delNum = $(sb[0]).children('.abort').attr('id');
+				fileList.splice(delNum, 1);
+
+				$('.abort').map(function(i){
+					var id = $(this).attr('id');
+					if(id > delNum){
+						$(this).attr('id', --id);
+					}
+				});
+				// ファイルが０なら再度メッセージを表示
+				if(fileCount == 0){
+					$('#js-dd-uploaded').show();
+				}
+			});
+		}
+	}
+
+	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+	//
+	//履歴書・職務経歴書・スキルシート
+	//ファイルを選択したときの処理
+	//
+	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+	$('form').on('change', 'input[type="file"]', function(e) {
+		var file_name = $(this).prop('files')[0].name;
+    	$(this).parent().next().html(file_name);
+   	});
 });

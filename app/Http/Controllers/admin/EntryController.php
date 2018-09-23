@@ -167,22 +167,22 @@ class EntryController extends AdminController
         }
 
         // ストレージへエントリーシートの存在チェック
-        if (!empty($entry->skillsheet_filename_first) && !Storage::disk('local')->exists($entry->skillsheet_filename_first )) {
+        if (!empty($entry->skillsheet_1) && !Storage::disk('local')->exists($entry->skillsheet_1)) {
             abort(404, 'エントリーシートが見つかりません。');
         }
-        if (!empty($entry->skillsheet_filename_second) && !Storage::disk('local')->exists($entry->skillsheet_filename_second )) {
+        if (!empty($entry->skillsheet_2) && !Storage::disk('local')->exists($entry->skillsheet_2)) {
             abort(404, 'エントリーシートが見つかりません。');
         }
-        if (!empty($entry->skillsheet_filename_third) && !Storage::disk('local')->exists($entry->skillsheet_filename_third )) {
+        if (!empty($entry->skillsheet_3) && !Storage::disk('local')->exists($entry->skillsheet_3)) {
             abort(404, 'エントリーシートが見つかりません。');
         }
 
         $zip = new ZipArchive();
         //$path = storage_path('app/');
         $targetfiles = array(
-                    $entry->skillsheet_filename_first, 
-                    $entry->skillsheet_filename_second, 
-                    $entry->skillsheet_filename_third
+                    $entry->skillsheet_1, 
+                    $entry->skillsheet_2, 
+                    $entry->skillsheet_3
                 );
 
         //処理対象のファイルの存在チェックを行い、存在するもののみのリストを作成
