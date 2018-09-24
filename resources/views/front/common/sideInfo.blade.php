@@ -103,14 +103,14 @@
 <!-- WEB塾超現場主義pcバナー -->
 <div class='wordpress-sidebar invisible-sp'>
       <ul>
-          <li><a href="/user/regist"><img src="/front/images/chogenba_480x200.jpg" alt="Engineer-Route News"></a></li>
+          <li><a href="https://goo.gl/225jcM" target=”_blank”><img src="/front/images/chogenba_480x200.jpg" alt="Engineer-Route News"></a></li>
       </ul>
 </div>
 </section>
 <!-- WEB塾超現場主義spバナー -->
 <div class='banner invisible-pc invisible-tab'>
       <ul>
-          <li><a href="/user/regist"><img src="/front/images/chogenba_480x200.jpg" alt="Engineer-Route News"></a></li>
+          <li><a href="https://goo.gl/225jcM" target=”_blank”><img src="/front/images/chogenba_480x200.jpg" alt="Engineer-Route News"></a></li>
       </ul>
 </div>
 
