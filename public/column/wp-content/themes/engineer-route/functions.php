@@ -280,6 +280,7 @@ if (!function_exists('add_mythumbnail_size')) {
 		add_theme_support('post-thumbnails');
 		add_image_size( 'home-thum', 486, 290, true );
 		add_image_size( 'post-thum', 300, 200, true );
+		add_image_size( 'blog-card', 180, 180, true );
 	}
 	add_action( 'after_setup_theme', 'add_mythumbnail_size' );
 }
@@ -514,8 +515,8 @@ function nlink_scode($atts) {
 
     //アイキャッチ画像を取得
     if(has_post_thumbnail($id)) {
-        $img = wp_get_attachment_image_src(get_post_thumbnail_id($id),'thumbnail');
-        $img_tag = "<img src='" . $img[0] . "' alt='{$title}' width=" . $img[1] . " height=" . $img[2] . " />";
+        $img = wp_get_attachment_image_src(get_post_thumbnail_id($id),'blog-card');
+        $img_tag = "<img src='" . $img[0] . "' alt='{$title}'/>";
     }
 
 	$nlink = '<div class="blog-card">
