@@ -506,10 +506,18 @@ function nlink_scode($atts) {
 	//タイトルを取得
 	if(empty($title)){
 		$title = esc_html(get_the_title($id));
+		if(mb_strlen($title, 'UTF-8')>45){
+			$title = mb_substr($title, 0, 45, 'UTF-8')."…";
+		}
 	}
-    //抜粋文を取得
+    //本文を取得
 	if(empty($excerpt)){
-		$excerpt = esc_html(ltl_get_the_excerpt($id));
+		$post = get_post($id);
+		if(mb_strlen($post->post_content, 'UTF-8')>80){
+			$excerpt = mb_substr($post->post_content, 0, 80, 'UTF-8')."…";
+		}else{
+			$excerpt = $post->post_content;
+		}
 	}
 
     //アイキャッチ画像を取得
