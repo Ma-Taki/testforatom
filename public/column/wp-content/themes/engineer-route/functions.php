@@ -503,10 +503,6 @@ function nlink_scode($atts) {
 
 	$id = url_to_postid($url);//URLから投稿IDを取得
 
-	$img_width ="150";//画像サイズの幅指定→サムネイル設定が150になっているため数値を変えてもサイズ変わらない
-	$img_height = "150";//画像サイズの高さ指定→サムネイル設定が150になっているため数値を変えてもサイズ変わらない
-	$no_image = 'noimageに指定したい画像があればここにパス';//アイキャッチ画像がない場合の画像を指定
-
 	//タイトルを取得
 	if(empty($title)){
 		$title = esc_html(get_the_title($id));
@@ -518,10 +514,8 @@ function nlink_scode($atts) {
 
     //アイキャッチ画像を取得
     if(has_post_thumbnail($id)) {
-        $img = wp_get_attachment_image_src(get_post_thumbnail_id($id),array($img_width,$img_height));
-        $img_tag = "<img src='" . $img[0] . "' alt='{$title}' width=" . $img[1] . " height=" . $img[2] . " />";
-    }else{ 
-    $img_tag ='<img src="'.$no_image.'" alt="" width="'.$img_width.'" height="'.$img_height.'" />';
+        $img = wp_get_attachment_image_src(get_post_thumbnail_id($id),'post-thum');
+        $img_tag = "<img src='" . $img[0] . "' alt='{$title}'/>";
     }
 
 	$nlink = '<div class="blog-card">

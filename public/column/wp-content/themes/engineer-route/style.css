@@ -2747,6 +2747,7 @@ margin-bottom:0;
 	display: block;
 }
 .blog-card-thumbnail {
+	width: 150px;
 	float:left;
 	padding:10px;
 }
