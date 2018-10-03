@@ -544,10 +544,10 @@ add_shortcode("nlink", "nlink_scode");
 //Jetpack facebook自動投稿文字数制限
 //---------------------------------------
 function publicize_message_rewrite($post_id){
-	$num = 74; //ここに字数制限を指定
+	$num = 300; //ここに字数制限を指定
 	if(class_exists('Publicize') && class_exists('Publicize_Base') && isset($_POST['content'])){
 		$str = preg_replace('/( |　| )/', '', preg_replace('/\r\n|\r|\n/', '', strip_tags($_POST['content'])));
-		$str = (mb_strlen($str) > $num) ? mb_substr($str, 0, $num - 2, get_bloginfo('charset')).'[...]' : $str;
+		$str = (mb_strlen($str) > $num) ? mb_substr($str, 0, $num - 2, get_bloginfo('charset')).'...' : $str;
 		update_post_meta($post_id, '_wpas_mess', $str);
 		unset($str);
 	}
