@@ -215,14 +215,18 @@ use App\Models\Ms_skills;
                                 <span>タグ予測変換：</span><input type=text id='tag-input' autocomplete="off" class="form-control">
                                 <div id='tag-suggest-list'><p id='tag-suggest-list-cap'></p><ul></ul></div>
                                 <div class="row">
+
                                     <div class="col-md-5">
+                                        <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px;" id="tagTextArea">{{ HtmlUtility::setTextValueByRequest(HtmlUtility::convertTagModelToString($item->tags), old('item_tag')) }}</textarea>
+                                    </div>
+
+                                    <?php /* <div class="col-md-5">
                                         <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px" id="tagTextArea">{{ HtmlUtility::setTextValueByRequest(HtmlUtility::convertTagModelToString($item->tags), old('item_tag')) }}</textarea>
                                     </div>
 
                                     <div class="col-md-5">
                                         <textarea name="item_tag" rows="15" cols"30" class="form-control" style="font-size:12px;" id="tagTextArea">{{ old('item_tag') }}</textarea>
-                                    </div>
-
+                                    </div> */ ?>
 
                                     <div class="col-md-7">
                                         <button type="button" class="btn btn-sm btn-default" onclick="mutualApply()">相互反映</button>
