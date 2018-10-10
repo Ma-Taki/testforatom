@@ -87,11 +87,11 @@
                         <ul></ul>
                         <hr class="partitionLine">
                       </div>
-                      <div id="tagSelectedRate">
+                      <?php /* <div id="tagSelectedRate">
                         <p class="tagSelectedName">報酬</p>
                         <ul></ul>
                         <hr class="partitionLine">
-                        </div>
+                        </div> */ ?>
                       <div id="tagSelectedBizCategory">
                         <p class="tagSelectedName">業種</p>
                         <ul></ul>
@@ -116,7 +116,7 @@
                       <ul>
                         <li>スキル</li>
                         <li>システム種別</li>
-                        <li>報　酬</li>
+                        <?php /* <li>報　酬</li> */ ?>
                         <li>業　種</li>
                         <li>勤務地</li>
                         <li>ポジション</li>
@@ -158,7 +158,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="tabBox">
+                    <?php /* <div class="tabBox">
                       <div class="tabBoxInr">
                         <div class="tabContent">
                           <ul>
@@ -172,7 +172,7 @@
                           </ul>
                         </div>
                       </div>
-                    </div>
+                    </div> */ ?>
                     <div class="tabBox">
                       <div class="tabBoxInr">
                         <div class="tabContent">
@@ -238,7 +238,7 @@
                   <select id="order">
                     <option value="RegistrationDesc" {{ $params['order'] == 'RegistrationDesc' ? "selected" : ""}}>新着順</option>
                     <option value="ServiceAsc" {{ $params['order'] == 'ServiceAsc' ? "selected" : ""}}>受付終了日が近い順</option>
-                    <option value="RateDesc" {{ $params['order'] == 'RateDesc' ? "selected" : ""}}>報酬が高い順</option>
+                    <?php /* <option value="RateDesc" {{ $params['order'] == 'RateDesc' ? "selected" : ""}}>報酬が高い順</option> */ ?>
                   </select>
                 </span>
                 <label>

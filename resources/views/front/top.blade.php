@@ -125,7 +125,7 @@ use App\Models\Tr_slide_images;
             <ul>
               <li>スキル</li>
               <li>システム種別</li>
-              <li>報　酬</li>
+              <?php /* <li>報　酬</li> */ ?>
               <li>業　種</li>
               <li>勤務地</li>
               <li>ポジション</li>
@@ -167,7 +167,7 @@ use App\Models\Tr_slide_images;
                 </div>
               </div>
               <!-- 報酬 -->
-              <div class="tabBoxInr">
+              <?php /* <div class="tabBoxInr">
                 <div class="tabContent">
                   <ul>
                     @foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
@@ -177,7 +177,7 @@ use App\Models\Tr_slide_images;
                     @endforeach
                   </ul>
                 </div>
-              </div>
+              </div> */ ?>
               <!-- 業種 -->
               <div class="tabBoxInr">
                 <div class="tabContent">
@@ -234,11 +234,11 @@ use App\Models\Tr_slide_images;
                   <ul></ul>
                   <hr class="partitionLine">
                 </div>
-                <div id="tagSelectedRate">
+                <?php /* <div id="tagSelectedRate">
                   <p class="tagSelectedName">報酬</p>
                   <ul></ul>
                   <hr class="partitionLine">
-                </div>
+                </div> */ ?>
                 <div id="tagSelectedBizCategory">
                   <p class="tagSelectedName">業種</p>
                   <ul></ul>
