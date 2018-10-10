@@ -153,6 +153,8 @@
                 <option value="6" @if($member->status==MdlUtil::EXIT_OPERATION) selected @endif>終了</option>
                 <option value="7" @if($member->status==MdlUtil::STOP_OPERATION) selected @endif>営業中止</option>
                 <option value="8" @if($member->status==MdlUtil::IN_OPARATION_AT_OTHER_COMPANY) selected @endif>他社稼働中</option>
+                <option value="9" @if($member->status==MdlUtil::REQUEST_IN_COUNCELING) selected @endif>カウンセリング依頼中</option>
+                <option value="10" @if($member->status==MdlUtil::OPERATING_RECORD) selected @endif>稼働実績有</option>
               </select>
             </div>
           </div>

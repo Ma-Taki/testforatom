@@ -252,6 +252,20 @@
                       他社稼働中
                     </label>
                   </div>
+                  <div class="col-md-2">
+                    <label for="status9">
+                      <input type="hidden"   name="status[9]" value="off">
+                      <input type="checkbox" name="status[9]" id="status9" value="{{ MdlUtil::REQUEST_IN_COUNCELING }}" {{ in_array(MdlUtil::REQUEST_IN_COUNCELING, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      カウンセリング依頼中
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="status10">
+                      <input type="hidden"   name="status[10]" value="off">
+                      <input type="checkbox" name="status[10]" id="status10" value="{{ MdlUtil::OPERATING_RECORD }}" {{ in_array(MdlUtil::OPERATING_RECORD, old('status', $data_query['status'])) ? "checked" : "" }} />
+                      稼働実績有
+                    </label>
+                  </div>
                 </td>
               </tr>
                 <th><label class="control-label" for="select-2">表示順序</label></th>
@@ -345,6 +359,8 @@
                       <option value="6" @if($member->status==MdlUtil::EXIT_OPERATION) selected @endif>終了</option>
                       <option value="7" @if($member->status==MdlUtil::STOP_OPERATION) selected @endif>営業中止</option>
                       <option value="8" @if($member->status==MdlUtil::IN_OPARATION_AT_OTHER_COMPANY) selected @endif>他社稼働中</option>
+                      <option value="9" @if($member->status==MdlUtil::REQUEST_IN_COUNCELING) selected @endif>カウンセリング依頼中</option>
+                      <option value="10" @if($member->status==MdlUtil::OPERATING_RECORD) selected @endif>稼働実績有</option>
                   	</select>
                   </div>
                   <br>
