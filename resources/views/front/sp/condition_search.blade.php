@@ -52,16 +52,16 @@ use App\Models\Ms_job_types;
 </div>
                 </div>
 
-                <div class="condition_content">
+                <?php /* <div class="condition_content">
                     <li class="condition_name">報酬<span>+</span></li>
-<div class="condition_slideArea">
-@foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
-                        <li class="condition_elmnt">
-                            <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
-                        </li>
-@endforeach
-</div>
-                </div>
+                    <div class="condition_slideArea">
+                        @foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
+                            <li class="condition_elmnt">
+                                <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
+                            </li>
+                        @endforeach
+                    </div>
+                </div> */ ?>
 
                 <div class="condition_content">
                     <li class="condition_name">業種<span>+</span></li>
