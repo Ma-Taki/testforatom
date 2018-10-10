@@ -432,6 +432,8 @@ use App\Models\Tr_slide_images;
                 centerMode: true,     // 中央寄せ
                 centerPadding:'20px', // 両サイドの見えている部分のサイズ
                 autoplay:true,        // 自動再生
+                autoplaySpeed:5000,    // オートプレイの切り替わり時間(ミリ秒)
+                speed:4500,           // スライド切り替え時の時間を指定(ミリ秒)
             });
         } else {
             $('.slider-item').slick({
@@ -442,6 +444,8 @@ use App\Models\Tr_slide_images;
                 centerMode: true,
                 centerPadding:'150px',
                 autoplay:true,
+                autoplaySpeed:5000,
+                speed:4500,
             });
         };
     });
