@@ -105,13 +105,22 @@ use App\Models\Tr_column_connects;
                   @endforeach
                 </div>
                 @if($canEntry)
-                  <div class="cmmn-btn">
-                    <a href="/entry?id={{ $item->id }}">この案件にエントリーする</a>
-                    @if($isConsidering)
-                      <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider_delete-btn">この案件を検討中から外す</a>
-                    @else
-                      <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider-btn">検討する</a>
-                    @endif
+                  <div class="cmmn-btn-entry">
+                    <div class="btn-frame">
+                      @if($userFlag)
+                        <a class="regist-entry" href="/entry?id={{ $item->id }}">この案件にエントリーする</a>
+                      @else
+                        <a class="regist-entry" href="http://localhost/user/regist/auth">新規登録してエントリーする</a>
+                        <a class="login-entry" href="/entry?id={{ $item->id }}">ログインしてエントリーする</a>
+                      @endif
+                    </div>
+                    <div class="btn-frame">
+                      @if($isConsidering)
+                        <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider_delete-btn">この案件を検討中から外す</a>
+                      @else
+                        <a href="javascript:void(0)" name = "{{ $item->id }}" class="consider-btn">検討する</a>
+                      @endif
+                    </div>
                   </div>
                 @endif
               </div><!-- END .itemInfoInr -->

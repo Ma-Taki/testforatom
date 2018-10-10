@@ -347,7 +347,85 @@ p.pageInfo{
 }
 /* 汎用ボタン END */
 
+/* 案件詳細 */
+.cmmn-btn-entry {
+    text-align: center;
+    margin-top: 4rem;
+    overflow: hidden;
+}
+
+.cmmn-btn-entry .btn-frame {
+   float: left;
+   width: 50%;
+}
+
+/* 新規登録してエントリーするボタン */
+.cmmn-btn-entry a.regist-entry {
+    float: right;
+    line-height: 1.5rem;
+    width: 60%;
+    border-radius: 18px;
+    background: #5e8796;
+    color: #fff;
+    border-style: none;
+    margin: 0 1rem;
+    padding: 0.8rem;
+    font-size: 1rem;
+    box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+}
+
+/* ログインしてエントリーするボタン */
+.cmmn-btn-entry a.login-entry {
+    float: right;
+    line-height: 1.5rem;
+    width: 60%;
+    border-radius: 0px;
+    background: transparent;
+    color: #5e8796;
+    border-bottom: dotted 1px #5e8796;
+    padding: 7px 0 0 0;
+    margin: 0 9px 0 9px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+
 /* 検討中ボタン */
+.cmmn-btn-entry a.consider-btn {
+    float: left;
+    line-height: 1.5rem;
+    width: 60%;
+    border-radius: 18px;
+    background:orange;
+    color: #fff;
+    border-style: none;
+    margin: 0 1rem;
+    padding: 0.8rem;
+    font-size: 1rem;
+    box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+}
+
+.cmmn-btn-entry a.consider_delete-btn {
+    float: left;
+    line-height: 1.5rem;
+    width: 60%;
+    border-radius: 18px;
+    background:#d9333f;
+    color: #fff;
+    border-style: none;
+    margin: 0 1rem;
+    padding: 0.8rem;
+    font-size: 1rem;
+    box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+}
 
 .cmmn-btn a.consider-btn {
  background:orange;
@@ -3708,7 +3786,7 @@ sp.css ~640px
     /* 汎用データテーブル END */
 
     /* 汎用ボタン START */
-    .cmmn-btn {
+    .cmmn-btn{
         margin-top: 2rem;
     }
 
@@ -3722,6 +3800,41 @@ sp.css ~640px
         margin-top: 1rem;
     }
     /* 汎用ボタン END */
+    .cmmn-btn-entry {
+        margin-top: 2rem;
+    }
+
+    .cmmn-btn-entry .btn-frame {
+       float: none;
+       width: 100%;
+       margin: 0 0 1rem 0;
+    }
+
+    .cmmn-btn-entry .btn-frame a {
+        display: inline-block;
+    }
+
+    .cmmn-btn-entry a.regist-entry {
+        text-align: center;
+        width: 80%;
+        float: none;
+    }
+
+    .cmmn-btn-entry a.login-entry {
+        width: 80%;
+        float: none;
+    }
+
+    .cmmn-btn-entry a.consider-btn,
+    .cmmn-btn-entry a.consider_delete-btn {
+        width: 80%;
+        float: none;
+    }  
+
+    .cmmn-btn {
+        margin-top: 2rem;
+    }
+
 
     .question .arrow-left {
         right: 4px;

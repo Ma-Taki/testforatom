@@ -20,6 +20,7 @@ use App\Models\Ms_job_types;
 use App\Models\Ms_skills;
 use App\Models\Tr_column_connects;
 use App\Models\Tr_link_column_connects;
+use App\Libraries\CookieUtility as CkieUtil;
 
 class ItemController extends FrontController
 {
@@ -166,7 +167,13 @@ class ItemController extends FrontController
             $columnConnects = $this->getColumn($tagKeywords);
         }
 
-        return view('front.item_detail', compact('item', 'recoItemList', 'canEntry','isConsidering','columnConnects'));
+        $cookieUser = CkieUtil::get(CkieUtil::COOKIE_NAME_USER_ID);
+        $userFlag = 0;
+        if(!empty($cookieUser)){
+            $userFlag = 1;
+        }
+
+        return view('front.item_detail', compact('item', 'recoItemList', 'canEntry','isConsidering','columnConnects','userFlag'));
     }
 
     /**
