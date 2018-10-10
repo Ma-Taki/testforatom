@@ -77,7 +77,16 @@ class ItemController extends AdminController
                           ->orderBy($item_order['columnName'], $item_order['sort'])
                           ->paginate(30);
 
-        return view('admin.item_list', compact('itemList', 'data_query'));
+        //案件総数
+        $allItems = Tr_items::where('delete_flag','=',0)->count();
+
+        //募集中
+        $today = Carbon::today();
+        $wantedItems = Tr_items::where('delete_flag','=',0)
+                        ->where('service_start_date', '<', $today)
+                        ->where('service_end_date', '>' ,$today)->count();
+                     
+        return view('admin.item_list', compact('itemList', 'data_query','allItems','wantedItems'));
     }
 
     /**

@@ -13,7 +13,7 @@ use App\Models\Tr_tag_infos;
         <div class="panel-title" style="font-size:20px">案件一覧</div>
 			</div>
   	  <div class="panel-body">
-
+        <p class="alert-member" style="font-weight: bold;padding-bottom: 1.6%;">案件総数: {{$allItems}}件　募集中: {{$wantedItems}}件</p>
 {{-- info message --}}
 @if(\Session::has('custom_info_messages'))
         <div class="alert alert-info">
