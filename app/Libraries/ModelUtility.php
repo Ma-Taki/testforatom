@@ -91,6 +91,8 @@ class ModelUtility
     const EXIT_OPERATION = 6; //終了
     const STOP_OPERATION = 7; //営業中止
     const IN_OPARATION_AT_OTHER_COMPANY = 8;//他社稼働中
+    const REQUEST_IN_COUNCELING = 9;//カウンセリング依頼中
+    const OPERATING_RECORD = 10;//稼働実績有
 
     /**
      * 引数のモデル配列のname属性を'、'で連結して返す。
