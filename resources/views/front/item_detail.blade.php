@@ -110,7 +110,7 @@ use App\Models\Tr_column_connects;
                       @if($userFlag)
                         <a class="regist-entry" href="/entry?id={{ $item->id }}">この案件にエントリーする</a>
                       @else
-                        <a class="regist-entry" href="http://localhost/user/regist/auth">新規登録してエントリーする</a>
+                        <a class="regist-entry" href="/user/regist/auth">新規登録してエントリーする</a>
                         <a class="login-entry" href="/entry?id={{ $item->id }}">ログインしてエントリーする</a>
                       @endif
                     </div>
