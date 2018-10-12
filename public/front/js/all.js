@@ -19,6 +19,14 @@ jQuery(function($){
 		window.location.href = setParameter(getParameter());
 	})
 
+    $('.accordion_name').each(function(){
+    	var $slideArea = $(this).parents('.accordion_content').find('.accordion_slideArea');
+    	$slideArea.hide();
+		$(this).click(function(){
+			$slideArea.slideToggle('fast');
+		})
+	})
+
 	function setParameter( paramsArray ) {
 		var resurl = '/item/search/condition';
         for ( key in paramsArray ) {
