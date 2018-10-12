@@ -125,22 +125,24 @@
 
                     <div class="tabBox">
                       <div class="tabBoxInr">
-                        @foreach(Ms_skill_categories::getNotIndexOnly() as $skill_category)
-                          @if(!$skill_category->skills->isEmpty())
-                            <div class="tabContent">
-                              <h3>{{ $skill_category->name }}</h3>
-                              <ul>
-                                @foreach($skill_category->skills as $skill)
-                                  @if($skill->master_type != mdlUtil::MASTER_TYPE_INDEX_ONLY)
-                                    <li class="tabContentElementOneThird">
-                                      <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
-                                    </li>
-                                  @endif
-                                @endforeach
-                              </ul>
-                            </div>
-                          @endif
-                        @endforeach
+                        <div class="tabContent">
+                          @foreach(Ms_skill_categories::getNotIndexOnly() as $skill_category)
+                            @if(!$skill_category->skills->isEmpty())
+                              <div class="accordion_content">
+                                <h3 class="accordion_name">{{ $skill_category->name }}</h3>
+                                <ul class="accordion_slideArea">
+                                  @foreach($skill_category->skills as $skill)
+                                    @if($skill->master_type != mdlUtil::MASTER_TYPE_INDEX_ONLY)
+                                      <li class="tabContentElementOneThird">
+                                        <label><input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">{{ $skill->name }}</label>
+                                      </li>
+                                    @endif
+                                  @endforeach
+                                </ul>
+                              </div>
+                            @endif
+                          @endforeach
+                        </div>
                       </div>
                     </div>
                     <div class="tabBox">

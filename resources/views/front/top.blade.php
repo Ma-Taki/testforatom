@@ -136,21 +136,23 @@ use App\Models\Tr_slide_images;
             <div class="tabBox">
               <!-- スキル -->
               <div class="tabBoxInr">
-                @foreach($skillCategories as $skill_category)
-                  <div class="tabContent">
-                    <h3>{{ $skill_category->name }}</h3>
-                    <ul>
-                      @foreach(Ms_skills::getSkills($skill_category->id) as $skill)
-                        <li class="tabContentElementOneThird">
-                          <label>
-                            <input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">
-                            {{ $skill->name }}
-                          </label>
-                        </li> 
-                      @endforeach  
-                    </ul>
-                  </div>
-                @endforeach
+                <div class="tabContent">
+                  @foreach($skillCategories as $skill_category)
+                    <div class="accordion_content">
+                      <h3 class="accordion_name">{{ $skill_category->name }}</h3>
+                      <ul class="accordion_slideArea">
+                        @foreach(Ms_skills::getSkills($skill_category->id) as $skill)
+                          <li class="tabContentElementOneThird">
+                            <label>
+                              <input class="srchCndtns_chkBx" type="checkbox" name="skills[]" value="{{ $skill->id }}">
+                              {{ $skill->name }}
+                            </label>
+                          </li> 
+                        @endforeach  
+                      </ul>
+                    </div>
+                  @endforeach
+                </div>
               </div>
               <!-- システム種別 -->
               <div class="tabBoxInr">
