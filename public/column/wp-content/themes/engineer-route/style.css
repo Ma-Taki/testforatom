@@ -1859,6 +1859,8 @@ ul.wpp-list li .wpp-author a:before,
 ul.wpp-list li .wpp-category a:before{
 content:none;
 }
+
+
 /* TOC+プラグイン */
 #toc_container li:before{
 content:none;
@@ -2790,6 +2792,38 @@ margin-bottom:0;
 .blog-card .clear {
   clear: both;
 }
+/*-------------------------
+人気記事表示　プラグインなし
+-------------------------*/
+li.popular-contents {
+	width: 24%;
+    min-height: 225px;
+    margin: 0 1% 1% 0;
+    float: left;
+}
+
+figure.popular-eyecatch {
+	width: 100%;
+	max-height: 180px;
+}
+
+div.popular-title .title a:hover {
+	color: #13acca;
+}
+
+figure.popular-eyecatch span.cat-name {
+	text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fcee21;
+    color: #444;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 0.1em 0.5em;
+    min-width: 8em;
+    opacity: .9;
+}
 
 /* --------------------------------------------- */
 /* Mobile Styles */
@@ -3244,6 +3278,42 @@ margin-bottom:0;
 	}
 	.alignright, img.alignright {
 	max-width:52%!important;
+	}
+
+	/* 人気記事表示　プラグインなし */
+	li.popular-contents {
+		width: 98%;
+	    min-height: 125px;
+	    margin: 0 1% 1% 0;
+	    float: left;
+	    padding: 8px 0px;
+	    border-top: 1px solid #e3e3e3;
+	}
+
+	figure.popular-eyecatch {
+		width: 50%;
+		max-height: 180px;
+		float: left;
+		margin-right: 10px;
+	}
+
+	figure.popular-eyecatch span.cat-name {
+		text-align: center;
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    background: #fcee21;
+	    color: #444;
+	    font-size: 0.7em;
+	    font-weight: bold;
+	    padding: 0.1em 0.5em;
+	    min-width: 8em;
+	    opacity: .9;
+	}
+
+	div.popular-title {
+		float: left;
+		width: 46%;
 	}
 }
 
