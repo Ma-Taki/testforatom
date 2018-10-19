@@ -328,6 +328,7 @@
               <th>ステータス</th>
               <th>進捗状況</th>
               <th>SNS連携</th>
+              <th>メモ</th>
               <th><!-- レイアウト用Blank --></th>
           </thead>
           <tbody>
@@ -370,9 +371,10 @@
                 <td>
                     @foreach(AdmnUtil::imgSNS($member->socialAccount) as $imgSNS)
                       <img src="/admin/images/{{ $imgSNS }}.png" width="20px"> 
-                    @endforeach
-                    
+                    @endforeach   
                 </td>
+                <!-- メモ -->
+                <td>{{ $member->memo == '' ? '-' : '○' }}</td>
                 <!-- 詳細・削除 -->
                 <td nowrap>
                   <a href="/admin/member/detail?id={{ $member->id }}"><button type="button" class="btn btn-info btn-xs">詳細</button></a>
