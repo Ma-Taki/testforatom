@@ -126,7 +126,7 @@
                             </tr>
                             <tr>
                                 <th>メモ</th>
-                                <td>{{ $member->note == '' ? 'なし' : $member->note }}</td>
+                                <td>@if($member->note == '')なし@else{!! nl2br(e($member->note)) !!}@endif</td>
                             </tr>
                         </table>
                     </div>
@@ -157,7 +157,7 @@
                             </tr>
                             <tr>
                                 <th>メモ</th>
-                                <td>{{ $member->memo == '' ? 'なし' : $member->memo }}</td>
+                                <td>@if($member->memo == '')なし@else{!! nl2br(e($member->memo)) !!}@endif</td>
                             </tr>
                         </table>
                     </div>
