@@ -554,3 +554,67 @@ function publicize_message_rewrite($post_id){
 	unset($num);
 }
 add_action('save_post', 'publicize_message_rewrite', 999, 1);
+
+
+//---------------------------------------
+//人気記事出力
+//---------------------------------------
+//書き出し用
+function getPostViews($postID){
+	$count_key = 'post_views_count';
+	$count = get_post_meta($postID, $count_key, true);
+	if($count ==''){
+			delete_post_meta($postID, $count_key);
+			add_post_meta($postID, $count_key, '0');
+			return "0 View";
+	}
+	return $count.' Views';
+}
+//カウントアップ用
+function setPostViews($postID) {
+	$count_key = 'post_views_count';
+	$count = get_post_meta($postID, $count_key, true);
+	if($count ==''){
+			$count = 0;
+			delete_post_meta($postID, $count_key);
+			add_post_meta($postID, $count_key, '0');
+	}else{
+			$count++;
+			update_post_meta($postID, $count_key, $count);
+	}
+}
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+//---------------------------------------
+//投稿一覧画面にカスタムフィールドの表示カラムを追加
+//---------------------------------------
+function my_posts_columns($columns){
+    $new_columns = array();
+    foreach ($columns as $name => $val){
+    	if ( 'categories' == $name ) {
+            $new_columns['date'] = '日付';
+        }
+        if('tags' == $name){
+            $new_columns['カウント'] = 'カウント';
+        }
+        $new_columns[ $name ] = $val;
+    }
+    return $new_columns;
+}
+
+add_filter( 'manage_posts_columns', 'my_posts_columns' );
+
+function my_posts_custom_column($column, $post_id){
+    switch($column){
+        case 'カウント':
+            $post_meta=get_post_meta($post_id,'post_views_count', true);
+            if($post_meta){
+				echo $post_meta;
+            }else{
+                echo '';
+            }
+            break;
+    }
+}
+add_action( 'manage_posts_custom_column' , 'my_posts_custom_column', 10, 2 );
+

@@ -59,12 +59,11 @@
 								) );?>
 						</section>
 						<div class="article-footer">
-						<!-- バナー作成 -->
-					<p>
-						<a href="https://www.engineer-route.com/user/regist/auth">
-						<img src="https://www.engineer-route.com/column/wp-content/uploads/engineer-route_yoko_bnr03-1.png" alt="プロのコーディネーターによる 非公開案件のご紹介 充実してます" width="615" height="219" class="alignnone size-full wp-image-1092" /></a>
-					</p>
-
+							<!-- バナー作成 -->
+							<p>
+								<a href="https://www.engineer-route.com/user/regist/auth">
+								<img src="https://www.engineer-route.com/column/wp-content/uploads/engineer-route_yoko_bnr03-1.png" alt="プロのコーディネーターによる 非公開案件のご紹介 充実してます" width="615" height="219" class="alignnone size-full wp-image-1092" /></a>
+							</p>
 							<?php echo get_the_category_list(); ?>
 							<?php the_tags( '<p class="tags">', '', '</p>' ); ?>
 						</div>
@@ -77,9 +76,21 @@
 					</article>
 					<?php //get_template_part( 'parts_singlefoot' ); ?>
 				<?php endwhile; ?>
+				<?php get_template_part( 'parts_popular_post' ); //人気のコラム記事 ?>
 			</main>
 			<?php get_sidebar(); ?>
 		</div>
 	</div>
 <?php endif; wp_reset_query(); //ワンカラム条件分岐END ?>
 <?php get_footer(); ?>
+
+
+
+
+
+
+
+
+
+
+
