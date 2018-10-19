@@ -1,6 +1,9 @@
 @extends('admin.common.layout')
 @section('title', 'エントリー詳細')
 @section('content')
+<?php
+    use App\Libraries\ModelUtility as MdlUtil;
+?>
 <div class="col-md-10">
     <div class="row">
         <div class="col-md-5">
@@ -40,7 +43,7 @@
                         <table>
                             <tr>
                                 <th>氏名</th>
-                                <td>{{ $entry->user->last_name.' '.$entry->user->first_name }}</td>
+                                <td><a href='/admin/member/detail?id={{$entry->user_id}}'>{{ $entry->user->last_name.' '.$entry->user->first_name }}</a></td>
                             </tr>
                             <tr>
                                 <th>氏名(かな)</th>
@@ -100,6 +103,61 @@
                             <tr>
                                 <th>スキルシート</th>
                                 <td>{!! $entry->user->skillsheet_upload ? "<a href='/admin/member/download?id=$entry->user_id'>アップロード済み</a>" : '未アップロード' !!}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="content-box-header">
+                    <div class="panel-title">評価 / メモ</div>
+                </div>
+                <div class="content-box-large box-with-header">
+                    <div class="cal-md-12">
+                        <table>
+                            <tr>
+                                <th>評価</th>
+                                <td>
+                                    @if($member->impression == MdlUtil::USER_IMPRESSION_EXCELLENT)優良@endif
+                                    @if($member->impression == MdlUtil::USER_IMPRESSION_NORMAL)普通@endif
+                                    @if($member->impression == MdlUtil::USER_IMPRESSION_NOTGOOD)いまいち@endif
+                                    @if($member->impression == MdlUtil::USER_IMPRESSION_BLACK)ブラック@endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>メモ</th>
+                                <td>{{ $member->note == '' ? 'なし' : $member->note }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="content-box-header">
+                    <div class="panel-title">進捗状況</div>
+                </div>
+                <div class="content-box-large box-with-header">
+                    <div class="cal-md-12">
+                        <table>
+                            <tr>
+                                <th>ステータス</th>
+                                <td>
+                                    @if($member->status == MdlUtil::UNSUPPORTED)未対応@endif
+                                    @if($member->status == MdlUtil::REQUEST_IN_COUNCELING)カウンセリング依頼中@endif
+                                    @if($member->status == MdlUtil::IN_ADJUSTMENT_COUNCELING)カウンセリング調整中@endif
+                                    @if($member->status == MdlUtil::FINISHED_COUNCELING)カウンセリング済み@endif
+                                    @if($member->status == MdlUtil::IN_ADJUSTMENT_INTERVIEW)案件面談調整中@endif
+                                    @if($member->status == MdlUtil::FINISHED_INTERVIEW)案件面談済み@endif
+                                    @if($member->status == MdlUtil::IN_OPERATION)稼働中@endif
+                                    @if($member->status == MdlUtil::EXIT_OPERATION)終了@endif
+                                    @if($member->status == MdlUtil::STOP_OPERATION)営業中止@endif
+                                    @if($member->status == MdlUtil::IN_OPARATION_AT_OTHER_COMPANY)他社稼働中@endif
+                                    @if($member->status == MdlUtil::OPERATING_RECORD)稼働実績有@endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>メモ</th>
+                                <td>{{ $member->memo == '' ? 'なし' : $member->memo }}</td>
                             </tr>
                         </table>
                     </div>
@@ -195,15 +253,13 @@
                         </tr>
                         <tr>
                             <th>ステータス</th>
-
-@if($today->lt($entry->item->service_start_date))
-                            <td>エントリー受付前</td>
-@elseif($today->gt($entry->item->service_end_date))
-                            <td>エントリー受付終了</td>
-@else
-                            <td>エントリー受付中</td>
-@endif
-
+                            @if($today->lt($entry->item->service_start_date))
+                                <td>エントリー受付前</td>
+                            @elseif($today->gt($entry->item->service_end_date))
+                                <td>エントリー受付終了</td>
+                            @else
+                                <td>エントリー受付中</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>メモ(社内用)</th>
