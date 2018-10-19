@@ -98,6 +98,7 @@ use App\Models\Tr_tag_infos;
               <th>報酬</th>
               <th>エントリー受付期間</th>
               <th>ステータス</th>
+              <th>メモ</th>
               <th></th>
             </tr>
           </thead>
@@ -112,6 +113,7 @@ use App\Models\Tr_tag_infos;
               <td>{{ $item->rate_detail }}</td>
               <td>{{ $item->service_start_date->format('Y年n月j日') }} 〜 {{ $item->service_end_date->format('Y年n月j日') }}</td>
               <td>@if($item->delete_flag) 削除済み @else 受付{{ (HtmlUtility::isTodayInPeriod($item->service_start_date, $item->service_end_date)) }} @endif</td>
+              <td>@if($item->note) ◯ @else -　@endif</td>
               <td nowrap>
                 <a href="/admin/item/detail?id={{ $item->id }}"><button type="button" class="btn btn-info btn-xs">詳細</button></a>
 
