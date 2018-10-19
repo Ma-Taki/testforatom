@@ -30,9 +30,16 @@ class EntryController extends AdminController
             abort(404, '指定されたエントリーは存在しません。');
         }
 
+        // 会員情報を取得する
+        $member = Tr_users::where('id', $entry->user_id)->first();
+        if (empty($member)) {
+            abort(404, '指定された会員は存在しません。');
+        }
+
         return view('admin.entry_detail', [
             'entry' => $entry,
             'today' => Carbon::today(),
+            'member' => $member,
         ]);
     }
 
