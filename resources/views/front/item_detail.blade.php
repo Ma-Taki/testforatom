@@ -91,12 +91,12 @@ use App\Models\Tr_column_connects;
                   <p class="otherName">詳細</p>
                   <p class="pre-wrap otherValue">{{ $item->detail }}</p>
                 </div>
-                <div class="other">
+                <?php /* <div class="other">
                   <p class="otherName">エントリー受付期間</p>
                   <p class="otherValue">
                     {{ $item->service_start_date->format('Y年n月j日').' 〜 '.$item->service_end_date->format('Y年n月j日') }}
                   </p>
-                </div>
+                </div> */ ?>
                 <div class="itemTagList invisible-sp">
                   @foreach($item->tags as $tag)
                     <a href="/item/tag/{{ $tag->id }}">
