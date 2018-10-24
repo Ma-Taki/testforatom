@@ -65,7 +65,7 @@
                 </div>
               </div>
 
-              <div class="cmmn-btn">
+              <div class="cmmn-btn red-btn">
                 <button class="login-btn" type="submit">送信</button>
               </div>
               {{ csrf_field() }}
