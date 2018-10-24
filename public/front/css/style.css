@@ -5037,3 +5037,38 @@ h3.news-title {
     color: #5e8796;
     padding: 0 0 10px 0;
 }
+
+/*-------------------------------
+コラム　上へもどるボタン
+-------------------------------*/
+.page_top {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    color: #becfd5;
+    font-size: 20px;
+    text-decoration: none;
+    background: #536C75;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    z-index: 100;
+}
+.page_top:hover {
+    background: #becfd5;
+    color: #536C75;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

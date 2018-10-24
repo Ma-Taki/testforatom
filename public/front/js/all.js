@@ -1339,13 +1339,29 @@ jQuery(function($){
 	}
 
 	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-	//
 	//履歴書・職務経歴書・スキルシート
 	//ファイルを選択したときの処理
-	//
 	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 	$('form').on('change', 'input[type="file"]', function(e) {
 		var file_name = $(this).prop('files')[0].name;
     	$(this).parent().next().html(file_name);
    	});
+
+   	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+	//コラム　上へもどるボタン処理
+	//~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+	var pageTop = $('.page_top');
+    pageTop.hide();
+    $(window).scroll(function () {
+    	//600pxよりスクロールしたとき
+        if ($(this).scrollTop() > 600) {
+            pageTop.fadeIn();
+        } else {
+            pageTop.fadeOut();
+        }
+    });
+    pageTop.click(function () {
+        $('body, html').animate({scrollTop:0}, 500, 'swing');
+        return false;
+    });
 });
