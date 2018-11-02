@@ -92,7 +92,7 @@ Route::group(['middleware' => 'front_loginCheck'], function () {
     Route::get('/user/edit/email/auth', 'front\UserController@updateEmail');
     // エントリー
     Route::resource('/entry', 'front\EntryController', ['only' => ['index', 'store']]);
-    Route::get('/entry/con', 'front\EntryController@download');
+    Route::get('/entry/download', 'front\EntryController@download');
     // ファイルアップロード
     Route::get('/entry/completion', 'front\EntryController@ajaxRegistComp');
     // 退会
