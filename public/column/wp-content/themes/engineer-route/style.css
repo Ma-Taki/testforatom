@@ -961,8 +961,8 @@ border-color:#E69B9B;
 .entry-content h2{
 position: relative;
 border: none;
-font-size:1.25em;
-padding: 1em 1.1em;
+font-size:1.8em;
+padding: 0.5em 1.1em;
 margin-top: 2.1em;
 margin-bottom: 1em;
 -webkit-border-radius: 3px;
@@ -3131,7 +3131,7 @@ margin-bottom:0;
 	.single-title,
 	.page-title,
 	.entry-title {
-	font-size:1.2em;
+	font-size:2em;
 	}
 	.add.more{
 	margin-left:-0.9em;
