@@ -317,13 +317,13 @@ p.pageInfo{
 /* submit用 */
 .cmmn-btn button {
     width: 30%;
-    border-radius: 18px;
+    border-radius: 25px;
     background: #5e8796;
     color: #fff;
     border-style: none;
     margin: 0 1rem;
     padding: 0.8rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
@@ -343,8 +343,8 @@ p.pageInfo{
     color: #fff;
     border-style: none;
     margin: 0 1rem;
-    padding: 0.8rem;
-    font-size: 1rem;
+    padding: 1.2rem 0 1rem 0;
+    font-size: 1.5rem;
     box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
