@@ -111,7 +111,7 @@ class FrontUtility
     public $change_mail_auth_mail_from_name = '';
 
     // メール：メールアドレス認証（新規会員登録）
-    const MAIL_TITLE_REGIST_MAIL_AUTH = '会員登録(無料)にお進みください。';
+    const MAIL_TITLE_REGIST_MAIL_AUTH = '【Engineer-Route運営事務局】 会員登録(無料)にお進みください（自動送信メール）';
     public $regist_mail_auth_mail_from = '';
     public $regist_mail_auth_mail_from_name = '';
 

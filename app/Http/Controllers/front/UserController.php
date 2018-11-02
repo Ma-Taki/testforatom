@@ -409,6 +409,7 @@ class UserController extends Controller
             $data = [
                 'user_name' => $request->last_name .$request->first_name,
                 'mail' => $request->mail,
+                'skillsheet_upload_flag' => $skillsheet_upload_flag,
             ];
 
             $frntUtil = new FrntUtil();
