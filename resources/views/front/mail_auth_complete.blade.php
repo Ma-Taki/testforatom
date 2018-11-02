@@ -21,17 +21,30 @@
   </div>
   <!-- END .breadcrumbs -->
 
-  <div class="main-content mail-auth-complete">
+  <div class="main-content mail-auth-complete user-complete">
     <h1 class="main-content__title">認証メール&nbsp;送信完了</h1>
     <hr class="hr-2px-solid-5e8796">
     <div class="main-content__body">
       <div class="content__element">
         <p>
-          会員登録ページのURLが記載されたメールを、入力されたメールアドレス宛に送信しました。<br />
-          24時間以内にURLにアクセスし、会員登録を完了してください。
+          この度はエンジニアルートをご利用いただき、誠にありがとうございます。<br />
         </p>
+        <div class="regist-thanks">
+          <p>
+            会員登録ページのURLが記載されたメールを、ご入力されたメールアドレス宛に送信しております。<br />
+            引き続き会員情報のご記入のほどよろしくお願い致します。<br />
+            エンジニアルート運営事務局一同
+          </p>
+        </div>
         <div class="cmmn-btn">
           <a href="{{ url('/') }}">トップページへ</a>
+        </div>
+      </div>
+      <div class="support">
+        <p class="about-support">サポートについて</p>
+        <p>疑問点・ご不明な点などございましたら、お気軽にお問い合わせください。</p>
+        <div class="cmmn-btn">
+          <a href="/contact">お問い合わせフォーム</a>
         </div>
       </div>
     </div>
