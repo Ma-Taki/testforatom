@@ -526,7 +526,7 @@ function nlink_scode($atts) {
     }
 
 	$nlink = '<div class="blog-card">
-  <a href="'. $url .'">
+  <a class="no-icon" href="'. $url .'" target="_blank">
       <div class="blog-card-thumbnail">'. $img_tag .'</div>
       <div class="blog-card-content">
           <div class="blog-card-title">'. $title .' </div>
