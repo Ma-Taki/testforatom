@@ -11,6 +11,25 @@ var indeed_conversion_label = '';
 <img height=1 width=1 border=0 src="//conv.indeed.com/pagead/conv/703555693215870/?script=0">
 </noscript>
 <!-- End INDEED conversion code -->
+
+<!-- Begin a8js_tag -->
+<span id="a8sales"></span>
+
+<script src="//statics.a8.net/a8sales/a8sales.js"></script>
+
+<script>
+a8sales({
+  "pid": "s00000019499",
+  "items": [
+    {
+      "price": 価格,
+      "quantity": 個数
+    },
+  ]
+});
+</script>
+<!-- End a8js_tag -->
+
 @extends('front.common.layout')
 @section('title', '新規会員登録完了 | エンジニアルート')
 @section('isSimpleFooter', 'true')
