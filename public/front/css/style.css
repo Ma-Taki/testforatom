@@ -367,14 +367,14 @@ p.pageInfo{
 .cmmn-btn-entry a.regist-entry {
     float: right;
     line-height: 1.5rem;
-    width: 60%;
+    width: 80%;
     border-radius: 18px;
     background: #5e8796;
     color: #fff;
     border-style: none;
     margin: 0 1rem;
-    padding: 0.8rem;
-    font-size: 1rem;
+    padding: 1rem;
+    font-size: 1.5rem;
     box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
@@ -384,7 +384,7 @@ p.pageInfo{
 .cmmn-btn-entry a.login-entry {
     float: right;
     line-height: 1.5rem;
-    width: 60%;
+    width: 80%;
     border-radius: 0px;
     background: transparent;
     color: #5e8796;
@@ -402,14 +402,14 @@ p.pageInfo{
 .cmmn-btn-entry a.consider-btn {
     float: left;
     line-height: 1.5rem;
-    width: 60%;
+    width: 80%;
     border-radius: 18px;
     background:orange;
     color: #fff;
     border-style: none;
     margin: 0 1rem;
-    padding: 0.8rem;
-    font-size: 1rem;
+    padding: 1rem;
+    font-size: 1.5rem;
     box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
     -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
