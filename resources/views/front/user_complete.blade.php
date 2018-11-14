@@ -1,7 +1,5 @@
 <!-- Begin a8js_tag -->
-<script src="//statics.a8.net/a8sales/a8sales.js"></script>
 <span id="a8sales"></span>
-<script src="//statics.a8.net/a8sales/a8sales.js"></script>
 <script>
 a8sales({
 "pid": "s00000019499001",

@@ -19,6 +19,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/slick.min.js') }}"></script>
     <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/jquery.tile.js') }}"></script>
+    <script src="//statics.a8.net/a8sales/a8sales.js"></script>
     @include('front.common.inside_head_tag')
   </head>
   <body>
