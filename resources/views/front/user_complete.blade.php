@@ -1,21 +1,3 @@
-<!-- Begin a8js_tag -->
-<span id="a8sales"></span>
-<script>
-a8sales({
-"pid": "s00000019499001",
-"order_number": "\""+{{$id}}+"\"",
-"currency": "JPY",
-"items": [
-{
-"code": "a8",
-"price": 16000,
-"quantity": 1
-},
-],
-"total_price": 16000,
-});
-</script>
-<!-- End a8js_tag -->
 <!-- Begin INDEED conversion code -->
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -35,6 +17,24 @@ var indeed_conversion_label = '';
 @section('noindex', 'true')
 @section('fbq_add', 'fbq(\'track\', \'CompleteRegistration\');')
 @section('content')
+<!-- Begin a8js_tag -->
+<span id="a8sales"></span>
+<script>
+a8sales({
+"pid": "s00000019499001",
+"order_number": "\""+{{$id}}+"\"",
+"currency": "JPY",
+"items": [
+{
+"code": "a8",
+"price": 16000,
+"quantity": 1
+},
+],
+"total_price": 16000,
+});
+</script>
+<!-- End a8js_tag -->
 <div class="wrap">
   <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
     <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
