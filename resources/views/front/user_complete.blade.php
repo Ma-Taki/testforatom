@@ -1,3 +1,21 @@
+<script src="//statics.a8.net/a8sales/a8sales.js"></script>
+<span id="a8sales"></span>
+<script src="//statics.a8.net/a8sales/a8sales.js"></script>
+<script>
+a8sales({
+"pid": "s00000019499001",
+"order_number": "\""+{{$id}}+"\"",
+"currency": "JPY",
+"items": [
+{
+"code": "a8",
+"price": 16000,
+"quantity": 1
+},
+],
+"total_price": 16000,
+});
+</script>
 <!-- Begin INDEED conversion code -->
 <script type="text/javascript">
 /* <![CDATA[ */

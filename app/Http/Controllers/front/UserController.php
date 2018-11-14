@@ -165,7 +165,9 @@ class UserController extends Controller
      * POST:/user/regist/completion
      */
     public function ajaxRegistComp(Request $request) {
-        return view('front.user_complete')->with('mail', $request->mail);
+        $id = $request->id;
+        $mail = $request->mail;
+        return view('front.user_complete', compact('id','mail'));
     }
 
     /**
@@ -391,7 +393,10 @@ class UserController extends Controller
                     }else{
                         $file_name = null;
                     }
-                    return ['file_name' => $file_name];
+                    return [
+                        'file_name' => $file_name,
+                        'id' => $user->id
+                        ];
                 } catch (Exception $e) {
                     Log::error($e);
                     abort(400, 'トランザクションが異常終了しました。');
@@ -421,8 +426,10 @@ class UserController extends Controller
                 }
                 $message->subject(FrntUtil::USER_REGIST_MAIL_TITLE);
             });
-            
-            $data_content = ['url' => '/user/regist/completion?mail="'.$request->mail.'"'];
+
+            $user_id = $db_return_data['id'];
+            $data_content = ['url' => '/user/regist/completion?mail="'.$request->mail.'"&id='.$user_id];
+
             //エンコードして返却
             echo json_encode($data_content);
         }
