@@ -22,7 +22,7 @@ var indeed_conversion_label = '';
 <script>
 a8sales({
 "pid": "s00000019499001",
-"order_number": {{$id}},
+"order_number": "{{$id}}",
 "currency": "JPY",
 "items": [
 {
