@@ -3649,6 +3649,19 @@ tablet.css 641px~1024px
 sp.css ~640px
 ===============================*/
 @media screen and (max-width:640px) {
+   /*-------------------------------
+　会員登録固定ボタン
+    -------------------------------*/
+  
+.fix_menu_smartphone{
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 10000;
+}
+.fix_menu_smartphone img{
+  width:100%;
+}
 
     /*-------------------------------
     # common
