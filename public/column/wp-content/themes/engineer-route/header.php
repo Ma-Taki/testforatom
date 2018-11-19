@@ -18,6 +18,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/front/js/slick.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/front/js/jquery.tile.js"></script>
+<script src="//statics.a8.net/a8sales/a8sales.js"></script>
 <?php
 echo file_get_contents(__DIR__.'/../../../../../resources/views/front/common/inside_head_tag.blade.php');
 ?>
