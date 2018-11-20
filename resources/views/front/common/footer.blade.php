@@ -1,23 +1,6 @@
 <div class="clear"></div>
-<div class="fix_menu_smartphone">
-  <a href = "https://www.engineer-route.com/user/regist/auth"><img src= "/front/images/bnrTouroku01SP.png" alt = "新規会員登録"/></a>
-</div>   
 <footer class="bg">
   <div id="fb-root"></div>
-<!--無料会員登録メニューの固定-->
-<script type="text/javascript">
-  $(function(){
-    if ((navigator.userAgent.indexOf('iPhone') > 0
-      && navigator.userAgent.indexOf('iPad') == -1)
-      || navigator.userAgent.indexOf('iPod') > 0
-      || navigator.userAgent.indexOf('Android') > 0) {
-      var bH = $('.fix_menu_smartphone').height();
-      $('body').css('margin-bottom',bH+'px');
-    }else{
-      $('.fix_menu_smartphone').css('display','none');
-    }
-  });
-</script>
 
   <script>
   (function(d, s, id) {
