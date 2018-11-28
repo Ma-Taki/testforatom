@@ -153,7 +153,7 @@ class FrontUtility
 
                 $this->user_regist_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
-                $this->user_regist_mail_to_bcc = 'akikohayashi0520@gmail.com';
+                $this->user_regist_mail_to_bcc = '';
 
                 $this->user_entry_mail_from = 'y.suzuki@solidseed.co.jp';
                 $this->user_entry_mail_from_name = 'エンジニアルート';
@@ -180,7 +180,7 @@ class FrontUtility
 
                 $this->user_regist_mail_from = 'sender@engineer-route.com';
                 $this->user_regist_mail_from_name = 'エンジニアルート';
-                $this->user_regist_mail_to_bcc = 'akikohayashi0520@gmail.com';
+                $this->user_regist_mail_to_bcc = 'info@engineer-route.com';
 
                 $this->user_entry_mail_from = 'sender@engineer-route.com';
                 $this->user_entry_mail_from_name = 'エンジニアルート';
