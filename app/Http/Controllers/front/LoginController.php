@@ -14,6 +14,8 @@ use Log;
 use Cookie;
 use Carbon\Carbon;
 use DB;
+use App\Models\Tr_auth_keys;
+use App\Libraries\ModelUtility as MdlUtil;
 
 class LoginController extends FrontController
 {
@@ -32,73 +34,79 @@ class LoginController extends FrontController
      * POST:/login
      */
     public function store(LoginRequest $request){
+      try {
+        // メールアドレスから有効なユーザを取得する
+        $user = parent::getUserByMail($request->email);
 
+      } catch (ModelNotFoundException $e) {
+        return back()->with('custom_error_messages',['メールアドレス又はパスワードに誤りがあります。'])->withInput();
+      }
+
+      // 一応、２件以上取得したらcritical
+      if ($user->count() >= 2) {
+        Log::critical('Duplicate email-address:' .$user->first()->mail);
+        abort(400);
+      }
+
+      // パスワード照合
+      $user = $user->first();
+      $password = md5($user->salt .$request->password .FrontUtil::FIXED_SALT);
+      if ($user->password != $password) {
+        // 認証失敗
+        return back()->with('custom_error_messages',['メールアドレス又はパスワードに誤りがあります。'])->withInput();
+      }
+
+      // 認証確認
+      if ($user->auth_flag == 1) {
+        // 認証失敗
+        return back()->with('custom_error_messages',['「ご登録完了にお進みください」メールのURLをクリックして、認証を完了してください。'])->withInput();
+      }
+
+      // 認証成功
+      $db_data = [
+        'user_id' => $user->id,
+        'now' => Carbon::now()->format('Y-m-d H:i:s'),
+      ];
+
+      // トランザクション
+      DB::transaction(function () use ($db_data) {
         try {
-            // メールアドレスから有効なユーザを取得する
-            $user = parent::getUserByMail($request->email);
+          // 最終ログイン日付をアップデート
+          Tr_users::where('id', $db_data['user_id'])
+                    ->update(['last_login_date' => $db_data['now']]);
 
-        } catch (ModelNotFoundException $e) {
-            return back()->with('custom_error_messages',['メールアドレス又はパスワードに誤りがあります。'])->withInput();
+        } catch (Exception $e) {
+          Log::error($e);
+          abort(503);
         }
+      });
 
-        // 一応、２件以上取得したらcritical
-        if ($user->count() >= 2) {
-            Log::critical('Duplicate email-address:' .$user->first()->mail);
-            abort(400);
-        }
+      // cookieを付与する
+      CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $user->id);
 
-        // パスワード照合
-        $user = $user->first();
-        $password = md5($user->salt .$request->password .FrontUtil::FIXED_SALT);
-        if ($user->password != $password) {
-            // 認証失敗
-            return back()->with('custom_error_messages',['メールアドレス又はパスワードに誤りがあります。'])->withInput();
-        }
-        // 認証成功
-        $db_data = [
-            'user_id' => $user->id,
-            'now' => Carbon::now()->format('Y-m-d H:i:s'),
-        ];
-
-        // トランザクション
-        DB::transaction(function () use ($db_data) {
-            try {
-                // 最終ログイン日付をアップデート
-                Tr_users::where('id', $db_data['user_id'])
-                        ->update(['last_login_date' => $db_data['now']]);
-
-            } catch (Exception $e) {
-                Log::error($e);
-                abort(503);
-            }
-        });
-
-        // cookieを付与する
-        CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $user->id);
-
-        //cookieに検討中案件があればデータベースに追加
-        if (CkieUtil::get('considers')){
-          $cookies = CkieUtil::get('considers');
-          foreach ($cookies as $key => $value) {
-            //すでに検討中かデータベース検索（user_idとitem_idの複合インデックス）
-            $considers = Tr_considers::where('user_id',$user->id)->where('item_id',$key);
-            //すでに検討中であればアップデート
-            if($considers->count() > 0){
-              $considers->update(['user_id' => $user->id,'item_id'=>$key,'delete_flag'=>0]);
-            //まだ検討中でなければインサート
-            }else{
-              //データベースに登録
-              $csd = new Tr_considers;
-              $csd->user_id = $user->id;
-              $csd->item_id = $key;
-              $csd->delete_flag = 0;
-              $csd->save();
-            }
-            //もうcookieに入っているデータは必要ないので削除
-            CkieUtil::delete('considers['.$key.']');
+      //cookieに検討中案件があればデータベースに追加
+      if (CkieUtil::get('considers')) {
+        $cookies = CkieUtil::get('considers');
+        foreach ($cookies as $key => $value) {
+          //すでに検討中かデータベース検索（user_idとitem_idの複合インデックス）
+          $considers = Tr_considers::where('user_id',$user->id)->where('item_id',$key);
+          //すでに検討中であればアップデート
+          if($considers->count() > 0){
+            $considers->update(['user_id' => $user->id,'item_id'=>$key,'delete_flag'=>0]);
+          //まだ検討中でなければインサート
+          }else{
+            //データベースに登録
+            $csd = new Tr_considers;
+            $csd->user_id = $user->id;
+            $csd->item_id = $key;
+            $csd->delete_flag = 0;
+            $csd->save();
           }
+          //もうcookieに入っているデータは必要ないので削除
+          CkieUtil::delete('considers['.$key.']');
         }
-        return redirect($request->next);
+      }
+      return redirect($request->next);
     }
 
     /**

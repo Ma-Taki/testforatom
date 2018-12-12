@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\File;
 class UserController extends Controller
 {
     /**
-     * メールアドレス認証画面表示
+     * 新規登録画面表示
      * GET:/user/regist/auth
      */
     public function showMailAuth(Request $request) {
@@ -44,12 +44,12 @@ class UserController extends Controller
     }
 
     /**
-     * メールアドレス認証 & 完了画面表示
+     * 新規登録処理 & 認証案内画面表示
      * POST:/user/regist/auth
      */
     public function mailAuth(MailAuthRequest $request) {
 
-        // SNS連携用のsessionがあれば削除
+        //SNS連携用のsessionがあれば削除
         if (session()->has(SsnUtil::SESSION_KEY_SOCIAL_TYPE)){
             session()->forget(SsnUtil::SESSION_KEY_SOCIAL_TYPE);
         }
@@ -71,11 +71,79 @@ class UserController extends Controller
             'ticket' => $ticket,
             'mail' => $request->mail,
             'now' => Carbon::now()->format('Y-m-d H:i:s'),
-
         ];
 
-        // トランザクション
-        DB::transaction(function () use ($data_db) {
+        // prefix_saltを作成   
+        $prefix_salt = FrntUtil::getPrefixSalt(20); 
+        // 必須項目以外はnullを指定   
+        // empty()で判別しているため、'0'は空文字扱い   
+        $db_data = [    
+            //性 
+            'last_name' => $request->last_name, 
+            //名 
+            'first_name' => $request->first_name,   
+            //性(かな) 
+            'last_name_kana' => $request->last_name_kana,   
+            //名(かな) 
+            'first_name_kana' => $request->first_name_kana, 
+            //性別    
+            'gender' => $request->gender,   
+            //メールアドレス   
+            'mail' => $request->mail,   
+            //salt  
+            'salt' => $prefix_salt, 
+            //パスワード 
+            'password' => $prefix_salt .$request->password .FrntUtil::FIXED_SALT,   
+            //電話番号  
+            'phone_num' => $request->phone_num, 
+            //お住まい  
+            'prefecture_id' => $request->prefecture_id, 
+            //生年月日  
+            'birth' => date('Y-m-d', strtotime($request->birth)),   
+            //国籍    
+            'country' => "日本",  
+            //メールマガジン配信 
+            'magazine_flag' => 1,   
+            //スキルシート    
+            'skillsheet_upload' => 0,   
+            //現在の日時 
+            'now' => Carbon::now()->format('Y-m-d H:i:s'),  
+            //SNS連携 
+            'social_conection_type' => session()->pull('social_conection_type', null),  
+            'social_conection_id' => session()->pull('social_conection_id', null),  
+        ];
+
+        // 会員登録トランザクション 
+        $db_return_data = DB::transaction(function () use ($db_data) {  
+            try {   
+                $db_data['user'] = new Tr_users;
+                $db_data['user']->auth_flag = 1;
+                $db_data['user']->last_name = $db_data['last_name'];
+                $db_data['user']->first_name = $db_data['first_name'];
+                $db_data['user']->last_name_kana = $db_data['last_name_kana'];
+                $db_data['user']->first_name_kana = $db_data['first_name_kana'];
+                $db_data['user']->sex = $db_data['gender'];
+                $db_data['user']->mail = $db_data['mail'];
+                $db_data['user']->salt = $db_data['salt'];
+                $db_data['user']->password = md5($db_data['password']);
+                $db_data['user']->tel = $db_data['phone_num'];
+                $db_data['user']->prefecture_id = $db_data['prefecture_id'];
+                $db_data['user']->birth_date = $db_data['birth'];
+                $db_data['user']->nationality = $db_data['country'];
+                $db_data['user']->magazine_flag = $db_data['magazine_flag']; 
+                $db_data['user']->skillsheet_upload = $db_data['skillsheet_upload'];
+                $db_data['user']->registration_date = $db_data['now'];
+                $db_data['user']->last_login_date = $db_data['now'];
+                $db_data['user']->save();  
+            } catch (Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+            return $db_data['user'];
+        });
+
+        // メール認証トランザクション
+        DB::transaction(function () use ($data_db) {           
             try {
                 if (empty($data_db['auth_key'])) {
                     // インサート
@@ -89,7 +157,6 @@ class UserController extends Controller
                 }
                 $data_db['auth_key']->ticket = $data_db['ticket'];
                 $data_db['auth_key']->save();
-
             } catch (Exception $e) {
                 Log::error($e);
                 abort(400, 'トランザクションが異常終了しました。');
@@ -114,7 +181,7 @@ class UserController extends Controller
     }
 
     /**
-     * 新規会員登録画面表示
+     * メール認証完了画面表示
      * GET:/user/regist
      */
     public function index(Request $request){
@@ -144,7 +211,7 @@ class UserController extends Controller
                 'limit' => $limit,
                 'now' => $now,
             ]);
-            return redirect('/user/regist/auth')->with('custom_error_messages',['恐れ入りますが、再度メールアドレス認証を行ってください。']);
+            return redirect('/user/regist/auth')->with('custom_error_messages',['登録から24時間以上経過しました。恐れ入りますが、再度登録をおこなってください。']);
         }
 
         $this->log('info', 'success to limit check', [
@@ -153,286 +220,48 @@ class UserController extends Controller
             'now' => $now,
         ]);
 
-        return view('front.user_input',[
-            'mail' => $auth_key->mail,
-            'ticket' => $ticket,
-            'magazine_flag' => 1,
-        ]);
-    }
-
-    /**
-     * 会員登録完了画面表示
-     * POST:/user/regist/completion
-     */
-    public function ajaxRegistComp(Request $request) {
-        $id = $request->id;
-        $mail = $request->mail;
-        return view('front.user_complete', compact('id','mail'));
-    }
-
-    /**
-     * 会員登録処理
-     * POST:/user/regist
-     */
-    public function store(UserRegistrationRequest $request) {
-        // ticketとmailが正しいかチェックする
-        $ticket = $request->ticket;
-        $auth_key = Tr_auth_keys::where('mail', $request->mail)
-                                ->where('ticket', $ticket)
-                                ->where('auth_task', MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT)
+        //会員情報取得
+        $user = Tr_users::where('mail', $auth_key->mail)
+                                ->where('delete_flag', 0)
+                                ->where('delete_date', Null)
                                 ->get()
                                 ->first();
 
-        // 認証鍵が取得できなかった場合
-        if (empty($auth_key)) {
-            $this->log('error', 'entity not found(Tr_auth_keys)',[
-                'mail' => $request->mail,
-                'ticket' => $ticket,
-                'auth_task' => MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT,
-            ]);
+        //認証フラグ更新処理
+        DB::transaction(function () use ($user) {
+            try {
+                Tr_users::where('mail', $user->mail)
+                        ->where('delete_flag', $user->delete_flag)
+                        ->where('delete_date', $user->delete_date)->update([
+                    'auth_flag' => 0,
+                ]);
+            } catch (\Exception $e) {
+                Log::error($e);
+                abort(400, 'トランザクションが異常終了しました。');
+            }
+        });
 
-            $data_content = ['url' => '/user/regist/auth?custom_error_messages="恐れ入りますが、再度メールアドレス認証を行ってください。"'];
-            echo json_encode($data_content);
-        }
+        //メール送信
+        $data = [
+            'user_name' => $user->last_name .$user->first_name,
+            'mail' => $auth_key->mail,
+            'skillsheet_upload_flag' => 0,
+        ];
 
-        // 24時間以内のアクセスかチェック
-        $limit = $auth_key->application_datetime->addDay();
-        $now = Carbon::now();
-        if (!$now->lte($limit)) {
-            $this->log('error', 'limit over mail auth', [
-                'regist' => $auth_key->application_datetime,
-                'limit' => $limit,
-                'now' => $now,
-            ]);
-            
-            $data_content = ['url' => '/user/regist/auth?custom_error_messages="恐れ入りますが、再度メールアドレス認証を行ってください。"'];
-            echo json_encode($data_content);
-        }
+        $frntUtil = new FrntUtil();
+        Mail::send('front.emails.user_regist', $data, function ($message) use ($data, $frntUtil) {
+            $message->from($frntUtil->user_regist_mail_from, $frntUtil->user_regist_mail_from_name);
+            $message->to($data['mail']);
+            if (!empty($frntUtil->user_regist_mail_to_bcc)) {
+                $message->bcc($frntUtil->user_regist_mail_to_bcc);
+            }
+            $message->subject(FrntUtil::USER_REGIST_MAIL_TITLE);
+        });
 
-        $this->log('info', 'success to limit check', [
-            'regist' => $auth_key->application_datetime,
-            'limit' => $limit,
-            'now' => $now,
-        ]);
-
-        // prefix_saltを作成
-        $prefix_salt = FrntUtil::getPrefixSalt(20);
-
-        //-------------------------------------------------------------------
-        //スキルシートのチェック
-        //-------------------------------------------------------------------
-        //バリデーションエラーでアップロードを何度もやり直していることを考慮
-        //登録ボタンを押すたびに新しい配列が作成されるため最新の配列のみチェックする
-        $skillsheet_up = 'skillsheet_'.$request->uploadCount;
-        $contract_types = 'contract_types_'.$request->uploadCount;
-        $file_extension = array();
-        $skillsheet_upload_flag = 0;
-        $custom_error_messages = array();
+        $id = $user->id;
+        $mail = $user->mail;
         
-        //「今登録する」、かつ未選択のとき
-        if($request->resume == 'now' && $request->file_type == ''){
-            array_push($custom_error_messages, 'ファイルの登録方法が選択されていません。');
-        }
-
-        //「今登録する」、かつ「ドラッグ&ドロップ」または「ファイル選択」のとき
-        if($request->resume == 'now' && ($request->file_type == 'user_input_dd' || $request->file_type == 'user_input_fe')){
-            $fileCount = 0;
-
-            foreach($request->$skillsheet_up as $key => $file) {
-                if(!empty($file)) {
-                    // サイズチェック
-                    if ($file->getClientSize() > FrntUtil::FILE_UPLOAD_RULE['maximumSize']) {
-                        array_push($custom_error_messages, 'スキルシートが1MBを超えています。');
-                    }
-                    // 拡張子チェック
-                    $original_name = collect(explode('.', $file->getClientOriginalName()));
-                    if ($original_name->count() != 2
-                        || !in_array($original_name->last(), FrntUtil::FILE_UPLOAD_RULE['allowedExtensions'])) {
-                            array_push($custom_error_messages, 'スキルシートの拡張子が正しくありません。');
-                    }
-                    // mimeTypeチェック
-                    $mime_type = shell_exec('file -b --mime '.escapeshellcmd($_FILES[$skillsheet_up]['tmp_name'][$key]));
-                    $mime_type = trim($mime_type);
-                    $mime_type = collect(explode(';', $mime_type));
-
-                    if ($mime_type->isEmpty() || (!$mime_type->isEmpty() && !in_array($mime_type->first(), FrntUtil::FILE_UPLOAD_RULE['allowedTypes']))) {
-                            array_push($custom_error_messages, 'スキルシートのファイル形式が正しくありません。');
-                    }
-                    $file_extension[$key] = $original_name->last();
-                    $skillsheet_upload_flag = 1;
-                }else{
-                    $file_extension[$key] = '';
-                    if(1 < $fileCount){
-                        array_push($custom_error_messages, 'スキルシートがアップロードされていません。');
-                    }
-                    $fileCount++;
-                }
-            }    
-        }
-
-        if (!empty($custom_error_messages)) {
-                $data_content = ['custom_error_messages' => $custom_error_messages];
-                echo json_encode($data_content);
-        }  
-
-        //エラーがないとき
-        if(empty($custom_error_messages)){
-
-            if($request->resume == 'now' && $request->file_type == 'user_input_fma'){
-                $file_extension[] = null;
-            }
-
-            if($request->resume == 'later'){
-                $file_extension[] = null;
-            }
-
-            // 必須項目以外は、入力されていない場合nullを指定
-            // empty()で判別しているため、'0'は空文字扱い
-            $db_data = [
-                'last_name'             => $request->last_name,
-                'first_name'            => $request->first_name,
-                'last_name_kana'        => $request->last_name_kana,
-                'first_name_kana'       => $request->first_name_kana,
-                'gender'                => $request->gender,
-                'birth'                 => date('Y-m-d', strtotime($request->birth)),
-                'education'             => $request->education ?: null,
-                'country'               => $request->country ?: null,
-                'contract_types'        => $request->$contract_types,
-                'prefecture_id'         => $request->prefecture_id,
-                'station'               => $request->station ?: null,
-                'mail'                  => $request->mail,
-                'phone_num'             => $request->phone_num,
-                'magazine_flag'         => $request->magazine_flag,
-                'salt'                  => $prefix_salt,
-                'password'              => $prefix_salt .$request->password .FrntUtil::FIXED_SALT,
-                'now'                   => Carbon::now()->format('Y-m-d H:i:s'),
-                'auth_key'              => $auth_key,
-                'social_conection_type' => session()->pull('social_conection_type', null),
-                'social_conection_id'   => session()->pull('social_conection_id', null),
-                'skillsheet_upload'     => $skillsheet_upload_flag,
-                'skillsheet_1'          => null,
-                'skillsheet_2'          => null,
-                'skillsheet_3'          => null,
-                'file_name'             => 'skillsheetEN',
-                'file_extension'        => $file_extension,
-            ];
-
-            $skillsheet_list = $request->$skillsheet_up;
-
-            // トランザクション
-            $db_return_data = DB::transaction(function () use ($db_data, $skillsheet_list) {
-                try {
-                    // ユーザーテーブルにインサート
-                    $user                    = new Tr_users;
-                    $user->salt              = $db_data['salt'];
-                    $user->password          = md5($db_data['password']);
-                    $user->first_name        = $db_data['first_name'];
-                    $user->last_name         = $db_data['last_name'];
-                    $user->first_name_kana   = $db_data['first_name_kana'];
-                    $user->last_name_kana    = $db_data['last_name_kana'];
-                    $user->registration_date = $db_data['now'];
-                    $user->last_login_date   = $db_data['now'];
-                    $user->sex               = $db_data['gender'];
-                    $user->birth_date        = $db_data['birth'];
-                    $user->education_level   = $db_data['education'];
-                    $user->nationality       = $db_data['country'];
-                    $user->prefecture_id     = $db_data['prefecture_id'];
-                    $user->station           = $db_data['station'];
-                    $user->mail              = $db_data['mail'];
-                    $user->tel               = $db_data['phone_num'];
-                    $user->magazine_flag     = $db_data['magazine_flag'];
-                    $user->delete_flag       = 0;
-                    $user->delete_date       = null;
-                    $user->version           = 0;
-                    $user->skillsheet_upload = $db_data['skillsheet_upload'];
-                    $user->skillsheet_1      = $db_data['skillsheet_1'];
-                    $user->skillsheet_2      = $db_data['skillsheet_2'];
-                    $user->skillsheet_3      = $db_data['skillsheet_3'];
-                    $user->save();
-
-                    // ユーザ契約形態中間テーブルにインサート
-                    // ローカル環境用のデリート。本番で意味はないが影響もない
-                    Tr_link_users_contract_types::where('user_id', $user->id)->delete();
-                    foreach ((array)$db_data['contract_types'] as $contract_type) {
-                        Tr_link_users_contract_types::create([
-                            'user_id' => $user->id,
-                            'contract_type_id' => $contract_type,
-                        ]);
-                    }
-
-                    // メールアドレスの認証鍵を物理削除
-                    $db_data['auth_key']->delete();
-
-                    // SNS連携データが存在する場合
-                    if (!empty($db_data['social_conection_type'])
-                        && !empty($db_data['social_conection_id'])) {
-                        $social_account = new Tr_user_social_accounts;
-                        $social_account->user_id = $user->id;
-                        $social_account->social_account_id = $db_data['social_conection_id'];
-                        $social_account->social_account_type = $db_data['social_conection_type'];
-                        $social_account->registration_date = $db_data['now'];
-                        $social_account->last_update_date = $db_data['now'];
-                        $social_account->save();
-                    }
-
-                    // 採番されたIDでファイル名を生成、アップデート
-                    if ($user->skillsheet_upload) {
-                        $name = $db_data['file_name'].$user->id;
-                        foreach ($skillsheet_list as $key => $file) {
-                            if(!empty($file)) {
-                                $key_plus = $key + 1;
-                                $sheet_num = 'skillsheet_'.$key_plus;
-                                $user->$sheet_num = $name.'_no'.$key_plus.'.'.$db_data['file_extension'][$key];
-                                $file_name[$key] = $user->$sheet_num;
-
-                            }else{
-                                $file_name[$key] = null;
-                            }
-                        }
-                        $user->save();
-                    }else{
-                        $file_name = null;
-                    }
-                    return [
-                        'file_name' => $file_name,
-                        'id' => $user->id
-                        ];
-                } catch (Exception $e) {
-                    Log::error($e);
-                    abort(400, 'トランザクションが異常終了しました。');
-                }
-            });
-            // ファイルをローカルに保存
-            if(count($skillsheet_list) > 0){
-                foreach ($skillsheet_list as $key => $file) {
-                    if(!empty($file)) {
-                        $file->move(storage_path('app'), $db_return_data['file_name'][$key]);
-                    }
-                }
-            }
-            // メール送信
-            $data = [
-                'user_name' => $request->last_name .$request->first_name,
-                'mail' => $request->mail,
-                'skillsheet_upload_flag' => $skillsheet_upload_flag,
-            ];
-
-            $frntUtil = new FrntUtil();
-            Mail::send('front.emails.user_regist', $data, function ($message) use ($data, $frntUtil) {
-                $message->from($frntUtil->user_regist_mail_from, $frntUtil->user_regist_mail_from_name);
-                $message->to($data['mail']);
-                if (!empty($frntUtil->user_regist_mail_to_bcc)) {
-                    $message->bcc($frntUtil->user_regist_mail_to_bcc);
-                }
-                $message->subject(FrntUtil::USER_REGIST_MAIL_TITLE);
-            });
-
-            $user_id = $db_return_data['id'];
-            $data_content = ['url' => '/user/regist/completion?mail="'.$request->mail.'"&id='.$user_id];
-
-            //エンコードして返却
-            echo json_encode($data_content);
-        }
+        return view('front.user_complete' , compact('id','mail'));
     }
 
     /*

@@ -1,0 +1,487 @@
+@charset "UTF-8";
+/*--------------------------------------------------------------
+ ヘッダー・ナビゲーションメニュー・フッター・サイドバー
+--------------------------------------------------------------*/
+/*------------------------------------------
+ ヘッダー
+------------------------------------------*/
+.headerInr {
+	width: 95%;
+    max-width: 1000px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.header__text {
+    width: 60%;
+	font-size: 1.3rem;
+    padding-top: 0.8rem;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.headerInr .header__logo a {
+	background: url(../images/logo.png)no-repeat;
+	background-size: 276px 68px;
+	display: block;
+    width: 276px;
+	height: 68px;
+}
+
+/* 検討中件数ボタン・新規登録ボタン・ログインボタン*/
+.user {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.user li {
+	display: inline-block;
+	background: #333;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0px 4px 8px -3px rgba(0,0,0,0.6);
+}
+
+.user li:hover {
+    background: #4c616a;
+    transition: 0.25s;
+}
+
+.user li a {
+  display:inline-block;
+	color: #fff;
+	line-height:1;
+	padding: 10px;
+	font-size:12px;
+}
+
+.user li a span {
+  display:inline-block;
+}
+
+.user li a #considers_length {
+  color:gold;
+  font-weight:bold;
+  display: inline;
+}
+
+.user li a #considers_unit {
+  display: inline;
+}
+
+.user #user-signin {
+    background: #D46363;
+}
+
+/* キーワード検索 */
+header .search {
+	position: absolute;
+	right: 0;
+	bottom: 12px;
+}
+
+.searchBox {
+	border: #5e8796 1px solid;
+	border-radius: 8px;
+	padding: 8px;
+	margin-right: 4px;
+}
+
+.searchBtn {
+	background: url(../images/search.png)no-repeat;
+	background-size: 26px 26px;
+	width: 26px;
+	height: 26px;
+	text-indent: 100%;
+	cursor: pointer;
+	border: none;
+	vertical-align: middle;
+}
+
+/*------------------------------------------
+ ナビゲーションメニュー 
+------------------------------------------*/
+nav {
+    width: 100%;
+    background: #5e8796;
+}
+
+nav ul {
+    max-width: 1000px;
+	margin: 0 auto;
+	font-size: 0px; /* 隙間対策 */
+    text-align: center;
+}
+
+nav li {
+    text-align: center;
+    width:16.6%;
+	display: inline-block;
+    vertical-align: middle;
+}
+
+nav li.small {
+    width:10%;
+}
+
+nav li a {
+	color: #fff;
+	font-size: 1.4rem;
+	line-height: 4.8rem;
+	padding: 1rem;
+}
+
+nav li a:hover {
+    color: #4c616a;
+}
+
+nav ul .active {
+    background: #536C75;
+}
+
+/*------------------------------------------
+ フッター
+------------------------------------------*/
+footer {
+    margin-top: 10rem;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+footer .footer-links {
+    margin-top: 214px;
+    padding-top: 3rem;
+}
+
+footer .footer-links ul {
+    border-top: 1px solid #ddd;
+}
+
+footer .footer-links ul li,
+footer .footer-links__no-margin ul li {
+	display: inline-block;
+	padding: 2rem 3%;
+}
+
+footer .footer-links__no-margin {
+    padding-top: 3rem;
+}
+
+footer li a {
+    font-size: 1.2rem;
+	color: #536c75;
+}
+
+footer li a:hover {
+	color: #ccc;
+}
+
+footer p {
+	background: #5E8796;
+	color: #fff;
+	padding: 1.6rem 0;
+	font-size: 1.2rem;
+}
+
+footer .footer-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+footer .facebook-window {
+    position: absolute;
+    left: 30px;
+}
+
+footer .sitemap {
+    position: absolute;
+    left: 370px;
+    vertical-align: top;
+    text-align: left;
+    margin-left: 60px;
+    margin-right: 30px;
+}
+
+footer .sitemap h3 {
+    font-size: 1.4rem;
+    padding: 1rem 0;
+}
+
+footer .sitemap ul {
+    margin: 0;
+    padding: 0;
+}
+
+footer .footer-inner .sitemap ul li {
+    display: inline-block;
+    padding: 0.6rem 0.8rem;
+}
+
+/*------------------------------------------
+ サイドバー
+------------------------------------------*/
+.sideInfo {
+    width: 100%;
+}
+
+.sideInfo ul {
+    margin-left: 15%;
+}
+
+.sideInfo li {
+    margin-bottom: 5%;
+}
+
+.sideInfo .hello_user {
+    border: 1px dashed #5e8796;
+    padding: 1.6rem 0.8rem;
+    text-align: center;
+    border-radius:8px;
+}
+
+/*======================================================================
+sp.css ~640px
+======================================================================*/
+@media screen and (max-width:640px) {
+	/*------------------------------------------
+	ヘッダー
+	------------------------------------------*/
+	header {
+        position: fixed;
+        width: 100%;
+        height: 58px;
+        background: white;
+        z-index: 999;
+    }
+
+    .headerInr {
+        padding: 0 16px;
+        height: 48px;
+    }
+
+	.headerInr .header__logo a {
+        margin-top: 8px;
+		width: 100%;
+        background-size: 160px;
+		height: 40px;
+	}
+
+	/* 検討中件数ボタン・新規登録ボタン・ログインボタン*/
+	.user {
+		top: 4px;
+		right: 32px;
+	}
+
+	.user li {
+		background: #5e8796;
+		border-radius: 8px;
+	}
+
+    .user li a {
+        width:38px;
+        height:38px;
+        padding:0px;
+        padding-top:7px;
+    }
+
+    .user li a.invisible-sp {
+        display:none;
+    }
+
+    .user li a span {
+        display:block;
+        font-size:9px;
+        padding:2px 0px;
+        text-align: center;
+    }
+
+    .user li a span:first-child {
+        padding-bottom:1px;
+    }
+
+    .user li a span:last-child {
+        padding-top:1px;
+    }
+
+	/* キーワード検索 */
+	.headerInr .signin,
+	.search {
+		display: none;
+	}
+
+	/*------------------------------------------
+     ナビゲーションメニュー
+    ------------------------------------------*/
+    nav {
+        position: fixed;
+        z-index: 1000;
+        background: none;
+    }
+
+    nav ul {
+        width: 100%;
+    }
+
+    nav ul li {
+        width: 100%;
+        min-height: 1.4rem;
+    }
+
+    nav ul li a {
+        width: 100%;
+        font-size: 1.6rem;
+        padding: 1rem 0;
+        line-height: 2rem;
+        border: 0;
+        border-bottom: 1px solid #fff;
+    }
+
+    .nav-mobile {
+    	display:none; /* Hide from browsers that don't support media queries */
+    	cursor:pointer;
+        position:fixed;
+        top:16px;
+    	right:8px;
+    	background:url(../images/navOpen.png) no-repeat center center;
+    	height:24px;
+    	width:24px;
+    	background-size: 24px 24px;
+        z-index: 1000;
+    }
+
+    .nav-list {
+        display: none;
+        position: fixed;
+        top: 58px;
+        background: #5e8796;
+    }
+
+    .nav-active {
+        display: block;
+    }
+
+    .nav-mobile {
+        display:block;
+    }
+
+    .nav-mobile-open {
+		background: url(../images/navClose.png)center no-repeat;
+		background-size: 20px;
+	}
+
+    /*------------------------------------------
+	 フッター
+	------------------------------------------*/
+    footer {
+        margin-top: 0;
+        padding-top: 0;
+        background: #5E8796;
+    }
+
+	footer ul {
+		letter-spacing: -1em; /* inline-blockの隙間対策 */
+	}
+
+    footer .footer-links {
+        margin: 0;
+        padding: 0;
+	}
+
+    footer .footer-links ul {
+        border: 0;
+    }
+
+	footer .footer-links ul li,
+    footer .footer-links__no-margin ul li {
+		width: 50%;
+		padding: 16px 8px;
+		font-size: 13px;
+		border-right: #9eb7c0 1px solid;
+        border-bottom: #9eb7c0 1px solid;
+        letter-spacing: normal;
+	}
+
+    footer .footer-links__no-margin {
+        padding: 0;
+    }
+
+	footer li:nth-child(even) {
+        border-right: 0;
+    }
+
+	footer li a {
+        color: #fff;
+    }
+
+    footer li a:hover {
+        color: #ccc;
+    }
+
+    footer p {
+		color: #fff;
+		padding: 16px 0;
+		font-size: 12px;
+	}
+
+    footer .footer-links ul {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    /*------------------------------------------
+     サイドバー
+    ------------------------------------------*/
+    .sideInfo{
+        clear: both;
+    }
+
+    .sideInfo ul {
+        margin-left: 0;
+    }
+
+    .sideInfo li {
+        width: 48%;
+        float: left;
+        margin: 1%;
+    }
+
+    .wordpress-sidebar {
+        padding:5px;
+    }
+
+    .wordpress-sidebar>ul>a>li {
+        width:100%;
+    }
+}
+
+/*======================================================================
+tablet.css ~1024px
+======================================================================*/
+@media screen and (max-width: 1024px) {
+
+    /*------------------------------------------
+	 ナビゲーションメニュー
+	------------------------------------------*/
+	nav ul {
+        width: 95%;
+        display: flex;
+    }
+
+    nav li {
+        min-height: 4.8rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    nav li.small {
+        width:auto;
+    }
+
+	nav li a {
+        line-height: 2.4rem;
+    }
+}

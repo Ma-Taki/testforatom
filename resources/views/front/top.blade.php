@@ -114,9 +114,7 @@ use App\Models\Tr_slide_images;
         </section><!-- /.attentionJob -->
       @endif
     </div><!-- /.topItemList -->
-
     @include('front.common.feature')
-
     <section class="conditions invisible-sp">
       <div class="contentInr">
         <h2>条件から案件を探す</h2>
@@ -125,7 +123,6 @@ use App\Models\Tr_slide_images;
             <ul>
               <li>スキル</li>
               <li>システム種別</li>
-              <?php /* <li>報　酬</li> */ ?>
               <li>業　種</li>
               <li>勤務地</li>
               <li>ポジション</li>
@@ -168,18 +165,6 @@ use App\Models\Tr_slide_images;
                   </ul>
                 </div>
               </div>
-              <!-- 報酬 -->
-              <?php /* <div class="tabBoxInr">
-                <div class="tabContent">
-                  <ul>
-                    @foreach(FrntUtil::SEARCH_CONDITION_RATE as $key => $value)
-                      <li class="tabContentElementHalf">
-                        <label><input type="radio" class="srchCndtns_radio" name="search_rate" value="{{ $key }}">{{ $value }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div> */ ?>
               <!-- 業種 -->
               <div class="tabBoxInr">
                 <div class="tabContent">
@@ -236,11 +221,6 @@ use App\Models\Tr_slide_images;
                   <ul></ul>
                   <hr class="partitionLine">
                 </div>
-                <?php /* <div id="tagSelectedRate">
-                  <p class="tagSelectedName">報酬</p>
-                  <ul></ul>
-                  <hr class="partitionLine">
-                </div> */ ?>
                 <div id="tagSelectedBizCategory">
                   <p class="tagSelectedName">業種</p>
                   <ul></ul>
@@ -266,12 +246,11 @@ use App\Models\Tr_slide_images;
               <a id="check-all-clear-btn" class="bg-color-red" href="javascript:void(0);">選択をクリア</a>
             </div>
           </form>
-        </div>
-      </div>
-    </section><!-- /.conditions -->
-
+        </div><!-- END tabWrap alignleft -->
+      </div><!-- END contentInr -->
+    </section><!-- END conditions -->
     <div class="contentInr">
-      <!-- カテゴリーから案件を探す パソコン版-->
+      <!-- START カテゴリーから案件を探す PC版 -->
       <section class="category-search invisible-sp">
         <h2>カテゴリーから案件を探す</h2>
         <div class="category-search__content">
@@ -294,9 +273,10 @@ use App\Models\Tr_slide_images;
             @endforeach
           @endif
           @include('front.common.keyword_pc')
-        </div>
+        </div><!-- END category-search__content -->
       </section>
-      <!-- カテゴリーから案件を探す スマートフォン版-->
+      <!-- END カテゴリーから案件を探す PC版 -->
+      <!-- START カテゴリーから案件を探す スマートフォン版 -->
       <section class="category-search invisible-pc invisible-tab">
         <h2>カテゴリーから案件を探す</h2>
         <div class="category-search__content">
@@ -330,36 +310,30 @@ use App\Models\Tr_slide_images;
               </div>
             @endforeach
           @endif
-        </div>
+        </div><!-- END category-search__content -->
       </section>
+      <!-- END カテゴリーから案件を探す スマートフォン版-->
       @include('front.common.keyword_sp')
-
-@if(!FrntUtil::isLogin())
-      <div class="user_regist_btn invisible-pc invisible-tab ">
-        <a href="{{ url('/user/regist/auth') }}">
-          <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
-        </a>
-      </div>
-@endif
-
+      @if(!FrntUtil::isLogin())
+        <div class="user_regist_btn invisible-pc invisible-tab ">
+          <a href="{{ url('/user/regist/auth') }}">
+            <img src="/front/images/bnrTourokuSP.png" alt="新規会員登録" />
+          </a>
+        </div>
+      @endif
       <div class="main-content-right">
         @include('front.common.sideInfo')
       </div>
-
-    </div><!-- category & sideInfo -->
-
+    </div><!-- END contentInr -->
     <section class="about">
       <div class="contentInr invisible-sp">
         <h2>最新コラム</h2>
       @include('front.common.recent_posts')
       </div>
-
       <div class="contentInr">
         <h2>人気プログラミング言語ランキング</h2>
-      @include('front.common.programming_lang_ranking')
+        @include('front.common.programming_lang_ranking')
       </div>
-
-
       <div class="contentInr">
         <h2>エンジニアルートとは？</h2>
         <div class="about__text">
@@ -371,9 +345,7 @@ use App\Models\Tr_slide_images;
             そして私達も、皆様とともに一緒に歩んでいく為に、 一つずつ丁寧にお手伝いしていきます。
           </p>
         </div>
-
         <hr class="hr-1px-dashed-5e8796">
-
         <div class="appeal-point">
           <h3>1．取引先を担当している営業がカウンセリング</h3>
           <p>
@@ -381,13 +353,11 @@ use App\Models\Tr_slide_images;
             また、状況毎に担当が変わることがないため、話も伝わりやすく安心して作業をして頂ける環境です。
           </p>
           <hr class="hr-1px-dashed-5e8796">
-
           <h3>2．営業力を活かした幅広く豊富な案件</h3>
           <p>
             汎用機系～オープン・WEB系、インフラ・サーバ系や、コンサルティング、PM、PMO、システムエンジニア、プログラマー、ヘルプデスク・サポート系、ディレクター、WEBデザイナーなど幅広い職種や言語にも対応しております。その他、英語や簿記（会計）を活かした求人もございます。役員や営業チームが抱えている案件のほか、万が一ご希望に合わなかった場合は、ヒアリングした内容を元に、新規開拓を行い、新たな案件をご提案いたします。
           </p>
           <hr class="hr-1px-dashed-5e8796">
-
           <h3>3．サイト上には掲載していない公開NG案件・求人も多数</h3>
           <p>
             WEB上には公開できない案件・求人情報が多く存在しています。その他、特に良い案件はサイトに公開する前に決まってしまうケースも非常に多いため、まずは一度弊社でご登録・カウンセリングをしていただくことをお勧めいたします。
@@ -399,7 +369,6 @@ use App\Models\Tr_slide_images;
             今まで正社員として働いていたが、初めてフリーランスになろうと考えている方。「自分のスキルで勝負したい」「たくさん稼ぎたい」「やりたい仕事を選びたい」など考えてはいるものの、フリーランスってどうしたら良いのか分からない事も多いと思います。エンジニアルートでは経験豊富なスタッフがお話をお聞きして、アドバイスをいたします。
           </p>
           <hr class="hr-1px-dashed-5e8796">
-
           <br>
           <br>
           <h3 class="underline">まずは今までのご経験や今後のご希望を私たちにお聞かせください</h3>
@@ -413,12 +382,11 @@ use App\Models\Tr_slide_images;
             ・大手企業の情報システム部などで働いてみたい<br>
           </p>
           <p>など、できる限りご希望に合った案件をご紹介させていただきます。</p>
-        </div>
-      </div>
-    </section>
-
-  </div>
-</div>
+        </div><!-- END appeal-point -->
+      </div><!-- END contentInr -->
+    </section><!-- END about -->
+  </div><!-- END top -->
+</div><!-- END wrap -->
 
 <script type="text/javascript">
     jQuery(function($){
@@ -434,7 +402,7 @@ use App\Models\Tr_slide_images;
                 centerMode: true,     // 中央寄せ
                 centerPadding:'20px', // 両サイドの見えている部分のサイズ
                 autoplay:true,        // 自動再生
-                autoplaySpeed:2500,    // オートプレイの切り替わり時間(ミリ秒)
+                autoplaySpeed:2500,   // オートプレイの切り替わり時間(ミリ秒)
                 speed:2000,           // スライド切り替え時の時間を指定(ミリ秒)
             });
         } else {

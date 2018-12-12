@@ -155,6 +155,9 @@ class MemberController extends AdminController
             $query = $query->whereIn('status', $data_query['status']);
         }
 
+        //メール認証済み
+        $query = $query->where('auth_flag', 0);
+
         //表示順
         $item_order = OdrUtil::MemberOrder[$data_query['sort_id']];
 
