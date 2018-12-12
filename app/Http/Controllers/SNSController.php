@@ -538,7 +538,7 @@ class SNSController extends Controller
                 ]);
 
                 // 会員登録のユーザ情報入力画面に遷移
-                return redirect('/user/regist?ticket='.$auth_key->ticket);
+                return redirect('/user/regist/auth?mail='.$auth_key->mail);
 
             // Twitter API からメールアドレスを取得できなかった場合
             } else {

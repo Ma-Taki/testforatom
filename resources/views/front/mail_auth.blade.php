@@ -30,28 +30,30 @@
     <div class="main-content__body">
       <div class="content__element">
         <div class="alert_design"></div>
-          @if(count($errors) == 0)
-            @if(Session::has('custom_error_messages'))
-              <div class="alert alert-danger">
-                <ul>
-                  @foreach(Session::get('custom_error_messages') as $message)
-                    <li>{{ $message }}</li>
-                  @endforeach
-                </ul>
-              </div>
-            @endif
-          @endif
-          {{-- SNS認証用メッセージ --}}
-          @if(Session::has('custom_info_messages'))
-            <div class="alert alert-info">
+        @if(count($errors) == 0)
+          @if(Session::has('custom_error_messages'))
+            <div class="alert alert-danger">
               <ul>
-                @foreach(Session::get('custom_info_messages') as $message)
-                  <li>{!! $message !!}</li>
+                @foreach(Session::get('custom_error_messages') as $message)
+                  <li>{{ $message }}</li>
                 @endforeach
               </ul>
             </div>
           @endif
-    
+        @endif
+        {{-- SNS認証用メッセージ --}}
+        @if(Session::has('custom_info_messages'))
+          <div class="alert alert-info">
+            <ul>
+              @foreach(Session::get('custom_info_messages') as $message)
+                <li>{!! $message !!}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+        @if(isset($_GET['mail']))
+          <div class="alert alert-info"><ul><li>SNS認証が完了しました。引き続きご記入くださいませ。</li></ul></div>
+        @endif  
         <div class="content__body">
           <div class="sing_up">
             <div class="regist__element">

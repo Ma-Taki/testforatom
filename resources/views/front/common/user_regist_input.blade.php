@@ -62,9 +62,13 @@
     <div class="input_f_name"><p>メールアドレス</p></div>
     <div class="input_f_value input_email">
       <label>
-        <input type="text" name="mail" maxlength="256" value="{{ old('email')}}" placeholder="例) info@solidseed.co.jp">
-        @if($errors->first('mail'))
-          <p class="help-block">{{$errors->first('mail')}}</p>
+        @if(isset($_GET['mail']))
+          <p style="padding: .6rem;"><?php echo $_GET['mail']; ?></p>
+        @else
+          <input type="text" name="mail" maxlength="256" value="{{ old('email')}}" placeholder="例) info@solidseed.co.jp">
+          @if($errors->first('mail'))
+            <p class="help-block">{{$errors->first('mail')}}</p>
+          @endif
         @endif
       </label>
     </div>
