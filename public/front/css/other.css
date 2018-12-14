@@ -3347,6 +3347,109 @@ sp.css ~640px
     }
 }
 
+/*---------------------------------------------------
+フリーエンジニアになるためには？
+---------------------------------------------------*/
+h2.about_free_title{
+  font-weight: bold;
+  padding-bottom: 10px;
+  margin-top: 40px;
+  font-size: 24px;
+  color: #5e8796;
+}
+
+h3.about_free_lead{
+  font-size: 1.6rem;
+  color: #5e8796;
+  padding: 0;
+  margin-top: 20px;
+  border-style: solid;
+  border-color: #5e8796;
+  border-width: 0 0 0 4px;
+  padding: 5px 0 5px 10px;
+  font-weight: bold;
+}
+
+.about_free_red{
+  color:#D46363;
+  font-weight: bold;
+  }
+
+.about_free_img{
+  width: 100%;
+  height: auto;
+}
+
+.about_free a{
+  color: #5e8796;
+  text-decoration: none;
+}
+
+.about_free a:hover{
+  color: #5e8796;
+  text-decoration: underline;
+}
+
+.mkj h2{
+  padding: 8px 12px;
+  margin: -1px;
+  background: #5e8796;
+  border: 0;
+  font-size: 18px;
+  text-align: center;
+  color: white;
+}
+
+.mkj {
+    background: #fffbf4;
+    padding: 0;
+    border: solid 2px #5e8796;
+    margin-bottom: 2em;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+.mkj a {
+    color: #545454;
+    padding: 8px 0;
+    display: block;
+}
+.mkj ol{
+    list-style: decimal;
+}
+
+.mkj>ol {
+    font-weight: bold;
+    color: #545454;
+    margin: 15px 0%;
+}
+
+.mkj ol li a {
+    color: #545454;
+    font-size: 1.6rem;
+    line-height: 1rem;
+    padding: 1rem;
+    font-weight: bold;
+}
+
+.mkj li {
+    padding-left: 5%;
+}
+
+.mkj ol li ol li a {
+  text-align: left;
+  width:  100%;
+  display: block;
+  color: #545454;
+  line-height: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+
+html{
+  scroll-behavior: smooth;
+}
 
 
 
