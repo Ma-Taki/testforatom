@@ -35,6 +35,10 @@ a8sales({
 });
 </script>
 <!-- End a8js_tag -->
+<!-- Begin moshimojs_tag -->
+<script src="https://r.moshimo.com/af/r/result.js?p_id=1891&pc_id=3696&m_v={{$id}}" id="msmaf"></script>
+<noscript><img src="https://r.moshimo.com/af/r/result?p_id=1891&pc_id=3696&m_v={{$id}}" width="1" height="1" alt=""></noscript>
+<!-- End moshimojs_tag -->
 <div class="wrap">
   <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
     <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
