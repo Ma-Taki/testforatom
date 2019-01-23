@@ -4,20 +4,34 @@
   use App\Models\Ms_prefectures;
   use App\Libraries\ModelUtility as MdlUtil;
   use Carbon\Carbon;
+  use App\Models\Tr_auth_keys;
 ?>
-<form method="post" name="regist-auth" action="{{ url('/user/regist/auth') }}" enctype="multipart/form-data">
+<form method="post" name="regist-auth" action="{{ url('/user/regist') }}" enctype="multipart/form-data">
   <div class="input_field fs0">
     <div class="input_f_name"><p>氏名</p></div>
     <div class="input_f_value input_name">
       <label>
-        <input type="text" maxlength="15" name="last_name" value="{{ old('last_name') }}" placeholder="例) 田中">
+      
+        <input type="text" maxlength="15" name="last_name" 
+        @if(isset($last_name)) 
+          value="{{$last_name}}"
+        @else
+          value="{{ old('last_name') }}" 
+        @endif
+        placeholder="例) 田中">
         @if($errors->first('last_name'))
           <p class="help-block">{{$errors->first('last_name')}}</p>
         @endif
       </label>
       <label>
-        <input type="text" maxlength="15" name="first_name" value="{{ old('first_name') }}" placeholder="例) 太郎">
-        @if($errors->first('last_name'))
+        <input type="text" maxlength="15" name="first_name" 
+        @if(isset($first_name)) 
+          value="{{$first_name}}"
+        @else
+          value="{{ old('first_name') }}" 
+        @endif
+        placeholder="例) 太郎">
+        @if($errors->first('first_name'))
           <p class="help-block">{{$errors->first('first_name')}}</p>
         @endif
       </label>
@@ -47,10 +61,26 @@
     <div class="input_f_name"><p>性別</p></div>
     <div class="input_f_value input_gender">
       <label>
-        <input type="radio" name="gender" @if(old('gender') == "Male") checked @endif value="Male">男性
+        <input type="radio" name="gender" 
+        @if(isset($gender) && $gender == "male") 
+          checked 
+        @else
+          @if(old('gender') == "Male") 
+            checked 
+          @endif 
+        @endif
+        value="Male">男性
       </label>
       <label>
-        <input type="radio" name="gender" @if(old('gender') == "Female") checked @endif value="Female">女性
+        <input type="radio" name="gender" 
+        @if(isset($gender) && $gender == "female") 
+          checked 
+        @else
+          @if(old('gender') == "Female") 
+            checked 
+          @endif 
+        @endif
+        value="Female">女性
       </label>
       @if($errors->first('gender'))
         <p class="help-block">{{ $errors->first('gender') }}</p>
@@ -62,13 +92,19 @@
     <div class="input_f_name"><p>メールアドレス</p></div>
     <div class="input_f_value input_email">
       <label>
-        @if(isset($_GET['mail']))
-          <p style="padding: .6rem;"><?php echo $_GET['mail']; ?></p>
+        <input type="text" name="mail" maxlength="256"
+        @if(isset($email) && old('mail'))
+          value="{{ old('mail')}}" 
         @else
-          <input type="text" name="mail" maxlength="256" value="{{ old('email')}}" placeholder="例) info@solidseed.co.jp">
-          @if($errors->first('mail'))
-            <p class="help-block">{{$errors->first('mail')}}</p>
+          @if(isset($email)) 
+            value="{{$email}}"
+          @else
+            value="{{ old('mail')}}" 
           @endif
+        @endif
+        placeholder="例) info@solidseed.co.jp">
+        @if($errors->first('mail'))
+          <p class="help-block">{{$errors->first('mail')}}</p>
         @endif
       </label>
     </div>
@@ -145,7 +181,7 @@
   <div class="input_field fs0">
     <div class="input_f_name_any"><p style="font-weight:bold;">規約への同意</p></div>
     <div class="input_f_value input_terms_of_agreement">
-      <label>エンジニアルートへのご登録およびご利用に関する<a class="any" href="{{ url('/terms') }}" style="color:blue;font-weight:bold;">利用規約</a>と<a class="any" href="{{ url('/privacy') }}" style="color:blue;font-weight:bold;">個人情報の取り扱いについて</a>同意したうえで以下の登録ボタンをクリックしてください。</label>
+      <label>エンジニアルートへのご登録およびご利用に関する<a class="any" href="{{ url('/terms') }}" style="color:blue;font-weight:bold;"  target="_blank">利用規約</a>と<a class="any" href="{{ url('/privacy') }}" style="color:blue;font-weight:bold;" target="_blank">個人情報の取り扱いについて</a>同意したうえで以下の登録ボタンをクリックしてください。</label>
     </div>
   </div>
 

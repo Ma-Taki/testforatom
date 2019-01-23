@@ -89,7 +89,7 @@ class Tr_users extends Model
      */
     public function scopeGetUserBySnsAccount($query, $account) {
         return $query->join('user_social_accounts', 'users.id', '=', 'user_social_accounts.user_id')
-                     ->join('user_'.$account['name'].'_accounts', 'user_social_accounts.social_account_id', '=', 'user_'.$account['name'].'_accounts.id')
+                     ->join('user_'.$account['name'].'_accounts', 'user_social_accounts.social_account_id', '=', 'user_'.$account['name'].'_accounts.'.$account['name'].'_id')
                      ->where('user_'.$account['name'].'_accounts.'.$account['name'].'_id', $account['id'])
                      ->where('user_social_accounts.social_account_type', $account['type'])
                      ->where('delete_flag', 0)

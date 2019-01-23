@@ -56,12 +56,29 @@ class LoginController extends FrontController
         return back()->with('custom_error_messages',['メールアドレス又はパスワードに誤りがあります。'])->withInput();
       }
 
-      // 認証確認
-      if ($user->auth_flag == 1) {
-        // 認証失敗
-        return back()->with('custom_error_messages',['「ご登録完了にお進みください」メールのURLをクリックして、認証を完了してください。'])->withInput();
+      // 24時間以内のアクセスかチェック
+      $auth_key = Tr_auth_keys::where('mail', $user->mail)
+                              ->where('auth_task', MdlUtil::AUTH_TASK_REGIST_MAIL_AUHT)
+                              ->get()
+                              ->first();
+                              
+      if(!empty($auth_key)){
+        $limit = $auth_key->application_datetime->addDay();
+        $now = Carbon::now();
+        // 認証確認
+        if ($user->auth_flag == 1) {
+          if (!$now->lte($limit)) {
+            // 認証失敗
+            return back()->with([
+                  'custom_error_messages' => ['登録から24時間以上経過しました。登録を完了する場合はメールを送信いたしますので「再送信する」をクリックしてください。'],
+                  'ticket' => $auth_key->ticket,
+              ]);
+          }else{
+            // 認証失敗
+            return back()->with('custom_error_messages',['「ご登録完了にお進みください」メールのURLをクリックして、認証を完了してください。'])->withInput();
+          }
+        }
       }
-
       // 認証成功
       $db_data = [
         'user_id' => $user->id,

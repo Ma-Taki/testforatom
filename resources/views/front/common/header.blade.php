@@ -17,7 +17,7 @@
           <li><a href="/user"><span>マイ</span><span>ページ</span></a></li>
           <li><a href="/logout" class="invisible-sp"><span>ログ</span><span>アウト</span></a></li>
         @else
-          <li id = "user-signin"><a href="/user/regist/auth" class="signin">新規登録</a></li>
+          <li id = "user-signin"><a href="/user/regist" class="signin">新規登録</a></li>
           <li id = "user-login"><a href="/login"><span>ログ</span><span>イン</span></a></li>
         @endif
       </ul>

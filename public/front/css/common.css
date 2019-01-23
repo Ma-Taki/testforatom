@@ -182,8 +182,18 @@
     padding: 2% 3%;
 }
 
+.alert ul li:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f071";
+    font-weight: 900;
+    font-size: 3rem;
+    padding: 0 .3em 0 0;
+    text-align: left;
+    width: 20px;
+}
+
 .alert ul li {
-    list-style: inside;
+    /*list-style: inside;*/
     font-size: 1.4rem;
     line-height: 2rem;
 }

@@ -20,6 +20,7 @@
     <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/slick.min.js') }}"></script>
     <script type="text/javascript" charset="utf-8" src="{{ url('/front/js/jquery.tile.js') }}"></script>
     <script src="//statics.a8.net/a8sales/a8sales.js"></script>
+    <script src="https://r.moshimo.com/af/r/maftag.js"></script>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     @include('front.common.inside_head_tag')
   </head>

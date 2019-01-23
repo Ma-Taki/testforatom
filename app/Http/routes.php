@@ -57,11 +57,8 @@ Route::get('/item/search/readmore', 'front\ItemController@ajaxReadMore');
 Route::get('/item/search/condition', function() { return view('front.sp.condition_search'); });
 
 // 新規会員登録
-Route::get('/user/regist/auth', 'front\UserController@showMailAuth');
-Route::post('/user/regist/auth', 'front\UserController@mailAuth');
 Route::resource('/user/regist', 'front\UserController', ['only' => ['index', 'store']]);
-// ファイルアップロード
-Route::get('/user/regist/completion', 'front\UserController@ajaxRegistComp');
+Route::get('/user/regist/comp', 'front\UserController@registComp');
 
 // ログイン
 Route::resource('/login', 'front\LoginController', ['only' => ['index', 'store']]);

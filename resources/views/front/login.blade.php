@@ -41,6 +41,11 @@
               <ul>
                 @foreach(Session::get('custom_error_messages') as $message)
                   <li>{!! $message !!}</li>
+                  @if(Session::has('ticket'))
+                    <div class="cmmn-btn">
+                      <a class="login-btn" style="color:#fff;width:50%;" href="/user/regist?ticket={{Session::get('ticket')}}">再送信する</a>
+                    </div>
+                  @endif
                 @endforeach
               </ul>
             </div>
