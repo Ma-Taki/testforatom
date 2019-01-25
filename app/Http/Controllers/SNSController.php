@@ -17,6 +17,7 @@ use App\Libraries\SessionUtility as SsnUtil;
 use Socialite;
 use Log;
 use Carbon\Carbon;
+use DB;
 
 class SNSController extends Controller
 {
@@ -133,15 +134,21 @@ class SNSController extends Controller
                     }
                 // 未ログイン
                 } else {
-                    // メールアドレスからユーザを取得
-                    $t_mail_user = Tr_users::getUserByMail($t_user->email)
-                                           ->get()
-                                           ->first();
+                    //SNSのIDで連携しているユーザを取得
+                    $t_user_link = Tr_users::getUserBySNSID('twitter', $t_user->id, MdlUtil::SOCIAL_TYPE_TWITTER)
+                                        ->get()->first();
+
+                    if(empty($t_user_link)){
+                        //テーブルのIDで連携しているユーザを取得
+                        $t_user_link = Tr_users::getUserByTBLID('twitter', $t_user->id, MdlUtil::SOCIAL_TYPE_TWITTER)
+                                        ->get()->first();
+                    }
+
                     // 会員登録済み
-                    if (!empty($t_mail_user)) {
+                    if (!empty($t_user_link)) {
                         
                         // ユーザとソーシャルアカウントの紐付けテーブルを取得
-                        $social_account = Tr_user_social_accounts::where('user_id', $t_mail_user->id)
+                        $social_account = Tr_user_social_accounts::where('user_id', $t_user_link->id)
                                                                  ->where('social_account_type', MdlUtil::SOCIAL_TYPE_TWITTER)
                                                                  ->get()
                                                                  ->first();
@@ -157,7 +164,7 @@ class SNSController extends Controller
                             // 今回のアカウントをインサート
                             $now = Carbon::now()->format('Y-m-d H:i:s');
                             $social_account = new Tr_user_social_accounts;
-                            $social_account->user_id = $t_mail_user->id;
+                            $social_account->user_id = $t_user_link->id;
                             $social_account->social_account_id = $twitter_account->id;
                             $social_account->social_account_type = MdlUtil::SOCIAL_TYPE_TWITTER;
                             $social_account->registration_date = $now;
@@ -166,9 +173,9 @@ class SNSController extends Controller
                         }
 
                         //　ログイン成功
-                        $t_mail_user->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
-                        $t_mail_user->save();
-                        CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $t_mail_user->id);
+                        $t_user_link->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
+                        $t_user_link->save();
+                        CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $t_user_link->id);
 
                     } else {
                         return redirect('/login')->with('custom_error_messages', [
@@ -424,16 +431,21 @@ class SNSController extends Controller
                     }
                 // 未ログイン
                 } else {
-                    //メールアドレスからユーザを取得
-                    $f_mail_user = Tr_users::getUserByMail($f_user->email)
-                                           ->get()
-                                           ->first();
+                    //SNSのIDで連携しているユーザを取得
+                    $f_user_link = Tr_users::getUserBySNSID('facebook', $f_user->id, MdlUtil::SOCIAL_TYPE_FACEBOOK)
+                                        ->get()->first();
 
+                    if(empty($f_user_link)){
+                        //テーブルのIDで連携しているユーザを取得
+                        $f_user_link = Tr_users::getUserByTBLID('facebook', $f_user->id, MdlUtil::SOCIAL_TYPE_FACEBOOK)
+                                        ->get()->first();
+                    }
+                    
                     // 会員登録済み
-                    if (!empty($f_mail_user)) {
+                    if (!empty($f_user_link)) {
 
                         // ユーザとソーシャルアカウントの紐付けテーブルを取得
-                        $social_account = Tr_user_social_accounts::where('user_id', $f_mail_user->id)
+                        $social_account = Tr_user_social_accounts::where('user_id', $f_user_link->id)
                                                                  ->where('social_account_type', MdlUtil::SOCIAL_TYPE_FACEBOOK)
                                                                  ->get()
                                                                  ->first();
@@ -449,7 +461,7 @@ class SNSController extends Controller
                             // 今回のアカウントをインサート
                             $now = Carbon::now()->format('Y-m-d H:i:s');
                             $social_account = new Tr_user_social_accounts;
-                            $social_account->user_id = $f_mail_user->id;
+                            $social_account->user_id = $f_user_link->id;
                             $social_account->social_account_id = $facebook_account->id;
                             $social_account->social_account_type = MdlUtil::SOCIAL_TYPE_FACEBOOK;
                             $social_account->registration_date = $now;
@@ -458,9 +470,9 @@ class SNSController extends Controller
                         }
 
                         //　ログイン成功
-                        $f_mail_user->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
-                        $f_mail_user->save();
-                        CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $f_mail_user->id);
+                        $f_user_link->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
+                        $f_user_link->save();
+                        CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $f_user_link->id);
 
                     } else {
                         return redirect('/login')->with('custom_error_messages', [
@@ -712,15 +724,22 @@ class SNSController extends Controller
                     }
                 // 未ログイン
                 } else {
-                    // メールアドレスからユーザを取得
-                    $g_mail_user = Tr_users::getUserByMail($g_user->email)
-                                           ->get()
-                                           ->first();
+            
+                    //SNSのIDで連携しているユーザを取得
+                    $g_user_link = Tr_users::getUserBySNSID('github', $g_user->id, MdlUtil::SOCIAL_TYPE_GITHUB)
+                                        ->get()->first();
+
+                    if(empty($g_user_link)){
+                        //テーブルのIDで連携しているユーザを取得
+                        $g_user_link = Tr_users::getUserByTBLID('github', $g_user->id, MdlUtil::SOCIAL_TYPE_GITHUB)
+                                        ->get()->first();
+                    }
+
                     // 会員登録済み
-                    if (!empty($g_mail_user)) {
+                    if (!empty($g_user_link)) {
                         
                         // ユーザとソーシャルアカウントの紐付けテーブルを取得
-                        $social_account = Tr_user_social_accounts::where('user_id', $g_mail_user->id)
+                        $social_account = Tr_user_social_accounts::where('user_id', $g_user_link->id)
                                                                  ->where('social_account_type', MdlUtil::SOCIAL_TYPE_GITHUB)
                                                                  ->get()
                                                                  ->first();
@@ -736,7 +755,7 @@ class SNSController extends Controller
                             // 今回のアカウントをインサート
                             $now = Carbon::now()->format('Y-m-d H:i:s');
                             $social_account = new Tr_user_social_accounts;
-                            $social_account->user_id = $g_mail_user->id;
+                            $social_account->user_id = $g_user_link->id;
                             $social_account->social_account_id = $github_account->id;
                             $social_account->social_account_type = MdlUtil::SOCIAL_TYPE_GITHUB;
                             $social_account->registration_date = $now;
@@ -745,9 +764,9 @@ class SNSController extends Controller
                         }
 
                         //　ログイン成功
-                        $g_mail_user->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
-                        $g_mail_user->save();
-                        CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $g_mail_user->id);
+                        $g_user_link->last_login_date = Carbon::now()->format('Y-m-d H:i:s');
+                        $g_user_link->save();
+                        CkieUtil::set(CkieUtil::COOKIE_NAME_USER_ID, $g_user_link->id);
 
                     } else {
                         return redirect('/login')->with('custom_error_messages', [

@@ -85,6 +85,28 @@ class Tr_users extends Model
     }
 
     /**
+     * SNSのIDで連携しているユーザを取得
+     */
+    public function scopeGetUserBySNSID($query, $sns, $id, $socialtype) {
+        return $query->join('user_social_accounts', 'user_social_accounts.user_id', '=', 'users.id')
+                    ->join('user_'.$sns.'_accounts','user_'.$sns.'_accounts.'.$sns.'_id','=','user_social_accounts.social_account_id')
+                    ->where('user_'.$sns.'_accounts.'.$sns.'_id', $id)
+                    ->where('user_social_accounts.social_account_type', $socialtype)
+                    ->select('users.*');
+    }
+
+    /**
+     * テーブルのIDで連携しているユーザを取得
+     */
+    public function scopeGetUserByTBLID($query, $sns, $id, $socialtype) {
+        return $query->join('user_social_accounts', 'user_social_accounts.user_id', '=', 'users.id')
+                    ->join('user_'.$sns.'_accounts','user_'.$sns.'_accounts.id','=','user_social_accounts.social_account_id')
+                    ->where('user_'.$sns.'_accounts.'.$sns.'_id', $id)
+                    ->where('user_social_accounts.social_account_type', $socialtype)
+                    ->select('users.*');
+    }
+
+    /**
      * SNSアカウントに紐付いた有効なユーザを取得
      */
     public function scopeGetUserBySnsAccount($query, $account) {
