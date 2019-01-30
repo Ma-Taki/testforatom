@@ -61,7 +61,7 @@ ga('send', 'pageview');
                     </li>
                 <?php }else{ ?>
                     <li id="user-signin">
-                        <a href="/user/regist/auth" class="signin">新規登録</a>
+                        <a href="/user/regist" class="signin">新規登録</a>
                     </li>
                     <li>
                         <a href="/login"><span>ログ</span><span>イン</span></a>
