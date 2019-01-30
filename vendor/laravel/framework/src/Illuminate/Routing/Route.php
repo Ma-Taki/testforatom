@@ -282,8 +282,8 @@ class Route
             $parameters = (new ReflectionFunction($action['uses']))->getParameters();
         }
 
-        return is_null($subClass) ? $parameters : array_filter($parameters, function ($p) use ($subClass) {    
-        return $p->getClass() && $p->getClass()->isSubclassOf($subClass);
+        return is_null($subClass) ? $parameters : array_filter($parameters, function ($p) use ($subClass) {
+            return $p->getClass() && $p->getClass()->isSubclassOf($subClass);
         });
     }
 

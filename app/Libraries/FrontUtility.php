@@ -101,17 +101,17 @@ class FrontUtility
     public $user_entry_mail_to_bcc = '';
 
     // メール：パスワード再設定
-    const USER_REMINDER_MAIL_TITLE = 'パスワード再設定URL通知メール';
+    const USER_REMINDER_MAIL_TITLE = '【Engineer-Route運営事務局】 パスワード再設定URL通知メール';
     public $user_reminder_mail_from = '';
     public $user_reminder_mail_from_name = '';
 
     // メール：メールアドレス認証（メールアドレス変更）
-    const MAIL_TITLE_CHANGE_MAIL_AUTH = 'メールアドレス変更URL通知メール';
+    const MAIL_TITLE_CHANGE_MAIL_AUTH = '【Engineer-Route運営事務局】 メールアドレス変更URL通知メール';
     public $change_mail_auth_mail_from = '';
     public $change_mail_auth_mail_from_name = '';
 
     // メール：メールアドレス認証（新規会員登録）
-    const MAIL_TITLE_REGIST_MAIL_AUTH = '【Engineer-Route運営事務局】 会員登録(無料)にお進みください（自動送信メール）';
+    const MAIL_TITLE_REGIST_MAIL_AUTH = '【Engineer-Route運営事務局】 ご登録完了にお進みください（自動送信メール）';
     public $regist_mail_auth_mail_from = '';
     public $regist_mail_auth_mail_from_name = '';
 

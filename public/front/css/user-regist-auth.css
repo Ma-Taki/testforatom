@@ -1,0 +1,455 @@
+@charset "UTF-8";
+/*--------------------------------------------------------------
+ /user/regist 新規登録画面
+--------------------------------------------------------------*/
+.mail-auth .content__body {
+	margin-top: 3rem;
+}
+
+.sing_up {
+	display: inline-block;
+	vertical-align: bottom;
+    width: 60%;
+}
+
+.counselor {
+	display: inline-block;
+	vertical-align: bottom;
+	width: 39%;
+	position: relative;
+}
+
+.counselor img {
+	position: absolute;
+    right: 0;
+    bottom: 0;
+	width: auto;
+}
+
+.mail-auth .regist__element {
+    padding: 3rem;
+    border: 1px solid #5e8796;
+}
+
+.regist__sns-text-contents {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0 15px 0;
+}
+
+.regist__sns-text-contents .regist-time,
+.regist__sns-text .regist__title,
+.regist__sns-text p {
+    text-align: center;
+    font-weight: bold;
+}
+
+.regist__sns-text-contents .regist-time {
+	width: 30%;
+}
+
+.regist__sns-text-contents .regist-time p {
+    color: #fff;
+    background-color: #D46363;
+    border-radius: 2px 2px;
+    padding: 4px 3px;
+    font-size: 2rem;
+}
+
+.regist__sns-text-contents .regist-time-num {
+    font-size: 3.5rem;
+}
+
+.regist__sns-text {
+    width: 70%;
+}
+
+.regist__sns-text .regist__title {
+    font-size: 3.2rem;
+    color: #5e8796;
+}
+
+.regist__sns-text p {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.regist__sns-btn-contents {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.regist__sns-btn-contents .regist__sns-btn {
+    width: calc(100% / 3 - 10px);
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.regist__sns-btn-contents .regist__sns-btn a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.regist__sns-btn-contents .regist__sns-btn a i {
+    margin-right: 6px;
+}
+
+.mail-auth .regist__twitter {
+    background: #1DA1F2;
+}
+
+.mail-auth .regist__facebook {
+    background: #3B5998;
+}
+
+.mail-auth .regist__github {
+    background: black;
+}
+
+.mail-auth .cmmn-btn button {
+    width: 100%;
+    border-radius: 25px;
+    font-weight: bold;
+    background: #D46363;
+    color: #fff;
+    border-style: none;
+    margin: 0;
+    padding: 0.8rem;
+    font-size: 2rem;
+    box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 2px 2px 8px -1px rgba(0,0,0,0.3);
+}
+
+.mail-auth .login-title {
+    font-size: 1.7em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 14px;
+}
+
+.mail-auth .login-title a {
+	color: #D46363;
+}
+
+.mail-auth .input_field {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.4rem 0 1.4rem 1.4rem;
+    padding: .38rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.mail-auth .input_f_name,
+.mail-auth .input_f_name_any {
+    display: inline;
+    font-weight: bold;
+    width: 30%;
+}
+.mail-auth .input_f_name p:before {
+	content: "必須";
+    background-color: #D46363;
+    border-radius: 2px 2px;
+    padding: 1px 3px;
+    margin-right: 10px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    float: right;
+}
+
+.mail-auth .input_f_value,
+.mail-auth .input_fresume_type_value {
+    display: inline;
+    flex-wrap: nowrap;
+    width: 70%;
+    padding: 0;
+}
+
+.mail-auth .input_email,
+.mail-auth .input_password,
+.mail-auth .input_phone_num {
+	padding-right: 3px !important;
+}
+
+.mail-auth .input_fma_value {
+    display: inline;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin: 15px 0 15px 0;
+}
+
+.mail-auth .input_fma_value label {
+    display: inline;
+    align-items: center;
+    width: 100%;
+}
+
+.mail-auth .input_f_value label {
+    display: inline;
+    align-items: normal;
+    width: 100%;
+}
+
+.mail-auth .input_name label {
+    display: inline;
+    align-items: normal;
+    width: 50%;
+    padding-right: 3px !important;
+    float: left;
+}
+
+.mail-auth .input_gender label {
+	padding-right: 10px;
+}
+
+.mail-auth .input_fresume_type_value label {
+    display: inline;
+    align-items: center;
+}
+
+.mail-auth .input_f_value label input,
+.mail-auth .input_f_value label select,
+.mail-auth .input_fma_value label input,
+.mail-auth .input_fresume_type_value label input {
+    display: inline;
+    width: 100%;
+    height: 45px;
+    font-size: 1.4rem;
+    border: 1px solid #5e8796;
+    border-radius: 5px;
+    padding: 0.6rem;
+    margin-left: 0px;
+    background-color: #fff;
+}
+
+.mail-auth .input_gender label input,
+.mail-auth .input_resume label input,
+.mail-auth .input_resume_type label input,
+.mail-auth .input_resume_type_edit label input,
+.mail-auth .input_file label input {
+    width: auto;
+/*    margin-left: 0;*/
+    margin-right: 6px;
+}
+
+.mail-auth .input_birth label {
+    width: calc(33.33% - 3px);
+    margin-right: 3px;
+    float: left;
+}
+
+.mail-auth .input_f_value input,
+.mail-auth .input_fresume_type_value input {
+    display: inline;
+    width: 70%;
+    font-size: 1.4rem;
+    border: 1px solid #5e8796;
+    border-radius: 5px;
+    padding: 0.6rem;
+}
+
+.mail-auth .input-file-box {
+    background-color: #eef3f4;
+    display: inline;
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #5e8796;
+    border-radius: 5px;
+    margin: 0.3rem;
+}
+
+.mail-auth .input-file-box span {
+    font-size: 1.4rem;
+    vertical-align: middle;
+    display: inline;
+    align-items: center;
+    padding: 0.4rem;
+}
+
+.mail-auth .input_f_name p,
+.mail-auth .input_f_name_any p {
+    text-align: left;
+}
+
+.mail-auth .regist-flow {
+    display:block;
+}
+
+.regist-flow-title {
+	padding: 4rem 0 1rem 0;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+/*------------------------------------------
+ エラー表示
+------------------------------------------*/
+.help-block {
+	padding: .5rem;
+    color: #bf1939;
+    background: #f7e5e9;
+    border-radius: 1rem;
+    margin-top: .3rem;
+}
+
+/*======================================================================
+sp.css ~640px
+======================================================================*/
+@media screen and (max-width:640px) {
+	.sing_up {
+		display: block;
+		vertical-align: baseline;
+    	width: auto;
+	}
+
+	.counselor {
+		display: none
+	}
+
+    .mail-auth .content__body {
+        display: block;
+        margin-bottom: 0;
+    }
+
+    .mail-auth .regist__element {
+        width: 100%;
+        padding: 2rem 1rem;
+        border: 1px solid #5e8796;
+    }
+
+	.input_birth label:not(:first-child) {
+        margin: 0;
+    }
+
+    .mail-auth .input_birth label {
+    	width: calc(33.33% - 3px);
+    	margin-right: 3px;
+    	float: left;
+    }
+ 
+    .regist__sns-text .regist__title {
+	    font-size: 2.5rem;
+	    color: #5e8796;
+	}
+
+	.regist__sns-text p {
+	    font-size: 1rem;
+	    letter-spacing: 1px;
+	}
+
+	.regist__sns-text-contents .regist-time p {
+	    color: #fff;
+	    background-color: #D46363;
+	    border-radius: 2px 2px;
+	    padding: 4px 3px;
+	    font-size: 1.5rem;
+	}
+
+	.mail-auth .input_f_value label input,
+	.mail-auth .input_f_value label select,
+	.mail-auth .input_fma_value label input,
+	.mail-auth .input_fresume_type_value label input {
+	    display: inline;
+	    height: 45px;
+	    font-size: 1.4rem;
+	    border: 1px solid #5e8796;
+	    border-radius: 5px;
+	    padding: 0.4rem;
+	    margin-left: 0px;
+	    background-color: #fff;
+	}
+}
+
+/*======================================================================
+sp.css 641~979px
+======================================================================*/
+@media screen and (min-width: 641px) and (max-width: 979px) {
+	.sing_up {
+		display: block;
+		vertical-align: baseline;
+    	width: auto;
+	}
+
+	.counselor {
+		display: none
+	}
+
+    .mail-auth .content__body {
+        display: block;
+        margin-bottom: 0;
+    }
+
+    .mail-auth .regist__element {
+        width: 80%;
+        margin: auto;
+        padding: 2rem 1rem;
+        border: 1px solid #5e8796;
+    }
+
+	.input_birth label:not(:first-child) {
+        margin: 0;
+    }
+
+    .mail-auth .input_birth label {
+    	width: calc(33.33% - 3px);
+    	margin-right: 3px;
+    	float: left;
+    }
+ 
+    .regist__sns-text .regist__title {
+	    font-size: 2.5rem;
+	    color: #5e8796;
+	}
+
+	.regist__sns-text p {
+	    font-size: 1rem;
+	    letter-spacing: 1px;
+	}
+
+	.regist__sns-text-contents .regist-time p {
+	    color: #fff;
+	    background-color: #D46363;
+	    border-radius: 2px 2px;
+	    padding: 4px 3px;
+	    font-size: 1.5rem;
+	}
+
+	.mail-auth .input_f_value label input,
+	.mail-auth .input_f_value label select,
+	.mail-auth .input_fma_value label input,
+	.mail-auth .input_fresume_type_value label input {
+	    display: inline;
+	    height: 45px;
+	    font-size: 1.4rem;
+	    border: 1px solid #5e8796;
+	    border-radius: 5px;
+	    padding: 0.4rem;
+	    margin-left: 0px;
+	    background-color: #fff;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

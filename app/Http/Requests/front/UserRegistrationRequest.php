@@ -43,11 +43,7 @@ class UserRegistrationRequest extends Request
             'birth_year' => 'required|numeric|between:1900,9999',
             'birth_month' => 'required|numeric|between:1,12',
             'birth_day' => 'required|numeric|between:1,31',
-            'education' => '',
-            'country' => '',
-            'contract_types' => '',
-            'prefecture' => '',
-            'station' => '',
+            'mail' => 'required|email|max:256|confirmed|unique:users,mail,NULL,id,delete_date,NULL',
             'phone_num' => [
                 'required',
                 'max:14',
@@ -57,11 +53,8 @@ class UserRegistrationRequest extends Request
             'password' => [
                 'required',
                 'between:6,20',
-                'confirmed',
                 'regex:/^[\x21-\x7E]+$/',
             ],
-            'password_confirmation' => '',
-             'resume' => 'required',
         ];
     }
 }

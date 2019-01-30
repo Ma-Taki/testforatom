@@ -1,7 +1,6 @@
 <div class="clear"></div>
 <footer class="bg">
   <div id="fb-root"></div>
-
   <script>
   (function(d, s, id) {
    var js, fjs = d.getElementsByTagName(s)[0];
@@ -11,12 +10,7 @@
    fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
   </script>
-  
-
-  
-
   <div class="footer-inner invisible-sp">
-
     <div class="facebook-window">
       <div class="fb-page"
            data-href="https://www.facebook.com/engineerroute/?fref=ts"
@@ -32,7 +26,6 @@
         </blockquote>
       </div>
     </div>
-
     <div class="sitemap">
       <h3>オススメの案件・求人</h3>
       <ul>
@@ -60,7 +53,6 @@
       </ul>
     </div>
   </div>
-
   <div class="footer-links">
     <ul>
       <li><a class="hover-thin" href="http://solidseed.co.jp/" target="_blank">運営会社</a></li>
@@ -70,5 +62,4 @@
     </ul>
   </div>
   <p>&copy; SolidSeed Co.,Ltd.</p>
-
 </footer>
