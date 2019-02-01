@@ -23,6 +23,11 @@
     <script src="https://r.moshimo.com/af/r/maftag.js"></script>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     @include('front.common.inside_head_tag')
+    <!-- User Heat Tag -->
+    <script type="text/javascript">
+    (function(add, cla){window['UserHeatTag']=cla;window[cla]=window[cla]||function(){(window[cla].q=window[cla].q||[]).push(arguments)},window[cla].l=1*new Date();var ul=document.createElement('script');var tag = document.getElementsByTagName('script')[0];ul.async=1;ul.src=add;tag.parentNode.insertBefore(ul,tag);})('//uh.nakanohito.jp/uhj2/uh.js', '_uhtracker');_uhtracker({id:'uhqZ5dOcnl'});
+    </script>
+    <!-- End User Heat Tag -->
   </head>
   <body>
     <script>

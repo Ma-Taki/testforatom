@@ -18,7 +18,7 @@
         @else
           value="{{ old('last_name') }}" 
         @endif
-        placeholder="例) 田中">
+        placeholder="例) ソリッド">
         @if($errors->first('last_name'))
           <p class="help-block">{{$errors->first('last_name')}}</p>
         @endif
@@ -41,7 +41,7 @@
     <div class="input_f_name"><p>かな</p></div>
     <div class="input_f_value input_name">
       <label>
-        <input type="text" maxlength="15" name="last_name_kana" value="{{ old('last_name_kana') }}" placeholder="例) たなか">
+        <input type="text" maxlength="15" name="last_name_kana" value="{{ old('last_name_kana') }}" placeholder="例) そりっど">
         @if($errors->first('last_name_kana'))
           <p class="help-block">{{$errors->first('last_name_kana')}}</p>
         @endif
