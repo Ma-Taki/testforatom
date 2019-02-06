@@ -65,7 +65,7 @@
               </div>
               <div class="login__infoText">
                 <p>パスワードを忘れた方は<a href="/user/reminder">コチラ</a></p>
-                <p>新規会員登録は<a href="/user/regist/auth">コチラ</a></p>
+                <p>新規会員登録は<a href="/user/regist">コチラ</a></p>
               </div>
               <div class="cmmn-btn">
                 <button class="login-btn" type="submit">ログイン</button>

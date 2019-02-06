@@ -90,7 +90,7 @@
 
           <ul class="flowWords">
             <li class="flowWordTitle"><h2>Step 1</h2><h2>会員登録</h2></li>
-            <li class="flowWordDetail"><p>まずはじめに、<a href="/user/regist/auth">会員登録ページ</a>から申し込みをして下さい。</p></li>
+            <li class="flowWordDetail"><p>まずはじめに、<a href="/user/regist">会員登録ページ</a>から申し込みをして下さい。</p></li>
           </ul>
           <ul class="flowWords">
             <li class="flowWordTitle"><h2>Step 2</h2><h2>案件を探す</h2></li>
