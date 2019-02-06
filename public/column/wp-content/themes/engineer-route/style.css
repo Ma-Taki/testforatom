@@ -2829,8 +2829,9 @@ figure.popular-eyecatch img {
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	width: auto;
-	height: 100%;
+	width: 100%;
+  	height: 100%;
+	object-fit: cover;
 }
 
 div.popular-title .title a:hover {
