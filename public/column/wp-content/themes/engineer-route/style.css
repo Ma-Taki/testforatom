@@ -1611,6 +1611,7 @@ margin:0;
 /* ウィジェットカテゴリー・新着記事 */
 .widget.widget_categories .widgettitle,
 .widget.widget_recent_entries .widgettitle,
+.widget.widget_hot_articles .widgettitle,
 .widget.widget_nav_menu .widgettitle,
 .widget.widget_pages .widgettitle,
 .widget.widget_archive .widgettitle,
@@ -1619,6 +1620,7 @@ margin-bottom:0;
 }
 .widget.widget_categories ul,
 .widget.widget_recent_entries ul,
+.widget.widget_hot_articles ul,
 .widget.widget_nav_menu ul,
 .widget.widget_pages ul,
 .widget.widget_archive ul,
@@ -1627,6 +1629,7 @@ margin-top: 0;
 }
 .widget.widget_categories ul li,
 .widget.widget_recent_entries li,
+.widget.widget_hot_articles li,
 .widget.widget_nav_menu li,
 .widget.widget_pages li,
 .widget.widget_archive li,
@@ -1643,6 +1646,7 @@ border-bottom:none!important;
 }
 .widget.widget_categories li a,
 .widget.widget_recent_entries li a,
+.widget.widget_hot_articles li a,
 .widget.widget_nav_menu li a,
 .widget.widget_pages li a,
 .widget.widget_archive li a,
@@ -1654,6 +1658,7 @@ position:relative;
 }
 .widget.widget_categories li:last-child,
 .widget.widget_recent_entries li:last-child,
+.widget.widget_hot_articles li:last-child,
 .widget.widget_nav_menu li:last-child,
 .widget.widget_pages li:last-child,
 .widget.widget_archive li:last-child,
@@ -1662,6 +1667,7 @@ border-bottom:none;
 }
 .widget.widget_categories li a:after,
 .widget.widget_recent_entries li a:after,
+.widget.widget_hot_articles li a:after,
 .widget.widget_nav_menu li a:after,
 .widget.widget_pages li a:after,
 .widget.widget_archive li a:after,
@@ -1802,7 +1808,8 @@ margin:2em 0;
 margin-top:0;
 }
 /* 新着記事のサムネイル */
-.widget.widget_recent_entries li .eyecatch{
+.widget.widget_recent_entries li .eyecatch,
+.widget.widget_hot_articles li .eyecatch{
 width: 30%;
 max-width: 100px;
 float:left;
@@ -1810,6 +1817,7 @@ margin-bottom:0.5em;
 margin-right:0.5em;
 }
 .widget.widget_recent_entries li span,
+.widget.widget_hot_articles li span,
 .widget li span.date{
 padding:0 0.3em;
 font-size:0.9em;
@@ -2795,9 +2803,13 @@ margin-bottom:0;
 /*-------------------------
 人気記事表示　プラグインなし
 -------------------------*/
+.popular-post{
+	margin: 0 0 7px 0;
+}
+
 li.popular-contents {
 	width: 24%;
-    min-height: 225px;
+    min-height: 100px;
     margin: 0 1% 1% 0;
     float: left;
 }
@@ -2805,7 +2817,20 @@ li.popular-contents {
 figure.popular-eyecatch {
 	width: 100%;
 	max-height: 180px;
+	height: 90px;
+	overflow: hidden;
 	position: relative;
+}
+
+figure.popular-eyecatch img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: auto;
+	height: 100%;
 }
 
 div.popular-title .title a:hover {

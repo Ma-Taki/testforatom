@@ -3,6 +3,8 @@
 	global $wp_query;
 	$postid = $wp_query->post->ID;
 	$tai = get_post_meta($postid, 'singlepostlayout_radio', true);
+	$cat = get_the_category();
+	$cat = $cat[0];
 ?>
 <?php if ($tai == 'フルサイズ（1カラム）' || $tai == 'バイラル風（1カラム）') : ?>
 	<?php get_template_part( 'singleparts_full' ); ?>
@@ -19,10 +21,6 @@
 						<?php dynamic_sidebar( 'addbanner-titletop' ); ?>
 						<div class="article-header entry-header">
 							<p class="byline entry-meta vcard cf">
-								<?php
-									$cat = get_the_category();
-									$cat = $cat[0];
-								?>
 								<span class="cat-name cat-id-<?php echo $cat->cat_ID;?>">
 									<?php echo $cat->name; ?>
 								</span>
@@ -59,7 +57,7 @@
 								) );?>
 						</section>
 						<div class="article-footer">
-							<!-- バナー作成 -->
+							<!-- バナー -->
 							<p>
 								<a href="https://www.engineer-route.com/user/regist/auth">
 								<img src="https://www.engineer-route.com/column/wp-content/uploads/engineer-route_yoko_bnr03-1.png" alt="プロのコーディネーターによる 非公開案件のご紹介 充実してます" width="615" height="219" class="alignnone size-full wp-image-1092" /></a>
@@ -72,11 +70,25 @@
 								<?php get_template_part( 'parts_sns' ); ?>
 							</div>
 						<?php endif; ?>
-						<?php //comments_template(); ?>
 					</article>
-					<?php //get_template_part( 'parts_singlefoot' ); ?>
 				<?php endwhile; ?>
-				<?php get_template_part( 'parts_popular_post' ); //人気のコラム記事 ?>
+				<?php setPostViews( get_the_ID() ); //記事のPV情報を取得 ?>
+				<div class="popular-post">
+					<h2 class="widgettitle">
+						<span>よく読まれている記事</span>
+					</h2>
+					<ul class="popular-list clearfix">
+						<?php hot_articles( get_the_ID(), 4 ); ?>
+					</ul>
+				</div>
+				<div class="popular-post">
+					<h2 class="widgettitle">
+						<span>「<?php echo $cat->cat_name; ?>」でよく読まれている記事</span>
+					</h2>
+					<ul class="popular-list clearfix">
+						<?php hot_articles( get_the_ID(), 4, $cat->cat_ID ); ?>
+					</ul>
+				</div>
 			</main>
 			<?php get_sidebar(); ?>
 		</div>
