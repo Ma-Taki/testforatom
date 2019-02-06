@@ -8,7 +8,7 @@
 			?>
 			<?php if ( has_post_thumbnail()) : ?>
 				<figure class="eyecatch">
-					<?php the_post_thumbnail('home-thum'); ?>
+					<?php the_post_thumbnail(); ?>
 					<span class="cat-name cat-id-<?php echo $cat->cat_ID;?>">
 						<?php echo $cat->name; ?>
 					</span>
