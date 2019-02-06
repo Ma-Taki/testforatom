@@ -75,7 +75,7 @@ class hot_articles_Widget extends WP_Widget{
 			$cat = $cat[0];
 			$title = apply_filters('widget_title', '「'.$cat->name.'」でよく読まれている記事');
 			$args_wp = array(
-				'category_name' => $cat->name,
+				'cat' => $cat->cat_ID,
 				'post__not_in' => array(get_the_ID()),
 				'posts_per_page' => 8, 
 				'order'=> 'DESC', 
