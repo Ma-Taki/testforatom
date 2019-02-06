@@ -274,16 +274,6 @@ if (!function_exists('my_search_form')) {
 	add_filter( 'get_search_form', 'my_search_form' );
 }
 
-// 独自アイキャッチ画像
-if (!function_exists('add_mythumbnail_size')) {
-	function add_mythumbnail_size() {
-		add_theme_support('post-thumbnails');
-		add_image_size( 'home-thum', 486, 290, true );
-		add_image_size( 'post-thum', 300, 200, true );
-	}
-	add_action( 'after_setup_theme', 'add_mythumbnail_size' );
-}
-
 // 固定ページでタグを使用可能にする
 function add_tag_to_page() {
 	register_taxonomy_for_object_type('post_tag', 'page');
@@ -521,7 +511,7 @@ function nlink_scode($atts) {
 
     //アイキャッチ画像を取得
     if(has_post_thumbnail($id)) {
-        $img = wp_get_attachment_image_src(get_post_thumbnail_id($id),'post-thum');
+        $img = wp_get_attachment_image_src(get_post_thumbnail_id($id));
         $img_tag = "<img src='" . $img[0] . "' alt='{$title}'/>";
     }
 
@@ -684,4 +674,11 @@ function hot_articles( $id, $posts_per_page, $category_id = 0 ) {
 <?php } ?>
 <?php 
 
+//---------------------------------------
+//トップページ　続きを読む
+//---------------------------------------
+function new_excerpt_more($more) {
+	return '…';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
 
