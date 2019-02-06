@@ -654,7 +654,7 @@ function hot_articles( $id, $posts_per_page, $category_id = 0 ) {
 		 ?>
 			<li class="popular-contents">
 				<figure class="popular-eyecatch">
-					<?php the_post_thumbnail('home-thum'); ?>
+					<?php the_post_thumbnail(); ?>
 					<span class="cat-name cat-id-<?php echo $cat->cat_ID;?>">
 						<?php echo $cat->name; ?>
 					</span>
