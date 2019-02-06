@@ -618,3 +618,70 @@ function my_posts_custom_column($column, $post_id){
 }
 add_action( 'manage_posts_custom_column' , 'my_posts_custom_column', 10, 2 );
 
+//---------------------------------------
+//よく読まれている記事
+// $exclude : 現在表示中の記事番号(除外)
+// $posts_per_page : 表示したい記事数
+// $category : 表示したいカテゴリー番号(ない場合は0)
+//---------------------------------------
+?>
+<?php 
+function hot_articles( $id, $posts_per_page, $category_id = 0 ) {
+	if($category_id > 0){
+		$args = array(
+			'post__not_in' => array($id), 
+			'posts_per_page' => $posts_per_page, 
+			'order'=> 'DESC', 
+			'meta_key' => 'post_views_count', 
+			'orderby' => 'meta_value_num', 
+			'cat' => $category_id
+		);
+	}else{
+		$args = array(
+			'post__not_in' => array($id),
+			'posts_per_page' => $posts_per_page, 
+			'order'=> 'DESC', 
+			'meta_key' => 'post_views_count', 
+			'orderby' => 'meta_value_num'
+		);
+	}
+	$query = new WP_Query($args);
+?>
+	<?php if( $query->have_posts() ) : ?>
+		<?php while ($query->have_posts()) : $query->the_post();
+			$cat = get_the_category(get_the_ID());
+			$cat = $cat[0];
+		 ?>
+			<li class="popular-contents">
+				<figure class="popular-eyecatch">
+					<?php the_post_thumbnail('home-thum'); ?>
+					<span class="cat-name cat-id-<?php echo $cat->cat_ID;?>">
+						<?php echo $cat->name; ?>
+					</span>
+				</figure>
+				<div class="popular-title">
+					<p class="byline entry-meta vcard">
+						<span class="date gf updated"><?php the_time('Y.m.d'); ?></span>
+
+						<span class="writer name author"><span class="fn"><?php the_author(); ?></span></span>
+					</p>
+					<h3 class="title">
+						<a href="<?php echo get_permalink(); ?>">
+							<?php
+								if(mb_strlen(get_the_title(), 'UTF-8') > 34){
+									$title= mb_substr(get_the_title(), 0, 34, 'UTF-8');
+									echo $title.'…';
+								}else{
+									echo get_the_title();
+								}
+							?>
+						</a>
+					</h3>
+				</div>
+			</li>
+		<?php endwhile; wp_reset_postdata(); ?>
+    <?php endif; ?>
+<?php } ?>
+<?php 
+
+
