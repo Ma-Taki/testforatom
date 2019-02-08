@@ -26,6 +26,9 @@ function culcConsiderLength(){
 	return CnsUtil::culcConsiderLength();
 }
 
+//アイキャッチ画像
+add_theme_support('post-thumbnails');
+
 /**
  * 正規化のためのURLを返却する
  **/
