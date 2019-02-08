@@ -19,7 +19,7 @@ html {
 body {
 	line-height:1;
 	color: #333;
-	font-family: "ＭＳ Ｐゴシック", Avenir , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "MS PGothic" , sans-serif;
+	font-family: "Montserrat","ＭＳ Ｐゴシック", Avenir , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "MS PGothic" , sans-serif;
 	-webkit-text-size-adjust: 100%;
 }
 
@@ -82,7 +82,7 @@ img {
 }
 
 p {
-	font-size: 1.4rem;
+	font-size: 1.7rem;
 	line-height: normal;
 }
 

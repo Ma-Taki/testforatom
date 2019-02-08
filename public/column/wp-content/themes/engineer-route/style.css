@@ -1,6 +1,6 @@
 /******************************************************************
 Theme Name: Engineer-Route
-Theme URL: 
+Theme URL:
 Description: エンジニアルート専用のWordPressテーマです
 Version: 1.0.0
 Author: ソリッドシード株式会社
@@ -126,20 +126,20 @@ main,
 nav,
 section,
 summary {
-display: block; 
+display: block;
 }
 audio,
 canvas,
 video {
-display: inline-block; 
+display: inline-block;
 }
 audio:not([controls]) {
 display: none;
-height: 0; 
+height: 0;
 }
 [hidden],
 template {
-display: none; 
+display: none;
 }
 
 /* ==========================================================================
@@ -150,7 +150,7 @@ font-family: sans-serif;
 -ms-text-size-adjust: 100%;
 -webkit-text-size-adjust: 100%;
 }
-body {margin: 0; 
+body {margin: 0;
 }
 
 /* ==========================================================================
@@ -961,7 +961,7 @@ border-color:#E69B9B;
 .entry-content h2{
 position: relative;
 border: none;
-font-size:1.8em;
+font-size:2em;
 padding: 0.5em 1.1em;
 margin-top: 2.1em;
 margin-bottom: 1em;
@@ -973,10 +973,12 @@ color: #ffffff;
 box-shadow: 0 1px 5px rgba(0, 0, 0, .03);
 }
 .entry-content h3{
-font-size: 1.25em;
-border-left:4px solid;
-padding: .7em 0 .7em .8em;
-margin-top: 1.8em;
+font-size: 1.8em;
+border-left: 4px solid;
+padding: .4em 0 .4em .6em;
+margin-top: 1.8ewwwwwwwwm;
+margin-bottom: 1em;
+line-height: 1.2em;
 }
 .h_boader .entry-content h2{
 background: none;
@@ -1157,7 +1159,7 @@ margin: .3em 0;
 .single-title,
 .page-title{
 padding: 0;
-font-size: 1.5em;
+font-size: 2.2em;
 }
 .single-title:empty,
 .page-title:empty{
@@ -1276,7 +1278,7 @@ overflow: hidden;
 }
 .entry-content p {
 margin: 0 0 1.6em;
-line-height: 1.75;
+line-height: 2;
 }
 .entry-content .question{
 	font-size: 1.4em;
@@ -2302,7 +2304,7 @@ float: right;
 margin-right: auto;
 margin-left: auto;
 display: block;
-clear: both; 
+clear: both;
 }
 /*********************
 TABLET & SMALLER LAPTOPS
@@ -3002,6 +3004,7 @@ figure.popular-eyecatch span.cat-name {
 	display: table-cell;
 	padding-right:.8em;
 	}
+
 	@-webkit-keyframes blink{
 		0% {
 		opacity:.2;
