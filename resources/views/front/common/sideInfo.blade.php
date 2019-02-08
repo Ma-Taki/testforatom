@@ -27,7 +27,7 @@
             </li>
 -->
       <li>
-        <a href="{{ url('/question#aboutFreeEngineer') }}">
+        <a href="{{ url('/about_free_engineer') }}">
           <img src="/front/images/sBnr02.png" alt="フリーエンジニアになるためには？">
         </a>
       </li>

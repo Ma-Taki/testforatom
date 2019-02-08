@@ -552,30 +552,6 @@
                 <div class="content__element">
                     <h2 class="content__title" id="aboutFreeEngineer">フリーエンジニアについて</h2>
                     <div class="content__body">
-
-                        <div class="question__element">
-                            <div class="question">
-                                <img alt="クエスチョン" src="/front/images/ico-question.png">
-                                <div class="question__text">フリーエンジニアになるためには
-                                    <div class="arrow">
-                                        <span class="arrow-left"></span>
-                                        <span class="arrow-right"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="question-anser">
-                                <div class="question-anser__inr">
-                                    <img alt="アンサー" src="/front/images/ico-answer.png">
-                                    <div class="question-anser__text">
-                                        <p>フリーエンジニアになるために必要な経験は特にございません。</p>
-                                        <p>正社員として2～3年の経験を経た後、独立される方も多くいらっしゃいます。</p>
-                                        <p>独立する際に相談に来られる方もいらっしゃいますので、お気軽にご相談下さい。</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="question__line">
-
                         <div class="question__element">
                             <div class="question">
                                 <img alt="クエスチョン" src="/front/images/ico-question.png">

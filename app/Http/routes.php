@@ -24,6 +24,9 @@ Route::get('/about', function () { return view('front.about'); });
 // ご利用の流れ
 Route::get('/flow', function () { return view('front.flowOfUse'); });
 
+// フリーエンジニアになるためには？
+Route::get('/about_free_engineer', function () { return view('front.about_free_engineer'); });
+
 // Q&A
 Route::get('/question', function () { return view('front.question'); });
 
