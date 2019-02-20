@@ -165,7 +165,6 @@ h1.SearchTitle:before{
     border:1px solid red;
     padding:10px;
 }
-
 .password-reminder__inr a{
     color:#D46363;
 }*/
@@ -525,7 +524,7 @@ h1.SearchTitle:before{
 .input_resume_type {
     display:none;
     border: 0;
-    width: 100%; 
+    width: 100%;
 }
 
 .input_resume_type_edit {
@@ -559,7 +558,7 @@ h1.SearchTitle:before{
 .uploadfile_edit {}
 
 .uploadfile_edit_frame {
-    padding: 5px 0 5px 0; 
+    padding: 5px 0 5px 0;
 }
 
 .uploadfile_img {
@@ -631,7 +630,7 @@ h1.SearchTitle:before{
 
 /*メール*/
 .mail_files {
-    display:none;  
+    display:none;
     background-color: #eef3f4;
     padding: 30px 0 30px 10px;
     border: 1px solid #5e8796;
@@ -1259,7 +1258,7 @@ h1.SearchTitle:before{
 /*------------------------------------------
 ## ご利用の流れ
 ------------------------------------------*/
-.flowImages { 
+.flowImages {
     padding-top: 6%;
 }
 
@@ -2440,7 +2439,7 @@ dt.news-date {
     width: 8em; /* 日付エリアの幅 */
     float: left;
     padding: 3px 0 4px 3px; /* 日付エリアのパディング（上右下左） */
-    line-height: 120%;   
+    line-height: 120%;
     border-left: 6px solid #5e8796;
 }
 
@@ -2479,7 +2478,7 @@ h3.news-title {
     position: fixed;
     bottom: 10px;
     right: 10px;
-    padding: 10px 15px;
+    padding: 10px 14px;
     color: #becfd5;
     font-size: 20px;
     text-decoration: none;
@@ -2551,6 +2550,11 @@ tablet.css 641px~1024px
     	width: 95%;
         margin: 0 auto;
     }
+
+    .fix_menu_smartphone{
+      display: none;
+    }
+
 }
 
 /*======================================================================
@@ -2621,15 +2625,71 @@ sp.css ~640px
 	/*------------------------------------------
 　   会員登録固定ボタン
     ------------------------------------------*/
+    .btn {
+        color: #fff;
+        background: #5e8796;
+        padding: .5em .7em;
+        border-radius: .1em;
+        text-align: center;
+        display: table;
+        cursor: pinter;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        font-size: 15px;
+    }
+    .btn:hover {
+        cursor: pinter;
+    }
+    .btn:active {
+        background: rgb(127, 194, 239);
+    }
+    .box {
+        border-radius: .1em;
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* close button */
+    .action-close {
+        position: relative;
+        margin-top: 2em;
+    }
+    .action-close .btn {
+        position: absolute;
+        right: 1em;
+        top: -1em;
+    }
+    .action-close .box {
+    }
+
+    /* checkbox non-display */
+    .add-control .checkbox {
+        display: none;
+    }
+
+    /* close button's control */
+    .add-control .action-close #close:checked ~ .btn {
+        display: none;
+    }
+    .add-control .action-close #close:checked ~ .box {
+        display: none;
+    }
+
+
 	.fix_menu_smartphone{
 	  position: fixed;
-	  bottom: 0px;
+	  bottom: -2px;
 	  left: 0px;
 	  z-index: 10000;
+    display: block;
+    max-width: 100%;
+    height: auto;
 	}
 
 	.fix_menu_smartphone img{
-	  width:100%;
+    max-width: 100%;
+    height: auto;
 	}
 
 	/* main-content-left を使わないページ */
@@ -2709,7 +2769,7 @@ sp.css ~640px
     .cmmn-btn-entry a.consider_delete-btn {
         width: 80%;
         float: none;
-    }  
+    }
 
     .cmmn-btn {
         margin-top: 2rem;
@@ -3160,7 +3220,7 @@ sp.css ~640px
 		border-bottom: 0;
 	}
 
-	.topJobInr img { 
+	.topJobInr img {
         display: none;
     }
 
@@ -3450,11 +3510,3 @@ h3.about_free_lead{
 html{
   scroll-behavior: smooth;
 }
-
-
-
-
-
-
-
-
