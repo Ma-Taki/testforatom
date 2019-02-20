@@ -45,16 +45,7 @@
 							<?php endif; ?>
 						</div>
 						<section class="entry-content cf">
-							<?php the_content();
-								wp_link_pages( array(
-								'before'      => '<div class="page-links cf"><ul>',
-								'after'       => '</ul></div>',
-								'link_before' => '<li><span>',
-								'link_after'  => '</span></li>',
-								'next_or_number'   => 'next',
-								'nextpagelink'     => __('次のページへ ≫'),
-								'previouspagelink' => __('≪ 前のページへ'),
-								) );?>
+							<?php the_content(); ?>
 						</section>
 						<div class="article-footer">
 							<!-- バナー -->
@@ -93,7 +84,7 @@
 			<?php get_sidebar(); ?>
 		</div>
 	</div>
-<?php endif; wp_reset_query(); //ワンカラム条件分岐END ?>
+<?php endif; wp_reset_query(); ?>
 <?php get_footer(); ?>
 
 

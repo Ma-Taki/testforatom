@@ -10,7 +10,7 @@
   <p>&copy; SolidSeed Co.,Ltd.</p>
 </footer>
 <!-- END .footer -->
-<script type="text/javascript" charset="utf-8" src="/front/js/all.js"></script>
+<!-- <script type="text/javascript" charset="utf-8" src="/front/js/all.js"></script> -->
 <a href="#top" class="page_top"><i class="fa fa-angle-double-up"></i></a>
 </body>
 </html>
