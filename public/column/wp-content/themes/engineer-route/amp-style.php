@@ -2449,6 +2449,10 @@ tablet.css 641px~1024px
     .breadcrumbs {
         width: 95%;
     }
+
+    .fix_menu_smartphone {
+        display: none;
+    }
 }
 
 /*--------------------------------
