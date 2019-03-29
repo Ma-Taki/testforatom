@@ -510,20 +510,20 @@ function nlink_scode($atts) {
 		}else{
 			$excerpt = $post->post_content;
 		}
+		$excerpt = wp_strip_all_tags($excerpt);
 	}
 
     //アイキャッチ画像を取得
     if(has_post_thumbnail($id)) {
-        $img = wp_get_attachment_image_src(get_post_thumbnail_id($id));
-        $img_tag = "<img src='" . $img[0] . "' alt='{$title}'/>";
+        $img_tag = get_the_post_thumbnail( $id, 'large', array('alt' => $title));
     }
 
 	$nlink = '<div class="blog-card">
   <a class="no-icon" href="'. $url .'" target="_blank">
       <div class="blog-card-thumbnail">'. $img_tag .'</div>
       <div class="blog-card-content">
-          <div class="blog-card-title">'. $title .' </div>
-          <div class="blog-card-excerpt">'. $excerpt .'</div>
+          <p class="blog-card-title">'. $title .' </p>
+          <p class="blog-card-discription">'. $excerpt .'</p>
       </div>
       <div class="clear"></div>
   </a>
@@ -638,45 +638,50 @@ function hot_articles( $id, $posts_per_page, $category_id = 0 ) {
 			'orderby' => 'meta_value_num'
 		);
 	}
+
 	$query = new WP_Query($args);
 ?>
+
 	<?php if( $query->have_posts() ) : ?>
 		<?php while ($query->have_posts()) : $query->the_post();
 			$cat = get_the_category(get_the_ID());
 			$cat = $cat[0];
-		 ?>
-			<li class="popular-contents">
-				<figure class="popular-eyecatch">
-					<?php the_post_thumbnail(); ?>
-					<span class="cat-name cat-id-<?php echo $cat->cat_ID;?>">
-						<?php echo $cat->name; ?>
-					</span>
-				</figure>
-				<div class="popular-title">
-					<p class="byline entry-meta vcard">
-						<span class="date gf updated"><?php the_time('Y.m.d'); ?></span>
 
-						<span class="writer name author"><span class="fn"><?php the_author(); ?></span></span>
-					</p>
-					<h3 class="title">
-						<a href="<?php echo get_permalink(); ?>">
-							<?php
-								if(mb_strlen(get_the_title(), 'UTF-8') > 34){
-									$title= mb_substr(get_the_title(), 0, 34, 'UTF-8');
-									echo $title.'…';
-								}else{
-									echo get_the_title();
-								}
-							?>
-						</a>
-					</h3>
-				</div>
+			//アイキャッチ画像を取得
+		    if(has_post_thumbnail(get_the_ID())){
+		    	$tag_img = get_the_post_thumbnail( get_the_ID(), 'large', array('alt' => get_the_title()));
+		    }
+		?>
+			<li class="popular-contents">
+				<a class="no-icon" href="<?php the_permalink(); ?>">
+					<figure class="popular-eyecatch">
+						<?php echo $tag_img; ?>
+						<span class="cat-name cat-id-<?php echo $cat->cat_ID;?>">
+							<?php echo $cat->name; ?>
+						</span>
+					</figure>
+					<div class="popular-title">
+						<p class="byline entry-meta vcard">
+							<span class="date gf updated"><?php the_time('Y.m.d'); ?></span>
+							<span class="writer name author"><span class="fn"><?php the_author(); ?></span></span>
+						</p>
+						<p class="title">
+								<?php
+									if(mb_strlen(get_the_title(), 'UTF-8') > 34){
+										$title= mb_substr(get_the_title(), 0, 34, 'UTF-8');
+										echo $title.'…';
+									}else{
+										echo get_the_title();
+									}
+								?>
+						</p>
+					</div>
+				</a>
 			</li>
 		<?php endwhile; wp_reset_postdata(); ?>
     <?php endif; ?>
 <?php } ?>
 <?php 
-
 //---------------------------------------
 //トップページ　続きを読む
 //---------------------------------------
@@ -685,3 +690,57 @@ function new_excerpt_more($more) {
 }
 add_filter('excerpt_more', 'new_excerpt_more');
 
+//---------------------------------------
+//記事詳細テンプレートをAMP専用テンプレートに切り替え
+//---------------------------------------
+function change_amp_template($single_template) {
+    $change_template = $single_template;
+
+    if(isset($_GET['amp']) && $_GET['amp'] == 1){
+        $amp_template = locate_template('amp.php');
+
+        if(!empty($amp_template)){
+            $change_template = $amp_template;
+        }
+
+        //アイキャッチ画像の<img>を<amp-img>へ書き換え
+		function otherImg( $html ){
+		    $html = preg_replace('/<img/', '<amp-img layout="responsive"', $html);
+		    $html = $html.'</amp-img>';
+		    return $html;
+		}
+		add_filter( 'post_thumbnail_html', 'otherImg' );
+
+        function the_content_filter( $content ) {
+        	//<amp-img>へ書き換え
+			$content = preg_replace('/<img (.*?)>/i', '<amp-img $1></amp-img>', $content);
+			$content = preg_replace('/<img (.*?) \/>/i', '<amp-img $1></amp-img>', $content);
+
+			 //gist
+            $content = preg_replace('/<script src="https:\/\/gist.github\.com\/.*\/(.*)\.js"><\/script>/', '<amp-gist data-gistid="$1" layout="fixed-height" height="241"></amp-gist>', $content);
+
+            //スクリプトを除去
+            $pattern = '/<script.+?<\/script>/is';
+            $append = '';
+            $content = preg_replace($pattern, $append, $content);
+
+            return $content;
+        }
+        add_filter( 'the_content', 'the_content_filter', 12 );
+
+    }
+    return $change_template;
+}
+add_filter('single_template', 'change_amp_template');
+
+//---------------------------------------
+// linkタグにAMP用URLを記載
+//---------------------------------------
+function amp_link_tag(){
+    if(is_singular('post')){
+        echo '<link rel="amphtml" href="'.esc_url(get_permalink()).'?amp=1">'."\n";
+    }
+}
+add_action('wp_head', 'amp_link_tag');
+
+?>

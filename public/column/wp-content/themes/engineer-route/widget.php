@@ -120,10 +120,34 @@ class hot_articles_Widget extends WP_Widget{
 	}
 }
 
+//検索
+class original_search_Widget extends WP_Widget{
+
+	//管理画面:ウィジェットタイトル
+    public function __construct() {
+        $widget_ops = array(
+    		//classname : htmlタグのdiv class名
+            'classname' => 'original_search_Widget',
+            'description' => 'カスタマイズ検索'
+        );
+        parent::__construct('original_search', 'カスタマイズした検索', $widget_ops);
+    }
+        // サイドバーでどのように表示するか設定
+    public function widget($args, $instance) {
+    	$title = apply_filters('widget_title', '検索');
+    	echo $args['before_title'] . $title . $args['after_title'];
+
+    	$url_home = esc_url(home_url('/'));
+
+		echo '<form class="searchform" action="'.$url_home.'" method="get" target="_top"><input type="text" placeholder="キーワードを入力" name="s" class="searchfield" value="" /><input type="submit" value="" title="検索" class="side-searchBtn"></form>';
+	}
+}
+
 function my_recent_widget_registration() {
 	unregister_widget('WP_Widget_Recent_Posts');
 	register_widget('My_Recent_Posts_Widget');	
 	register_widget('hot_articles_Widget');
+	register_widget('original_search_Widget');
 }
 add_action('widgets_init', 'my_recent_widget_registration');
 
