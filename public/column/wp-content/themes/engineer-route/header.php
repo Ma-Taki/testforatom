@@ -9,25 +9,8 @@
 <link rel="icon" href="/front/favicon.ico">
 <link rel="canonical" href=<?php getCanonical(); ?>>
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); echo '?' . filemtime( get_stylesheet_directory() . '/style.css'); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_directory'); echo '/engineer-route.css?' . filemtime( get_stylesheet_directory() . '/engineer-route.css'); ?>" />
-<!-- <link rel="stylesheet" type="text/css" href="/front/css/style.css<?php //echo '?' . filemtime(__DIR__.'/../../../../../public/front/css/style.css');?>"> -->
-<?php /* if( in_category('技術者の視点') ): */ ?>
-      <!-- <link rel="stylesheet" type="text/css" href="/front/css/pointview-engineer.css<?php /* echo '?' . filemtime(__DIR__.'/../../../../../public/front/css/pointview-engineer.css'); */ ?>"> -->
-<?php /*endif; */?>
-<!-- <link rel="stylesheet" type="text/css" href="/front/css/slick.css">
-<link rel="stylesheet" type="text/css" href="/front/css/slick-theme.css"> -->
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" charset="utf-8" src="/front/js/slick.min.js"></script> -->
-<!-- <script type="text/javascript" charset="utf-8" src="/front/js/jquery.tile.js"></script> -->
-<!-- <script src="//statics.a8.net/a8sales/a8sales.js"></script> -->
-<?php
-//echo file_get_contents(__DIR__.'/../../../../../resources/views/front/common/inside_head_tag.blade.php');
-?>
-<!-- User Heat Tag -->
-<!-- <script type="text/javascript">
-(function(add, cla){window['UserHeatTag']=cla;window[cla]=window[cla]||function(){(window[cla].q=window[cla].q||[]).push(arguments)},window[cla].l=1*new Date();var ul=document.createElement('script');var tag = document.getElementsByTagName('script')[0];ul.async=1;ul.src=add;tag.parentNode.insertBefore(ul,tag);})('//uh.nakanohito.jp/uhj2/uh.js', '_uhtracker');_uhtracker({id:'uhqZ5dOcnl'});
-</script> -->
-<!-- End User Heat Tag -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo get_template_directory_uri(); ?>/column-scripts.js"></script>
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
