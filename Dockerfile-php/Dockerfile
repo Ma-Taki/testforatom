@@ -11,7 +11,6 @@ RUN apt clean
 #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #RUN chmod 777 /var/www/laravel/storage/logs /var/www/laravel/storage/framework/cache /var/www/laravel/storage/framework/sessions /var/www/laravel/storage/framework/views
-#RUN chmod 644 /etc/cron.d/lessan
 #初回はvendorライブラリをインストールのに下記の実行が必要
 #RUN cd /var/www/laravel && composer install
 #/etc/cron.d/lessanのパーミッションを644に変更できない時はcronインストール後にcrontab -eで下記を設定する
