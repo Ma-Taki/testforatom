@@ -1,2 +1,4 @@
-*
+#*
 !.gitignore
+conf.d/*
+!conf.d/my.conf.example
