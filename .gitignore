@@ -1,8 +1,20 @@
+docker-compose.yml
+phpinfo.php
+
+/.vscode
+/.settings
+
+## Googel News RSS ##
+laravel/public/rss/*
+
+## Mac ##
+.DS_Store
+
+!.gitkeep
+
 Hiomestead.yaml
 Homestead.json
-.env
-.DS_Store
-*.sh
+#*.sh
 
 #eclipse
 .settings
@@ -10,10 +22,10 @@ Homestead.json
 .buildpath
 
 #WordPress
-/public/column/wp-content/upgrade/*
-/public/column/wp-content/uploads/*
-/public/column/wp-content/plugins/*
-/public/column/wp-content/languages/plugins/*
+#/public/column/wp-content/upgrade/*
+#/public/column/wp-content/uploads/*
+#/public/column/wp-content/plugins/*
+#/public/column/wp-content/languages/plugins/*
 
 #admin
-/public/front/images/slide/*
+#/public/front/images/slide/*

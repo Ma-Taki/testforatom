@@ -1,0 +1,86 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:1.15
+#        build:
+#            context: ./Dockerfile-nginx
+#            dockerfile: Dockerfile
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ./nginx/conf.d:/etc/nginx/conf.d
+            - ./nginx/ssl:/etc/nginx/ssl
+            - ./logs/nginx:/var/log/nginx
+            - ./laravel/public:/var/www/laravel/public
+        environment:
+            TZ: "Asia/Tokyo"
+        depends_on:
+            - php
+    php:
+#        image: php:7-fpm
+        #Dockerfileのコマンドがうまく実行できなかったので手動で実行する。
+        build:
+            context: ./Dockerfile-php
+            dockerfile: Dockerfile
+        ports:
+            - 9000:9000
+        volumes:
+            - ./laravel:/var/www/laravel
+            - ./cron/php:/etc/cron.d
+        environment:
+            TZ: "Asia/Tokyo"
+#docker-compose exec php bash -c "php /var/www/laravel/artisan BusinessPersonAdPaymentRequest"
+#「docker-php-ext-install pdo_mysql mysqli mbstring gd iconv curl」でエクステンションをインストールする必要がある
+#        command: > 
+#            bash -c "docker-php-ext-install pdo_mysql mysqli mbstring gd iconv curl
+#            && docker-php-entrypoint php-fpm"
+#    mysql80:
+#        image: mysql:8.0
+#        build:
+#            context: ./Dockerfile-mysql
+#            dockerfile: Dockerfile
+#        ports:
+#            - 3307:3307
+#        volumes:
+#            - ./dump:/usr/local/dump
+#        environment:
+#            MYSQL_ROOT_PASSWORD: Z#1qHk2Gbtay
+#            MYSQL_USER: toco
+#            MYSQL_PASSWORD: Z#1qHk2Gbtay
+#            MYSQL_DATABASE: toco
+#            TZ: "Asia/Tokyo"
+        #起動するまで時間がかかるので手動で実行する。
+#        command: 
+#/etc/mysql/conf.d/unique.cnfを作成しmysql/unique.cnfの内容を反映する。
+#sql_modeの確認コマンド show variables like 'sql_mode';
+#文字コード確認コマンド show variables like '%char%';
+#select user, host, Plugin from mysql.user;
+#ALTER USER 'toco'@'%' IDENTIFIED WITH mysql_native_password BY 'Z#1qHk2Gbtay';
+#ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Z#1qHk2Gbtay';
+    mysql57:
+        image: mysql:5.7
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mysql/data:/var/lib/mysql
+            - ./mysql/conf/unique.cnf:/etc/mysql/conf.d/unique.cnf
+            - ./dump:/usr/local/dump
+        environment:
+            MYSQL_ROOT_PASSWORD: S0l!d=9oo9
+            MYSQL_USER: engineer_route_user
+            MYSQL_PASSWORD: Eroute!4649
+            MYSQL_DATABASE: Engineer_Route
+            TZ: "Asia/Tokyo"
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 4000:80
+        volumes:
+            - ./phpmyadmin/sessions:/sessions
+        environment:
+            - TZ="Asia/Tokyo"
+            - PMA_ARBITRARY=1
+            - PMA_HOST=mysql57
+            - PMA_USER=engineer_route_user
+            - PMA_PASSWORD=Eroute!4649
