@@ -1,9 +1,9 @@
 docker-compose.yml
 phpinfo.php
 
-laravel/public/column
-!laravel/public/column/wp-config.php
-!laravel/public/column/wp-content/themes/engineer-route
+/laravel/public/column/*
+!/laravel/public/column/wp-config.php
+!/laravel/public/column/wp-content/themes/engineer-route/
 
 /.vscode
 /.settings
