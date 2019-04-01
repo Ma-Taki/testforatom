@@ -3,6 +3,11 @@ phpinfo.php
 
 /laravel/public/column/*
 !/laravel/public/column/wp-config.php
+/laravel/public/column/wp-content/*
+!/laravel/public/column/wp-content/
+/laravel/public/column/wp-content/themes/*
+!/laravel/public/column/wp-content/themes/
+#/laravel/public/column/wp-content/themes/engineer-route/*
 !/laravel/public/column/wp-content/themes/engineer-route/
 
 /.vscode
