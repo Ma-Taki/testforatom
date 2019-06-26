@@ -1,0 +1,155 @@
+@charset "utf-8";
+
+/* ################################## */
+/* ## 案件                         ## */
+/* ################################## */
+
+@import url("../common/reset.css");
+@import url("../layout/standard.css");
+@import url("../common/component.css");
+
+/* #---------------------# */
+/* # 共通                # */
+/* #---------------------# */
+#guide {
+	width: 880px;
+	margin: 5px auto;
+}
+
+.errorMessageWidth {
+	width: 800px;
+	margin: 10px auto !important;
+}
+
+.gotoTop {
+	padding: 10px 0 15px 15px;
+}
+
+.notInServiceMessage {
+	margin: 2px 15px 2px 15px;
+	padding: 3px;
+	border: 1px dashed #A2CF7E;
+	background-color: #f4f7f2;
+}
+
+/* #---------------------# */
+/* # 案件内容            # */
+/* #---------------------# */
+.dataTable {
+	border-top: 2px solid #A2CF7E;
+	border-bottom: 2px solid #A2CF7E;
+	width: 880px;
+	border-collapse: collapse;
+	margin: 10px auto 20px auto;
+}
+
+.dataTable caption {
+	padding: 2px;
+	font-weight: bold;
+}
+
+.dataTable th {
+	border-bottom: 1px solid #A2CF7E;
+	background-color: #DBEDCD;
+	width: 15%;
+	padding: 10px 10px;
+	text-indent: 5px;
+	white-space: nowrap;
+}
+
+.dataTable td {
+	border-bottom: 1px solid #A2CF7E;
+	padding: 10px 10px;
+}
+
+.entryField {
+	width: 880px;
+	margin: 10px auto 20px auto;
+	border-top: 3px double #A2CF7E;
+	border-bottom: 3px double #A2CF7E;
+	padding: 5px 0 !important;
+	text-align: center;
+}
+
+.entryField a {
+	font-size: 1.2em;
+	font-weight: bold;
+	background-image: url(/images/common/material/bullet-triangle_emeraldgreen.gif);
+	background-position: left center;
+	padding-left: 20px;
+	background-repeat: no-repeat;
+}
+
+.entryField .disabledText {
+	font-weight: bold;
+	color: #AAAAAA;
+}
+
+.unionCell {
+	background-color: #f4f7f2;
+}
+
+/* #---------------------# */
+/* # 所属                # */
+/* #---------------------# */
+#routeNavi-container {
+	width: 880px;
+	margin: 5px auto 0 auto;
+}
+#routeNavi {
+	padding: 2px 3px;
+	border-left: 5px solid #A2CF7E;
+	border-right: 5px solid #A2CF7E;
+	background-color: #f4f7f2;
+}
+
+#routeNavi {
+	font-size: 0.9em;
+}
+
+#routeNavi a:link { text-decoration: underline; }
+#routeNavi a:visited { text-decoration: underline; }
+#routeNavi a:hover { text-decoration: none; }
+#routeNavi a:active { text-decoration: underline; }
+
+/* #---------------------# */
+/* # おすすめ            # */
+/* #---------------------# */
+#lookAlike {
+	width: 880px;
+	margin: 20px auto;
+	border-bottom: 2px solid #A2CF7E;
+}
+
+#lookAlike caption {
+	border-bottom: 2px solid #A2CF7E;
+	padding: 5px 23px;
+	background-image: url(/images/common/material/check-green.gif);
+	background-position: 5px center;
+	background-repeat: no-repeat;
+}
+
+#lookAlike td {
+	border-bottom: 1px solid #CCCCCC;
+	padding: 10px;
+}
+
+#lookAlike td.name {
+	width: 45%;
+	background-image: url(/images/common/material/bullet-dash_yellow.gif);
+	background-position: 5px center;
+	background-repeat: no-repeat;
+	padding-left: 20px !important;
+}
+
+#lookAlike td.rate {
+	width: 20%;
+	text-align: right;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+#lookAlike td.skill {
+	background-color: #f4f7f2;
+}
+

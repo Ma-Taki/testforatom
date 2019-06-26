@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="フリーランス、フリーエンジニアのためのIT系求人情報、案件情報満載。">
+		<meta name="keywords" content="IT案件,案件情報,求人,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP">
+		<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1" />
+		<title>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」</title>
+		<link rel="canonical" href="http://www.engineer-route.com/">
+		<link rel="icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/slick.css">
+		<link rel="stylesheet" type="text/css" href="css/slick-theme.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/slick.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/all.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/jQueryAutoHeight.js"></script>
+	</head>
+	
+	<body>
+		<header>
+			<div class="headerInr">
+				<p>フリーランス、フリーエンジニアのためのIT系求人・案件情報提供サイト「エンジニアルート」</p>
+				<div class="user">
+					<ul>
+						<li><a href="#" class="signin">新規登録</a></li>
+						<li><a href="#">ログイン</a></li>
+					</ul>
+				</div>
+				<h1 class="alignleft"><a href="index.html" title="エンジニアルート"></a></h1>
+				
+				<div class="search">
+					<form action="cgi-bin/example.cgi" method="post">
+						<input type="search" name="search" placeholder="キーワードを入力" size="40" maxlength="255" class="searchBox">
+						<input type="submit" name="submit" value="検索" class="searchBtn">
+					</form>
+				</div><!-- /.search -->
+			
+			</div><!-- /.headerInr -->
+		</header>
+		
+		<div class="wrapper">
+			<div class="main">
+				<nav class="nav">
+					<ul class="nav-list">
+						<li class="nav-item"><a href="index.html">HOME</a></li>
+						<li class="nav-item"><a href="#">エンジニアルートとは</a></li>
+						<li class="nav-item"><a href="#">新着一覧</a></li>
+						<li class="nav-item"><a href="#">Q&amp;A</a></li>
+						<li class="nav-item"><a href="#">ご利用の流れ</a></li>
+						<li class="nav-item"><a href="#">企業の皆様へ</a></li>
+					</ul>
+				</nav>
+				<!-- /Nav -->
+				
+				<div class="content">
+					<ul class="slider center-item">
+						<li><a href="#"><img src="../images/bnr001.jpg"></a></li>
+						<li><a href="#"><img src="../images/bnr002.jpg"></a></li>
+						<li><a href="#"><img src="../images/bnr001.jpg"></a></li>
+						<li><a href="#"><img src="../images/bnr002.jpg"></a></li>
+					</ul>
+					<script>
+						$(function() {
+							$('.center-item').slick({
+							arrows: true,
+							infinite: true,
+							dots:false,
+							slidesToShow: 1,
+							centerMode: true, //要素を中央寄せ
+							centerPadding:'150px', //両サイドの見えている部分のサイズ
+							autoplay:true, //自動再生
+							responsive: [{
+							  breakpoint: 480,
+								settings: {
+								  centerMode: false,
+							  }
+							}]
+						  });
+						});
+					</script><!-- /.slider -->
+					
+					<div class="ankenListWrap">
+						<section class="alignleft newJob">
+							<div class="topJobWrap alignright">
+								<h1 class="alignleft">新着案件</h1>
+								<p class="alignright"><a href="#">新着案件一覧へ</a></p>
+								<ul class="fs0 clear">
+									<li>
+										<a href="#">
+										<div class="topJobInr">
+											<img src="images/ico-newjob.png">
+											<h2>システム(BtoC向け)対応(PHP)</h2>
+											<p class="location">目黒</p>
+											<p class="remuneration">〜55万円、〜65万円</p>
+											<p class="update">2016/5/31</p>
+										</div>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+										<div class="topJobInr">
+											<img src="images/ico-newjob.png">
+											<h2>システム開発(Java)</h2>
+											<p class="location">五反田/7月以降は武蔵小杉</p>
+											<p class="remuneration">〜65万円</p>
+											<p class="update">2016/5/31</p>
+										</div>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+										<div class="topJobInr">
+											<img src="images/ico-newjob.png">
+											<h2>システム(BtoC向け)対応(PHP)</h2>
+											<p class="location">目黒</p>
+											<p class="remuneration">〜55万円、〜65万円</p>
+											<p class="update">2016/5/31</p>
+										</div>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+										<div class="topJobInr">
+											<img src="images/ico-newjob.png">
+											<h2>システム(BtoC向け)対応(PHP)</h2>
+											<p class="location">目黒</p>
+											<p class="remuneration">〜55万円、〜65万円</p>
+											<p class="update">2016/5/31</p>
+										</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</section><!-- /.newJob -->
+
+						<section class="alignleft attentionJob">
+							<div class="topJobWrap alignleft">
+								<h1 class="alignleft">急募案件</h1>
+								<p class="alignright"><a href="#">急募案件一覧へ</a></p>
+								<ul class="fs0 clear">
+									<li>
+										<a href="#">
+										<div class="topJobInr">
+											<img src="images/ico-attentionJob.png">
+											<h2>システム(BtoC向け)対応(PHP)</h2>
+											<p class="location">目黒</p>
+											<p class="remuneration">〜55万円、〜65万円</p>
+											<p class="update">2016/5/31</p>
+										</div>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+										<div class="topJobInr">
+											<img src="images/ico-attentionJob.png">
+											<h2>システム(BtoC向け)対応(PHP)</h2>
+											<p class="location">目黒</p>
+											<p class="remuneration">〜55万円、〜65万円</p>
+											<p class="update">2016/5/31</p>
+										</div>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+										<div class="topJobInr">
+											<img src="images/ico-attentionJob.png">
+											<h2>システム(BtoC向け)対応(PHP)</h2>
+											<p class="location">目黒</p>
+											<p class="remuneration">〜55万円、〜65万円</p>
+											<p class="update">2016/5/31</p>
+										</div>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+										<div class="topJobInr">
+										<img src="images/ico-attentionJob.png">
+										<h2>システム(BtoC向け)対応(PHP)</h2>
+										<p class="location">目黒</p>
+										<p class="remuneration">〜55万円、〜65万円</p>
+										<p class="update">2016/5/31</p>
+									</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</section><!-- /.attentionJob -->
+					<script>
+					$(window).load(function() {
+					 $(".topJobInr").tile();
+					});
+					</script><!-- /.topJob -->
+					</div>
+					
+					<section class="pickupCat">
+						<div class="contentInr">
+							<h1>特集から案件を探す</h1>
+							<ul class="fs0">
+								<li class="pucat01"><a href="#">残業少なめ</a></li>
+								<li class="pucat02"><a href="#">年齢不問</a></li>
+								<li class="pucat03"><a href="#">高単価</a></li>
+								<li class="pucat04"><a href="#">ロースキル</a></li>
+								<li class="pucat05"><a href="#">現場直</a></li>
+							</ul>
+						</div>
+					</section><!-- /.pickupCat -->
+					
+					<section class="conditions">
+						<div class="contentInr">
+							<h1>条件から案件を探す</h1>
+							<div class="tabWrap alignleft">
+								<div class="tabMenu">
+									<ul>
+										<li>スキル</li>
+										<li>システム種別</li>
+										<li>報　酬</li>
+										<li>業　種</li>
+										<li>勤務地</li>
+										<li>ポジション</li>
+									</ul>
+								</div><!-- /.tabMenu -->
+								
+								<div class="tabBox">
+									<div class="tabBoxInr">
+										<p class="attention">10個まで選択可能<span>※他の条件と組み合わせて検索できます。</span></p>
+										<div class="tabContent">
+										<h2>プログラミング言語</h2>
+											<form action="" method="post">
+												<ul>
+													<li><input type="checkbox" name="skill1" value="1">Java</li>
+													<li><input type="checkbox" name="skill1" value="2">C#</li>
+													<li><input type="checkbox" name="skill1" value="3">PHP</li>
+													<li><input type="checkbox" name="skill1" value="4">Ruby</li>
+													<li><input type="checkbox" name="skill1" value="5">C++</li>
+													<li><input type="checkbox" name="skill1" value="6">C言語</li>
+													<li><input type="checkbox" name="skill1" value="7">Objective-C</li>
+													<li><input type="checkbox" name="skill1" value="8">Visual C++</li>
+													<li><input type="checkbox" name="skill1" value="9">Python</li>
+													<li><input type="checkbox" name="skill1" value="10">SAP/ABAP</li>
+													<li><input type="checkbox" name="skill1" value="10">ActionScript</li>
+													<li><input type="checkbox" name="skill1" value="10">ASP.NET</li>
+													<li><input type="checkbox" name="skill1" value="10">HTML/HTML5</li>
+													<li><input type="checkbox" name="skill1" value="10">JavaScript</li>
+													<li><input type="checkbox" name="skill1" value="10">PL/SQL</li>
+													<li><input type="checkbox" name="skill1" value="10">COBOL</li>
+													<li><input type="checkbox" name="skill1" value="10">アセンブラ</li>
+													<li><input type="checkbox" name="skill1" value="10">その他言語</li>
+												</ul>
+											</form>
+										</div>
+									</div>
+									<div class="tabBoxInr">スキルるるスキルスキルスキルスキル</div>
+									<div class="tabBoxInr">スキルスdふぁふぁキルスキルスキルスキル</div>
+									<div class="tabBoxInr">スキルスあsdfまlkふぁぁふぁキルスキルスキルスキル</div>
+									<div class="tabBoxInr">スキルあsdfjlfじゃスキルスキルスキルスキル</div>
+									<div class="tabBoxInr">スキあsdfjsふぁjルスキルスキルスキルスキル</div>
+								</div><!-- /.tabBox -->
+							</div>
+							
+						</div>
+					</section><!-- /.conditions -->
+					
+					<script>
+						jQuery(function($){
+							var tabmenu = $('.tabMenu ul li');
+								$('.tabBox .tabBoxInr').hide().eq(0).show();
+								tabmenu.eq(0).addClass('navhit');
+								tabmenu.click(function () {
+								var no = $(this).parent().children().index(this);
+								tabmenu.removeClass('navhit');
+								$(this).addClass('navhit');
+								$('.tabBox .tabBoxInr').hide().eq(no).show();
+							});
+						});
+					</script>
+					
+					
+
+		
+				</div>
+			</div>
+		</div>
+		
+		
+		<footer class="bg clear">
+			<ul>
+				<li><a href="#">運営会社</a></li>
+				<li><a href="#">プライバシーポリシー</a></li>
+				<li><a href="#">利用規約</a></li>
+				<li><a href="#">お問い合わせ</a></li>
+			</ul>
+			<p>&copy; SolidSeed Co.,Ltd.</p>
+		</footer>
+		
+	
+		
+	</body>
+</html>

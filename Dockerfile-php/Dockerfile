@@ -1,6 +1,6 @@
 FROM php:7-fpm
 RUN apt update
-RUN apt install -y git vim unzip cron libzip-dev libfreetype6-dev libjpeg-dev libpng-dev
+RUN apt install -y git vim unzip cron libzip-dev libfreetype6-dev libjpeg-dev libpng-dev zlib1g-dev
 RUN apt clean
 #下記以降はうまくいかないので手動実行
 #RUN docker-php-ext-install pdo_mysql mysqli mbstring curl exif zip iconv

@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title><?php wp_title(''); ?></title>
-<meta name="description" content=<?php description(); ?> />
-<meta name="keywords" content="IT案件,案件情報,求人,案件,仕事,フリーランス,フリーエンジニア,個人事業主,エンジニア,Java,PHP,コラム">
+<?php MataTitle(); ?>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="icon" href="/front/favicon.ico">
 <link rel="canonical" href=<?php echo esc_url(get_permalink()); ?>>

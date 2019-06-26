@@ -1,0 +1,175 @@
+@charset "utf-8";
+
+/* ################################## */
+/* ## 標準レイアウトCSS            ## */
+/* ################################## */
+
+/* #---------------------# */
+/* # 共通                # */
+/* #---------------------# */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	width: 942px;
+	margin: 0 auto;
+	background-color: #f7f8fa;
+}
+
+#container {
+	background: #f7f8fa url(/images/layout/standard-bg.gif) repeat-y scroll center;
+	padding: 0 15px;
+	height: 100%;
+	min-height: 100%;
+}
+
+body > #container {
+	height: auto;
+}
+
+a:hover   { text-decoration: none; color: #a03b24; }
+a:link    { text-decoration: none; color: #1356a6; }
+a:visited { text-decoration: none; color: #1356a6; }
+a:active  { text-decoration: none; color: #1356a6; }
+
+
+/* #---------------------# */
+/* # ヘッダー            # */
+/* #---------------------# */
+#header {
+	margin: 0 1px;
+	position: relative;
+	background: #FFFFFF url(/images/layout/standard-header_bg.gif) repeat-x scroll left top;
+	padding-top: 23px;
+}
+
+#header #header-message {
+	height: 23px;
+	line-height: 23px;
+	font-size: 0.9em;
+	top: 0px;
+	left: 25px;
+	position: absolute;
+}
+
+#header #searchMessage {
+	position: absolute;
+	top: 1px;
+	right: 190px;
+	height: 23px;
+	line-height: 23px;
+	font-size: 0.9em;
+}
+
+#header #searchText {
+	position: absolute;
+	top: 1px;
+	right: 30px;
+	height: 19px;
+	padding: 0; margin: 0;
+	border: 1px solid #d2d2d2;
+	width: 150px;
+}
+
+#header #searchButton {
+	position: absolute;
+	top: 1px;
+	right: 5px;
+	height: 20px;
+	width: 20px;
+	border: 0; margin: 0; padding: 0;
+	cursor: pointer;
+	background: transparent url(/images/common/material/icon-mag_glass_trans.gif) no-repeat center center;
+}
+
+#header #header-box {
+	padding: 0 25px;
+	height: 60px;
+	position: relative;
+	overflow: visible;
+}
+
+#header #header-logo {
+	position: absolute;
+	top: 20px;
+	left: 25px;
+}
+
+#header #header-logo a {
+}
+
+#header #header-menu {
+	list-style: none;
+	position: absolute;
+	width: 250px;
+	top: 5px;
+	right: 25px;
+}
+
+#header #header-menu li {
+	display: block;
+	float: right;
+	width: 60px;
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+#header #header-menu li a {
+	display: block;
+	text-align: center;
+	padding-top: 40px;
+	white-space: nowrap;
+	font-size: 0.9em;
+}
+
+#header #header-menu .login  { background-image: url(/images/common/material/icon-lock.gif); }
+#header #header-menu .logout { background-image: url(/images/common/material/icon-user_exit.gif); }
+#header #header-menu .signup { background-image: url(/images/common/material/icon-user_add.gif); }
+#header #header-menu .view   { background-image: url(/images/common/material/icon-user_edit.gif); }
+#header #header-menu .guide  { background-image: url(/images/common/material/icon-book.gif); }
+
+
+/* #---------------------# */
+/* # コンテント          # */
+/* #---------------------# */
+#content {
+	margin: 0 1px;
+	overflow: visible;
+	position: relative;
+}
+
+/* #---------------------# */
+/* # フッター            # */
+/* #---------------------# */
+#footer {
+	margin: 0 1px;
+	padding-top: 10px;
+	clear: both;
+}
+
+#footer #footer-menu {
+	background-color: #FFFFFF;
+	text-align: center;
+	border-top: 1px solid #cdd3dd;
+	border-bottom: 1px solid #cdd3dd;
+	width: 100%;
+	padding: 3px 0;
+}
+
+#footer #footer-menu a:hover   { text-decoration: none; color: #5078AA; }
+#footer #footer-menu a:link    { text-decoration: none; color: #5078AA; }
+#footer #footer-menu a:visited { text-decoration: none; color: #5078AA; }
+#footer #footer-menu a:active  { text-decoration: none; color: #5078AA; }
+
+#footer #footer-copyright {
+	color: #5078AA;
+	text-align: center;
+	padding: 10px 0;
+}

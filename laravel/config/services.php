@@ -14,6 +14,24 @@ return [
     |
     */
 
+    'twitter' => [
+    'client_id'     => env('TWITTER_ID'),
+    'client_secret' => env('TWITTER_SECRET'),
+    'redirect'      => env('TWITTER_CALLBACKURL'),
+    ],
+
+    'facebook' => [
+    'client_id'     => env('FACEBOOK_ID'),
+    'client_secret' => env('FACEBOOK_SECRET'),
+    'redirect'      => env('FACEBOOK_CALLBACKURL'),
+    ],
+
+    'github' => [
+    'client_id'     => env('GITHUB_ID'),
+    'client_secret' => env('GITHUB_SECRET'),
+    'redirect'      => env('GITHUB_CALLBACKURL'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
@@ -43,5 +61,4 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
-
 ];

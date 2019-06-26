@@ -1,0 +1,527 @@
+@charset "utf-8";
+
+/* #---------------------# */
+/* # ゲストメニュー      # */
+/* #---------------------# */
+ul.guestMenu {
+	list-style-type: none;
+	width: 200px;
+	height: 25px;
+}
+
+ul.guestMenu li {
+	list-style-type: none;
+	text-align: center;
+	width: 96px;
+	height: 25px;
+	float: right;
+	display: block;
+}
+
+/* #---------------------# */
+/* # ログイン            # */
+/* #---------------------# */
+.menuLoginBox {
+	font-size: 1em;
+}
+
+.menuLoginBox {
+	font-size: 0.9em;
+	font-weight: bold;
+	color: #8AAADB;
+}
+
+.menuLoginBox .loginTextBox {
+	border: 1px solid #8AAADB;
+	margin 0;padding 1px;
+	width: 55px;
+	font-size: 1em;
+}
+
+.menuLoginBox .loginBtn {
+	margin 0;padding 0;
+	border: 1px solid #8AAADB;
+	background-color: #C7D7EE;
+	font-size: 1em;
+}
+
+/* #------------------------# */
+/* # ユーザ情報関連フォーム # */
+/* #------------------------# */
+#userInputForm {
+	margin: 0 10px 10px 10px;
+}
+
+/* 入力フォームのレイアウトテーブル */
+#userInputForm-table {
+	width: 100%;
+}
+
+/* 入力フォームについての説明書き */
+#userInputForm-guidance {
+	border-bottom: 1px solid #5088B1;
+	padding: 5px;
+}
+
+/* 項目セル */
+.userInputForm-rowHead {
+	background-color: #ECF1F9;
+	border-bottom: 1px solid #C7D7EE;
+	padding: 5px 0 5px 5px;
+	width: 15%;
+}
+
+/* 入力セル */
+.userInputForm-rowInput {
+	padding: 10px 0 10px 10px;
+	border-bottom: 1px solid #C7D7EE;
+}
+
+/* 入力エラーメッセージの表示セル */
+.userInputForm-rowMessage {
+	border-bottom: 1px solid #C7D7EE;
+	width: 25%;
+}
+
+.userInputForm-rowMessage li {
+
+}
+
+.userInputForm-rowMessage li span {
+	color: #CC0000;
+}
+
+/* 列間のマージン */
+.userInputForm-rowSpace {
+	height: 8px;
+}
+
+/* 入力必須マーク */
+#userInputForm em {
+	color: #FF0000;
+}
+
+/* フォームの部品にルビを振る場合に使用するテーブル */
+.userInputForm-rubyTable {
+}
+
+/* ルビのフォント */
+.userInputForm-rubyTable th {
+}
+
+/* 項目間のマージン */
+.userInputForm-rubyTable td {
+	padding-right: 5px;
+}
+
+/* 一つの項目で複数の入力ボックスがある場合 */
+.userInputForm-multiItemTable {
+}
+
+/* サブ項目 */
+.userInputForm-multiItemTable th {
+	padding: 6px 5px 6px 0;
+}
+
+
+/* ボタンセル */
+#userInputForm-submitCell {
+	text-align: center;
+	background-color: #ECF1F9;
+	border-top: 1px solid #C7D7EE;
+	border-bottom: 1px solid #C7D7EE;
+	padding: 6px 0;
+}
+
+/* 使用可能文字 */
+.userInputForm-allowChars {
+	font-size: 0.9em;
+}
+
+
+/* #---------------------# */
+/* # 詳細検索フォーム    # */
+/* #---------------------# */
+#detailSearch {
+}
+
+#detailSearch table {
+	width: 100%;
+}
+
+#detailSearch th {
+	background-color: #ebdfbb;
+	border: 1px dotted #000000;
+	white-space: nowrap;
+	padding: 7px;
+}
+
+#detailSearch td.elementCell {
+	border: 1px dotted #000000;
+	padding: 10px;
+}
+
+#detailSearch td.elementCell .subTitle {
+	border-bottom: 1px dotted #CCCCCC;
+	font-weight: bold;
+	padding: 0 0 3px 2px;
+	margin-bottom: 3px;
+	display: block;
+}
+
+#detailSearch td.elementCell label {
+	white-space: nowrap;
+	display: inline-block;
+	line-height: 1em;
+}
+
+#detailSearch td.element140px label {
+	width: 140px;
+}
+
+#detailSearch td.element150px label {
+	width: 150px;
+}
+
+#detailSearch td.element160px label {
+	width: 160px;
+}
+
+#detailSearch td.element200px label {
+	width: 200px;
+}
+
+#detailSearch td.element180px label {
+	width: 180px;
+}
+
+#detailSearch td.elementCell .elementGroup {
+	clear: both;
+	overflow: hidden;
+}
+
+#detailSearch td.btnCell {
+	border: 1px dotted #000000;
+	text-align: center;
+	padding: 3px;
+}
+
+#detailSearch td.btnCell input {
+	height: 22px;
+	width: 111px;
+	border: 0; margin: 0; padding: 0;
+	cursor: pointer;
+	background: transparent url(/images/common/material/button-glass_bg.gif) no-repeat center center;
+}
+
+#detailSearch .errorMessage {
+	padding: 5px 0 10px 0;
+	color: #FF0000;
+	list-style: none;
+}
+
+/* #---------------------# */
+/* # keyword検索フォーム # */
+/* #---------------------# */
+#keywordSearch {
+}
+
+#keywordSearch table {
+	width: 100%;
+}
+
+#keywordSearch .textCell {
+}
+
+#keywordSearch .textCell input {
+	width: 95%;
+	height: 1.2em;
+	line-height: 1.2em;
+	font-size: 1.2em;
+}
+
+#keywordSearch .submitCell {
+	width: 111px;
+}
+
+#keywordSearch .submitCell input {
+	width: 111px;
+	height: 22px;
+	border: 0; margin: 0; padding: 0;
+	cursor: pointer;
+	background: transparent url(/images/common/material/button-glass_bg.gif) no-repeat center center;
+}
+
+/* #---------------------# */
+/* # Glass Caption Bar   # */
+/* #---------------------# */
+#glassCaptionBar {
+	font-size: 125%;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	text-indent: 15px;
+	width: 890px;
+	height: 35px;
+	line-height: 35px;
+	margin: 10px auto;
+}
+
+.glassCaptionBar-green {
+	background-image: url(/images/common/component/glass_caption_bar-green.gif);
+}
+
+.glassCaptionBar-blue {
+	background-image: url(/images/common/component/glass_caption_bar-blue.gif);
+}
+
+.glassCaptionBar-red {
+	background-image: url(/images/common/component/glass_caption_bar-red.gif);
+}
+
+/* #---------------------# */
+/* # Cells               # */
+/* #---------------------# */
+.cells {
+	width: 100%;
+	border: 1px solid #A0AABE;
+}
+
+.cells caption {
+	background-color: #A0AABE;
+	color: #FFFFFF;
+	font-weight: bold;
+	height: 2em;
+	line-height: 2em;
+	padding: 0 8px;
+}
+
+.cells th {
+	font-weight: bold;
+	text-align: center;
+	border-left: 1px solid #A0AABE;
+	border-right: 1px solid #A0AABE;
+	border-bottom: 3px double #A0AABE;
+	background-color: #FFFFFF;
+	padding: 4px 0;
+}
+
+.cells th.w10pct  { width: 10%; }
+.cells th.w20pct  { width: 20%; }
+.cells th.w30pct    { width: 30%; }
+
+.cells td {
+	border-top: 1px solid #A0AABE;
+	border-left: 1px solid #A0AABE;
+	border-right: 1px solid #A0AABE;
+	padding: 4px 5px;
+}
+
+.cells td.aCenter {
+	text-align: center;
+}
+
+.cells-controlBox {
+	text-align: right;
+	background-color: #E2E5EB;
+	padding: 3px;
+	zoom: 1;
+}
+
+.cells td.empty {
+	color: #808080;
+	padding: 15px;
+}
+
+/* #---------------------# */
+/* # ErrorMsgBox         # */
+/* #---------------------# */
+.errorMessageBox {
+	margin: 10px 0px;
+	border: 1px solid #d26700;
+	padding: 10px 8px 10px 60px;
+	background-image: url(/images/page/emsg_notice.gif);
+	background-position: 8px center;
+	background-repeat: no-repeat;
+}
+
+.errorMessageBox li {
+
+}
+
+.errorMessageBox li span {
+	color: #CC0000;
+}
+
+/* #---------------------# */
+/* # 規約類              # */
+/* #---------------------# */
+#terms {
+	padding: 10px;
+}
+
+#terms .terms-title {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2em;
+	padding: 10px 5px 10px 5px;
+}
+
+#terms .terms-title-left {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 0 10px 10px 10px;
+	border-bottom: 1px solid #d26700;
+}
+
+#terms .terms-caption {
+	font-weight: bold;
+	padding-top: 5px;
+}
+
+#terms p {
+	text-indent: 5px;
+	padding: 5px;
+}
+
+#terms .sign {
+	text-align: right;
+	padding: 10px 0;
+}
+
+
+/* #---------------------# */
+/* # サーチボックス      # */
+/* #---------------------# */
+.searchBox-header {
+	text-indent: 30px;
+	margin: 15px 0 10px 0;
+	font-size: 1.0em;
+	font-weight: bold;
+	padding: 0.6em 0;
+	border-bottom: 1px dashed #888888;
+	background-position: left center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.searchBox-header-keyword {
+	background-image: url(/images/common/material/icon-mag_glass.gif);
+}
+
+.searchBox-header-detail {
+	background-image: url(/images/common/material/icon-check.gif);
+}
+
+.searchBox-header-pickup {
+}
+
+.searchBox-header-category {
+	background-image: url(/images/common/material/icon-category.gif);
+}
+
+.searchBox-header-tag {
+	background-image: url(/images/common/material/icon-tag.gif);
+}
+
+.searchBox-header-feature {
+	background-image: url(/images/common/material/icon-smile.gif);
+}
+
+.searchBox-body {
+	padding: 0 10px;
+}
+
+/* #---------------------# */
+/* # 特集                # */
+/* #---------------------# */
+
+.searchBox-featureBanner {
+	overflow: auto;
+}
+.searchBox-featureBanner ul {
+	list-style: none;
+}
+
+.searchBox-featureBanner li {
+	display: block;
+	width: 132px;
+	float: left;
+}
+
+
+/* #---------------------# */
+/* # タグクラウド        # */
+/* #---------------------# */
+
+.searchBox-tagCloud {
+	overflow: auto;
+}
+
+.searchBox-tagCloud a {
+	margin-right: 3px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.searchBox-tagCloud .rank1 { font-size: 1.0em; }
+.searchBox-tagCloud .rank2 { font-size: 1.1em; }
+.searchBox-tagCloud .rank3 { font-size: 1.3em; }
+.searchBox-tagCloud .rank4 { font-size: 1.5em; }
+.searchBox-tagCloud .rank5 { font-size: 1.7em; }
+
+
+/* #-------------------------# */
+/* # サーチボックステキスト  # */
+/* #-------------------------# */
+.searchBox-textList {
+	list-style: none;
+}
+
+.searchBox-textList li {
+	display: block;
+	background: url(/images/common/material/bullet-triangle_soft.gif) no-repeat 5px center;
+	padding-left: 22px;
+	margin-bottom: 5px;
+}
+
+.searchBox-textList li a {
+	display: block;
+}
+
+/* #---------------------# */
+/* # データテーブル      # */
+/* #---------------------# */
+.dataTable {
+	border-top: 2px solid #7d9fcd;
+	border-bottom: 2px solid #7d9fcd;
+	width: 880px;
+	border-collapse: collapse;
+	margin: 10px auto 20px auto;
+}
+
+.dataTable caption {
+	padding: 2px;
+}
+
+.dataTable caption em {
+	font-weight: bold;
+}
+
+.dataTable th {
+	border-bottom: 1px solid #7d9fcd;
+	background-color: #cedeee;
+	width: 15%;
+	padding: 10px 10px;
+	text-indent: 5px;
+	white-space: nowrap;
+}
+
+.dataTable td {
+	border-bottom: 1px solid #7d9fcd;
+	padding: 10px 10px;
+}
+
+.dataTable td .mailCell {
+	width: 500px;
+	word-wrap: break-word;
+}

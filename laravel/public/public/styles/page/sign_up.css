@@ -1,0 +1,125 @@
+@charset "utf-8";
+
+/* ################################## */
+/* ## ユーザ登録CSS                ## */
+/* ################################## */
+
+@import url("/styles/common/reset.css");
+@import url("/styles/layout/standard.css");
+@import url("/styles/common/component.css");
+
+/* #---------------------# */
+/* # メンバー登録        # */
+/* #---------------------# */
+/* 利用規約セル */
+#signUpForm-ruleCell {
+	text-align: center;
+	padding: 5px;
+}
+
+/* 利用規約 */
+#signUpForm-ruleArea {
+	text-align: left;
+	overflow: auto;
+	border: 1px solid #5088B1;
+	margin: 10px auto;
+	width: 95%;
+	height: 30em;
+}
+
+/* #---------------------# */
+/* # ユーザ登録フロー    # */
+/* #---------------------# */
+#signUpFlow {
+	background-image: url(/images/common/component/signupflow-bg.gif);
+	background-repeat: repeat-x;
+	border-left: 1px solid #8AAADB;
+	border-right: 1px solid #8AAADB;
+	margin: 10px;
+}
+
+#signUpFlow table {
+	border-collapse: collapse;
+	height: 30px;
+	width: 100%;
+}
+
+#signUpFlow th {
+	padding-left: 10px;
+}
+
+#signUpFlow td {
+	text-align: center;
+	border-left: 1px solid #8AAADB;
+	width: 100px;
+}
+
+#signUpFlow td#signUpFlow-position {
+	background-image: url(/images/common/component/signupflow-active_bg.gif);
+	background-repeat: repeat-x;
+}
+
+/* #---------------------# */
+/* # 登録完了            # */
+/* #---------------------# */
+#guidance-container {
+	padding: 0 10px 20px 10px;
+}
+
+#register-thanks {
+	font-weight: bold;
+	border-bottom: 1px solid #5088B1;
+	padding-left: 10px;
+}
+
+#register-notice {
+	padding: 10px;
+}
+
+#registered-memberId {
+	background-color: #ECF1F9;
+	text-align: center;
+	font-size: 125%;
+	font-weight: bold;
+	border: 1px solid #C7D7EE;
+	margin: 10px;
+	padding: 5px;
+}
+
+#guidance-comment {
+	padding: 0 15px;
+}
+
+.guidance-caption {
+	font-weight: bold;
+	font-size: 120%;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+#guidance-greeting {
+	text-align: center;
+	font-weight: bold;
+	font-size: 120%;
+	padding: 20px;
+}
+
+#content-banners {
+	height: 76px;
+	padding: 0 15px;
+	overflow: visible;
+}
+
+#content-banners a {
+	width: 325px;
+	height: 76px;
+	display: block;
+}
+
+#content-banners a#leftBanner {
+	float: left;
+}
+
+#content-banners a#rightBanner {
+	float: right;
+}

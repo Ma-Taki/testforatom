@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+/* ################################## */
+/* ## プライバシーポリシーCSS      ## */
+/* ################################## */
+
+@import url("/styles/common/reset.css");
+@import url("/styles/layout/standard.css");
+@import url("/styles/common/component.css");
+
+#privacy-content {
+	margin: 0 auto;
+	width: 95%;
+}
