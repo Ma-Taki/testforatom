@@ -1,0 +1,97 @@
+@charset "UTF-8";
+/*--------------------------------------------------------------
+ リセット
+--------------------------------------------------------------*/
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
+	margin:0;
+	padding:0;
+	border:0;
+	background:transparent;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+}
+
+html {
+	font-size: 62.5%; /* 10px */
+}
+
+body {
+	line-height:1;
+	color: #333;
+	font-family: "Montserrat","ＭＳ Ｐゴシック", Avenir , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "MS PGothic" , sans-serif;
+	-webkit-text-size-adjust: 100%;
+}
+
+input {
+	padding:0;
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+	display:block;
+}
+
+li {
+	list-style:none;
+}
+
+blockquote, q {
+	quotes:none;
+}
+
+blockquote:before,blockquote:after,q:before, q:after {
+	content:''; content:none;
+}
+
+a {
+	margin:0;
+	padding:0;
+	background:transparent;
+	font-size:100%;
+	vertical-align:baseline;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+input, select {
+	vertical-align:middle;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+a:hover {
+	transition: 0.25s;
+}
+
+img {
+	width: 100%;
+}
+
+p {
+	font-size: 1.7rem;
+	line-height: normal;
+}
+
+ul li,label,textarea {
+	font-size: 1.4rem;
+}
+
+textarea {
+	width: 100%;
+	border: 1px solid #5e8796;
+	border-radius: 5px;
+}

@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+/* ################################## */
+/* ## ユーザ情報表示               ## */
+/* ################################## */
+
+@import url("../common/reset.css");
+@import url("../layout/standard.css");
+@import url("../common/component.css");
+
+a.change:hover   { text-decoration: underline; color: #5078AA; }
+a.change:link    { text-decoration: none; color: #5078AA; }
+a.change:visited { text-decoration: none; color: #5078AA; }
+a.change:active  { text-decoration: none; color: #5078AA; }

@@ -3,22 +3,32 @@ server {
     #listen 443 ssl;
     server_name  lh.engineer-route.com;
     root         /var/www/laravel/public;
-    access_log /var/log/nginx/access.log main;
-    error_log /var/log/nginx/error.log;
-    #ssl on;
-    #ssl_certificate      /etc/nginx/ssl/server.pem;
-    #ssl_certificate_key  /etc/nginx/ssl/server.key;
-    #ssl_dhparam          /etc/nginx/ssl/dhparam.pem;
-    #ssl_ciphers  ECDHE+AESGCM:DHE+AESGCM:HIGH:!aNULL:!MD5;
-    #ssl_session_cache shared:SSL:1m;
-    #ssl_session_timeout 5m;
-    #ssl_prefer_server_ciphers on;
-    #add_header Strict-Transport-Security "max-age=15768000; includeSubdomains";
-    #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    charset UTF-8;
-    #client_max_body_size 1G;
+
+    ### big header error の対策 ###
+    fastcgi_buffers 8 16k;
+    fastcgi_buffer_size 32k;
     
+    ### メンテナンス設定 ###
+
+    set $maintenance false;
+    if (-e /var/tmp/do_maintenance ) {
+            set $maintenance true;
+    }
+    if ($uri ~ "^/maintenance.html") {
+        set $maintenance false; # ループ防止
+    }
+    if ($uri ~ "^/front/images") {
+            set $maintenance false;
+        }
+    if ($remote_addr = 219.98.168.106) {
+            #set $maintenance false;
+        }
+    if ($maintenance = true) {
+        rewrite ^ /maintenance.html redirect;
+    }
+
     location / {
+        root         /var/www/laravel/public;
         index index.html index.htm index.php;
         try_files $uri $uri/ /index.php?$query_string;
     }
@@ -29,10 +39,43 @@ server {
     error_page 500 502 503 504 /50x.html;
     location = /50x.html {}
     
+    # index.php など、通常の.phpでのアクセス。見つからなければ@wordpressロケーションとして飛ばします。
     location ~ \.php$ {
+        root           /var/www/laravel/public;
         fastcgi_pass   php:9000;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         include        fastcgi_params;
     }
+
+    location /column/wp-content {
+        root   /var/www/laravel/public;
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location /column/wp-includes {
+        root   /var/www/laravel/public;
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location /column/wp-admin {
+        fastcgi_index index.php;
+        fastcgi_split_path_info ^(.+\.php)(.*)$;
+        fastcgi_pass  php:9000;
+        fastcgi_param SCRIPT_FILENAME /var/www/laravel/public/column/wp-admin/index.php;
+        include       fastcgi_params;
+    }
+
+    location /column {
+        fastcgi_index index.php;
+        fastcgi_split_path_info ^(.+\.php)(.*)$;
+        fastcgi_pass  php:9000;
+        fastcgi_param SCRIPT_FILENAME /var/www/laravel/public/column/index.php;
+        include       fastcgi_params;
+    }
+
+    # wordpressのconfigファイルは404を返却する
+    # .phpをfastcgiに向けているため、基本何か起こることはない
+    location = /column/wp-config.php             { return 404; }
+    location = /column/wp-admin/setup-config.php { return 404; }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Monolog\Logger;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -12,7 +14,7 @@
 */
 
 $app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
+    realpath(__DIR__.'/../')
 );
 
 /*
@@ -40,7 +42,7 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
-
+return $app;
 /*
 |--------------------------------------------------------------------------
 | Return The Application
@@ -52,4 +54,17 @@ $app->singleton(
 |
 */
 
-return $app;
+//ログファイル出力カスタマイズ
+// $app->configureMonologUsing(function ($monolog) {
+//     $filename = storage_path('logs/laravel.log');
+//     $handler = new Monolog\Handler\RotatingFileHandler(
+//         $filename,
+//         5,
+//         Logger::DEBUG,
+//         true,
+//         0777
+//     );
+//     $monolog->pushHandler($handler);
+// });
+
+// return $app;

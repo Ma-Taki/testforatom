@@ -36,6 +36,26 @@ function getCanonical() {
     echo '"'. (empty($_SERVER["HTTPS"]) ? "http://" : "https://"). $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]. '"';
 }
 
+//---------------------------------------
+// 無効化・非表示
+//---------------------------------------
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
+remove_action( 'wp_head','rest_output_link_wp_head' );
+remove_action( 'wp_head','wp_oembed_add_discovery_links' );
+remove_action( 'wp_head','wp_oembed_add_host_js' );
+remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+remove_action( 'wp_head', 'rel_canonical' );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wlwmanifest_link' );
+add_filter( 'emoji_svg_url', '__return_false' );
+remove_action( 'wp_head', 'wp_generator' );
+remove_action( 'wp_head', 'wp_shortlink_wp_head', 10, 0 );
+remove_action('wp_head', 'feed_links', 2);
+remove_action('wp_head', 'feed_links_extra', 3);
+
 /**
  * パンくず
  **/
@@ -118,30 +138,30 @@ function breadcrumb() {
 /**
  * description
  **/
-function description() {
-    $description = '';
-    if (is_home() || is_front_page()) {
-        // トップページ
-        $description = get_bloginfo('description');
-    } else if (get_queried_object()) {
-        if (is_category()) {
-            // カテゴリページ
-            $queried_obj = get_queried_object();
-            $description = $queried_obj->cat_name. 'についてのコラム一覧ページです。';
-            $description.= 'エンジニアルートでは、フリーランスエンジニアとして成功するための知識や、IT業界事情など、幅広い情報をお届けしています。';
-        } else {
-            // 記事ページ
-            $queried_obj = get_queried_object();
-            // htmlタグをすべて削除
-            $description = strip_tags($queried_obj->post_content);
-            // 先頭から100文字
-            $description = mb_substr($description, 0, 100) . '...';
-            // 改行を半角スペースに変換
-            $description =  str_replace(PHP_EOL, ' ', $description);
-        }
-    }
-    echo '"'. $description. '"';
-}
+// function description() {
+//     $description = '';
+//     if (is_home() || is_front_page()) {
+//         // トップページ
+//         $description = get_bloginfo('description');
+//     } else if (get_queried_object()) {
+//         if (is_category()) {
+//             // カテゴリページ
+//             $queried_obj = get_queried_object();
+//             $description = $queried_obj->cat_name. 'についてのコラム一覧ページです。';
+//             $description.= 'エンジニアルートでは、フリーランスエンジニアとして成功するための知識や、IT業界事情など、幅広い情報をお届けしています。';
+//         } else {
+//             // 記事ページ
+//             $queried_obj = get_queried_object();
+//             // htmlタグをすべて削除
+//             $description = strip_tags($queried_obj->post_content);
+//             // 先頭から100文字
+//             $description = mb_substr($description, 0, 100) . '...';
+//             // 改行を半角スペースに変換
+//             $description =  str_replace(PHP_EOL, ' ', $description);
+//         }
+//     }
+//     echo '"'. $description. '"';
+// }
 
 /**
  * titleタグを最適化（ | でつなぐ）
@@ -713,8 +733,8 @@ function change_amp_template($single_template) {
 
         function the_content_filter( $content ) {
         	//<amp-img>へ書き換え
-			$content = preg_replace('/<img (.*?)>/i', '<amp-img $1></amp-img>', $content);
-			$content = preg_replace('/<img (.*?) \/>/i', '<amp-img $1></amp-img>', $content);
+			$content = preg_replace('/<img (.*?)>/i', '<amp-img layout="responsive" $1></amp-img>', $content);
+			$content = preg_replace('/<img (.*?) \/>/i', '<amp-img layout="responsive" layout="responsive"$1></amp-img>', $content);
 
 			 //gist
             $content = preg_replace('/<script src="https:\/\/gist.github\.com\/.*\/(.*)\.js"><\/script>/', '<amp-gist data-gistid="$1" layout="fixed-height" height="241"></amp-gist>', $content);
@@ -742,5 +762,109 @@ function amp_link_tag(){
     }
 }
 add_action('wp_head', 'amp_link_tag');
+
+//---------------------------------------
+// meta情報　keywords/description
+//---------------------------------------
+// 記事ページと固定ページでカスタムフィールドを表示
+function add_seo_custom_fields() {
+	$screen = array('page' , 'post');
+	add_meta_box( 'seo_setting', 'SEO', 'seo_custom_fields', $screen );
+}
+
+function seo_custom_fields() {
+	global $post;
+	$meta_keywords = get_post_meta($post->ID,'meta_keywords',true);
+	$noindex = get_post_meta($post->ID,'noindex',true);
+	echo '<p>keywords（キーワードを半角カンマ区切りで5個記入する　例:Java,php,swift,C#,html）<br />';
+	echo '<input type="text" name="meta_keywords" value="'.esc_html($meta_keywords).'" size="80" /></p>';
+}
+
+// カスタムフィールドの値を保存
+function save_seo_custom_fields( $post_id ) {
+	if(!empty($_POST['meta_keywords'])){
+		update_post_meta($post_id, 'meta_keywords', $_POST['meta_keywords'] );
+	}else{
+		delete_post_meta($post_id, 'meta_keywords');
+	}
+
+	if(!empty($_POST['noindex'])){
+		update_post_meta($post_id, 'noindex', $_POST['noindex'] );
+	}else{
+		delete_post_meta($post_id, 'noindex');
+	}
+}
+add_action('admin_menu', 'add_seo_custom_fields');
+add_action('save_post', 'save_seo_custom_fields');
+
+function MataTitle() {
+	// カスタムフィールドの値を読み込む
+	$custom = get_post_custom();
+	if(!empty( $custom['meta_keywords'][0])) {
+		$keywords = $custom['meta_keywords'][0];
+	}
+
+	if(is_home()){
+		// トップページ
+		echo '<meta name="keywords" content="エンジニアルート,コラム,フリーエンジニア,エンジニア,フリーランス">';
+		echo '<meta name="description" content="エンジニアルートのコラムは、フリーエンジニアをサポートする記事を公開しています！">';
+	}elseif(is_single()){
+		// 記事ページ
+		if(empty($keywords)) {
+			$keywords = 'IT案件,案件情報,求人,案件,仕事';
+		}
+		$description = strip_tags(get_the_excerpt());
+		if(empty($description)) {
+			$queried_obj = get_queried_object();
+            // htmlタグをすべて削除
+            $description = strip_tags($queried_obj->post_content);
+            // 先頭から100文字
+            $description = mb_substr($description, 0, 100) . '...';
+            // 改行を半角スペースに変換
+            $description =  str_replace(PHP_EOL, ' ', $description);
+		}
+		echo '<meta name="keywords" content="'.$keywords.'">';
+		echo '<meta name="description" content="'.$description.'">';
+	}elseif(is_page()){
+		// 固定ページ
+		if(empty($keywords)) {
+			$keywords = 'エンジニア,案件情報,求人,案件,仕事';
+		}
+		$description = strip_tags(get_the_excerpt());
+		if(empty($description)) {
+			$queried_obj = get_queried_object();
+            // htmlタグをすべて削除
+            $description = strip_tags($queried_obj->post_content);
+            // 先頭から100文字
+            $description = mb_substr($description, 0, 100) . '...';
+            // 改行を半角スペースに変換
+            $description =  str_replace(PHP_EOL, ' ', $description);
+		}
+		echo '<meta name="keywords" content="'.$keywords.'">';
+		echo '<meta name="description" content="'.$description.'">';
+	}elseif(is_archive()){
+		if(is_category()){
+			// カテゴリーページ
+			echo '<meta name="keywords" content="'.single_cat_title('', false).',エンジニアルート,コラム,">';
+			echo '<meta name="description" content="'.single_cat_title('', false).'の記事一覧">';
+		}
+		if(is_tag()){
+			// タグページ
+			$meta = str_replace('#', '', single_tag_title('', false));
+			echo '<meta name="keywords" content="'.$meta.',エンジニアルート,コラム,">';
+			echo '<meta name="description" content="'.$meta.'の記事一覧">';
+		}
+	}elseif(is_404()){
+		// 404ページ
+		echo '<meta name="robots" content="noindex, follow">';
+		echo '<title>404:お探しのページが見つかりませんでした</title>';
+	}else{
+		// その他ページ
+		echo '<meta name="robots" content="noindex, follow">';
+	};
+}
+
+// 固定ページで抜粋欄を表示する
+add_post_type_support( 'page', 'excerpt' );
 
 ?>
