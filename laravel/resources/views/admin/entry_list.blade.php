@@ -157,7 +157,28 @@
 @foreach($entry_list as $entry)
             <tr>
               <td>{{ $entry->id }}</td>
-              <td>{{ $entry->user->last_name or '山田' }} {{ $entry->user->first_name or '太郎' }} ({{ $entry->user->last_name_kana or 'たろう' }} {{ $entry->user->first_name_kana or 'やまだ' }})</td>
+              <td>
+                @if($entry->user->last_name)
+                  {{ $entry->user->last_name }} 
+                @else
+                  山田 
+                @endif
+                @if($entry->user->first_name)
+                  {{ $entry->user->first_name }} 
+                @else
+                  太郎　
+                @endif                
+                @if($entry->user->last_name_kana)
+                  ({{ $entry->user->last_name_kana }} 
+                @else
+                  (たろう 
+                @endif
+                @if($entry->user->first_name_kana)
+                  {{ $entry->user->first_name_kana }})
+                @else
+                  やまだ)
+                @endif  
+              </td>
               <td>{{ $entry->item->name}}</td>
               <td>{{ $entry->entry_date->format('Y年n月j日 G時i分') }}</td>
               <td>{!! $entry->skillsheet_upload ? "<a href='/admin/entry/download?id=$entry->id'>アップロード済み</a>" : '未アップロード' !!}</td>

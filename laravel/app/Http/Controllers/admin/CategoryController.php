@@ -52,6 +52,7 @@ class CategoryController extends AdminController
      * GET:/admin/category/detail
      */
     public function showCategoryDetail(Request $request){
+        $parent = null;
         $category = Tr_search_categories::where('id', $request->id)->get()->first();
 
         if(!empty($request->parent_id)){
@@ -69,7 +70,7 @@ class CategoryController extends AdminController
      * GET:/admin/category/input
      */
     public function showCategoryInput(Request $request){
-
+        $parents = null;
         if($request->type == 'parent'){
             //親のとき
             //親カテゴリー最大表示順を取得
@@ -639,6 +640,8 @@ class CategoryController extends AdminController
      * GET:/admin/category/modify
      */
     public function showCategoryModify(Request $request){
+        $parents = null;
+        $sortMax = null;
         //idに紐づいたカテゴリー情報を取得
         $category = Tr_search_categories::where('id', $request->id)->get()->first();
 

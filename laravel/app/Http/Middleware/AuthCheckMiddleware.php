@@ -39,7 +39,6 @@ class AuthCheckMiddleware
              $permission = true;
         }
 
-
         return $permission ? $next($request) : abort(403,' 権限がありません。');
     }
 }

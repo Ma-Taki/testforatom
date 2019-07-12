@@ -964,6 +964,7 @@ jQuery(function($){
 			// HTMLでの送信をキャンセル
 			e.preventDefault();
 			var result = confirm('削除しますか？');
+
 			if(result){
 				var str = '';
 				$(this).parent().css('display', 'none');
@@ -1171,10 +1172,13 @@ jQuery(function($){
             }
         }).
         fail(function( jqXHR, textStatus, errorThrown ){
+
+
         	//422HTTPステータスコードのとき(バリデーションチェックで引っかかったとき)
         	if(jqXHR.status == 422){
 	        	var str = '<div class="alert alert-danger"><ul>';
-	        	var resJson = jqXHR.responseJSON;
+	        	var resJson = jqXHR.responseJSON.errors;
+	        	console.log(jqXHR);
 	        	for(var item in resJson){
 					str = str + '<li>' + resJson[item] + '</li>';
 	        	}

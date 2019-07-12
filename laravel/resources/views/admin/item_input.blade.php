@@ -260,8 +260,24 @@ use App\Models\Ms_skills;
                             <label for="input_detail" class="col-md-2 control-label">詳細</label>
                             <div class="col-md-8">
                                 (1000文字まで)</br>
-                                <textarea name="item_detail" rows="15" cols"60" class="form-control" style="font-size:12px" maxlength="1000" id="tagTextArea">
-{{ HtmlUtility::setTextValueByRequest('【仕事内容】&#13;&#13;【要求スキル】&#13;（必須）&#13;・&#13;（尚可）&#13;・&#13;&#13;【募集人数】&#13;名&#13;&#13;【面接回数】&#13;回（弊社同席)', old('item_detail')) }}</textarea>
+                                <textarea name="item_detail" rows="15" cols"60" class="form-control" style="font-size:12px" maxlength="1000" id="tagTextArea">{{ HtmlUtility::setTextValueByRequest('
+【募集人数】
+名
+
+【面接回数】
+回（弊社同席)【仕事内容】
+
+【要求スキル】
+（必須）
+・
+（尚可）
+・
+
+【募集人数】
+名
+
+【面接回数】
+回（弊社同席)', old('item_detail')) }}</textarea>
                             </div>
                         </div>
 

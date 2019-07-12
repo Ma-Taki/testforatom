@@ -69,7 +69,7 @@
 		                                <button type="button" class="btn btn-warning btn-xs">編集</button>
 		                            </a>
 									@if(!$connect->delete_flag)
-	                               		<a href="/admin/column-connect/delete?id={{ $connect->id }}&sort_order={{ $connect->sort_order }}" onClick="javascript:return confirm('本当に削除しますか？')">
+	                               		<a href="/admin/column-connect/delete?id={{ $connect->id }}" onClick="javascript:return confirm('本当に削除しますか？')">
 	                               			<button type="button" class="btn btn-danger btn-xs">削除</button>
 	                               		</a>
 	                               	@else

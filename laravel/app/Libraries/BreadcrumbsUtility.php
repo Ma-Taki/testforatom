@@ -191,7 +191,8 @@ class BreadcrumbsUtility
 
         $category_child  = null;
         $category_parent = null;
-        if (!empty($category_childs)) {
+        if (!empty($category_childs) && !empty($category_childs[0])) {
+
           // エンジニアルート > 案件一覧 > 親カテゴリ > 子カテゴリ > 案件名
           $category_child = $category_childs[0];
           foreach ($category_parents as $key => $value) {
@@ -200,7 +201,8 @@ class BreadcrumbsUtility
                 break;
             }
           }
-        } else if (!empty($category_parents)) {
+        } else if (!empty($category_parents) && !empty($category_parents[0])) {
+
           // エンジニアルート > 案件一覧 > 親カテゴリ > 案件名
           $category_parent = $category_parents[0];
         } else {
@@ -210,6 +212,7 @@ class BreadcrumbsUtility
         $breadcrumbs = $this->getRootByItemDetail();
 
         if ($category_parent) {
+        
             $breadcrumbs->push(collect([
                 'name' => $category_parent->name,
                 'path' => '/item/category/'.$category_parent->id,
@@ -226,6 +229,7 @@ class BreadcrumbsUtility
         // エントリー確認画面から呼ばれた場合
         $uri =  parse_url($_SERVER["REQUEST_URI"]);
         if ($uri["path"] == "/entry") {
+
             $breadcrumbs->push(collect([
                 'name' => $item_name.' - AN' .$item_id,
                 'path' => '/item/detail?id='.$item_id,
