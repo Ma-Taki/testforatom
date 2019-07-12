@@ -108,7 +108,7 @@ class EntryController extends AdminController
         $entry_list = $query->select('item_entries.*')
                            ->orderBy($item_order['columnName'], $item_order['sort'])
                            ->paginate(30);
-
+                           
         return view('admin.entry_list', compact('entry_list', 'data_query'));
     }
 

@@ -61,7 +61,7 @@ use App\Libraries\HtmlUtility;
 			            
 			            <div class="col-md-10 text-right">
 			             	<button type="submit" class="btn btn-md btn-primary">更新</button>
-						    <a href="/admin/column-connect/list">
+						    <a href="/admin/column-connect/search">
 						    	<button type="button" class="btn btn-default">キャンセル</button>
 						    </a>	
 			            </div>

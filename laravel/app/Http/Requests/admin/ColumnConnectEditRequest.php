@@ -8,7 +8,7 @@ use App\Http\Requests\Request;
  * 記事紐付け登録/編集FormRequest
  *
  **/
-class ColumnConnectRegistRequest extends Request
+class ColumnConnectEditRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class ColumnConnectRegistRequest extends Request
     public function rules()
     {
         return [
-            'connect_id' => 'required|max:3|unique:column_connects,connect_id',
+            'connect_id' => 'required|max:3|unique:column_connects,connect_id,id',
             'title'      => 'required|max:50',
             'keyword'    => 'required|max:3000',
         ];

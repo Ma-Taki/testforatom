@@ -194,7 +194,7 @@ class EntryController extends FrontController
             });
 
             // ファイルをローカルに保存
-            if(count($skillsheet_list) > 0){
+            if(isset($skillsheet_list) && count($skillsheet_list) > 0){
                 foreach ($skillsheet_list as $key => $file) {
                     if(!empty($file)) {
                         $file->move(storage_path('app'), $db_return_data['file_name'][$key]);

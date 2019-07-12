@@ -1306,7 +1306,7 @@ class UserController extends Controller
             abort(404, 'スキルシートが見つかりません');
         }
 
-        $zip = new \ZipArchive();
+        $zip = new ZipArchive();
         $path = storage_path('app/');
         $targetfiles = array(
                     $user->skillsheet_1, 

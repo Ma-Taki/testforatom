@@ -6,8 +6,8 @@
     </p>
     <p>
         {{ $limit }}時間以内に下記のURLからメールアドレス変更を完了してください。<br>
-        <a href={{ url('/user/edit/email/auth?id=' .$auth_key->user_id .'&amp;ticket=' .$auth_key->ticket) }} ">
-            {{ url('/user/edit/email/auth?id=' .$auth_key->user_id .'&amp;ticket=' .$auth_key->ticket) }}
+        <a href={{ url('/user/edit/email/auth?id=' .$auth_key->user_id .'&ticket=' .$auth_key->ticket) }} ">
+            {{ url('/user/edit/email/auth?id=' .$auth_key->user_id .'&ticket=' .$auth_key->ticket) }}
         </a>
     </p>
     <p>
